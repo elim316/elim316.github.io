@@ -1,22 +1,23 @@
 /* ==========================================================================
-   Elias Lim · Apple Keynote & Flagship Showcase Design System (styles.css)
-   Scroll-Driven 3D Hardware Stage · Full-Bleed Flagships · 2-Column Promo Grid
+   Elias Lim · Light-First Scroll-Animated Repository Showcase (styles.css)
+   Scroll-Driven 3D Stage · Full-Width Repo Showcases · 2-Column Promo Grid
    ========================================================================== */
 
 :root {
-  /* Light Theme Tokens */
+  /* Default Light Theme Tokens (Crisp Alabaster & Silver Titanium) */
   --bg-primary: #f5f5f7;
   --bg-elevated: #ffffff;
-  --bg-canvas: #eef0f4;
-  --bg-subtle: #e5e7eb;
-  --bg-nav: rgba(251, 251, 253, 0.82);
+  --bg-canvas: #f2f3f7;
+  --bg-subtle: #e5e7ed;
+  --bg-nav: rgba(255, 255, 255, 0.84);
+  --bg-hero: radial-gradient(ellipse 80% 55% at 50% 58%, #e8eef7 0%, #ffffff 74%);
 
   --text-primary: #1d1d1f;
-  --text-secondary: #515154;
+  --text-secondary: #49494d;
   --text-muted: #6e6e73;
 
   --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.18);
+  --border-strong: rgba(0, 0, 0, 0.16);
 
   --apple-blue: #0071e3;
   --apple-blue-hover: #0077ed;
@@ -26,14 +27,29 @@
   --accent-subtle: rgba(0, 113, 227, 0.1);
   --accent-text: #0066cc;
 
-  --signal-green: #28cd41;
-  --signal-amber: #ff9f0a;
-  --signal-teal: #00c7be;
+  --signal-green: #1d9bf0;
+  --signal-emerald: #1f9d55;
+  --signal-amber: #d97706;
+  --signal-teal: #0891b2;
 
-  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --shadow-card-hover: 0 14px 36px rgba(0, 0, 0, 0.1);
-  --shadow-modal: 0 28px 68px rgba(0, 0, 0, 0.24);
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-card: 0 6px 24px rgba(15, 23, 42, 0.05);
+  --shadow-card-hover: 0 16px 38px rgba(15, 23, 42, 0.09);
+  --shadow-deck:
+    0 24px 60px rgba(15, 23, 42, 0.12),
+    0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-modal: 0 28px 68px rgba(15, 23, 42, 0.22);
+
+  --wordmark-gradient: linear-gradient(
+    112deg,
+    #cbd5e1 0%,
+    #64748b 20%,
+    #93c5fd 38%,
+    #94a3b8 54%,
+    #f59e0b 70%,
+    #64748b 86%,
+    #cbd5e1 100%
+  );
 
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -50,12 +66,13 @@
 }
 
 [data-theme="dark"] {
-  /* Dark Theme Tokens (Apple Pro Obsidian & Brushed Titanium) */
+  /* Optional Dark Theme Tokens */
   --bg-primary: #000000;
   --bg-elevated: #121214;
   --bg-canvas: #18181b;
   --bg-subtle: #242429;
-  --bg-nav: rgba(22, 22, 23, 0.82);
+  --bg-nav: rgba(22, 22, 23, 0.84);
+  --bg-hero: radial-gradient(ellipse 80% 55% at 50% 58%, #131824 0%, #000000 74%);
 
   --text-primary: #f5f5f7;
   --text-secondary: #a1a1a6;
@@ -72,14 +89,26 @@
   --accent-subtle: rgba(41, 151, 255, 0.15);
   --accent-text: #5ac8fa;
 
-  --signal-green: #30d158;
+  --signal-emerald: #30d158;
   --signal-amber: #ffd60a;
   --signal-teal: #64d2ff;
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.45);
   --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
   --shadow-card-hover: 0 18px 46px rgba(0, 0, 0, 0.7);
+  --shadow-deck: 0 28px 70px rgba(0, 0, 0, 0.85);
   --shadow-modal: 0 32px 76px rgba(0, 0, 0, 0.82);
+
+  --wordmark-gradient: linear-gradient(
+    112deg,
+    #3a3d45 0%,
+    #d8dde6 18%,
+    #f5cba7 34%,
+    #2b3038 50%,
+    #9ad0f5 68%,
+    #eef2f7 82%,
+    #484d56 100%
+  );
 }
 
 *,
@@ -120,14 +149,14 @@ a {
 }
 
 /* ==========================================================================
-   1. Apple-Style Global Frosted Header (44px) & Sub-Header Ribbon
+   1. Frosted Global Navigation Ribbon (46px)
    ========================================================================== */
 
 .global-nav {
   position: sticky;
   top: 0;
   z-index: 60;
-  height: 46px;
+  height: 48px;
   background: var(--bg-nav);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -135,7 +164,7 @@ a {
 }
 
 .nav-content {
-  max-width: 1024px;
+  max-width: 1040px;
   height: 100%;
   margin: 0 auto;
   padding: 0 20px;
@@ -148,7 +177,7 @@ a {
 .nav-brand {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
 }
 
 .nav-monogram {
@@ -159,22 +188,29 @@ a {
   height: 24px;
   border-radius: 6px;
   background: var(--text-primary);
-  color: var(--bg-primary);
+  color: var(--bg-elevated);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
+.nav-brand-text {
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 26px;
 }
 
 .nav-link {
-  font-size: 0.78rem;
-  font-weight: 400;
+  font-size: 0.79rem;
+  font-weight: 500;
   color: var(--text-secondary);
   letter-spacing: -0.01em;
   transition: color 180ms var(--ease-smooth);
@@ -188,7 +224,7 @@ a {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .nav-icon-btn {
@@ -198,7 +234,7 @@ a {
   padding: 4px 10px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-subtle);
-  background: transparent;
+  background: var(--bg-elevated);
   color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -215,48 +251,23 @@ a {
   background: var(--bg-subtle);
 }
 
-.ribbon-banner {
-  background: #1d1d1f;
-  color: #f5f5f7;
-  text-align: center;
-  padding: 10px 16px;
-  font-size: 0.78rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.ribbon-text {
-  max-width: 960px;
-  margin: 0 auto;
-  color: #d2d2d7;
-}
-
-.ribbon-link {
-  color: #2997ff;
-  margin-left: 6px;
-  font-weight: 500;
-}
-
-.ribbon-link:hover {
-  text-decoration: underline;
-}
-
 /* ==========================================================================
-   2. Full-Viewport Flagship Hero Stage (Apple "iPhone Pro" Landing Style)
+   2. Full-Viewport Light-First Hero Stage
    ========================================================================== */
 
 .hero-stage {
   position: relative;
-  min-height: calc(100vh - 84px);
-  background: radial-gradient(ellipse 80% 50% at 50% 60%, #131824 0%, #000000 72%);
-  color: #f5f5f7;
+  min-height: calc(100vh - 48px);
+  background: var(--bg-hero);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 56px 20px 36px;
+  padding: 52px 20px 32px;
   overflow: hidden;
   text-align: center;
-  border-bottom: 8px solid var(--bg-primary);
+  border-bottom: 12px solid var(--bg-primary);
 }
 
 .hero-copy {
@@ -266,36 +277,41 @@ a {
   margin: 0 auto;
 }
 
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
 .hero-headline {
   font-size: clamp(2.8rem, 6vw, 4.4rem);
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.05;
-  color: #f5f5f7;
-  margin-bottom: 8px;
+  color: var(--text-primary);
+  margin-bottom: 10px;
 }
 
 .hero-subhead {
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.12rem, 2.1vw, 1.42rem);
   font-weight: 400;
   letter-spacing: -0.015em;
-  color: #f5f5f7;
-  margin-bottom: 8px;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 24px;
+  line-height: 1.48;
 }
 
-.hero-caption {
-  font-size: 0.96rem;
-  color: #86868b;
-  margin-bottom: 24px;
-}
-
-/* Signature Apple Pill CTA Buttons */
+/* Pill CTA Buttons */
 .cta-pill-group {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .apple-pill {
@@ -303,9 +319,9 @@ a {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 11px 22px;
+  padding: 10px 20px;
   border-radius: var(--radius-pill);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 500;
   letter-spacing: -0.01em;
   cursor: pointer;
@@ -336,33 +352,35 @@ a {
 
 .apple-pill.outline {
   background: transparent;
-  color: #2997ff;
-  border: 1px solid #2997ff;
+  color: var(--apple-link);
+  border: 1px solid var(--apple-link);
 }
 
 .apple-pill.outline:hover {
-  background: #2997ff;
+  background: var(--apple-blue);
+  border-color: var(--apple-blue);
   color: #ffffff;
 }
 
 .apple-pill.subtle {
-  background: rgba(255, 255, 255, 0.08);
-  color: #d2d2d7;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  padding: 11px 18px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 16px;
+  box-shadow: var(--shadow-sm);
 }
 
 .apple-pill.subtle:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  border-color: var(--border-strong);
+  color: var(--text-primary);
 }
 
-/* Monumental Metallic Wordmark ("PRO" / "SYSTEMS" Iridescent Specular Effect) */
+/* Sculpted Metallic Backdrop Wordmark + 3D Scroll-Tilting Project Stage */
 .hero-visual-stage {
   position: relative;
   width: 100%;
   max-width: 980px;
-  margin: 18px auto 12px;
+  margin: 16px auto 10px;
   perspective: 1400px;
   display: flex;
   flex-direction: column;
@@ -371,29 +389,19 @@ a {
 }
 
 .metallic-wordmark {
-  font-size: clamp(4.6rem, 15.5vw, 12.2rem);
+  font-size: clamp(4.4rem, 15vw, 11.6rem);
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 0.88;
   user-select: none;
   pointer-events: none;
   text-transform: uppercase;
-  /* Brushed titanium + warm amber & ice blue specular edge highlights */
-  background: linear-gradient(
-    112deg,
-    #3a3d45 0%,
-    #d8dde6 18%,
-    #f5cba7 32%,
-    #2b3038 48%,
-    #9ad0f5 66%,
-    #eef2f7 80%,
-    #484d56 100%
-  );
+  background: var(--wordmark-gradient);
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 12px 34px rgba(0, 0, 0, 0.85));
+  opacity: 0.65;
   transform: translateY(var(--wordmark-y, 0px)) scale(var(--wordmark-scale, 1));
   animation: titaniumShimmer 9s ease-in-out infinite alternate;
   will-change: transform;
@@ -408,13 +416,12 @@ a {
   }
 }
 
-/* Floating 3D Hardware Telemetry Deck in Front of Metallic Wordmark */
 .hardware-deck {
   position: relative;
   z-index: 3;
   width: 100%;
   max-width: 860px;
-  margin-top: -38px;
+  margin-top: -36px;
   transform:
     rotateX(var(--deck-tilt, 14deg))
     translateY(var(--deck-y, 0px))
@@ -427,12 +434,9 @@ a {
 .hardware-bezel {
   border-radius: 22px;
   padding: 18px 22px 22px;
-  background: linear-gradient(165deg, rgba(32, 34, 40, 0.95) 0%, rgba(14, 15, 18, 0.98) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.85),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-    0 1px 0 rgba(255, 255, 255, 0.28) inset;
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border-strong);
+  box-shadow: var(--shadow-deck);
   text-align: left;
 }
 
@@ -443,7 +447,7 @@ a {
   gap: 12px;
   padding-bottom: 14px;
   margin-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .bezel-dots {
@@ -455,7 +459,6 @@ a {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.22);
 }
 
 .bezel-dots span:nth-child(1) {
@@ -472,9 +475,9 @@ a {
 
 .bezel-title {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: #a1a1a6;
+  font-size: 0.71rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
 }
 
 .bezel-status {
@@ -483,15 +486,14 @@ a {
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  color: #30d158;
+  color: var(--signal-emerald);
 }
 
 .status-led {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #30d158;
-  box-shadow: 0 0 8px #30d158;
+  background: var(--signal-emerald);
 }
 
 .bezel-grid {
@@ -501,8 +503,8 @@ a {
 }
 
 .bezel-pane {
-  background: rgba(0, 0, 0, 0.46);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
   border-radius: 14px;
   padding: 14px 16px;
 }
@@ -518,15 +520,15 @@ a {
 .pane-label {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  letter-spacing: 0.04em;
-  color: #a1a1a6;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
 }
 
 .pane-badge {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  color: #5ac8fa;
-  background: rgba(41, 151, 255, 0.16);
+  color: var(--accent-text);
+  background: var(--accent-subtle);
   padding: 2px 8px;
   border-radius: var(--radius-pill);
 }
@@ -540,23 +542,23 @@ a {
 .deck-svg-label {
   font-family: var(--font-mono);
   font-size: 9px;
-  fill: #86868b;
+  fill: var(--text-muted);
 }
 
 .deck-svg-sub {
   font-family: var(--font-mono);
   font-size: 9px;
-  fill: #5ac8fa;
+  fill: var(--accent-text);
 }
 
 .deck-node {
-  fill: #18181b;
-  stroke: #d2d2d7;
+  fill: var(--bg-elevated);
+  stroke: var(--text-primary);
   stroke-width: 1.6;
 }
 
 .deck-node.active-ring {
-  stroke: #2997ff;
+  stroke: var(--accent);
   stroke-width: 2;
 }
 
@@ -582,17 +584,18 @@ a {
   justify-content: space-between;
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: #d2d2d7;
+  color: var(--text-secondary);
 }
 
 .metric-val {
-  color: #5ac8fa;
+  color: var(--accent-text);
+  font-weight: 500;
 }
 
 .metric-track {
   height: 6px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-subtle);
   overflow: hidden;
 }
 
@@ -605,17 +608,17 @@ a {
 
 .metric-fill.fill-blue {
   width: 71%;
-  background: #2997ff;
+  background: var(--accent);
 }
 
 .metric-fill.fill-teal {
   width: 95%;
-  background: #64d2ff;
+  background: var(--signal-teal);
 }
 
 .metric-fill.fill-green {
   width: 100%;
-  background: #30d158;
+  background: var(--signal-emerald);
 }
 
 @keyframes metricFillIn {
@@ -633,13 +636,13 @@ a {
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.74rem;
-  color: #86868b;
-  margin-top: 12px;
+  color: var(--text-muted);
+  margin-top: 10px;
   transition: color 180ms var(--ease-smooth);
 }
 
 .scroll-cue:hover {
-  color: #f5f5f7;
+  color: var(--text-primary);
 }
 
 .scroll-chevron {
@@ -656,7 +659,6 @@ a {
   }
 }
 
-/* Staggered Hero Load Animation */
 @keyframes heroRise {
   0% {
     opacity: 0;
@@ -675,24 +677,24 @@ a {
 }
 
 /* ==========================================================================
-   3. Full-Width Flagship Product Showcases (Scroll-Revealed Like Apple.com)
+   3. Full-Width Scroll-Animated Repository Showcases
    ========================================================================== */
 
-.flagship-banner {
+.repo-showcase {
   position: relative;
-  padding: 76px 20px 80px;
+  padding: 72px 20px 76px;
   text-align: center;
-  border-bottom: 10px solid var(--bg-primary);
+  border-bottom: 12px solid var(--bg-primary);
   overflow: hidden;
 }
 
-.flagship-banner.dark-stage {
-  background: #090a0f;
-  color: #f5f5f7;
+.repo-showcase.surface-white {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
 }
 
-.flagship-banner.light-stage {
-  background: var(--bg-elevated);
+.repo-showcase.surface-alabaster {
+  background: var(--bg-canvas);
   color: var(--text-primary);
 }
 
@@ -702,11 +704,11 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
 .stage-copy {
-  max-width: 680px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -714,36 +716,33 @@ a {
 
 .stage-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   letter-spacing: 0.08em;
   color: var(--accent);
   margin-bottom: 8px;
 }
 
 .stage-headline {
-  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  font-size: clamp(1.9rem, 4vw, 2.85rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.08;
+  line-height: 1.1;
   margin-bottom: 10px;
 }
 
 .stage-subhead {
-  font-size: clamp(1.02rem, 1.8vw, 1.24rem);
+  font-size: clamp(0.98rem, 1.6vw, 1.14rem);
   color: var(--text-secondary);
   margin-bottom: 20px;
-  max-width: 580px;
-}
-
-.dark-stage .stage-subhead {
-  color: #a1a1a6;
+  max-width: 620px;
+  line-height: 1.58;
 }
 
 .stage-showcase-card {
   width: 100%;
   border-radius: var(--radius-lg);
   padding: 24px;
-  background: var(--bg-canvas);
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
   text-align: left;
@@ -754,9 +753,8 @@ a {
     opacity 760ms var(--spring-out);
 }
 
-.dark-stage .stage-showcase-card {
-  background: #121318;
-  border-color: rgba(255, 255, 255, 0.12);
+.surface-white .stage-showcase-card {
+  background: var(--bg-canvas);
 }
 
 .scroll-stage.is-inview .stage-showcase-card {
@@ -781,11 +779,6 @@ a {
   gap: 10px;
 }
 
-.dark-stage .stage-panel {
-  background: #181a20;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
 .stage-svg {
   width: 100%;
   height: 112px;
@@ -793,7 +786,7 @@ a {
 }
 
 .stage-svg.wide-svg {
-  height: 132px;
+  height: 126px;
 }
 
 .centered-pills {
@@ -802,7 +795,7 @@ a {
 }
 
 /* ==========================================================================
-   4. Apple 2-Column Product Promo Grid (#projects)
+   4. 2-Column Product Promo Grid (#projects)
    ========================================================================== */
 
 .section {
@@ -854,7 +847,7 @@ a {
   align-items: center;
   padding: 4px;
   border-radius: var(--radius-pill);
-  background: var(--bg-canvas);
+  background: var(--bg-subtle);
   border: 1px solid var(--border-subtle);
   gap: 2px;
 }
@@ -901,7 +894,7 @@ a {
   margin-left: 3px;
 }
 
-/* Apple 2-Column Promotional Grid */
+/* 2-Column Promotional Grid */
 .promo-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -935,7 +928,7 @@ a {
   pointer-events: none;
   background: radial-gradient(
     480px circle at var(--mouse-x, 50%) var(--mouse-y, 0%),
-    color-mix(in srgb, var(--accent) 8%, transparent),
+    color-mix(in srgb, var(--accent) 7%, transparent),
     transparent 65%
   );
   opacity: 0;
@@ -952,7 +945,6 @@ a {
   opacity: 1;
 }
 
-/* Apple Promo Tile Top Copy */
 .project-body {
   padding: 30px 28px 20px;
   display: flex;
@@ -984,7 +976,7 @@ a {
 }
 
 .project-title {
-  font-size: 1.42rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.022em;
   color: var(--text-primary);
@@ -1026,7 +1018,6 @@ a {
   text-decoration: underline;
 }
 
-/* Smooth Animated Architecture Accordion inside Promo Tile */
 .arch-drawer {
   width: 100%;
   text-align: left;
@@ -1074,7 +1065,6 @@ a {
   border-radius: var(--radius-pill);
 }
 
-/* Interactive Visual Stage at Bottom of Each Apple Promo Tile */
 .project-visual {
   position: relative;
   height: 174px;
@@ -1161,7 +1151,6 @@ a {
   transform: scale(1.16);
 }
 
-/* Animated SVG Micro-Interactions */
 .trace-edge {
   stroke: var(--border-strong);
   stroke-width: 1.5;
@@ -1286,7 +1275,7 @@ a {
 }
 
 .ci-band {
-  opacity: 0.26;
+  opacity: 0.24;
   transition:
     opacity 320ms var(--ease-smooth),
     transform 440ms var(--spring-out);
@@ -1296,7 +1285,7 @@ a {
 }
 
 .project-card:hover .ci-band {
-  opacity: 0.36;
+  opacity: 0.34;
 }
 
 .yolo-box {
@@ -1563,7 +1552,7 @@ a {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
