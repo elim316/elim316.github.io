@@ -1810,12 +1810,474 @@ a {
   color: var(--text-secondary);
   background: var(--bg-canvas);
   border: 1px solid var(--border-subtle);
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    transform 180ms var(--spring-out),
+    background-color 180ms var(--ease-smooth),
+    color 180ms var(--ease-smooth),
+    border-color 180ms var(--ease-smooth);
+}
+
+.skill-chip:hover,
+.skill-chip.is-active {
+  background: var(--accent-subtle);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.project-card.is-skill-matched {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 2px var(--accent-subtle),
+    var(--shadow-card-hover);
+}
+
+/* Apple M4-Inspired Sculpted Titanium Spec Bento Grid */
+.apple-bento-specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.bento-spec-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: left;
+  padding: 22px 20px;
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition:
+    transform 240ms var(--spring-out),
+    border-color 220ms var(--ease-smooth),
+    box-shadow 240ms var(--ease-smooth);
+}
+
+.bento-spec-tile:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.bento-spec-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.bento-spec-stat {
+  font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 10px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bento-spec-stat.stat-blue {
+  background-image: linear-gradient(135deg, #0071e3 0%, #38bdf8 100%);
+}
+
+.bento-spec-stat.stat-teal {
+  background-image: linear-gradient(135deg, #0891b2 0%, #2dd4bf 100%);
+}
+
+.bento-spec-stat.stat-emerald {
+  background-image: linear-gradient(135deg, #1f9d55 0%, #34d399 100%);
+}
+
+.bento-spec-stat.stat-amber {
+  background-image: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+}
+
+.bento-spec-caption {
+  font-size: 0.81rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* Apple "Closer Look (+)" Button on Project Cards */
+.closer-look-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 180ms var(--ease-smooth),
+    border-color 180ms var(--ease-smooth),
+    transform 180ms var(--spring-out);
+}
+
+.closer-look-trigger-btn:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  transform: scale(1.02);
+}
+
+.closer-look-plus-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--apple-blue);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   6. Apple Floating Bottom Stage Controller Pill & Closer Look Sheet Modal
+   ========================================================================== */
+
+body.is-animations-paused *,
+body.is-animations-paused *::before,
+body.is-animations-paused *::after {
+  animation-play-state: paused !important;
+}
+
+.apple-stage-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transform: translate3d(-50%, 0, 0);
+  transition:
+    opacity 280ms var(--ease-smooth),
+    transform 280ms var(--spring-out);
+}
+
+.apple-stage-dock.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-50%, 24px, 0);
+}
+
+.stage-dock-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-nav);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.stage-dock-caption {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.stage-dock-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stage-dock-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--border-strong);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    width 280ms var(--spring-out),
+    background-color 200ms var(--ease-smooth);
+}
+
+.stage-dock-dot:hover {
+  background: var(--text-muted);
+}
+
+.stage-dock-dot.active {
+  width: 32px;
+  background: var(--bg-subtle);
+}
+
+.stage-dot-fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background: var(--apple-blue);
+  border-radius: var(--radius-pill);
+}
+
+.stage-dock-dot.active .stage-dot-fill {
+  width: 100%;
+  animation: dockDotProgress 6.5s linear infinite;
+}
+
+@keyframes dockDotProgress {
+  0% {
+    width: 15%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.stage-dock-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 11px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-nav);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-card-hover);
+  cursor: pointer;
+  transition:
+    transform 200ms var(--spring-out),
+    border-color 200ms var(--ease-smooth);
+}
+
+.stage-dock-action-btn:hover {
+  transform: scale(1.04);
+  border-color: var(--accent);
+}
+
+.stage-dock-plus-btn {
+  padding: 0 6px 0 13px;
+}
+
+.dock-plus-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.dock-plus-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--apple-blue);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Apple "Take a Closer Look" Full-Scale Sheet Modal */
+.closer-look-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms var(--ease-smooth);
+}
+
+.closer-look-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.closer-look-sheet {
+  width: 100%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 26px;
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border-strong);
+  box-shadow: var(--shadow-modal);
+  padding: 22px 28px 28px;
+  transform: translateY(16px) scale(0.96);
+  transition: transform 280ms var(--spring-out);
+}
+
+.closer-look-backdrop.is-open .closer-look-sheet {
+  transform: translateY(0) scale(1);
+}
+
+.closer-look-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.closer-look-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.closer-look-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent-text);
+  background: var(--accent-subtle);
   padding: 4px 10px;
   border-radius: var(--radius-pill);
 }
 
+.closer-look-counter {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.closer-look-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.closer-nav-btn,
+.closer-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-smooth),
+    border-color 160ms var(--ease-smooth),
+    transform 160ms var(--spring-out);
+}
+
+.closer-nav-btn:hover,
+.closer-close-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--border-strong);
+  transform: scale(1.05);
+}
+
+.closer-look-header {
+  margin-bottom: 18px;
+}
+
+.closer-look-title {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.closer-look-summary {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.closer-look-stage {
+  border-radius: 18px;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+
+.closer-look-stage .visual-svg {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  display: block;
+}
+
+.closer-look-specs-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 20px;
+  padding-top: 4px;
+}
+
+.closer-spec-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.closer-spec-heading {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.closer-spec-text {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.closer-stack-row {
+  margin-bottom: 6px;
+}
+
+.closer-cta-row {
+  justify-content: flex-start;
+}
+
 /* ==========================================================================
-   6. Command Palette Modal (Cmd+K / Ctrl+K) & Footer
+   7. Command Palette Modal (Cmd+K / Ctrl+K) & Footer
    ========================================================================== */
 
 .cmd-backdrop {
@@ -1972,7 +2434,7 @@ a {
 }
 
 .site-footer {
-  padding: 40px 0 60px;
+  padding: 40px 0 84px;
   border-top: 1px solid var(--border-subtle);
   color: var(--text-muted);
   font-size: 0.84rem;
@@ -2007,7 +2469,7 @@ a {
 }
 
 /* ==========================================================================
-   Responsive & Reduced Motion
+   Responsive, Print Executive CV & Reduced Motion
    ========================================================================== */
 
 @media (max-width: 840px) {
@@ -2016,7 +2478,9 @@ a {
   .about-bento,
   .stage-visual-grid,
   .promo-grid,
-  .skills-grid {
+  .skills-grid,
+  .apple-bento-specs,
+  .closer-look-specs-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2030,12 +2494,52 @@ a {
     align-items: center;
   }
 
-  .nav-links {
+  .nav-links,
+  .dock-plus-label {
     display: none;
   }
 
   .hardware-deck {
     margin-top: -16px;
+  }
+}
+
+@media print {
+  .global-nav,
+  .apple-stage-dock,
+  .closer-look-backdrop,
+  .cmd-backdrop,
+  .scroll-cue,
+  .hero-visual-stage,
+  .filter-bar,
+  .project-visual,
+  .promo-links,
+  .pub-actions,
+  #print-cv-btn {
+    display: none !important;
+  }
+
+  body,
+  .repo-showcase,
+  .section {
+    background: #ffffff !important;
+    color: #111111 !important;
+    padding: 12px 0 !important;
+    min-height: 0 !important;
+  }
+
+  .promo-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .project-card,
+  .pub-card,
+  .skill-group,
+  .bento-spec-tile {
+    box-shadow: none !important;
+    border: 1px solid #d1d5db !important;
+    break-inside: avoid;
   }
 }
 
