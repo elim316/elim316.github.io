@@ -457,11 +457,7 @@ a {
   color: transparent;
   opacity: 0.72;
   transform:
-    translate3d(
-      var(--wordmark-mx, 0px),
-      calc(var(--wordmark-y, 0px) + var(--wordmark-my, 0px)),
-      0
-    )
+    translate3d(0, var(--wordmark-y, 0px), 0)
     scale(var(--wordmark-scale, 1));
   transition:
     opacity 260ms var(--ease-smooth),
