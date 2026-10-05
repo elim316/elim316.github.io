@@ -254,10 +254,10 @@
             <text x="24" y="16" class="visual-label">KNOWLEDGE TRACING MASTERY</text>
             <text x="214" y="16" class="visual-badge">2nd Place LifeHack</text>
             <line x1="24" y1="78" x2="296" y2="78" stroke="var(--border-strong)" stroke-width="1.2" />
-            <rect class="kt-bar b1" id="kt-b1" x="44" y="44" width="36" height="34" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
-            <rect class="kt-bar b2" id="kt-b2" x="108" y="34" width="36" height="44" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
-            <rect class="kt-bar b3" id="kt-b3" x="172" y="26" width="36" height="52" rx="4" fill="var(--accent)" />
-            <rect class="kt-bar b1" id="kt-b4" x="236" y="38" width="36" height="40" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
+            <rect class="kt-bar b1" x="44" y="44" width="36" height="34" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
+            <rect class="kt-bar b2" x="108" y="34" width="36" height="44" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
+            <rect class="kt-bar b3" x="172" y="26" width="36" height="52" rx="4" fill="var(--accent)" />
+            <rect class="kt-bar b1" x="236" y="38" width="36" height="40" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
             <text x="48" y="91" class="visual-label">ALG</text>
             <text x="112" y="91" class="visual-label">SYS</text>
             <text x="176" y="91" class="visual-label">ML</text>
@@ -407,47 +407,51 @@
         id="project-${escapeHtml(p.id)}"
         style="--card-delay: ${Math.min(idx * 55, 360)}ms"
       >
-        <div class="project-visual">
-          ${getProjectVisual(p.id)}
-        </div>
         <div class="project-body">
-          <div>
-            <div class="project-meta-line">
-              <span class="project-category">${escapeHtml(p.categoryLabel)}</span>
-              <span class="project-year">${escapeHtml(p.year)}</span>
-            </div>
-            <h3 class="project-title">
-              <a href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.title)}</a>
-            </h3>
-            <p class="project-summary">${escapeHtml(p.summary)}</p>
+          <div class="project-meta-line">
+            <span class="project-category">${escapeHtml(p.categoryLabel)}</span>
+            <span class="project-year">· ${escapeHtml(p.year)}</span>
+          </div>
+          <h3 class="project-title">
+            <a href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.title)}</a>
+          </h3>
+          <p class="project-summary">${escapeHtml(p.summary)}</p>
 
-            <div class="arch-drawer" id="drawer-${escapeHtml(p.id)}">
-              <button
-                type="button"
-                class="arch-toggle-btn"
-                data-drawer-target="drawer-${escapeHtml(p.id)}"
-                aria-expanded="false"
-              >
-                <span>Technical architecture</span>
-                <span class="arch-toggle-icon" aria-hidden="true">+</span>
-              </button>
-              <div class="arch-collapse">
-                <div class="arch-collapse-inner">
-                  <p class="arch-text">${escapeHtml(p.architecture)}</p>
-                </div>
+          <div class="promo-links">
+            <button
+              type="button"
+              class="apple-text-link arch-toggle-btn"
+              data-drawer-target="drawer-${escapeHtml(p.id)}"
+              aria-expanded="false"
+            >
+              <span>Technical architecture</span>
+              <span class="arch-toggle-icon" aria-hidden="true">+</span>
+            </button>
+            <a
+              class="apple-text-link"
+              href="${escapeHtml(p.repoUrl)}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Repository &#8599;</span>
+            </a>
+          </div>
+
+          <div class="arch-drawer" id="drawer-${escapeHtml(p.id)}">
+            <div class="arch-collapse">
+              <div class="arch-collapse-inner">
+                <p class="arch-text">${escapeHtml(p.architecture)}</p>
               </div>
             </div>
           </div>
 
-          <div class="project-footer">
-            <div class="stack-tags">
-              ${p.stack.map((t) => `<span class="stack-tag">${escapeHtml(t)}</span>`).join("")}
-            </div>
-            <a class="repo-link" href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer">
-              <span>Repository</span>
-              <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
-            </a>
+          <div class="stack-tags">
+            ${p.stack.map((t) => `<span class="stack-tag">${escapeHtml(t)}</span>`).join("")}
           </div>
+        </div>
+
+        <div class="project-visual">
+          ${getProjectVisual(p.id)}
         </div>
       </article>
     `
@@ -482,8 +486,125 @@
     });
   }
 
+  function initFlagshipSandboxes() {
+    const tracerData = {
+      user: "Step #01 USER_INPUT · 12ms · 420 prompt tok",
+      planner: "Step #02 PLANNER · 640ms · 1,840 output tok",
+      mcp: "Step #03 CALL_MCP_TOOL · 310ms · exit=0 (OK)",
+      subagent: "Step #04 INVOKE_SUBAGENT · 1.2s · branch=research",
+    };
+
+    const fTracer = document.getElementById("flagship-tracer-sandbox");
+    if (fTracer) {
+      const fReadout = document.getElementById("flagship-tracer-readout");
+      const fStepBtns = fTracer.querySelectorAll("[data-fstep-btn]");
+      const fSvgNodes = fTracer.querySelectorAll("[data-fstep]");
+
+      function selectFlagshipStep(stepKey) {
+        if (fReadout && tracerData[stepKey]) {
+          fReadout.textContent = tracerData[stepKey];
+        }
+        fStepBtns.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-fstep-btn") === stepKey)
+        );
+        fSvgNodes.forEach((n) =>
+          n.classList.toggle("is-selected", n.getAttribute("data-fstep") === stepKey)
+        );
+      }
+
+      fStepBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectFlagshipStep(btn.getAttribute("data-fstep-btn"));
+        });
+      });
+      fSvgNodes.forEach((node) => {
+        node.addEventListener("click", () => {
+          selectFlagshipStep(node.getAttribute("data-fstep"));
+        });
+      });
+
+      const fTurns = {
+        turn2: {
+          scale: 0.24,
+          color: "var(--signal-green)",
+          label: "CONTEXT SATURATION: 48k / 200k TOKENS",
+          readout: "48k / 200k · 42% Cached",
+        },
+        turn8: {
+          scale: 0.71,
+          color: "var(--accent)",
+          label: "CONTEXT SATURATION: 142k / 200k TOKENS",
+          readout: "142k / 200k · 71% Cached",
+        },
+        turn14: {
+          scale: 0.98,
+          color: "var(--signal-amber)",
+          label: "CONTEXT SATURATION: 196k / 200k (AUTO-COMPACT)",
+          readout: "196k / 200k · Compaction triggered!",
+        },
+      };
+
+      const fBar = document.getElementById("flagship-token-bar");
+      const fBarLabel = document.getElementById("flagship-bar-label");
+      const fHarnessReadout = document.getElementById("flagship-harness-readout");
+      const fTurnBtns = fTracer.querySelectorAll("[data-fturn-btn]");
+
+      fTurnBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.getAttribute("data-fturn-btn");
+          const cfg = fTurns[key];
+          if (!cfg) return;
+          fTurnBtns.forEach((b) => b.classList.toggle("active", b === btn));
+          if (fBar) {
+            fBar.style.setProperty("--token-scale", String(cfg.scale));
+            fBar.setAttribute("fill", cfg.color);
+          }
+          if (fBarLabel) fBarLabel.textContent = cfg.label;
+          if (fHarnessReadout) fHarnessReadout.textContent = cfg.readout;
+        });
+      });
+    }
+
+    const fUq = document.getElementById("flagship-uq-sandbox");
+    if (fUq) {
+      const fCiLevels = {
+        "90": {
+          scale: 0.68,
+          title: "INTERACTIVE CONFORMAL PREDICTION BAND (90% ACI)",
+          readout: "PICP: 0.904 · ECE: 0.018 · Tight interval",
+        },
+        "95": {
+          scale: 1.0,
+          title: "INTERACTIVE CONFORMAL PREDICTION BAND (95% ACI)",
+          readout: "PICP: 0.952 · ECE: 0.012 · McMaster -> Oxford",
+        },
+        "99": {
+          scale: 1.38,
+          title: "INTERACTIVE CONFORMAL PREDICTION BAND (99% ACI)",
+          readout: "PICP: 0.989 · ECE: 0.009 · Conservative safety band",
+        },
+      };
+
+      const fBand = document.getElementById("flagship-aci-band");
+      const fTitle = document.getElementById("flagship-aci-title");
+      const fReadout = document.getElementById("flagship-aci-readout");
+      const fCiBtns = fUq.querySelectorAll("[data-fci-btn]");
+
+      fCiBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const key = btn.getAttribute("data-fci-btn");
+          const cfg = fCiLevels[key];
+          if (!cfg) return;
+          fCiBtns.forEach((b) => b.classList.toggle("active", b === btn));
+          if (fBand) fBand.style.setProperty("--ci-scale", String(cfg.scale));
+          if (fTitle) fTitle.textContent = cfg.title;
+          if (fReadout) fReadout.textContent = cfg.readout;
+        });
+      });
+    }
+  }
+
   function attachSandboxControls() {
-    /* 1. Agent Tracer Interactive Step Inspector */
     const tracerData = {
       user: "Step #01 USER_INPUT · 12ms · 420 prompt tok",
       planner: "Step #02 PLANNER · 640ms · 1,840 output tok",
@@ -521,7 +642,6 @@
       });
     }
 
-    /* 2. Jetski Harness Token Saturation Simulator */
     const harnessTurns = {
       turn2: {
         scale: 0.24,
@@ -571,7 +691,6 @@
       });
     }
 
-    /* 3. Meeting Prep Agent Pipeline Selector */
     const prepData = {
       linter: "Linter: 0 hallucinated URLs or names",
       nbd: "Stage 1: 18:00 SGT Next-Business-Day brief",
@@ -593,7 +712,6 @@
       });
     }
 
-    /* 4. UQ-XAI Battery Conformal Prediction Confidence Selector */
     const ciLevels = {
       "90": {
         scale: 0.68,
@@ -631,6 +749,48 @@
         });
       });
     }
+  }
+
+  /* Apple-Style Scroll-Driven 3D Hero Stage Physics */
+  function initHeroScrollPhysics() {
+    const heroStage = document.getElementById("hero-stage");
+    const deck = document.getElementById("hero-hardware-deck");
+    const wordmark = document.getElementById("hero-wordmark");
+    if (!heroStage || !deck || !wordmark) return;
+
+    let ticking = false;
+
+    function updateScrollPhysics() {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const heroHeight = Math.max(heroStage.offsetHeight, 500);
+      const progress = Math.min(Math.max(scrollY / (heroHeight * 0.65), 0), 1);
+
+      const tilt = (1 - progress) * 14;
+      const deckScale = 0.96 + progress * 0.04;
+      const deckY = -progress * 14;
+      const wordmarkY = progress * 28;
+      const wordmarkScale = 1 - progress * 0.05;
+
+      deck.style.setProperty("--deck-tilt", `${tilt.toFixed(2)}deg`);
+      deck.style.setProperty("--deck-scale", deckScale.toFixed(3));
+      deck.style.setProperty("--deck-y", `${deckY.toFixed(1)}px`);
+      wordmark.style.setProperty("--wordmark-y", `${wordmarkY.toFixed(1)}px`);
+      wordmark.style.setProperty("--wordmark-scale", wordmarkScale.toFixed(3));
+      ticking = false;
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateScrollPhysics);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+
+    updateScrollPhysics();
   }
 
   function updateFilterCounts() {
@@ -690,24 +850,8 @@
     requestAnimationFrame(updateActiveFilterPill);
   }
 
-  function initNavDock() {
-    const dock = document.getElementById("nav-dock");
-    const indicator = document.getElementById("nav-pill-indicator");
+  function initNavHighlight() {
     const links = document.querySelectorAll(".nav-link");
-
-    function updateNavIndicator() {
-      const activeLink = document.querySelector(".nav-link.active");
-      syncSlidingPill(dock, indicator, activeLink);
-    }
-
-    links.forEach((link) => {
-      link.addEventListener("click", () => {
-        links.forEach((l) => l.classList.remove("active"));
-        link.classList.add("active");
-        updateNavIndicator();
-      });
-    });
-
     const sections = document.querySelectorAll("[data-section-target]");
     if ("IntersectionObserver" in window && sections.length > 0) {
       const observer = new IntersectionObserver(
@@ -718,7 +862,6 @@
               links.forEach((l) => {
                 l.classList.toggle("active", l.getAttribute("data-section") === id);
               });
-              updateNavIndicator();
             }
           });
         },
@@ -726,15 +869,15 @@
       );
       sections.forEach((s) => observer.observe(s));
     }
-
-    window.addEventListener("resize", updateNavIndicator);
-    requestAnimationFrame(updateNavIndicator);
   }
 
   function initScrollReveal() {
     const items = document.querySelectorAll(".reveal-on-scroll");
+    const stages = document.querySelectorAll(".scroll-stage");
+
     if (!("IntersectionObserver" in window)) {
       items.forEach((el) => el.classList.add("is-visible"));
+      stages.forEach((el) => el.classList.add("is-inview"));
       return;
     }
 
@@ -743,14 +886,16 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
+            entry.target.classList.add("is-inview");
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.14 }
     );
 
     items.forEach((el) => observer.observe(el));
+    stages.forEach((el) => observer.observe(el));
   }
 
   async function copyTextToClipboard(text) {
@@ -759,27 +904,6 @@
       return true;
     }
     return false;
-  }
-
-  function initCopyEmail() {
-    const btn = document.getElementById("copy-email-btn");
-    const badge = document.getElementById("copy-email-badge");
-    if (!btn || !badge) return;
-
-    btn.addEventListener("click", async () => {
-      const email = btn.getAttribute("data-email") || "eliaslim316@gmail.com";
-      try {
-        await copyTextToClipboard(email);
-        btn.classList.add("copied");
-        badge.textContent = "Copied";
-        setTimeout(() => {
-          btn.classList.remove("copied");
-          badge.textContent = "Copy";
-        }, 2000);
-      } catch (_) {
-        window.location.href = `mailto:${email}`;
-      }
-    });
   }
 
   function initBibtexButtons() {
@@ -827,7 +951,7 @@
   }
 
   function applyTheme(theme) {
-    const clean = theme === "dark" ? "dark" : "light";
+    const clean = theme === "light" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", clean);
     try {
       localStorage.setItem("eliaslim_site_theme", clean);
@@ -848,12 +972,7 @@
     try {
       saved = localStorage.getItem("eliaslim_site_theme");
     } catch (_) {}
-    if (!saved) {
-      const prefersDark =
-        window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-      saved = prefersDark ? "dark" : "light";
-    }
-    applyTheme(saved);
+    applyTheme(saved || "dark");
 
     const btn = document.getElementById("theme-toggle-btn");
     if (btn) {
@@ -875,16 +994,16 @@
 
     const baseCommands = [
       {
-        title: "Toggle Light / Dark Theme",
-        sub: "Switch colour palette",
-        badge: "Action",
-        action: () => toggleTheme(),
+        title: "Jump to Flagship Showcases",
+        sub: "Agent Tracer, Jetski Harness, and Battery Conformal Prediction",
+        badge: "Flagship",
+        action: () => document.getElementById("flagship")?.scrollIntoView({ behavior: "smooth" }),
       },
       {
-        title: "Copy Email (eliaslim316@gmail.com)",
-        sub: "Copy address to clipboard",
+        title: "Toggle Light / Dark Theme",
+        sub: "Switch between Apple Pro Obsidian and Alabaster Light",
         badge: "Action",
-        action: () => copyTextToClipboard("eliaslim316@gmail.com"),
+        action: () => toggleTheme(),
       },
       {
         title: "Filter: Agentic & DevTools Projects",
@@ -959,6 +1078,12 @@
         sub: "https://github.com/elim316",
         badge: "External",
         action: () => window.open("https://github.com/elim316", "_blank", "noopener"),
+      },
+      {
+        title: "Open LinkedIn Profile",
+        sub: "https://linkedin.com/in/eliaslim",
+        badge: "External",
+        action: () => window.open("https://linkedin.com/in/eliaslim", "_blank", "noopener"),
       },
       {
         title: "Open Google Scholar Profile",
@@ -1093,10 +1218,11 @@
     initTheme();
     updateFilterCounts();
     renderProjects();
+    initFlagshipSandboxes();
+    initHeroScrollPhysics();
     initFilters();
-    initNavDock();
+    initNavHighlight();
     initScrollReveal();
-    initCopyEmail();
     initBibtexButtons();
     initLocalClock();
     initCommandPalette();
