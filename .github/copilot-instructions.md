@@ -1,0 +1,57 @@
+# AGENT HANDOFF & CONTINUATION GUIDE (`elim316.github.io`)
+
+If you are an AI coding assistant (1P Google Gemini CLI / Antigravity / Jetski, or 3P Cursor, Claude Code, Windsurf, GitHub Copilot, OpenAI Codex, etc.) working on this repository for Elias Lim, follow this specification before making any changes. After completing your changes, keep `.github/copilot-instructions.md`, `.cursorrules`, and the hidden HTML comment block inside `README.md` synchronised so the next agent can pick up seamlessly where you left off.
+
+## 1. Owner Preferences & Editorial Rules (Strict)
+- Spelling: Always use British English spelling across all UI copy, comments, and documentation (e.g., visualiser, customisable, synchronised, centralised, personalise, modelling, defence, behaviour, colour).
+- Punctuation & Formatting: Avoid em dashes and en dashes in prose and replies (use middle dots `·`, colons, commas, or parentheses). Avoid bold text formatting in prose or chat replies.
+- No Decorative Emojis: Never add decorative emojis (such as robot, wrench, or rocket emojis) in headers, badges, or documentation, as they make interfaces look "vibe-coded". Keep only minimal functional toolbar symbols (`🌙`/`☀️`, `↗`, `+`, `-`) and clean inline SVG vector icons.
+- Privacy: Never include Elias's personal email address or internal company project IDs anywhere in `index.html`, `app.js`, `projects.json`, or READMEs.
+- No Vibe-Coded Tropes: Do not add fake glowing status indicators (such as "CONNECT-RPC ACTIVE") or meaningless sci-fi filler text. Every visual schematic must represent the real technical architecture of that system.
+- Company Naming: Always refer to Grab simply as `Grab` (never `Grab TIS`). Always use `astar-logo.png` for the A*STAR company logo badge.
+
+## 2. Repository Architecture (Zero-Dependency Static Site)
+This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) and is also pre-configured with `vercel.json` for zero-config Vercel deployment from the `main` branch with zero build steps, bundlers, or external runtime dependencies:
+- Local Dev Server: Run `python3 -m http.server 8000` (or `npx serve .`) in the repository root and open `http://localhost:8000`.
+- `index.html`: Semantic structure containing the sticky glass navigation bar, 5 full-bleed scroll-animated hardware stages, the interactive experience timeline (`#journey`), the filterable project grid (`#projects`), peer-reviewed research (`#publications`), and toolkit (`#stack`).
+- `styles.css`: Apple-inspired design system in Light Mode by default (`:root`), with full Dark Mode variables under `[data-theme="dark"]`.
+- `app.js`: Interactive behaviours, scroll-driven 3D stage physics, cursor-tracked metallic wordmark specular reflections and 3D hover tilt, About Me chapter switcher, flagship sandboxes, custom per-project SVG visualisations, Command+K palette, and live GitHub repository synchronisation.
+- `projects.json`: Declarative project catalogue and `excludedRepos` list.
+- `astar-logo.png`: Official A*STAR logo asset used in `#about` and `#journey`.
+- `vercel.json`: Zero-build static hosting and security header configuration for Vercel.
+
+## 3. Visual System & Layout Guardrails
+- Button Hierarchy: Paired CTA buttons must always pair `.apple-pill.solid` (blue primary `#0066cc`) for the primary action with `.apple-pill.outline` for the secondary action. Never style both buttons in a pair with the same solid colour.
+- 5 Scroll-Animated & Cursor-Interactive Hardware Stages (`initHeroScrollPhysics()` in `app.js`):
+  1. `#hero-stage` (Wordmark: `BUILDER`)
+  2. `#about` (Wordmark: `PROFILE`)
+  3. `#showcase-agent-tracer` (Wordmark: `TRACER`)
+  4. `#showcase-meeting-prep` (Wordmark: `DOSSIER`)
+  5. `#showcase-uq-xai` (Wordmark: `RESEARCH`)
+  On scroll, `app.js` interpolates `--deck-tilt`, `--deck-scale`, `--deck-y`, `--wordmark-y`, and `--wordmark-scale` via `requestAnimationFrame` based on `deck.getBoundingClientRect()`. On `mousemove`, `app.js` updates `--wordmark-spot-x`, `--wordmark-spot-y`, `--wordmark-mx`, `--wordmark-my` (driving the liquid-metal specular reflection across the wordmark letters) and `--mouse-rx`, `--mouse-ry`, `--mouse-lift`, `--bezel-mx`, `--bezel-my` (driving the 3D magnetic tilt and glass surface glare on `.hardware-deck` and `.hardware-bezel`).
+- Anti-Clipping & Overflow Guardrails (`styles.css`):
+  - `.hardware-bezel`, `.bezel-grid` (`grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr)`), `.bezel-pane`, and `.about-mini-card` must preserve `min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;` so the right pane never overflows outside the rounded hardware bezel border.
+  - Never apply `stroke` or `stroke-width` directly to `<g class="clickable-node">` or `<text>` elements in SVG, as SVG inheritance will outline the text and make it look blurry. Always target child shapes (`.clickable-node.is-selected .trace-node`) and keep `stroke: none !important` on all SVG `<text>` elements.
+
+## 4. How to Add or Update Projects
+- Curated Projects (`PROJECTS` in `app.js` & `projects` in `projects.json`):
+  There are 13 curated projects across 3 categories (`agentic`, `fullstack`, `ml`).
+- Custom SVG Visualisations (`getProjectVisual(project)` in `app.js`):
+  IMPORTANT: Never use a generic "3 boxes lined up" diagram for any project. Every project in `#projects-grid` has a bespoke SVG schematic in `getProjectVisual(project)` in `app.js`.
+  When adding a new project:
+  1. Add the project object to `PROJECTS` in `app.js` and `projects` in `projects.json`.
+  2. Add a dedicated `case '<project-id>':` in `getProjectVisual(project)` in `app.js` with a custom SVG visualisation tailored to the project's real architecture.
+- Excluded Repositories (`EXCLUDED_REPOS` in `app.js` & `projects.json`):
+  Coursework, lab, and duplicate repositories are listed in `excludedRepos` (`CSC2106-IoT`, `real-time-cv-vlm-pipeline`, `WeatherPredictor`, `yolov6-object-detector`, `Opencv-real-time-face-detection`, `INF2007_Week2_Lab`, `mylab2`, `Google-Certificate---Introduction-to-Github`, `Wind-City-BrainHack-2023`, `COMPUTERFUNCTION-Easy`) so `initScalableProjects()` does not auto-import them from the GitHub API.
+- Cache Busting on Every Update:
+  Whenever you edit `styles.css` or `app.js`, increment the version query string in `index.html` (`styles.css?v=YYYYMMDD-N` and `app.js?v=YYYYMMDD-N`) and bump `cacheKey` (`gh_repos_v3_elim316`) in `app.js` if the project list changed.
+
+## 5. Current State & Changelog
+- Last updated: 2026-10-05
+- Asset version in `index.html`: `?v=20261005-7`
+- SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
+- Recent milestones completed:
+  * Added cursor-tracked metallic specular reflection (`--wordmark-spot-x/y`) and inverse parallax (`--wordmark-mx/my`) on all 5 stage wordmarks (`BUILDER`, `PROFILE`, `TRACER`, `DOSSIER`, `RESEARCH`), paired with 3D magnetic cursor tilt (`--mouse-rx/ry`) and glass surface reflection (`--bezel-mx/my`) on `.hardware-deck` and `.hardware-bezel`.
+  * Added `vercel.json` for zero-config Vercel deployment alongside GitHub Pages.
+  * Fixed SVG text stroke inheritance on `.clickable-node.is-selected` so active node labels render crisp.
+  * Added live streaming packets, pulsing active node borders, and auto-cycling stage/bar animations across all 5 stages and all 13 custom project cards.
