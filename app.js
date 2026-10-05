@@ -739,7 +739,7 @@
         bar2Width: "90%",
       },
       astar: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · A*STAR AI RESEARCH",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · A*STAR SINGAPORE",
         bezelStatus: "SEP 2024 TO MAY 2025",
         paneLabel: "UNCERTAINTY-AWARE DEEP LEARNING & EXPLAINABLE AI",
         paneBadge: "PyTorch · Conformal UQ · IEEE",
