@@ -258,55 +258,201 @@
     </section>
 
     <!-- ======================================================================
-         1B. Self-Introduction & At-a-Glance Bento Section (#about)
+         1B. Interactive Animated Self-Introduction Stage (#about)
+             (Matches the exact large BUILDER stage size with PROFILE backdrop & live visuals)
          ====================================================================== -->
-    <section id="about" class="about-section surface-white" data-section-target="about">
-      <div class="container about-grid">
-        <div class="about-narrative reveal-on-scroll">
-          <span class="section-eyebrow">INTRODUCTION</span>
-          <h2 class="section-title">Bridging cloud infrastructure, backend systems, and applied AI.</h2>
-          <p class="about-paragraph">
-            I am a Cloud and AI Engineer at Google in Singapore, where I architect zero-trust cloud landing zones for generative AI agents, build native observability plugins to visualise multi-agent execution trajectories, and run hands-on buildathons that help engineering teams take AI workloads into production.
-          </p>
-          <p class="about-paragraph">
-            Before joining Google, I worked as a Trust Software Engineer on Grab's Trust, Identity and Safety team building Golang fraud-detection services on petabyte-scale data infrastructure, and as an AI Research Intern at A*STAR developing uncertainty-aware and explainable deep learning models for battery State-of-Health estimation. I graduated with a BSc (Hons) in Computer Science (Second Upper Class) from the University of Glasgow and the Singapore Institute of Technology.
-          </p>
-          <p class="about-paragraph">
-            I enjoy working across the full stack and collaborating closely with both technical and non-technical stakeholders to ship dependable software. Outside of work, you will usually find me playing basketball or pickleball, or hunting for vintage pieces while thrifting.
-          </p>
+    <section id="about" class="repo-showcase surface-white scroll-stage" data-section-target="about">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">ABOUT ELIAS LIM · SINGAPORE</span>
+        <h2 class="hero-headline stage-hero-headline">Cloud infrastructure. Backend systems. Applied AI.</h2>
+        <p class="hero-subhead">
+          BSc (Hons) Computer Science graduate from the University of Glasgow and SIT, building secure cloud architectures, high-scale backend services, and uncertainty-aware AI.
+        </p>
+
+        <div class="cta-pill-group about-chapter-pills" id="about-chapter-tabs" role="tablist" aria-label="Interactive career and personal chapters">
+          <button type="button" class="sandbox-pill chapter-pill active" data-about-tab="google" role="tab" aria-selected="true">
+            01 · Google (Cloud &amp; AI)
+          </button>
+          <button type="button" class="sandbox-pill chapter-pill" data-about-tab="grab" role="tab" aria-selected="false">
+            02 · Grab (Trust &amp; Safety)
+          </button>
+          <button type="button" class="sandbox-pill chapter-pill" data-about-tab="astar" role="tab" aria-selected="false">
+            03 · A*STAR (AI Research)
+          </button>
+          <button type="button" class="sandbox-pill chapter-pill" data-about-tab="beyond" role="tab" aria-selected="false">
+            04 · Glasgow, SIT &amp; Court Life
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-visual-stage">
+        <div class="metallic-wordmark" aria-hidden="true">
+          PROFILE
         </div>
 
-        <div class="about-bento reveal-on-scroll">
-          <div class="about-bento-card">
-            <span class="bento-label">CURRENT ROLE</span>
-            <h3 class="bento-title">Customer Engineer · Google</h3>
-            <p class="bento-desc">
-              Zero-trust Terraform AI landing zones (Dual-VPC, Private Service Connect, Cloud Run), LangGraph/Jetski agent trajectory visualisers, and enterprise GenAI enablement.
-            </p>
-          </div>
+        <div class="hardware-deck stage-deck" id="about-hardware-deck">
+          <div class="hardware-bezel">
+            <div class="bezel-top-bar">
+              <div class="bezel-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="bezel-title" id="about-bezel-title">INTERACTIVE ENGINEERING PROFILE · GOOGLE CLOUD SINGAPORE</div>
+              <div class="bezel-status">
+                <span class="status-led"></span>
+                <span id="about-bezel-status">APR 2026 TO PRESENT</span>
+              </div>
+            </div>
 
-          <div class="about-bento-card">
-            <span class="bento-label">PREVIOUS ENGINEERING</span>
-            <h3 class="bento-title">Grab (TIS) &amp; A*STAR</h3>
-            <p class="bento-desc">
-              Golang fraud-detection services and runtime controls at Grab; first-author deep learning uncertainty quantification and explainable AI research at A*STAR.
-            </p>
-          </div>
+            <div class="bezel-grid">
+              <!-- Left Pane: Animated Chapter Visual + Concise Story -->
+              <div class="bezel-pane about-visual-pane">
+                <div class="pane-header">
+                  <span class="pane-label" id="about-pane-label">ZERO-TRUST DUAL-VPC AI AGENT LANDING ZONE</span>
+                  <span class="pane-badge" id="about-pane-badge">Terraform · PSC · Cloud Run</span>
+                </div>
 
-          <div class="about-bento-card">
-            <span class="bento-label">EDUCATION</span>
-            <h3 class="bento-title">BSc (Hons) Computer Science</h3>
-            <p class="bento-desc">
-              University of Glasgow and Singapore Institute of Technology (Second Upper Class Honours, Aug 2022 to May 2025).
-            </p>
-          </div>
+                <!-- Dynamic Animated SVG Stage (Switched by JS) -->
+                <div class="about-svg-stage" id="about-svg-stage">
+                  <!-- Chapter 01: Google Cloud & AI (Default Visible) -->
+                  <svg class="hero-deck-svg about-scene is-active" data-about-scene="google" viewBox="0 0 380 120" aria-hidden="true">
+                    <text x="16" y="18" class="deck-svg-label">INGRESS VPC (WAF)</text>
+                    <text x="148" y="18" class="deck-svg-label">CLOUD RUN AGENT</text>
+                    <text x="276" y="18" class="deck-svg-label">PSC &#8594; VERTEX AI</text>
+                    <path class="trace-edge" d="M 62 58 L 154 58" />
+                    <path class="trace-edge" d="M 206 58 L 296 40" />
+                    <path class="trace-edge" d="M 206 58 L 296 80" />
+                    <path class="trace-packet hero-stream" d="M 62 58 L 154 58" />
+                    <path class="trace-packet hero-stream" d="M 206 58 L 296 40" />
+                    <path class="trace-packet hero-stream" d="M 206 58 L 296 80" />
+                    <rect class="deck-node" x="22" y="42" width="40" height="32" rx="7" />
+                    <text x="30" y="61" class="visual-label">ALB</text>
+                    <rect class="deck-node active-ring" x="154" y="38" width="52" height="40" rx="8" />
+                    <text x="163" y="61" class="visual-badge">AGENT</text>
+                    <rect class="deck-node active-ring" x="296" y="24" width="60" height="28" rx="6" />
+                    <text x="306" y="41" class="visual-label">GEMINI</text>
+                    <rect class="deck-node" x="296" y="66" width="60" height="28" rx="6" />
+                    <text x="304" y="83" class="visual-label">PUB/SUB</text>
+                    <text x="90" y="110" class="deck-svg-sub">IM8-compliant landing zone + Jetski trajectory visualiser</text>
+                  </svg>
 
-          <div class="about-bento-card">
-            <span class="bento-label">RECOGNITION &amp; OUTSIDE WORK</span>
-            <h3 class="bento-title">Awards &amp; Interests</h3>
-            <p class="bento-desc">
-              2nd Place NUS LifeHack 2025 · Overall Best &amp; Most Impactful (AISG / SMU / CyberYouthSG) · DSTA BrainHack Semifinalist · Basketball, pickleball &amp; vintage thrifting.
-            </p>
+                  <!-- Chapter 02: Grab Trust, Identity & Safety -->
+                  <svg class="hero-deck-svg about-scene" data-about-scene="grab" viewBox="0 0 380 120" aria-hidden="true">
+                    <text x="16" y="18" class="deck-svg-label">INGRESS EVENTS</text>
+                    <text x="136" y="18" class="deck-svg-label">GOLANG CONTROLS</text>
+                    <text x="272" y="18" class="deck-svg-label">PETABYTE RISK ENGINE</text>
+                    <path class="trace-edge" d="M 66 58 L 146 58" />
+                    <path class="trace-edge" d="M 218 58 L 292 58" />
+                    <path class="trace-packet hero-stream" d="M 66 58 L 146 58" />
+                    <path class="trace-packet hero-stream" d="M 218 58 L 292 58" />
+                    <circle class="deck-node" cx="44" cy="58" r="14" />
+                    <text x="34" y="61" class="visual-label">API</text>
+                    <rect class="deck-node active-ring" x="146" y="36" width="72" height="44" rx="8" />
+                    <text x="156" y="55" class="visual-badge">GO FLAGS</text>
+                    <text x="156" y="69" class="visual-label">RATE LIMIT</text>
+                    <rect class="deck-node active-ring" x="292" y="36" width="66" height="44" rx="8" />
+                    <text x="302" y="55" class="visual-label">TIS RISK</text>
+                    <text x="302" y="69" class="visual-badge">PB-Scale</text>
+                    <text x="82" y="110" class="deck-svg-sub">Real-time fraud detection microservices in Golang at Grab</text>
+                  </svg>
+
+                  <!-- Chapter 03: A*STAR AI Research -->
+                  <svg class="hero-deck-svg about-scene" data-about-scene="astar" viewBox="0 0 380 120" aria-hidden="true">
+                    <text x="18" y="18" class="deck-svg-label">DATA + MODEL UQ · APSIPA ASC / IEEE XPLORE</text>
+                    <path
+                      d="M 24 28 Q 130 40, 225 58 T 356 78 L 356 100 Q 225 82, 130 62 T 24 48 Z"
+                      fill="var(--accent-subtle)"
+                    />
+                    <path
+                      d="M 24 38 Q 130 51, 225 70 T 356 89"
+                      fill="none"
+                      stroke="var(--accent)"
+                      stroke-width="2.6"
+                    />
+                    <circle class="deck-node active-ring" cx="130" cy="51" r="5" />
+                    <circle class="deck-node active-ring" cx="225" cy="70" r="5" />
+                    <text x="24" y="110" class="deck-svg-sub">First-author battery State-of-Health UQ &amp; SHAP/LIME framework</text>
+                  </svg>
+
+                  <!-- Chapter 04: Glasgow, SIT & Beyond Code -->
+                  <svg class="hero-deck-svg about-scene" data-about-scene="beyond" viewBox="0 0 380 120" aria-hidden="true">
+                    <rect class="deck-node active-ring" x="16" y="24" width="106" height="62" rx="8" />
+                    <text x="26" y="45" class="visual-badge">GLASGOW &amp; SIT</text>
+                    <text x="26" y="61" class="visual-label">BSc (Hons) CS</text>
+                    <text x="26" y="75" class="visual-label">Second Upper</text>
+
+                    <rect class="deck-node active-ring" x="136" y="24" width="108" height="62" rx="8" />
+                    <text x="146" y="45" class="visual-badge">3X HACKATHONS</text>
+                    <text x="146" y="61" class="visual-label">NUS LifeHack 2nd</text>
+                    <text x="146" y="75" class="visual-label">AISG · DSTA TIL</text>
+
+                    <rect class="deck-node" x="258" y="24" width="106" height="62" rx="8" />
+                    <text x="268" y="45" class="visual-badge">OFF THE CLOCK</text>
+                    <text x="268" y="61" class="visual-label">Basketball</text>
+                    <text x="268" y="75" class="visual-label">Pickleball · Thrift</text>
+                    <text x="74" y="110" class="deck-svg-sub">Bridging technical teams, stakeholders, and life outside code</text>
+                  </svg>
+                </div>
+
+                <p class="about-live-story" id="about-live-story">
+                  At Google in Singapore, I architect IM8-compliant zero-trust cloud landing zones for generative AI agents using Terraform, Dual-VPC, and Private Service Connect, build native trajectory visualisers, and lead AI buildathons for over 4,000 students and engineers across NTU, GovTech, DBS, and A*STAR.
+                </p>
+              </div>
+
+              <!-- Right Pane: Interactive Bento Cards + Live Domain Telemetry -->
+              <div class="bezel-pane about-right-pane">
+                <div class="pane-header">
+                  <span class="pane-label">CLICK ANY CARD TO INSPECT CHAPTER</span>
+                  <span class="pane-badge" id="about-active-pill-readout">Chapter 01 / 04</span>
+                </div>
+
+                <div class="about-mini-bento">
+                  <button type="button" class="about-mini-card active" data-about-card="google">
+                    <span class="mini-card-eyebrow">CURRENT ROLE</span>
+                    <span class="mini-card-title">Customer Engineer · Google</span>
+                    <span class="mini-card-sub">Terraform · Dual-VPC · Agent Visualiser</span>
+                  </button>
+
+                  <button type="button" class="about-mini-card" data-about-card="grab">
+                    <span class="mini-card-eyebrow">BACKEND SYSTEMS</span>
+                    <span class="mini-card-title">Trust SWE · Grab (TIS)</span>
+                    <span class="mini-card-sub">Golang · Fraud Detection · PB-Scale</span>
+                  </button>
+
+                  <button type="button" class="about-mini-card" data-about-card="astar">
+                    <span class="mini-card-eyebrow">APPLIED ML RESEARCH</span>
+                    <span class="mini-card-title">AI Research · A*STAR</span>
+                    <span class="mini-card-sub">1st Author IEEE · Conformal UQ &amp; XAI</span>
+                  </button>
+
+                  <button type="button" class="about-mini-card" data-about-card="beyond">
+                    <span class="mini-card-eyebrow">EDUCATION &amp; LIFE</span>
+                    <span class="mini-card-title">Glasgow &amp; SIT · Off Court</span>
+                    <span class="mini-card-sub">BSc CS (2:1) · Basketball &amp; Pickleball</span>
+                  </button>
+                </div>
+
+                <div class="telemetry-metrics about-bars">
+                  <div class="metric-row">
+                    <div class="metric-top">
+                      <span id="about-bar1-label">Zero-Trust Cloud &amp; Terraform IaC</span>
+                      <span class="metric-val" id="about-bar1-val">36 / 36 IM8 Checks</span>
+                    </div>
+                    <div class="metric-track">
+                      <div class="metric-fill fill-blue" id="about-bar1-fill" style="width: 96%"></div>
+                    </div>
+                  </div>
+                  <div class="metric-row">
+                    <div class="metric-top">
+                      <span id="about-bar2-label">Enablement &amp; Buildathon Reach</span>
+                      <span class="metric-val" id="about-bar2-val">4,000+ Participants</span>
+                    </div>
+                    <div class="metric-track">
+                      <div class="metric-fill fill-teal" id="about-bar2-fill" style="width: 92%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -314,91 +460,108 @@
 
     <!-- ======================================================================
          2. Full-Width Scroll-Animated Repository Showcases
-            (Each top GitHub repo presented like an Apple product section on scroll)
+            (Unified to the exact same large BUILDER stage size & 2-column bezel grid)
          ====================================================================== -->
     <div id="featured" data-section-target="featured">
       <!-- Repo Showcase 01: Jetski Agent Tracer & Harness -->
-      <section class="repo-showcase surface-white scroll-stage" id="showcase-agent-tracer">
-        <div class="stage-inner">
-          <div class="stage-copy">
-            <span class="stage-eyebrow">AGENTIC OBSERVABILITY &amp; MISSION CONTROL · PYTHON &amp; VIS.JS</span>
-            <h2 class="stage-headline">Jetski Agent Tracer &amp; Harness</h2>
-            <p class="stage-subhead">
-              Stream live JSONL agent trajectories into a three-lane execution visualiser, paired with a 2x2 mission control harness tracking 200k context window saturation over Connect-RPC.
-            </p>
-            <div class="cta-pill-group">
-              <a
-                href="https://github.com/elim316/Jetski-Agent-Tracer-Plugin"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="apple-pill solid"
-              >
-                View Agent Tracer Repo &#8599;
-              </a>
-              <a
-                href="https://github.com/elim316/Jetski-Harness"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="apple-pill outline"
-              >
-                View Jetski Harness Repo &#8599;
-              </a>
-            </div>
+      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-agent-tracer">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">AGENTIC OBSERVABILITY &amp; MISSION CONTROL · PYTHON &amp; VIS.JS</span>
+          <h2 class="hero-headline stage-hero-headline">Jetski Agent Tracer &amp; Harness</h2>
+          <p class="hero-subhead">
+            Stream live JSONL agent trajectories into a three-lane execution visualiser, paired with a 2x2 mission control harness tracking 200k context window saturation over Connect-RPC.
+          </p>
+          <div class="cta-pill-group">
+            <a
+              href="https://github.com/elim316/Jetski-Agent-Tracer-Plugin"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill solid"
+            >
+              View Agent Tracer Repo &#8599;
+            </a>
+            <a
+              href="https://github.com/elim316/Jetski-Harness"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill outline"
+            >
+              View Jetski Harness Repo &#8599;
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual-stage">
+          <div class="metallic-wordmark" aria-hidden="true">
+            TRACER
           </div>
 
-          <div class="stage-showcase-card" id="flagship-tracer-sandbox">
-            <div class="stage-visual-grid">
-              <div class="stage-panel">
-                <div class="pane-header">
-                  <span class="pane-label">INTERACTIVE TRACE INSPECTOR (CLICK NODES)</span>
-                  <span class="pane-badge" id="flagship-tracer-readout">Step #02 PLANNER · 640ms · 1,840 tok</span>
+          <div class="hardware-deck stage-deck" id="flagship-tracer-sandbox">
+            <div class="hardware-bezel">
+              <div class="bezel-top-bar">
+                <div class="bezel-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
                 </div>
-                <svg class="stage-svg" viewBox="0 0 360 110" aria-hidden="true">
-                  <text x="18" y="18" class="visual-label">USER</text>
-                  <text x="150" y="18" class="visual-label">PLANNER</text>
-                  <text x="276" y="18" class="visual-label">MCP / SUB</text>
-                  <path class="trace-edge" d="M 48 58 C 96 58, 115 42, 162 42" />
-                  <path class="trace-edge" d="M 188 42 C 236 42, 255 32, 300 32" />
-                  <path class="trace-edge" d="M 188 42 C 236 42, 255 80, 300 80" />
-                  <path class="trace-packet hero-stream" d="M 48 58 C 96 58, 115 42, 162 42" />
-                  <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 32, 300 32" />
-                  <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 80, 300 80" />
-                  <circle class="trace-node clickable-node" data-fstep="user" cx="38" cy="58" r="10" />
-                  <circle class="trace-node node-accent clickable-node is-selected" data-fstep="planner" cx="175" cy="42" r="13" />
-                  <rect class="trace-node node-accent clickable-node" data-fstep="mcp" x="296" y="20" width="24" height="22" rx="5" />
-                  <rect class="trace-node clickable-node" data-fstep="subagent" x="296" y="68" width="24" height="22" rx="5" />
-                </svg>
-                <div class="sandbox-pills">
-                  <button type="button" class="sandbox-pill" data-fstep-btn="user">#01 User</button>
-                  <button type="button" class="sandbox-pill active" data-fstep-btn="planner">#02 Planner</button>
-                  <button type="button" class="sandbox-pill" data-fstep-btn="mcp">#03 MCP Tool</button>
-                  <button type="button" class="sandbox-pill" data-fstep-btn="subagent">#04 Subagent</button>
+                <div class="bezel-title">JETSKI AGENT TRACER &amp; HARNESS · LIVE TELEMETRY SANDBOX</div>
+                <div class="bezel-status">
+                  <span class="status-led"></span>
+                  <span>CONNECT-RPC ACTIVE</span>
                 </div>
               </div>
 
-              <div class="stage-panel">
-                <div class="pane-header">
-                  <span class="pane-label">200K TOKEN COMPACTION SIMULATOR</span>
-                  <span class="pane-badge" id="flagship-harness-readout">142k / 200k · 71% Cached</span>
+              <div class="bezel-grid">
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label">INTERACTIVE TRACE INSPECTOR (CLICK NODES)</span>
+                    <span class="pane-badge" id="flagship-tracer-readout">Step #02 PLANNER · 640ms · 1,840 tok</span>
+                  </div>
+                  <svg class="hero-deck-svg" viewBox="0 0 360 110" aria-hidden="true">
+                    <text x="18" y="18" class="visual-label">USER</text>
+                    <text x="150" y="18" class="visual-label">PLANNER</text>
+                    <text x="276" y="18" class="visual-label">MCP / SUB</text>
+                    <path class="trace-edge" d="M 48 58 C 96 58, 115 42, 162 42" />
+                    <path class="trace-edge" d="M 188 42 C 236 42, 255 32, 300 32" />
+                    <path class="trace-edge" d="M 188 42 C 236 42, 255 80, 300 80" />
+                    <path class="trace-packet hero-stream" d="M 48 58 C 96 58, 115 42, 162 42" />
+                    <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 32, 300 32" />
+                    <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 80, 300 80" />
+                    <circle class="trace-node clickable-node" data-fstep="user" cx="38" cy="58" r="10" />
+                    <circle class="trace-node node-accent clickable-node is-selected" data-fstep="planner" cx="175" cy="42" r="13" />
+                    <rect class="trace-node node-accent clickable-node" data-fstep="mcp" x="296" y="20" width="24" height="22" rx="5" />
+                    <rect class="trace-node clickable-node" data-fstep="subagent" x="296" y="68" width="24" height="22" rx="5" />
+                  </svg>
+                  <div class="sandbox-pills">
+                    <button type="button" class="sandbox-pill" data-fstep-btn="user">#01 User</button>
+                    <button type="button" class="sandbox-pill active" data-fstep-btn="planner">#02 Planner</button>
+                    <button type="button" class="sandbox-pill" data-fstep-btn="mcp">#03 MCP Tool</button>
+                    <button type="button" class="sandbox-pill" data-fstep-btn="subagent">#04 Subagent</button>
+                  </div>
                 </div>
-                <svg class="stage-svg" viewBox="0 0 360 110" aria-hidden="true">
-                  <rect x="14" y="12" width="158" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                  <rect x="184" y="12" width="162" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                  <text x="26" y="28" class="visual-label">2x2 BENTO HARNESS</text>
-                  <text x="26" y="42" class="visual-badge" id="flagship-rpc-badge">Connect-RPC Stream</text>
-                  <text x="196" y="28" class="visual-label">3 ACTIVE SESSIONS</text>
-                  <circle cx="202" cy="39" r="3.5" fill="var(--signal-green)" />
-                  <circle cx="214" cy="39" r="3.5" fill="var(--signal-green)" />
-                  <circle cx="226" cy="39" r="3.5" fill="var(--signal-amber)" />
-                  <rect x="14" y="58" width="332" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                  <text x="26" y="75" class="visual-label" id="flagship-bar-label">CONTEXT SATURATION: 142k / 200k TOKENS</text>
-                  <rect x="26" y="83" width="308" height="7" rx="3.5" fill="var(--bg-subtle)" />
-                  <rect class="token-fill-bar" id="flagship-token-bar" x="26" y="83" width="308" height="7" rx="3.5" fill="var(--accent)" />
-                </svg>
-                <div class="sandbox-pills">
-                  <button type="button" class="sandbox-pill" data-fturn-btn="turn2">Turn 2 (48k)</button>
-                  <button type="button" class="sandbox-pill active" data-fturn-btn="turn8">Turn 8 (142k)</button>
-                  <button type="button" class="sandbox-pill" data-fturn-btn="turn14">Turn 14 (196k Auto-Compact)</button>
+
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label">200K TOKEN COMPACTION SIMULATOR</span>
+                    <span class="pane-badge" id="flagship-harness-readout">142k / 200k · 71% Cached</span>
+                  </div>
+                  <svg class="hero-deck-svg" viewBox="0 0 360 110" aria-hidden="true">
+                    <rect x="14" y="12" width="158" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <rect x="184" y="12" width="162" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <text x="26" y="28" class="visual-label">2x2 BENTO HARNESS</text>
+                    <text x="26" y="42" class="visual-badge" id="flagship-rpc-badge">Connect-RPC Stream</text>
+                    <text x="196" y="28" class="visual-label">3 ACTIVE SESSIONS</text>
+                    <circle cx="202" cy="39" r="3.5" fill="var(--signal-green)" />
+                    <circle cx="214" cy="39" r="3.5" fill="var(--signal-green)" />
+                    <circle cx="226" cy="39" r="3.5" fill="var(--signal-amber)" />
+                    <rect x="14" y="58" width="332" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <text x="26" y="75" class="visual-label" id="flagship-bar-label">CONTEXT SATURATION: 142k / 200k TOKENS</text>
+                    <rect x="26" y="83" width="308" height="7" rx="3.5" fill="var(--bg-subtle)" />
+                    <rect class="token-fill-bar" id="flagship-token-bar" x="26" y="83" width="308" height="7" rx="3.5" fill="var(--accent)" />
+                  </svg>
+                  <div class="sandbox-pills">
+                    <button type="button" class="sandbox-pill" data-fturn-btn="turn2">Turn 2 (48k)</button>
+                    <button type="button" class="sandbox-pill active" data-fturn-btn="turn8">Turn 8 (142k)</button>
+                    <button type="button" class="sandbox-pill" data-fturn-btn="turn14">Turn 14 (196k Auto-Compact)</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -407,110 +570,223 @@
       </section>
 
       <!-- Repo Showcase 02: Smart Meeting Prep & Dossier Agent -->
-      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-meeting-prep">
-        <div class="stage-inner">
-          <div class="stage-copy">
-            <span class="stage-eyebrow">MULTI-CORPUS AGENT &amp; EVALUATION HARNESS · PYTHON</span>
-            <h2 class="stage-headline">Smart Meeting Prep &amp; Dossier Agent</h2>
-            <p class="stage-subhead">
-              Two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings, verified by a 5-scenario, 36-check hallucination linter.
-            </p>
-            <div class="cta-pill-group">
-              <a
-                href="https://github.com/elim316/Jetski-Meeting-Prep-Agent"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="apple-pill solid"
-              >
-                View Repository &#8599;
-              </a>
-              <a href="#project-meeting-prep-agent" class="apple-pill outline">
-                Technical specs &#8595;
-              </a>
-            </div>
+      <section class="repo-showcase surface-white scroll-stage" id="showcase-meeting-prep">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">MULTI-CORPUS AGENT &amp; EVALUATION HARNESS · PYTHON</span>
+          <h2 class="hero-headline stage-hero-headline">Smart Meeting Prep &amp; Dossier Agent</h2>
+          <p class="hero-subhead">
+            Two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings, verified by a 5-scenario, 36-check hallucination linter.
+          </p>
+          <div class="cta-pill-group">
+            <a
+              href="https://github.com/elim316/Jetski-Meeting-Prep-Agent"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill solid"
+            >
+              View Repository &#8599;
+            </a>
+            <a href="#project-meeting-prep-agent" class="apple-pill outline">
+              Technical specs &#8595;
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual-stage">
+          <div class="metallic-wordmark" aria-hidden="true">
+            DOSSIER
           </div>
 
-          <div class="stage-showcase-card" id="flagship-prep-sandbox">
-            <div class="pane-header">
-              <span class="pane-label">TWO-STAGE PIPELINE &amp; 36-CHECK CITATION LINTER</span>
-              <span class="pane-badge" id="flagship-prep-readout">Stage 1 (18:00 NBD Dossier) + Stage 2 (Stateless T-1h Alert)</span>
+          <div class="hardware-deck stage-deck" id="flagship-prep-sandbox">
+            <div class="hardware-bezel">
+              <div class="bezel-top-bar">
+                <div class="bezel-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="bezel-title">MEETING PREP &amp; DOSSIER AGENT · EVALUATION HARNESS</div>
+                <div class="bezel-status">
+                  <span class="status-led"></span>
+                  <span>36 / 36 CHECKS PASSED</span>
+                </div>
+              </div>
+
+              <div class="bezel-grid">
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label">TWO-STAGE SCHEDULED EXECUTION PIPELINE</span>
+                    <span class="pane-badge" id="flagship-prep-readout">Stage 1 (18:00 NBD) + Stage 2 (T-1h)</span>
+                  </div>
+                  <svg class="hero-deck-svg" viewBox="0 0 380 120" aria-hidden="true">
+                    <rect x="14" y="24" width="96" height="68" rx="8" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.3" />
+                    <text x="24" y="48" class="visual-label">STAGE 1</text>
+                    <text x="24" y="66" class="visual-badge">18:00 NBD</text>
+                    <path class="trace-edge" d="M 110 58 L 142 58" />
+                    <path class="trace-packet hero-stream" d="M 110 58 L 142 58" />
+                    <rect x="142" y="18" width="104" height="80" rx="8" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.5" />
+                    <text x="152" y="42" class="visual-label">LINTER</text>
+                    <text x="152" y="60" class="visual-badge">&#10003; 36 Checks</text>
+                    <text x="152" y="76" class="visual-label">0 Hallucinations</text>
+                    <path class="trace-edge" d="M 246 58 L 276 58" />
+                    <path class="trace-packet hero-stream" d="M 246 58 L 276 58" />
+                    <rect x="276" y="24" width="90" height="68" rx="8" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.3" />
+                    <text x="286" y="48" class="visual-label">STAGE 2</text>
+                    <text x="286" y="66" class="visual-badge">T-1h Window</text>
+                  </svg>
+                </div>
+
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label">5-SCENARIO MOCK EVALUATION SUITE</span>
+                    <span class="pane-badge">Zero Hallucinated URLs</span>
+                  </div>
+                  <div class="telemetry-metrics">
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Citation &amp; Source URL Verification</span>
+                        <span class="metric-val">100% Grounded</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-green" style="width: 100%"></div>
+                      </div>
+                    </div>
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Cross-Corpus Synthesis (Calendar/Gmail/Chat/Drive)</span>
+                        <span class="metric-val">5 / 5 Scenarios</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-blue" style="width: 100%"></div>
+                      </div>
+                    </div>
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Stateless 60-Min Window Partitioning</span>
+                        <span class="metric-val">Zero Duplicates</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-teal" style="width: 100%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <svg class="stage-svg wide-svg" viewBox="0 0 640 120" aria-hidden="true">
-              <rect x="24" y="22" width="140" height="72" rx="10" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" />
-              <text x="42" y="48" class="visual-label">STAGE 1 · 18:00 SGT</text>
-              <text x="42" y="68" class="visual-badge">Next-Business-Day Dossier</text>
-              <path class="trace-edge" d="M 164 58 L 228 58" />
-              <path class="trace-packet hero-stream" d="M 164 58 L 228 58" />
-              <rect x="228" y="16" width="184" height="84" rx="10" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.6" />
-              <text x="248" y="40" class="visual-label">EVAL HARNESS (5 SCENARIOS)</text>
-              <text x="248" y="60" class="visual-badge">&#10003; 36 / 36 Assertion Checks</text>
-              <text x="248" y="78" class="visual-label">&#10003; Zero Hallucinated URLs</text>
-              <path class="trace-edge" d="M 412 58 L 476 58" />
-              <path class="trace-packet hero-stream" d="M 412 58 L 476 58" />
-              <rect x="476" y="22" width="140" height="72" rx="10" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" />
-              <text x="494" y="48" class="visual-label">STAGE 2 · T-1H</text>
-              <text x="494" y="68" class="visual-badge">Stateless 60m Window</text>
-            </svg>
           </div>
         </div>
       </section>
 
       <!-- Repo Showcase 03: UQ & Explainable AI for Battery Analytics -->
-      <section class="repo-showcase surface-white scroll-stage" id="showcase-uq-xai">
-        <div class="stage-inner">
-          <div class="stage-copy">
-            <span class="stage-eyebrow">PUBLISHED IN IEEE XPLORE · DOCUMENT 11249263</span>
-            <h2 class="stage-headline">Uncertainty &amp; Explainable AI for Battery Analytics</h2>
-            <p class="stage-subhead">
-              Combines Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE), and SHAP/LIME attributions for convolutional battery state-of-health estimation.
-            </p>
-            <div class="cta-pill-group">
-              <a
-                href="https://github.com/elim316/UQ-XAI-battery-analytics"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="apple-pill solid"
-              >
-                View Repository &#8599;
-              </a>
-              <a
-                href="https://ieeexplore.ieee.org/document/11249263"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="apple-pill outline"
-              >
-                Read IEEE Paper &#8599;
-              </a>
-            </div>
+      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-uq-xai">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">FIRST AUTHOR · APSIPA ASC 2025 &amp; IEEE XPLORE (DOC 11249263)</span>
+          <h2 class="hero-headline stage-hero-headline">Uncertainty &amp; Explainable AI for Battery Analytics</h2>
+          <p class="hero-subhead">
+            Unified deep learning framework quantifying both model and data uncertainty via Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE), and SHAP/LIME attributions.
+          </p>
+          <div class="cta-pill-group">
+            <a
+              href="https://github.com/elim316/UQ-XAI-battery-analytics"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill solid"
+            >
+              View Repository &#8599;
+            </a>
+            <a
+              href="https://ieeexplore.ieee.org/document/11249263"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill outline"
+            >
+              Read IEEE Paper &#8599;
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual-stage">
+          <div class="metallic-wordmark" aria-hidden="true">
+            RESEARCH
           </div>
 
-          <div class="stage-showcase-card" id="flagship-uq-sandbox">
-            <div class="pane-header">
-              <span class="pane-label" id="flagship-aci-title">INTERACTIVE CONFORMAL PREDICTION BAND (95% ACI)</span>
-              <span class="pane-badge" id="flagship-aci-readout">PICP: 0.952 · ECE: 0.012 · McMaster &#8594; Oxford</span>
-            </div>
-            <svg class="stage-svg wide-svg" viewBox="0 0 640 130" aria-hidden="true">
-              <path
-                class="ci-band"
-                id="flagship-aci-band"
-                d="M 30 22 Q 210 38, 380 62 T 610 88 L 610 118 Q 380 94, 210 68 T 30 52 Z"
-                fill="var(--accent)"
-              />
-              <path
-                d="M 30 37 Q 210 53, 380 78 T 610 103"
-                fill="none"
-                stroke="var(--accent)"
-                stroke-width="2.8"
-              />
-              <circle class="trace-node node-accent" cx="210" cy="53" r="5" />
-              <circle class="trace-node node-accent" cx="380" cy="78" r="5" />
-              <text x="34" y="114" class="visual-label">Cycle 0 (McMaster Train)</text>
-              <text x="465" y="68" class="visual-badge">SHAP + LIME Verified</text>
-            </svg>
-            <div class="sandbox-pills centered-pills">
-              <button type="button" class="sandbox-pill" data-fci-btn="90">90% Confidence (Tight)</button>
-              <button type="button" class="sandbox-pill active" data-fci-btn="95">95% Confidence (Optimal)</button>
-              <button type="button" class="sandbox-pill" data-fci-btn="99">99% Confidence (Conservative)</button>
+          <div class="hardware-deck stage-deck" id="flagship-uq-sandbox">
+            <div class="hardware-bezel">
+              <div class="bezel-top-bar">
+                <div class="bezel-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="bezel-title">A*STAR BATTERY SOH FRAMEWORK · CONFORMAL &amp; XAI SANDBOX</div>
+                <div class="bezel-status">
+                  <span class="status-led"></span>
+                  <span>IEEE XPLORE PUBLISHED</span>
+                </div>
+              </div>
+
+              <div class="bezel-grid">
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label" id="flagship-aci-title">INTERACTIVE CONFORMAL BAND (95% ACI)</span>
+                    <span class="pane-badge" id="flagship-aci-readout">PICP: 0.952 · ECE: 0.012 · McMaster &#8594; Oxford</span>
+                  </div>
+                  <svg class="hero-deck-svg" viewBox="0 0 380 110" aria-hidden="true">
+                    <path
+                      class="ci-band"
+                      id="flagship-aci-band"
+                      d="M 20 18 Q 130 32, 230 52 T 360 74 L 360 100 Q 230 80, 130 58 T 20 44 Z"
+                      fill="var(--accent)"
+                    />
+                    <path
+                      d="M 20 31 Q 130 45, 230 66 T 360 87"
+                      fill="none"
+                      stroke="var(--accent)"
+                      stroke-width="2.6"
+                    />
+                    <circle class="trace-node node-accent" cx="130" cy="45" r="4.5" />
+                    <circle class="trace-node node-accent" cx="230" cy="66" r="4.5" />
+                    <text x="22" y="98" class="visual-label">Cycle 0 (McMaster Train)</text>
+                  </svg>
+                  <div class="sandbox-pills">
+                    <button type="button" class="sandbox-pill" data-fci-btn="90">90% Confidence</button>
+                    <button type="button" class="sandbox-pill active" data-fci-btn="95">95% Confidence</button>
+                    <button type="button" class="sandbox-pill" data-fci-btn="99">99% Confidence</button>
+                  </div>
+                </div>
+
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label">CALIBRATION &amp; POST-HOC EXPLAINABILITY</span>
+                    <span class="pane-badge">SHAP · LIME · IG</span>
+                  </div>
+                  <div class="telemetry-metrics">
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Prediction Interval Coverage (PICP @ 95%)</span>
+                        <span class="metric-val">95.2% Empirical</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-teal" style="width: 95%"></div>
+                      </div>
+                    </div>
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Expected Calibration Error (ECE Reduction)</span>
+                        <span class="metric-val">0.012 ECE</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-blue" style="width: 92%"></div>
+                      </div>
+                    </div>
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Feature Attribution Consistency (SHAP / LIME)</span>
+                        <span class="metric-val">Voltage &amp; Temp</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-green" style="width: 94%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
