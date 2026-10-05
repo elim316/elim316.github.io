@@ -233,20 +233,20 @@
     switch (id) {
       case "agent-tracer":
         return `
-          <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <text x="38" y="16" text-anchor="middle" class="visual-label">USER</text>
-            <text x="160" y="16" text-anchor="middle" class="visual-label">PLANNER</text>
-            <text x="275" y="16" text-anchor="middle" class="visual-label">MCP / SUB</text>
-            <path class="trace-edge" d="M 48 52 C 90 52, 105 38, 148 38" />
-            <path class="trace-edge" d="M 172 38 C 215 38, 230 30, 264 30" />
-            <path class="trace-edge" d="M 172 38 C 215 38, 230 72, 264 72" />
-            <path class="trace-packet" d="M 48 52 C 90 52, 105 38, 148 38" />
-            <path class="trace-packet" d="M 172 38 C 215 38, 230 30, 264 30" />
-            <path class="trace-packet" d="M 172 38 C 215 38, 230 72, 264 72" />
-            <circle class="trace-node clickable-node" data-step="user" cx="38" cy="52" r="10" />
-            <circle class="trace-node node-accent clickable-node is-selected" data-step="planner" cx="160" cy="38" r="12" />
-            <rect class="trace-node node-accent clickable-node" data-step="mcp" x="264" y="20" width="22" height="20" rx="5" />
-            <rect class="trace-node clickable-node" data-step="subagent" x="264" y="62" width="22" height="20" rx="5" />
+          <svg class="visual-svg" viewBox="0 0 320 98" aria-hidden="true">
+            <text x="38" y="12" text-anchor="middle" class="visual-label">USER</text>
+            <text x="160" y="12" text-anchor="middle" class="visual-label">PLANNER</text>
+            <text x="275" y="12" text-anchor="middle" class="visual-label">MCP / SUB</text>
+            <path class="trace-edge" d="M 48 54 C 90 54, 105 44, 148 44" />
+            <path class="trace-edge" d="M 172 44 C 215 44, 230 38, 264 38" />
+            <path class="trace-edge" d="M 172 44 C 215 44, 230 74, 264 74" />
+            <path class="trace-packet" d="M 48 54 C 90 54, 105 44, 148 44" />
+            <path class="trace-packet" d="M 172 44 C 215 44, 230 38, 264 38" />
+            <path class="trace-packet" d="M 172 44 C 215 44, 230 74, 264 74" />
+            <circle class="trace-node clickable-node" data-step="user" cx="38" cy="54" r="10" />
+            <circle class="trace-node node-accent clickable-node is-selected" data-step="planner" cx="160" cy="44" r="12" />
+            <rect class="trace-node node-accent clickable-node" data-step="mcp" x="264" y="28" width="22" height="20" rx="5" />
+            <rect class="trace-node clickable-node" data-step="subagent" x="264" y="64" width="22" height="20" rx="5" />
           </svg>
           <div class="sandbox-bar" data-sandbox="agent-tracer">
             <span class="sandbox-readout" id="readout-agent-tracer">Step #02 PLANNER · 640ms</span>
@@ -261,18 +261,23 @@
       case "jetski-harness":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <rect x="18" y="8" width="144" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <rect x="170" y="8" width="132" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="90" y="22" text-anchor="middle" class="visual-label">2x2 BENTO HARNESS</text>
-            <text x="90" y="36" text-anchor="middle" class="visual-badge" id="harness-rpc-status">RPC · 71% Cached</text>
-            <text x="236" y="22" text-anchor="middle" class="visual-label">3 ACTIVE SESSIONS</text>
-            <circle cx="222" cy="34" r="3.5" fill="var(--signal-green)" />
-            <circle cx="236" cy="34" r="3.5" fill="var(--signal-green)" />
-            <circle cx="250" cy="34" r="3.5" fill="var(--signal-amber)" />
+            <defs>
+              <clipPath id="harness-bar-clip">
+                <rect x="28" y="73" width="264" height="6" rx="3" />
+              </clipPath>
+            </defs>
+            <rect x="18" y="8" width="140" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+            <rect x="166" y="8" width="136" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+            <text x="88" y="22" text-anchor="middle" class="visual-label">2x2 BENTO HARNESS</text>
+            <text x="88" y="36" text-anchor="middle" class="visual-badge" id="harness-rpc-status">71% Cached</text>
+            <text x="234" y="22" text-anchor="middle" class="visual-label">3 ACTIVE SESSIONS</text>
+            <circle cx="220" cy="34" r="3.5" fill="var(--signal-green)" />
+            <circle cx="234" cy="34" r="3.5" fill="var(--signal-green)" />
+            <circle cx="248" cy="34" r="3.5" fill="var(--signal-amber)" />
             <rect x="18" y="52" width="284" height="34" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
             <text x="28" y="66" class="visual-label" id="harness-bar-label">CONTEXT WINDOW: 142k / 200k TOKENS</text>
             <rect x="28" y="73" width="264" height="6" rx="3" fill="var(--bg-subtle)" />
-            <rect class="token-fill-bar" id="harness-token-bar" x="28" y="73" width="187" height="6" rx="3" fill="var(--accent)" />
+            <rect class="token-fill-bar" id="harness-token-bar" clip-path="url(#harness-bar-clip)" x="28" y="73" width="187" height="6" rx="3" fill="var(--accent)" />
           </svg>
           <div class="sandbox-bar" data-sandbox="jetski-harness">
             <span class="sandbox-readout" id="readout-jetski-harness">142k / 200k · Healthy</span>
@@ -319,17 +324,24 @@
       case "eduverse":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <text x="24" y="16" class="visual-label">KNOWLEDGE TRACING MASTERY</text>
-            <text x="296" y="16" text-anchor="end" class="visual-badge">2nd Place LifeHack</text>
-            <line x1="24" y1="78" x2="296" y2="78" stroke="var(--border-strong)" stroke-width="1.2" />
-            <rect class="kt-bar b1" x="44" y="44" width="36" height="34" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
-            <rect class="kt-bar b2" x="108" y="34" width="36" height="44" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
-            <rect class="kt-bar b3" x="172" y="26" width="36" height="52" rx="4" fill="var(--accent)" />
-            <rect class="kt-bar b1" x="236" y="38" width="36" height="40" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
-            <text x="62" y="91" text-anchor="middle" class="visual-label">ALG</text>
-            <text x="126" y="91" text-anchor="middle" class="visual-label">SYS</text>
-            <text x="190" y="91" text-anchor="middle" class="visual-label">ML</text>
-            <text x="254" y="91" text-anchor="middle" class="visual-label">NET</text>
+            <defs>
+              <clipPath id="kt-bars-clip">
+                <rect x="20" y="20" width="280" height="56" />
+              </clipPath>
+            </defs>
+            <text x="24" y="14" class="visual-label">KNOWLEDGE TRACING MASTERY</text>
+            <text x="296" y="14" text-anchor="end" class="visual-badge">2nd Place LifeHack</text>
+            <g clip-path="url(#kt-bars-clip)">
+              <rect class="kt-bar b1" x="44" y="48" width="36" height="32" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
+              <rect class="kt-bar b2" x="108" y="40" width="36" height="40" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
+              <rect class="kt-bar b3" x="172" y="32" width="36" height="48" rx="4" fill="var(--accent)" />
+              <rect class="kt-bar b1" x="236" y="42" width="36" height="38" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
+            </g>
+            <line x1="24" y1="76" x2="296" y2="76" stroke="var(--border-strong)" stroke-width="1.2" />
+            <text x="62" y="90" text-anchor="middle" class="visual-label">ALG</text>
+            <text x="126" y="90" text-anchor="middle" class="visual-label">SYS</text>
+            <text x="190" y="90" text-anchor="middle" class="visual-label">ML</text>
+            <text x="254" y="90" text-anchor="middle" class="visual-label">NET</text>
           </svg>
           <div class="sandbox-bar">
             <span class="sandbox-readout">PyTorch kt_models · Adaptive routing</span>
@@ -605,13 +617,13 @@
         bar2Width: "92%",
       },
       grab: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GRAB TRUST, IDENTITY & SAFETY",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GRAB SINGAPORE",
         bezelStatus: "JAN 2026 TO MAR 2026",
         paneLabel: "REAL-TIME FRAUD DETECTION & GOLANG RUNTIME CONTROLS",
         paneBadge: "Golang · Feature Flags · PB-Scale",
         readout: "Chapter 02 / 04",
         story:
-          "At Grab in the Trust, Identity, and Safety division, I engineered scalable Golang backend services for real-time fraud detection on petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting, and high-coverage unit test suites.",
+          "At Grab, I engineered scalable Golang backend services for real-time fraud detection on petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting, and high-coverage unit test suites.",
         bar1Label: "Golang Microservices & Runtime Controls",
         bar1Val: "Feature Flags + Rate Limit",
         bar1Width: "94%",
@@ -899,21 +911,21 @@
         width: 63,
         color: "var(--signal-green)",
         label: "CONTEXT WINDOW: 48k / 200k TOKENS",
-        rpc: "RPC · 42% Cached",
+        rpc: "42% Cached",
         readout: "48k / 200k · Fresh",
       },
       turn8: {
         width: 187,
         color: "var(--accent)",
         label: "CONTEXT WINDOW: 142k / 200k TOKENS",
-        rpc: "RPC · 71% Cached",
+        rpc: "71% Cached",
         readout: "142k / 200k · Healthy",
       },
       turn14: {
         width: 259,
         color: "var(--signal-amber)",
         label: "CONTEXT WINDOW: 196k / 200k (AUTO-COMPACT)",
-        rpc: "RPC · 86% Cached",
+        rpc: "86% Cached",
         readout: "196k / 200k · Compact",
       },
     };
@@ -1402,7 +1414,7 @@
     const baseCommands = [
       {
         title: "Jump to About & Background",
-        sub: "Google Cloud & AI Engineer, Grab TIS, A*STAR Research, Glasgow & SIT",
+        sub: "Google Cloud & AI Engineer, Grab, A*STAR Research, Glasgow & SIT",
         badge: "About",
         action: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }),
       },
@@ -1447,7 +1459,7 @@
       },
       {
         title: "Jump to Experience & Education",
-        sub: "Google, Grab (Trust, Identity & Safety), A*STAR, University of Glasgow & SIT",
+        sub: "Google, Grab, A*STAR, University of Glasgow & SIT",
         badge: "Section",
         action: () => document.getElementById("journey")?.scrollIntoView({ behavior: "smooth" }),
       },
