@@ -951,10 +951,10 @@
   }
 
   function applyTheme(theme) {
-    const clean = theme === "light" ? "light" : "dark";
+    const clean = theme === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", clean);
     try {
-      localStorage.setItem("eliaslim_site_theme", clean);
+      localStorage.setItem("eliaslim_theme_pref", clean);
     } catch (_) {}
     const label = document.getElementById("theme-toggle-label");
     if (label) {
@@ -970,9 +970,9 @@
   function initTheme() {
     let saved = null;
     try {
-      saved = localStorage.getItem("eliaslim_site_theme");
+      saved = localStorage.getItem("eliaslim_theme_pref");
     } catch (_) {}
-    applyTheme(saved || "dark");
+    applyTheme(saved || "light");
 
     const btn = document.getElementById("theme-toggle-btn");
     if (btn) {
@@ -994,14 +994,14 @@
 
     const baseCommands = [
       {
-        title: "Jump to Flagship Showcases",
-        sub: "Agent Tracer, Jetski Harness, and Battery Conformal Prediction",
-        badge: "Flagship",
-        action: () => document.getElementById("flagship")?.scrollIntoView({ behavior: "smooth" }),
+        title: "Jump to Featured Repositories",
+        sub: "Jetski Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
+        badge: "Featured",
+        action: () => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" }),
       },
       {
         title: "Toggle Light / Dark Theme",
-        sub: "Switch between Apple Pro Obsidian and Alabaster Light",
+        sub: "Switch between Alabaster Light and Obsidian Dark",
         badge: "Action",
         action: () => toggleTheme(),
       },
