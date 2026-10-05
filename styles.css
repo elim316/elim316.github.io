@@ -379,7 +379,7 @@ a {
 .hero-visual-stage {
   position: relative;
   width: 100%;
-  max-width: 980px;
+  max-width: 1040px;
   margin: 16px auto 10px;
   perspective: 1400px;
   display: flex;
@@ -420,7 +420,7 @@ a {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 860px;
+  max-width: 960px;
   margin-top: -36px;
   transform:
     rotateX(var(--deck-tilt, 14deg))
@@ -431,9 +431,22 @@ a {
   will-change: transform;
 }
 
+.hardware-deck.stage-deck {
+  transform: rotateX(10deg) translateY(26px) scale(0.95);
+  opacity: 0;
+  transition:
+    transform 820ms var(--spring-out),
+    opacity 680ms var(--spring-out);
+}
+
+.scroll-stage.is-inview .hardware-deck.stage-deck {
+  transform: rotateX(0deg) translateY(0px) scale(1);
+  opacity: 1;
+}
+
 .hardware-bezel {
   border-radius: 22px;
-  padding: 18px 22px 22px;
+  padding: 20px 24px 24px;
   background: var(--bg-elevated);
   border: 1.5px solid var(--border-strong);
   box-shadow: var(--shadow-deck);
@@ -498,15 +511,19 @@ a {
 
 .bezel-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 16px;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 18px;
 }
 
 .bezel-pane {
   background: var(--bg-canvas);
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
-  padding: 14px 16px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .pane-header {
@@ -514,7 +531,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .pane-label {
@@ -535,7 +552,7 @@ a {
 
 .hero-deck-svg {
   width: 100%;
-  height: 112px;
+  height: 118px;
   overflow: visible;
 }
 
@@ -604,6 +621,7 @@ a {
   border-radius: 3px;
   transform-origin: left center;
   animation: metricFillIn 1.2s var(--spring-out) forwards;
+  transition: width 520ms var(--spring-out);
 }
 
 .metric-fill.fill-blue {
@@ -677,86 +695,18 @@ a {
 }
 
 /* ==========================================================================
-   2B. Self-Introduction & At-a-Glance Bento Section (#about)
-   ========================================================================== */
-
-.about-section {
-  padding: 76px 24px;
-  background: var(--bg-elevated);
-  border-bottom: 12px solid var(--bg-primary);
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: 44px;
-  align-items: start;
-}
-
-.about-narrative {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.about-paragraph {
-  font-size: 0.98rem;
-  line-height: 1.68;
-  color: var(--text-secondary);
-}
-
-.about-bento {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.about-bento-card {
-  padding: 18px 20px;
-  border-radius: var(--radius-md);
-  background: var(--bg-canvas);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  transition:
-    transform 260ms var(--spring-out),
-    border-color 200ms var(--ease-smooth);
-}
-
-.about-bento-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--border-strong);
-}
-
-.bento-label {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  color: var(--accent);
-}
-
-.bento-title {
-  font-size: 0.98rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.015em;
-}
-
-.bento-desc {
-  font-size: 0.82rem;
-  line-height: 1.52;
-  color: var(--text-secondary);
-}
-
-/* ==========================================================================
-   3. Full-Width Scroll-Animated Repository Showcases
+   2B. Interactive Animated Self-Introduction Stage (#about) & Full-Stage Showcases
    ========================================================================== */
 
 .repo-showcase {
   position: relative;
-  padding: 72px 20px 76px;
+  min-height: calc(100vh - 48px);
+  padding: 56px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
   text-align: center;
   border-bottom: 12px solid var(--bg-primary);
   overflow: hidden;
@@ -768,104 +718,104 @@ a {
 }
 
 .repo-showcase.surface-alabaster {
-  background: var(--bg-canvas);
+  background: var(--bg-hero);
   color: var(--text-primary);
 }
 
-.stage-inner {
-  max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
+.stage-hero-headline {
+  font-size: clamp(2.2rem, 4.6vw, 3.5rem);
 }
 
-.stage-copy {
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.about-chapter-pills {
+  margin-top: 4px;
 }
 
-.stage-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  margin-bottom: 8px;
+.chapter-pill {
+  padding: 8px 15px !important;
+  font-size: 0.76rem !important;
 }
 
-.stage-headline {
-  font-size: clamp(1.9rem, 4vw, 2.85rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin-bottom: 10px;
-}
-
-.stage-subhead {
-  font-size: clamp(0.98rem, 1.6vw, 1.14rem);
-  color: var(--text-secondary);
-  margin-bottom: 20px;
-  max-width: 620px;
-  line-height: 1.58;
-}
-
-.stage-showcase-card {
+.about-svg-stage {
+  position: relative;
   width: 100%;
-  border-radius: var(--radius-lg);
-  padding: 24px;
+  min-height: 118px;
+}
+
+.about-scene {
+  display: none;
+  opacity: 0;
+}
+
+.about-scene.is-active {
+  display: block;
+  animation: heroRise 420ms var(--spring-out) forwards;
+}
+
+.about-live-story {
+  font-size: 0.86rem;
+  line-height: 1.58;
+  color: var(--text-secondary);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-card);
-  text-align: left;
-  transform: translateY(28px) scale(0.96);
-  opacity: 0;
-  transition:
-    transform 760ms var(--spring-out),
-    opacity 760ms var(--spring-out);
+  transition: opacity 220ms var(--ease-smooth);
 }
 
-.surface-white .stage-showcase-card {
-  background: var(--bg-canvas);
-}
-
-.scroll-stage.is-inview .stage-showcase-card {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-.stage-visual-grid {
+.about-mini-bento {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 8px;
 }
 
-.stage-panel {
-  padding: 16px;
-  border-radius: var(--radius-md);
+.about-mini-card {
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 2px;
+  transition:
+    transform 220ms var(--spring-out),
+    border-color 180ms var(--ease-smooth),
+    background-color 180ms var(--ease-smooth);
 }
 
-.stage-svg {
-  width: 100%;
-  height: 112px;
-  overflow: visible;
+.about-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
 }
 
-.stage-svg.wide-svg {
-  height: 126px;
+.about-mini-card.active {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
 }
 
-.centered-pills {
-  justify-content: center;
-  margin-top: 8px;
+.mini-card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-text);
+}
+
+.mini-card-title {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mini-card-sub {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--text-muted);
+}
+
+.about-bars {
+  margin-top: 4px;
 }
 
 /* ==========================================================================
