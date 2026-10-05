@@ -28,7 +28,7 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
   3. `#showcase-agent-tracer` (Wordmark: `TRACER`)
   4. `#showcase-meeting-prep` (Wordmark: `DOSSIER`)
   5. `#showcase-uq-xai` (Wordmark: `RESEARCH`)
-  On scroll, `app.js` interpolates `--deck-tilt`, `--deck-scale`, `--deck-y`, `--wordmark-y`, and `--wordmark-scale` via `requestAnimationFrame` based on `deck.getBoundingClientRect()`. On `mousemove`, `app.js` updates `--wordmark-spot-x`, `--wordmark-spot-y`, `--wordmark-mx`, `--wordmark-my` (driving the liquid-metal specular reflection across the wordmark letters) and `--mouse-rx`, `--mouse-ry`, `--mouse-lift`, `--bezel-mx`, `--bezel-my` (driving the 3D magnetic tilt and glass surface glare on `.hardware-deck` and `.hardware-bezel`).
+  On scroll, `app.js` interpolates `--deck-tilt`, `--deck-scale`, `--deck-y`, `--wordmark-y`, and `--wordmark-scale` via `requestAnimationFrame` based on `deck.getBoundingClientRect()`. By default, `.metallic-wordmark` continuously runs `titaniumShimmer` (with `--wordmark-spot-size: 0px`). On `mousemove`, `app.js` toggles `.is-hovered` (activating `--wordmark-spot-size: 260px`) and updates `--wordmark-spot-x`, `--wordmark-spot-y`, `--wordmark-mx`, and `--wordmark-my` on the backdrop words only. Never apply mouse tilt or mouse glare to `.hardware-deck` or `.hardware-bezel` (the box stays steady and only animates on scroll).
 - Anti-Clipping & Overflow Guardrails (`styles.css`):
   - `.hardware-bezel`, `.bezel-grid` (`grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr)`), `.bezel-pane`, and `.about-mini-card` must preserve `min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;` so the right pane never overflows outside the rounded hardware bezel border.
   - Never apply `stroke` or `stroke-width` directly to `<g class="clickable-node">` or `<text>` elements in SVG, as SVG inheritance will outline the text and make it look blurry. Always target child shapes (`.clickable-node.is-selected .trace-node`) and keep `stroke: none !important` on all SVG `<text>` elements.
@@ -48,10 +48,10 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-8`
+- Asset version in `index.html`: `?v=20261005-9`
 - SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
 - Recent milestones completed:
-  * Added cursor-tracked metallic specular reflection (`--wordmark-spot-x/y`) and inverse parallax (`--wordmark-mx/my`) on all 5 stage wordmarks (`BUILDER`, `PROFILE`, `TRACER`, `DOSSIER`, `RESEARCH`), paired with 3D magnetic cursor tilt (`--mouse-rx/ry`) and glass surface reflection (`--bezel-mx/my`) on `.hardware-deck` and `.hardware-bezel`.
+  * Kept the continuous default `titaniumShimmer` sparkle always running on all 5 stage wordmarks (`BUILDER`, `PROFILE`, `TRACER`, `DOSSIER`, `RESEARCH`) and layered the cursor-tracked specular reflection (`--wordmark-spot-size: 260px`, `--wordmark-spot-x/y`, `--wordmark-mx/my`) strictly on the words when hovering, while keeping the `.hardware-deck` / `.hardware-bezel` box free of mouse tilt or glare.
   * Added `vercel.json` for zero-config Vercel deployment alongside GitHub Pages.
   * Fixed SVG text stroke inheritance on `.clickable-node.is-selected` so active node labels render crisp.
   * Added live streaming packets, pulsing active node borders, and auto-cycling stage/bar animations across all 5 stages and all 13 custom project cards.
