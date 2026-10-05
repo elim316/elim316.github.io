@@ -174,27 +174,82 @@
       .replace(/"/g, "&quot;");
   }
 
-  function getProjectVisual(id) {
+  function clipSvgLabel(text, maxLen) {
+    const clean = String(text || "").trim();
+    if (clean.length <= maxLen) return clean;
+    return clean.slice(0, Math.max(1, maxLen - 1)).trim();
+  }
+
+  function renderAutoBlueprintVisual(project) {
+    const p = project || {};
+    const rawNodes =
+      Array.isArray(p.visualNodes) && p.visualNodes.length >= 3
+        ? p.visualNodes
+        : Array.isArray(p.stack) && p.stack.length >= 3
+          ? [p.stack[0], p.stack[1], p.stack[2]]
+          : ["INGRESS", (p.stack && p.stack[0]) || "CORE", "OUTPUT"];
+
+    const n1 = escapeHtml(clipSvgLabel(rawNodes[0], 11).toUpperCase());
+    const n2 = escapeHtml(clipSvgLabel(rawNodes[1], 11).toUpperCase());
+    const n3 = escapeHtml(clipSvgLabel(rawNodes[2], 11).toUpperCase());
+    const subBadge = escapeHtml(
+      clipSvgLabel((p.stack && p.stack[0]) || p.year || "GitHub", 14)
+    );
+    const readout = escapeHtml(
+      p.readout ||
+        (Array.isArray(p.stack) && p.stack.length
+          ? p.stack.slice(0, 3).join(" · ")
+          : "Live GitHub Repository")
+    );
+
+    return `
+      <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
+        <rect class="trace-node" x="16" y="24" width="80" height="44" rx="7" />
+        <text x="56" y="50" text-anchor="middle" class="visual-label">${n1}</text>
+        <path class="trace-edge" d="M 96 46 L 120 46" />
+        <path class="trace-packet" d="M 96 46 L 120 46" />
+        <rect class="trace-node node-accent" x="120" y="20" width="80" height="52" rx="8" />
+        <text x="160" y="44" text-anchor="middle" class="visual-badge">${n2}</text>
+        <text x="160" y="58" text-anchor="middle" class="visual-label">Active</text>
+        <path class="trace-edge" d="M 200 46 L 224 46" />
+        <path class="trace-packet" d="M 200 46 L 224 46" />
+        <rect class="trace-node" x="224" y="24" width="80" height="44" rx="7" />
+        <text x="264" y="50" text-anchor="middle" class="visual-label">${n3}</text>
+      </svg>
+      <div class="sandbox-bar">
+        <span class="sandbox-readout">${readout}</span>
+        <span class="visual-badge">${subBadge}</span>
+      </div>
+    `;
+  }
+
+  function getProjectVisual(projectOrId) {
+    const p =
+      typeof projectOrId === "object" && projectOrId !== null
+        ? projectOrId
+        : PROJECTS.find((item) => item.id === projectOrId) || { id: projectOrId };
+    const id = p.id;
+
     switch (id) {
       case "agent-tracer":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <text x="16" y="16" class="visual-label">USER</text>
-            <text x="138" y="16" class="visual-label">PLANNER</text>
-            <text x="250" y="16" class="visual-label">MCP / SUB</text>
+            <text x="38" y="16" text-anchor="middle" class="visual-label">USER</text>
+            <text x="160" y="16" text-anchor="middle" class="visual-label">PLANNER</text>
+            <text x="275" y="16" text-anchor="middle" class="visual-label">MCP / SUB</text>
             <path class="trace-edge" d="M 48 52 C 90 52, 105 38, 148 38" />
-            <path class="trace-edge" d="M 172 38 C 215 38, 230 30, 272 30" />
-            <path class="trace-edge" d="M 172 38 C 215 38, 230 72, 272 72" />
+            <path class="trace-edge" d="M 172 38 C 215 38, 230 30, 264 30" />
+            <path class="trace-edge" d="M 172 38 C 215 38, 230 72, 264 72" />
             <path class="trace-packet" d="M 48 52 C 90 52, 105 38, 148 38" />
-            <path class="trace-packet" d="M 172 38 C 215 38, 230 30, 272 30" />
-            <path class="trace-packet" d="M 172 38 C 215 38, 230 72, 272 72" />
+            <path class="trace-packet" d="M 172 38 C 215 38, 230 30, 264 30" />
+            <path class="trace-packet" d="M 172 38 C 215 38, 230 72, 264 72" />
             <circle class="trace-node clickable-node" data-step="user" cx="38" cy="52" r="10" />
             <circle class="trace-node node-accent clickable-node is-selected" data-step="planner" cx="160" cy="38" r="12" />
             <rect class="trace-node node-accent clickable-node" data-step="mcp" x="264" y="20" width="22" height="20" rx="5" />
             <rect class="trace-node clickable-node" data-step="subagent" x="264" y="62" width="22" height="20" rx="5" />
           </svg>
           <div class="sandbox-bar" data-sandbox="agent-tracer">
-            <span class="sandbox-readout" id="readout-agent-tracer">Step #02 PLANNER · 640ms · 1,840 tok</span>
+            <span class="sandbox-readout" id="readout-agent-tracer">Step #02 PLANNER · 640ms</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-step-btn="user">#01 User</button>
               <button type="button" class="sandbox-pill active" data-step-btn="planner">#02 Plan</button>
@@ -206,56 +261,56 @@
       case "jetski-harness":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <rect x="18" y="8" width="136" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <rect x="164" y="8" width="138" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="28" y="23" class="visual-label">2x2 BENTO HARNESS</text>
-            <text x="28" y="36" class="visual-badge" id="harness-rpc-status">Connect-RPC · 71% Cached</text>
-            <text x="174" y="23" class="visual-label">SESSIONS: 3 ACTIVE</text>
-            <circle cx="179" cy="34" r="3.5" fill="var(--signal-green)" />
-            <circle cx="191" cy="34" r="3.5" fill="var(--signal-green)" />
-            <circle cx="203" cy="34" r="3.5" fill="var(--signal-amber)" />
+            <rect x="18" y="8" width="144" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+            <rect x="170" y="8" width="132" height="36" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+            <text x="90" y="22" text-anchor="middle" class="visual-label">2x2 BENTO HARNESS</text>
+            <text x="90" y="36" text-anchor="middle" class="visual-badge" id="harness-rpc-status">RPC · 71% Cached</text>
+            <text x="236" y="22" text-anchor="middle" class="visual-label">3 ACTIVE SESSIONS</text>
+            <circle cx="222" cy="34" r="3.5" fill="var(--signal-green)" />
+            <circle cx="236" cy="34" r="3.5" fill="var(--signal-green)" />
+            <circle cx="250" cy="34" r="3.5" fill="var(--signal-amber)" />
             <rect x="18" y="52" width="284" height="34" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
             <text x="28" y="66" class="visual-label" id="harness-bar-label">CONTEXT WINDOW: 142k / 200k TOKENS</text>
             <rect x="28" y="73" width="264" height="6" rx="3" fill="var(--bg-subtle)" />
-            <rect class="token-fill-bar" id="harness-token-bar" x="28" y="73" width="264" height="6" rx="3" fill="var(--accent)" />
+            <rect class="token-fill-bar" id="harness-token-bar" x="28" y="73" width="187" height="6" rx="3" fill="var(--accent)" />
           </svg>
           <div class="sandbox-bar" data-sandbox="jetski-harness">
-            <span class="sandbox-readout" id="readout-jetski-harness">142k / 200k · Healthy window</span>
+            <span class="sandbox-readout" id="readout-jetski-harness">142k / 200k · Healthy</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-turn-btn="turn2">Turn 2</button>
               <button type="button" class="sandbox-pill active" data-turn-btn="turn8">Turn 8</button>
-              <button type="button" class="sandbox-pill" data-turn-btn="turn14">Turn 14 (196k)</button>
+              <button type="button" class="sandbox-pill" data-turn-btn="turn14">Turn 14</button>
             </div>
           </div>
         `;
       case "meeting-prep-agent":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <rect x="16" y="18" width="84" height="56" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="26" y="38" class="visual-label">STAGE 1</text>
-            <text x="26" y="54" class="visual-badge">NBD Dossier</text>
-            <path class="trace-edge" d="M 100 46 L 130 46" />
-            <path class="trace-packet" d="M 100 46 L 130 46" />
+            <rect x="14" y="18" width="84" height="56" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+            <text x="56" y="40" text-anchor="middle" class="visual-label">STAGE 1</text>
+            <text x="56" y="55" text-anchor="middle" class="visual-badge">NBD Dossier</text>
+            <path class="trace-edge" d="M 98 46 L 122 46" />
+            <path class="trace-packet" d="M 98 46 L 122 46" />
             <g class="check-pill c1 is-highlighted">
-              <rect x="130" y="12" width="94" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
-              <text x="140" y="25" class="visual-badge">&#10003; Citations</text>
+              <rect x="122" y="12" width="104" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
+              <text x="174" y="25" text-anchor="middle" class="visual-badge">&#10003; Citations</text>
             </g>
             <g class="check-pill c2 is-highlighted">
-              <rect x="130" y="36" width="94" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
-              <text x="140" y="49" class="visual-badge">&#10003; 36/36 Checks</text>
+              <rect x="122" y="36" width="104" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
+              <text x="174" y="49" text-anchor="middle" class="visual-badge">&#10003; 36/36 Checks</text>
             </g>
             <g class="check-pill c3 is-highlighted">
-              <rect x="130" y="60" width="94" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
-              <text x="140" y="73" class="visual-badge">&#10003; T-1h Window</text>
+              <rect x="122" y="60" width="104" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
+              <text x="174" y="73" text-anchor="middle" class="visual-badge">&#10003; T-1h Window</text>
             </g>
-            <path class="trace-edge" d="M 224 46 L 246 46" />
-            <rect class="trace-node node-accent" x="246" y="27" width="56" height="38" rx="7" />
-            <text x="256" y="50" class="visual-label">BRIEF</text>
+            <path class="trace-edge" d="M 226 46 L 248 46" />
+            <rect class="trace-node node-accent" x="248" y="27" width="58" height="38" rx="7" />
+            <text x="277" y="50" text-anchor="middle" class="visual-label">BRIEF</text>
           </svg>
           <div class="sandbox-bar" data-sandbox="meeting-prep">
-            <span class="sandbox-readout" id="readout-meeting-prep">Linter: 0 hallucinated URLs or names</span>
+            <span class="sandbox-readout" id="readout-meeting-prep">Linter: 0 hallucinated URLs</span>
             <div class="sandbox-pills">
-              <button type="button" class="sandbox-pill active" data-prep-btn="linter">Linter (36/36)</button>
+              <button type="button" class="sandbox-pill active" data-prep-btn="linter">Linter</button>
               <button type="button" class="sandbox-pill" data-prep-btn="nbd">NBD Cron</button>
               <button type="button" class="sandbox-pill" data-prep-btn="t1h">T-1h Alert</button>
             </div>
@@ -265,16 +320,16 @@
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
             <text x="24" y="16" class="visual-label">KNOWLEDGE TRACING MASTERY</text>
-            <text x="214" y="16" class="visual-badge">2nd Place LifeHack</text>
+            <text x="296" y="16" text-anchor="end" class="visual-badge">2nd Place LifeHack</text>
             <line x1="24" y1="78" x2="296" y2="78" stroke="var(--border-strong)" stroke-width="1.2" />
             <rect class="kt-bar b1" x="44" y="44" width="36" height="34" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
             <rect class="kt-bar b2" x="108" y="34" width="36" height="44" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
             <rect class="kt-bar b3" x="172" y="26" width="36" height="52" rx="4" fill="var(--accent)" />
             <rect class="kt-bar b1" x="236" y="38" width="36" height="40" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
-            <text x="48" y="91" class="visual-label">ALG</text>
-            <text x="112" y="91" class="visual-label">SYS</text>
-            <text x="176" y="91" class="visual-label">ML</text>
-            <text x="240" y="91" class="visual-label">NET</text>
+            <text x="62" y="91" text-anchor="middle" class="visual-label">ALG</text>
+            <text x="126" y="91" text-anchor="middle" class="visual-label">SYS</text>
+            <text x="190" y="91" text-anchor="middle" class="visual-label">ML</text>
+            <text x="254" y="91" text-anchor="middle" class="visual-label">NET</text>
           </svg>
           <div class="sandbox-bar">
             <span class="sandbox-readout">PyTorch kt_models · Adaptive routing</span>
@@ -285,19 +340,19 @@
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
             <g class="fan-card fc-left">
-              <rect x="64" y="18" width="82" height="62" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.3" />
-              <text x="74" y="38" class="visual-label">BRANCH A</text>
-              <text x="74" y="54" class="visual-badge">14 Volunteers</text>
+              <rect x="48" y="18" width="92" height="62" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.3" />
+              <text x="94" y="38" text-anchor="middle" class="visual-label">BRANCH A</text>
+              <text x="94" y="54" text-anchor="middle" class="visual-badge">14 Volunteers</text>
             </g>
             <g class="fan-card fc-right">
-              <rect x="174" y="18" width="82" height="62" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.3" />
-              <text x="184" y="38" class="visual-label">BRANCH C</text>
-              <text x="184" y="54" class="visual-badge">19 Volunteers</text>
+              <rect x="180" y="18" width="92" height="62" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.3" />
+              <text x="226" y="38" text-anchor="middle" class="visual-label">BRANCH C</text>
+              <text x="226" y="54" text-anchor="middle" class="visual-badge">19 Volunteers</text>
             </g>
             <g class="fan-card fc-mid">
-              <rect x="116" y="12" width="88" height="68" rx="8" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.6" />
-              <text x="128" y="34" class="visual-label">MINDS HUB</text>
-              <text x="128" y="50" class="visual-badge">Synchronised</text>
+              <rect x="112" y="12" width="96" height="68" rx="8" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.6" />
+              <text x="160" y="34" text-anchor="middle" class="visual-label">MINDS HUB</text>
+              <text x="160" y="50" text-anchor="middle" class="visual-badge">Synchronised</text>
               <rect x="128" y="60" width="64" height="6" rx="3" fill="var(--accent-subtle)" />
             </g>
           </svg>
@@ -309,18 +364,18 @@
       case "multi-cloud-serverless":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <rect class="trace-node" x="22" y="26" width="70" height="42" rx="7" />
-            <text x="35" y="50" class="visual-label">VERCEL</text>
-            <path class="trace-edge" d="M 92 47 L 130 47" />
-            <path class="trace-packet" d="M 92 47 L 130 47" />
-            <rect class="trace-node node-accent" x="130" y="20" width="76" height="54" rx="8" />
-            <text x="141" y="44" class="visual-label">SUPABASE</text>
-            <text x="141" y="58" class="visual-badge">Realtime</text>
-            <path class="trace-edge" d="M 206 47 L 242 47" />
-            <path class="trace-packet" d="M 206 47 L 242 47" />
-            <rect class="trace-node" x="242" y="26" width="60" height="42" rx="7" />
-            <text x="255" y="46" class="visual-label">AWS</text>
-            <text x="250" y="59" class="visual-badge">IaC</text>
+            <rect class="trace-node" x="20" y="26" width="72" height="42" rx="7" />
+            <text x="56" y="50" text-anchor="middle" class="visual-label">VERCEL</text>
+            <path class="trace-edge" d="M 92 47 L 124 47" />
+            <path class="trace-packet" d="M 92 47 L 124 47" />
+            <rect class="trace-node node-accent" x="124" y="20" width="80" height="54" rx="8" />
+            <text x="164" y="44" text-anchor="middle" class="visual-label">SUPABASE</text>
+            <text x="164" y="58" text-anchor="middle" class="visual-badge">Realtime</text>
+            <path class="trace-edge" d="M 204 47 L 238 47" />
+            <path class="trace-packet" d="M 204 47 L 238 47" />
+            <rect class="trace-node" x="238" y="26" width="64" height="42" rx="7" />
+            <text x="270" y="45" text-anchor="middle" class="visual-label">AWS</text>
+            <text x="270" y="58" text-anchor="middle" class="visual-badge">IaC</text>
           </svg>
           <div class="sandbox-bar">
             <span class="sandbox-readout">Cross-tab Realtime Postgres CRUD</span>
@@ -336,7 +391,7 @@
             <circle class="trace-node node-accent" cx="190" cy="62" r="4.5" />
           </svg>
           <div class="sandbox-bar" data-sandbox="uq-xai">
-            <span class="sandbox-readout" id="readout-uq-xai">PICP: 0.952 · ECE: 0.012 · SHAP</span>
+            <span class="sandbox-readout" id="readout-uq-xai">PICP: 0.952 · ECE: 0.012</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-ci-btn="90">90% ACI</button>
               <button type="button" class="sandbox-pill active" data-ci-btn="95">95% ACI</button>
@@ -347,18 +402,18 @@
       case "semantic-segmentation":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <rect class="trace-node" x="20" y="24" width="84" height="46" rx="7" />
-            <text x="30" y="45" class="visual-label">DEEPLABV3+</text>
-            <text x="30" y="59" class="visual-badge">Pixel Masks</text>
-            <path class="trace-edge" d="M 104 47 L 136 47" />
-            <path class="trace-packet" d="M 104 47 L 136 47" />
-            <rect class="trace-node node-accent" x="136" y="24" width="76" height="46" rx="7" />
-            <text x="148" y="45" class="visual-label">BLIP VLM</text>
-            <text x="148" y="59" class="visual-badge">Captioning</text>
-            <path class="trace-edge" d="M 212 47 L 240 47" />
-            <path class="trace-packet" d="M 212 47 L 240 47" />
-            <rect class="trace-node" x="240" y="24" width="62" height="46" rx="7" />
-            <text x="250" y="51" class="visual-label">OPENCV</text>
+            <rect class="trace-node" x="18" y="24" width="88" height="46" rx="7" />
+            <text x="62" y="45" text-anchor="middle" class="visual-label">DEEPLABV3+</text>
+            <text x="62" y="59" text-anchor="middle" class="visual-badge">Pixel Masks</text>
+            <path class="trace-edge" d="M 106 47 L 134 47" />
+            <path class="trace-packet" d="M 106 47 L 134 47" />
+            <rect class="trace-node node-accent" x="134" y="24" width="78" height="46" rx="7" />
+            <text x="173" y="45" text-anchor="middle" class="visual-label">BLIP VLM</text>
+            <text x="173" y="59" text-anchor="middle" class="visual-badge">Captioning</text>
+            <path class="trace-edge" d="M 212 47 L 238 47" />
+            <path class="trace-packet" d="M 212 47 L 238 47" />
+            <rect class="trace-node" x="238" y="24" width="66" height="46" rx="7" />
+            <text x="271" y="51" text-anchor="middle" class="visual-label">OPENCV</text>
           </svg>
           <div class="sandbox-bar">
             <span class="sandbox-readout">Live ResNet50 masks + BLIP scene captioning</span>
@@ -371,12 +426,12 @@
             <line x1="20" y1="30" x2="300" y2="30" stroke="var(--border-strong)" stroke-dasharray="6 6" />
             <line x1="20" y1="70" x2="300" y2="70" stroke="var(--border-strong)" stroke-dasharray="6 6" />
             <g class="yolo-box yb-1">
-              <rect x="44" y="36" width="66" height="28" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.5" />
-              <text x="50" y="53" class="visual-badge">VEH 0.96</text>
+              <rect x="44" y="36" width="70" height="28" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.5" />
+              <text x="79" y="53" text-anchor="middle" class="visual-badge">VEH 0.96</text>
             </g>
             <g class="yolo-box yb-2">
-              <rect x="190" y="36" width="76" height="28" rx="4" fill="var(--bg-elevated)" stroke="var(--signal-teal)" stroke-width="1.5" />
-              <text x="197" y="53" class="visual-label">FLOW: MOD</text>
+              <rect x="188" y="36" width="80" height="28" rx="4" fill="var(--bg-elevated)" stroke="var(--signal-teal)" stroke-width="1.5" />
+              <text x="228" y="53" text-anchor="middle" class="visual-label">FLOW: MOD</text>
             </g>
             <text x="22" y="18" class="visual-label">YOLOv3 STREAM &#8594; LANGCHAIN ADVISORY</text>
           </svg>
@@ -393,7 +448,7 @@
             </g>
             <g class="iso-zone iz-top">
               <polygon points="160,14 244,40 160,66 76,40" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.5" />
-              <text x="132" y="44" class="visual-badge">ZONE A · 21.5°C</text>
+              <text x="160" y="44" text-anchor="middle" class="visual-badge">ZONE A · 21.5°C</text>
             </g>
             <text x="20" y="18" class="visual-label">3D FLOOR PLAN</text>
           </svg>
@@ -402,26 +457,35 @@
             <span class="visual-badge">Three.js + Svelte</span>
           </div>
         `;
-      default:
+      case "operation-guardian":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <rect class="trace-node" x="20" y="26" width="74" height="42" rx="7" />
-            <text x="30" y="51" class="visual-label">WHISPER</text>
-            <path class="trace-edge" d="M 94 47 L 126 47" />
-            <path class="trace-packet" d="M 94 47 L 126 47" />
-            <rect class="trace-node node-accent" x="126" y="26" width="76" height="42" rx="7" />
-            <text x="135" y="51" class="visual-badge">NLP &gt;85%</text>
-            <path class="trace-edge" d="M 202 47 L 234 47" />
-            <path class="trace-packet" d="M 202 47 L 234 47" />
-            <rect class="trace-node" x="234" y="26" width="68" height="42" rx="7" />
-            <text x="243" y="51" class="visual-label">VLM ~80%</text>
+            <rect class="trace-node" x="18" y="26" width="76" height="42" rx="7" />
+            <text x="56" y="51" text-anchor="middle" class="visual-label">WHISPER</text>
+            <path class="trace-edge" d="M 94 47 L 122 47" />
+            <path class="trace-packet" d="M 94 47 L 122 47" />
+            <rect class="trace-node node-accent" x="122" y="26" width="76" height="42" rx="7" />
+            <text x="160" y="51" text-anchor="middle" class="visual-badge">NLP &gt;85%</text>
+            <path class="trace-edge" d="M 198 47 L 226 47" />
+            <path class="trace-packet" d="M 198 47 L 226 47" />
+            <rect class="trace-node" x="226" y="26" width="76" height="42" rx="7" />
+            <text x="264" y="51" text-anchor="middle" class="visual-label">VLM ~80%</text>
           </svg>
           <div class="sandbox-bar">
             <span class="sandbox-readout">Semifinalist · Whisper + NLP + VLM air defence</span>
             <span class="visual-badge">DSTA TIL-AI</span>
           </div>
         `;
+      default:
+        return renderAutoBlueprintVisual(p);
     }
+  }
+
+  function getCategoryLabel(category, explicitLabel) {
+    if (explicitLabel) return explicitLabel;
+    if (category === "agentic") return "Agentic & DevTools";
+    if (category === "ml") return "ML & Research";
+    return "Full-Stack & Cloud";
   }
 
   function renderProjects() {
@@ -443,8 +507,8 @@
       >
         <div class="project-body">
           <div class="project-meta-line">
-            <span class="project-category">${escapeHtml(p.categoryLabel)}</span>
-            <span class="project-year">· ${escapeHtml(p.year)}</span>
+            <span class="project-category">${escapeHtml(getCategoryLabel(p.category, p.categoryLabel))}</span>
+            <span class="project-year">· ${escapeHtml(p.year || "2026")}</span>
           </div>
           <h3 class="project-title">
             <a href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.title)}</a>
@@ -474,18 +538,18 @@
           <div class="arch-drawer" id="drawer-${escapeHtml(p.id)}">
             <div class="arch-collapse">
               <div class="arch-collapse-inner">
-                <p class="arch-text">${escapeHtml(p.architecture)}</p>
+                <p class="arch-text">${escapeHtml(p.architecture || p.summary)}</p>
               </div>
             </div>
           </div>
 
           <div class="stack-tags">
-            ${p.stack.map((t) => `<span class="stack-tag">${escapeHtml(t)}</span>`).join("")}
+            ${(p.stack || []).map((t) => `<span class="stack-tag">${escapeHtml(t)}</span>`).join("")}
           </div>
         </div>
 
         <div class="project-visual">
-          ${getProjectVisual(p.id)}
+          ${getProjectVisual(p)}
         </div>
       </article>
     `
@@ -676,10 +740,10 @@
 
   function initFlagshipSandboxes() {
     const tracerData = {
-      user: "Step #01 USER_INPUT · 12ms · 420 prompt tok",
-      planner: "Step #02 PLANNER · 640ms · 1,840 output tok",
-      mcp: "Step #03 CALL_MCP_TOOL · 310ms · exit=0 (OK)",
-      subagent: "Step #04 INVOKE_SUBAGENT · 1.2s · branch=research",
+      user: "Step #01 USER_INPUT · 12ms",
+      planner: "Step #02 PLANNER · 640ms",
+      mcp: "Step #03 CALL_MCP_TOOL · 310ms",
+      subagent: "Step #04 SUBAGENT · 1.2s",
     };
 
     const fTracer = document.getElementById("flagship-tracer-sandbox");
@@ -713,22 +777,22 @@
 
       const fTurns = {
         turn2: {
-          scale: 0.24,
+          width: 74,
           color: "var(--signal-green)",
           label: "CONTEXT SATURATION: 48k / 200k TOKENS",
           readout: "48k / 200k · 42% Cached",
         },
         turn8: {
-          scale: 0.71,
+          width: 219,
           color: "var(--accent)",
           label: "CONTEXT SATURATION: 142k / 200k TOKENS",
           readout: "142k / 200k · 71% Cached",
         },
         turn14: {
-          scale: 0.98,
+          width: 302,
           color: "var(--signal-amber)",
           label: "CONTEXT SATURATION: 196k / 200k (AUTO-COMPACT)",
-          readout: "196k / 200k · Compaction triggered!",
+          readout: "196k / 200k · Auto-Compact",
         },
       };
 
@@ -744,7 +808,7 @@
           if (!cfg) return;
           fTurnBtns.forEach((b) => b.classList.toggle("active", b === btn));
           if (fBar) {
-            fBar.style.setProperty("--token-scale", String(cfg.scale));
+            fBar.setAttribute("width", String(cfg.width));
             fBar.setAttribute("fill", cfg.color);
           }
           if (fBarLabel) fBarLabel.textContent = cfg.label;
@@ -758,18 +822,18 @@
       const fCiLevels = {
         "90": {
           scale: 0.68,
-          title: "INTERACTIVE CONFORMAL PREDICTION BAND (90% ACI)",
-          readout: "PICP: 0.904 · ECE: 0.018 · Tight interval",
+          title: "CONFORMAL BAND (90% ACI)",
+          readout: "PICP: 0.904 · ECE: 0.018",
         },
         "95": {
           scale: 1.0,
-          title: "INTERACTIVE CONFORMAL PREDICTION BAND (95% ACI)",
-          readout: "PICP: 0.952 · ECE: 0.012 · McMaster -> Oxford",
+          title: "CONFORMAL BAND (95% ACI)",
+          readout: "PICP: 0.952 · ECE: 0.012",
         },
         "99": {
           scale: 1.38,
-          title: "INTERACTIVE CONFORMAL PREDICTION BAND (99% ACI)",
-          readout: "PICP: 0.989 · ECE: 0.009 · Conservative safety band",
+          title: "CONFORMAL BAND (99% ACI)",
+          readout: "PICP: 0.989 · ECE: 0.009",
         },
       };
 
@@ -794,10 +858,10 @@
 
   function attachSandboxControls() {
     const tracerData = {
-      user: "Step #01 USER_INPUT · 12ms · 420 prompt tok",
-      planner: "Step #02 PLANNER · 640ms · 1,840 output tok",
-      mcp: "Step #03 CALL_MCP_TOOL · 310ms · exit=0 (OK)",
-      subagent: "Step #04 INVOKE_SUBAGENT · 1.2s · branch=research",
+      user: "Step #01 USER_INPUT · 12ms",
+      planner: "Step #02 PLANNER · 640ms",
+      mcp: "Step #03 CALL_MCP_TOOL · 310ms",
+      subagent: "Step #04 SUBAGENT · 1.2s",
     };
 
     const tracerCard = document.getElementById("project-agent-tracer");
@@ -832,25 +896,25 @@
 
     const harnessTurns = {
       turn2: {
-        scale: 0.24,
+        width: 63,
         color: "var(--signal-green)",
         label: "CONTEXT WINDOW: 48k / 200k TOKENS",
-        rpc: "Connect-RPC · 42% Cached",
-        readout: "48k / 200k · Fresh session",
+        rpc: "RPC · 42% Cached",
+        readout: "48k / 200k · Fresh",
       },
       turn8: {
-        scale: 0.71,
+        width: 187,
         color: "var(--accent)",
         label: "CONTEXT WINDOW: 142k / 200k TOKENS",
-        rpc: "Connect-RPC · 71% Cached",
-        readout: "142k / 200k · Healthy window",
+        rpc: "RPC · 71% Cached",
+        readout: "142k / 200k · Healthy",
       },
       turn14: {
-        scale: 0.98,
+        width: 259,
         color: "var(--signal-amber)",
         label: "CONTEXT WINDOW: 196k / 200k (AUTO-COMPACT)",
-        rpc: "Connect-RPC · 86% Cached",
-        readout: "196k / 200k · Compaction threshold!",
+        rpc: "RPC · 86% Cached",
+        readout: "196k / 200k · Compact",
       },
     };
 
@@ -869,7 +933,7 @@
           if (!cfg) return;
           turnBtns.forEach((b) => b.classList.toggle("active", b === btn));
           if (bar) {
-            bar.style.setProperty("--token-scale", String(cfg.scale));
+            bar.setAttribute("width", String(cfg.width));
             bar.setAttribute("fill", cfg.color);
           }
           if (barLabel) barLabel.textContent = cfg.label;
@@ -880,9 +944,9 @@
     }
 
     const prepData = {
-      linter: "Linter: 0 hallucinated URLs or names",
-      nbd: "Stage 1: 18:00 SGT Next-Business-Day brief",
-      t1h: "Stage 2: Stateless 60-min T-1h window check",
+      linter: "Linter: 0 hallucinated URLs",
+      nbd: "Stage 1: 18:00 SGT NBD brief",
+      t1h: "Stage 2: 60-min T-1h window",
     };
 
     const prepCard = document.getElementById("project-meeting-prep-agent");
@@ -904,17 +968,17 @@
       "90": {
         scale: 0.68,
         title: "90% ADAPTIVE CONFORMAL INTERVAL (ACI)",
-        readout: "PICP: 0.904 · ECE: 0.018 · Tight band",
+        readout: "PICP: 0.904 · ECE: 0.018",
       },
       "95": {
         scale: 1.0,
         title: "95% ADAPTIVE CONFORMAL INTERVAL (ACI)",
-        readout: "PICP: 0.952 · ECE: 0.012 · Optimal band",
+        readout: "PICP: 0.952 · ECE: 0.012",
       },
       "99": {
         scale: 1.38,
         title: "99% ADAPTIVE CONFORMAL INTERVAL (ACI)",
-        readout: "PICP: 0.989 · ECE: 0.009 · Conservative",
+        readout: "PICP: 0.989 · ECE: 0.009",
       },
     };
 
@@ -936,6 +1000,161 @@
           if (readout) readout.textContent = cfg.readout;
         });
       });
+    }
+  }
+
+  function formatRepoSlugToTitle(name) {
+    return String(name || "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\b\w/g, (ch) => ch.toUpperCase());
+  }
+
+  function inferRepoCategory(repo) {
+    const text = [
+      repo.name || "",
+      repo.description || "",
+      repo.language || "",
+      ...(Array.isArray(repo.topics) ? repo.topics : []),
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    if (
+      /\b(agent|mcp|llm|prompt|tracer|harness|autonomous|langchain|gemini)\b/.test(
+        text
+      )
+    ) {
+      return "agentic";
+    }
+    if (
+      /\b(ml|pytorch|tensorflow|keras|vision|segmentation|yolo|whisper|conformal|xai|shap|deep-learning|neural)\b/.test(
+        text
+      ) ||
+      repo.language === "Jupyter Notebook"
+    ) {
+      return "ml";
+    }
+    return "fullstack";
+  }
+
+  async function initScalableProjects() {
+    let config = {
+      githubUsername: "elim316",
+      autoDiscoverNewGithubRepos: true,
+      excludedRepos: ["elim316", "elim316.github.io"],
+    };
+
+    try {
+      const res = await fetch("./projects.json", { cache: "no-cache" });
+      if (res.ok) {
+        const payload = await res.json();
+        if (payload && typeof payload === "object") {
+          if (payload.config) {
+            config = Object.assign(config, payload.config);
+          }
+          if (Array.isArray(payload.projects) && payload.projects.length > 0) {
+            PROJECTS.length = 0;
+            payload.projects.forEach((item) => PROJECTS.push(item));
+            updateFilterCounts();
+            renderProjects();
+          }
+        }
+      }
+    } catch (_err) {
+      /* Fallback to built-in PROJECTS when opened via file:// */
+    }
+
+    if (!config.autoDiscoverNewGithubRepos || !config.githubUsername) return;
+
+    try {
+      const cacheKey = `gh_repos_v1_${config.githubUsername}`;
+      let repos = null;
+      const cachedRaw = sessionStorage.getItem(cacheKey);
+      if (cachedRaw) {
+        const parsed = JSON.parse(cachedRaw);
+        if (parsed && Date.now() - parsed.ts < 15 * 60 * 1000) {
+          repos = parsed.data;
+        }
+      }
+
+      if (!repos) {
+        const ghRes = await fetch(
+          `https://api.github.com/users/${encodeURIComponent(config.githubUsername)}/repos?sort=updated&per_page=100`
+        );
+        if (ghRes.ok) {
+          repos = await ghRes.json();
+          sessionStorage.setItem(
+            cacheKey,
+            JSON.stringify({ ts: Date.now(), data: repos })
+          );
+        }
+      }
+
+      if (!Array.isArray(repos)) return;
+
+      const excludedSet = new Set(
+        (config.excludedRepos || []).map((r) => String(r).toLowerCase())
+      );
+      const knownUrls = new Set(
+        PROJECTS.map((p) => String(p.repoUrl || "").toLowerCase().replace(/\/+$/, ""))
+      );
+
+      const publicNonFork = repos.filter(
+        (r) =>
+          r &&
+          !r.fork &&
+          !r.archived &&
+          !excludedSet.has(String(r.name || "").toLowerCase())
+      );
+
+      let addedAny = false;
+      publicNonFork.forEach((repo) => {
+        const htmlUrl = String(repo.html_url || "").replace(/\/+$/, "");
+        if (!htmlUrl || knownUrls.has(htmlUrl.toLowerCase())) return;
+
+        const category = inferRepoCategory(repo);
+        const year = repo.created_at
+          ? String(new Date(repo.created_at).getFullYear())
+          : String(new Date().getFullYear());
+        const topics = Array.isArray(repo.topics) ? repo.topics.slice(0, 3) : [];
+        const stack = [
+          ...(repo.language ? [repo.language] : []),
+          ...topics,
+        ].slice(0, 4);
+        if (stack.length === 0) stack.push("GitHub");
+
+        PROJECTS.push({
+          id: String(repo.name || "repo")
+            .toLowerCase()
+            .replace(/[^a-z0-9-]+/g, "-"),
+          title: formatRepoSlugToTitle(repo.name),
+          category,
+          categoryLabel: getCategoryLabel(category),
+          year,
+          summary:
+            repo.description ||
+            `Public ${repo.language || "software"} repository hosted on GitHub (@${config.githubUsername}).`,
+          architecture:
+            repo.description ||
+            `Automatically discovered from GitHub (@${config.githubUsername}/${repo.name}). Add an entry in projects.json to customise technical architecture notes.`,
+          stack,
+          repoUrl: htmlUrl,
+        });
+        knownUrls.add(htmlUrl.toLowerCase());
+        addedAny = true;
+      });
+
+      const countEl = document.getElementById("hero-repo-count");
+      if (countEl) {
+        countEl.textContent = `${Math.max(PROJECTS.length, publicNonFork.length)} PUBLIC REPOS`;
+      }
+
+      if (addedAny) {
+        updateFilterCounts();
+        renderProjects();
+      }
+    } catch (_err) {
+      /* Ignore GitHub API offline/rate-limit errors gracefully */
     }
   }
 
@@ -1421,5 +1640,6 @@
     initBibtexButtons();
     initLocalClock();
     initCommandPalette();
+    initScalableProjects();
   });
 })();
