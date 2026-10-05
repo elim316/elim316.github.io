@@ -1522,13 +1522,11 @@
     window.addEventListener("resize", updateScrollPhysics);
     updateScrollPhysics();
 
-    /* Mouse-following metallic wordmark reflection & 3D hardware deck tilt */
+    /* Mouse-following metallic wordmark reflection (words only, box stays steady) */
     allStages.forEach((stage) => {
       const visualStage = stage.querySelector(".hero-visual-stage");
-      const deck = stage.querySelector(".hardware-deck");
-      const bezel = stage.querySelector(".hardware-bezel");
       const wordmark = stage.querySelector(".metallic-wordmark");
-      if (!visualStage || !deck || !wordmark) return;
+      if (!visualStage || !wordmark) return;
 
       stage.addEventListener("mousemove", (e) => {
         visualStage.classList.add("is-hovered");
@@ -1554,16 +1552,6 @@
 
           wordmark.style.setProperty("--wordmark-mx", `${(-normX * 14).toFixed(1)}px`);
           wordmark.style.setProperty("--wordmark-my", `${(-normY * 6).toFixed(1)}px`);
-
-          deck.style.setProperty("--mouse-ry", `${(normX * 4.2).toFixed(2)}deg`);
-          deck.style.setProperty("--mouse-rx", `${(-normY * 3.2).toFixed(2)}deg`);
-          deck.style.setProperty("--mouse-lift", "-3px");
-        }
-
-        if (bezel) {
-          const bzRect = bezel.getBoundingClientRect();
-          bezel.style.setProperty("--bezel-mx", `${(e.clientX - bzRect.left).toFixed(0)}px`);
-          bezel.style.setProperty("--bezel-my", `${(e.clientY - bzRect.top).toFixed(0)}px`);
         }
       });
 
@@ -1573,9 +1561,6 @@
         wordmark.style.setProperty("--wordmark-spot-y", "50%");
         wordmark.style.setProperty("--wordmark-mx", "0px");
         wordmark.style.setProperty("--wordmark-my", "0px");
-        deck.style.setProperty("--mouse-ry", "0deg");
-        deck.style.setProperty("--mouse-rx", "0deg");
-        deck.style.setProperty("--mouse-lift", "0px");
       });
     });
   }
