@@ -19,6 +19,20 @@
   },
   "projects": [
     {
+      "id": "jumpgate-agentic-lz",
+      "title": "Jumpgate · Zero-Trust Agentic AI Landing Zone & Vending Machine",
+      "category": "agentic",
+      "categoryLabel": "Agentic & Cloud Security",
+      "year": "2026",
+      "summary": "Self-service Dual-VPC cloud landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup and IM8 security verification into under 3 minutes, driving $1.96M in realised public sector ARR (+$1.46M pipeline).",
+      "architecture": "Separates Ingress (Regional HTTPS ALB with TLS 1.3, Cloud Armor OWASP WAF, Serverless NEG, IAM-locked Cloud Run) from Egress (Secure Web Proxy Layer 7 domain allowlisting, Private Service Connect to Vertex AI, non-root SHA-256 pinned containers) in Terraform. Paired with a 4-agent, 14-step ADLC pipeline enforcing an >=0.85 LLM-as-a-Judge quality gate and passing 14/14 Ingress runtime and 18/18 Egress static security checks.",
+      "stack": ["Terraform", "Dual-VPC & PSC", "14-Step ADLC", "IM8 Security"],
+      "repoUrl": "https://github.com/RZOWQ/trainee-project-jumpgate-agentic-lz",
+      "repoLabel": "Landing Zone Repo",
+      "secondaryRepoUrl": "https://github.com/jarrettyeo/vending-machine-agent",
+      "secondaryRepoLabel": "Vending Machine Repo"
+    },
+    {
       "id": "agent-tracer",
       "title": "Jetski Agent Tracer Plugin",
       "category": "agentic",
