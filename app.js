@@ -637,6 +637,15 @@
           <div class="promo-links">
             <button
               type="button"
+              class="closer-look-trigger-btn"
+              data-closer-look-id="${escapeHtml(p.id)}"
+              aria-label="Take a closer look at ${escapeHtml(p.title)}"
+            >
+              <span>Closer look</span>
+              <span class="closer-look-plus-icon" aria-hidden="true">+</span>
+            </button>
+            <button
+              type="button"
               class="apple-text-link arch-toggle-btn"
               data-drawer-target="drawer-${escapeHtml(p.id)}"
               aria-expanded="false"
@@ -699,6 +708,14 @@
         if (!drawer) return;
         const isOpen = drawer.classList.toggle("is-open");
         btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    });
+
+    const closerButtons = document.querySelectorAll(".closer-look-trigger-btn");
+    closerButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const pid = btn.getAttribute("data-closer-look-id");
+        if (pid) openCloserLookModal(pid);
       });
     });
   }
@@ -1835,21 +1852,23 @@
         badge: "BibTeX",
         action: () => copyTextToClipboard(BIBTEX_ENTRIES["10892827"]),
       },
+      {
+        title: "Save 1-Page Executive CV (Print / PDF)",
+        sub: "Format experience, research, and projects into a clean printable CV",
+        badge: "Action",
+        action: () => window.print(),
+      },
+      {
+        title: "Take a Closer Look: Architecture Inspector",
+        sub: "Open full-scale interactive architecture sheet modal",
+        badge: "Inspector",
+        action: () => openCloserLookModal(PROJECTS[0]?.id || "agent-tracer"),
+      },
       ...PROJECTS.map((p) => ({
         title: p.title,
         sub: `${p.categoryLabel} · ${p.stack.join(", ")}`,
         badge: "Project",
-        action: () => {
-          setFilterCategory("all");
-          setTimeout(() => {
-            const card = document.getElementById(`project-${p.id}`);
-            if (card) {
-              card.scrollIntoView({ behavior: "smooth", block: "center" });
-              const drawer = document.getElementById(`drawer-${p.id}`);
-              if (drawer) drawer.classList.add("is-open");
-            }
-          }, 80);
-        },
+        action: () => openCloserLookModal(p.id),
       })),
       {
         title: "Open GitHub Profile (@elim316)",
@@ -1992,6 +2011,312 @@
     });
   }
 
+  /* Apple "Take a Closer Look" Full-Scale Architecture Sheet Modal */
+  let closerLookIdx = 0;
+
+  function openCloserLookModal(projectId) {
+    const backdrop = document.getElementById("closer-look-backdrop");
+    if (!backdrop || PROJECTS.length === 0) return;
+
+    const foundIdx = PROJECTS.findIndex((p) => p.id === projectId);
+    closerLookIdx = foundIdx >= 0 ? foundIdx : 0;
+    const p = PROJECTS[closerLookIdx];
+
+    const eyebrowEl = document.getElementById("closer-look-eyebrow");
+    const counterEl = document.getElementById("closer-look-counter");
+    const titleEl = document.getElementById("closer-look-title");
+    const summaryEl = document.getElementById("closer-look-summary");
+    const visualEl = document.getElementById("closer-look-visual");
+    const archEl = document.getElementById("closer-look-arch");
+    const stackEl = document.getElementById("closer-look-stack");
+    const repoLinkEl = document.getElementById("closer-look-repo-link");
+    const copyLabelEl = document.getElementById("closer-copy-link-label");
+
+    if (eyebrowEl) {
+      eyebrowEl.textContent = `${getCategoryLabel(p.category, p.categoryLabel).toUpperCase()} · ${p.year || "2026"}`;
+    }
+    if (counterEl) {
+      counterEl.textContent = `${String(closerLookIdx + 1).padStart(2, "0")} / ${String(PROJECTS.length).padStart(2, "0")}`;
+    }
+    if (titleEl) titleEl.textContent = p.title;
+    if (summaryEl) summaryEl.textContent = p.summary;
+    if (visualEl) visualEl.innerHTML = getProjectVisual(p);
+    if (archEl) archEl.textContent = p.architecture || p.summary;
+    if (stackEl) {
+      stackEl.innerHTML = (p.stack || [])
+        .map((t) => `<span class="stack-tag">${escapeHtml(t)}</span>`)
+        .join("");
+    }
+    if (repoLinkEl) repoLinkEl.setAttribute("href", p.repoUrl);
+    if (copyLabelEl) copyLabelEl.textContent = "Copy Deep-Link";
+
+    backdrop.classList.add("is-open");
+    backdrop.setAttribute("aria-hidden", "false");
+    try {
+      history.replaceState(null, "", `#inspect-${p.id}`);
+    } catch (_) {}
+  }
+
+  function closeCloserLookModal() {
+    const backdrop = document.getElementById("closer-look-backdrop");
+    if (!backdrop) return;
+    backdrop.classList.remove("is-open");
+    backdrop.setAttribute("aria-hidden", "true");
+  }
+
+  function initCloserLookModal() {
+    const backdrop = document.getElementById("closer-look-backdrop");
+    const prevBtn = document.getElementById("closer-prev-btn");
+    const nextBtn = document.getElementById("closer-next-btn");
+    const closeBtn = document.getElementById("closer-close-btn");
+    const copyBtn = document.getElementById("closer-copy-link-btn");
+    const copyLabel = document.getElementById("closer-copy-link-label");
+    if (!backdrop) return;
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        const nextIdx = (closerLookIdx - 1 + PROJECTS.length) % PROJECTS.length;
+        openCloserLookModal(PROJECTS[nextIdx].id);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        const nextIdx = (closerLookIdx + 1) % PROJECTS.length;
+        openCloserLookModal(PROJECTS[nextIdx].id);
+      });
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeCloserLookModal);
+    }
+    if (copyBtn) {
+      copyBtn.addEventListener("click", async () => {
+        const p = PROJECTS[closerLookIdx];
+        if (!p) return;
+        const url = `${window.location.origin}${window.location.pathname}#inspect-${p.id}`;
+        await copyTextToClipboard(url);
+        if (copyLabel) copyLabel.textContent = "Copied Link";
+        setTimeout(() => {
+          if (copyLabel) copyLabel.textContent = "Copy Deep-Link";
+        }, 1800);
+      });
+    }
+
+    backdrop.addEventListener("click", (e) => {
+      if (e.target === backdrop) closeCloserLookModal();
+    });
+  }
+
+  /* Apple Floating Bottom Stage Controller Pill */
+  function initAppleStageDock() {
+    const dock = document.getElementById("apple-stage-dock");
+    const captionEl = document.getElementById("stage-dock-caption");
+    const dotBtns = document.querySelectorAll(".stage-dock-dot");
+    const playBtn = document.getElementById("stage-dock-play-btn");
+    const iconPause = document.getElementById("dock-icon-pause");
+    const iconPlay = document.getElementById("dock-icon-play");
+    const inspectBtn = document.getElementById("stage-dock-inspect-btn");
+    if (!dock) return;
+
+    const stageConfigs = [
+      { id: "hero-stage", label: "01 / 05 · BUILDER", projectId: "agent-tracer" },
+      { id: "about", label: "02 / 05 · PROFILE", projectId: "jetski-harness" },
+      { id: "showcase-agent-tracer", label: "03 / 05 · TRACER", projectId: "agent-tracer" },
+      { id: "showcase-meeting-prep", label: "04 / 05 · DOSSIER", projectId: "meeting-prep-agent" },
+      { id: "showcase-uq-xai", label: "05 / 05 · RESEARCH", projectId: "uq-xai-battery" },
+    ];
+
+    let activeStageIdx = 0;
+
+    function updateStageDockOnScroll() {
+      const vh = window.innerHeight || 800;
+      const projectsSection = document.getElementById("projects");
+      if (projectsSection) {
+        const projRect = projectsSection.getBoundingClientRect();
+        const shouldHide = projRect.top < vh * 0.42;
+        dock.classList.toggle("is-hidden", shouldHide);
+      }
+
+      let bestIdx = 0;
+      let bestDist = Infinity;
+      stageConfigs.forEach((cfg, idx) => {
+        const el = document.getElementById(cfg.id);
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const centerDist = Math.abs(rect.top + rect.height * 0.45 - vh * 0.5);
+        if (centerDist < bestDist) {
+          bestDist = centerDist;
+          bestIdx = idx;
+        }
+      });
+
+      activeStageIdx = bestIdx;
+      if (captionEl) captionEl.textContent = stageConfigs[bestIdx].label;
+      dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === bestIdx));
+    }
+
+    dotBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.getAttribute("data-dock-idx") || 0);
+        const target = stageConfigs[idx] ? document.getElementById(stageConfigs[idx].id) : null;
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    if (playBtn) {
+      playBtn.addEventListener("click", () => {
+        const paused = document.body.classList.toggle("is-animations-paused");
+        if (iconPause) iconPause.style.display = paused ? "none" : "block";
+        if (iconPlay) iconPlay.style.display = paused ? "block" : "none";
+        playBtn.setAttribute(
+          "aria-label",
+          paused ? "Resume live stage animations" : "Pause live stage animations"
+        );
+      });
+    }
+
+    if (inspectBtn) {
+      inspectBtn.addEventListener("click", () => {
+        const cfg = stageConfigs[activeStageIdx] || stageConfigs[0];
+        openCloserLookModal(cfg.projectId);
+      });
+    }
+
+    window.addEventListener("scroll", updateStageDockOnScroll, { passive: true });
+    updateStageDockOnScroll();
+  }
+
+  /* Apple Bento Specs, Interactive Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
+  function initBentoSpecsAndSkillFilters() {
+    const printBtn = document.getElementById("print-cv-btn");
+    if (printBtn) {
+      printBtn.addEventListener("click", () => window.print());
+    }
+
+    const bentoTiles = document.querySelectorAll("[data-bento-target]");
+    bentoTiles.forEach((tile) => {
+      tile.addEventListener("click", () => {
+        const target = tile.getAttribute("data-bento-target") || "";
+        applyDeepLinkHash(target, true);
+      });
+    });
+
+    const skillChips = document.querySelectorAll(".skill-chip[data-skill-cat]");
+    skillChips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const cat = chip.getAttribute("data-skill-cat") || "all";
+        const query = (chip.getAttribute("data-skill-query") || "").toLowerCase();
+
+        skillChips.forEach((c) => c.classList.toggle("is-active", c === chip));
+        setFilterCategory(cat);
+
+        const projectsSection = document.getElementById("projects");
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ behavior: "smooth" });
+        }
+
+        requestAnimationFrame(() => {
+          const cards = document.querySelectorAll(".project-card");
+          cards.forEach((card) => {
+            const text = (card.textContent || "").toLowerCase();
+            card.classList.toggle("is-skill-matched", Boolean(query && text.includes(query)));
+          });
+        });
+      });
+    });
+
+    function applyDeepLinkHash(hashStr, shouldScroll) {
+      const clean = (hashStr || "").replace(/^#/, "").trim();
+      if (!clean) return;
+
+      if (clean.startsWith("projects-")) {
+        const cat = clean.replace("projects-", "");
+        if (["all", "agentic", "fullstack", "ml"].includes(cat)) {
+          setFilterCategory(cat);
+          if (shouldScroll) {
+            document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      } else if (clean.startsWith("about-")) {
+        const chap = clean.replace("about-", "");
+        const tabBtn = document.querySelector(`[data-about-tab="${chap}"]`);
+        if (tabBtn) {
+          tabBtn.click();
+          if (shouldScroll) {
+            document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      } else if (clean.startsWith("inspect-")) {
+        const pid = clean.replace("inspect-", "");
+        openCloserLookModal(pid);
+      }
+    }
+
+    /* Update URL hash when filter buttons or about chapter buttons are clicked */
+    document.querySelectorAll(".filter-btn[data-filter]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const f = btn.getAttribute("data-filter") || "all";
+        try {
+          history.replaceState(null, "", `#projects-${f}`);
+        } catch (_) {}
+      });
+    });
+
+    document.querySelectorAll("[data-about-tab]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const t = btn.getAttribute("data-about-tab") || "google";
+        try {
+          history.replaceState(null, "", `#about-${t}`);
+        } catch (_) {}
+      });
+    });
+
+    /* Keyboard Left/Right navigation for Closer Look modal & About chapters */
+    window.addEventListener("keydown", (e) => {
+      const cmdOpen = document.getElementById("cmd-backdrop")?.classList.contains("is-open");
+      if (cmdOpen) return;
+
+      const closerBackdrop = document.getElementById("closer-look-backdrop");
+      const closerOpen = closerBackdrop?.classList.contains("is-open");
+
+      if (closerOpen) {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          closeCloserLookModal();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          const nextIdx = (closerLookIdx + 1) % PROJECTS.length;
+          openCloserLookModal(PROJECTS[nextIdx].id);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          const prevIdx = (closerLookIdx - 1 + PROJECTS.length) % PROJECTS.length;
+          openCloserLookModal(PROJECTS[prevIdx].id);
+        }
+        return;
+      }
+
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        const aboutEl = document.getElementById("about");
+        if (!aboutEl) return;
+        const rect = aboutEl.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        if (rect.top < vh * 0.65 && rect.bottom > vh * 0.35) {
+          const tabs = Array.from(document.querySelectorAll("[data-about-tab]"));
+          const activeIdx = tabs.findIndex((t) => t.classList.contains("active"));
+          if (tabs.length > 0 && activeIdx >= 0) {
+            const delta = e.key === "ArrowRight" ? 1 : -1;
+            const nextTab = tabs[(activeIdx + delta + tabs.length) % tabs.length];
+            if (nextTab) nextTab.click();
+          }
+        }
+      }
+    });
+
+    if (window.location.hash) {
+      setTimeout(() => applyDeepLinkHash(window.location.hash, true), 120);
+    }
+    window.addEventListener("hashchange", () => applyDeepLinkHash(window.location.hash, true));
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initTheme();
     updateFilterCounts();
@@ -2005,6 +2330,9 @@
     initBibtexButtons();
     initLocalClock();
     initCommandPalette();
+    initCloserLookModal();
+    initAppleStageDock();
+    initBentoSpecsAndSkillFilters();
     initScalableProjects();
   });
 })();
