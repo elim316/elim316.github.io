@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +15,7 @@
   <link
     rel="icon"
     type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23161b22'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23f8f6f0' font-family='monospace' font-size='26' font-weight='600'%3EEL%3C/text%3E%3C/svg%3E"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000000'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23f5f5f7' font-family='monospace' font-size='26' font-weight='600'%3EEL%3C/text%3E%3C/svg%3E"
   />
 
   <!-- OpenGraph / LinkedIn / Social Sharing Metadata -->
@@ -37,14 +37,13 @@
     content="Building reliable agentic workflows, developer observability tools, full-stack cloud systems, and uncertainty-aware machine learning."
   />
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data (no email address) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Elias Lim",
     "url": "https://elim316.github.io/",
-    "email": "mailto:eliaslim316@gmail.com",
     "jobTitle": "Software, Cloud & Machine Learning Engineer",
     "sameAs": [
       "https://github.com/elim316",
@@ -66,123 +65,366 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Subtle tactile paper grain overlay -->
-  <div class="grain-overlay" aria-hidden="true"></div>
-
-  <!-- Floating Pill Header -->
-  <header class="site-header" id="site-header">
-    <div class="container header-inner">
-      <a href="#top" class="brand-link" id="nav-brand">
-        <span class="brand-monogram" aria-hidden="true">EL</span>
-        <span class="brand-name">Elias Lim</span>
+  <!-- Apple-Style Frosted Global Navigation Ribbon -->
+  <header class="global-nav" id="site-header">
+    <div class="nav-content">
+      <a href="#top" class="nav-brand" id="nav-brand" aria-label="Elias Lim Home">
+        <span class="nav-monogram">EL</span>
       </a>
 
-      <nav class="nav-dock" id="nav-dock" aria-label="Primary Navigation">
-        <span class="nav-pill-indicator" id="nav-pill-indicator" aria-hidden="true"></span>
+      <nav class="nav-links" id="nav-dock" aria-label="Primary Navigation">
         <a href="#top" class="nav-link active" data-section="top" id="nav-overview">Overview</a>
-        <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">Projects</a>
+        <a href="#flagship" class="nav-link" data-section="flagship" id="nav-flagship">Flagship</a>
+        <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">All Systems</a>
         <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Journey</a>
         <a href="#publications" class="nav-link" data-section="publications" id="nav-publications">Research</a>
-        <a href="#stack" class="nav-link" data-section="stack" id="nav-stack">Stack</a>
+        <a href="#stack" class="nav-link" data-section="stack" id="nav-stack">Toolkit</a>
       </nav>
 
-      <div class="header-controls">
+      <div class="nav-actions">
         <button
           type="button"
-          class="cmd-trigger-btn"
+          class="nav-icon-btn"
           id="cmd-palette-trigger"
-          aria-label="Open command palette (Command+K or Ctrl+K)"
+          aria-label="Search projects and actions (Command+K)"
         >
-          <span>Search</span>
-          <kbd class="kbd-pill">&#8984;K</kbd>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="nav-action-label">&#8984;K</span>
         </button>
 
         <button
           type="button"
-          class="theme-btn"
+          class="nav-icon-btn"
           id="theme-toggle-btn"
           aria-label="Toggle colour theme"
         >
-          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-          </svg>
-          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <span id="theme-toggle-label">Theme</span>
+          <span id="theme-toggle-label">Light</span>
         </button>
       </div>
     </div>
   </header>
 
-  <main id="top" class="container">
-    <!-- Hero Section -->
-    <section class="hero" data-section-target="top">
-      <h1 class="hero-title reveal-item" style="--delay: 40ms">
-        I'm Elias, an engineer building <span class="serif-italic">agentic systems</span>, developer tools, and full-stack software.
-      </h1>
+  <!-- Sub-Header Ribbon Banner (Apple SG style) -->
+  <div class="ribbon-banner" id="ribbon-banner">
+    <p class="ribbon-text">
+      Software, Agentic AI &amp; Machine Learning Engineer in Singapore. Explore 10 open-source engineering systems and 2 IEEE Xplore publications.
+      <a href="#projects" class="ribbon-link">Browse all systems &#8594;</a>
+    </p>
+  </div>
 
-      <p class="hero-lead reveal-item" style="--delay: 120ms">
-        Welcome to my corner of the internet. I work across software engineering, applied machine learning, and forward-deployed cloud engineering in Singapore. Lately I have been crafting real-time execution visualisers and evaluation harnesses for autonomous AI agents, alongside cloud-native web platforms and peer-reviewed research in explainable AI.
-      </p>
+  <main id="top">
+    <!-- ======================================================================
+         1. Full-Viewport Flagship Hero Stage (Apple Keynote / Pro Landing Style)
+         ====================================================================== -->
+    <section class="hero-stage" id="hero-stage" data-section-target="top">
+      <div class="hero-copy">
+        <h1 class="hero-headline reveal-hero" style="--d: 40ms">Elias Lim</h1>
+        <p class="hero-subhead reveal-hero" style="--d: 120ms">
+          Engineered for autonomy. Built for production.
+        </p>
+        <p class="hero-caption reveal-hero" style="--d: 180ms">
+          Software engineering, applied machine learning, and forward-deployed cloud systems.
+        </p>
 
-      <div class="hero-actions reveal-item" style="--delay: 200ms">
-        <a
-          href="https://github.com/elim316"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="tactile-btn primary"
-          id="hero-github-link"
-        >
-          <span>GitHub (@elim316)</span>
-          <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
-        </a>
-        <a
-          href="https://linkedin.com/in/eliaslim"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="tactile-btn"
-          id="hero-linkedin-link"
-        >
-          <span>LinkedIn</span>
-          <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
-        </a>
-        <a
-          href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="tactile-btn"
-          id="hero-scholar-link"
-        >
-          <span>Google Scholar</span>
-          <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
-        </a>
-        <button
-          type="button"
-          class="tactile-btn"
-          id="copy-email-btn"
-          data-email="eliaslim316@gmail.com"
-        >
-          <span id="copy-email-label">eliaslim316@gmail.com</span>
-          <span class="copy-badge" id="copy-email-badge">Copy</span>
-        </button>
+        <div class="cta-pill-group reveal-hero" style="--d: 240ms">
+          <a href="#flagship" class="apple-pill solid" id="hero-explore-btn">
+            Explore flagship
+          </a>
+          <a
+            href="https://github.com/elim316"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="apple-pill outline"
+            id="hero-github-link"
+          >
+            GitHub (@elim316)
+          </a>
+          <a
+            href="https://linkedin.com/in/eliaslim"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="apple-pill subtle"
+            id="hero-linkedin-link"
+          >
+            LinkedIn &#8599;
+          </a>
+          <a
+            href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="apple-pill subtle"
+            id="hero-scholar-link"
+          >
+            Scholar &#8599;
+          </a>
+        </div>
       </div>
+
+      <!-- Monumental Metallic Wordmark + Floating 3D Hardware Telemetry Deck -->
+      <div class="hero-visual-stage reveal-hero" style="--d: 320ms">
+        <div class="metallic-wordmark" id="hero-wordmark" aria-hidden="true">
+          SYSTEMS
+        </div>
+
+        <div class="hardware-deck" id="hero-hardware-deck">
+          <div class="hardware-bezel">
+            <div class="bezel-top-bar">
+              <div class="bezel-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="bezel-title">JETSKI MISSION CONTROL · LIVE TELEMETRY</div>
+              <div class="bezel-status">
+                <span class="status-led"></span>
+                <span>CONNECT-RPC READY</span>
+              </div>
+            </div>
+
+            <div class="bezel-grid">
+              <!-- Left Pane: 3-Lane Autonomous Execution Topology -->
+              <div class="bezel-pane">
+                <div class="pane-header">
+                  <span class="pane-label">01 · THREE-LANE EXECUTION TOPOLOGY</span>
+                  <span class="pane-badge">1.5s JSONL Delta</span>
+                </div>
+                <svg class="hero-deck-svg" viewBox="0 0 380 120" aria-hidden="true">
+                  <text x="18" y="20" class="deck-svg-label">USER</text>
+                  <text x="158" y="20" class="deck-svg-label">PLANNER</text>
+                  <text x="290" y="20" class="deck-svg-label">MCP / SUBAGENT</text>
+                  <path class="trace-edge" d="M 52 64 C 102 64, 120 46, 168 46" />
+                  <path class="trace-edge" d="M 196 46 C 248 46, 265 34, 314 34" />
+                  <path class="trace-edge" d="M 196 46 C 248 46, 265 86, 314 86" />
+                  <path class="trace-packet hero-stream" d="M 52 64 C 102 64, 120 46, 168 46" />
+                  <path class="trace-packet hero-stream" d="M 196 46 C 248 46, 265 34, 314 34" />
+                  <path class="trace-packet hero-stream" d="M 196 46 C 248 46, 265 86, 314 86" />
+                  <circle class="deck-node" cx="40" cy="64" r="11" />
+                  <circle class="deck-node active-ring" cx="182" cy="46" r="14" />
+                  <rect class="deck-node active-ring" x="314" y="22" width="26" height="24" rx="6" />
+                  <rect class="deck-node" x="314" y="74" width="26" height="24" rx="6" />
+                  <text x="132" y="108" class="deck-svg-sub">Trajectory verified · 36/36 checks passed</text>
+                </svg>
+              </div>
+
+              <!-- Right Pane: Context Window & Conformal Calibration -->
+              <div class="bezel-pane">
+                <div class="pane-header">
+                  <span class="pane-label">02 · CONTEXT &amp; CONFORMAL CALIBRATION</span>
+                  <span class="pane-badge">95% ACI · IEEE</span>
+                </div>
+                <div class="telemetry-metrics">
+                  <div class="metric-row">
+                    <div class="metric-top">
+                      <span>Context Window Saturation</span>
+                      <span class="metric-val">142k / 200k (71%)</span>
+                    </div>
+                    <div class="metric-track">
+                      <div class="metric-fill fill-blue"></div>
+                    </div>
+                  </div>
+                  <div class="metric-row">
+                    <div class="metric-top">
+                      <span>Conformal Coverage (PICP · IEEE 11249263)</span>
+                      <span class="metric-val">95.2% · ECE 0.012</span>
+                    </div>
+                    <div class="metric-track">
+                      <div class="metric-fill fill-teal"></div>
+                    </div>
+                  </div>
+                  <div class="metric-row">
+                    <div class="metric-top">
+                      <span>Hallucination Linter (Meeting Dossier Agent)</span>
+                      <span class="metric-val">36 / 36 Passed</span>
+                    </div>
+                    <div class="metric-track">
+                      <div class="metric-fill fill-green"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#flagship" class="scroll-cue" aria-label="Scroll down to flagship systems">
+        <span>Scroll to explore</span>
+        <span class="scroll-chevron" aria-hidden="true">&#8595;</span>
+      </a>
     </section>
 
-    <!-- Selected Projects Section -->
-    <section id="projects" class="section" data-section-target="projects">
+    <!-- ======================================================================
+         2. Full-Width Flagship Product Showcases (Scroll-Revealed Like Apple.com)
+         ====================================================================== -->
+    <div id="flagship" data-section-target="flagship">
+      <!-- Flagship Showcase 01: Dark Titanium Stage -->
+      <section class="flagship-banner dark-stage scroll-stage">
+        <div class="stage-inner">
+          <div class="stage-copy">
+            <span class="stage-eyebrow">FLAGSHIP OBSERVABILITY &amp; CONTROL · 2026</span>
+            <h2 class="stage-headline">Agent Tracer &amp; Harness</h2>
+            <p class="stage-subhead">
+              Real-time three-lane execution visualiser and 2x2 mission control with live 200k token saturation telemetry.
+            </p>
+            <div class="cta-pill-group">
+              <a
+                href="https://github.com/elim316/Jetski-Agent-Tracer-Plugin"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apple-pill solid"
+              >
+                Agent Tracer Repo &#8599;
+              </a>
+              <a
+                href="https://github.com/elim316/Jetski-Harness"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apple-pill outline"
+              >
+                Jetski Harness Repo &#8599;
+              </a>
+            </div>
+          </div>
+
+          <div class="stage-showcase-card" id="flagship-tracer-sandbox">
+            <div class="stage-visual-grid">
+              <div class="stage-panel">
+                <div class="pane-header">
+                  <span class="pane-label">INTERACTIVE TRACE INSPECTOR (CLICK NODES)</span>
+                  <span class="pane-badge" id="flagship-tracer-readout">Step #02 PLANNER · 640ms · 1,840 tok</span>
+                </div>
+                <svg class="stage-svg" viewBox="0 0 360 110" aria-hidden="true">
+                  <text x="18" y="18" class="deck-svg-label">USER</text>
+                  <text x="150" y="18" class="deck-svg-label">PLANNER</text>
+                  <text x="276" y="18" class="deck-svg-label">MCP / SUB</text>
+                  <path class="trace-edge" d="M 48 58 C 96 58, 115 42, 162 42" />
+                  <path class="trace-edge" d="M 188 42 C 236 42, 255 32, 300 32" />
+                  <path class="trace-edge" d="M 188 42 C 236 42, 255 80, 300 80" />
+                  <path class="trace-packet hero-stream" d="M 48 58 C 96 58, 115 42, 162 42" />
+                  <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 32, 300 32" />
+                  <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 80, 300 80" />
+                  <circle class="trace-node clickable-node" data-fstep="user" cx="38" cy="58" r="10" />
+                  <circle class="trace-node node-accent clickable-node is-selected" data-fstep="planner" cx="175" cy="42" r="13" />
+                  <rect class="trace-node node-accent clickable-node" data-fstep="mcp" x="296" y="20" width="24" height="22" rx="5" />
+                  <rect class="trace-node clickable-node" data-fstep="subagent" x="296" y="68" width="24" height="22" rx="5" />
+                </svg>
+                <div class="sandbox-pills">
+                  <button type="button" class="sandbox-pill" data-fstep-btn="user">#01 User</button>
+                  <button type="button" class="sandbox-pill active" data-fstep-btn="planner">#02 Planner</button>
+                  <button type="button" class="sandbox-pill" data-fstep-btn="mcp">#03 MCP Tool</button>
+                  <button type="button" class="sandbox-pill" data-fstep-btn="subagent">#04 Subagent</button>
+                </div>
+              </div>
+
+              <div class="stage-panel">
+                <div class="pane-header">
+                  <span class="pane-label">200K TOKEN COMPACTION SIMULATOR</span>
+                  <span class="pane-badge" id="flagship-harness-readout">142k / 200k · 71% Cached</span>
+                </div>
+                <svg class="stage-svg" viewBox="0 0 360 110" aria-hidden="true">
+                  <rect x="14" y="12" width="158" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                  <rect x="184" y="12" width="162" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                  <text x="26" y="28" class="visual-label">2x2 BENTO HARNESS</text>
+                  <text x="26" y="42" class="visual-badge" id="flagship-rpc-badge">Connect-RPC Stream</text>
+                  <text x="196" y="28" class="visual-label">3 ACTIVE SESSIONS</text>
+                  <circle cx="202" cy="39" r="3.5" fill="var(--signal-green)" />
+                  <circle cx="214" cy="39" r="3.5" fill="var(--signal-green)" />
+                  <circle cx="226" cy="39" r="3.5" fill="var(--signal-amber)" />
+                  <rect x="14" y="58" width="332" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                  <text x="26" y="75" class="visual-label" id="flagship-bar-label">CONTEXT SATURATION: 142k / 200k TOKENS</text>
+                  <rect x="26" y="83" width="308" height="7" rx="3.5" fill="var(--bg-subtle)" />
+                  <rect class="token-fill-bar" id="flagship-token-bar" x="26" y="83" width="308" height="7" rx="3.5" fill="var(--accent)" />
+                </svg>
+                <div class="sandbox-pills">
+                  <button type="button" class="sandbox-pill" data-fturn-btn="turn2">Turn 2 (48k)</button>
+                  <button type="button" class="sandbox-pill active" data-fturn-btn="turn8">Turn 8 (142k)</button>
+                  <button type="button" class="sandbox-pill" data-fturn-btn="turn14">Turn 14 (196k Auto-Compact)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Flagship Showcase 02: Light Alabaster Stage -->
+      <section class="flagship-banner light-stage scroll-stage">
+        <div class="stage-inner">
+          <div class="stage-copy">
+            <span class="stage-eyebrow">PUBLISHED IN IEEE XPLORE · DOCUMENT 11249263</span>
+            <h2 class="stage-headline">Uncertainty &amp; Explainable AI</h2>
+            <p class="stage-subhead">
+              Adaptive Conformal Inference (ACI) and SHAP/LIME feature attributions for deep battery state-of-health estimation.
+            </p>
+            <div class="cta-pill-group">
+              <a
+                href="https://ieeexplore.ieee.org/document/11249263"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apple-pill solid"
+              >
+                Read IEEE Paper &#8599;
+              </a>
+              <a
+                href="https://github.com/elim316/UQ-XAI-battery-analytics"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apple-pill outline"
+              >
+                Companion Repo &#8599;
+              </a>
+            </div>
+          </div>
+
+          <div class="stage-showcase-card" id="flagship-uq-sandbox">
+            <div class="pane-header">
+              <span class="pane-label" id="flagship-aci-title">INTERACTIVE CONFORMAL PREDICTION BAND (95% ACI)</span>
+              <span class="pane-badge" id="flagship-aci-readout">PICP: 0.952 · ECE: 0.012 · McMaster &#8594; Oxford</span>
+            </div>
+            <svg class="stage-svg wide-svg" viewBox="0 0 640 130" aria-hidden="true">
+              <path
+                class="ci-band"
+                id="flagship-aci-band"
+                d="M 30 22 Q 210 38, 380 62 T 610 88 L 610 118 Q 380 94, 210 68 T 30 52 Z"
+                fill="var(--accent)"
+              />
+              <path
+                d="M 30 37 Q 210 53, 380 78 T 610 103"
+                fill="none"
+                stroke="var(--accent)"
+                stroke-width="2.8"
+              />
+              <circle class="trace-node node-accent" cx="210" cy="53" r="5" />
+              <circle class="trace-node node-accent" cx="380" cy="78" r="5" />
+              <text x="34" y="114" class="visual-label">Cycle 0 (McMaster Train)</text>
+              <text x="465" y="68" class="visual-badge">SHAP + LIME Verified</text>
+            </svg>
+            <div class="sandbox-pills centered-pills">
+              <button type="button" class="sandbox-pill" data-fci-btn="90">90% Confidence (Tight)</button>
+              <button type="button" class="sandbox-pill active" data-fci-btn="95">95% Confidence (Optimal)</button>
+              <button type="button" class="sandbox-pill" data-fci-btn="99">99% Confidence (Conservative)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ======================================================================
+         3. Apple 2-Column Product Promo Grid for All 10 Engineering Systems
+         ====================================================================== -->
+    <section id="projects" class="section container" data-section-target="projects">
       <div class="section-header reveal-on-scroll">
         <div>
-          <h2 class="section-title">Selected projects</h2>
+          <span class="section-eyebrow">COMPLETE LINE-UP</span>
+          <h2 class="section-title">Explore all engineering systems.</h2>
           <p class="section-subtitle">
-            Interact with the live mini-sandboxes on the top cards, or expand any drawer to inspect its technical architecture.
+            Filter by engineering domain or expand any product tile to inspect its technical architecture.
           </p>
         </div>
 
@@ -204,14 +446,17 @@
         </div>
       </div>
 
-      <div id="projects-grid" class="projects-grid"></div>
+      <div id="projects-grid" class="promo-grid"></div>
     </section>
 
-    <!-- Experience, Awards & Milestones Timeline Section -->
-    <section id="journey" class="section" data-section-target="journey">
+    <!-- ======================================================================
+         4. Experience, Awards & Milestones Timeline (#journey)
+         ====================================================================== -->
+    <section id="journey" class="section container" data-section-target="journey">
       <div class="section-header reveal-on-scroll">
         <div>
-          <h2 class="section-title">Experience and milestones</h2>
+          <span class="section-eyebrow">TRACK RECORD</span>
+          <h2 class="section-title">Experience and milestones.</h2>
           <p class="section-subtitle">
             Highlights across cloud engineering, agentic AI systems, hackathons, and published research.
           </p>
@@ -273,12 +518,15 @@
       </div>
     </section>
 
-    <!-- Publications Section -->
-    <section id="publications" class="section" data-section-target="publications">
+    <!-- ======================================================================
+         5. Publications Section
+         ====================================================================== -->
+    <section id="publications" class="section container" data-section-target="publications">
       <div class="section-header reveal-on-scroll">
         <div>
-          <h2 class="section-title">Peer-reviewed research</h2>
-          <p class="section-subtitle">Published in IEEE Xplore, with one-click BibTeX citations for researchers.</p>
+          <span class="section-eyebrow">PUBLICATIONS</span>
+          <h2 class="section-title">Peer-reviewed research.</h2>
+          <p class="section-subtitle">Published in IEEE Xplore, with one-click BibTeX citations.</p>
         </div>
       </div>
 
@@ -365,11 +613,14 @@
       </div>
     </section>
 
-    <!-- Technical Stack Section -->
-    <section id="stack" class="section" data-section-target="stack">
+    <!-- ======================================================================
+         6. Technical Stack Section
+         ====================================================================== -->
+    <section id="stack" class="section container" data-section-target="stack">
       <div class="section-header reveal-on-scroll">
         <div>
-          <h2 class="section-title">Technical toolkit</h2>
+          <span class="section-eyebrow">SPECIFICATIONS</span>
+          <h2 class="section-title">Technical toolkit.</h2>
           <p class="section-subtitle">Core languages, frameworks, and infrastructure tools I build with day to day.</p>
         </div>
       </div>
@@ -474,7 +725,6 @@
         <a href="https://github.com/elim316" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://linkedin.com/in/eliaslim" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
-        <a href="mailto:eliaslim316@gmail.com">Email</a>
       </div>
     </div>
   </footer>
