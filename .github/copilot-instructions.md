@@ -28,14 +28,14 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
   3. `#showcase-agent-tracer` (Wordmark: `TRACER`)
   4. `#showcase-meeting-prep` (Wordmark: `DOSSIER`)
   5. `#showcase-uq-xai` (Wordmark: `RESEARCH`)
-  On scroll, `app.js` interpolates `--deck-tilt`, `--deck-scale`, `--deck-y`, `--wordmark-y`, and `--wordmark-scale` via `requestAnimationFrame` based on `deck.getBoundingClientRect()`. By default, `.metallic-wordmark` continuously runs `titaniumShimmer` (with `--wordmark-spot-size: 0px`). On `mousemove`, `app.js` toggles `.is-hovered` (activating `--wordmark-spot-size: 260px`) and updates `--wordmark-spot-x`, `--wordmark-spot-y`, `--wordmark-mx`, and `--wordmark-my` on the backdrop words only. Never apply mouse tilt or mouse glare to `.hardware-deck` or `.hardware-bezel` (the box stays steady and only animates on scroll).
+  On scroll, `app.js` interpolates `--deck-tilt`, `--deck-scale`, `--deck-y`, `--wordmark-y`, and `--wordmark-scale` via `requestAnimationFrame` based on `deck.getBoundingClientRect()`. By default, `.metallic-wordmark` continuously runs `titaniumShimmer` (with `--wordmark-spot-size: 0px`). On `mousemove`, `app.js` toggles `.is-hovered` (activating `--wordmark-spot-size: 260px`) and updates `--wordmark-spot-x` and `--wordmark-spot-y` on the backdrop words only. Never move the words on mousemove (`--wordmark-mx` / `--wordmark-my` are forbidden), and never apply mouse tilt or mouse glare to `.hardware-deck` or `.hardware-bezel` (both the words and the box stay steady in position and only animate position on scroll).
 - Anti-Clipping & Overflow Guardrails (`styles.css`):
   - `.hardware-bezel`, `.bezel-grid` (`grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr)`), `.bezel-pane`, and `.about-mini-card` must preserve `min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;` so the right pane never overflows outside the rounded hardware bezel border.
   - Never apply `stroke` or `stroke-width` directly to `<g class="clickable-node">` or `<text>` elements in SVG, as SVG inheritance will outline the text and make it look blurry. Always target child shapes (`.clickable-node.is-selected .trace-node`) and keep `stroke: none !important` on all SVG `<text>` elements.
 
 ## 4. How to Add or Update Projects
 - Curated Projects (`PROJECTS` in `app.js` & `projects` in `projects.json`):
-  There are 13 curated projects across 3 categories (`agentic`, `fullstack`, `ml`).
+  There are 14 curated projects across 3 categories (`agentic`, `fullstack`, `ml`), including `jumpgate-agentic-lz` (which links to both `RZOWQ/trainee-project-jumpgate-agentic-lz` and `jarrettyeo/vending-machine-agent` via `secondaryRepoUrl`).
 - Custom SVG Visualisations (`getProjectVisual(project)` in `app.js`):
   IMPORTANT: Never use a generic "3 boxes lined up" diagram for any project. Every project in `#projects-grid` has a bespoke SVG schematic in `getProjectVisual(project)` in `app.js`.
   When adding a new project:
@@ -44,15 +44,12 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 - Excluded Repositories (`EXCLUDED_REPOS` in `app.js` & `projects.json`):
   Coursework, lab, and duplicate repositories are listed in `excludedRepos` (`CSC2106-IoT`, `real-time-cv-vlm-pipeline`, `WeatherPredictor`, `yolov6-object-detector`, `Opencv-real-time-face-detection`, `INF2007_Week2_Lab`, `mylab2`, `Google-Certificate---Introduction-to-Github`, `Wind-City-BrainHack-2023`, `COMPUTERFUNCTION-Easy`) so `initScalableProjects()` does not auto-import them from the GitHub API.
 - Cache Busting on Every Update:
-  Whenever you edit `styles.css` or `app.js`, increment the version query string in `index.html` (`styles.css?v=YYYYMMDD-N` and `app.js?v=YYYYMMDD-N`) and bump `cacheKey` (`gh_repos_v3_elim316`) in `app.js` if the project list changed.
+  Whenever you edit `styles.css` or `app.js`, increment the version query string in `index.html` (`styles.css?v=YYYYMMDD-N` and `app.js?v=YYYYMMDD-N`) and bump `cacheKey` (`gh_repos_v4_elim316`) in `app.js` if the project list changed.
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-10`
-- SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
+- Asset version in `index.html`: `?v=20261005-11`
+- SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
-  * Added Apple-inspired Floating Bottom Stage Controller Pill (`#apple-stage-dock`) with 5 expanding progress dots, live stage readout, Play/Pause animation toggle, and `+` Closer Look trigger.
-  * Added Apple "Take a Closer Look" Full-Scale Interactive Architecture Sheet Modal (`#closer-look-backdrop`) with project counter, `<` / `>` arrow navigation, custom SVG schematic viewer, and deep-link copy button.
-  * Added Apple M4-inspired "By the Numbers" 4-Tile Sculpted Spec Bento Grid (`#bento-specs-grid`) and interactive `.skill-chip` filters in `#stack`.
-  * Added 1200x630 Light Mode OpenGraph social preview card (`og-image.png`), URL hash deep-linking (`#projects-*`, `#about-*`, `#inspect-*`), keyboard `←` / `→` navigation, and a 1-page executive CV print stylesheet (`@media print`).
-  * Kept the continuous default `titaniumShimmer` sparkle always running on all 5 stage wordmarks (`BUILDER`, `PROFILE`, `TRACER`, `DOSSIER`, `RESEARCH`) and layered the cursor-tracked specular reflection (`--wordmark-spot-size: 260px`) strictly on the words when hovering, while keeping `.hardware-deck` steady.
+  * Added `jumpgate-agentic-lz` ("Jumpgate · Zero-Trust Agentic AI Landing Zone & Vending Machine") as the #1 curated project with custom interactive SVG visualisation, dual repository links (`Landing Zone Repo` & `Vending Machine Repo`), and integrated Jumpgate datapoints (`< 3 min` deploy down from 4-6 weeks, `14/14` Ingress & `18/18` Egress IM8 security checks, `14-step ADLC` with `>=0.85` LLM-as-a-Judge gate, and `$1.96M` realised public sector ARR + `$1.46M` pipeline) across `#hero-stage`, `#about`, `#journey`, `#bento-specs-grid`, and `#projects`.
+  * Removed mouse-movement parallax (`--wordmark-mx`, `--wordmark-my`) from `.metallic-wordmark` so the words never shift position on hover, keeping only the colour spotlight reflection (`--wordmark-spot-size: 260px`) and continuous default `titaniumShimmer` sparkle.
