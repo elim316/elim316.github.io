@@ -68,7 +68,7 @@
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261005-4" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -203,21 +203,21 @@
                   <span class="pane-label">elim316/Jetski-Agent-Tracer-Plugin</span>
                   <span class="pane-badge">1.5s JSONL Stream</span>
                 </div>
-                <svg class="hero-deck-svg" viewBox="0 0 380 120" aria-hidden="true">
-                  <text x="18" y="20" class="deck-svg-label">USER</text>
-                  <text x="158" y="20" class="deck-svg-label">PLANNER</text>
-                  <text x="285" y="20" class="deck-svg-label">MCP / SUBAGENT</text>
-                  <path class="trace-edge" d="M 52 64 C 102 64, 120 46, 168 46" />
-                  <path class="trace-edge" d="M 196 46 C 248 46, 265 34, 314 34" />
-                  <path class="trace-edge" d="M 196 46 C 248 46, 265 86, 314 86" />
-                  <path class="trace-packet hero-stream" d="M 52 64 C 102 64, 120 46, 168 46" />
-                  <path class="trace-packet hero-stream" d="M 196 46 C 248 46, 265 34, 314 34" />
-                  <path class="trace-packet hero-stream" d="M 196 46 C 248 46, 265 86, 314 86" />
+                <svg class="hero-deck-svg" viewBox="0 0 380 124" aria-hidden="true">
+                  <text x="40" y="13" text-anchor="middle" class="deck-svg-label">USER</text>
+                  <text x="182" y="13" text-anchor="middle" class="deck-svg-label">PLANNER</text>
+                  <text x="326" y="13" text-anchor="middle" class="deck-svg-label">MCP / SUB</text>
+                  <path class="trace-edge" d="M 52 64 C 102 64, 120 50, 168 50" />
+                  <path class="trace-edge" d="M 196 50 C 248 50, 265 40, 314 40" />
+                  <path class="trace-edge" d="M 196 50 C 248 50, 265 84, 314 84" />
+                  <path class="trace-packet hero-stream" d="M 52 64 C 102 64, 120 50, 168 50" />
+                  <path class="trace-packet hero-stream" d="M 196 50 C 248 50, 265 40, 314 40" />
+                  <path class="trace-packet hero-stream" d="M 196 50 C 248 50, 265 84, 314 84" />
                   <circle class="deck-node" cx="40" cy="64" r="11" />
-                  <circle class="deck-node active-ring" cx="182" cy="46" r="14" />
-                  <rect class="deck-node active-ring" x="314" y="22" width="26" height="24" rx="6" />
-                  <rect class="deck-node" x="314" y="74" width="26" height="24" rx="6" />
-                  <text x="115" y="108" class="deck-svg-sub">Real-time Timeline, Architecture &amp; Simplified views</text>
+                  <circle class="deck-node active-ring" cx="182" cy="50" r="13" />
+                  <rect class="deck-node active-ring" x="314" y="29" width="24" height="22" rx="5" />
+                  <rect class="deck-node" x="314" y="73" width="24" height="22" rx="5" />
+                  <text x="190" y="116" text-anchor="middle" class="deck-svg-sub">Real-time Timeline, Architecture &amp; Simplified views</text>
                 </svg>
               </div>
 
@@ -295,7 +295,7 @@
               <rect width="24" height="24" rx="6" fill="#00B14F"/>
               <path d="M16.5 11.2h-4.3v2.1h2.2c-.3 1.2-1.3 2-2.6 2-1.7 0-3-1.3-3-3.1s1.3-3.1 3-3.1c.9 0 1.7.4 2.2 1l1.6-1.5C14.6 7.6 13.3 7 11.8 7 8.9 7 6.5 9.3 6.5 12.2s2.4 5.2 5.3 5.2c3 0 5-2.1 5-5 0-.4 0-.8-.3-1.2z" fill="#ffffff"/>
             </svg>
-            <span>02 · Grab (Trust &amp; Safety)</span>
+            <span>02 · Grab (Backend Systems)</span>
           </button>
           <button type="button" class="sandbox-pill chapter-pill" data-about-tab="astar" role="tab" aria-selected="false">
             <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -365,7 +365,7 @@
                     <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">IM8-compliant landing zone + Jetski trajectory visualiser</text>
                   </svg>
 
-                  <!-- Chapter 02: Grab Trust, Identity & Safety -->
+                  <!-- Chapter 02: Grab -->
                   <svg class="hero-deck-svg about-scene" data-about-scene="grab" viewBox="0 0 380 120" aria-hidden="true">
                     <text x="44" y="18" text-anchor="middle" class="deck-svg-label">INGRESS</text>
                     <text x="182" y="18" text-anchor="middle" class="deck-svg-label">GOLANG CONTROLS</text>
@@ -380,7 +380,7 @@
                     <text x="182" y="55" text-anchor="middle" class="visual-badge">GO FLAGS</text>
                     <text x="182" y="69" text-anchor="middle" class="visual-label">RATE LIMIT</text>
                     <rect class="deck-node active-ring" x="284" y="36" width="76" height="44" rx="8" />
-                    <text x="322" y="55" text-anchor="middle" class="visual-label">TIS RISK</text>
+                    <text x="322" y="55" text-anchor="middle" class="visual-label">RISK API</text>
                     <text x="322" y="69" text-anchor="middle" class="visual-badge">PB-Scale</text>
                     <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">Real-time fraud detection microservices in Golang at Grab</text>
                   </svg>
@@ -450,7 +450,7 @@
                       </svg>
                       <span>Customer Engineer · Google</span>
                     </span>
-                    <span class="mini-card-sub">Terraform · Dual-VPC · Agent Visualiser</span>
+                    <span class="mini-card-sub">Terraform · Dual-VPC · Agent UI</span>
                   </button>
 
                   <button type="button" class="about-mini-card" data-about-card="grab">
@@ -460,7 +460,7 @@
                         <rect width="24" height="24" rx="6" fill="#00B14F"/>
                         <path d="M16.5 11.2h-4.3v2.1h2.2c-.3 1.2-1.3 2-2.6 2-1.7 0-3-1.3-3-3.1s1.3-3.1 3-3.1c.9 0 1.7.4 2.2 1l1.6-1.5C14.6 7.6 13.3 7 11.8 7 8.9 7 6.5 9.3 6.5 12.2s2.4 5.2 5.3 5.2c3 0 5-2.1 5-5 0-.4 0-.8-.3-1.2z" fill="#ffffff"/>
                       </svg>
-                      <span>Trust SWE · Grab (TIS)</span>
+                      <span>Trust SWE · Grab</span>
                     </span>
                     <span class="mini-card-sub">Golang · Fraud Detection · PB-Scale</span>
                   </button>
@@ -581,20 +581,20 @@
                     <span class="pane-label">TRACE INSPECTOR (CLICK NODES)</span>
                     <span class="pane-badge" id="flagship-tracer-readout">Step #02 PLANNER · 640ms</span>
                   </div>
-                  <svg class="hero-deck-svg" viewBox="0 0 360 110" aria-hidden="true">
-                    <text x="18" y="18" class="visual-label">USER</text>
-                    <text x="150" y="18" class="visual-label">PLANNER</text>
-                    <text x="276" y="18" class="visual-label">MCP / SUB</text>
-                    <path class="trace-edge" d="M 48 58 C 96 58, 115 42, 162 42" />
-                    <path class="trace-edge" d="M 188 42 C 236 42, 255 32, 300 32" />
-                    <path class="trace-edge" d="M 188 42 C 236 42, 255 80, 300 80" />
-                    <path class="trace-packet hero-stream" d="M 48 58 C 96 58, 115 42, 162 42" />
-                    <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 32, 300 32" />
-                    <path class="trace-packet hero-stream" d="M 188 42 C 236 42, 255 80, 300 80" />
-                    <circle class="trace-node clickable-node" data-fstep="user" cx="38" cy="58" r="10" />
-                    <circle class="trace-node node-accent clickable-node is-selected" data-fstep="planner" cx="175" cy="42" r="13" />
-                    <rect class="trace-node node-accent clickable-node" data-fstep="mcp" x="296" y="20" width="24" height="22" rx="5" />
-                    <rect class="trace-node clickable-node" data-fstep="subagent" x="296" y="68" width="24" height="22" rx="5" />
+                  <svg class="hero-deck-svg" viewBox="0 0 360 116" aria-hidden="true">
+                    <text x="38" y="12" text-anchor="middle" class="visual-label">USER</text>
+                    <text x="175" y="12" text-anchor="middle" class="visual-label">PLANNER</text>
+                    <text x="308" y="12" text-anchor="middle" class="visual-label">MCP / SUB</text>
+                    <path class="trace-edge" d="M 48 60 C 96 60, 115 48, 162 48" />
+                    <path class="trace-edge" d="M 188 48 C 236 48, 255 39, 296 39" />
+                    <path class="trace-edge" d="M 188 48 C 236 48, 255 81, 296 81" />
+                    <path class="trace-packet hero-stream" d="M 48 60 C 96 60, 115 48, 162 48" />
+                    <path class="trace-packet hero-stream" d="M 188 48 C 236 48, 255 39, 296 39" />
+                    <path class="trace-packet hero-stream" d="M 188 48 C 236 48, 255 81, 296 81" />
+                    <circle class="trace-node clickable-node" data-fstep="user" cx="38" cy="60" r="10" />
+                    <circle class="trace-node node-accent clickable-node is-selected" data-fstep="planner" cx="175" cy="48" r="13" />
+                    <rect class="trace-node node-accent clickable-node" data-fstep="mcp" x="296" y="28" width="24" height="22" rx="5" />
+                    <rect class="trace-node clickable-node" data-fstep="subagent" x="296" y="70" width="24" height="22" rx="5" />
                   </svg>
                   <div class="sandbox-pills">
                     <button type="button" class="sandbox-pill" data-fstep-btn="user">#01 User</button>
@@ -610,18 +610,23 @@
                     <span class="pane-badge" id="flagship-harness-readout">142k / 200k · 71% Cached</span>
                   </div>
                   <svg class="hero-deck-svg" viewBox="0 0 360 110" aria-hidden="true">
-                    <rect x="14" y="12" width="160" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                    <rect x="184" y="12" width="162" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                    <text x="26" y="28" class="visual-label">2x2 BENTO HARNESS</text>
-                    <text x="26" y="42" class="visual-badge" id="flagship-rpc-badge">Connect-RPC Stream</text>
-                    <text x="196" y="28" class="visual-label">3 ACTIVE SESSIONS</text>
-                    <circle cx="202" cy="39" r="3.5" fill="var(--signal-green)" />
-                    <circle cx="214" cy="39" r="3.5" fill="var(--signal-green)" />
-                    <circle cx="226" cy="39" r="3.5" fill="var(--signal-amber)" />
+                    <defs>
+                      <clipPath id="flagship-bar-clip">
+                        <rect x="26" y="83" width="308" height="7" rx="3.5" />
+                      </clipPath>
+                    </defs>
+                    <rect x="14" y="10" width="160" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <rect x="184" y="10" width="162" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <text x="94" y="26" text-anchor="middle" class="visual-label">2x2 BENTO HARNESS</text>
+                    <text x="94" y="40" text-anchor="middle" class="visual-badge" id="flagship-rpc-badge">Connect-RPC</text>
+                    <text x="265" y="26" text-anchor="middle" class="visual-label">3 ACTIVE SESSIONS</text>
+                    <circle cx="251" cy="39" r="3.5" fill="var(--signal-green)" />
+                    <circle cx="265" cy="39" r="3.5" fill="var(--signal-green)" />
+                    <circle cx="279" cy="39" r="3.5" fill="var(--signal-amber)" />
                     <rect x="14" y="58" width="332" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
                     <text x="26" y="75" class="visual-label" id="flagship-bar-label">CONTEXT SATURATION: 142k / 200k TOKENS</text>
                     <rect x="26" y="83" width="308" height="7" rx="3.5" fill="var(--bg-subtle)" />
-                    <rect class="token-fill-bar" id="flagship-token-bar" x="26" y="83" width="219" height="7" rx="3.5" fill="var(--accent)" />
+                    <rect class="token-fill-bar" id="flagship-token-bar" clip-path="url(#flagship-bar-clip)" x="26" y="83" width="219" height="7" rx="3.5" fill="var(--accent)" />
                   </svg>
                   <div class="sandbox-pills">
                     <button type="button" class="sandbox-pill" data-fturn-btn="turn2">Turn 2 · 48k</button>
@@ -932,11 +937,11 @@
             <span class="timeline-year">Jan 2026 to Mar 2026</span>
             <span class="timeline-tag">
               <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.5" fill="#00B14F"/><path fill="#FFFFFF" d="M12.2 5.5c-3.7 0-6.5 2.8-6.5 6.5s2.8 6.5 6.5 6.5c2.9 0 5.3-1.8 6.1-4.4H13v-2.4h7.5v1.1c0 4.6-3.5 8.1-8.3 8.1-4.9 0-8.9-4-8.9-8.9s4-8.9 8.9-8.9c2.5 0 4.8 1 6.4 2.6l-1.8 1.8c-1.1-1.2-2.7-2-4.6-2Z"/></svg>
-              <span>Grab · TIS</span>
+              <span>Grab · Singapore</span>
             </span>
           </div>
           <div class="timeline-content">
-            <h3 class="timeline-title">Trust Software Engineer · Grab (Trust, Identity &amp; Safety)</h3>
+            <h3 class="timeline-title">Trust Software Engineer · Grab</h3>
             <p class="timeline-desc">
               Built scalable Golang backend services for real-time fraud detection, implementing runtime control mechanisms such as feature flags and rate limiting on petabyte-scale risk infrastructure. Expanded automated unit test coverage, resolved production defects, and contributed to architecture and code reviews across Agile sprints.
             </p>
@@ -1196,6 +1201,6 @@
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20261005-4"></script>
 </body>
 </html>
