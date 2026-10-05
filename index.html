@@ -81,9 +81,10 @@
 
       <nav class="nav-links" id="nav-dock" aria-label="Primary Navigation">
         <a href="#top" class="nav-link active" data-section="top" id="nav-overview">Overview</a>
+        <a href="#about" class="nav-link" data-section="about" id="nav-about">About</a>
         <a href="#featured" class="nav-link" data-section="featured" id="nav-featured">Featured Repos</a>
         <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">All Projects</a>
-        <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Journey</a>
+        <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Experience</a>
         <a href="#publications" class="nav-link" data-section="publications" id="nav-publications">Research</a>
         <a href="#stack" class="nav-link" data-section="stack" id="nav-stack">Toolkit</a>
       </nav>
@@ -121,22 +122,25 @@
     <section class="hero-stage" id="hero-stage" data-section-target="top">
       <div class="hero-copy">
         <span class="hero-eyebrow reveal-hero" style="--d: 20ms">
-          SOFTWARE · AGENTIC AI · MACHINE LEARNING
+          CLOUD &amp; AI ENGINEER · GOOGLE SINGAPORE
         </span>
         <h1 class="hero-headline reveal-hero" style="--d: 80ms">Elias Lim</h1>
         <p class="hero-subhead reveal-hero" style="--d: 140ms">
-          Building autonomous agent tooling, full-stack cloud platforms, and uncertainty-aware machine learning.
+          Cloud and AI engineer experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling.
         </p>
 
         <div class="cta-pill-group reveal-hero" style="--d: 200ms">
           <a href="#featured" class="apple-pill solid" id="hero-browse-btn">
             Browse projects
           </a>
+          <a href="#about" class="apple-pill outline" id="hero-about-btn">
+            About me
+          </a>
           <a
             href="https://github.com/elim316"
             target="_blank"
             rel="noopener noreferrer"
-            class="apple-pill outline"
+            class="apple-pill subtle"
             id="hero-github-link"
           >
             GitHub (@elim316) &#8599;
@@ -177,7 +181,7 @@
               <div class="bezel-title">FEATURED REPOSITORY PREVIEW · LIVE ARCHITECTURE</div>
               <div class="bezel-status">
                 <span class="status-led"></span>
-                <span>10 PUBLIC REPOS</span>
+                <span>11 PUBLIC REPOS</span>
               </div>
             </div>
 
@@ -247,10 +251,65 @@
         </div>
       </div>
 
-      <a href="#featured" class="scroll-cue" aria-label="Scroll down to featured repositories">
-        <span>Scroll down to explore repositories</span>
+      <a href="#about" class="scroll-cue" aria-label="Scroll down to introduction and featured repositories">
+        <span>Scroll down to learn more and explore repositories</span>
         <span class="scroll-chevron" aria-hidden="true">&#8595;</span>
       </a>
+    </section>
+
+    <!-- ======================================================================
+         1B. Self-Introduction & At-a-Glance Bento Section (#about)
+         ====================================================================== -->
+    <section id="about" class="about-section surface-white" data-section-target="about">
+      <div class="container about-grid">
+        <div class="about-narrative reveal-on-scroll">
+          <span class="section-eyebrow">INTRODUCTION</span>
+          <h2 class="section-title">Bridging cloud infrastructure, backend systems, and applied AI.</h2>
+          <p class="about-paragraph">
+            I am a Cloud and AI Engineer at Google in Singapore, where I architect zero-trust cloud landing zones for generative AI agents, build native observability plugins to visualise multi-agent execution trajectories, and run hands-on buildathons that help engineering teams take AI workloads into production.
+          </p>
+          <p class="about-paragraph">
+            Before joining Google, I worked as a Trust Software Engineer on Grab's Trust, Identity and Safety team building Golang fraud-detection services on petabyte-scale data infrastructure, and as an AI Research Intern at A*STAR developing uncertainty-aware and explainable deep learning models for battery State-of-Health estimation. I graduated with a BSc (Hons) in Computer Science (Second Upper Class) from the University of Glasgow and the Singapore Institute of Technology.
+          </p>
+          <p class="about-paragraph">
+            I enjoy working across the full stack and collaborating closely with both technical and non-technical stakeholders to ship dependable software. Outside of work, you will usually find me playing basketball or pickleball, or hunting for vintage pieces while thrifting.
+          </p>
+        </div>
+
+        <div class="about-bento reveal-on-scroll">
+          <div class="about-bento-card">
+            <span class="bento-label">CURRENT ROLE</span>
+            <h3 class="bento-title">Customer Engineer · Google</h3>
+            <p class="bento-desc">
+              Zero-trust Terraform AI landing zones (Dual-VPC, Private Service Connect, Cloud Run), LangGraph/Jetski agent trajectory visualisers, and enterprise GenAI enablement.
+            </p>
+          </div>
+
+          <div class="about-bento-card">
+            <span class="bento-label">PREVIOUS ENGINEERING</span>
+            <h3 class="bento-title">Grab (TIS) &amp; A*STAR</h3>
+            <p class="bento-desc">
+              Golang fraud-detection services and runtime controls at Grab; first-author deep learning uncertainty quantification and explainable AI research at A*STAR.
+            </p>
+          </div>
+
+          <div class="about-bento-card">
+            <span class="bento-label">EDUCATION</span>
+            <h3 class="bento-title">BSc (Hons) Computer Science</h3>
+            <p class="bento-desc">
+              University of Glasgow and Singapore Institute of Technology (Second Upper Class Honours, Aug 2022 to May 2025).
+            </p>
+          </div>
+
+          <div class="about-bento-card">
+            <span class="bento-label">RECOGNITION &amp; OUTSIDE WORK</span>
+            <h3 class="bento-title">Awards &amp; Interests</h3>
+            <p class="bento-desc">
+              2nd Place NUS LifeHack 2025 · Overall Best &amp; Most Impactful (AISG / SMU / CyberYouthSG) · DSTA BrainHack Semifinalist · Basketball, pickleball &amp; vintage thrifting.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ======================================================================
@@ -493,15 +552,15 @@
     </section>
 
     <!-- ======================================================================
-         4. Experience, Awards & Milestones Timeline (#journey)
+         4. Experience, Education & Awards Timeline (#journey)
          ====================================================================== -->
     <section id="journey" class="section container" data-section-target="journey">
       <div class="section-header reveal-on-scroll">
         <div>
-          <span class="section-eyebrow">TRACK RECORD</span>
-          <h2 class="section-title">Experience and milestones.</h2>
+          <span class="section-eyebrow">EXPERIENCE &amp; EDUCATION</span>
+          <h2 class="section-title">Career and academic progression.</h2>
           <p class="section-subtitle">
-            Highlights across cloud engineering, agentic AI systems, hackathons, and published research.
+            Engineering roles across cloud infrastructure, high-scale backend systems, and applied machine learning research.
           </p>
         </div>
       </div>
@@ -509,52 +568,52 @@
       <div class="timeline-list">
         <div class="timeline-item reveal-on-scroll" id="milestone-gcloud">
           <div class="timeline-meta">
-            <span class="timeline-year">2026</span>
-            <span class="timeline-tag">Cloud &amp; Agentic AI</span>
+            <span class="timeline-year">Apr 2026 to Present</span>
+            <span class="timeline-tag">Google · Singapore</span>
           </div>
           <div class="timeline-content">
-            <h3 class="timeline-title">Customer Engineering &amp; Agentic Systems · Google Cloud Singapore</h3>
+            <h3 class="timeline-title">Customer Engineer · Google</h3>
             <p class="timeline-desc">
-              Designing multi-VPC cloud landing zones, enterprise AI governance architectures, and open-source developer tools for autonomous agent trajectory tracing, token telemetry, and automated multi-corpus evaluation harnesses.
+              Architected an IM8-compliant zero-trust AI agent landing zone using Terraform, Dual-VPC, IAM, Private Service Connect, Cloud Run, and Pub/Sub. Developed a native Jetski plugin to visualise multi-agent execution trajectories, tool calls, and subagent invocations. Led AI buildathons and technical enablement across universities, public sector agencies, and financial services teams.
             </p>
           </div>
         </div>
 
-        <div class="timeline-item reveal-on-scroll" id="milestone-ieee">
+        <div class="timeline-item reveal-on-scroll" id="milestone-grab">
           <div class="timeline-meta">
-            <span class="timeline-year">2025</span>
-            <span class="timeline-tag">IEEE Xplore</span>
+            <span class="timeline-year">Jan 2026 to Mar 2026</span>
+            <span class="timeline-tag">Grab · TIS</span>
           </div>
           <div class="timeline-content">
-            <h3 class="timeline-title">Published two peer-reviewed papers in IEEE Xplore</h3>
+            <h3 class="timeline-title">Trust Software Engineer · Grab (Trust, Identity &amp; Safety)</h3>
             <p class="timeline-desc">
-              Authored research on Adaptive Conformal Inference (ACI) and post-hoc explainability (SHAP, LIME) for convolutional battery state-of-health models, alongside a study on data-driven teamwork assessment in software engineering education.
+              Built scalable Golang backend services for real-time fraud detection, implementing runtime control mechanisms such as feature flags and rate limiting on petabyte-scale risk infrastructure. Expanded automated unit test coverage, resolved production defects, and contributed to architecture and code reviews across Agile sprints.
             </p>
           </div>
         </div>
 
-        <div class="timeline-item reveal-on-scroll" id="milestone-lifehack">
+        <div class="timeline-item reveal-on-scroll" id="milestone-astar">
           <div class="timeline-meta">
-            <span class="timeline-year">2025</span>
-            <span class="timeline-tag">2nd Place Overall</span>
+            <span class="timeline-year">Sep 2024 to May 2025</span>
+            <span class="timeline-tag">A*STAR · Research</span>
           </div>
           <div class="timeline-content">
-            <h3 class="timeline-title">NUS LifeHack 2025 &amp; Hack4Good · Full-Stack &amp; Applied ML</h3>
+            <h3 class="timeline-title">AI Research Intern · A*STAR (Agency for Science, Technology and Research)</h3>
             <p class="timeline-desc">
-              Awarded 2nd Place Overall at NUS LifeHack 2025 for EduVerse, an adaptive learning platform pairing Next.js with PyTorch Knowledge Tracing models. Built MINDSync for Hack4Good to unify volunteer and event signups across MINDS branches.
+              Designed and implemented a unified uncertainty-aware deep learning framework for battery State-of-Health estimation that quantifies both model and data uncertainty alongside model-agnostic explainability (SHAP and LIME). First author of "A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks" (APSIPA ASC 2025 / IEEE Xplore).
             </p>
           </div>
         </div>
 
-        <div class="timeline-item reveal-on-scroll" id="milestone-industry">
+        <div class="timeline-item reveal-on-scroll" id="milestone-education">
           <div class="timeline-meta">
-            <span class="timeline-year">2024</span>
-            <span class="timeline-tag">Industry &amp; Defence</span>
+            <span class="timeline-year">Aug 2022 to May 2025</span>
+            <span class="timeline-tag">Glasgow &amp; SIT</span>
           </div>
           <div class="timeline-content">
-            <h3 class="timeline-title">Panasonic HVAC Collaboration, NUS NCS Challenge &amp; DSTA BrainHack</h3>
+            <h3 class="timeline-title">BSc (Hons) Computer Science (Second Upper Class) · University of Glasgow &amp; SIT</h3>
             <p class="timeline-desc">
-              Engineered a Three.js and Svelte 3D commercial HVAC control dashboard with Panasonic, built TransportGPT (YOLOv3 + LangChain traffic intelligence) for the NUS NCS Innovation Challenge, and developed a containerised ASR, NLP, and CV defence pipeline for DSTA BrainHack TIL-AI.
+              Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025 (EduVerse), Overall Best (Intermediate) and Most Impactful at the AI Singapore, SMU, and CyberYouthSG Hackathon, and Semifinalist at DSTA BrainHack 2024 TIL-AI (Autonomous Air Defence System).
             </p>
           </div>
         </div>
@@ -577,14 +636,14 @@
         <article class="pub-card reveal-on-scroll" id="pub-battery-xai">
           <div class="pub-info">
             <div class="pub-meta-row">
-              <span class="pub-venue">IEEE Xplore · Document 11249263</span>
-              <span class="pub-year">2025</span>
+              <span class="pub-venue">APSIPA ASC 2025 · IEEE Xplore (Doc 11249263)</span>
+              <span class="pub-year">First Author · 2025</span>
             </div>
             <h3 class="pub-title">
-              Uncertainty Quantification and Explainable AI for Battery Analytics
+              A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks
             </h3>
             <p class="pub-desc">
-              Evaluated Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE, MCE), and post-hoc explainability (SHAP, LIME, Integrated Gradients) on convolutional neural networks for battery state-of-health estimation across the McMaster and Oxford battery datasets.
+              Designed a unified deep learning framework quantifying both model and data uncertainty via Adaptive Conformal Inference (ACI) and calibration metrics (PICP, ECE, MCE), paired with model-agnostic explainability (SHAP, LIME, Integrated Gradients) across the McMaster and Oxford battery datasets.
             </p>
           </div>
           <div class="pub-actions">
@@ -664,7 +723,7 @@
         <div>
           <span class="section-eyebrow">SPECIFICATIONS</span>
           <h2 class="section-title">Technical toolkit.</h2>
-          <p class="section-subtitle">Core languages, frameworks, and infrastructure tools I build with day to day.</p>
+          <p class="section-subtitle">Core languages, frameworks, and cloud infrastructure tools I build with day to day.</p>
         </div>
       </div>
 
@@ -675,50 +734,49 @@
             <h3 class="skill-group-title">Agentic AI &amp; Machine Learning</h3>
           </div>
           <div class="skill-chips">
-            <span class="skill-chip">LLM Agents</span>
+            <span class="skill-chip">LLM &amp; LangGraph Agents</span>
             <span class="skill-chip">MCP Tooling</span>
             <span class="skill-chip">Evaluation Harnesses</span>
-            <span class="skill-chip">PyTorch</span>
-            <span class="skill-chip">LangChain</span>
-            <span class="skill-chip">YOLOv3 / v6</span>
-            <span class="skill-chip">DeepLabV3</span>
+            <span class="skill-chip">PyTorch &amp; TensorFlow</span>
             <span class="skill-chip">Conformal Prediction</span>
             <span class="skill-chip">SHAP &amp; LIME</span>
+            <span class="skill-chip">DeepLabV3 &amp; YOLOv3</span>
+            <span class="skill-chip">BLIP &amp; OpenAI Whisper</span>
+            <span class="skill-chip">scikit-learn &amp; NumPy</span>
           </div>
         </div>
 
         <div class="skill-group reveal-on-scroll" id="skill-fullstack">
           <div class="skill-group-header">
             <span class="skill-index">02</span>
-            <h3 class="skill-group-title">Software &amp; Full-Stack</h3>
+            <h3 class="skill-group-title">Backend &amp; Full-Stack Systems</h3>
           </div>
           <div class="skill-chips">
+            <span class="skill-chip">Golang</span>
             <span class="skill-chip">Python</span>
-            <span class="skill-chip">TypeScript</span>
-            <span class="skill-chip">JavaScript</span>
-            <span class="skill-chip">React</span>
-            <span class="skill-chip">Next.js</span>
-            <span class="skill-chip">Svelte</span>
-            <span class="skill-chip">Node.js</span>
-            <span class="skill-chip">Kotlin (Jetpack Compose)</span>
+            <span class="skill-chip">TypeScript &amp; JavaScript</span>
+            <span class="skill-chip">Java &amp; Kotlin</span>
+            <span class="skill-chip">C &amp; C++</span>
+            <span class="skill-chip">React &amp; Next.js</span>
+            <span class="skill-chip">Svelte &amp; Angular</span>
             <span class="skill-chip">Connect-RPC</span>
-            <span class="skill-chip">Vis.js &amp; Three.js</span>
+            <span class="skill-chip">PostgreSQL, MySQL &amp; MongoDB</span>
           </div>
         </div>
 
         <div class="skill-group reveal-on-scroll" id="skill-cloud">
           <div class="skill-group-header">
             <span class="skill-index">03</span>
-            <h3 class="skill-group-title">Cloud &amp; Infrastructure</h3>
+            <h3 class="skill-group-title">Cloud, Security &amp; DevOps</h3>
           </div>
           <div class="skill-chips">
-            <span class="skill-chip">Google Cloud (Cloud Run, Vertex AI)</span>
-            <span class="skill-chip">VPC &amp; Secure Web Proxy</span>
-            <span class="skill-chip">AWS Serverless</span>
-            <span class="skill-chip">Supabase</span>
-            <span class="skill-chip">Firebase</span>
+            <span class="skill-chip">Google Cloud (Cloud Run, Vertex AI, Pub/Sub)</span>
+            <span class="skill-chip">Dual-VPC &amp; Private Service Connect</span>
             <span class="skill-chip">Terraform IaC</span>
-            <span class="skill-chip">Docker</span>
+            <span class="skill-chip">Docker &amp; Kubernetes</span>
+            <span class="skill-chip">Cloudflare Workers</span>
+            <span class="skill-chip">AWS &amp; Supabase</span>
+            <span class="skill-chip">Prometheus &amp; Grafana</span>
             <span class="skill-chip">GitHub Actions CI/CD</span>
           </div>
         </div>
