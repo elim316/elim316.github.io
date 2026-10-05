@@ -31,6 +31,7 @@ This site is deployed directly via GitHub Pages from the `main` branch with zero
 - Anti-Clipping & Overflow Guardrails (`styles.css`):
   - `.hardware-bezel`, `.bezel-grid` (`grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr)`), `.bezel-pane`, and `.about-mini-card` must preserve `min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;` so the right pane never overflows outside the rounded hardware bezel border.
   - All SVG diagrams inside `.bezel-svg-wrap` and `.project-visual` must retain `overflow: visible` and safe `viewBox` coordinates so text and animated packets are never clipped.
+  - Never apply `stroke` or `stroke-width` directly to `<g class="clickable-node">` or `<text>` elements in SVG, as SVG inheritance will outline the text and make it look blurry. Always target child shapes (`.clickable-node.is-selected .trace-node`) and keep `stroke: none !important` on all SVG `<text>` elements.
 
 ## 4. How to Add or Update Projects
 - Curated Projects (`PROJECTS` in `app.js` & `projects` in `projects.json`):
@@ -47,5 +48,5 @@ This site is deployed directly via GitHub Pages from the `main` branch with zero
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-5`
+- Asset version in `index.html`: `?v=20261005-6`
 - SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
