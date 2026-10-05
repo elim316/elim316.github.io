@@ -48,10 +48,11 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-9`
+- Asset version in `index.html`: `?v=20261005-10`
 - SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
 - Recent milestones completed:
-  * Kept the continuous default `titaniumShimmer` sparkle always running on all 5 stage wordmarks (`BUILDER`, `PROFILE`, `TRACER`, `DOSSIER`, `RESEARCH`) and layered the cursor-tracked specular reflection (`--wordmark-spot-size: 260px`, `--wordmark-spot-x/y`, `--wordmark-mx/my`) strictly on the words when hovering, while keeping the `.hardware-deck` / `.hardware-bezel` box free of mouse tilt or glare.
-  * Added `vercel.json` for zero-config Vercel deployment alongside GitHub Pages.
-  * Fixed SVG text stroke inheritance on `.clickable-node.is-selected` so active node labels render crisp.
-  * Added live streaming packets, pulsing active node borders, and auto-cycling stage/bar animations across all 5 stages and all 13 custom project cards.
+  * Added Apple-inspired Floating Bottom Stage Controller Pill (`#apple-stage-dock`) with 5 expanding progress dots, live stage readout, Play/Pause animation toggle, and `+` Closer Look trigger.
+  * Added Apple "Take a Closer Look" Full-Scale Interactive Architecture Sheet Modal (`#closer-look-backdrop`) with project counter, `<` / `>` arrow navigation, custom SVG schematic viewer, and deep-link copy button.
+  * Added Apple M4-inspired "By the Numbers" 4-Tile Sculpted Spec Bento Grid (`#bento-specs-grid`) and interactive `.skill-chip` filters in `#stack`.
+  * Added 1200x630 Light Mode OpenGraph social preview card (`og-image.png`), URL hash deep-linking (`#projects-*`, `#about-*`, `#inspect-*`), keyboard `←` / `→` navigation, and a 1-page executive CV print stylesheet (`@media print`).
+  * Kept the continuous default `titaniumShimmer` sparkle always running on all 5 stage wordmarks (`BUILDER`, `PROFILE`, `TRACER`, `DOSSIER`, `RESEARCH`) and layered the cursor-tracked specular reflection (`--wordmark-spot-size: 260px`) strictly on the words when hovering, while keeping `.hardware-deck` steady.
