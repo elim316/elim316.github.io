@@ -384,6 +384,14 @@ a {
   vertical-align: -2px;
 }
 
+.brand-icon-img {
+  width: auto;
+  height: 15px;
+  max-width: 28px;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
 .icon-linkedin {
   color: #0a66c2;
 }
@@ -450,7 +458,8 @@ a {
   }
 }
 
-.hardware-deck {
+.hardware-deck,
+.hardware-deck.stage-deck {
   position: relative;
   z-index: 3;
   width: 100%;
@@ -465,20 +474,10 @@ a {
   will-change: transform;
 }
 
-.hardware-deck.stage-deck {
-  transform: rotateX(10deg) translateY(26px) scale(0.95);
-  opacity: 0;
-  transition:
-    transform 820ms var(--spring-out),
-    opacity 680ms var(--spring-out);
-}
-
-.scroll-stage.is-inview .hardware-deck.stage-deck {
-  transform: rotateX(0deg) translateY(0px) scale(1);
-  opacity: 1;
-}
-
 .hardware-bezel {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   border-radius: 22px;
   padding: 20px 24px 24px;
   background: var(--bg-elevated);
@@ -500,6 +499,7 @@ a {
 .bezel-dots {
   display: flex;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .bezel-dots span {
@@ -525,31 +525,25 @@ a {
   font-size: 0.71rem;
   letter-spacing: 0.06em;
   color: var(--text-muted);
-}
-
-.bezel-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--signal-emerald);
-}
-
-.status-led {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--signal-emerald);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .bezel-grid {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 18px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .bezel-pane {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   background: var(--bg-canvas);
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
@@ -566,6 +560,7 @@ a {
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 6px;
+  min-width: 0;
 }
 
 .pane-label {
@@ -576,6 +571,7 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .pane-badge {
@@ -592,7 +588,7 @@ a {
 .hero-deck-svg {
   width: 100%;
   height: 118px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .deck-svg-label {
@@ -805,6 +801,8 @@ a {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .about-mini-card {
@@ -818,6 +816,9 @@ a {
   flex-direction: column;
   gap: 3px;
   min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
   transition:
     transform 220ms var(--spring-out),
     border-color 180ms var(--ease-smooth),
@@ -840,6 +841,8 @@ a {
   letter-spacing: 0.05em;
   color: var(--accent-text);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mini-card-title {
@@ -850,6 +853,15 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mini-card-title span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .mini-card-sub {
@@ -859,6 +871,8 @@ a {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .about-bars {
@@ -1154,7 +1168,7 @@ a {
   width: 100%;
   height: 108px;
   max-width: 340px;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .sandbox-bar {
@@ -1220,10 +1234,10 @@ a {
   cursor: pointer;
 }
 
-.clickable-node.is-selected {
+.clickable-node.is-selected,
+.clickable-node.is-selected .trace-node {
   stroke: var(--accent) !important;
   stroke-width: 2.2 !important;
-  transform: scale(1.06);
 }
 
 .trace-edge {
