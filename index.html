@@ -68,7 +68,7 @@
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261005-4" />
+  <link rel="stylesheet" href="styles.css?v=20261005-5" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -134,7 +134,7 @@
             <span>Browse projects</span>
             <span aria-hidden="true">&#8595;</span>
           </a>
-          <a href="#about" class="apple-pill solid" id="hero-about-btn">
+          <a href="#about" class="apple-pill outline" id="hero-about-btn">
             <span>About me</span>
             <span aria-hidden="true">&#8595;</span>
           </a>
@@ -190,10 +190,6 @@
                 <span></span><span></span><span></span>
               </div>
               <div class="bezel-title">FEATURED REPOSITORY PREVIEW · LIVE ARCHITECTURE</div>
-              <div class="bezel-status">
-                <span class="status-led"></span>
-                <span id="hero-repo-count">11 PUBLIC REPOS</span>
-              </div>
             </div>
 
             <div class="bezel-grid">
@@ -201,23 +197,33 @@
               <div class="bezel-pane">
                 <div class="pane-header">
                   <span class="pane-label">elim316/Jetski-Agent-Tracer-Plugin</span>
-                  <span class="pane-badge">1.5s JSONL Stream</span>
+                  <span class="pane-badge">Live Execution Graph</span>
                 </div>
                 <svg class="hero-deck-svg" viewBox="0 0 380 124" aria-hidden="true">
-                  <text x="40" y="13" text-anchor="middle" class="deck-svg-label">USER</text>
-                  <text x="182" y="13" text-anchor="middle" class="deck-svg-label">PLANNER</text>
-                  <text x="326" y="13" text-anchor="middle" class="deck-svg-label">MCP / SUB</text>
-                  <path class="trace-edge" d="M 52 64 C 102 64, 120 50, 168 50" />
-                  <path class="trace-edge" d="M 196 50 C 248 50, 265 40, 314 40" />
-                  <path class="trace-edge" d="M 196 50 C 248 50, 265 84, 314 84" />
-                  <path class="trace-packet hero-stream" d="M 52 64 C 102 64, 120 50, 168 50" />
-                  <path class="trace-packet hero-stream" d="M 196 50 C 248 50, 265 40, 314 40" />
-                  <path class="trace-packet hero-stream" d="M 196 50 C 248 50, 265 84, 314 84" />
-                  <circle class="deck-node" cx="40" cy="64" r="11" />
-                  <circle class="deck-node active-ring" cx="182" cy="50" r="13" />
-                  <rect class="deck-node active-ring" x="314" y="29" width="24" height="22" rx="5" />
-                  <rect class="deck-node" x="314" y="73" width="24" height="22" rx="5" />
-                  <text x="190" y="116" text-anchor="middle" class="deck-svg-sub">Real-time Timeline, Architecture &amp; Simplified views</text>
+                  <path class="trace-edge" d="M 96 54 L 136 54" />
+                  <path class="trace-edge" d="M 244 44 L 274 34" />
+                  <path class="trace-edge" d="M 244 64 L 274 76" />
+                  <path class="trace-packet hero-stream" d="M 96 54 L 136 54" />
+                  <path class="trace-packet hero-stream" d="M 244 44 L 274 34" />
+                  <path class="trace-packet hero-stream" d="M 244 64 L 274 76" />
+
+                  <rect class="deck-node" x="12" y="34" width="84" height="40" rx="8" />
+                  <text x="54" y="51" text-anchor="middle" class="visual-label">01 · PROMPT</text>
+                  <text x="54" y="64" text-anchor="middle" class="deck-svg-label">User Input</text>
+
+                  <rect class="deck-node active-ring" x="136" y="30" width="108" height="48" rx="9" />
+                  <text x="190" y="50" text-anchor="middle" class="visual-badge">02 · PLANNER</text>
+                  <text x="190" y="65" text-anchor="middle" class="visual-label">LLM · 640ms</text>
+
+                  <rect class="deck-node active-ring" x="274" y="14" width="94" height="36" rx="7" />
+                  <text x="321" y="30" text-anchor="middle" class="visual-badge">03 · MCP TOOL</text>
+                  <text x="321" y="42" text-anchor="middle" class="deck-svg-label">Search · 310ms</text>
+
+                  <rect class="deck-node" x="274" y="58" width="94" height="36" rx="7" />
+                  <text x="321" y="74" text-anchor="middle" class="visual-label">04 · SUBAGENT</text>
+                  <text x="321" y="86" text-anchor="middle" class="deck-svg-label">Verify · 1.2s</text>
+
+                  <text x="190" y="114" text-anchor="middle" class="deck-svg-sub">Visualises prompts, reasoning, tool calls &amp; subagents</text>
                 </svg>
               </div>
 
@@ -298,11 +304,7 @@
             <span>02 · Grab (Backend Systems)</span>
           </button>
           <button type="button" class="sandbox-pill chapter-pill" data-about-tab="astar" role="tab" aria-selected="false">
-            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <rect width="24" height="24" rx="6" fill="#003876"/>
-              <polygon points="12,4.5 13.9,9.5 19.2,9.5 14.9,12.6 16.5,17.7 12,14.6 7.5,17.7 9.1,12.6 4.8,9.5 10.1,9.5" fill="#ffffff"/>
-              <circle cx="17.5" cy="6.5" r="2.1" fill="#E31837"/>
-            </svg>
+            <img class="brand-icon brand-icon-img" src="astar-logo.png" alt="" aria-hidden="true" />
             <span>03 · A*STAR (AI Research)</span>
           </button>
           <button type="button" class="sandbox-pill chapter-pill" data-about-tab="beyond" role="tab" aria-selected="false">
@@ -310,7 +312,7 @@
               <rect width="24" height="24" rx="6" fill="#00539B"/>
               <path d="M12 5L4 9l8 4 6.5-3.25V14.5h1.5V9L12 5zm-5 6.75v3.5L12 18l5-2.75v-3.5L12 14.5l-5-2.75z" fill="#ffffff"/>
             </svg>
-            <span>04 · Glasgow, SIT &amp; Court Life</span>
+            <span>04 · Glasgow, SIT &amp; Life</span>
           </button>
         </div>
       </div>
@@ -327,10 +329,6 @@
                 <span></span><span></span><span></span>
               </div>
               <div class="bezel-title" id="about-bezel-title">INTERACTIVE ENGINEERING PROFILE · GOOGLE CLOUD SINGAPORE</div>
-              <div class="bezel-status">
-                <span class="status-led"></span>
-                <span id="about-bezel-status">APR 2026 TO PRESENT</span>
-              </div>
             </div>
 
             <div class="bezel-grid">
@@ -418,7 +416,7 @@
                     <text x="190" y="80" text-anchor="middle" class="deck-svg-label">DSTA TIL-AI</text>
 
                     <rect class="deck-node" x="256" y="16" width="112" height="74" rx="8" />
-                    <text x="312" y="34" text-anchor="middle" class="visual-badge">OFF THE CLOCK</text>
+                    <text x="312" y="34" text-anchor="middle" class="visual-badge">LIFE OUTSIDE CODE</text>
                     <text x="312" y="51" text-anchor="middle" class="visual-label">Basketball</text>
                     <text x="312" y="66" text-anchor="middle" class="visual-label">Pickleball</text>
                     <text x="312" y="80" text-anchor="middle" class="deck-svg-label">Vintage Thrift</text>
@@ -468,11 +466,7 @@
                   <button type="button" class="about-mini-card" data-about-card="astar">
                     <span class="mini-card-eyebrow">APPLIED ML RESEARCH</span>
                     <span class="mini-card-title">
-                      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
-                        <rect width="24" height="24" rx="6" fill="#003876"/>
-                        <polygon points="12,4.5 13.9,9.5 19.2,9.5 14.9,12.6 16.5,17.7 12,14.6 7.5,17.7 9.1,12.6 4.8,9.5 10.1,9.5" fill="#ffffff"/>
-                        <circle cx="17.5" cy="6.5" r="2.1" fill="#E31837"/>
-                      </svg>
+                      <img class="brand-icon brand-icon-img" src="astar-logo.png" alt="" aria-hidden="true" />
                       <span>AI Research · A*STAR</span>
                     </span>
                     <span class="mini-card-sub">1st Author IEEE · Conformal UQ &amp; XAI</span>
@@ -485,7 +479,7 @@
                         <rect width="24" height="24" rx="6" fill="#00539B"/>
                         <path d="M12 5L4 9l8 4 6.5-3.25V14.5h1.5V9L12 5zm-5 6.75v3.5L12 18l5-2.75v-3.5L12 14.5l-5-2.75z" fill="#ffffff"/>
                       </svg>
-                      <span>Glasgow &amp; SIT · Off Court</span>
+                      <span>Glasgow &amp; SIT · Life</span>
                     </span>
                     <span class="mini-card-sub">BSc CS (2:1) · Basketball &amp; Pickleball</span>
                   </button>
@@ -526,10 +520,10 @@
       <!-- Repo Showcase 01: Jetski Agent Tracer & Harness -->
       <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-agent-tracer">
         <div class="hero-copy">
-          <span class="hero-eyebrow">AGENTIC OBSERVABILITY &amp; MISSION CONTROL · PYTHON &amp; VIS.JS</span>
+          <span class="hero-eyebrow">AGENTIC OBSERVABILITY &amp; WORKSPACE · PYTHON &amp; VIS.JS</span>
           <h2 class="hero-headline stage-hero-headline">Jetski Agent Tracer &amp; Harness</h2>
           <p class="hero-subhead">
-            Stream live JSONL agent trajectories into a three-lane execution visualiser, paired with a 2x2 mission control harness tracking 200k context window saturation over Connect-RPC.
+            Visualise every step an AI agent takes in real time, from user prompt and LLM planning to tool execution and subagent delegation, paired with a 2x2 workspace that monitors 200k token context usage.
           </p>
           <div class="cta-pill-group">
             <a
@@ -547,7 +541,7 @@
               href="https://github.com/elim316/Jetski-Harness"
               target="_blank"
               rel="noopener noreferrer"
-              class="apple-pill solid"
+              class="apple-pill outline"
             >
               <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
@@ -568,65 +562,79 @@
                 <div class="bezel-dots" aria-hidden="true">
                   <span></span><span></span><span></span>
                 </div>
-                <div class="bezel-title">JETSKI AGENT TRACER &amp; HARNESS · LIVE TELEMETRY SANDBOX</div>
-                <div class="bezel-status">
-                  <span class="status-led"></span>
-                  <span>CONNECT-RPC ACTIVE</span>
-                </div>
+                <div class="bezel-title">JETSKI AGENT TRACER &amp; HARNESS · INTERACTIVE ARCHITECTURE</div>
               </div>
 
               <div class="bezel-grid">
                 <div class="bezel-pane">
                   <div class="pane-header">
-                    <span class="pane-label">TRACE INSPECTOR (CLICK NODES)</span>
+                    <span class="pane-label">AGENT EXECUTION GRAPH (CLICK ANY STEP)</span>
                     <span class="pane-badge" id="flagship-tracer-readout">Step #02 PLANNER · 640ms</span>
                   </div>
-                  <svg class="hero-deck-svg" viewBox="0 0 360 116" aria-hidden="true">
-                    <text x="38" y="12" text-anchor="middle" class="visual-label">USER</text>
-                    <text x="175" y="12" text-anchor="middle" class="visual-label">PLANNER</text>
-                    <text x="308" y="12" text-anchor="middle" class="visual-label">MCP / SUB</text>
-                    <path class="trace-edge" d="M 48 60 C 96 60, 115 48, 162 48" />
-                    <path class="trace-edge" d="M 188 48 C 236 48, 255 39, 296 39" />
-                    <path class="trace-edge" d="M 188 48 C 236 48, 255 81, 296 81" />
-                    <path class="trace-packet hero-stream" d="M 48 60 C 96 60, 115 48, 162 48" />
-                    <path class="trace-packet hero-stream" d="M 188 48 C 236 48, 255 39, 296 39" />
-                    <path class="trace-packet hero-stream" d="M 188 48 C 236 48, 255 81, 296 81" />
-                    <circle class="trace-node clickable-node" data-fstep="user" cx="38" cy="60" r="10" />
-                    <circle class="trace-node node-accent clickable-node is-selected" data-fstep="planner" cx="175" cy="48" r="13" />
-                    <rect class="trace-node node-accent clickable-node" data-fstep="mcp" x="296" y="28" width="24" height="22" rx="5" />
-                    <rect class="trace-node clickable-node" data-fstep="subagent" x="296" y="70" width="24" height="22" rx="5" />
+                  <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
+                    <path class="trace-edge" d="M 96 58 L 136 58" />
+                    <path class="trace-edge" d="M 244 46 L 274 34" />
+                    <path class="trace-edge" d="M 244 70 L 274 82" />
+                    <path class="trace-packet hero-stream" d="M 96 58 L 136 58" />
+                    <path class="trace-packet hero-stream" d="M 244 46 L 274 34" />
+                    <path class="trace-packet hero-stream" d="M 244 70 L 274 82" />
+
+                    <g class="clickable-node" data-fstep="user">
+                      <rect class="trace-node" x="12" y="38" width="84" height="40" rx="8" />
+                      <text x="54" y="55" text-anchor="middle" class="visual-label">01 · PROMPT</text>
+                      <text x="54" y="68" text-anchor="middle" class="deck-svg-label">User · 12ms</text>
+                    </g>
+
+                    <g class="clickable-node is-selected" data-fstep="planner">
+                      <rect class="trace-node node-accent" x="136" y="34" width="108" height="48" rx="9" />
+                      <text x="190" y="54" text-anchor="middle" class="visual-badge">02 · PLANNER</text>
+                      <text x="190" y="69" text-anchor="middle" class="visual-label">LLM · 640ms</text>
+                    </g>
+
+                    <g class="clickable-node" data-fstep="mcp">
+                      <rect class="trace-node node-accent" x="274" y="14" width="94" height="38" rx="7" />
+                      <text x="321" y="31" text-anchor="middle" class="visual-badge">03 · MCP TOOL</text>
+                      <text x="321" y="43" text-anchor="middle" class="deck-svg-label">Search · 310ms</text>
+                    </g>
+
+                    <g class="clickable-node" data-fstep="subagent">
+                      <rect class="trace-node" x="274" y="62" width="94" height="38" rx="7" />
+                      <text x="321" y="79" text-anchor="middle" class="visual-label">04 · SUBAGENT</text>
+                      <text x="321" y="91" text-anchor="middle" class="deck-svg-label">Verify · 1.2s</text>
+                    </g>
                   </svg>
                   <div class="sandbox-pills">
-                    <button type="button" class="sandbox-pill" data-fstep-btn="user">#01 User</button>
-                    <button type="button" class="sandbox-pill active" data-fstep-btn="planner">#02 Planner</button>
-                    <button type="button" class="sandbox-pill" data-fstep-btn="mcp">#03 MCP Tool</button>
-                    <button type="button" class="sandbox-pill" data-fstep-btn="subagent">#04 Subagent</button>
+                    <button type="button" class="sandbox-pill" data-fstep-btn="user">01 · User Prompt</button>
+                    <button type="button" class="sandbox-pill active" data-fstep-btn="planner">02 · Planner LLM</button>
+                    <button type="button" class="sandbox-pill" data-fstep-btn="mcp">03 · MCP Tool</button>
+                    <button type="button" class="sandbox-pill" data-fstep-btn="subagent">04 · Subagent</button>
                   </div>
                 </div>
 
                 <div class="bezel-pane">
                   <div class="pane-header">
-                    <span class="pane-label">TOKEN COMPACTION SIMULATOR</span>
+                    <span class="pane-label">2x2 WORKSPACE &amp; CONTEXT WINDOW METER</span>
                     <span class="pane-badge" id="flagship-harness-readout">142k / 200k · 71% Cached</span>
                   </div>
                   <svg class="hero-deck-svg" viewBox="0 0 360 110" aria-hidden="true">
                     <defs>
                       <clipPath id="flagship-bar-clip">
-                        <rect x="26" y="83" width="308" height="7" rx="3.5" />
+                        <rect x="26" y="85" width="308" height="7" rx="3.5" />
                       </clipPath>
                     </defs>
-                    <rect x="14" y="10" width="160" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                    <rect x="184" y="10" width="162" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                    <text x="94" y="26" text-anchor="middle" class="visual-label">2x2 BENTO HARNESS</text>
-                    <text x="94" y="40" text-anchor="middle" class="visual-badge" id="flagship-rpc-badge">Connect-RPC</text>
-                    <text x="265" y="26" text-anchor="middle" class="visual-label">3 ACTIVE SESSIONS</text>
-                    <circle cx="251" cy="39" r="3.5" fill="var(--signal-green)" />
-                    <circle cx="265" cy="39" r="3.5" fill="var(--signal-green)" />
-                    <circle cx="279" cy="39" r="3.5" fill="var(--signal-amber)" />
-                    <rect x="14" y="58" width="332" height="40" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-                    <text x="26" y="75" class="visual-label" id="flagship-bar-label">CONTEXT SATURATION: 142k / 200k TOKENS</text>
-                    <rect x="26" y="83" width="308" height="7" rx="3.5" fill="var(--bg-subtle)" />
-                    <rect class="token-fill-bar" id="flagship-token-bar" clip-path="url(#flagship-bar-clip)" x="26" y="83" width="219" height="7" rx="3.5" fill="var(--accent)" />
+                    <rect x="14" y="8" width="162" height="22" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
+                    <text x="95" y="22" text-anchor="middle" class="visual-badge">PANE 1 · AGENT CHAT</text>
+                    <rect x="184" y="8" width="162" height="22" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <text x="265" y="22" text-anchor="middle" class="visual-label">PANE 2 · SUBAGENT</text>
+                    <rect x="14" y="34" width="162" height="22" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <text x="95" y="48" text-anchor="middle" class="visual-label">PANE 3 · TRACE GRAPH</text>
+                    <rect x="184" y="34" width="162" height="22" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <text x="265" y="48" text-anchor="middle" class="visual-label">PANE 4 · AUTOMATIONS</text>
+
+                    <rect x="14" y="62" width="332" height="38" rx="7" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+                    <text x="26" y="77" class="visual-label" id="flagship-bar-label">CONTEXT SATURATION: 142k / 200k TOKENS</text>
+                    <rect x="26" y="85" width="308" height="7" rx="3.5" fill="var(--bg-subtle)" />
+                    <rect class="token-fill-bar" id="flagship-token-bar" clip-path="url(#flagship-bar-clip)" x="26" y="85" width="219" height="7" rx="3.5" fill="var(--accent)" />
                   </svg>
                   <div class="sandbox-pills">
                     <button type="button" class="sandbox-pill" data-fturn-btn="turn2">Turn 2 · 48k</button>
@@ -658,7 +666,7 @@
               <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
               <span>View Repository &#8599;</span>
             </a>
-            <a href="#project-meeting-prep-agent" class="apple-pill solid">
+            <a href="#project-meeting-prep-agent" class="apple-pill outline">
               <span>Technical specs &#8595;</span>
             </a>
           </div>
@@ -676,10 +684,6 @@
                   <span></span><span></span><span></span>
                 </div>
                 <div class="bezel-title">MEETING PREP &amp; DOSSIER AGENT · EVALUATION HARNESS</div>
-                <div class="bezel-status">
-                  <span class="status-led"></span>
-                  <span>36 / 36 CHECKS PASSED</span>
-                </div>
               </div>
 
               <div class="bezel-grid">
@@ -769,7 +773,7 @@
               href="https://ieeexplore.ieee.org/document/11249263"
               target="_blank"
               rel="noopener noreferrer"
-              class="apple-pill solid"
+              class="apple-pill outline"
             >
               <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 2zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
               <span>Read IEEE Paper &#8599;</span>
@@ -789,10 +793,6 @@
                   <span></span><span></span><span></span>
                 </div>
                 <div class="bezel-title">A*STAR BATTERY SOH FRAMEWORK · CONFORMAL &amp; XAI SANDBOX</div>
-                <div class="bezel-status">
-                  <span class="status-led"></span>
-                  <span>IEEE XPLORE PUBLISHED</span>
-                </div>
               </div>
 
               <div class="bezel-grid">
@@ -868,7 +868,7 @@
     </div>
 
     <!-- ======================================================================
-         3. Apple 2-Column Product Promo Grid for All 10 Repositories
+         3. Apple 2-Column Product Promo Grid for All Curated Repositories
          ====================================================================== -->
     <section id="projects" class="section container" data-section-target="projects">
       <div class="section-header reveal-on-scroll">
@@ -952,7 +952,7 @@
           <div class="timeline-meta">
             <span class="timeline-year">Sep 2024 to May 2025</span>
             <span class="timeline-tag">
-              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#003876"/><path fill="#FFFFFF" d="M12 4.2l2.1 4.8 5.2.5-3.9 3.4 1.2 5.1L12 15.3 7.4 18l1.2-5.1-3.9-3.4 5.2-.5L12 4.2Z"/><circle cx="17.5" cy="6.5" r="2.2" fill="#E31837"/></svg>
+              <img class="brand-icon brand-icon-img" src="astar-logo.png" alt="" aria-hidden="true" />
               <span>A*STAR · Research</span>
             </span>
           </div>
@@ -1201,6 +1201,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261005-4"></script>
+  <script src="app.js?v=20261005-5"></script>
 </body>
 </html>
