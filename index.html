@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elias Lim | Software, Agentic AI &amp; Machine Learning Engineer</title>
+  <meta
+    name="description"
+    content="Portfolio of Elias Lim: building agentic workflows, observability and evaluation harnesses, full-stack cloud applications, and uncertainty-aware machine learning systems."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="#top" class="brand-link" id="nav-brand">Elias Lim</a>
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#projects" class="nav-link" id="nav-projects">Projects</a>
+        <a href="#publications" class="nav-link" id="nav-publications">Publications</a>
+        <a href="#stack" class="nav-link" id="nav-stack">Stack</a>
+        <button type="button" class="theme-btn" id="theme-toggle-btn" aria-label="Toggle colour theme">
+          <span id="theme-toggle-label">Dark mode</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="hero-title">
+        Building reliable agentic systems, developer tools, and full-stack software.
+      </h1>
+      <p class="hero-lead">
+        Hi, I'm Elias Lim. I work across software engineering, applied machine learning, and forward-deployed engineering. Lately I have been building observability visualisers and evaluation harnesses for autonomous agents, alongside full-stack cloud applications and research in explainable AI.
+      </p>
+      <div class="hero-meta-row">
+        <a
+          href="https://github.com/elim316"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-link primary"
+          id="hero-github-link"
+        >
+          GitHub (@elim316) &#8599;
+        </a>
+        <a
+          href="https://linkedin.com/in/eliaslim"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-link"
+          id="hero-linkedin-link"
+        >
+          LinkedIn &#8599;
+        </a>
+        <a
+          href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-link"
+          id="hero-scholar-link"
+        >
+          Google Scholar &#8599;
+        </a>
+        <a href="mailto:eliaslim316@gmail.com" class="btn-link" id="hero-email-link">
+          eliaslim316@gmail.com
+        </a>
+      </div>
+    </section>
+
+    <!-- Selected Projects Section -->
+    <section id="projects" class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Selected engineering work</h2>
+          <p class="section-subtitle">
+            Filter by engineering domain or expand any card to inspect its technical architecture.
+          </p>
+        </div>
+      </div>
+
+      <div class="filter-bar" role="tablist" aria-label="Filter projects by domain">
+        <button type="button" class="filter-btn active" data-filter="all" id="filter-all">
+          All work <span class="filter-count" id="count-all"></span>
+        </button>
+        <button type="button" class="filter-btn" data-filter="agentic" id="filter-agentic">
+          Agentic &amp; DevTools <span class="filter-count" id="count-agentic"></span>
+        </button>
+        <button type="button" class="filter-btn" data-filter="fullstack" id="filter-fullstack">
+          Full-Stack &amp; Cloud <span class="filter-count" id="count-fullstack"></span>
+        </button>
+        <button type="button" class="filter-btn" data-filter="ml" id="filter-ml">
+          ML &amp; Research <span class="filter-count" id="count-ml"></span>
+        </button>
+      </div>
+
+      <div id="projects-grid" class="projects-grid"></div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Peer-reviewed publications</h2>
+          <p class="section-subtitle">Published in IEEE Xplore.</p>
+        </div>
+      </div>
+
+      <div class="pub-list">
+        <article class="pub-card" id="pub-battery-xai">
+          <div class="pub-info">
+            <div class="pub-venue">IEEE Xplore · Document 11249263</div>
+            <h3 class="pub-title">
+              Uncertainty Quantification and Explainable AI for Battery Analytics
+            </h3>
+            <p class="pub-desc">
+              Evaluated Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE), and post-hoc explainability (SHAP, LIME) on convolutional neural networks for battery state-of-health estimation.
+            </p>
+          </div>
+          <div class="pub-actions">
+            <a
+              href="https://ieeexplore.ieee.org/document/11249263"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-link"
+            >
+              IEEE Paper &#8599;
+            </a>
+            <a
+              href="https://github.com/elim316/UQ-XAI-battery-analytics"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-link"
+            >
+              Companion Repo &#8599;
+            </a>
+          </div>
+        </article>
+
+        <article class="pub-card" id="pub-teamwork-ed">
+          <div class="pub-info">
+            <div class="pub-venue">IEEE Xplore · Document 10892827</div>
+            <h3 class="pub-title">
+              Teamwork Assessment in Software Engineering Education
+            </h3>
+            <p class="pub-desc">
+              Investigated data-driven approaches for evaluating collaboration and student team dynamics in software engineering coursework.
+            </p>
+          </div>
+          <div class="pub-actions">
+            <a
+              href="https://ieeexplore.ieee.org/document/10892827"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-link"
+            >
+              IEEE Paper &#8599;
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Technical Stack Section -->
+    <section id="stack" class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Technical focus</h2>
+          <p class="section-subtitle">Core languages, frameworks, and infrastructure tools.</p>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Agentic AI &amp; Machine Learning</div>
+          <div class="skill-group-items">
+            LLM Agents, MCP Tooling, Evaluation Harnesses, PyTorch, LangChain, YOLOv3/v6, DeepLabV3, Conformal Prediction, SHAP, LIME
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Software &amp; Full-Stack</div>
+          <div class="skill-group-items">
+            Python, TypeScript, JavaScript, React, Next.js, Svelte, Node.js, Kotlin (Jetpack Compose), Connect-RPC, Vis.js, Three.js
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Cloud &amp; Infrastructure</div>
+          <div class="skill-group-items">
+            Google Cloud (Cloud Run, Vertex AI, VPC/SWP), AWS, Supabase, Firebase, Terraform IaC, Docker, GitHub Actions CI/CD
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>Elias Lim · Hosted on GitHub Pages</span>
+      <div class="footer-links">
+        <a href="https://github.com/elim316" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/eliaslim" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="mailto:eliaslim316@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
