@@ -8,6 +8,61 @@
     name="description"
     content="Personal site and engineering portfolio of Elias Lim. Building reliable agentic workflows, observability visualisers, full-stack cloud systems, and uncertainty-aware machine learning."
   />
+  <meta name="author" content="Elias Lim" />
+  <link rel="canonical" href="https://elim316.github.io/" />
+
+  <!-- Custom SVG Monogram Favicon -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23161b22'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23f8f6f0' font-family='monospace' font-size='26' font-weight='600'%3EEL%3C/text%3E%3C/svg%3E"
+  />
+
+  <!-- OpenGraph / LinkedIn / Social Sharing Metadata -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Elias Lim · Engineering Portfolio" />
+  <meta property="og:title" content="Elias Lim · Software, Agentic AI &amp; Machine Learning Engineer" />
+  <meta
+    property="og:description"
+    content="Interactive engineering portfolio featuring real-time agentic observability visualisers, evaluation harnesses, full-stack cloud platforms, and IEEE Xplore research in explainable AI."
+  />
+  <meta property="og:url" content="https://elim316.github.io/" />
+  <meta property="og:locale" content="en_GB" />
+
+  <!-- Twitter / X Card Metadata -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Elias Lim · Software, Agentic AI &amp; Machine Learning Engineer" />
+  <meta
+    name="twitter:description"
+    content="Building reliable agentic workflows, developer observability tools, full-stack cloud systems, and uncertainty-aware machine learning."
+  />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Elias Lim",
+    "url": "https://elim316.github.io/",
+    "email": "mailto:eliaslim316@gmail.com",
+    "jobTitle": "Software, Cloud & Machine Learning Engineer",
+    "sameAs": [
+      "https://github.com/elim316",
+      "https://linkedin.com/in/eliaslim",
+      "https://scholar.google.com/citations?user=f2hfYeoAAAAJ"
+    ],
+    "knowsAbout": [
+      "Agentic AI",
+      "Software Engineering",
+      "Machine Learning",
+      "Conformal Prediction",
+      "Explainable AI",
+      "Cloud Architecture",
+      "Full-Stack Development"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -32,25 +87,38 @@
         <span class="nav-pill-indicator" id="nav-pill-indicator" aria-hidden="true"></span>
         <a href="#top" class="nav-link active" data-section="top" id="nav-overview">Overview</a>
         <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">Projects</a>
+        <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Journey</a>
         <a href="#publications" class="nav-link" data-section="publications" id="nav-publications">Research</a>
         <a href="#stack" class="nav-link" data-section="stack" id="nav-stack">Stack</a>
       </nav>
 
-      <button
-        type="button"
-        class="theme-btn"
-        id="theme-toggle-btn"
-        aria-label="Toggle colour theme"
-      >
-        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-        </svg>
-        <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-        <span id="theme-toggle-label">Theme</span>
-      </button>
+      <div class="header-controls">
+        <button
+          type="button"
+          class="cmd-trigger-btn"
+          id="cmd-palette-trigger"
+          aria-label="Open command palette (Command+K or Ctrl+K)"
+        >
+          <span>Search</span>
+          <kbd class="kbd-pill">&#8984;K</kbd>
+        </button>
+
+        <button
+          type="button"
+          class="theme-btn"
+          id="theme-toggle-btn"
+          aria-label="Toggle colour theme"
+        >
+          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span id="theme-toggle-label">Theme</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -62,7 +130,7 @@
       </h1>
 
       <p class="hero-lead reveal-item" style="--delay: 120ms">
-        Welcome to my corner of the internet. I work across software engineering, applied machine learning, and forward-deployed engineering. Lately I have been crafting real-time execution visualisers and evaluation harnesses for autonomous AI agents, alongside cloud-native web platforms and research in explainable AI.
+        Welcome to my corner of the internet. I work across software engineering, applied machine learning, and forward-deployed cloud engineering in Singapore. Lately I have been crafting real-time execution visualisers and evaluation harnesses for autonomous AI agents, alongside cloud-native web platforms and peer-reviewed research in explainable AI.
       </p>
 
       <div class="hero-actions reveal-item" style="--delay: 200ms">
@@ -114,7 +182,7 @@
         <div>
           <h2 class="section-title">Selected projects</h2>
           <p class="section-subtitle">
-            Hover over any card to interact with its system preview, or expand the drawer to inspect its technical architecture.
+            Interact with the live mini-sandboxes on the top cards, or expand any drawer to inspect its technical architecture.
           </p>
         </div>
 
@@ -139,12 +207,78 @@
       <div id="projects-grid" class="projects-grid"></div>
     </section>
 
+    <!-- Experience, Awards & Milestones Timeline Section -->
+    <section id="journey" class="section" data-section-target="journey">
+      <div class="section-header reveal-on-scroll">
+        <div>
+          <h2 class="section-title">Experience and milestones</h2>
+          <p class="section-subtitle">
+            Highlights across cloud engineering, agentic AI systems, hackathons, and published research.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-list">
+        <div class="timeline-item reveal-on-scroll" id="milestone-gcloud">
+          <div class="timeline-meta">
+            <span class="timeline-year">2026</span>
+            <span class="timeline-tag">Cloud &amp; Agentic AI</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Customer Engineering &amp; Agentic Systems · Google Cloud Singapore</h3>
+            <p class="timeline-desc">
+              Designing multi-VPC cloud landing zones, enterprise AI governance architectures, and open-source developer tools for autonomous agent trajectory tracing, token telemetry, and automated multi-corpus evaluation harnesses.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll" id="milestone-ieee">
+          <div class="timeline-meta">
+            <span class="timeline-year">2025</span>
+            <span class="timeline-tag">IEEE Xplore</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Published two peer-reviewed papers in IEEE Xplore</h3>
+            <p class="timeline-desc">
+              Authored research on Adaptive Conformal Inference (ACI) and post-hoc explainability (SHAP, LIME) for convolutional battery state-of-health models, alongside a study on data-driven teamwork assessment in software engineering education.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll" id="milestone-lifehack">
+          <div class="timeline-meta">
+            <span class="timeline-year">2025</span>
+            <span class="timeline-tag">2nd Place Overall</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">NUS LifeHack 2025 &amp; Hack4Good · Full-Stack &amp; Applied ML</h3>
+            <p class="timeline-desc">
+              Awarded 2nd Place Overall at NUS LifeHack 2025 for EduVerse, an adaptive learning platform pairing Next.js with PyTorch Knowledge Tracing models. Built MINDSync for Hack4Good to unify volunteer and event signups across MINDS branches.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll" id="milestone-industry">
+          <div class="timeline-meta">
+            <span class="timeline-year">2024</span>
+            <span class="timeline-tag">Industry &amp; Defence</span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Panasonic HVAC Collaboration, NUS NCS Challenge &amp; DSTA BrainHack</h3>
+            <p class="timeline-desc">
+              Engineered a Three.js and Svelte 3D commercial HVAC control dashboard with Panasonic, built TransportGPT (YOLOv3 + LangChain traffic intelligence) for the NUS NCS Innovation Challenge, and developed a containerised ASR, NLP, and CV defence pipeline for DSTA BrainHack TIL-AI.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Publications Section -->
     <section id="publications" class="section" data-section-target="publications">
       <div class="section-header reveal-on-scroll">
         <div>
           <h2 class="section-title">Peer-reviewed research</h2>
-          <p class="section-subtitle">First-author and co-authored papers published in IEEE Xplore.</p>
+          <p class="section-subtitle">Published in IEEE Xplore, with one-click BibTeX citations for researchers.</p>
         </div>
       </div>
 
@@ -159,7 +293,7 @@
               Uncertainty Quantification and Explainable AI for Battery Analytics
             </h3>
             <p class="pub-desc">
-              Evaluated Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE), and post-hoc explainability (SHAP, LIME) on convolutional neural networks for battery state-of-health estimation.
+              Evaluated Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE, MCE), and post-hoc explainability (SHAP, LIME, Integrated Gradients) on convolutional neural networks for battery state-of-health estimation across the McMaster and Oxford battery datasets.
             </p>
           </div>
           <div class="pub-actions">
@@ -183,6 +317,14 @@
               <span>Code</span>
               <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
             </a>
+            <button
+              type="button"
+              class="tactile-btn small bibtex-btn"
+              id="bibtex-btn-11249263"
+              data-doc-id="11249263"
+            >
+              <span class="bibtex-label">Copy BibTeX</span>
+            </button>
           </div>
         </article>
 
@@ -210,6 +352,14 @@
               <span>IEEE Paper</span>
               <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
             </a>
+            <button
+              type="button"
+              class="tactile-btn small bibtex-btn"
+              id="bibtex-btn-10892827"
+              data-doc-id="10892827"
+            >
+              <span class="bibtex-label">Copy BibTeX</span>
+            </button>
           </div>
         </article>
       </div>
@@ -281,6 +431,37 @@
       </div>
     </section>
   </main>
+
+  <!-- Command Palette Modal (Cmd+K / Ctrl+K) -->
+  <div class="cmd-backdrop" id="cmd-backdrop" aria-hidden="true">
+    <div
+      class="cmd-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cmd-input"
+    >
+      <div class="cmd-search-bar">
+        <svg class="cmd-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          id="cmd-input"
+          class="cmd-input"
+          placeholder="Search projects, research papers, or actions..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <kbd class="kbd-pill" id="cmd-esc-btn">ESC</kbd>
+      </div>
+      <div class="cmd-results" id="cmd-results" role="listbox"></div>
+      <div class="cmd-footer">
+        <span>Navigate with <kbd>&#8593;</kbd> <kbd>&#8595;</kbd></span>
+        <span>Press <kbd>&#9166;</kbd> to select</span>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">
