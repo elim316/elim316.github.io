@@ -1,0 +1,133 @@
+{
+  "config": {
+    "githubUsername": "elim316",
+    "autoDiscoverNewGithubRepos": true,
+    "excludedRepos": [
+      "elim316",
+      "elim316.github.io"
+    ]
+  },
+  "projects": [
+    {
+      "id": "agent-tracer",
+      "title": "Jetski Agent Tracer Plugin",
+      "category": "agentic",
+      "categoryLabel": "Agentic & DevTools",
+      "year": "2026",
+      "summary": "Real-time execution graph and three-lane architecture visualiser for autonomous agents, streaming live JSONL transcripts into Timeline, Architecture, and Simplified views.",
+      "architecture": "Zero-dependency Python 3 HTTP backend with 1.5s delta-tail JSONL streaming, paired with a Vis.js and SVG topology frontend. Detects mid-text tool exit codes, strips metadata envelopes, and supports inline subagent trajectory drill-down.",
+      "stack": ["Python", "Vis.js", "SVG", "SSE / JSONL"],
+      "repoUrl": "https://github.com/elim316/Jetski-Agent-Tracer-Plugin"
+    },
+    {
+      "id": "jetski-harness",
+      "title": "Jetski Harness",
+      "category": "agentic",
+      "categoryLabel": "Agentic & DevTools",
+      "year": "2026",
+      "summary": "Unified mission control UI plugin combining a customisable 2x2 Bento grid, multi-session agent chat, embedded Agent Tracer graph, automation controls, and live token telemetry.",
+      "architecture": "Connects to the local Language Server via Connect-RPC to stream per-turn prompt, cached-context, and output token metrics, calculate context window saturation against the 200k compaction threshold, and dispatch multi-session prompts.",
+      "stack": ["Python", "Connect-RPC", "JavaScript", "CSS Grid"],
+      "repoUrl": "https://github.com/elim316/Jetski-Harness"
+    },
+    {
+      "id": "meeting-prep-agent",
+      "title": "Smart Meeting Prep and Dossier Agent",
+      "category": "agentic",
+      "categoryLabel": "Agentic & DevTools",
+      "year": "2026",
+      "summary": "Two-stage scheduled agent that researches external and cross-functional meetings across Calendar, Gmail, Chat, Drive, and People Directory to generate cited one-page briefing docs.",
+      "architecture": "Pairs a Next-Business-Day dossier generator with a stateless T-1h reminder partitioned into 60-minute windows. Verified by a 5-scenario, 36-check mock test harness with an automated linter that flags hallucinated names, bugs, and URLs.",
+      "stack": ["Python", "Multi-Corpus MCP", "Eval Harness", "Cron"],
+      "repoUrl": "https://github.com/elim316/Jetski-Meeting-Prep-Agent"
+    },
+    {
+      "id": "eduverse",
+      "title": "EduVerse",
+      "category": "fullstack",
+      "categoryLabel": "Full-Stack & Cloud",
+      "year": "2025",
+      "summary": "Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025. Adaptive learning platform pairing modular classroom routing with an ~85% accuracy Knowledge Tracing model.",
+      "architecture": "Modular React, Next.js, and TypeScript platform deployed on Cloudflare Workers for low-latency serverless execution, integrated with a Python and PyTorch Knowledge Tracing (kt_models) recommendation engine.",
+      "stack": ["React", "TypeScript", "Cloudflare Workers", "PyTorch"],
+      "repoUrl": "https://github.com/elim316/eduverse"
+    },
+    {
+      "id": "mindsync",
+      "title": "MINDSync (Lobang-Octagon)",
+      "category": "fullstack",
+      "categoryLabel": "Full-Stack & Cloud",
+      "year": "2026",
+      "summary": "Built for Hack4Good. Centralised multi-branch event and volunteer management platform for MINDS, replacing scattered spreadsheets and forms across branches.",
+      "architecture": "Role-based web application in TypeScript, Next.js App Router, and Supabase supporting staff, caregivers, and volunteers with unified calendar views, PostgreSQL RPC signup workflows, and real-time event coverage tracking.",
+      "stack": ["TypeScript", "Next.js", "Supabase", "PostgreSQL"],
+      "repoUrl": "https://github.com/elim316/Lobang-octagon"
+    },
+    {
+      "id": "multi-cloud-serverless",
+      "title": "Multi-Cloud Serverless Application",
+      "category": "fullstack",
+      "categoryLabel": "Full-Stack & Cloud",
+      "year": "2025",
+      "summary": "Full-stack serverless web application demonstrating cloud-portable CRUD workflows, real-time state synchronisation across browser tabs, and automated CI/CD.",
+      "architecture": "React and Vite frontend deployed on Vercel backed by Supabase (Postgres, Auth, Realtime) and AWS serverless primitives provisioned with Terraform Infrastructure-as-Code and GitHub Actions.",
+      "stack": ["React", "Terraform", "Supabase", "AWS", "GitHub Actions"],
+      "repoUrl": "https://github.com/elim316/multi-cloud-serverless-app"
+    },
+    {
+      "id": "uq-xai-battery",
+      "title": "Uncertainty Quantification & XAI for Battery Analytics",
+      "category": "ml",
+      "categoryLabel": "ML & Research",
+      "year": "2025",
+      "summary": "First-author paper at APSIPA ASC 2025 (IEEE Xplore) from A*STAR research. Unified deep learning framework quantifying both model and data uncertainty for battery State-of-Health estimation.",
+      "architecture": "Integrates Adaptive Conformal Inference (ACI), Prediction Interval Coverage Probability (PICP), Expected Calibration Error (ECE), and model-agnostic SHAP/LIME attributions into a CNN pipeline evaluated across McMaster and Oxford datasets.",
+      "stack": ["Python", "CNN", "Conformal Prediction", "SHAP / LIME"],
+      "repoUrl": "https://github.com/elim316/UQ-XAI-battery-analytics"
+    },
+    {
+      "id": "semantic-segmentation",
+      "title": "Real-Time Semantic Segmentation & Multimodal Captioning",
+      "category": "ml",
+      "categoryLabel": "ML & Research",
+      "year": "2025",
+      "summary": "Real-time computer vision inspection pipeline combining live frame-by-frame DeepLabV3+ResNet50 semantic segmentation with context-aware natural language captions.",
+      "architecture": "Streams webcam video through a PyTorch DeepLabV3+ResNet50 backbone to overlay semantic pixel masks via OpenCV and NumPy, paired with the Hugging Face BLIP vision-language model for live scene captioning.",
+      "stack": ["Python", "PyTorch", "DeepLabV3+", "BLIP", "OpenCV"],
+      "repoUrl": "https://github.com/elim316/Semantic-Segmentation"
+    },
+    {
+      "id": "transport-gpt",
+      "title": "TransportGPT",
+      "category": "ml",
+      "categoryLabel": "ML & Research",
+      "year": "2024",
+      "summary": "Built for the NUS NCS Innovation Challenge 2024. Multimodal traffic intelligence system combining live camera feeds, vehicle detection, and LLM synthesis.",
+      "architecture": "Chains YOLOv3 computer vision detection on traffic camera streams with time-series congestion modelling and LangChain LLM prompts to produce plain-English routing advisories.",
+      "stack": ["Python", "LangChain", "YOLOv3", "Computer Vision"],
+      "repoUrl": "https://github.com/elim316/TransportGPT"
+    },
+    {
+      "id": "panasonic-hvac",
+      "title": "Panasonic Commercial HVAC Control Dashboard",
+      "category": "fullstack",
+      "categoryLabel": "Full-Stack & Cloud",
+      "year": "2024",
+      "summary": "Industry collaboration case study building a centralised web dashboard to monitor and control commercial HVAC units across building zones.",
+      "architecture": "Combines a Svelte frontend and Three.js interactive 3D floor-plan visualiser with a Node.js and WebSocket backend streaming live telemetry and energy consumption metrics.",
+      "stack": ["Svelte", "Three.js", "Node.js", "WebSockets"],
+      "repoUrl": "https://github.com/elim316/Panasonic-HVAC-Dashboard-overview"
+    },
+    {
+      "id": "operation-guardian",
+      "title": "Autonomous Air Defence System (DSTA BrainHack 2024)",
+      "category": "ml",
+      "categoryLabel": "ML & Research",
+      "year": "2024",
+      "summary": "Semifinalist at DSTA BrainHack 2024 (TIL-AI). Voice-commanded multimodal defence pipeline linking spoken mission orders to live aircraft bounding box detection.",
+      "architecture": "Containerised pipeline integrating OpenAI Whisper real-time speech transcription, a custom-trained text-to-JSON NLP parser (>85% parsing accuracy), and Vision-Language Modelling (~80% aircraft bounding box alignment accuracy).",
+      "stack": ["Python", "OpenAI Whisper", "NLP (>85%)", "VLM", "Docker"],
+      "repoUrl": "https://github.com/elim316/TIL-AI-brainhack2024-project-overview"
+    }
+  ]
+}
