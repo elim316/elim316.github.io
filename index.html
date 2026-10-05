@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB" data-theme="dark">
+<html lang="en-GB" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +15,7 @@
   <link
     rel="icon"
     type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23000000'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23f5f5f7' font-family='monospace' font-size='26' font-weight='600'%3EEL%3C/text%3E%3C/svg%3E"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1f'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23f5f5f7' font-family='monospace' font-size='26' font-weight='600'%3EEL%3C/text%3E%3C/svg%3E"
   />
 
   <!-- OpenGraph / LinkedIn / Social Sharing Metadata -->
@@ -71,17 +71,18 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Apple-Style Frosted Global Navigation Ribbon -->
+  <!-- Frosted Global Navigation Bar -->
   <header class="global-nav" id="site-header">
     <div class="nav-content">
       <a href="#top" class="nav-brand" id="nav-brand" aria-label="Elias Lim Home">
         <span class="nav-monogram">EL</span>
+        <span class="nav-brand-text">Elias Lim</span>
       </a>
 
       <nav class="nav-links" id="nav-dock" aria-label="Primary Navigation">
         <a href="#top" class="nav-link active" data-section="top" id="nav-overview">Overview</a>
-        <a href="#flagship" class="nav-link" data-section="flagship" id="nav-flagship">Flagship</a>
-        <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">All Systems</a>
+        <a href="#featured" class="nav-link" data-section="featured" id="nav-featured">Featured Repos</a>
+        <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">All Projects</a>
         <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Journey</a>
         <a href="#publications" class="nav-link" data-section="publications" id="nav-publications">Research</a>
         <a href="#stack" class="nav-link" data-section="stack" id="nav-stack">Toolkit</a>
@@ -92,7 +93,7 @@
           type="button"
           class="nav-icon-btn"
           id="cmd-palette-trigger"
-          aria-label="Search projects and actions (Command+K)"
+          aria-label="Search repositories and actions (Command+K)"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="11" cy="11" r="8"></circle>
@@ -107,37 +108,29 @@
           id="theme-toggle-btn"
           aria-label="Toggle colour theme"
         >
-          <span id="theme-toggle-label">Light</span>
+          <span id="theme-toggle-label">Dark</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Sub-Header Ribbon Banner (Apple SG style) -->
-  <div class="ribbon-banner" id="ribbon-banner">
-    <p class="ribbon-text">
-      Software, Agentic AI &amp; Machine Learning Engineer in Singapore. Explore 10 open-source engineering systems and 2 IEEE Xplore publications.
-      <a href="#projects" class="ribbon-link">Browse all systems &#8594;</a>
-    </p>
-  </div>
-
   <main id="top">
     <!-- ======================================================================
-         1. Full-Viewport Flagship Hero Stage (Apple Keynote / Pro Landing Style)
+         1. Initial Landing Hero Stage (Light Mode, Scroll-Animated Repo Preview)
          ====================================================================== -->
     <section class="hero-stage" id="hero-stage" data-section-target="top">
       <div class="hero-copy">
-        <h1 class="hero-headline reveal-hero" style="--d: 40ms">Elias Lim</h1>
-        <p class="hero-subhead reveal-hero" style="--d: 120ms">
-          Engineered for autonomy. Built for production.
-        </p>
-        <p class="hero-caption reveal-hero" style="--d: 180ms">
-          Software engineering, applied machine learning, and forward-deployed cloud systems.
+        <span class="hero-eyebrow reveal-hero" style="--d: 20ms">
+          SOFTWARE · AGENTIC AI · MACHINE LEARNING
+        </span>
+        <h1 class="hero-headline reveal-hero" style="--d: 80ms">Elias Lim</h1>
+        <p class="hero-subhead reveal-hero" style="--d: 140ms">
+          Building autonomous agent tooling, full-stack cloud platforms, and uncertainty-aware machine learning.
         </p>
 
-        <div class="cta-pill-group reveal-hero" style="--d: 240ms">
-          <a href="#flagship" class="apple-pill solid" id="hero-explore-btn">
-            Explore flagship
+        <div class="cta-pill-group reveal-hero" style="--d: 200ms">
+          <a href="#featured" class="apple-pill solid" id="hero-browse-btn">
+            Browse projects
           </a>
           <a
             href="https://github.com/elim316"
@@ -146,7 +139,7 @@
             class="apple-pill outline"
             id="hero-github-link"
           >
-            GitHub (@elim316)
+            GitHub (@elim316) &#8599;
           </a>
           <a
             href="https://linkedin.com/in/eliaslim"
@@ -164,15 +157,15 @@
             class="apple-pill subtle"
             id="hero-scholar-link"
           >
-            Scholar &#8599;
+            Google Scholar &#8599;
           </a>
         </div>
       </div>
 
-      <!-- Monumental Metallic Wordmark + Floating 3D Hardware Telemetry Deck -->
-      <div class="hero-visual-stage reveal-hero" style="--d: 320ms">
+      <!-- Sculpted Metallic Backdrop Typography + 3D Scroll-Tilting Project Stage -->
+      <div class="hero-visual-stage reveal-hero" style="--d: 280ms">
         <div class="metallic-wordmark" id="hero-wordmark" aria-hidden="true">
-          SYSTEMS
+          BUILDER
         </div>
 
         <div class="hardware-deck" id="hero-hardware-deck">
@@ -181,10 +174,10 @@
               <div class="bezel-dots" aria-hidden="true">
                 <span></span><span></span><span></span>
               </div>
-              <div class="bezel-title">JETSKI MISSION CONTROL · LIVE TELEMETRY</div>
+              <div class="bezel-title">FEATURED REPOSITORY PREVIEW · LIVE ARCHITECTURE</div>
               <div class="bezel-status">
                 <span class="status-led"></span>
-                <span>CONNECT-RPC READY</span>
+                <span>10 PUBLIC REPOS</span>
               </div>
             </div>
 
@@ -192,13 +185,13 @@
               <!-- Left Pane: 3-Lane Autonomous Execution Topology -->
               <div class="bezel-pane">
                 <div class="pane-header">
-                  <span class="pane-label">01 · THREE-LANE EXECUTION TOPOLOGY</span>
-                  <span class="pane-badge">1.5s JSONL Delta</span>
+                  <span class="pane-label">elim316/Jetski-Agent-Tracer-Plugin</span>
+                  <span class="pane-badge">1.5s JSONL Stream</span>
                 </div>
                 <svg class="hero-deck-svg" viewBox="0 0 380 120" aria-hidden="true">
                   <text x="18" y="20" class="deck-svg-label">USER</text>
                   <text x="158" y="20" class="deck-svg-label">PLANNER</text>
-                  <text x="290" y="20" class="deck-svg-label">MCP / SUBAGENT</text>
+                  <text x="285" y="20" class="deck-svg-label">MCP / SUBAGENT</text>
                   <path class="trace-edge" d="M 52 64 C 102 64, 120 46, 168 46" />
                   <path class="trace-edge" d="M 196 46 C 248 46, 265 34, 314 34" />
                   <path class="trace-edge" d="M 196 46 C 248 46, 265 86, 314 86" />
@@ -209,21 +202,21 @@
                   <circle class="deck-node active-ring" cx="182" cy="46" r="14" />
                   <rect class="deck-node active-ring" x="314" y="22" width="26" height="24" rx="6" />
                   <rect class="deck-node" x="314" y="74" width="26" height="24" rx="6" />
-                  <text x="132" y="108" class="deck-svg-sub">Trajectory verified · 36/36 checks passed</text>
+                  <text x="115" y="108" class="deck-svg-sub">Real-time Timeline, Architecture &amp; Simplified views</text>
                 </svg>
               </div>
 
-              <!-- Right Pane: Context Window & Conformal Calibration -->
+              <!-- Right Pane: Repository Highlights -->
               <div class="bezel-pane">
                 <div class="pane-header">
-                  <span class="pane-label">02 · CONTEXT &amp; CONFORMAL CALIBRATION</span>
-                  <span class="pane-badge">95% ACI · IEEE</span>
+                  <span class="pane-label">CORE ENGINEERING METRICS</span>
+                  <span class="pane-badge">Verified</span>
                 </div>
                 <div class="telemetry-metrics">
                   <div class="metric-row">
                     <div class="metric-top">
-                      <span>Context Window Saturation</span>
-                      <span class="metric-val">142k / 200k (71%)</span>
+                      <span>Jetski Harness Context Telemetry</span>
+                      <span class="metric-val">142k / 200k tok</span>
                     </div>
                     <div class="metric-track">
                       <div class="metric-fill fill-blue"></div>
@@ -231,8 +224,8 @@
                   </div>
                   <div class="metric-row">
                     <div class="metric-top">
-                      <span>Conformal Coverage (PICP · IEEE 11249263)</span>
-                      <span class="metric-val">95.2% · ECE 0.012</span>
+                      <span>Battery SOH Conformal Coverage (IEEE)</span>
+                      <span class="metric-val">95.2% PICP</span>
                     </div>
                     <div class="metric-track">
                       <div class="metric-fill fill-teal"></div>
@@ -240,8 +233,8 @@
                   </div>
                   <div class="metric-row">
                     <div class="metric-top">
-                      <span>Hallucination Linter (Meeting Dossier Agent)</span>
-                      <span class="metric-val">36 / 36 Passed</span>
+                      <span>Meeting Dossier Evaluation Harness</span>
+                      <span class="metric-val">36 / 36 Checks</span>
                     </div>
                     <div class="metric-track">
                       <div class="metric-fill fill-green"></div>
@@ -254,24 +247,25 @@
         </div>
       </div>
 
-      <a href="#flagship" class="scroll-cue" aria-label="Scroll down to flagship systems">
-        <span>Scroll to explore</span>
+      <a href="#featured" class="scroll-cue" aria-label="Scroll down to featured repositories">
+        <span>Scroll down to explore repositories</span>
         <span class="scroll-chevron" aria-hidden="true">&#8595;</span>
       </a>
     </section>
 
     <!-- ======================================================================
-         2. Full-Width Flagship Product Showcases (Scroll-Revealed Like Apple.com)
+         2. Full-Width Scroll-Animated Repository Showcases
+            (Each top GitHub repo presented like an Apple product section on scroll)
          ====================================================================== -->
-    <div id="flagship" data-section-target="flagship">
-      <!-- Flagship Showcase 01: Dark Titanium Stage -->
-      <section class="flagship-banner dark-stage scroll-stage">
+    <div id="featured" data-section-target="featured">
+      <!-- Repo Showcase 01: Jetski Agent Tracer & Harness -->
+      <section class="repo-showcase surface-white scroll-stage" id="showcase-agent-tracer">
         <div class="stage-inner">
           <div class="stage-copy">
-            <span class="stage-eyebrow">FLAGSHIP OBSERVABILITY &amp; CONTROL · 2026</span>
-            <h2 class="stage-headline">Agent Tracer &amp; Harness</h2>
+            <span class="stage-eyebrow">AGENTIC OBSERVABILITY &amp; MISSION CONTROL · PYTHON &amp; VIS.JS</span>
+            <h2 class="stage-headline">Jetski Agent Tracer &amp; Harness</h2>
             <p class="stage-subhead">
-              Real-time three-lane execution visualiser and 2x2 mission control with live 200k token saturation telemetry.
+              Stream live JSONL agent trajectories into a three-lane execution visualiser, paired with a 2x2 mission control harness tracking 200k context window saturation over Connect-RPC.
             </p>
             <div class="cta-pill-group">
               <a
@@ -280,7 +274,7 @@
                 rel="noopener noreferrer"
                 class="apple-pill solid"
               >
-                Agent Tracer Repo &#8599;
+                View Agent Tracer Repo &#8599;
               </a>
               <a
                 href="https://github.com/elim316/Jetski-Harness"
@@ -288,7 +282,7 @@
                 rel="noopener noreferrer"
                 class="apple-pill outline"
               >
-                Jetski Harness Repo &#8599;
+                View Jetski Harness Repo &#8599;
               </a>
             </div>
           </div>
@@ -301,9 +295,9 @@
                   <span class="pane-badge" id="flagship-tracer-readout">Step #02 PLANNER · 640ms · 1,840 tok</span>
                 </div>
                 <svg class="stage-svg" viewBox="0 0 360 110" aria-hidden="true">
-                  <text x="18" y="18" class="deck-svg-label">USER</text>
-                  <text x="150" y="18" class="deck-svg-label">PLANNER</text>
-                  <text x="276" y="18" class="deck-svg-label">MCP / SUB</text>
+                  <text x="18" y="18" class="visual-label">USER</text>
+                  <text x="150" y="18" class="visual-label">PLANNER</text>
+                  <text x="276" y="18" class="visual-label">MCP / SUB</text>
                   <path class="trace-edge" d="M 48 58 C 96 58, 115 42, 162 42" />
                   <path class="trace-edge" d="M 188 42 C 236 42, 255 32, 300 32" />
                   <path class="trace-edge" d="M 188 42 C 236 42, 255 80, 300 80" />
@@ -353,31 +347,80 @@
         </div>
       </section>
 
-      <!-- Flagship Showcase 02: Light Alabaster Stage -->
-      <section class="flagship-banner light-stage scroll-stage">
+      <!-- Repo Showcase 02: Smart Meeting Prep & Dossier Agent -->
+      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-meeting-prep">
         <div class="stage-inner">
           <div class="stage-copy">
-            <span class="stage-eyebrow">PUBLISHED IN IEEE XPLORE · DOCUMENT 11249263</span>
-            <h2 class="stage-headline">Uncertainty &amp; Explainable AI</h2>
+            <span class="stage-eyebrow">MULTI-CORPUS AGENT &amp; EVALUATION HARNESS · PYTHON</span>
+            <h2 class="stage-headline">Smart Meeting Prep &amp; Dossier Agent</h2>
             <p class="stage-subhead">
-              Adaptive Conformal Inference (ACI) and SHAP/LIME feature attributions for deep battery state-of-health estimation.
+              Two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings, verified by a 5-scenario, 36-check hallucination linter.
             </p>
             <div class="cta-pill-group">
               <a
-                href="https://ieeexplore.ieee.org/document/11249263"
+                href="https://github.com/elim316/Jetski-Meeting-Prep-Agent"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="apple-pill solid"
               >
-                Read IEEE Paper &#8599;
+                View Repository &#8599;
               </a>
+              <a href="#project-meeting-prep-agent" class="apple-pill outline">
+                Technical specs &#8595;
+              </a>
+            </div>
+          </div>
+
+          <div class="stage-showcase-card" id="flagship-prep-sandbox">
+            <div class="pane-header">
+              <span class="pane-label">TWO-STAGE PIPELINE &amp; 36-CHECK CITATION LINTER</span>
+              <span class="pane-badge" id="flagship-prep-readout">Stage 1 (18:00 NBD Dossier) + Stage 2 (Stateless T-1h Alert)</span>
+            </div>
+            <svg class="stage-svg wide-svg" viewBox="0 0 640 120" aria-hidden="true">
+              <rect x="24" y="22" width="140" height="72" rx="10" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" />
+              <text x="42" y="48" class="visual-label">STAGE 1 · 18:00 SGT</text>
+              <text x="42" y="68" class="visual-badge">Next-Business-Day Dossier</text>
+              <path class="trace-edge" d="M 164 58 L 228 58" />
+              <path class="trace-packet hero-stream" d="M 164 58 L 228 58" />
+              <rect x="228" y="16" width="184" height="84" rx="10" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.6" />
+              <text x="248" y="40" class="visual-label">EVAL HARNESS (5 SCENARIOS)</text>
+              <text x="248" y="60" class="visual-badge">&#10003; 36 / 36 Assertion Checks</text>
+              <text x="248" y="78" class="visual-label">&#10003; Zero Hallucinated URLs</text>
+              <path class="trace-edge" d="M 412 58 L 476 58" />
+              <path class="trace-packet hero-stream" d="M 412 58 L 476 58" />
+              <rect x="476" y="22" width="140" height="72" rx="10" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.4" />
+              <text x="494" y="48" class="visual-label">STAGE 2 · T-1H</text>
+              <text x="494" y="68" class="visual-badge">Stateless 60m Window</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Repo Showcase 03: UQ & Explainable AI for Battery Analytics -->
+      <section class="repo-showcase surface-white scroll-stage" id="showcase-uq-xai">
+        <div class="stage-inner">
+          <div class="stage-copy">
+            <span class="stage-eyebrow">PUBLISHED IN IEEE XPLORE · DOCUMENT 11249263</span>
+            <h2 class="stage-headline">Uncertainty &amp; Explainable AI for Battery Analytics</h2>
+            <p class="stage-subhead">
+              Combines Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE), and SHAP/LIME attributions for convolutional battery state-of-health estimation.
+            </p>
+            <div class="cta-pill-group">
               <a
                 href="https://github.com/elim316/UQ-XAI-battery-analytics"
                 target="_blank"
                 rel="noopener noreferrer"
+                class="apple-pill solid"
+              >
+                View Repository &#8599;
+              </a>
+              <a
+                href="https://ieeexplore.ieee.org/document/11249263"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="apple-pill outline"
               >
-                Companion Repo &#8599;
+                Read IEEE Paper &#8599;
               </a>
             </div>
           </div>
@@ -416,15 +459,15 @@
     </div>
 
     <!-- ======================================================================
-         3. Apple 2-Column Product Promo Grid for All 10 Engineering Systems
+         3. Apple 2-Column Product Promo Grid for All 10 Repositories
          ====================================================================== -->
     <section id="projects" class="section container" data-section-target="projects">
       <div class="section-header reveal-on-scroll">
         <div>
-          <span class="section-eyebrow">COMPLETE LINE-UP</span>
-          <h2 class="section-title">Explore all engineering systems.</h2>
+          <span class="section-eyebrow">ALL REPOSITORIES</span>
+          <h2 class="section-title">Explore the full project line-up.</h2>
           <p class="section-subtitle">
-            Filter by engineering domain or expand any product tile to inspect its technical architecture.
+            Filter by engineering domain or expand any project tile to inspect its technical architecture.
           </p>
         </div>
 
@@ -700,7 +743,7 @@
           type="text"
           id="cmd-input"
           class="cmd-input"
-          placeholder="Search projects, research papers, or actions..."
+          placeholder="Search repositories, research papers, or actions..."
           autocomplete="off"
           spellcheck="false"
         />
