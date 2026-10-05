@@ -520,6 +520,160 @@
     });
   }
 
+  function initAboutConsole() {
+    const aboutStage = document.getElementById("about");
+    if (!aboutStage) return;
+
+    const chapters = {
+      google: {
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GOOGLE CLOUD SINGAPORE",
+        bezelStatus: "APR 2026 TO PRESENT",
+        paneLabel: "ZERO-TRUST DUAL-VPC AI AGENT LANDING ZONE",
+        paneBadge: "Terraform · PSC · Cloud Run",
+        readout: "Chapter 01 / 04",
+        story:
+          "At Google in Singapore, I architect IM8-compliant zero-trust cloud landing zones for generative AI agents using Terraform, Dual-VPC, and Private Service Connect, build native trajectory visualisers, and lead AI buildathons for over 4,000 students and engineers across NTU, GovTech, DBS, and A*STAR.",
+        bar1Label: "Zero-Trust Cloud & Terraform IaC",
+        bar1Val: "36 / 36 IM8 Checks",
+        bar1Width: "96%",
+        bar2Label: "Enablement & Buildathon Reach",
+        bar2Val: "4,000+ Participants",
+        bar2Width: "92%",
+      },
+      grab: {
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GRAB TRUST, IDENTITY & SAFETY",
+        bezelStatus: "JAN 2026 TO MAR 2026",
+        paneLabel: "REAL-TIME FRAUD DETECTION & GOLANG RUNTIME CONTROLS",
+        paneBadge: "Golang · Feature Flags · PB-Scale",
+        readout: "Chapter 02 / 04",
+        story:
+          "At Grab in the Trust, Identity, and Safety division, I engineered scalable Golang backend services for real-time fraud detection on petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting, and high-coverage unit test suites.",
+        bar1Label: "Golang Microservices & Runtime Controls",
+        bar1Val: "Feature Flags + Rate Limit",
+        bar1Width: "94%",
+        bar2Label: "Risk Platform Scale & Test Reliability",
+        bar2Val: "Petabyte-Scale Pipeline",
+        bar2Width: "90%",
+      },
+      astar: {
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · A*STAR AI RESEARCH",
+        bezelStatus: "SEP 2024 TO MAY 2025",
+        paneLabel: "UNCERTAINTY-AWARE DEEP LEARNING & EXPLAINABLE AI",
+        paneBadge: "PyTorch · Conformal UQ · IEEE",
+        readout: "Chapter 03 / 04",
+        story:
+          "As an AI Research Intern at A*STAR, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 (IEEE Xplore).",
+        bar1Label: "Calibrated Prediction Coverage (1 - alpha)",
+        bar1Val: "90.4% Empirical Coverage",
+        bar1Width: "91%",
+        bar2Label: "Publication & Interpretability Rigour",
+        bar2Val: "First-Author IEEE Paper",
+        bar2Width: "95%",
+      },
+      beyond: {
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · EDUCATION, HACKATHONS & COURT LIFE",
+        bezelStatus: "GLASGOW · SIT · SINGAPORE",
+        paneLabel: "HONOURS COMPUTER SCIENCE, HACKATHONS & LIFE OUTSIDE CODE",
+        paneBadge: "BSc (Hons) CS · 3x Awards",
+        readout: "Chapter 04 / 04",
+        story:
+          "I graduated with a BSc (Hons) in Computer Science (Second Upper Class) from the University of Glasgow and Singapore Institute of Technology, placing at NUS LifeHack, AISG, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
+        bar1Label: "National Hackathons & Applied Prototypes",
+        bar1Val: "3x Award Winner / Finalist",
+        bar1Width: "93%",
+        bar2Label: "Off-Court Energy (Basketball, Pickleball, Thrift)",
+        bar2Val: "Always Active",
+        bar2Width: "100%",
+      },
+    };
+
+    const tabBtns = aboutStage.querySelectorAll("[data-about-tab]");
+    const cardBtns = aboutStage.querySelectorAll("[data-about-card]");
+    const scenes = aboutStage.querySelectorAll("[data-about-scene]");
+
+    const bezelTitleEl = document.getElementById("about-bezel-title");
+    const bezelStatusEl = document.getElementById("about-bezel-status");
+    const paneLabelEl = document.getElementById("about-pane-label");
+    const paneBadgeEl = document.getElementById("about-pane-badge");
+    const readoutEl = document.getElementById("about-active-pill-readout");
+    const storyEl = document.getElementById("about-live-story");
+
+    const bar1LabelEl = document.getElementById("about-bar1-label");
+    const bar1ValEl = document.getElementById("about-bar1-val");
+    const bar1FillEl = document.getElementById("about-bar1-fill");
+    const bar2LabelEl = document.getElementById("about-bar2-label");
+    const bar2ValEl = document.getElementById("about-bar2-val");
+    const bar2FillEl = document.getElementById("about-bar2-fill");
+
+    const order = ["google", "grab", "astar", "beyond"];
+    let currentIdx = 0;
+    let autoTimer = null;
+
+    function selectChapter(key) {
+      const data = chapters[key];
+      if (!data) return;
+      currentIdx = Math.max(0, order.indexOf(key));
+
+      tabBtns.forEach((btn) => {
+        const active = btn.getAttribute("data-about-tab") === key;
+        btn.classList.toggle("active", active);
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+      });
+
+      cardBtns.forEach((card) => {
+        const active = card.getAttribute("data-about-card") === key;
+        card.classList.toggle("active", active);
+      });
+
+      scenes.forEach((scene) => {
+        const active = scene.getAttribute("data-about-scene") === key;
+        scene.classList.toggle("is-active", active);
+      });
+
+      if (bezelTitleEl) bezelTitleEl.textContent = data.bezelTitle;
+      if (bezelStatusEl) bezelStatusEl.textContent = data.bezelStatus;
+      if (paneLabelEl) paneLabelEl.textContent = data.paneLabel;
+      if (paneBadgeEl) paneBadgeEl.textContent = data.paneBadge;
+      if (readoutEl) readoutEl.textContent = data.readout;
+      if (storyEl) storyEl.textContent = data.story;
+
+      if (bar1LabelEl) bar1LabelEl.textContent = data.bar1Label;
+      if (bar1ValEl) bar1ValEl.textContent = data.bar1Val;
+      if (bar1FillEl) bar1FillEl.style.width = data.bar1Width;
+      if (bar2LabelEl) bar2LabelEl.textContent = data.bar2Label;
+      if (bar2ValEl) bar2ValEl.textContent = data.bar2Val;
+      if (bar2FillEl) bar2FillEl.style.width = data.bar2Width;
+    }
+
+    function stopAutoCycle() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        stopAutoCycle();
+        const key = btn.getAttribute("data-about-tab");
+        if (key) selectChapter(key);
+      });
+    });
+
+    cardBtns.forEach((card) => {
+      card.addEventListener("click", () => {
+        stopAutoCycle();
+        const key = card.getAttribute("data-about-card");
+        if (key) selectChapter(key);
+      });
+    });
+
+    autoTimer = setInterval(() => {
+      currentIdx = (currentIdx + 1) % order.length;
+      selectChapter(order[currentIdx]);
+    }, 6500);
+  }
+
   function initFlagshipSandboxes() {
     const tracerData = {
       user: "Step #01 USER_INPUT · 12ms · 420 prompt tok",
@@ -1258,6 +1412,7 @@
     initTheme();
     updateFilterCounts();
     renderProjects();
+    initAboutConsole();
     initFlagshipSandboxes();
     initHeroScrollPhysics();
     initFilters();
