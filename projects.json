@@ -4,7 +4,17 @@
     "autoDiscoverNewGithubRepos": true,
     "excludedRepos": [
       "elim316",
-      "elim316.github.io"
+      "elim316.github.io",
+      "CSC2106-IoT",
+      "real-time-cv-vlm-pipeline",
+      "WeatherPredictor",
+      "yolov6-object-detector",
+      "Opencv-real-time-face-detection",
+      "INF2007_Week2_Lab",
+      "mylab2",
+      "Google-Certificate---Introduction-to-Github",
+      "Wind-City-BrainHack-2023",
+      "COMPUTERFUNCTION-Easy"
     ]
   },
   "projects": [
@@ -25,8 +35,8 @@
       "category": "agentic",
       "categoryLabel": "Agentic & DevTools",
       "year": "2026",
-      "summary": "Unified mission control UI plugin combining a customisable 2x2 Bento grid, multi-session agent chat, embedded Agent Tracer graph, automation controls, and live token telemetry.",
-      "architecture": "Connects to the local Language Server via Connect-RPC to stream per-turn prompt, cached-context, and output token metrics, calculate context window saturation against the 200k compaction threshold, and dispatch multi-session prompts.",
+      "summary": "Unified multi-agent workspace UI plugin combining a customisable 2x2 Bento grid, multi-session agent chat, embedded Agent Tracer graph, automation controls, and live token telemetry.",
+      "architecture": "Streams per-turn prompt, cached-context, and output token metrics from the local Language Server, calculates context window saturation against the 200k compaction threshold, and dispatches multi-session prompts.",
       "stack": ["Python", "Connect-RPC", "JavaScript", "CSS Grid"],
       "repoUrl": "https://github.com/elim316/Jetski-Harness"
     },
@@ -128,6 +138,28 @@
       "architecture": "Containerised pipeline integrating OpenAI Whisper real-time speech transcription, a custom-trained text-to-JSON NLP parser (>85% parsing accuracy), and Vision-Language Modelling (~80% aircraft bounding box alignment accuracy).",
       "stack": ["Python", "OpenAI Whisper", "NLP (>85%)", "VLM", "Docker"],
       "repoUrl": "https://github.com/elim316/TIL-AI-brainhack2024-project-overview"
+    },
+    {
+      "id": "onlynotes",
+      "title": "OnlyNotes Note Sharing Application",
+      "category": "fullstack",
+      "categoryLabel": "Full-Stack & Cloud",
+      "year": "2024",
+      "summary": "Collaborative Android note-sharing, flashcard, and study-group application built with Kotlin, Jetpack Compose, Firebase, and MVVM architecture.",
+      "architecture": "Native Android client architected with Kotlin, Jetpack Compose declarative UI, and MVVM state management, backed by Firebase Authentication, Cloud Firestore real-time document sync, and Cloud Storage.",
+      "stack": ["Kotlin", "Jetpack Compose", "Firebase", "Android MVVM"],
+      "repoUrl": "https://github.com/elim316/OnlyNotes-Note-Sharing-Application"
+    },
+    {
+      "id": "lobangcube",
+      "title": "LobangCube Financial Wellness Platform",
+      "category": "fullstack",
+      "categoryLabel": "Full-Stack & Cloud",
+      "year": "2025",
+      "summary": "Interactive personal finance and budgeting analytics application built with Python and Streamlit to visualise cashflow, savings goals, and spending categories.",
+      "architecture": "Data-driven Python and Streamlit web application that ingests personal transaction ledgers, computes category-level budget variance and savings projections, and renders interactive financial health dashboards.",
+      "stack": ["Python", "Streamlit", "Financial Analytics", "Data Visualisation"],
+      "repoUrl": "https://github.com/elim316/LobangCube-showcase"
     }
   ]
 }
