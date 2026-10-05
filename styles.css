@@ -1,6 +1,6 @@
 /* ==========================================================================
    Elias Lim · Personal Portfolio & Digital Garden (styles.css)
-   Tactile Editorial Craft · Spring Physics · Zero Dependencies
+   Tactile Editorial Craft · Spring Physics · Interactive Sandboxes & Cmd+K
    ========================================================================== */
 
 :root {
@@ -9,7 +9,7 @@
   --bg-elevated: hsl(40, 33%, 99%);
   --bg-canvas: hsl(40, 22%, 93.5%);
   --bg-subtle: hsl(40, 18%, 91%);
-  --bg-glass: hsla(42, 28%, 97%, 0.84);
+  --bg-glass: hsla(42, 28%, 97%, 0.85);
 
   --text-primary: hsl(215, 22%, 12%);
   --text-secondary: hsl(215, 12%, 34%);
@@ -36,6 +36,9 @@
   --shadow-dock:
     0 2px 6px rgba(15, 23, 42, 0.05),
     0 10px 24px rgba(15, 23, 42, 0.06);
+  --shadow-modal:
+    0 24px 60px -12px rgba(15, 23, 42, 0.22),
+    0 4px 16px rgba(15, 23, 42, 0.08);
 
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-serif: 'Instrument Serif', Georgia, serif;
@@ -57,7 +60,7 @@
   --bg-elevated: hsl(215, 16%, 11.5%);
   --bg-canvas: hsl(215, 18%, 14%);
   --bg-subtle: hsl(215, 15%, 17%);
-  --bg-glass: hsla(215, 18%, 9%, 0.82);
+  --bg-glass: hsla(215, 18%, 9%, 0.84);
 
   --text-primary: hsl(40, 18%, 94%);
   --text-secondary: hsl(215, 12%, 71%);
@@ -84,6 +87,9 @@
   --shadow-dock:
     0 4px 12px rgba(0, 0, 0, 0.45),
     0 12px 28px rgba(0, 0, 0, 0.4);
+  --shadow-modal:
+    0 28px 68px -12px rgba(0, 0, 0, 0.72),
+    0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
 *,
@@ -154,8 +160,14 @@ a {
 
 .brand-link,
 .nav-dock,
-.theme-btn {
+.header-controls {
   pointer-events: auto;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .brand-link {
@@ -235,8 +247,8 @@ a {
 .nav-link {
   position: relative;
   z-index: 1;
-  padding: 5px 14px;
-  font-size: 0.85rem;
+  padding: 5px 13px;
+  font-size: 0.84rem;
   font-weight: 500;
   color: var(--text-secondary);
   border-radius: var(--radius-pill);
@@ -248,11 +260,12 @@ a {
   color: var(--text-primary);
 }
 
+.cmd-trigger-btn,
 .theme-btn {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 14px;
+  padding: 6px 12px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-subtle);
   background: var(--bg-glass);
@@ -260,7 +273,7 @@ a {
   -webkit-backdrop-filter: blur(12px);
   color: var(--text-secondary);
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition:
@@ -269,19 +282,31 @@ a {
     color 200ms var(--ease-smooth);
 }
 
+.cmd-trigger-btn:hover,
 .theme-btn:hover {
   transform: translateY(-1px);
   border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
+.cmd-trigger-btn:active,
 .theme-btn:active {
   transform: scale(0.96);
 }
 
+.kbd-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
 .theme-icon {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   transition: transform 420ms var(--spring-bounce);
 }
 
@@ -349,7 +374,6 @@ a {
   gap: 10px;
 }
 
-/* Tactile buttons with spring hover & arrow shift */
 .tactile-btn {
   display: inline-flex;
   align-items: center;
@@ -373,7 +397,7 @@ a {
 
 .tactile-btn.small {
   padding: 6px 13px;
-  font-size: 0.81rem;
+  font-size: 0.8rem;
 }
 
 .tactile-btn:hover {
@@ -394,6 +418,12 @@ a {
 
 .tactile-btn.primary:hover {
   opacity: 0.92;
+}
+
+.tactile-btn.copied {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent-text);
 }
 
 .arrow-glyph {
@@ -420,11 +450,10 @@ a {
 }
 
 .tactile-btn.copied .copy-badge {
-  background: var(--accent-subtle);
-  color: var(--accent-text);
+  background: var(--accent);
+  color: var(--bg-primary);
 }
 
-/* Staggered Load & Scroll Animations */
 @keyframes springUp {
   0% {
     opacity: 0;
@@ -546,7 +575,7 @@ a {
 }
 
 /* ==========================================================================
-   Project Grid & Interactive Animated Cards
+   Project Grid & Interactive Mini-Sandbox Cards
    ========================================================================== */
 
 .projects-grid {
@@ -574,7 +603,6 @@ a {
     border-color 220ms var(--ease-smooth);
 }
 
-/* Cursor-tracked subtle radial spotlight */
 .project-card::before {
   content: "";
   position: absolute;
@@ -602,21 +630,90 @@ a {
 /* Interactive Visual Stage at top of each Project Card */
 .project-visual {
   position: relative;
-  height: 148px;
+  height: 168px;
   background: var(--bg-canvas);
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   overflow: hidden;
-  padding: 16px;
+  padding: 12px 14px 10px;
 }
 
 .visual-svg {
   width: 100%;
-  height: 100%;
+  height: 108px;
   max-width: 340px;
   overflow: visible;
+}
+
+/* Interactive Mini-Sandbox Control Bar inside Card Canvas */
+.sandbox-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.69rem;
+  color: var(--text-secondary);
+  z-index: 2;
+}
+
+.sandbox-readout {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-secondary);
+}
+
+.sandbox-pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.sandbox-pill {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background-color 180ms var(--ease-smooth),
+    color 180ms var(--ease-smooth),
+    border-color 180ms var(--ease-smooth),
+    transform 180ms var(--spring-bounce);
+}
+
+.sandbox-pill:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.sandbox-pill.active {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+/* Clickable SVG nodes inside Agent Tracer sandbox */
+.clickable-node {
+  cursor: pointer;
+}
+
+.clickable-node.is-selected {
+  stroke: var(--accent) !important;
+  stroke-width: 2.4 !important;
+  transform: scale(1.16);
 }
 
 /* Animated SVG Micro-Interactions */
@@ -658,7 +755,7 @@ a {
 
 .project-card:hover .trace-node.node-accent {
   stroke: var(--accent);
-  transform: scale(1.14);
+  transform: scale(1.12);
 }
 
 .visual-label {
@@ -676,12 +773,10 @@ a {
 /* Harness Token Bar Animation */
 .token-fill-bar {
   transform-origin: left center;
-  transform: scaleX(0.58);
-  transition: transform 560ms var(--spring-out);
-}
-
-.project-card:hover .token-fill-bar {
-  transform: scaleX(0.84);
+  transform: scaleX(var(--token-scale, 0.71));
+  transition:
+    transform 460ms var(--spring-out),
+    fill 260ms var(--ease-smooth);
 }
 
 /* Dossier Checkmarks Stagger */
@@ -693,22 +788,22 @@ a {
     transform 280ms var(--spring-bounce);
 }
 
-.project-card:hover .check-pill.c1 {
+.project-card:hover .check-pill.c1,
+.check-pill.is-highlighted {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 40ms;
 }
 
 .project-card:hover .check-pill.c2 {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 110ms;
+  transition-delay: 90ms;
 }
 
 .project-card:hover .check-pill.c3 {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 180ms;
+  transition-delay: 160ms;
 }
 
 /* Knowledge Tracing Mastery Bars */
@@ -730,7 +825,7 @@ a {
   transform: scaleY(1.18);
 }
 
-/* MINDSync Fanning Card Stack (Chester How style spring fan) */
+/* MINDSync Fanning Card Stack */
 .fan-card {
   transform-box: fill-box;
   transform-origin: bottom center;
@@ -751,15 +846,17 @@ a {
 
 /* Conformal Prediction Band & Curve */
 .ci-band {
-  opacity: 0.22;
-  transition: opacity 320ms var(--ease-smooth), transform 460ms var(--spring-out);
+  opacity: 0.26;
+  transition:
+    opacity 320ms var(--ease-smooth),
+    transform 440ms var(--spring-out);
   transform-box: fill-box;
   transform-origin: center;
+  transform: scaleY(var(--ci-scale, 1));
 }
 
 .project-card:hover .ci-band {
-  opacity: 0.38;
-  transform: scaleY(0.76);
+  opacity: 0.36;
 }
 
 /* YOLO Bounding Box Scanner */
@@ -794,7 +891,7 @@ a {
 
 /* Project Body Content */
 .project-body {
-  padding: 22px 24px 18px;
+  padding: 20px 24px 18px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -941,6 +1038,73 @@ a {
 }
 
 /* ==========================================================================
+   Experience & Milestones Timeline (#journey)
+   ========================================================================== */
+
+.timeline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 24px;
+  padding: 22px 26px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 280ms var(--spring-out),
+    border-color 200ms var(--ease-smooth),
+    box-shadow 280ms var(--spring-out);
+}
+
+.timeline-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.timeline-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.timeline-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-text);
+  background: var(--accent-subtle);
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.timeline-title {
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 0.91rem;
+  color: var(--text-secondary);
+  line-height: 1.64;
+}
+
+/* ==========================================================================
    Publications & Technical Toolkit
    ========================================================================== */
 
@@ -974,7 +1138,7 @@ a {
 }
 
 .pub-info {
-  max-width: 650px;
+  max-width: 610px;
 }
 
 .pub-meta-row {
@@ -1013,6 +1177,7 @@ a {
 
 .pub-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -1084,6 +1249,156 @@ a {
 }
 
 /* ==========================================================================
+   Command Palette Modal (Cmd+K / Ctrl+K)
+   ========================================================================== */
+
+.cmd-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 16px 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease-smooth);
+}
+
+.cmd-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cmd-dialog {
+  width: 100%;
+  max-width: 560px;
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-modal);
+  overflow: hidden;
+  transform: translateY(10px) scale(0.97);
+  transition: transform 260ms var(--spring-out);
+}
+
+.cmd-backdrop.is-open .cmd-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.cmd-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cmd-search-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.cmd-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.cmd-input::placeholder {
+  color: var(--text-muted);
+}
+
+#cmd-esc-btn {
+  cursor: pointer;
+}
+
+.cmd-results {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 140ms var(--ease-smooth);
+}
+
+.cmd-item:hover,
+.cmd-item.selected {
+  background: var(--bg-canvas);
+}
+
+.cmd-item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cmd-item-title {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.cmd-item-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.cmd-item-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-text);
+  background: var(--accent-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+}
+
+.cmd-empty {
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.cmd-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.cmd-footer kbd {
+  font-family: var(--font-mono);
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
    Footer
    ========================================================================== */
 
@@ -1134,6 +1449,16 @@ a {
   .projects-grid,
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .timeline-meta {
+    flex-direction: row;
+    align-items: center;
   }
 
   .hero {
