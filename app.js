@@ -48,10 +48,10 @@
       categoryLabel: "Full-Stack & Cloud",
       year: "2025",
       summary:
-        "Awarded 2nd Place Overall at NUS LifeHack 2025. Adaptive learning platform that keeps teachers in control of lesson design while personalising student revision with Knowledge Tracing.",
+        "Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025. Adaptive learning platform pairing modular classroom routing with an ~85% accuracy Knowledge Tracing model.",
       architecture:
-        "Full-stack Next.js and TypeScript web platform integrated with a Python and PyTorch Knowledge Tracing (kt_models) backend that models per-topic mastery and routes targeted revision materials.",
-      stack: ["TypeScript", "Next.js", "Python", "PyTorch"],
+        "Modular React, Next.js, and TypeScript platform deployed on Cloudflare Workers for low-latency serverless execution, integrated with a Python and PyTorch Knowledge Tracing (kt_models) recommendation engine.",
+      stack: ["React", "TypeScript", "Cloudflare Workers", "PyTorch"],
       repoUrl: "https://github.com/elim316/eduverse",
     },
     {
@@ -87,11 +87,24 @@
       categoryLabel: "ML & Research",
       year: "2025",
       summary:
-        "Published in IEEE Xplore. Applies uncertainty quantification and post-hoc explainability to deep learning models for battery state-of-health (SOH) estimation.",
+        "First-author paper at APSIPA ASC 2025 (IEEE Xplore) from A*STAR research. Unified deep learning framework quantifying both model and data uncertainty for battery State-of-Health estimation.",
       architecture:
-        "Integrates Adaptive Conformal Inference (ACI), Prediction Interval Coverage Probability (PICP), Expected Calibration Error (ECE), and SHAP/LIME feature attributions into a CNN battery health pipeline evaluated across McMaster and Oxford datasets.",
+        "Integrates Adaptive Conformal Inference (ACI), Prediction Interval Coverage Probability (PICP), Expected Calibration Error (ECE), and model-agnostic SHAP/LIME attributions into a CNN pipeline evaluated across McMaster and Oxford datasets.",
       stack: ["Python", "CNN", "Conformal Prediction", "SHAP / LIME"],
       repoUrl: "https://github.com/elim316/UQ-XAI-battery-analytics",
+    },
+    {
+      id: "semantic-segmentation",
+      title: "Real-Time Semantic Segmentation & Multimodal Captioning",
+      category: "ml",
+      categoryLabel: "ML & Research",
+      year: "2025",
+      summary:
+        "Real-time computer vision inspection pipeline combining live frame-by-frame DeepLabV3+ResNet50 semantic segmentation with context-aware natural language captions.",
+      architecture:
+        "Streams webcam video through a PyTorch DeepLabV3+ResNet50 backbone to overlay semantic pixel masks via OpenCV and NumPy, paired with the Hugging Face BLIP vision-language model for live scene captioning.",
+      stack: ["Python", "PyTorch", "DeepLabV3+", "BLIP", "OpenCV"],
+      repoUrl: "https://github.com/elim316/Semantic-Segmentation",
     },
     {
       id: "transport-gpt",
@@ -121,15 +134,15 @@
     },
     {
       id: "operation-guardian",
-      title: "Operation Guardian (DSTA BrainHack 2024)",
+      title: "Autonomous Air Defence System (DSTA BrainHack 2024)",
       category: "ml",
       categoryLabel: "ML & Research",
       year: "2024",
       summary:
-        "Multimodal defence pipeline built for TIL-AI 2024 to transcribe noisy spoken commands, extract target entities, and identify visual targets.",
+        "Semifinalist at DSTA BrainHack 2024 (TIL-AI). Voice-commanded multimodal defence pipeline linking spoken mission orders to live aircraft bounding box detection.",
       architecture:
-        "Containerised three-stage pipeline in Docker integrating Automatic Speech Recognition (ASR), spaCy and NLTK entity extraction, and computer vision object detection.",
-      stack: ["Python", "ASR", "spaCy / NLTK", "Computer Vision", "Docker"],
+        "Containerised pipeline integrating OpenAI Whisper real-time speech transcription, a custom-trained text-to-JSON NLP parser (>85% parsing accuracy), and Vision-Language Modelling (~80% aircraft bounding box alignment accuracy).",
+      stack: ["Python", "OpenAI Whisper", "NLP (>85%)", "VLM", "Docker"],
       repoUrl: "https://github.com/elim316/TIL-AI-brainhack2024-project-overview",
     },
   ];
@@ -137,8 +150,8 @@
   const BIBTEX_ENTRIES = {
     "11249263": `@inproceedings{lim2025uqxai,
   author    = {Lim, Elias and others},
-  title     = {Uncertainty Quantification and Explainable AI for Battery Analytics},
-  booktitle = {IEEE Xplore},
+  title     = {A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks},
+  booktitle = {APSIPA ASC / IEEE Xplore},
   year      = {2025},
   url       = {https://ieeexplore.ieee.org/document/11249263}
 }`,
@@ -331,6 +344,27 @@
             </div>
           </div>
         `;
+      case "semantic-segmentation":
+        return `
+          <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
+            <rect class="trace-node" x="20" y="24" width="84" height="46" rx="7" />
+            <text x="30" y="45" class="visual-label">DEEPLABV3+</text>
+            <text x="30" y="59" class="visual-badge">Pixel Masks</text>
+            <path class="trace-edge" d="M 104 47 L 136 47" />
+            <path class="trace-packet" d="M 104 47 L 136 47" />
+            <rect class="trace-node node-accent" x="136" y="24" width="76" height="46" rx="7" />
+            <text x="148" y="45" class="visual-label">BLIP VLM</text>
+            <text x="148" y="59" class="visual-badge">Captioning</text>
+            <path class="trace-edge" d="M 212 47 L 240 47" />
+            <path class="trace-packet" d="M 212 47 L 240 47" />
+            <rect class="trace-node" x="240" y="24" width="62" height="46" rx="7" />
+            <text x="250" y="51" class="visual-label">OPENCV</text>
+          </svg>
+          <div class="sandbox-bar">
+            <span class="sandbox-readout">Live ResNet50 masks + BLIP scene captioning</span>
+            <span class="visual-badge">PyTorch + HF</span>
+          </div>
+        `;
       case "transport-gpt":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
@@ -371,19 +405,19 @@
       default:
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <rect class="trace-node" x="22" y="26" width="72" height="42" rx="7" />
-            <text x="34" y="51" class="visual-label">ASR AUDIO</text>
+            <rect class="trace-node" x="20" y="26" width="74" height="42" rx="7" />
+            <text x="30" y="51" class="visual-label">WHISPER</text>
             <path class="trace-edge" d="M 94 47 L 126 47" />
             <path class="trace-packet" d="M 94 47 L 126 47" />
             <rect class="trace-node node-accent" x="126" y="26" width="76" height="42" rx="7" />
-            <text x="138" y="51" class="visual-badge">spaCy NER</text>
+            <text x="135" y="51" class="visual-badge">NLP &gt;85%</text>
             <path class="trace-edge" d="M 202 47 L 234 47" />
             <path class="trace-packet" d="M 202 47 L 234 47" />
-            <rect class="trace-node" x="234" y="26" width="66" height="42" rx="7" />
-            <text x="244" y="51" class="visual-label">CV LOCK</text>
+            <rect class="trace-node" x="234" y="26" width="68" height="42" rx="7" />
+            <text x="243" y="51" class="visual-label">VLM ~80%</text>
           </svg>
           <div class="sandbox-bar">
-            <span class="sandbox-readout">Three-stage multimodal defence pipeline</span>
+            <span class="sandbox-readout">Semifinalist · Whisper + NLP + VLM air defence</span>
             <span class="visual-badge">DSTA TIL-AI</span>
           </div>
         `;
@@ -994,6 +1028,12 @@
 
     const baseCommands = [
       {
+        title: "Jump to About & Background",
+        sub: "Google Cloud & AI Engineer, Grab TIS, A*STAR Research, Glasgow & SIT",
+        badge: "About",
+        action: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }),
+      },
+      {
         title: "Jump to Featured Repositories",
         sub: "Jetski Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
         badge: "Featured",
@@ -1025,7 +1065,7 @@
       },
       {
         title: "Filter: ML & Research Projects",
-        sub: "Show Battery UQ & XAI, TransportGPT, and Operation Guardian",
+        sub: "Show Battery UQ & XAI, Semantic Segmentation, TransportGPT, and Air Defence",
         badge: "Filter",
         action: () => {
           setFilterCategory("ml");
@@ -1033,8 +1073,8 @@
         },
       },
       {
-        title: "Jump to Experience & Milestones",
-        sub: "Google Cloud Singapore, IEEE Xplore, NUS LifeHack, DSTA BrainHack",
+        title: "Jump to Experience & Education",
+        sub: "Google, Grab (Trust, Identity & Safety), A*STAR, University of Glasgow & SIT",
         badge: "Section",
         action: () => document.getElementById("journey")?.scrollIntoView({ behavior: "smooth" }),
       },
