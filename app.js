@@ -3,6 +3,22 @@
 
   const PROJECTS = [
     {
+      id: "jumpgate-agentic-lz",
+      title: "Jumpgate · Zero-Trust Agentic AI Landing Zone & Vending Machine",
+      category: "agentic",
+      categoryLabel: "Agentic & Cloud Security",
+      year: "2026",
+      summary:
+        "Self-service Dual-VPC cloud landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup and IM8 security verification into under 3 minutes, driving $1.96M in realised public sector ARR (+$1.46M pipeline).",
+      architecture:
+        "Separates Ingress (Regional HTTPS ALB with TLS 1.3, Cloud Armor OWASP WAF, Serverless NEG, IAM-locked Cloud Run) from Egress (Secure Web Proxy Layer 7 domain allowlisting, Private Service Connect to Vertex AI, non-root SHA-256 pinned containers) in Terraform. Paired with a 4-agent, 14-step ADLC pipeline enforcing an >=0.85 LLM-as-a-Judge quality gate and passing 14/14 Ingress runtime and 18/18 Egress static security checks.",
+      stack: ["Terraform", "Dual-VPC & PSC", "14-Step ADLC", "IM8 Security"],
+      repoUrl: "https://github.com/RZOWQ/trainee-project-jumpgate-agentic-lz",
+      repoLabel: "Landing Zone Repo",
+      secondaryRepoUrl: "https://github.com/jarrettyeo/vending-machine-agent",
+      secondaryRepoLabel: "Vending Machine Repo",
+    },
+    {
       id: "agent-tracer",
       title: "Jetski Agent Tracer Plugin",
       category: "agentic",
@@ -260,6 +276,45 @@
     const id = p.id;
 
     switch (id) {
+      case "jumpgate-agentic-lz":
+        return `
+          <svg class="visual-svg" viewBox="0 0 320 98" aria-hidden="true">
+            <path class="trace-edge" d="M 88 50 L 114 50" />
+            <path class="trace-edge" d="M 206 38 L 232 28" />
+            <path class="trace-edge" d="M 206 62 L 232 72" />
+            <path class="trace-packet" d="M 88 50 L 114 50" />
+            <path class="trace-packet" d="M 206 38 L 232 28" />
+            <path class="trace-packet" d="M 206 62 L 232 72" />
+            <g class="clickable-node is-selected" data-jg="vpc">
+              <rect class="trace-node node-accent" x="10" y="28" width="78" height="44" rx="7" />
+              <text x="49" y="46" text-anchor="middle" class="visual-badge">INGRESS VPC</text>
+              <text x="49" y="59" text-anchor="middle" class="deck-svg-label">14/14 WAF</text>
+            </g>
+            <g class="clickable-node" data-jg="adlc">
+              <rect class="trace-node node-accent" x="114" y="26" width="92" height="48" rx="8" />
+              <text x="160" y="46" text-anchor="middle" class="visual-badge">14-STEP ADLC</text>
+              <text x="160" y="61" text-anchor="middle" class="visual-label">&lt; 3m · &gt;=0.85</text>
+            </g>
+            <g class="clickable-node" data-jg="egress">
+              <rect class="trace-node" x="232" y="10" width="78" height="36" rx="6" />
+              <text x="271" y="25" text-anchor="middle" class="visual-badge">PSC + SWP</text>
+              <text x="271" y="37" text-anchor="middle" class="deck-svg-label">18/18 Egress</text>
+            </g>
+            <g class="clickable-node" data-jg="arr">
+              <rect class="trace-node" x="232" y="54" width="78" height="36" rx="6" />
+              <text x="271" y="69" text-anchor="middle" class="visual-label">IMPACT</text>
+              <text x="271" y="81" text-anchor="middle" class="deck-svg-label">$1.96M ARR</text>
+            </g>
+          </svg>
+          <div class="sandbox-bar" data-sandbox="jumpgate">
+            <span class="sandbox-readout" id="readout-jumpgate">Dual-VPC: 14/14 Ingress &amp; 18/18 Egress IM8 PASS</span>
+            <div class="sandbox-pills">
+              <button type="button" class="sandbox-pill active" data-jg-btn="vpc">32/32 IM8</button>
+              <button type="button" class="sandbox-pill" data-jg-btn="adlc">&lt; 3m ADLC</button>
+              <button type="button" class="sandbox-pill" data-jg-btn="arr">$1.96M ARR</button>
+            </div>
+          </div>
+        `;
       case "agent-tracer":
         return `
           <svg class="visual-svg" viewBox="0 0 320 98" aria-hidden="true">
@@ -659,8 +714,20 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>Repository &#8599;</span>
+              <span>${escapeHtml(p.repoLabel || "Repository")} &#8599;</span>
             </a>
+            ${
+              p.secondaryRepoUrl
+                ? `<a
+                    class="apple-text-link"
+                    href="${escapeHtml(p.secondaryRepoUrl)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>${escapeHtml(p.secondaryRepoLabel || "Agent Repo")} &#8599;</span>
+                  </a>`
+                : ""
+            }
           </div>
 
           <div class="arch-drawer" id="drawer-${escapeHtml(p.id)}">
@@ -728,17 +795,17 @@
       google: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GOOGLE CLOUD SINGAPORE",
         bezelStatus: "APR 2026 TO PRESENT",
-        paneLabel: "ZERO-TRUST DUAL-VPC AI AGENT LANDING ZONE",
-        paneBadge: "Terraform · PSC · Cloud Run",
+        paneLabel: "JUMPGATE DUAL-VPC LANDING ZONE & 14-STEP AGENT VENDING MACHINE",
+        paneBadge: "< 3 min · 32/32 IM8 · $1.96M ARR",
         readout: "Chapter 01 / 04",
         story:
-          "At Google in Singapore, I architect IM8-compliant zero-trust cloud landing zones for generative AI agents using Terraform, Dual-VPC, and Private Service Connect, build native trajectory visualisers, and lead AI buildathons for over 4,000 students and engineers across NTU, GovTech, DBS, and A*STAR.",
-        bar1Label: "Zero-Trust Cloud & Terraform IaC",
-        bar1Val: "36 / 36 IM8 Checks",
-        bar1Width: "96%",
-        bar2Label: "Enablement & Buildathon Reach",
-        bar2Val: "4,000+ Participants",
-        bar2Width: "92%",
+          "At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup into under 3 minutes (passing 14/14 Ingress and 18/18 Egress security checks), driving $1.96M in realised public sector ARR (+$1.46M pipeline) and training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
+        bar1Label: "Jumpgate Dual-VPC & IM8 Security Posture",
+        bar1Val: "< 3 min · 32 / 32 Checks",
+        bar1Width: "100%",
+        bar2Label: "Public Sector ARR & Buildathon Reach",
+        bar2Val: "$1.96M ARR · 4,000+ Trained",
+        bar2Width: "95%",
       },
       grab: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GRAB SINGAPORE",
@@ -1168,6 +1235,43 @@
   }
 
   function attachSandboxControls() {
+    const jgData = {
+      vpc: "Dual-VPC: 14/14 Ingress & 18/18 Egress IM8 PASS",
+      adlc: "14-Step ADLC: 4-6 wks -> < 3 min (>=0.85 Judge)",
+      egress: "Egress VPC: SWP L7 + PSC Vertex AI (0 Bypasses)",
+      arr: "Public Sector: $1.96M Realised + $1.46M Pipeline ARR",
+    };
+
+    const jgCard = document.getElementById("project-jumpgate-agentic-lz");
+    if (jgCard) {
+      const readout = document.getElementById("readout-jumpgate");
+      const jgBtns = jgCard.querySelectorAll("[data-jg-btn]");
+      const jgNodes = jgCard.querySelectorAll("[data-jg]");
+
+      function selectJgStep(key) {
+        if (readout && jgData[key]) {
+          readout.textContent = jgData[key];
+        }
+        jgBtns.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-jg-btn") === key)
+        );
+        jgNodes.forEach((n) =>
+          n.classList.toggle("is-selected", n.getAttribute("data-jg") === key)
+        );
+      }
+
+      jgBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectJgStep(btn.getAttribute("data-jg-btn"));
+        });
+      });
+      jgNodes.forEach((node) => {
+        node.addEventListener("click", () => {
+          selectJgStep(node.getAttribute("data-jg"));
+        });
+      });
+    }
+
     const tracerData = {
       user: "Step #01 USER_INPUT · 12ms",
       planner: "Step #02 PLANNER · 640ms",
@@ -1391,7 +1495,7 @@
     if (!config.autoDiscoverNewGithubRepos || !config.githubUsername) return;
 
     try {
-      const cacheKey = `gh_repos_v3_${config.githubUsername}`;
+      const cacheKey = `gh_repos_v4_${config.githubUsername}`;
       let repos = null;
       const cachedRaw = sessionStorage.getItem(cacheKey);
       if (cachedRaw) {
@@ -1539,7 +1643,7 @@
     window.addEventListener("resize", updateScrollPhysics);
     updateScrollPhysics();
 
-    /* Mouse-following metallic wordmark reflection (words only, box stays steady) */
+    /* Mouse-following metallic wordmark colour reflection ONLY (zero movement) */
     allStages.forEach((stage) => {
       const visualStage = stage.querySelector(".hero-visual-stage");
       const wordmark = stage.querySelector(".metallic-wordmark");
@@ -1561,23 +1665,12 @@
           wordmark.style.setProperty("--wordmark-spot-x", `${spotX.toFixed(1)}%`);
           wordmark.style.setProperty("--wordmark-spot-y", `${spotY.toFixed(1)}%`);
         }
-
-        const stRect = visualStage.getBoundingClientRect();
-        if (stRect.width > 0 && stRect.height > 0) {
-          const normX = ((e.clientX - stRect.left) / stRect.width - 0.5) * 2;
-          const normY = ((e.clientY - stRect.top) / stRect.height - 0.5) * 2;
-
-          wordmark.style.setProperty("--wordmark-mx", `${(-normX * 14).toFixed(1)}px`);
-          wordmark.style.setProperty("--wordmark-my", `${(-normY * 6).toFixed(1)}px`);
-        }
       });
 
       stage.addEventListener("mouseleave", () => {
         visualStage.classList.remove("is-hovered");
         wordmark.style.setProperty("--wordmark-spot-x", "50%");
         wordmark.style.setProperty("--wordmark-spot-y", "50%");
-        wordmark.style.setProperty("--wordmark-mx", "0px");
-        wordmark.style.setProperty("--wordmark-my", "0px");
       });
     });
   }
@@ -1802,7 +1895,7 @@
       },
       {
         title: "Filter: Agentic & DevTools Projects",
-        sub: "Show Agent Tracer, Jetski Harness, and Meeting Prep Agent",
+        sub: "Show Jumpgate Landing Zone, Agent Tracer, Jetski Harness, and Meeting Prep Agent",
         badge: "Filter",
         action: () => {
           setFilterCategory("agentic");
@@ -1862,7 +1955,7 @@
         title: "Take a Closer Look: Architecture Inspector",
         sub: "Open full-scale interactive architecture sheet modal",
         badge: "Inspector",
-        action: () => openCloserLookModal(PROJECTS[0]?.id || "agent-tracer"),
+        action: () => openCloserLookModal(PROJECTS[0]?.id || "jumpgate-agentic-lz"),
       },
       ...PROJECTS.map((p) => ({
         title: p.title,
@@ -2030,6 +2123,9 @@
     const archEl = document.getElementById("closer-look-arch");
     const stackEl = document.getElementById("closer-look-stack");
     const repoLinkEl = document.getElementById("closer-look-repo-link");
+    const repoLabelEl = document.getElementById("closer-look-repo-label");
+    const secRepoLinkEl = document.getElementById("closer-look-secondary-repo-link");
+    const secRepoLabelEl = document.getElementById("closer-look-secondary-repo-label");
     const copyLabelEl = document.getElementById("closer-copy-link-label");
 
     if (eyebrowEl) {
@@ -2048,6 +2144,20 @@
         .join("");
     }
     if (repoLinkEl) repoLinkEl.setAttribute("href", p.repoUrl);
+    if (repoLabelEl) {
+      repoLabelEl.innerHTML = `${escapeHtml(p.repoLabel || "Open GitHub Repository")} &#8599;`;
+    }
+    if (secRepoLinkEl) {
+      if (p.secondaryRepoUrl) {
+        secRepoLinkEl.setAttribute("href", p.secondaryRepoUrl);
+        secRepoLinkEl.style.display = "inline-flex";
+        if (secRepoLabelEl) {
+          secRepoLabelEl.innerHTML = `${escapeHtml(p.secondaryRepoLabel || "Agent Repo")} &#8599;`;
+        }
+      } else {
+        secRepoLinkEl.style.display = "none";
+      }
+    }
     if (copyLabelEl) copyLabelEl.textContent = "Copy Deep-Link";
 
     backdrop.classList.add("is-open");
@@ -2119,7 +2229,7 @@
 
     const stageConfigs = [
       { id: "hero-stage", label: "01 / 05 · BUILDER", projectId: "agent-tracer" },
-      { id: "about", label: "02 / 05 · PROFILE", projectId: "jetski-harness" },
+      { id: "about", label: "02 / 05 · PROFILE", projectId: "jumpgate-agentic-lz" },
       { id: "showcase-agent-tracer", label: "03 / 05 · TRACER", projectId: "agent-tracer" },
       { id: "showcase-meeting-prep", label: "04 / 05 · DOSSIER", projectId: "meeting-prep-agent" },
       { id: "showcase-uq-xai", label: "05 / 05 · RESEARCH", projectId: "uq-xai-battery" },
