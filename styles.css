@@ -431,6 +431,7 @@ a {
 }
 
 .metallic-wordmark {
+  position: relative;
   font-size: clamp(4.4rem, 15vw, 11.6rem);
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -438,23 +439,57 @@ a {
   user-select: none;
   pointer-events: none;
   text-transform: uppercase;
-  background: var(--wordmark-gradient);
-  background-size: 220% auto;
+  background-image:
+    radial-gradient(
+      260px circle at var(--wordmark-spot-x, 50%) var(--wordmark-spot-y, 50%),
+      rgba(0, 113, 227, 0.95) 0%,
+      rgba(56, 189, 248, 0.72) 28%,
+      rgba(245, 158, 11, 0.55) 54%,
+      transparent 78%
+    ),
+    var(--wordmark-gradient);
+  background-size: 100% 100%, 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  opacity: 0.65;
-  transform: translateY(var(--wordmark-y, 0px)) scale(var(--wordmark-scale, 1));
+  opacity: 0.68;
+  transform:
+    translate3d(
+      var(--wordmark-mx, 0px),
+      calc(var(--wordmark-y, 0px) + var(--wordmark-my, 0px)),
+      0
+    )
+    scale(var(--wordmark-scale, 1));
+  transition:
+    opacity 260ms var(--ease-smooth),
+    filter 260ms var(--ease-smooth);
   animation: titaniumShimmer 9s ease-in-out infinite alternate;
-  will-change: transform;
+  will-change: transform, background-position;
+}
+
+[data-theme="dark"] .metallic-wordmark {
+  background-image:
+    radial-gradient(
+      260px circle at var(--wordmark-spot-x, 50%) var(--wordmark-spot-y, 50%),
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(90, 200, 250, 0.82) 30%,
+      rgba(245, 158, 11, 0.58) 56%,
+      transparent 78%
+    ),
+    var(--wordmark-gradient);
+}
+
+.hero-visual-stage.is-hovered .metallic-wordmark {
+  opacity: 0.95;
+  filter: drop-shadow(0 8px 22px rgba(0, 113, 227, 0.16));
 }
 
 @keyframes titaniumShimmer {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 0%, 0% 50%;
   }
   100% {
-    background-position: 100% 50%;
+    background-position: 0% 0%, 100% 50%;
   }
 }
 
@@ -466,15 +501,17 @@ a {
   max-width: 960px;
   margin-top: -36px;
   transform:
-    rotateX(var(--deck-tilt, 14deg))
-    translateY(var(--deck-y, 0px))
+    rotateX(calc(var(--deck-tilt, 14deg) + var(--mouse-rx, 0deg)))
+    rotateY(var(--mouse-ry, 0deg))
+    translateY(calc(var(--deck-y, 0px) + var(--mouse-lift, 0px)))
     scale(var(--deck-scale, 0.96));
   transform-style: preserve-3d;
-  transition: transform 120ms linear;
+  transition: transform 140ms var(--ease-smooth);
   will-change: transform;
 }
 
 .hardware-bezel {
+  position: relative;
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
@@ -484,9 +521,37 @@ a {
   border: 1.5px solid var(--border-strong);
   box-shadow: var(--shadow-deck);
   text-align: left;
+  transition:
+    border-color 240ms var(--ease-smooth),
+    box-shadow 280ms var(--ease-smooth);
+}
+
+.hardware-bezel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    520px circle at var(--bezel-mx, 50%) var(--bezel-my, 0%),
+    color-mix(in srgb, var(--accent) 9%, transparent),
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 260ms var(--ease-smooth);
+}
+
+.hero-visual-stage.is-hovered .hardware-bezel {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--border-strong));
+}
+
+.hero-visual-stage.is-hovered .hardware-bezel::before {
+  opacity: 1;
 }
 
 .bezel-top-bar {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -532,6 +597,8 @@ a {
 }
 
 .bezel-grid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: 18px;
@@ -552,6 +619,21 @@ a {
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+  transition:
+    transform 240ms var(--spring-out),
+    border-color 220ms var(--ease-smooth),
+    box-shadow 240ms var(--ease-smooth);
+}
+
+.bezel-pane:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border-strong));
+  box-shadow: var(--shadow-sm);
+}
+
+.bezel-pane:hover .hero-stream,
+.bezel-pane:hover .trace-packet {
+  animation-duration: 0.85s;
 }
 
 .pane-header {
