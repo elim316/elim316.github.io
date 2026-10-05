@@ -28,14 +28,18 @@
   />
   <meta property="og:url" content="https://elim316.github.io/" />
   <meta property="og:locale" content="en_GB" />
+  <meta property="og:image" content="https://elim316.github.io/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter / X Card Metadata -->
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Elias Lim · Software, Agentic AI &amp; Machine Learning Engineer" />
   <meta
     name="twitter:description"
     content="Building reliable agentic workflows, developer observability tools, full-stack cloud systems, and uncertainty-aware machine learning."
   />
+  <meta name="twitter:image" content="https://elim316.github.io/og-image.png" />
 
   <!-- JSON-LD Structured Data (no email address) -->
   <script type="application/ld+json">
@@ -68,7 +72,7 @@
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261005-9" />
+  <link rel="stylesheet" href="styles.css?v=20261005-10" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -979,6 +983,14 @@
             Engineering roles across cloud infrastructure, high-scale backend systems, and applied machine learning research.
           </p>
         </div>
+        <button type="button" class="apple-pill outline" id="print-cv-btn" aria-label="Print or save 1-page executive CV as PDF">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 9V2h12v7"></path>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Save 1-Page CV (PDF)</span>
+        </button>
       </div>
 
       <div class="timeline-list">
@@ -1144,15 +1156,42 @@
     </section>
 
     <!-- ======================================================================
-         6. Technical Stack Section
+         6. Technical Stack & Apple "By the Numbers" Spec Bento Section
          ====================================================================== -->
     <section id="stack" class="section container" data-section-target="stack">
       <div class="section-header reveal-on-scroll">
         <div>
-          <span class="section-eyebrow">SPECIFICATIONS</span>
-          <h2 class="section-title">Technical toolkit.</h2>
-          <p class="section-subtitle">Core languages, frameworks, and cloud infrastructure tools I build with day to day.</p>
+          <span class="section-eyebrow">SPECIFICATIONS &amp; TELEMETRY</span>
+          <h2 class="section-title">By the numbers. Built for production.</h2>
+          <p class="section-subtitle">Click any metric or technology chip below to filter the matching repositories above.</p>
         </div>
+      </div>
+
+      <!-- Apple M4-Inspired Sculpted Titanium Spec Bento Grid -->
+      <div class="apple-bento-specs reveal-on-scroll" id="bento-specs-grid">
+        <button type="button" class="bento-spec-tile" data-bento-target="#about-google">
+          <span class="bento-spec-eyebrow">CLOUD &amp; AI ENABLEMENT</span>
+          <span class="bento-spec-stat stat-blue">4,000+</span>
+          <span class="bento-spec-caption">Engineers and students trained across NTU, GovTech, DBS, and A*STAR buildathons.</span>
+        </button>
+
+        <button type="button" class="bento-spec-tile" data-bento-target="#projects-agentic">
+          <span class="bento-spec-eyebrow">EVALUATION RIGOUR</span>
+          <span class="bento-spec-stat stat-teal">36 / 36</span>
+          <span class="bento-spec-caption">Automated hallucination linter checks verifying 100% grounded multi-corpus citations.</span>
+        </button>
+
+        <button type="button" class="bento-spec-tile" data-bento-target="#projects-ml">
+          <span class="bento-spec-eyebrow">IEEE XPLORE RESEARCH</span>
+          <span class="bento-spec-stat stat-emerald">95.2%</span>
+          <span class="bento-spec-caption">Empirical conformal coverage (PICP) for battery State-of-Health deep learning at A*STAR.</span>
+        </button>
+
+        <button type="button" class="bento-spec-tile" data-bento-target="#projects-fullstack">
+          <span class="bento-spec-eyebrow">NATIONAL HACKATHONS</span>
+          <span class="bento-spec-stat stat-amber">3x</span>
+          <span class="bento-spec-caption">Award winner &amp; finalist across NUS LifeHack, AI Singapore (AISG), and DSTA BrainHack.</span>
+        </button>
       </div>
 
       <div class="skills-grid">
@@ -1162,15 +1201,15 @@
             <h3 class="skill-group-title">Agentic AI &amp; Machine Learning</h3>
           </div>
           <div class="skill-chips">
-            <span class="skill-chip">LLM &amp; LangGraph Agents</span>
-            <span class="skill-chip">MCP Tooling</span>
-            <span class="skill-chip">Evaluation Harnesses</span>
-            <span class="skill-chip">PyTorch &amp; TensorFlow</span>
-            <span class="skill-chip">Conformal Prediction</span>
-            <span class="skill-chip">SHAP &amp; LIME</span>
-            <span class="skill-chip">DeepLabV3 &amp; YOLOv3</span>
-            <span class="skill-chip">BLIP &amp; OpenAI Whisper</span>
-            <span class="skill-chip">scikit-learn &amp; NumPy</span>
+            <button type="button" class="skill-chip" data-skill-cat="agentic" data-skill-query="Python">LLM &amp; LangGraph Agents</button>
+            <button type="button" class="skill-chip" data-skill-cat="agentic" data-skill-query="MCP">MCP Tooling</button>
+            <button type="button" class="skill-chip" data-skill-cat="agentic" data-skill-query="Evaluation">Evaluation Harnesses</button>
+            <button type="button" class="skill-chip" data-skill-cat="ml" data-skill-query="PyTorch">PyTorch &amp; TensorFlow</button>
+            <button type="button" class="skill-chip" data-skill-cat="ml" data-skill-query="Conformal">Conformal Prediction</button>
+            <button type="button" class="skill-chip" data-skill-cat="ml" data-skill-query="SHAP">SHAP &amp; LIME</button>
+            <button type="button" class="skill-chip" data-skill-cat="ml" data-skill-query="YOLOv3">DeepLabV3 &amp; YOLOv3</button>
+            <button type="button" class="skill-chip" data-skill-cat="ml" data-skill-query="Whisper">BLIP &amp; OpenAI Whisper</button>
+            <button type="button" class="skill-chip" data-skill-cat="ml" data-skill-query="scikit-learn">scikit-learn &amp; NumPy</button>
           </div>
         </div>
 
@@ -1180,15 +1219,15 @@
             <h3 class="skill-group-title">Backend &amp; Full-Stack Systems</h3>
           </div>
           <div class="skill-chips">
-            <span class="skill-chip">Golang</span>
-            <span class="skill-chip">Python</span>
-            <span class="skill-chip">TypeScript &amp; JavaScript</span>
-            <span class="skill-chip">Java &amp; Kotlin</span>
-            <span class="skill-chip">C &amp; C++</span>
-            <span class="skill-chip">React &amp; Next.js</span>
-            <span class="skill-chip">Svelte &amp; Angular</span>
-            <span class="skill-chip">Connect-RPC</span>
-            <span class="skill-chip">PostgreSQL, MySQL &amp; MongoDB</span>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Go">Golang</button>
+            <button type="button" class="skill-chip" data-skill-cat="all" data-skill-query="Python">Python</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="TypeScript">TypeScript &amp; JavaScript</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Kotlin">Java &amp; Kotlin</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="C">C &amp; C++</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="React">React &amp; Next.js</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Svelte">Svelte &amp; Angular</button>
+            <button type="button" class="skill-chip" data-skill-cat="agentic" data-skill-query="Connect-RPC">Connect-RPC</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="SQL">PostgreSQL, MySQL &amp; MongoDB</button>
           </div>
         </div>
 
@@ -1198,19 +1237,132 @@
             <h3 class="skill-group-title">Cloud, Security &amp; DevOps</h3>
           </div>
           <div class="skill-chips">
-            <span class="skill-chip">Google Cloud (Cloud Run, Vertex AI, Pub/Sub)</span>
-            <span class="skill-chip">Dual-VPC &amp; Private Service Connect</span>
-            <span class="skill-chip">Terraform IaC</span>
-            <span class="skill-chip">Docker &amp; Kubernetes</span>
-            <span class="skill-chip">Cloudflare Workers</span>
-            <span class="skill-chip">AWS &amp; Supabase</span>
-            <span class="skill-chip">Prometheus &amp; Grafana</span>
-            <span class="skill-chip">GitHub Actions CI/CD</span>
+            <button type="button" class="skill-chip" data-skill-cat="agentic" data-skill-query="Cloud">Google Cloud (Cloud Run, Vertex AI, Pub/Sub)</button>
+            <button type="button" class="skill-chip" data-skill-cat="agentic" data-skill-query="VPC">Dual-VPC &amp; Private Service Connect</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Terraform">Terraform IaC</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Docker">Docker &amp; Kubernetes</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Cloudflare">Cloudflare Workers</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Supabase">AWS &amp; Supabase</button>
+            <button type="button" class="skill-chip" data-skill-cat="fullstack" data-skill-query="Telemetry">Prometheus &amp; Grafana</button>
+            <button type="button" class="skill-chip" data-skill-cat="all" data-skill-query="GitHub">GitHub Actions CI/CD</button>
           </div>
         </div>
       </div>
     </section>
   </main>
+
+  <!-- Apple-Style Floating Bottom Stage Controller Pill -->
+  <div class="apple-stage-dock" id="apple-stage-dock" role="region" aria-label="Interactive stage controller">
+    <div class="stage-dock-pill">
+      <span class="stage-dock-caption" id="stage-dock-caption">01 / 05 · BUILDER</span>
+      <div class="stage-dock-dots" role="tablist" aria-label="Jump to stage">
+        <button type="button" class="stage-dock-dot active" data-dock-idx="0" aria-label="Stage 1: Builder Overview">
+          <span class="stage-dot-fill"></span>
+        </button>
+        <button type="button" class="stage-dock-dot" data-dock-idx="1" aria-label="Stage 2: Engineering Profile">
+          <span class="stage-dot-fill"></span>
+        </button>
+        <button type="button" class="stage-dock-dot" data-dock-idx="2" aria-label="Stage 3: Agent Tracer &amp; Harness">
+          <span class="stage-dot-fill"></span>
+        </button>
+        <button type="button" class="stage-dock-dot" data-dock-idx="3" aria-label="Stage 4: Meeting Prep Dossier Agent">
+          <span class="stage-dot-fill"></span>
+        </button>
+        <button type="button" class="stage-dock-dot" data-dock-idx="4" aria-label="Stage 5: Battery UQ &amp; XAI Research">
+          <span class="stage-dot-fill"></span>
+        </button>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="stage-dock-action-btn"
+      id="stage-dock-play-btn"
+      aria-label="Pause live stage animations"
+      title="Pause or resume live animations"
+    >
+      <svg id="dock-icon-pause" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <rect x="6" y="4" width="4" height="16" rx="1.5"></rect>
+        <rect x="14" y="4" width="4" height="16" rx="1.5"></rect>
+      </svg>
+      <svg id="dock-icon-play" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: none">
+        <path d="M6 4l14 8-14 8V4z"></path>
+      </svg>
+    </button>
+
+    <button
+      type="button"
+      class="stage-dock-action-btn stage-dock-plus-btn"
+      id="stage-dock-inspect-btn"
+      aria-label="Take a closer look at active architecture"
+      title="Take a closer look (+)"
+    >
+      <span class="dock-plus-label">Closer look</span>
+      <span class="dock-plus-circle" aria-hidden="true">+</span>
+    </button>
+  </div>
+
+  <!-- Apple "Take a Closer Look" Full-Scale Architecture Sheet Modal -->
+  <div class="closer-look-backdrop" id="closer-look-backdrop" aria-hidden="true">
+    <div
+      class="closer-look-sheet"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="closer-look-title"
+    >
+      <div class="closer-look-topbar">
+        <div class="closer-look-meta">
+          <span class="closer-look-eyebrow" id="closer-look-eyebrow">AGENTIC &amp; DEVTOOLS</span>
+          <span class="closer-look-counter" id="closer-look-counter">01 / 13</span>
+        </div>
+        <div class="closer-look-controls">
+          <button type="button" class="closer-nav-btn" id="closer-prev-btn" aria-label="Previous project (Left arrow)">
+            &#8592;
+          </button>
+          <button type="button" class="closer-nav-btn" id="closer-next-btn" aria-label="Next project (Right arrow)">
+            &#8594;
+          </button>
+          <button type="button" class="closer-close-btn" id="closer-close-btn" aria-label="Close architecture inspector (Escape)">
+            &#215;
+          </button>
+        </div>
+      </div>
+
+      <div class="closer-look-body">
+        <div class="closer-look-header">
+          <h3 class="closer-look-title" id="closer-look-title">Jetski Agent Tracer Plugin</h3>
+          <p class="closer-look-summary" id="closer-look-summary"></p>
+        </div>
+
+        <div class="closer-look-stage" id="closer-look-visual"></div>
+
+        <div class="closer-look-specs-grid">
+          <div class="closer-spec-col">
+            <span class="closer-spec-heading">TECHNICAL ARCHITECTURE</span>
+            <p class="closer-spec-text" id="closer-look-arch"></p>
+          </div>
+          <div class="closer-spec-col">
+            <span class="closer-spec-heading">ENGINEERING STACK &amp; ACTIONS</span>
+            <div class="stack-row closer-stack-row" id="closer-look-stack"></div>
+            <div class="cta-pill-group closer-cta-row">
+              <a
+                href="https://github.com/elim316"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apple-pill solid"
+                id="closer-look-repo-link"
+              >
+                <span>Open GitHub Repository &#8599;</span>
+              </a>
+              <button type="button" class="apple-pill outline" id="closer-copy-link-btn">
+                <span id="closer-copy-link-label">Copy Deep-Link</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Command Palette Modal (Cmd+K / Ctrl+K) -->
   <div class="cmd-backdrop" id="cmd-backdrop" aria-hidden="true">
@@ -1237,7 +1389,7 @@
       </div>
       <div class="cmd-results" id="cmd-results" role="listbox"></div>
       <div class="cmd-footer">
-        <span>Navigate with <kbd>&#8593;</kbd> <kbd>&#8595;</kbd></span>
+        <span>Navigate with <kbd>&#8593;</kbd> <kbd>&#8595;</kbd> <kbd>&#8592;</kbd> <kbd>&#8594;</kbd></span>
         <span>Press <kbd>&#9166;</kbd> to select</span>
       </div>
     </div>
@@ -1267,6 +1419,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261005-9"></script>
+  <script src="app.js?v=20261005-10"></script>
 </body>
 </html>
