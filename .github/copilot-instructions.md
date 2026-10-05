@@ -48,7 +48,7 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-7`
+- Asset version in `index.html`: `?v=20261005-8`
 - SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
 - Recent milestones completed:
   * Added cursor-tracked metallic specular reflection (`--wordmark-spot-x/y`) and inverse parallax (`--wordmark-mx/my`) on all 5 stage wordmarks (`BUILDER`, `PROFILE`, `TRACER`, `DOSSIER`, `RESEARCH`), paired with 3D magnetic cursor tilt (`--mouse-rx/ry`) and glass surface reflection (`--bezel-mx/my`) on `.hardware-deck` and `.hardware-bezel`.
