@@ -375,6 +375,40 @@ a {
   color: var(--text-primary);
 }
 
+/* Inline Brand & Company SVG Logos */
+.brand-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: -2px;
+}
+
+.icon-linkedin {
+  color: #0a66c2;
+}
+
+.icon-scholar {
+  color: #4285f4;
+}
+
+[data-theme="dark"] .icon-linkedin {
+  color: #58a6ff;
+}
+
+[data-theme="dark"] .icon-scholar {
+  color: #79c0ff;
+}
+
+.chapter-pill,
+.mini-card-title,
+.timeline-tag,
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 /* Sculpted Metallic Backdrop Wordmark + 3D Scroll-Tilting Project Stage */
 .hero-visual-stage {
   position: relative;
