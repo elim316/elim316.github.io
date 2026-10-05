@@ -74,6 +74,10 @@ build steps, bundlers, or external runtime dependencies:
   - All SVG diagrams inside `.bezel-svg-wrap` and `.project-visual` must retain
     `overflow: visible` and safe `viewBox` coordinates so text and animated
     packets are never clipped.
+  - Never apply `stroke` or `stroke-width` directly to `<g class="clickable-node">`
+    or `<text>` elements in SVG, as SVG inheritance will outline the text and make
+    it look blurry. Always target child shapes (`.clickable-node.is-selected .trace-node`)
+    and keep `stroke: none !important` on all SVG `<text>` elements.
 
 4. HOW TO ADD OR UPDATE PROJECTS
 --------------------------------------------------------------------------------
@@ -107,16 +111,19 @@ build steps, bundlers, or external runtime dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-5`
+- Asset version in `index.html`: `?v=20261005-6`
 - SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
 - Recent milestones completed:
+  * Fixed SVG text stroke inheritance on `.clickable-node.is-selected` so active
+    node labels render crisp without blue stroke smudging.
+  * Added live streaming packets, pulsing active node borders, and auto-cycling
+    stage/bar animations across all 5 stages (`BUILDER`, `PROFILE`, `TRACER`,
+    `DOSSIER`, and `RESEARCH`) as well as continuous ambient animations on all
+    project cards.
   * Reverted paired CTA buttons to `.apple-pill.solid` + `.apple-pill.outline`.
   * Updated About Me Chapter 04 to `04 · Glasgow, SIT & Life` (`Glasgow & SIT · Life`).
   * Integrated official `astar-logo.png` across `#about` and `#experience`.
   * Fixed `.bezel-grid` and `.bezel-pane` right-pane overflow inside `.hardware-bezel`.
-  * Removed green `CONNECT-RPC ACTIVE` badge and redesigned `BUILDER` & `TRACER`
-    stages with a 4-step Agent Execution Graph and 2x2 Multi-Agent Workspace.
-  * Enabled 3D scroll tilt, scale, and wordmark parallax on all 5 stages.
   * Curated `#projects` to 13 signature repositories, each with a custom SVG
     architectural visualisation in `getProjectVisual()`.
 ================================================================================
