@@ -607,11 +607,29 @@ a {
   fill: var(--bg-elevated);
   stroke: var(--text-primary);
   stroke-width: 1.6;
+  transition:
+    stroke 260ms var(--ease-smooth),
+    fill 260ms var(--ease-smooth),
+    transform 320ms var(--spring-out);
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .deck-node.active-ring {
   stroke: var(--accent);
   stroke-width: 2;
+  animation: activeBorderPulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes activeBorderPulse {
+  0% {
+    stroke-width: 1.8;
+    filter: drop-shadow(0 0 0px transparent);
+  }
+  100% {
+    stroke-width: 2.3;
+    filter: drop-shadow(0 0 6px var(--accent-subtle));
+  }
 }
 
 .hero-stream {
@@ -655,8 +673,15 @@ a {
   height: 100%;
   border-radius: 3px;
   transform-origin: left center;
-  animation: metricFillIn 1.2s var(--spring-out) forwards;
-  transition: width 520ms var(--spring-out);
+  transform: scaleX(0);
+  transition:
+    width 520ms var(--spring-out),
+    transform 900ms var(--spring-out);
+}
+
+.hero-stage .metric-fill,
+.scroll-stage.is-inview .metric-fill {
+  transform: scaleX(1);
 }
 
 .metric-fill.fill-blue {
@@ -1234,10 +1259,18 @@ a {
   cursor: pointer;
 }
 
-.clickable-node.is-selected,
 .clickable-node.is-selected .trace-node {
   stroke: var(--accent) !important;
-  stroke-width: 2.2 !important;
+  stroke-width: 2.2px !important;
+  fill: var(--accent-subtle) !important;
+  animation: activeBorderPulse 2.4s ease-in-out infinite alternate;
+}
+
+.clickable-node text,
+.hero-deck-svg text,
+.visual-svg text {
+  stroke: none !important;
+  stroke-width: 0 !important;
 }
 
 .trace-edge {
@@ -1252,11 +1285,11 @@ a {
   fill: none;
   stroke-dasharray: 6 18;
   stroke-dashoffset: 48;
-  transition: stroke-dashoffset 900ms linear;
+  animation: packetStream 1.6s linear infinite;
 }
 
 .project-card:hover .trace-packet {
-  animation: packetStream 1.4s linear infinite;
+  animation-duration: 1s;
 }
 
 @keyframes packetStream {
@@ -1271,9 +1304,16 @@ a {
   stroke-width: 1.6;
   transition:
     transform 340ms var(--spring-bounce),
-    stroke 240ms var(--ease-smooth);
+    stroke 240ms var(--ease-smooth),
+    fill 240ms var(--ease-smooth);
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.trace-node.node-accent {
+  stroke: var(--accent);
+  stroke-width: 1.9;
+  animation: activeBorderPulse 2.8s ease-in-out infinite alternate;
 }
 
 .project-card:hover .trace-node.node-accent {
@@ -1330,6 +1370,24 @@ a {
   transform-box: fill-box;
   transform-origin: bottom;
   transition: transform 480ms var(--spring-bounce);
+  animation: ktBarPulse 3.2s ease-in-out infinite alternate;
+}
+
+.kt-bar.b2 {
+  animation-delay: 0.6s;
+}
+
+.kt-bar.b3 {
+  animation-delay: 1.2s;
+}
+
+@keyframes ktBarPulse {
+  0% {
+    transform: scaleY(0.96);
+  }
+  100% {
+    transform: scaleY(1.06);
+  }
 }
 
 .project-card:hover .kt-bar.b1 {
@@ -1348,6 +1406,19 @@ a {
   transform-box: fill-box;
   transform-origin: bottom center;
   transition: transform 420ms var(--spring-bounce);
+}
+
+.fan-card.fc-mid {
+  animation: fanMidPulse 3.4s ease-in-out infinite alternate;
+}
+
+@keyframes fanMidPulse {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.015);
+  }
 }
 
 .project-card:hover .fan-card.fc-left {
@@ -1370,16 +1441,52 @@ a {
   transform-box: fill-box;
   transform-origin: center;
   transform: scaleY(var(--ci-scale, 1));
+  animation: ciBandBreath 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes ciBandBreath {
+  0% {
+    opacity: 0.18;
+  }
+  100% {
+    opacity: 0.34;
+  }
 }
 
 .project-card:hover .ci-band {
-  opacity: 0.34;
+  opacity: 0.36;
 }
 
 .yolo-box {
   transition: transform 520ms var(--spring-out);
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.yolo-box.yb-1 {
+  animation: yoloScanA 3.6s ease-in-out infinite alternate;
+}
+
+.yolo-box.yb-2 {
+  animation: yoloScanB 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes yoloScanA {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes yoloScanB {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-6px);
+  }
 }
 
 .project-card:hover .yolo-box.yb-1 {
@@ -1394,6 +1501,19 @@ a {
   transform-box: fill-box;
   transform-origin: center;
   transition: transform 460ms var(--spring-out);
+}
+
+.iso-zone.iz-top {
+  animation: isoFloatTop 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes isoFloatTop {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-4px);
+  }
 }
 
 .project-card:hover .iso-zone.iz-top {
