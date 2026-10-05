@@ -677,6 +677,80 @@ a {
 }
 
 /* ==========================================================================
+   2B. Self-Introduction & At-a-Glance Bento Section (#about)
+   ========================================================================== */
+
+.about-section {
+  padding: 76px 24px;
+  background: var(--bg-elevated);
+  border-bottom: 12px solid var(--bg-primary);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.about-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-paragraph {
+  font-size: 0.98rem;
+  line-height: 1.68;
+  color: var(--text-secondary);
+}
+
+.about-bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.about-bento-card {
+  padding: 18px 20px;
+  border-radius: var(--radius-md);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition:
+    transform 260ms var(--spring-out),
+    border-color 200ms var(--ease-smooth);
+}
+
+.about-bento-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+}
+
+.bento-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.bento-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+.bento-desc {
+  font-size: 0.82rem;
+  line-height: 1.52;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
    3. Full-Width Scroll-Animated Repository Showcases
    ========================================================================== */
 
@@ -1742,6 +1816,8 @@ a {
 
 @media (max-width: 840px) {
   .bezel-grid,
+  .about-grid,
+  .about-bento,
   .stage-visual-grid,
   .promo-grid,
   .skills-grid {
