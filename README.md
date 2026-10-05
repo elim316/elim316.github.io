@@ -118,7 +118,7 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-7`
+- Asset version in `index.html`: `?v=20261005-8`
 - SessionStorage cache key in `app.js`: `gh_repos_v3_elim316`
 - Recent milestones completed:
   * Added cursor-tracked metallic specular reflection (`--wordmark-spot-x/y`)
