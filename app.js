@@ -870,9 +870,14 @@
       const fReadout = document.getElementById("flagship-tracer-readout");
       const fStepBtns = fTracer.querySelectorAll("[data-fstep-btn]");
       const fSvgNodes = fTracer.querySelectorAll("[data-fstep]");
+      const stepOrder = ["user", "planner", "mcp", "subagent"];
+      let stepIdx = 1;
+      let stepTimer = null;
 
       function selectFlagshipStep(stepKey) {
-        if (fReadout && tracerData[stepKey]) {
+        if (!stepKey || !tracerData[stepKey]) return;
+        stepIdx = Math.max(0, stepOrder.indexOf(stepKey));
+        if (fReadout) {
           fReadout.textContent = tracerData[stepKey];
         }
         fStepBtns.forEach((b) =>
@@ -885,14 +890,21 @@
 
       fStepBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
+          if (stepTimer) clearInterval(stepTimer);
           selectFlagshipStep(btn.getAttribute("data-fstep-btn"));
         });
       });
       fSvgNodes.forEach((node) => {
         node.addEventListener("click", () => {
+          if (stepTimer) clearInterval(stepTimer);
           selectFlagshipStep(node.getAttribute("data-fstep"));
         });
       });
+
+      stepTimer = setInterval(() => {
+        stepIdx = (stepIdx + 1) % stepOrder.length;
+        selectFlagshipStep(stepOrder[stepIdx]);
+      }, 3200);
 
       const fTurns = {
         turn2: {
@@ -919,21 +931,124 @@
       const fBarLabel = document.getElementById("flagship-bar-label");
       const fHarnessReadout = document.getElementById("flagship-harness-readout");
       const fTurnBtns = fTracer.querySelectorAll("[data-fturn-btn]");
+      const turnOrder = ["turn2", "turn8", "turn14"];
+      let turnIdx = 1;
+      let turnTimer = null;
+
+      function selectFlagshipTurn(key) {
+        const cfg = fTurns[key];
+        if (!cfg) return;
+        turnIdx = Math.max(0, turnOrder.indexOf(key));
+        fTurnBtns.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-fturn-btn") === key)
+        );
+        if (fBar) {
+          fBar.setAttribute("width", String(cfg.width));
+          fBar.setAttribute("fill", cfg.color);
+        }
+        if (fBarLabel) fBarLabel.textContent = cfg.label;
+        if (fHarnessReadout) fHarnessReadout.textContent = cfg.readout;
+      }
 
       fTurnBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
-          const key = btn.getAttribute("data-fturn-btn");
-          const cfg = fTurns[key];
-          if (!cfg) return;
-          fTurnBtns.forEach((b) => b.classList.toggle("active", b === btn));
-          if (fBar) {
-            fBar.setAttribute("width", String(cfg.width));
-            fBar.setAttribute("fill", cfg.color);
-          }
-          if (fBarLabel) fBarLabel.textContent = cfg.label;
-          if (fHarnessReadout) fHarnessReadout.textContent = cfg.readout;
+          if (turnTimer) clearInterval(turnTimer);
+          selectFlagshipTurn(btn.getAttribute("data-fturn-btn"));
         });
       });
+
+      turnTimer = setInterval(() => {
+        turnIdx = (turnIdx + 1) % turnOrder.length;
+        selectFlagshipTurn(turnOrder[turnIdx]);
+      }, 3800);
+    }
+
+    const fPrep = document.getElementById("flagship-prep-sandbox");
+    if (fPrep) {
+      const fPrepStages = {
+        nbd: {
+          readout: "Stage 1 · 18:00 SGT Next-Business-Day Dossier",
+          badge: "Multi-Corpus MCP",
+          b1Val: "Calendar + People",
+          b1Width: "92%",
+          b2Val: "5 / 5 Scenarios",
+          b2Width: "100%",
+          b3Val: "18:00 SGT Cron",
+          b3Width: "94%",
+        },
+        linter: {
+          readout: "Stage 2 · Hallucination Linter (36/36 Checks)",
+          badge: "Zero Hallucinated URLs",
+          b1Val: "100% Grounded",
+          b1Width: "100%",
+          b2Val: "36 / 36 Verified",
+          b2Width: "100%",
+          b3Val: "Zero Duplicates",
+          b3Width: "100%",
+        },
+        t1h: {
+          readout: "Stage 3 · Stateless T-1h Pre-Meeting Reminder",
+          badge: "60-Min Window",
+          b1Val: "Cited One-Pager",
+          b1Width: "98%",
+          b2Val: "Gmail + Chat + Drive",
+          b2Width: "96%",
+          b3Val: "Stateless Partition",
+          b3Width: "100%",
+        },
+      };
+
+      const pReadout = document.getElementById("flagship-prep-readout");
+      const pBadge = document.getElementById("flagship-prep-badge");
+      const pB1Val = document.getElementById("flagship-prep-bar1-val");
+      const pB1Fill = document.getElementById("flagship-prep-bar1-fill");
+      const pB2Val = document.getElementById("flagship-prep-bar2-val");
+      const pB2Fill = document.getElementById("flagship-prep-bar2-fill");
+      const pB3Val = document.getElementById("flagship-prep-bar3-val");
+      const pB3Fill = document.getElementById("flagship-prep-bar3-fill");
+      const pBtns = fPrep.querySelectorAll("[data-fprep-btn]");
+      const pNodes = fPrep.querySelectorAll("[data-fprep]");
+      const prepOrder = ["nbd", "linter", "t1h"];
+      let prepIdx = 1;
+      let prepTimer = null;
+
+      function selectPrepStage(key) {
+        const cfg = fPrepStages[key];
+        if (!cfg) return;
+        prepIdx = Math.max(0, prepOrder.indexOf(key));
+        pBtns.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-fprep-btn") === key)
+        );
+        pNodes.forEach((n) =>
+          n.classList.toggle("is-selected", n.getAttribute("data-fprep") === key)
+        );
+        if (pReadout) pReadout.textContent = cfg.readout;
+        if (pBadge) pBadge.textContent = cfg.badge;
+        if (pB1Val) pB1Val.textContent = cfg.b1Val;
+        if (pB1Fill) pB1Fill.style.width = cfg.b1Width;
+        if (pB2Val) pB2Val.textContent = cfg.b2Val;
+        if (pB2Fill) pB2Fill.style.width = cfg.b2Width;
+        if (pB3Val) pB3Val.textContent = cfg.b3Val;
+        if (pB3Fill) pB3Fill.style.width = cfg.b3Width;
+      }
+
+      pBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (prepTimer) clearInterval(prepTimer);
+          selectPrepStage(btn.getAttribute("data-fprep-btn"));
+        });
+      });
+      pNodes.forEach((node) => {
+        node.addEventListener("click", () => {
+          if (prepTimer) clearInterval(prepTimer);
+          selectPrepStage(node.getAttribute("data-fprep"));
+        });
+      });
+
+      prepTimer = setInterval(() => {
+        prepIdx = (prepIdx + 1) % prepOrder.length;
+        selectPrepStage(prepOrder[prepIdx]);
+      }, 3400);
     }
 
     const fUq = document.getElementById("flagship-uq-sandbox");
@@ -943,35 +1058,95 @@
           scale: 0.68,
           title: "CONFORMAL BAND (90% ACI)",
           readout: "PICP: 0.904 · ECE: 0.018",
+          b1Label: "Prediction Interval Coverage (PICP @ 90%)",
+          b1Val: "90.4% Empirical",
+          b1Width: "90%",
+          b2Val: "0.018 ECE",
+          b2Width: "88%",
+          b3Val: "Discharge Cycle & Temp",
+          b3Width: "91%",
         },
         "95": {
           scale: 1.0,
           title: "CONFORMAL BAND (95% ACI)",
           readout: "PICP: 0.952 · ECE: 0.012",
+          b1Label: "Prediction Interval Coverage (PICP @ 95%)",
+          b1Val: "95.2% Empirical",
+          b1Width: "95%",
+          b2Val: "0.012 ECE",
+          b2Width: "93%",
+          b3Val: "Voltage & Temp",
+          b3Width: "95%",
         },
         "99": {
           scale: 1.38,
           title: "CONFORMAL BAND (99% ACI)",
           readout: "PICP: 0.989 · ECE: 0.009",
+          b1Label: "Prediction Interval Coverage (PICP @ 99%)",
+          b1Val: "98.9% Empirical",
+          b1Width: "99%",
+          b2Val: "0.009 ECE",
+          b2Width: "97%",
+          b3Val: "SHAP + LIME + IG",
+          b3Width: "98%",
         },
       };
 
       const fBand = document.getElementById("flagship-aci-band");
       const fTitle = document.getElementById("flagship-aci-title");
       const fReadout = document.getElementById("flagship-aci-readout");
+      const uB1Label = document.getElementById("flagship-uq-bar1-label");
+      const uB1Val = document.getElementById("flagship-uq-bar1-val");
+      const uB1Fill = document.getElementById("flagship-uq-bar1-fill");
+      const uB2Val = document.getElementById("flagship-uq-bar2-val");
+      const uB2Fill = document.getElementById("flagship-uq-bar2-fill");
+      const uB3Val = document.getElementById("flagship-uq-bar3-val");
+      const uB3Fill = document.getElementById("flagship-uq-bar3-fill");
       const fCiBtns = fUq.querySelectorAll("[data-fci-btn]");
+      const fCiNodes = fUq.querySelectorAll("[data-fci-node]");
+      const ciOrder = ["90", "95", "99"];
+      let ciIdx = 1;
+      let ciTimer = null;
+
+      function selectUqLevel(key) {
+        const cfg = fCiLevels[key];
+        if (!cfg) return;
+        ciIdx = Math.max(0, ciOrder.indexOf(key));
+        fCiBtns.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-fci-btn") === key)
+        );
+        fCiNodes.forEach((n) =>
+          n.classList.toggle("is-selected", n.getAttribute("data-fci-node") === key)
+        );
+        if (fBand) fBand.style.setProperty("--ci-scale", String(cfg.scale));
+        if (fTitle) fTitle.textContent = cfg.title;
+        if (fReadout) fReadout.textContent = cfg.readout;
+        if (uB1Label) uB1Label.textContent = cfg.b1Label;
+        if (uB1Val) uB1Val.textContent = cfg.b1Val;
+        if (uB1Fill) uB1Fill.style.width = cfg.b1Width;
+        if (uB2Val) uB2Val.textContent = cfg.b2Val;
+        if (uB2Fill) uB2Fill.style.width = cfg.b2Width;
+        if (uB3Val) uB3Val.textContent = cfg.b3Val;
+        if (uB3Fill) uB3Fill.style.width = cfg.b3Width;
+      }
 
       fCiBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
-          const key = btn.getAttribute("data-fci-btn");
-          const cfg = fCiLevels[key];
-          if (!cfg) return;
-          fCiBtns.forEach((b) => b.classList.toggle("active", b === btn));
-          if (fBand) fBand.style.setProperty("--ci-scale", String(cfg.scale));
-          if (fTitle) fTitle.textContent = cfg.title;
-          if (fReadout) fReadout.textContent = cfg.readout;
+          if (ciTimer) clearInterval(ciTimer);
+          selectUqLevel(btn.getAttribute("data-fci-btn"));
         });
       });
+      fCiNodes.forEach((node) => {
+        node.addEventListener("click", () => {
+          if (ciTimer) clearInterval(ciTimer);
+          selectUqLevel(node.getAttribute("data-fci-node"));
+        });
+      });
+
+      ciTimer = setInterval(() => {
+        ciIdx = (ciIdx + 1) % ciOrder.length;
+        selectUqLevel(ciOrder[ciIdx]);
+      }, 3400);
     }
   }
 
@@ -1311,17 +1486,17 @@
           const heroHeight = Math.max(stage.offsetHeight, 500);
           progress = Math.min(Math.max(scrollY / (heroHeight * 0.65), 0), 1);
         } else {
-          const rect = stage.getBoundingClientRect();
-          const startTop = vh * 0.88;
-          const endTop = vh * 0.14;
-          progress = Math.min(Math.max((startTop - rect.top) / (startTop - endTop), 0), 1);
+          const deckRect = deck.getBoundingClientRect();
+          const startTop = vh * 0.96;
+          const endTop = vh * 0.34;
+          progress = Math.min(Math.max((startTop - deckRect.top) / (startTop - endTop), 0), 1);
         }
 
-        const tilt = (1 - progress) * 14;
-        const deckScale = 0.95 + progress * 0.05;
-        const deckY = idx === 0 ? -progress * 14 : (1 - progress) * 20;
-        const wordmarkY = idx === 0 ? progress * 28 : -16 + progress * 34;
-        const wordmarkScale = 1.02 - progress * 0.06;
+        const tilt = (1 - progress) * 15;
+        const deckScale = 0.93 + progress * 0.07;
+        const deckY = idx === 0 ? -progress * 14 : (1 - progress) * 26;
+        const wordmarkY = idx === 0 ? progress * 28 : -22 + progress * 44;
+        const wordmarkScale = 1.03 - progress * 0.07;
 
         deck.style.setProperty("--deck-tilt", `${tilt.toFixed(2)}deg`);
         deck.style.setProperty("--deck-scale", deckScale.toFixed(3));
