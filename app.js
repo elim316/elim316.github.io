@@ -1521,6 +1521,63 @@
 
     window.addEventListener("resize", updateScrollPhysics);
     updateScrollPhysics();
+
+    /* Mouse-following metallic wordmark reflection & 3D hardware deck tilt */
+    allStages.forEach((stage) => {
+      const visualStage = stage.querySelector(".hero-visual-stage");
+      const deck = stage.querySelector(".hardware-deck");
+      const bezel = stage.querySelector(".hardware-bezel");
+      const wordmark = stage.querySelector(".metallic-wordmark");
+      if (!visualStage || !deck || !wordmark) return;
+
+      stage.addEventListener("mousemove", (e) => {
+        visualStage.classList.add("is-hovered");
+
+        const wmRect = wordmark.getBoundingClientRect();
+        if (wmRect.width > 0 && wmRect.height > 0) {
+          const spotX = Math.min(
+            Math.max(((e.clientX - wmRect.left) / wmRect.width) * 100, -10),
+            110
+          );
+          const spotY = Math.min(
+            Math.max(((e.clientY - wmRect.top) / wmRect.height) * 100, -20),
+            120
+          );
+          wordmark.style.setProperty("--wordmark-spot-x", `${spotX.toFixed(1)}%`);
+          wordmark.style.setProperty("--wordmark-spot-y", `${spotY.toFixed(1)}%`);
+        }
+
+        const stRect = visualStage.getBoundingClientRect();
+        if (stRect.width > 0 && stRect.height > 0) {
+          const normX = ((e.clientX - stRect.left) / stRect.width - 0.5) * 2;
+          const normY = ((e.clientY - stRect.top) / stRect.height - 0.5) * 2;
+
+          wordmark.style.setProperty("--wordmark-mx", `${(-normX * 14).toFixed(1)}px`);
+          wordmark.style.setProperty("--wordmark-my", `${(-normY * 6).toFixed(1)}px`);
+
+          deck.style.setProperty("--mouse-ry", `${(normX * 4.2).toFixed(2)}deg`);
+          deck.style.setProperty("--mouse-rx", `${(-normY * 3.2).toFixed(2)}deg`);
+          deck.style.setProperty("--mouse-lift", "-3px");
+        }
+
+        if (bezel) {
+          const bzRect = bezel.getBoundingClientRect();
+          bezel.style.setProperty("--bezel-mx", `${(e.clientX - bzRect.left).toFixed(0)}px`);
+          bezel.style.setProperty("--bezel-my", `${(e.clientY - bzRect.top).toFixed(0)}px`);
+        }
+      });
+
+      stage.addEventListener("mouseleave", () => {
+        visualStage.classList.remove("is-hovered");
+        wordmark.style.setProperty("--wordmark-spot-x", "50%");
+        wordmark.style.setProperty("--wordmark-spot-y", "50%");
+        wordmark.style.setProperty("--wordmark-mx", "0px");
+        wordmark.style.setProperty("--wordmark-my", "0px");
+        deck.style.setProperty("--mouse-ry", "0deg");
+        deck.style.setProperty("--mouse-rx", "0deg");
+        deck.style.setProperty("--mouse-lift", "0px");
+      });
+    });
   }
 
   function updateFilterCounts() {
