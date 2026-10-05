@@ -131,10 +131,12 @@
 
         <div class="cta-pill-group reveal-hero" style="--d: 200ms">
           <a href="#featured" class="apple-pill solid" id="hero-browse-btn">
-            Browse projects
+            <span>Browse projects</span>
+            <span aria-hidden="true">&#8595;</span>
           </a>
-          <a href="#about" class="apple-pill outline" id="hero-about-btn">
-            About me
+          <a href="#about" class="apple-pill solid" id="hero-about-btn">
+            <span>About me</span>
+            <span aria-hidden="true">&#8595;</span>
           </a>
           <a
             href="https://github.com/elim316"
@@ -143,7 +145,10 @@
             class="apple-pill subtle"
             id="hero-github-link"
           >
-            GitHub (@elim316) &#8599;
+            <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            <span>GitHub (@elim316) &#8599;</span>
           </a>
           <a
             href="https://linkedin.com/in/eliaslim"
@@ -152,7 +157,10 @@
             class="apple-pill subtle"
             id="hero-linkedin-link"
           >
-            LinkedIn &#8599;
+            <svg class="brand-icon icon-linkedin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path>
+            </svg>
+            <span>LinkedIn &#8599;</span>
           </a>
           <a
             href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ"
@@ -161,7 +169,10 @@
             class="apple-pill subtle"
             id="hero-scholar-link"
           >
-            Google Scholar &#8599;
+            <svg class="brand-icon icon-scholar" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"></path>
+            </svg>
+            <span>Google Scholar &#8599;</span>
           </a>
         </div>
       </div>
@@ -271,16 +282,35 @@
 
         <div class="cta-pill-group about-chapter-pills" id="about-chapter-tabs" role="tablist" aria-label="Interactive career and personal chapters">
           <button type="button" class="sandbox-pill chapter-pill active" data-about-tab="google" role="tab" aria-selected="true">
-            01 · Google (Cloud &amp; AI)
+            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"/>
+            </svg>
+            <span>01 · Google (Cloud &amp; AI)</span>
           </button>
           <button type="button" class="sandbox-pill chapter-pill" data-about-tab="grab" role="tab" aria-selected="false">
-            02 · Grab (Trust &amp; Safety)
+            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect width="24" height="24" rx="6" fill="#00B14F"/>
+              <path d="M16.5 11.2h-4.3v2.1h2.2c-.3 1.2-1.3 2-2.6 2-1.7 0-3-1.3-3-3.1s1.3-3.1 3-3.1c.9 0 1.7.4 2.2 1l1.6-1.5C14.6 7.6 13.3 7 11.8 7 8.9 7 6.5 9.3 6.5 12.2s2.4 5.2 5.3 5.2c3 0 5-2.1 5-5 0-.4 0-.8-.3-1.2z" fill="#ffffff"/>
+            </svg>
+            <span>02 · Grab (Trust &amp; Safety)</span>
           </button>
           <button type="button" class="sandbox-pill chapter-pill" data-about-tab="astar" role="tab" aria-selected="false">
-            03 · A*STAR (AI Research)
+            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect width="24" height="24" rx="6" fill="#003876"/>
+              <polygon points="12,4.5 13.9,9.5 19.2,9.5 14.9,12.6 16.5,17.7 12,14.6 7.5,17.7 9.1,12.6 4.8,9.5 10.1,9.5" fill="#ffffff"/>
+              <circle cx="17.5" cy="6.5" r="2.1" fill="#E31837"/>
+            </svg>
+            <span>03 · A*STAR (AI Research)</span>
           </button>
           <button type="button" class="sandbox-pill chapter-pill" data-about-tab="beyond" role="tab" aria-selected="false">
-            04 · Glasgow, SIT &amp; Court Life
+            <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect width="24" height="24" rx="6" fill="#00539B"/>
+              <path d="M12 5L4 9l8 4 6.5-3.25V14.5h1.5V9L12 5zm-5 6.75v3.5L12 18l5-2.75v-3.5L12 14.5l-5-2.75z" fill="#ffffff"/>
+            </svg>
+            <span>04 · Glasgow, SIT &amp; Court Life</span>
           </button>
         </div>
       </div>
@@ -411,25 +441,52 @@
                 <div class="about-mini-bento">
                   <button type="button" class="about-mini-card active" data-about-card="google">
                     <span class="mini-card-eyebrow">CURRENT ROLE</span>
-                    <span class="mini-card-title">Customer Engineer · Google</span>
+                    <span class="mini-card-title">
+                      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                      </svg>
+                      <span>Customer Engineer · Google</span>
+                    </span>
                     <span class="mini-card-sub">Terraform · Dual-VPC · Agent Visualiser</span>
                   </button>
 
                   <button type="button" class="about-mini-card" data-about-card="grab">
                     <span class="mini-card-eyebrow">BACKEND SYSTEMS</span>
-                    <span class="mini-card-title">Trust SWE · Grab (TIS)</span>
+                    <span class="mini-card-title">
+                      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect width="24" height="24" rx="6" fill="#00B14F"/>
+                        <path d="M16.5 11.2h-4.3v2.1h2.2c-.3 1.2-1.3 2-2.6 2-1.7 0-3-1.3-3-3.1s1.3-3.1 3-3.1c.9 0 1.7.4 2.2 1l1.6-1.5C14.6 7.6 13.3 7 11.8 7 8.9 7 6.5 9.3 6.5 12.2s2.4 5.2 5.3 5.2c3 0 5-2.1 5-5 0-.4 0-.8-.3-1.2z" fill="#ffffff"/>
+                      </svg>
+                      <span>Trust SWE · Grab (TIS)</span>
+                    </span>
                     <span class="mini-card-sub">Golang · Fraud Detection · PB-Scale</span>
                   </button>
 
                   <button type="button" class="about-mini-card" data-about-card="astar">
                     <span class="mini-card-eyebrow">APPLIED ML RESEARCH</span>
-                    <span class="mini-card-title">AI Research · A*STAR</span>
+                    <span class="mini-card-title">
+                      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect width="24" height="24" rx="6" fill="#003876"/>
+                        <polygon points="12,4.5 13.9,9.5 19.2,9.5 14.9,12.6 16.5,17.7 12,14.6 7.5,17.7 9.1,12.6 4.8,9.5 10.1,9.5" fill="#ffffff"/>
+                        <circle cx="17.5" cy="6.5" r="2.1" fill="#E31837"/>
+                      </svg>
+                      <span>AI Research · A*STAR</span>
+                    </span>
                     <span class="mini-card-sub">1st Author IEEE · Conformal UQ &amp; XAI</span>
                   </button>
 
                   <button type="button" class="about-mini-card" data-about-card="beyond">
                     <span class="mini-card-eyebrow">EDUCATION &amp; LIFE</span>
-                    <span class="mini-card-title">Glasgow &amp; SIT · Off Court</span>
+                    <span class="mini-card-title">
+                      <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect width="24" height="24" rx="6" fill="#00539B"/>
+                        <path d="M12 5L4 9l8 4 6.5-3.25V14.5h1.5V9L12 5zm-5 6.75v3.5L12 18l5-2.75v-3.5L12 14.5l-5-2.75z" fill="#ffffff"/>
+                      </svg>
+                      <span>Glasgow &amp; SIT · Off Court</span>
+                    </span>
                     <span class="mini-card-sub">BSc CS (2:1) · Basketball &amp; Pickleball</span>
                   </button>
                 </div>
@@ -481,15 +538,21 @@
               rel="noopener noreferrer"
               class="apple-pill solid"
             >
-              View Agent Tracer Repo &#8599;
+              <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+              </svg>
+              <span>View Agent Tracer Repo &#8599;</span>
             </a>
             <a
               href="https://github.com/elim316/Jetski-Harness"
               target="_blank"
               rel="noopener noreferrer"
-              class="apple-pill outline"
+              class="apple-pill solid"
             >
-              View Jetski Harness Repo &#8599;
+              <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+              </svg>
+              <span>View Jetski Harness Repo &#8599;</span>
             </a>
           </div>
         </div>
@@ -587,10 +650,11 @@
               rel="noopener noreferrer"
               class="apple-pill solid"
             >
-              View Repository &#8599;
+              <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              <span>View Repository &#8599;</span>
             </a>
-            <a href="#project-meeting-prep-agent" class="apple-pill outline">
-              Technical specs &#8595;
+            <a href="#project-meeting-prep-agent" class="apple-pill solid">
+              <span>Technical specs &#8595;</span>
             </a>
           </div>
         </div>
@@ -693,15 +757,17 @@
               rel="noopener noreferrer"
               class="apple-pill solid"
             >
-              View Repository &#8599;
+              <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              <span>View Repository &#8599;</span>
             </a>
             <a
               href="https://ieeexplore.ieee.org/document/11249263"
               target="_blank"
               rel="noopener noreferrer"
-              class="apple-pill outline"
+              class="apple-pill solid"
             >
-              Read IEEE Paper &#8599;
+              <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 2zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+              <span>Read IEEE Paper &#8599;</span>
             </a>
           </div>
         </div>
@@ -848,7 +914,10 @@
         <div class="timeline-item reveal-on-scroll" id="milestone-gcloud">
           <div class="timeline-meta">
             <span class="timeline-year">Apr 2026 to Present</span>
-            <span class="timeline-tag">Google · Singapore</span>
+            <span class="timeline-tag">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24Z"/><path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96Z"/></svg>
+              <span>Google · Singapore</span>
+            </span>
           </div>
           <div class="timeline-content">
             <h3 class="timeline-title">Customer Engineer · Google</h3>
@@ -861,7 +930,10 @@
         <div class="timeline-item reveal-on-scroll" id="milestone-grab">
           <div class="timeline-meta">
             <span class="timeline-year">Jan 2026 to Mar 2026</span>
-            <span class="timeline-tag">Grab · TIS</span>
+            <span class="timeline-tag">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.5" fill="#00B14F"/><path fill="#FFFFFF" d="M12.2 5.5c-3.7 0-6.5 2.8-6.5 6.5s2.8 6.5 6.5 6.5c2.9 0 5.3-1.8 6.1-4.4H13v-2.4h7.5v1.1c0 4.6-3.5 8.1-8.3 8.1-4.9 0-8.9-4-8.9-8.9s4-8.9 8.9-8.9c2.5 0 4.8 1 6.4 2.6l-1.8 1.8c-1.1-1.2-2.7-2-4.6-2Z"/></svg>
+              <span>Grab · TIS</span>
+            </span>
           </div>
           <div class="timeline-content">
             <h3 class="timeline-title">Trust Software Engineer · Grab (Trust, Identity &amp; Safety)</h3>
@@ -874,7 +946,10 @@
         <div class="timeline-item reveal-on-scroll" id="milestone-astar">
           <div class="timeline-meta">
             <span class="timeline-year">Sep 2024 to May 2025</span>
-            <span class="timeline-tag">A*STAR · Research</span>
+            <span class="timeline-tag">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#003876"/><path fill="#FFFFFF" d="M12 4.2l2.1 4.8 5.2.5-3.9 3.4 1.2 5.1L12 15.3 7.4 18l1.2-5.1-3.9-3.4 5.2-.5L12 4.2Z"/><circle cx="17.5" cy="6.5" r="2.2" fill="#E31837"/></svg>
+              <span>A*STAR · Research</span>
+            </span>
           </div>
           <div class="timeline-content">
             <h3 class="timeline-title">AI Research Intern · A*STAR (Agency for Science, Technology and Research)</h3>
@@ -887,7 +962,10 @@
         <div class="timeline-item reveal-on-scroll" id="milestone-education">
           <div class="timeline-meta">
             <span class="timeline-year">Aug 2022 to May 2025</span>
-            <span class="timeline-tag">Glasgow &amp; SIT</span>
+            <span class="timeline-tag">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.5" fill="#00539B"/><path fill="#FFFFFF" d="M12 4.5L3.5 9 12 13.5 20.5 9 12 4.5Zm-5.5 7.2v4.2c0 1.8 2.5 3.3 5.5 3.3s5.5-1.5 5.5-3.3v-4.2L12 14.8l-5.5-3.1Z"/></svg>
+              <span>Glasgow &amp; SIT</span>
+            </span>
           </div>
           <div class="timeline-content">
             <h3 class="timeline-title">BSc (Hons) Computer Science (Second Upper Class) · University of Glasgow &amp; SIT</h3>
@@ -1102,9 +1180,18 @@
         <span class="footer-clock" id="local-time-display">Singapore (GMT+8)</span>
       </div>
       <div class="footer-links">
-        <a href="https://github.com/elim316" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://linkedin.com/in/eliaslim" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="https://github.com/elim316" target="_blank" rel="noopener noreferrer">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/eliaslim" target="_blank" rel="noopener noreferrer">
+          <svg class="brand-icon icon-linkedin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://scholar.google.com/citations?user=f2hfYeoAAAAJ" target="_blank" rel="noopener noreferrer">
+          <svg class="brand-icon icon-scholar" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 2zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+          <span>Google Scholar</span>
+        </a>
       </div>
     </div>
   </footer>
