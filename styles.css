@@ -809,14 +809,15 @@ a {
 
 .about-mini-card {
   text-align: left;
-  padding: 10px 12px;
+  padding: 10px 10px;
   border-radius: var(--radius-sm);
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  min-width: 0;
   transition:
     transform 220ms var(--spring-out),
     border-color 180ms var(--ease-smooth),
@@ -835,22 +836,29 @@ a {
 
 .mini-card-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.05em;
   color: var(--accent-text);
+  white-space: nowrap;
 }
 
 .mini-card-title {
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.77rem;
   font-weight: 600;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mini-card-sub {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.63rem;
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .about-bars {
@@ -1130,15 +1138,16 @@ a {
 
 .project-visual {
   position: relative;
-  height: 174px;
+  min-height: 184px;
+  height: auto;
   background: var(--bg-canvas);
   border-top: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
-  padding: 14px 18px 10px;
+  gap: 8px;
+  padding: 14px 18px 12px;
 }
 
 .visual-svg {
@@ -1151,9 +1160,10 @@ a {
 .sandbox-bar {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px 8px;
   padding-top: 6px;
   border-top: 1px dashed var(--border-subtle);
   font-family: var(--font-mono);
@@ -1212,8 +1222,8 @@ a {
 
 .clickable-node.is-selected {
   stroke: var(--accent) !important;
-  stroke-width: 2.4 !important;
-  transform: scale(1.16);
+  stroke-width: 2.2 !important;
+  transform: scale(1.06);
 }
 
 .trace-edge {
@@ -1254,22 +1264,23 @@ a {
 
 .project-card:hover .trace-node.node-accent {
   stroke: var(--accent);
-  transform: scale(1.12);
+  transform: scale(1.06);
 }
 
 .visual-label {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 9px;
   fill: var(--text-secondary);
 }
 
 .visual-badge {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 8.8px;
   fill: var(--accent-text);
 }
 
 .token-fill-bar {
+  transform: none !important;
   transition:
     width 460ms var(--spring-out),
     fill 260ms var(--ease-smooth);
@@ -1308,15 +1319,15 @@ a {
 }
 
 .project-card:hover .kt-bar.b1 {
-  transform: scaleY(1.22);
+  transform: scaleY(1.08);
 }
 
 .project-card:hover .kt-bar.b2 {
-  transform: scaleY(1.35);
+  transform: scaleY(1.12);
 }
 
 .project-card:hover .kt-bar.b3 {
-  transform: scaleY(1.18);
+  transform: scaleY(1.06);
 }
 
 .fan-card {
