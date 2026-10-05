@@ -539,6 +539,9 @@ a {
   font-size: 0.68rem;
   letter-spacing: 0.03em;
   color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pane-badge {
@@ -548,6 +551,8 @@ a {
   background: var(--accent-subtle);
   padding: 2px 8px;
   border-radius: var(--radius-pill);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .hero-deck-svg {
@@ -1132,8 +1137,9 @@ a {
 
 .sandbox-pills {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   flex-shrink: 0;
 }
 
@@ -1145,6 +1151,7 @@ a {
   border: 1px solid var(--border-subtle);
   background: var(--bg-elevated);
   color: var(--text-secondary);
+  white-space: nowrap;
   cursor: pointer;
   transition:
     background-color 180ms var(--ease-smooth),
@@ -1229,10 +1236,8 @@ a {
 }
 
 .token-fill-bar {
-  transform-origin: left center;
-  transform: scaleX(var(--token-scale, 0.71));
   transition:
-    transform 460ms var(--spring-out),
+    width 460ms var(--spring-out),
     fill 260ms var(--ease-smooth);
 }
 
