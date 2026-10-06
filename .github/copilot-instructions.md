@@ -47,9 +47,10 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
   Whenever you edit `styles.css` or `app.js`, increment the version query string in `index.html` (`styles.css?v=YYYYMMDD-N` and `app.js?v=YYYYMMDD-N`) and bump `cacheKey` (`gh_repos_v4_elim316`) in `app.js` if the project list changed.
 
 ## 5. Current State & Changelog
-- Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-11`
+- Last updated: 2026-10-06
+- Asset version in `index.html`: `?v=20261005-12`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
+  * Repurposed the bottom stage controller Play/Pause button (`#stage-dock-play-btn`) into a human neural voice-over narrator (`Listen` / `Pause` with live waveform indicator) backed by pre-generated Gemini neural TTS MP3s in `audio/` (`stage-builder.mp3`, `stage-profile-google.mp3`, `stage-profile-grab.mp3`, `stage-profile-astar.mp3`, `stage-profile-beyond.mp3`, `stage-tracer.mp3`, `stage-dossier.mp3`, `stage-research.mp3`) and a Web Speech API fallback.
   * Added `jumpgate-agentic-lz` ("Jumpgate · Zero-Trust Agentic AI Landing Zone & Vending Machine") as the #1 curated project with custom interactive SVG visualisation, dual repository links (`Landing Zone Repo` & `Vending Machine Repo`), and integrated Jumpgate datapoints (`< 3 min` deploy down from 4-6 weeks, `14/14` Ingress & `18/18` Egress IM8 security checks, `14-step ADLC` with `>=0.85` LLM-as-a-Judge gate, and `$1.96M` realised public sector ARR + `$1.46M` pipeline) across `#hero-stage`, `#about`, `#journey`, `#bento-specs-grid`, and `#projects`.
   * Removed mouse-movement parallax (`--wordmark-mx`, `--wordmark-my`) from `.metallic-wordmark` so the words never shift position on hover, keeping only the colour spotlight reflection (`--wordmark-spot-size: 260px`) and continuous default `titaniumShimmer` sparkle.
