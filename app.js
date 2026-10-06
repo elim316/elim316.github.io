@@ -2501,10 +2501,49 @@
       };
     }
 
+    const teleprompterEl = document.getElementById("stage-dock-teleprompter");
+    const teleprompterTextEl = document.getElementById("teleprompter-text");
+    const speedBtn = document.getElementById("stage-dock-speed-btn");
+    const speedRates = [1.0, 1.25, 1.5];
+    let currentSpeedIdx = 0;
+    let currentSentences = [];
+
+    function splitIntoSentences(text) {
+      if (!text) return [];
+      const parts = text
+        .split(/(?<=[.!?])\s+/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+      return parts.length > 0 ? parts : [text.trim()];
+    }
+
+    function updateTeleprompterProgress(progressRatio) {
+      if (!teleprompterTextEl || currentSentences.length === 0) return;
+      const clamped = Math.max(0, Math.min(0.999, Number(progressRatio) || 0));
+      const idx = Math.min(
+        currentSentences.length - 1,
+        Math.floor(clamped * currentSentences.length)
+      );
+      teleprompterTextEl.textContent = currentSentences[idx];
+    }
+
+    if (speedBtn) {
+      speedBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentSpeedIdx = (currentSpeedIdx + 1) % speedRates.length;
+        const rate = speedRates[currentSpeedIdx];
+        audioPlayer.playbackRate = rate;
+        speedBtn.textContent = `${rate}x`;
+      });
+    }
+
     function setVoiceUiState(speaking) {
       isNarrating = speaking;
       if (!speaking) {
         setRingProgress(0);
+      }
+      if (teleprompterEl) {
+        teleprompterEl.classList.toggle("is-visible", speaking);
       }
       if (playBtn) {
         playBtn.classList.toggle("is-speaking", speaking);
@@ -2548,9 +2587,11 @@
       }
       try {
         window.speechSynthesis.cancel();
+        currentSentences = splitIntoSentences(text);
+        updateTeleprompterProgress(0);
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = "en-GB";
-        utter.rate = 0.98;
+        utter.rate = 0.98 * speedRates[currentSpeedIdx];
         const voices = window.speechSynthesis.getVoices() || [];
         const preferred =
           voices.find(
@@ -2581,6 +2622,9 @@
         } catch (_) {}
       }
 
+      currentSentences = splitIntoSentences(payload.speechText || "");
+      updateTeleprompterProgress(0);
+
       if (!payload.audioSrc) {
         currentTrackKey = payload.key;
         speakFallbackWithWebSpeech(payload.speechText);
@@ -2588,6 +2632,7 @@
       }
 
       if (!forceRestart && currentTrackKey === payload.key && audioPlayer.src) {
+        audioPlayer.playbackRate = speedRates[currentSpeedIdx];
         setVoiceUiState(true);
         audioPlayer.play().catch(() => {
           speakFallbackWithWebSpeech(payload.speechText);
@@ -2598,6 +2643,7 @@
       currentTrackKey = payload.key;
       audioPlayer.src = payload.audioSrc;
       audioPlayer.currentTime = 0;
+      audioPlayer.playbackRate = speedRates[currentSpeedIdx];
       setVoiceUiState(true);
       audioPlayer.play().catch(() => {
         speakFallbackWithWebSpeech(payload.speechText);
@@ -2625,7 +2671,9 @@
 
     audioPlayer.addEventListener("timeupdate", () => {
       if (isNarrating && audioPlayer.duration > 0) {
-        setRingProgress(audioPlayer.currentTime / audioPlayer.duration);
+        const ratio = audioPlayer.currentTime / audioPlayer.duration;
+        setRingProgress(ratio);
+        updateTeleprompterProgress(ratio);
       }
     });
 
@@ -3099,6 +3147,468 @@
     window.addEventListener("hashchange", () => applyDeepLinkHash(window.location.hash, true));
   }
 
+  /* 1. Apple "Get the Highlights." Horizontal Snap Carousel */
+  function initAppleHighlightsCarousel() {
+    const track = document.getElementById("highlights-track");
+    const prevBtn = document.getElementById("highlights-prev");
+    const nextBtn = document.getElementById("highlights-next");
+    const dots = Array.from(document.querySelectorAll("#highlights-dots .highlight-dot"));
+    const cards = Array.from(document.querySelectorAll("#highlights-track .highlight-card"));
+    if (!track || cards.length === 0) return;
+
+    let activeIdx = 0;
+
+    function scrollToCard(idx) {
+      const clamped = (idx + cards.length) % cards.length;
+      activeIdx = clamped;
+      const card = cards[clamped];
+      if (card) {
+        track.scrollTo({
+          left: card.offsetLeft - track.offsetLeft,
+          behavior: "smooth",
+        });
+      }
+      dots.forEach((d, i) => {
+        const isAct = i === clamped;
+        d.classList.toggle("active", isAct);
+        d.setAttribute("aria-selected", isAct ? "true" : "false");
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => scrollToCard(activeIdx - 1));
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => scrollToCard(activeIdx + 1));
+    }
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const idx = Number(dot.getAttribute("data-highlight-idx") || 0);
+        scrollToCard(idx);
+      });
+    });
+
+    track.addEventListener(
+      "scroll",
+      () => {
+        const scrollLeft = track.scrollLeft;
+        let best = 0;
+        let bestDist = Infinity;
+        cards.forEach((c, i) => {
+          const dist = Math.abs(c.offsetLeft - track.offsetLeft - scrollLeft);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = i;
+          }
+        });
+        if (best !== activeIdx) {
+          activeIdx = best;
+          dots.forEach((d, i) => {
+            const isAct = i === best;
+            d.classList.toggle("active", isAct);
+            d.setAttribute("aria-selected", isAct ? "true" : "false");
+          });
+        }
+      },
+      { passive: true }
+    );
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const targetSel = card.getAttribute("data-highlight-target");
+        if (!targetSel) return;
+        const targetEl = document.querySelector(targetSel);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  }
+
+  /* 2. Smooth-Gliding macOS/iOS Segmented Pill Indicator */
+  function initSlidingSegmentedControls() {
+    const selectors = ["#about-chapter-tabs", "#filter-bar", "#bento-compare-bar"];
+    const updaters = [];
+
+    selectors.forEach((sel) => {
+      const bar = document.querySelector(sel);
+      if (!bar) return;
+      bar.classList.add("has-sliding-pill");
+      let pill = bar.querySelector(".seg-glide-pill");
+      if (!pill) {
+        pill = document.createElement("span");
+        pill.className = "seg-glide-pill";
+        pill.setAttribute("aria-hidden", "true");
+        bar.prepend(pill);
+      }
+
+      const updatePill = () => {
+        const activeBtn = bar.querySelector("button.active");
+        if (!activeBtn) return;
+        const x = activeBtn.offsetLeft;
+        const y = activeBtn.offsetTop;
+        const w = activeBtn.offsetWidth;
+        const h = activeBtn.offsetHeight;
+        if (w > 0 && h > 0) {
+          pill.style.width = `${w}px`;
+          pill.style.height = `${h}px`;
+          pill.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          bar.classList.add("glide-ready");
+        }
+      };
+
+      bar.querySelectorAll("button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          requestAnimationFrame(updatePill);
+        });
+      });
+
+      updaters.push(updatePill);
+      requestAnimationFrame(updatePill);
+      setTimeout(updatePill, 180);
+    });
+
+    window.addEventListener(
+      "resize",
+      () => {
+        updaters.forEach((fn) => fn());
+      },
+      { passive: true }
+    );
+  }
+
+  /* 3. Interactive "X-Ray Specs" Toggle inside the 6 Hardware Stage Bezels */
+  function initHardwareXraySpecs() {
+    const stageSpecs = {
+      "hero-stage": [
+        {
+          label: "RUNTIME & TRANSPORT",
+          val: "Go · Python · Connect-RPC",
+          sub: "Streaming sidecar telemetry + Terraform Dual-VPC provisioning",
+        },
+        {
+          label: "SECURITY POSTURE",
+          val: "IM8 Zero-Trust · 32/32",
+          sub: "14/14 Ingress runtime + 18/18 Egress static security gates",
+        },
+        {
+          label: "EVALUATION GATE",
+          val: ">= 0.85 Judge · 36/36",
+          sub: "Automated LLM-as-a-Judge + zero-hallucination URL linter",
+        },
+        {
+          label: "PRODUCTION IMPACT",
+          val: "$1.96M ARR · < 3 min",
+          sub: "4,000+ engineers trained across GovTech, DBS, NTU & A*STAR",
+        },
+      ],
+      about: [
+        {
+          label: "CLOUD ARCHITECTURE",
+          val: "Google · Singapore",
+          sub: "Jumpgate Dual-VPC landing zone & 14-step Vending Machine Agent",
+        },
+        {
+          label: "HIGH-SCALE BACKEND",
+          val: "Grab · Singapore",
+          sub: "Golang fraud detection services, feature flags & rate limiting",
+        },
+        {
+          label: "APPLIED ML RESEARCH",
+          val: "A*STAR · Singapore",
+          sub: "First-author IEEE Xplore conformal UQ & SHAP/LIME explainability",
+        },
+        {
+          label: "HONOURS & DEGREE",
+          val: "Glasgow & SIT · 2:1",
+          sub: "2nd Place LifeHack 2025 · Overall Best AISG/SMU · DSTA Semifinalist",
+        },
+      ],
+      "showcase-jumpgate": [
+        {
+          label: "INGRESS PERIMETER",
+          val: "Cloud Armor + L7 LB",
+          sub: "OWASP WAF rules, Serverless NEG & zero public IP exposure",
+        },
+        {
+          label: "EGRESS ISOLATION",
+          val: "Private Service Connect",
+          sub: "Dedicated consumer-to-producer PSC tunnel + Secure Web Proxy",
+        },
+        {
+          label: "AGENTIC VENDING",
+          val: "14-Step ADLC Pipeline",
+          sub: "Automated Discovery, Architecture, IaC & >=0.85 Judge Gate",
+        },
+        {
+          label: "VERIFIED OUTCOME",
+          val: "4-6 wks -> < 3 min",
+          sub: "$1.96M realised public sector ARR (+$1.46M pipeline)",
+        },
+      ],
+      "showcase-agent-tracer": [
+        {
+          label: "INGESTION ENGINE",
+          val: "Go fsnotify Watcher",
+          sub: "Zero-polling local JSONL trajectory tailing with sub-ms diffs",
+        },
+        {
+          label: "STREAMING RPC",
+          val: "Connect-RPC Server",
+          sub: "Typed server-streaming spans for Planner, Tool & Subagent nodes",
+        },
+        {
+          label: "CONTEXT TELEMETRY",
+          val: "128k Token Gauge",
+          sub: "Real-time context window saturation & cost-burn attribution",
+        },
+        {
+          label: "FRONTEND INTERFACE",
+          val: "Svelte 5 Runes DAG",
+          sub: "Interactive execution graph with zero external cloud lock-in",
+        },
+      ],
+      "showcase-meeting-prep": [
+        {
+          label: "CADENCE ARCHITECTURE",
+          val: "Two-Stage Scheduler",
+          sub: "Next-Business-Day 17:00 briefing + stateless T-1h reminder",
+        },
+        {
+          label: "MULTI-CORPUS FUSION",
+          val: "Workspace MCP Suite",
+          sub: "Parallel Calendar, Gmail, Chat, Drive & Docs context synthesis",
+        },
+        {
+          label: "VERIFICATION HARNESS",
+          val: "36 / 36 Eval Checks",
+          sub: "Strict URL grounding linter with 0 hallucinated citations",
+        },
+        {
+          label: "DEDUPLICATION",
+          val: "60-Min Window Lock",
+          sub: "Idempotent dispatch preventing duplicate pre-meeting alerts",
+        },
+      ],
+      "showcase-uq-xai": [
+        {
+          label: "UNCERTAINTY ENGINE",
+          val: "Adaptive Conformal",
+          sub: "Distribution-free prediction intervals under exchangeability shift",
+        },
+        {
+          label: "CALIBRATION METRICS",
+          val: "95.2% PICP · 0.012 ECE",
+          sub: "Verified across McMaster and Oxford battery degradation datasets",
+        },
+        {
+          label: "EXPLAINABILITY SUITE",
+          val: "SHAP · LIME · IG",
+          sub: "Consistent physical attribution across voltage, temp & capacity",
+        },
+        {
+          label: "PUBLICATION VENUE",
+          val: "IEEE Xplore · 2025",
+          sub: "First Author · APSIPA ASC 2025 (Document 11249263)",
+        },
+      ],
+    };
+
+    Object.entries(stageSpecs).forEach(([stageId, specs]) => {
+      const stageEl = document.getElementById(stageId);
+      if (!stageEl) return;
+      const bezel = stageEl.querySelector(".hardware-bezel");
+      const topBar = stageEl.querySelector(".bezel-top-bar");
+      if (!bezel || !topBar || topBar.querySelector(".bezel-xray-btn")) return;
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "bezel-xray-btn";
+      btn.setAttribute("aria-expanded", "false");
+      btn.textContent = "X-Ray Specs";
+      topBar.appendChild(btn);
+
+      const drawer = document.createElement("div");
+      drawer.className = "bezel-xray-drawer";
+      drawer.innerHTML = `
+        <div class="xray-spec-grid">
+          ${specs
+            .map(
+              (s) => `
+            <div class="xray-spec-cell">
+              <span class="xray-spec-label">${escapeHtml(s.label)}</span>
+              <span class="xray-spec-val">${escapeHtml(s.val)}</span>
+              <span class="xray-spec-sub">${escapeHtml(s.sub)}</span>
+            </div>
+          `
+            )
+            .join("")}
+        </div>
+      `;
+      bezel.appendChild(drawer);
+
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = bezel.classList.toggle("is-xray-open");
+        btn.classList.toggle("is-active", isOpen);
+        btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        btn.textContent = isOpen ? "Hide X-Ray" : "X-Ray Specs";
+      });
+    });
+  }
+
+  /* 4. Scroll-Triggered Number Counter Roll-Ups & Bar Fill Physics */
+  function initScrollCountUpAndBars() {
+    if (!("IntersectionObserver" in window)) return;
+
+    const statTargets = [
+      { id: "bento-stat-1", prefix: "$", target: 1.96, decimals: 2, suffix: "M" },
+      { id: "bento-stat-2", prefix: "< ", target: 3, decimals: 0, suffix: " min" },
+      { id: "bento-stat-3", prefix: "", target: 100, decimals: 0, suffix: "%" },
+      { id: "bento-stat-4", prefix: "", target: 95.2, decimals: 1, suffix: "%" },
+    ];
+
+    const statObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          statObserver.unobserve(el);
+          const cfg = statTargets.find((s) => s.id === el.id);
+          if (!cfg) return;
+          const duration = 900;
+          const startTs = performance.now();
+          function step(now) {
+            const p = Math.min(1, (now - startTs) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            const val = (cfg.target * eased).toFixed(cfg.decimals);
+            el.textContent = `${cfg.prefix}${val}${cfg.suffix}`;
+            if (p < 1) {
+              requestAnimationFrame(step);
+            }
+          }
+          requestAnimationFrame(step);
+        });
+      },
+      { threshold: 0.35 }
+    );
+
+    statTargets.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) statObserver.observe(el);
+    });
+
+    const barEls = document.querySelectorAll(".metric-fill");
+    const barObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const bar = entry.target;
+          barObserver.unobserve(bar);
+          const targetWidth = bar.style.width || "92%";
+          bar.style.width = "0%";
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              bar.style.width = targetWidth;
+            });
+          });
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    barEls.forEach((bar) => barObserver.observe(bar));
+  }
+
+  /* 5. Apple-Style "Compare Systems" Side-by-Side Architecture Selector */
+  function initCompareSystemsSelector() {
+    const selA = document.getElementById("compare-select-a");
+    const selB = document.getElementById("compare-select-b");
+    const swapBtn = document.getElementById("compare-swap-btn");
+    const grid = document.getElementById("compare-cards-grid");
+    if (!selA || !selB || !grid || PROJECTS.length < 2) return;
+
+    const optionsHtml = PROJECTS.map(
+      (p) => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.title)}</option>`
+    ).join("");
+    selA.innerHTML = optionsHtml;
+    selB.innerHTML = optionsHtml;
+
+    selA.value = PROJECTS[0]?.id || "jumpgate-agentic-lz";
+    selB.value = PROJECTS[1]?.id || "gemini-agent-tracer";
+
+    function renderComparison() {
+      const projA = PROJECTS.find((p) => p.id === selA.value) || PROJECTS[0];
+      const projB = PROJECTS.find((p) => p.id === selB.value) || PROJECTS[1];
+
+      grid.innerHTML = [projA, projB]
+        .map((p) => {
+          const stackBadges = (p.stack || [])
+            .map((t) => `<span class="stack-tag">${escapeHtml(t)}</span>`)
+            .join("");
+          return `
+            <article class="compare-card">
+              <div>
+                <div class="compare-card-top">
+                  <span class="project-category">${escapeHtml(p.categoryLabel)}</span>
+                  <span class="project-year">${escapeHtml(p.year)}</span>
+                </div>
+                <h4 class="compare-card-title">${escapeHtml(p.title)}</h4>
+                <p class="compare-card-summary">${escapeHtml(p.summary)}</p>
+              </div>
+
+              <div class="project-visual">
+                ${getProjectVisual(p)}
+              </div>
+
+              <div class="compare-spec-list">
+                <div class="compare-spec-row">
+                  <span class="compare-spec-key">Architectural Specification &amp; Verification</span>
+                  <span class="compare-spec-value">${escapeHtml(p.architecture || p.summary)}</span>
+                </div>
+                <div class="compare-spec-row">
+                  <span class="compare-spec-key">Runtime Stack</span>
+                  <div class="stack-row" style="justify-content: flex-start; margin-top: 4px;">${stackBadges}</div>
+                </div>
+              </div>
+
+              <div class="promo-links" style="justify-content: flex-start; margin-top: 4px;">
+                <a href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer" class="apple-pill solid small">
+                  <span>${escapeHtml(p.linkLabel || "GitHub")} &#8599;</span>
+                </a>
+                <button type="button" class="apple-pill outline small" data-compare-inspect="${escapeHtml(p.id)}">
+                  <span>Closer Look (+)</span>
+                </button>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+
+      grid.querySelectorAll("[data-compare-inspect]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const pid = btn.getAttribute("data-compare-inspect");
+          if (pid) openCloserLookModal(pid);
+        });
+      });
+
+      initInteractiveCardVisuals(grid);
+    }
+
+    selA.addEventListener("change", renderComparison);
+    selB.addEventListener("change", renderComparison);
+    if (swapBtn) {
+      swapBtn.addEventListener("click", () => {
+        const tmp = selA.value;
+        selA.value = selB.value;
+        selB.value = tmp;
+        renderComparison();
+      });
+    }
+
+    renderComparison();
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initTheme();
     updateFilterCounts();
@@ -3115,6 +3625,11 @@
     initCloserLookModal();
     initAppleStageDock();
     initBentoSpecsAndSkillFilters();
+    initAppleHighlightsCarousel();
+    initSlidingSegmentedControls();
+    initHardwareXraySpecs();
+    initScrollCountUpAndBars();
+    initCompareSystemsSelector();
     initScalableProjects();
   });
 })();
