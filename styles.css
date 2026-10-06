@@ -2259,20 +2259,7 @@ a {
   width: 0%;
   background: var(--apple-blue);
   border-radius: var(--radius-pill);
-}
-
-.stage-dock-dot.active .stage-dot-fill {
-  width: 100%;
-  animation: dockDotProgress 6.5s linear infinite;
-}
-
-@keyframes dockDotProgress {
-  0% {
-    width: 15%;
-  }
-  100% {
-    width: 100%;
-  }
+  transition: width 110ms linear;
 }
 
 .stage-dock-action-btn {
