@@ -2662,26 +2662,164 @@
       }
       dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === bestIdx));
 
-      if (isNarrating && prevIdx !== bestIdx) {
-        startOrSwitchNarration(true);
+      if (prevIdx !== bestIdx) {
+        resetStageReadTimer();
+        if (isNarrating) {
+          startOrSwitchNarration(true);
+        }
       }
     }
+
+    /* Estimate reading time of visible prose on the active stage + 10s buffer */
+    const WORDS_PER_SECOND = 3.8; /* ~228 WPM average reading speed */
+    const EXTRA_BUFFER_SECONDS = 10;
+    let stageElapsedMs = 0;
+    let lastTickTs = performance.now();
+    let isAutoScrolling = false;
+    let currentReadEstimate = {
+      wordCount: 100,
+      readingSeconds: 26,
+      totalSeconds: 36,
+      durationMs: 36000,
+    };
+
+    function estimateStageReadDuration(stageId) {
+      const stageEl = document.getElementById(stageId);
+      if (!stageEl) {
+        return {
+          wordCount: 100,
+          readingSeconds: 26,
+          totalSeconds: 36,
+          durationMs: 36000,
+        };
+      }
+      const readableNodes = stageEl.querySelectorAll(
+        ".hero-copy, .about-live-story, .about-mini-bento, .bezel-top-bar, .pane-header, .telemetry-metrics, .sandbox-bar"
+      );
+      let combinedText = "";
+      if (readableNodes.length > 0) {
+        readableNodes.forEach((node) => {
+          combinedText += ` ${node.innerText || node.textContent || ""}`;
+        });
+      } else {
+        combinedText = stageEl.innerText || stageEl.textContent || "";
+      }
+      const words = combinedText.trim().split(/\s+/).filter(Boolean).length;
+      const readingSeconds = Math.max(8, Math.round(words / WORDS_PER_SECOND));
+      const totalSeconds = readingSeconds + EXTRA_BUFFER_SECONDS;
+      return {
+        wordCount: words,
+        readingSeconds,
+        totalSeconds,
+        durationMs: totalSeconds * 1000,
+      };
+    }
+
+    function updateDotFillBars(progressPct, remainingSec) {
+      dotBtns.forEach((btn, i) => {
+        const fillEl = btn.querySelector(".stage-dot-fill");
+        if (!fillEl) return;
+        if (i === activeStageIdx) {
+          fillEl.style.width = `${progressPct.toFixed(1)}%`;
+          btn.setAttribute(
+            "title",
+            `${stageConfigs[i]?.label || ""} · Est. ${currentReadEstimate.readingSeconds}s read + 10s (${remainingSec}s to next stage)`
+          );
+        } else {
+          fillEl.style.width = "0%";
+        }
+      });
+    }
+
+    function resetStageReadTimer() {
+      stageElapsedMs = 0;
+      lastTickTs = performance.now();
+      const cfg = stageConfigs[activeStageIdx] || stageConfigs[0];
+      currentReadEstimate = estimateStageReadDuration(cfg.id);
+      updateDotFillBars(0, currentReadEstimate.totalSeconds);
+    }
+
+    function advanceToNextStageOnBarFull() {
+      if (isAutoScrolling) return;
+      const nextStageCfg = stageConfigs[activeStageIdx + 1];
+      const nextTargetEl = nextStageCfg
+        ? document.getElementById(nextStageCfg.id)
+        : document.getElementById("projects");
+      if (!nextTargetEl) return;
+
+      isAutoScrolling = true;
+      nextTargetEl.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        isAutoScrolling = false;
+        lastTickTs = performance.now();
+      }, 950);
+    }
+
+    setInterval(() => {
+      const now = performance.now();
+      const cmdOpen = document.getElementById("cmd-backdrop")?.classList.contains("is-open");
+      const closerOpen = document
+        .getElementById("closer-look-backdrop")
+        ?.classList.contains("is-open");
+      const dockHidden = dock.classList.contains("is-hidden");
+
+      if (document.hidden || dockHidden || cmdOpen || closerOpen || isAutoScrolling) {
+        lastTickTs = now;
+        return;
+      }
+
+      const deltaMs = Math.min(Math.max(now - lastTickTs, 0), 500);
+      lastTickTs = now;
+      stageElapsedMs += deltaMs;
+
+      let effectiveDurationMs = currentReadEstimate.durationMs;
+      if (isNarrating && audioPlayer.duration > 0) {
+        effectiveDurationMs = Math.max(
+          effectiveDurationMs,
+          (audioPlayer.duration + 2) * 1000
+        );
+      }
+
+      const pct = Math.min(100, (stageElapsedMs / effectiveDurationMs) * 100);
+      const remainingSec = Math.max(
+        0,
+        Math.ceil((effectiveDurationMs - stageElapsedMs) / 1000)
+      );
+      updateDotFillBars(pct, remainingSec);
+
+      if (stageElapsedMs >= effectiveDurationMs) {
+        stageElapsedMs = 0;
+        advanceToNextStageOnBarFull();
+      }
+    }, 100);
 
     dotBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const idx = Number(btn.getAttribute("data-dock-idx") || 0);
         const target = stageConfigs[idx] ? document.getElementById(stageConfigs[idx].id) : null;
+        resetStageReadTimer();
         if (target) target.scrollIntoView({ behavior: "smooth" });
       });
     });
 
-    document.querySelectorAll("#about [data-about-tab], #about [data-about-card]").forEach((el) => {
-      el.addEventListener("click", () => {
-        if (isNarrating && activeStageIdx === 1) {
-          requestAnimationFrame(() => startOrSwitchNarration(true));
-        }
+    document
+      .querySelectorAll(
+        "#about [data-about-tab], #about [data-about-card], [data-fjg-btn], [data-fstep-btn], [data-fturn-btn], [data-fprep-btn], [data-fci-btn]"
+      )
+      .forEach((el) => {
+        el.addEventListener("click", (e) => {
+          if (e.isTrusted) {
+            requestAnimationFrame(() => resetStageReadTimer());
+          }
+          if (
+            isNarrating &&
+            activeStageIdx === 1 &&
+            (el.hasAttribute("data-about-tab") || el.hasAttribute("data-about-card"))
+          ) {
+            requestAnimationFrame(() => startOrSwitchNarration(true));
+          }
+        });
       });
-    });
 
     if (playBtn) {
       playBtn.addEventListener("mouseenter", () => {
@@ -2710,6 +2848,7 @@
 
     window.addEventListener("scroll", updateStageDockOnScroll, { passive: true });
     updateStageDockOnScroll();
+    resetStageReadTimer();
   }
 
   /* Apple Bento Specs, Before/After Comparison, Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
