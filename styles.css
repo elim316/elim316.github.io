@@ -182,6 +182,7 @@ a {
   gap: 8px;
 }
 
+.nav-apple-icon,
 .nav-monogram {
   display: inline-flex;
   align-items: center;
@@ -189,12 +190,20 @@ a {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background: var(--text-primary);
-  color: var(--bg-elevated);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 113, 227, 0.18);
+  transition: transform 220ms var(--spring-out), box-shadow 220ms var(--ease-smooth);
+}
+
+.nav-brand:hover .nav-apple-icon {
+  transform: scale(1.06);
+  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.32);
+}
+
+.nav-apple-svg {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .nav-brand-text {
@@ -1660,6 +1669,161 @@ a {
   line-height: 1.64;
 }
 
+/* Hackathon Honours & 4,000+ Engineer Buildathon Leadership Strip */
+.leadership-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.leadership-card {
+  padding: 24px 26px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  transition:
+    transform 260ms var(--spring-out),
+    border-color 200ms var(--ease-smooth),
+    box-shadow 240ms var(--ease-smooth);
+}
+
+.leadership-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.leadership-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.leadership-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.leadership-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-text);
+  background: var(--accent-subtle);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.leadership-title {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.leadership-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.56;
+}
+
+.award-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.award-row-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
+  cursor: pointer;
+  transition:
+    transform 200ms var(--spring-out),
+    border-color 180ms var(--ease-smooth),
+    background-color 180ms var(--ease-smooth);
+}
+
+.award-row-btn:hover {
+  transform: translateX(3px);
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+.award-rank-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.award-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.award-row-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.award-row-sub {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.institution-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.institution-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
 .pub-list {
   display: flex;
   flex-direction: column;
@@ -1831,7 +1995,46 @@ a {
     var(--shadow-card-hover);
 }
 
-/* Apple M4-Inspired Sculpted Titanium Spec Bento Grid */
+/* Apple M4-Inspired Sculpted Titanium Spec Bento Grid & Before/After Comparison */
+.stack-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.bento-compare-bar {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-subtle);
+  gap: 3px;
+}
+
+.bento-compare-btn {
+  padding: 6px 13px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 200ms var(--ease-smooth),
+    color 200ms var(--ease-smooth),
+    box-shadow 200ms var(--ease-smooth);
+}
+
+.bento-compare-btn.active {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
 .apple-bento-specs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1863,13 +2066,37 @@ a {
   box-shadow: var(--shadow-card-hover);
 }
 
+.bento-tile-top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
 .bento-spec-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   color: var(--text-muted);
-  margin-bottom: 8px;
+}
+
+.bento-delta-pill {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  background: var(--accent-subtle);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+}
+
+.bento-spec-tile.is-legacy-mode .bento-delta-pill {
+  color: var(--signal-amber);
+  background: color-mix(in srgb, var(--signal-amber) 14%, transparent);
 }
 
 .bento-spec-stat {
@@ -1881,6 +2108,7 @@ a {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  transition: transform 240ms var(--spring-out);
 }
 
 .bento-spec-stat.stat-blue {
@@ -1897,6 +2125,10 @@ a {
 
 .bento-spec-stat.stat-amber {
   background-image: linear-gradient(135deg, #d97706 0%, #fbbf24 100%);
+}
+
+.bento-spec-tile.is-legacy-mode .bento-spec-stat {
+  background-image: linear-gradient(135deg, #64748b 0%, #94a3b8 100%);
 }
 
 .bento-spec-caption {
@@ -2077,6 +2309,39 @@ a {
   color: var(--accent-text);
 }
 
+.dock-voice-ring-wrap {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dock-voice-ring-svg {
+  position: absolute;
+  inset: 0;
+  width: 22px;
+  height: 22px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.dock-voice-ring-bg {
+  fill: none;
+  stroke: var(--border-subtle);
+  stroke-width: 2;
+}
+
+.dock-voice-ring-fg {
+  fill: none;
+  stroke: var(--apple-blue);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 180ms linear;
+}
+
 .dock-voice-label {
   font-size: 0.75rem;
   font-weight: 600;
@@ -2223,6 +2488,40 @@ a {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.closer-listen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 160ms var(--ease-smooth),
+    border-color 160ms var(--ease-smooth),
+    color 160ms var(--ease-smooth),
+    transform 160ms var(--spring-out);
+}
+
+.closer-listen-btn:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  transform: scale(1.03);
+}
+
+.closer-listen-btn.is-speaking {
+  background: var(--accent-subtle);
+  border-color: var(--apple-blue);
+  color: var(--accent-text);
 }
 
 .closer-nav-btn,
@@ -2523,6 +2822,7 @@ a {
   .promo-grid,
   .skills-grid,
   .apple-bento-specs,
+  .leadership-bento-grid,
   .closer-look-specs-grid {
     grid-template-columns: 1fr;
   }
