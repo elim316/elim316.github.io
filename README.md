@@ -124,9 +124,14 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261005-13`
+- Asset version in `index.html`: `?v=20261005-14`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
+  * Made the active stage pill dot (`#apple-stage-dock .stage-dot-fill`) a live
+    reading-time progress bar that estimates the reading time of the visible prose
+    on the active stage (~228 WPM / 3.8 words per second) plus a 10-second buffer
+    (or waits for voice-over completion if narration is active), fills smoothly
+    from 0% to 100%, and automatically smooth-scrolls to the next stage when full.
   * Replaced the default `EL` navbar box and missing tab icon with a custom
     Apple Silicon / macOS squircle vector icon (`favicon.svg` + `.nav-apple-icon`).
   * Added `#showcase-jumpgate` (`JUMPGATE` wordmark + `#flagship-jumpgate-sandbox`
