@@ -942,6 +942,104 @@
   }
 
   function initFlagshipSandboxes() {
+    const fJumpgate = document.getElementById("flagship-jumpgate-sandbox");
+    if (fJumpgate) {
+      const fJgStages = {
+        vpc: {
+          readout: "Dual-VPC: 14/14 Ingress & 18/18 Egress IM8 PASS",
+          badge: "14/14 IN · 18/18 OUT",
+          b1Val: "4 to 6 Weeks -> < 3 Min",
+          b1Width: "100%",
+          b2Val: "14/14 Ingress · 18/18 Egress",
+          b2Width: "100%",
+          b3Val: "$1.96M Realised + $1.46M Pipe",
+          b3Width: "96%",
+        },
+        adlc: {
+          readout: "14-Step ADLC: 4-6 wks -> < 3 min (>=0.85 Judge)",
+          badge: "14-STEP VENDING MACHINE",
+          b1Val: "3 Parallel Terraform Workstreams",
+          b1Width: "100%",
+          b2Val: "LLM-as-a-Judge >= 0.85 Gate",
+          b2Width: "98%",
+          b3Val: "70% Build Effort Reduction",
+          b3Width: "94%",
+        },
+        egress: {
+          readout: "Egress VPC: SWP L7 + PSC Vertex AI (0 Bypasses)",
+          badge: "SWP L7 · PSC · DLP",
+          b1Val: "Private Service Connect (Vertex)",
+          b1Width: "100%",
+          b2Val: "Model Armor + DLP Redaction",
+          b2Width: "100%",
+          b3Val: "Zero Direct Internet Egress",
+          b3Width: "100%",
+        },
+        arr: {
+          readout: "Public Sector: $1.96M Realised + $1.46M Pipeline ARR",
+          badge: "$1.96M ARR · 4,000+ TRAINED",
+          b1Val: "$1.96M Realised Public Sector ARR",
+          b1Width: "100%",
+          b2Val: "+$1.46M Qualified Pipeline",
+          b2Width: "95%",
+          b3Val: "4,000+ Engineers & Students",
+          b3Width: "98%",
+        },
+      };
+
+      const jgReadout = document.getElementById("flagship-jg-readout");
+      const jgBadge = document.getElementById("flagship-jg-badge");
+      const jgB1Val = document.getElementById("flagship-jg-bar1-val");
+      const jgB1Fill = document.getElementById("flagship-jg-bar1-fill");
+      const jgB2Val = document.getElementById("flagship-jg-bar2-val");
+      const jgB2Fill = document.getElementById("flagship-jg-bar2-fill");
+      const jgB3Val = document.getElementById("flagship-jg-bar3-val");
+      const jgB3Fill = document.getElementById("flagship-jg-bar3-fill");
+      const jgBtns = fJumpgate.querySelectorAll("[data-fjg-btn]");
+      const jgNodes = fJumpgate.querySelectorAll("[data-fjg]");
+      const jgOrder = ["vpc", "adlc", "egress", "arr"];
+      let jgIdx = 0;
+      let jgTimer = null;
+
+      function selectFlagshipJg(key) {
+        const cfg = fJgStages[key];
+        if (!cfg) return;
+        jgIdx = Math.max(0, jgOrder.indexOf(key));
+        jgBtns.forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-fjg-btn") === key)
+        );
+        jgNodes.forEach((n) =>
+          n.classList.toggle("is-selected", n.getAttribute("data-fjg") === key)
+        );
+        if (jgReadout) jgReadout.textContent = cfg.readout;
+        if (jgBadge) jgBadge.textContent = cfg.badge;
+        if (jgB1Val) jgB1Val.textContent = cfg.b1Val;
+        if (jgB1Fill) jgB1Fill.style.width = cfg.b1Width;
+        if (jgB2Val) jgB2Val.textContent = cfg.b2Val;
+        if (jgB2Fill) jgB2Fill.style.width = cfg.b2Width;
+        if (jgB3Val) jgB3Val.textContent = cfg.b3Val;
+        if (jgB3Fill) jgB3Fill.style.width = cfg.b3Width;
+      }
+
+      jgBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (jgTimer) clearInterval(jgTimer);
+          selectFlagshipJg(btn.getAttribute("data-fjg-btn"));
+        });
+      });
+      jgNodes.forEach((node) => {
+        node.addEventListener("click", () => {
+          if (jgTimer) clearInterval(jgTimer);
+          selectFlagshipJg(node.getAttribute("data-fjg"));
+        });
+      });
+
+      jgTimer = setInterval(() => {
+        jgIdx = (jgIdx + 1) % jgOrder.length;
+        selectFlagshipJg(jgOrder[jgIdx]);
+      }, 3600);
+    }
+
     const tracerData = {
       user: "Step #01 USER_INPUT · 12ms",
       planner: "Step #02 PLANNER · 640ms",
@@ -1876,6 +1974,22 @@
 
     const baseCommands = [
       {
+        title: "Toggle Voice-Over Narration (Shortcut: V)",
+        sub: "Play or pause human neural voice-over for the active stage or modal",
+        badge: "Audio",
+        action: () => {
+          const btn = document.getElementById("stage-dock-play-btn");
+          if (btn) btn.click();
+        },
+      },
+      {
+        title: "Jump to Jumpgate Zero-Trust AI Landing Zone Stage",
+        sub: "< 3 min Dual-VPC & 14-Step Vending Machine ($1.96M ARR, 32/32 IM8)",
+        badge: "Stage 03",
+        action: () =>
+          document.getElementById("showcase-jumpgate")?.scrollIntoView({ behavior: "smooth" }),
+      },
+      {
         title: "Jump to About & Background",
         sub: "Google Cloud & AI Engineer, Grab, A*STAR Research, Glasgow & SIT",
         badge: "About",
@@ -1883,7 +1997,7 @@
       },
       {
         title: "Jump to Featured Repositories",
-        sub: "Jetski Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
+        sub: "Jumpgate, Jetski Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
         badge: "Featured",
         action: () => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" }),
       },
@@ -1921,8 +2035,8 @@
         },
       },
       {
-        title: "Jump to Experience & Education",
-        sub: "Google, Grab, A*STAR, University of Glasgow & SIT",
+        title: "Jump to Experience, Hackathons & Education",
+        sub: "Google, Grab, A*STAR, 3x Hackathon Honours & 4,000+ Trained",
         badge: "Section",
         action: () => document.getElementById("journey")?.scrollIntoView({ behavior: "smooth" }),
       },
@@ -2106,6 +2220,8 @@
 
   /* Apple "Take a Closer Look" Full-Scale Architecture Sheet Modal */
   let closerLookIdx = 0;
+  let stopSharedNarrationFn = null;
+  let playProjectNarrationFn = null;
 
   function openCloserLookModal(projectId) {
     const backdrop = document.getElementById("closer-look-backdrop");
@@ -2172,6 +2288,9 @@
     if (!backdrop) return;
     backdrop.classList.remove("is-open");
     backdrop.setAttribute("aria-hidden", "true");
+    if (typeof stopSharedNarrationFn === "function") {
+      stopSharedNarrationFn();
+    }
   }
 
   function initCloserLookModal() {
@@ -2181,22 +2300,40 @@
     const closeBtn = document.getElementById("closer-close-btn");
     const copyBtn = document.getElementById("closer-copy-link-btn");
     const copyLabel = document.getElementById("closer-copy-link-label");
+    const listenBtn = document.getElementById("closer-look-listen-btn");
     if (!backdrop) return;
 
     if (prevBtn) {
       prevBtn.addEventListener("click", () => {
         const nextIdx = (closerLookIdx - 1 + PROJECTS.length) % PROJECTS.length;
         openCloserLookModal(PROJECTS[nextIdx].id);
+        if (listenBtn?.classList.contains("is-speaking") && typeof playProjectNarrationFn === "function") {
+          playProjectNarrationFn(PROJECTS[nextIdx]);
+        }
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener("click", () => {
         const nextIdx = (closerLookIdx + 1) % PROJECTS.length;
         openCloserLookModal(PROJECTS[nextIdx].id);
+        if (listenBtn?.classList.contains("is-speaking") && typeof playProjectNarrationFn === "function") {
+          playProjectNarrationFn(PROJECTS[nextIdx]);
+        }
       });
     }
     if (closeBtn) {
       closeBtn.addEventListener("click", closeCloserLookModal);
+    }
+    if (listenBtn) {
+      listenBtn.addEventListener("click", () => {
+        const p = PROJECTS[closerLookIdx];
+        if (!p) return;
+        if (listenBtn.classList.contains("is-speaking")) {
+          if (typeof stopSharedNarrationFn === "function") stopSharedNarrationFn();
+        } else if (typeof playProjectNarrationFn === "function") {
+          playProjectNarrationFn(p);
+        }
+      });
     }
     if (copyBtn) {
       copyBtn.addEventListener("click", async () => {
@@ -2225,13 +2362,21 @@
     const iconPause = document.getElementById("dock-icon-pause");
     const iconPlay = document.getElementById("dock-icon-play");
     const voiceLabel = document.getElementById("dock-voice-label");
+    const progressCircle = document.getElementById("dock-voice-progress-circle");
     const inspectBtn = document.getElementById("stage-dock-inspect-btn");
+
+    const closerListenBtn = document.getElementById("closer-look-listen-btn");
+    const closerListenPlay = document.getElementById("closer-listen-icon-play");
+    const closerListenPause = document.getElementById("closer-listen-icon-pause");
+    const closerListenLabel = document.getElementById("closer-listen-label");
     if (!dock) return;
+
+    const RING_CIRCUMFERENCE = 62.83;
 
     const stageConfigs = [
       {
         id: "hero-stage",
-        label: "01 / 05 · BUILDER",
+        label: "01 / 06 · BUILDER",
         projectId: "jumpgate-agentic-lz",
         audioSrc: "audio/stage-builder.mp3",
         speechText:
@@ -2239,35 +2384,43 @@
       },
       {
         id: "about",
-        label: "02 / 05 · PROFILE",
+        label: "02 / 06 · PROFILE",
         projectId: "jumpgate-agentic-lz",
         audioSrc: "audio/stage-profile-google.mp3",
         speechText:
           "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses four to six weeks of infrastructure setup into under three minutes, passing all 14 Ingress and 18 Egress security checks. The platform has driven 1.96 million dollars in realised public sector recurring revenue with an additional 1.46 million dollar pipeline, alongside training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
       {
+        id: "showcase-jumpgate",
+        label: "03 / 06 · JUMPGATE",
+        projectId: "jumpgate-agentic-lz",
+        audioSrc: "audio/stage-jumpgate.mp3",
+        speechText:
+          "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to Vertex AI in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
+      },
+      {
         id: "showcase-agent-tracer",
-        label: "03 / 05 · TRACER",
+        label: "04 / 06 · TRACER",
         projectId: "agent-tracer",
         audioSrc: "audio/stage-tracer.mp3",
         speechText:
-          "Stage 3: Jetski Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
+          "Stage 4: Jetski Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
       },
       {
         id: "showcase-meeting-prep",
-        label: "04 / 05 · DOSSIER",
+        label: "05 / 06 · DOSSIER",
         projectId: "meeting-prep-agent",
         audioSrc: "audio/stage-dossier.mp3",
         speechText:
-          "Stage 4: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
+          "Stage 5: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
       },
       {
         id: "showcase-uq-xai",
-        label: "05 / 05 · RESEARCH",
+        label: "06 / 06 · RESEARCH",
         projectId: "uq-xai-battery",
         audioSrc: "audio/stage-research.mp3",
         speechText:
-          "Stage 5: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
+          "Stage 6: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
       },
     ];
 
@@ -2293,11 +2446,37 @@
       },
     };
 
+    const projectAudioMap = {
+      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3",
+      "agent-tracer": "audio/stage-tracer.mp3",
+      "jetski-harness": "audio/stage-tracer.mp3",
+      "meeting-prep-agent": "audio/stage-dossier.mp3",
+      "uq-xai-battery": "audio/stage-research.mp3",
+    };
+
     let activeStageIdx = 0;
     let isNarrating = false;
     let currentTrackKey = "";
     const audioPlayer = new Audio();
     audioPlayer.preload = "none";
+    const preloadedSet = new Set();
+
+    function preloadAudioUrl(url) {
+      if (!url || preloadedSet.has(url)) return;
+      preloadedSet.add(url);
+      try {
+        const pre = new Audio();
+        pre.preload = "auto";
+        pre.src = url;
+      } catch (_) {}
+    }
+
+    function setRingProgress(fraction) {
+      if (!progressCircle) return;
+      const clamped = Math.min(Math.max(Number(fraction) || 0, 0), 1);
+      const offset = RING_CIRCUMFERENCE * (1 - clamped);
+      progressCircle.style.strokeDashoffset = offset.toFixed(2);
+    }
 
     function getActiveAboutChapterKey() {
       const activeTab = document.querySelector("#about [data-about-tab].active");
@@ -2324,19 +2503,30 @@
 
     function setVoiceUiState(speaking) {
       isNarrating = speaking;
+      if (!speaking) {
+        setRingProgress(0);
+      }
       if (playBtn) {
         playBtn.classList.toggle("is-speaking", speaking);
         playBtn.setAttribute("aria-pressed", speaking ? "true" : "false");
         playBtn.setAttribute(
           "aria-label",
           speaking
-            ? "Pause voice-over narration"
-            : "Play voice-over narration for active section"
+            ? "Pause voice-over narration (Shortcut: V)"
+            : "Play voice-over narration for active section (Shortcut: V)"
         );
       }
       if (iconPlay) iconPlay.style.display = speaking ? "none" : "block";
       if (iconPause) iconPause.style.display = speaking ? "block" : "none";
       if (voiceLabel) voiceLabel.textContent = speaking ? "Pause" : "Listen";
+
+      if (closerListenBtn) {
+        closerListenBtn.classList.toggle("is-speaking", speaking);
+        closerListenBtn.setAttribute("aria-pressed", speaking ? "true" : "false");
+      }
+      if (closerListenPlay) closerListenPlay.style.display = speaking ? "none" : "block";
+      if (closerListenPause) closerListenPause.style.display = speaking ? "block" : "none";
+      if (closerListenLabel) closerListenLabel.textContent = speaking ? "Pause" : "Listen";
     }
 
     function stopAllNarration() {
@@ -2376,18 +2566,25 @@
         utter.onend = () => setVoiceUiState(false);
         utter.onerror = () => setVoiceUiState(false);
         setVoiceUiState(true);
+        setRingProgress(0.5);
         window.speechSynthesis.speak(utter);
       } catch (_) {
         setVoiceUiState(false);
       }
     }
 
-    function startOrSwitchNarration(forceRestart) {
-      const payload = getTargetVoicePayload();
+    function playPayload(payload, forceRestart) {
+      if (!payload) return;
       if ("speechSynthesis" in window) {
         try {
           window.speechSynthesis.cancel();
         } catch (_) {}
+      }
+
+      if (!payload.audioSrc) {
+        currentTrackKey = payload.key;
+        speakFallbackWithWebSpeech(payload.speechText);
+        return;
       }
 
       if (!forceRestart && currentTrackKey === payload.key && audioPlayer.src) {
@@ -2406,6 +2603,31 @@
         speakFallbackWithWebSpeech(payload.speechText);
       });
     }
+
+    function startOrSwitchNarration(forceRestart) {
+      playPayload(getTargetVoicePayload(), forceRestart);
+    }
+
+    stopSharedNarrationFn = stopAllNarration;
+    playProjectNarrationFn = (proj) => {
+      if (!proj) return;
+      const mappedAudio = projectAudioMap[proj.id] || "";
+      const text = `${proj.title}. ${proj.summary} ${proj.architecture || ""}`;
+      playPayload(
+        {
+          key: `modal-${proj.id}`,
+          audioSrc: mappedAudio,
+          speechText: text,
+        },
+        true
+      );
+    };
+
+    audioPlayer.addEventListener("timeupdate", () => {
+      if (isNarrating && audioPlayer.duration > 0) {
+        setRingProgress(audioPlayer.currentTime / audioPlayer.duration);
+      }
+    });
 
     audioPlayer.addEventListener("ended", () => {
       setVoiceUiState(false);
@@ -2435,7 +2657,9 @@
 
       const prevIdx = activeStageIdx;
       activeStageIdx = bestIdx;
-      if (captionEl) captionEl.textContent = stageConfigs[bestIdx].label;
+      if (captionEl && stageConfigs[bestIdx]) {
+        captionEl.textContent = stageConfigs[bestIdx].label;
+      }
       dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === bestIdx));
 
       if (isNarrating && prevIdx !== bestIdx) {
@@ -2460,6 +2684,14 @@
     });
 
     if (playBtn) {
+      playBtn.addEventListener("mouseenter", () => {
+        const payload = getTargetVoicePayload();
+        if (payload?.audioSrc) preloadAudioUrl(payload.audioSrc);
+      });
+      playBtn.addEventListener("focus", () => {
+        const payload = getTargetVoicePayload();
+        if (payload?.audioSrc) preloadAudioUrl(payload.audioSrc);
+      });
       playBtn.addEventListener("click", () => {
         if (isNarrating) {
           stopAllNarration();
@@ -2480,17 +2712,122 @@
     updateStageDockOnScroll();
   }
 
-  /* Apple Bento Specs, Interactive Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
+  /* Apple Bento Specs, Before/After Comparison, Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
   function initBentoSpecsAndSkillFilters() {
     const printBtn = document.getElementById("print-cv-btn");
     if (printBtn) {
       printBtn.addEventListener("click", () => window.print());
     }
 
+    const compareBtns = document.querySelectorAll("[data-compare-mode]");
+    const bentoSpecComparison = {
+      after: [
+        {
+          statId: "bento-stat-1",
+          deltaId: "bento-delta-1",
+          capId: "bento-cap-1",
+          stat: "< 3 min",
+          delta: "99.9% Faster",
+          cap: "14-step Vending Machine Agent compressing 4 to 6 weeks of IM8 Dual-VPC landing zone setup into under 3 minutes (32/32 checks)",
+        },
+        {
+          statId: "bento-stat-2",
+          deltaId: "bento-delta-2",
+          capId: "bento-cap-2",
+          stat: "$1.96M",
+          delta: "70% Less Effort",
+          cap: "Realised public sector ARR (+$1.46M pipeline) and 4,000+ engineers and students trained across NTU, GovTech, DBS & A*STAR",
+        },
+        {
+          statId: "bento-stat-3",
+          deltaId: "bento-delta-3",
+          capId: "bento-cap-3",
+          stat: "95.2%",
+          delta: "0.012 ECE",
+          cap: "Adaptive Conformal Prediction coverage (0.012 ECE) across McMaster & Oxford battery degradation datasets (IEEE Xplore)",
+        },
+        {
+          statId: "bento-stat-4",
+          deltaId: "bento-delta-4",
+          capId: "bento-cap-4",
+          stat: "36 / 36",
+          delta: "0 Hallucinations",
+          cap: "Automated evaluation checks passed with zero hallucinated links across two-stage Workspace MCP meeting dossiers",
+        },
+      ],
+      before: [
+        {
+          statId: "bento-stat-1",
+          deltaId: "bento-delta-1",
+          capId: "bento-cap-1",
+          stat: "4-6 wks",
+          delta: "Manual Baseline",
+          cap: "Manual Dual-VPC firewall rules, IAM bindings, and security reviews before automated Jumpgate Terraform provisioning",
+        },
+        {
+          statId: "bento-stat-2",
+          deltaId: "bento-delta-2",
+          capId: "bento-cap-2",
+          stat: "Siloed PoCs",
+          delta: "Pre-Jumpgate",
+          cap: "Fragmented agency proofs-of-concept blocked from production rollout by unverified ingress/egress compliance posture",
+        },
+        {
+          statId: "bento-stat-3",
+          deltaId: "bento-delta-3",
+          capId: "bento-cap-3",
+          stat: "Uncalibrated",
+          delta: "Point Estimates",
+          cap: "Standard deep neural networks without distribution-free prediction intervals or SHAP/LIME feature attribution guarantees",
+        },
+        {
+          statId: "bento-stat-4",
+          deltaId: "bento-delta-4",
+          capId: "bento-cap-4",
+          stat: "Ad-Hoc",
+          delta: "Unverified URLs",
+          cap: "Single-prompt summaries prone to fabricated Workspace links and duplicate notifications without a 36-check linter",
+        },
+      ],
+    };
+
+    if (compareBtns.length > 0) {
+      compareBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const mode = btn.getAttribute("data-compare-mode") || "after";
+          const items = bentoSpecComparison[mode] || bentoSpecComparison.after;
+          compareBtns.forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle("active", active);
+            b.setAttribute("aria-selected", active ? "true" : "false");
+          });
+          document.querySelectorAll(".bento-spec-tile").forEach((tile) => {
+            tile.classList.toggle("is-legacy-mode", mode === "before");
+          });
+          items.forEach((item) => {
+            const sEl = document.getElementById(item.statId);
+            const dEl = document.getElementById(item.deltaId);
+            const cEl = document.getElementById(item.capId);
+            if (sEl) sEl.textContent = item.stat;
+            if (dEl) dEl.textContent = item.delta;
+            if (cEl) cEl.textContent = item.cap;
+          });
+        });
+      });
+    }
+
     const bentoTiles = document.querySelectorAll("[data-bento-target]");
     bentoTiles.forEach((tile) => {
       tile.addEventListener("click", () => {
         const target = tile.getAttribute("data-bento-target") || "";
+        applyDeepLinkHash(target, true);
+      });
+    });
+
+    const awardBtns = document.querySelectorAll("[data-award-target]");
+    awardBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-award-target") || "";
         applyDeepLinkHash(target, true);
       });
     });
@@ -2565,13 +2902,26 @@
       });
     });
 
-    /* Keyboard Left/Right navigation for Closer Look modal & About chapters */
+    /* Keyboard navigation: V for voice-over, Left/Right for Closer Look modal & About chapters */
     window.addEventListener("keydown", (e) => {
       const cmdOpen = document.getElementById("cmd-backdrop")?.classList.contains("is-open");
       if (cmdOpen) return;
 
+      const tag = (e.target && e.target.tagName ? e.target.tagName : "").toLowerCase();
+      const isTyping = tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable);
+
       const closerBackdrop = document.getElementById("closer-look-backdrop");
       const closerOpen = closerBackdrop?.classList.contains("is-open");
+
+      if (!isTyping && !e.metaKey && !e.ctrlKey && !e.altKey && e.key.toLowerCase() === "v") {
+        e.preventDefault();
+        if (closerOpen) {
+          document.getElementById("closer-look-listen-btn")?.click();
+        } else {
+          document.getElementById("stage-dock-play-btn")?.click();
+        }
+        return;
+      }
 
       if (closerOpen) {
         if (e.key === "Escape") {
@@ -2579,12 +2929,10 @@
           closeCloserLookModal();
         } else if (e.key === "ArrowRight") {
           e.preventDefault();
-          const nextIdx = (closerLookIdx + 1) % PROJECTS.length;
-          openCloserLookModal(PROJECTS[nextIdx].id);
+          document.getElementById("closer-next-btn")?.click();
         } else if (e.key === "ArrowLeft") {
           e.preventDefault();
-          const prevIdx = (closerLookIdx - 1 + PROJECTS.length) % PROJECTS.length;
-          openCloserLookModal(PROJECTS[prevIdx].id);
+          document.getElementById("closer-prev-btn")?.click();
         }
         return;
       }
