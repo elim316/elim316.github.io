@@ -182,7 +182,6 @@ a {
   gap: 8px;
 }
 
-.nav-apple-icon,
 .nav-monogram {
   display: inline-flex;
   align-items: center;
@@ -190,20 +189,12 @@ a {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 113, 227, 0.18);
-  transition: transform 220ms var(--spring-out), box-shadow 220ms var(--ease-smooth);
-}
-
-.nav-brand:hover .nav-apple-icon {
-  transform: scale(1.06);
-  box-shadow: 0 4px 12px rgba(0, 113, 227, 0.32);
-}
-
-.nav-apple-svg {
-  width: 24px;
-  height: 24px;
-  display: block;
+  background: var(--text-primary);
+  color: var(--bg-elevated);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .nav-brand-text {
