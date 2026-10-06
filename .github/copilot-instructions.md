@@ -49,7 +49,7 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261005-17`
+- Asset version in `index.html`: `?v=20261005-18`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
   * Added 6 Apple-inspired visual and functional upgrades: (1) "Get the highlights." horizontal snap carousel (`#highlights-section`) at the top of `#featured`, (2) smooth-gliding macOS/iOS segmented pill indicators (`.seg-glide-pill`) on `#about-chapter-tabs`, `#filter-bar`, and `#bento-compare-bar`, (3) interactive `X-Ray Specs` toggle (`.bezel-xray-btn` + `.bezel-xray-drawer`) inside all 6 hardware stage bezels, (4) live synced voice-over caption ribbon (`#stage-dock-teleprompter`) and `1x / 1.25x / 1.5x` speed toggle (`#stage-dock-speed-btn`) on `#apple-stage-dock`, (5) scroll-triggered counter roll-ups and bar fills (`initScrollCountUpAndBars()`), and (6) side-by-side "Compare systems." selector (`#compare-systems-box`) in `#projects`.
