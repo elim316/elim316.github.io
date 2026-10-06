@@ -2055,6 +2055,10 @@ a {
   background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
   cursor: pointer;
   transition:
     transform 240ms var(--spring-out),
@@ -2071,6 +2075,7 @@ a {
 .bento-tile-top {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
@@ -2102,11 +2107,13 @@ a {
 }
 
 .bento-spec-stat {
-  font-size: clamp(2.1rem, 3.6vw, 2.85rem);
+  font-size: clamp(1.75rem, 2.8vw, 2.4rem);
   font-weight: 700;
   letter-spacing: -0.04em;
-  line-height: 1.05;
+  line-height: 1.08;
   margin-bottom: 10px;
+  max-width: 100%;
+  overflow-wrap: break-word;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
