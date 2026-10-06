@@ -72,7 +72,7 @@
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261005-11" />
+  <link rel="stylesheet" href="styles.css?v=20261005-12" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -1276,18 +1276,23 @@
 
     <button
       type="button"
-      class="stage-dock-action-btn"
+      class="stage-dock-action-btn stage-dock-voice-btn"
       id="stage-dock-play-btn"
-      aria-label="Pause live stage animations"
-      title="Pause or resume live animations"
+      aria-label="Play voice-over narration for active section"
+      aria-pressed="false"
+      title="Play or pause human voice-over narration for this section"
     >
-      <svg id="dock-icon-pause" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <svg id="dock-icon-play" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6 4l14 8-14 8V4z"></path>
+      </svg>
+      <svg id="dock-icon-pause" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: none">
         <rect x="6" y="4" width="4" height="16" rx="1.5"></rect>
         <rect x="14" y="4" width="4" height="16" rx="1.5"></rect>
       </svg>
-      <svg id="dock-icon-play" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: none">
-        <path d="M6 4l14 8-14 8V4z"></path>
-      </svg>
+      <span class="dock-voice-wave" id="dock-voice-wave" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      <span class="dock-voice-label" id="dock-voice-label">Listen</span>
     </button>
 
     <button
@@ -1429,6 +1434,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261005-11"></script>
+  <script src="app.js?v=20261005-12"></script>
 </body>
 </html>
