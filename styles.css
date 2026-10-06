@@ -1949,12 +1949,6 @@ a {
    6. Apple Floating Bottom Stage Controller Pill & Closer Look Sheet Modal
    ========================================================================== */
 
-body.is-animations-paused *,
-body.is-animations-paused *::before,
-body.is-animations-paused *::after {
-  animation-play-state: paused !important;
-}
-
 .apple-stage-dock {
   position: fixed;
   left: 50%;
@@ -2056,7 +2050,7 @@ body.is-animations-paused *::after {
   gap: 7px;
   height: 36px;
   min-width: 36px;
-  padding: 0 11px;
+  padding: 0 12px;
   border-radius: var(--radius-pill);
   background: var(--bg-nav);
   backdrop-filter: saturate(180%) blur(20px);
@@ -2067,12 +2061,65 @@ body.is-animations-paused *::after {
   cursor: pointer;
   transition:
     transform 200ms var(--spring-out),
-    border-color 200ms var(--ease-smooth);
+    border-color 200ms var(--ease-smooth),
+    background-color 200ms var(--ease-smooth),
+    color 200ms var(--ease-smooth);
 }
 
 .stage-dock-action-btn:hover {
   transform: scale(1.04);
   border-color: var(--accent);
+}
+
+.stage-dock-voice-btn.is-speaking {
+  border-color: var(--apple-blue);
+  background: var(--accent-subtle);
+  color: var(--accent-text);
+}
+
+.dock-voice-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.dock-voice-wave {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 11px;
+}
+
+.stage-dock-voice-btn.is-speaking .dock-voice-wave {
+  display: inline-flex;
+}
+
+.dock-voice-wave span {
+  width: 2.2px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--apple-blue);
+  animation: voiceWavePulse 720ms ease-in-out infinite alternate;
+}
+
+.dock-voice-wave span:nth-child(2) {
+  height: 10px;
+  animation-delay: 180ms;
+}
+
+.dock-voice-wave span:nth-child(3) {
+  height: 6px;
+  animation-delay: 340ms;
+}
+
+@keyframes voiceWavePulse {
+  0% {
+    transform: scaleY(0.45);
+  }
+  100% {
+    transform: scaleY(1.1);
+  }
 }
 
 .stage-dock-plus-btn {
