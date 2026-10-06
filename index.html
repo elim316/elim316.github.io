@@ -66,20 +66,57 @@
   }
   </script>
 
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261005-13" />
+  <link rel="apple-touch-icon" href="og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261005-12" />
+  <link rel="stylesheet" href="styles.css?v=20261005-13" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
   <header class="global-nav" id="site-header">
     <div class="nav-content">
       <a href="#top" class="nav-brand" id="nav-brand" aria-label="Elias Lim Home">
-        <span class="nav-monogram">EL</span>
+        <span class="nav-apple-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <defs>
+              <linearGradient id="nav-squircle-bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#1d1d1f" />
+                <stop offset="52%" stop-color="#111318" />
+                <stop offset="100%" stop-color="#003870" />
+              </linearGradient>
+              <linearGradient id="nav-squircle-rim" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
+                <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.3" />
+                <stop offset="100%" stop-color="#0071e3" stop-opacity="0.55" />
+              </linearGradient>
+              <linearGradient id="nav-core-grad" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#60a5fa" />
+                <stop offset="50%" stop-color="#38bdf8" />
+                <stop offset="100%" stop-color="#0071e3" />
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#nav-squircle-bg)" stroke="url(#nav-squircle-rim)" stroke-width="2" />
+            <path d="M 17 4.5 H 47 C 54 4.5 58.5 9 59.5 16 C 56 10 49 7.5 32 7.5 C 15 7.5 8 10 4.5 16 C 5.5 9 10 4.5 17 4.5 Z" fill="#ffffff" fill-opacity="0.09" />
+            <g stroke="#93c5fd" stroke-width="2.4" stroke-linecap="round">
+              <line x1="26" y1="12" x2="26" y2="19" />
+              <line x1="38" y1="12" x2="38" y2="19" />
+              <line x1="26" y1="45" x2="26" y2="52" />
+              <line x1="38" y1="45" x2="38" y2="52" />
+              <line x1="12" y1="26" x2="19" y2="26" />
+              <line x1="12" y1="38" x2="19" y2="38" />
+              <line x1="45" y1="26" x2="52" y2="26" />
+              <line x1="45" y1="38" x2="52" y2="38" />
+            </g>
+            <rect x="18" y="18" width="28" height="28" rx="7" fill="#0b1322" stroke="url(#nav-core-grad)" stroke-width="2.4" />
+            <rect x="24.5" y="24.5" width="15" height="15" rx="4" fill="url(#nav-core-grad)" />
+            <circle cx="32" cy="32" r="2.8" fill="#ffffff" />
+          </svg>
+        </span>
         <span class="nav-brand-text">Elias Lim</span>
       </a>
 
@@ -542,8 +579,144 @@
             (Unified to the exact same large BUILDER stage size & 2-column bezel grid)
          ====================================================================== -->
     <div id="featured" data-section-target="featured">
+      <!-- Repo Showcase 00: Jumpgate Zero-Trust Agentic AI Landing Zone & Vending Machine -->
+      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-jumpgate">
+        <div class="hero-copy">
+          <span class="hero-eyebrow">ZERO-TRUST AGENTIC CLOUD ARCHITECTURE · TERRAFORM &amp; VERTEX AI</span>
+          <h2 class="hero-headline stage-hero-headline">Jumpgate · Agentic AI Landing Zone &amp; Vending Machine</h2>
+          <p class="hero-subhead">
+            IM8-compliant Dual-VPC landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of cloud setup into under 3 minutes, driving $1.96M in realised public sector ARR (+$1.46M pipeline).
+          </p>
+          <div class="cta-pill-group">
+            <a
+              href="https://github.com/RZOWQ/trainee-project-jumpgate-agentic-lz"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill solid"
+            >
+              <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+              </svg>
+              <span>View Landing Zone Repo &#8599;</span>
+            </a>
+            <a
+              href="https://github.com/jarrettyeo/vending-machine-agent"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill outline"
+            >
+              <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+              </svg>
+              <span>View Vending Machine Repo &#8599;</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual-stage">
+          <div class="metallic-wordmark" aria-hidden="true">
+            JUMPGATE
+          </div>
+
+          <div class="hardware-deck stage-deck" id="flagship-jumpgate-sandbox">
+            <div class="hardware-bezel">
+              <div class="bezel-top-bar">
+                <div class="bezel-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="bezel-title">JUMPGATE DUAL-VPC &amp; 14-STEP VENDING MACHINE · INTERACTIVE TOPOLOGY</div>
+              </div>
+
+              <div class="bezel-grid">
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label">ZERO-TRUST TOPOLOGY (CLICK ANY NODE)</span>
+                    <span class="pane-badge" id="flagship-jg-readout">14-Step ADLC · &lt; 3 min (&gt;=0.85 Judge)</span>
+                  </div>
+                  <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
+                    <path class="trace-edge" d="M 96 58 L 132 58" />
+                    <path class="trace-edge" d="M 244 44 L 274 34" />
+                    <path class="trace-edge" d="M 244 72 L 274 82" />
+                    <path class="trace-packet hero-stream" d="M 96 58 L 132 58" />
+                    <path class="trace-packet hero-stream" d="M 244 44 L 274 34" />
+                    <path class="trace-packet hero-stream" d="M 244 72 L 274 82" />
+
+                    <g class="clickable-node" data-fjg="vpc">
+                      <rect class="trace-node" x="12" y="34" width="84" height="48" rx="8" />
+                      <text x="54" y="53" text-anchor="middle" class="visual-label">01 · INGRESS</text>
+                      <text x="54" y="68" text-anchor="middle" class="deck-svg-label">14/14 IM8 PASS</text>
+                    </g>
+
+                    <g class="clickable-node is-selected" data-fjg="adlc">
+                      <rect class="trace-node node-accent" x="132" y="30" width="112" height="56" rx="9" />
+                      <text x="188" y="49" text-anchor="middle" class="visual-badge">02 · 14-STEP ADLC</text>
+                      <text x="188" y="64" text-anchor="middle" class="visual-label">&lt; 3 min Deploy</text>
+                      <text x="188" y="77" text-anchor="middle" class="deck-svg-label">&gt;=0.85 LLM Judge</text>
+                    </g>
+
+                    <g class="clickable-node" data-fjg="egress">
+                      <rect class="trace-node node-accent" x="274" y="14" width="94" height="40" rx="7" />
+                      <text x="321" y="31" text-anchor="middle" class="visual-badge">03 · EGRESS VPC</text>
+                      <text x="321" y="45" text-anchor="middle" class="deck-svg-label">18/18 · PSC + SWP</text>
+                    </g>
+
+                    <g class="clickable-node" data-fjg="arr">
+                      <rect class="trace-node" x="274" y="62" width="94" height="40" rx="7" />
+                      <text x="321" y="79" text-anchor="middle" class="visual-label">04 · IMPACT</text>
+                      <text x="321" y="93" text-anchor="middle" class="deck-svg-label">$1.96M ARR</text>
+                    </g>
+                  </svg>
+                  <div class="sandbox-pills">
+                    <button type="button" class="sandbox-pill" data-fjg-btn="vpc">01 · Ingress (14/14)</button>
+                    <button type="button" class="sandbox-pill active" data-fjg-btn="adlc">02 · 14-Step ADLC</button>
+                    <button type="button" class="sandbox-pill" data-fjg-btn="egress">03 · Egress (18/18)</button>
+                    <button type="button" class="sandbox-pill" data-fjg-btn="arr">04 · $1.96M ARR</button>
+                  </div>
+                </div>
+
+                <div class="bezel-pane">
+                  <div class="pane-header">
+                    <span class="pane-label">IM8 POSTURE &amp; COMMERCIAL IMPACT</span>
+                    <span class="pane-badge" id="flagship-jg-badge">32 / 32 Checks Passed</span>
+                  </div>
+                  <div class="telemetry-metrics">
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Ingress Runtime Posture (WAF, TLS, Serverless NEG)</span>
+                        <span class="metric-val" id="flagship-jg-bar1-val">14 / 14 PASS</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-green" id="flagship-jg-bar1-fill" style="width: 100%"></div>
+                      </div>
+                    </div>
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Egress Static Terraform Checks (PSC Vertex AI, SWP L7)</span>
+                        <span class="metric-val" id="flagship-jg-bar2-val">18 / 18 PASS</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-blue" id="flagship-jg-bar2-fill" style="width: 100%"></div>
+                      </div>
+                    </div>
+                    <div class="metric-row">
+                      <div class="metric-top">
+                        <span>Public Sector Realised &amp; Pipeline ARR</span>
+                        <span class="metric-val" id="flagship-jg-bar3-val">$1.96M + $1.46M</span>
+                      </div>
+                      <div class="metric-track">
+                        <div class="metric-fill fill-teal" id="flagship-jg-bar3-fill" style="width: 96%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Repo Showcase 01: Jetski Agent Tracer & Harness -->
-      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-agent-tracer">
+      <section class="repo-showcase surface-white scroll-stage" id="showcase-agent-tracer">
         <div class="hero-copy">
           <span class="hero-eyebrow">AGENTIC OBSERVABILITY &amp; WORKSPACE · PYTHON &amp; VIS.JS</span>
           <h2 class="hero-headline stage-hero-headline">Jetski Agent Tracer &amp; Harness</h2>
@@ -678,7 +851,7 @@
       </section>
 
       <!-- Repo Showcase 02: Smart Meeting Prep & Dossier Agent -->
-      <section class="repo-showcase surface-white scroll-stage" id="showcase-meeting-prep">
+      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-meeting-prep">
         <div class="hero-copy">
           <span class="hero-eyebrow">MULTI-CORPUS AGENT &amp; EVALUATION HARNESS · PYTHON</span>
           <h2 class="hero-headline stage-hero-headline">Smart Meeting Prep &amp; Dossier Agent</h2>
@@ -795,7 +968,7 @@
       </section>
 
       <!-- Repo Showcase 03: UQ & Explainable AI for Battery Analytics -->
-      <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-uq-xai">
+      <section class="repo-showcase surface-white scroll-stage" id="showcase-uq-xai">
         <div class="hero-copy">
           <span class="hero-eyebrow">FIRST AUTHOR · APSIPA ASC 2025 &amp; IEEE XPLORE (DOC 11249263)</span>
           <h2 class="hero-headline stage-hero-headline">Uncertainty &amp; Explainable AI for Battery Analytics</h2>
@@ -1058,6 +1231,69 @@
           </div>
         </div>
       </div>
+
+      <!-- Scannable Hackathon Awards & 4,000+ Engineer Buildathon Leadership Showcase Strip -->
+      <div class="leadership-bento-grid reveal-on-scroll" id="leadership-strip">
+        <div class="leadership-card">
+          <div class="leadership-card-header">
+            <span class="leadership-eyebrow">NATIONAL HACKATHON HONOURS</span>
+            <span class="leadership-badge">3x Award Winner / Finalist</span>
+          </div>
+          <h3 class="leadership-title">Competitive AI &amp; Systems Engineering</h3>
+          <div class="award-pill-list">
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-eduverse">
+              <div class="award-row-main">
+                <span class="award-rank-pill rank-blue">2nd Place Overall</span>
+                <span class="award-event-name">NUS · Singtel · Millennium LifeHack 2025</span>
+              </div>
+              <span class="award-project-link">EduVerse AI Platform &#8599;</span>
+            </button>
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-mindsync">
+              <div class="award-row-main">
+                <span class="award-rank-pill rank-emerald">Overall Best &amp; Most Impactful</span>
+                <span class="award-event-name">AI Singapore · SMU · CyberYouthSG</span>
+              </div>
+              <span class="award-project-link">MINDSync Suite &#8599;</span>
+            </button>
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-til-ai-air-defence">
+              <div class="award-row-main">
+                <span class="award-rank-pill rank-amber">Semifinalist</span>
+                <span class="award-event-name">DSTA BrainHack 2024 · TIL-AI</span>
+              </div>
+              <span class="award-project-link">Autonomous Air Defence &#8599;</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="leadership-card">
+          <div class="leadership-card-header">
+            <span class="leadership-eyebrow">TECHNICAL ENABLEMENT &amp; WORKSHOPS</span>
+            <span class="leadership-badge">4,000+ Engineers &amp; Students</span>
+          </div>
+          <h3 class="leadership-title">AI Buildathons &amp; Cloud Architecture Training</h3>
+          <p class="leadership-desc">
+            Designed and delivered hands-on agentic AI, Vertex AI, and zero-trust Google Cloud architecture buildathons across Singapore's public sector, enterprise banking, and research institutions.
+          </p>
+          <div class="institution-badge-row" aria-label="Partner institutions trained">
+            <span class="institution-pill">
+              <span class="inst-dot dot-blue"></span>
+              <span>GovTech Singapore</span>
+            </span>
+            <span class="institution-pill">
+              <span class="inst-dot dot-emerald"></span>
+              <span>DBS Bank</span>
+            </span>
+            <span class="institution-pill">
+              <span class="inst-dot dot-teal"></span>
+              <span>NTU Singapore</span>
+            </span>
+            <span class="institution-pill">
+              <span class="inst-dot dot-amber"></span>
+              <span>A*STAR Research</span>
+            </span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ======================================================================
@@ -1163,34 +1399,68 @@
         <div>
           <span class="section-eyebrow">SPECIFICATIONS &amp; TELEMETRY</span>
           <h2 class="section-title">By the numbers. Built for production.</h2>
-          <p class="section-subtitle">Click any metric or technology chip below to filter the matching repositories above.</p>
+          <p class="section-subtitle">Compare the production architecture against legacy baselines, or click any tile below to filter repositories.</p>
+        </div>
+
+        <!-- Apple-Style Before vs. After Architecture Comparison Toggle -->
+        <div class="bento-compare-bar" id="bento-compare-bar" role="tablist" aria-label="Compare production architecture vs legacy baseline">
+          <button
+            type="button"
+            class="bento-compare-btn active"
+            data-compare-mode="after"
+            role="tab"
+            aria-selected="true"
+          >
+            With Jumpgate &amp; Conformal AI
+          </button>
+          <button
+            type="button"
+            class="bento-compare-btn"
+            data-compare-mode="before"
+            role="tab"
+            aria-selected="false"
+          >
+            Legacy Baseline (Before)
+          </button>
         </div>
       </div>
 
       <!-- Apple M4-Inspired Sculpted Titanium Spec Bento Grid -->
       <div class="apple-bento-specs reveal-on-scroll" id="bento-specs-grid">
         <button type="button" class="bento-spec-tile" data-bento-target="#inspect-jumpgate-agentic-lz">
-          <span class="bento-spec-eyebrow">CLOUD &amp; PUBLIC SECTOR IMPACT</span>
-          <span class="bento-spec-stat stat-blue">$1.96M</span>
-          <span class="bento-spec-caption">Realised Phase 1 public sector ARR (+$1.46M pipeline) via the Jumpgate AI landing zone.</span>
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">CLOUD &amp; PUBLIC SECTOR IMPACT</span>
+            <span class="bento-delta-pill" id="bento-delta-1">+ $3.42M Total Pipe</span>
+          </div>
+          <span class="bento-spec-stat stat-blue" id="bento-stat-1">$1.96M</span>
+          <span class="bento-spec-caption" id="bento-cap-1">Realised Phase 1 public sector ARR (+$1.46M pipeline) via the Jumpgate AI landing zone.</span>
         </button>
 
         <button type="button" class="bento-spec-tile" data-bento-target="#about-google">
-          <span class="bento-spec-eyebrow">PROVISIONING &amp; ENABLEMENT</span>
-          <span class="bento-spec-stat stat-teal">&lt; 3 min</span>
-          <span class="bento-spec-caption">Self-service 14-step agent deployment (down from 4 to 6 weeks), plus 4,000+ engineers trained.</span>
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">PROVISIONING &amp; ENABLEMENT</span>
+            <span class="bento-delta-pill" id="bento-delta-2">99.9% Faster Setup</span>
+          </div>
+          <span class="bento-spec-stat stat-teal" id="bento-stat-2">&lt; 3 min</span>
+          <span class="bento-spec-caption" id="bento-cap-2">Self-service 14-step agent deployment (down from 4 to 6 weeks), plus 4,000+ engineers trained.</span>
         </button>
 
         <button type="button" class="bento-spec-tile" data-bento-target="#projects-agentic">
-          <span class="bento-spec-eyebrow">SECURITY &amp; EVAL RIGOUR</span>
-          <span class="bento-spec-stat stat-emerald">100%</span>
-          <span class="bento-spec-caption">14/14 Ingress &amp; 18/18 Egress IM8 cloud posture checks, plus 36/36 multi-corpus linter checks.</span>
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">SECURITY &amp; EVAL RIGOUR</span>
+            <span class="bento-delta-pill" id="bento-delta-3">68 Automated Gates</span>
+          </div>
+          <span class="bento-spec-stat stat-emerald" id="bento-stat-3">100%</span>
+          <span class="bento-spec-caption" id="bento-cap-3">14/14 Ingress &amp; 18/18 Egress IM8 cloud posture checks, plus 36/36 multi-corpus linter checks.</span>
         </button>
 
         <button type="button" class="bento-spec-tile" data-bento-target="#projects-ml">
-          <span class="bento-spec-eyebrow">IEEE XPLORE RESEARCH</span>
-          <span class="bento-spec-stat stat-amber">95.2%</span>
-          <span class="bento-spec-caption">Empirical conformal coverage (PICP) for battery State-of-Health deep learning at A*STAR.</span>
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">IEEE XPLORE RESEARCH</span>
+            <span class="bento-delta-pill" id="bento-delta-4">0.012 ECE Calibrated</span>
+          </div>
+          <span class="bento-spec-stat stat-amber" id="bento-stat-4">95.2%</span>
+          <span class="bento-spec-caption" id="bento-cap-4">Empirical conformal coverage (PICP) for battery State-of-Health deep learning at A*STAR.</span>
         </button>
       </div>
 
@@ -1254,7 +1524,7 @@
   <!-- Apple-Style Floating Bottom Stage Controller Pill -->
   <div class="apple-stage-dock" id="apple-stage-dock" role="region" aria-label="Interactive stage controller">
     <div class="stage-dock-pill">
-      <span class="stage-dock-caption" id="stage-dock-caption">01 / 05 · BUILDER</span>
+      <span class="stage-dock-caption" id="stage-dock-caption">01 / 06 · BUILDER</span>
       <div class="stage-dock-dots" role="tablist" aria-label="Jump to stage">
         <button type="button" class="stage-dock-dot active" data-dock-idx="0" aria-label="Stage 1: Builder Overview">
           <span class="stage-dot-fill"></span>
@@ -1262,13 +1532,16 @@
         <button type="button" class="stage-dock-dot" data-dock-idx="1" aria-label="Stage 2: Engineering Profile">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="2" aria-label="Stage 3: Agent Tracer &amp; Harness">
+        <button type="button" class="stage-dock-dot" data-dock-idx="2" aria-label="Stage 3: Jumpgate Zero-Trust Landing Zone">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="3" aria-label="Stage 4: Meeting Prep Dossier Agent">
+        <button type="button" class="stage-dock-dot" data-dock-idx="3" aria-label="Stage 4: Agent Tracer &amp; Harness">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="4" aria-label="Stage 5: Battery UQ &amp; XAI Research">
+        <button type="button" class="stage-dock-dot" data-dock-idx="4" aria-label="Stage 5: Meeting Prep Dossier Agent">
+          <span class="stage-dot-fill"></span>
+        </button>
+        <button type="button" class="stage-dock-dot" data-dock-idx="5" aria-label="Stage 6: Battery UQ &amp; XAI Research">
           <span class="stage-dot-fill"></span>
         </button>
       </div>
@@ -1278,17 +1551,23 @@
       type="button"
       class="stage-dock-action-btn stage-dock-voice-btn"
       id="stage-dock-play-btn"
-      aria-label="Play voice-over narration for active section"
+      aria-label="Play voice-over narration for active section (Shortcut: V)"
       aria-pressed="false"
-      title="Play or pause human voice-over narration for this section"
+      title="Play or pause human voice-over narration (Shortcut: V)"
     >
-      <svg id="dock-icon-play" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M6 4l14 8-14 8V4z"></path>
-      </svg>
-      <svg id="dock-icon-pause" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: none">
-        <rect x="6" y="4" width="4" height="16" rx="1.5"></rect>
-        <rect x="14" y="4" width="4" height="16" rx="1.5"></rect>
-      </svg>
+      <span class="dock-voice-ring-wrap" aria-hidden="true">
+        <svg class="dock-voice-ring-svg" viewBox="0 0 22 22">
+          <circle class="dock-voice-ring-bg" cx="11" cy="11" r="9"></circle>
+          <circle class="dock-voice-ring-fg" id="dock-voice-progress-circle" cx="11" cy="11" r="9"></circle>
+        </svg>
+        <svg id="dock-icon-play" class="dock-voice-center-icon" width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 4l13 8-13 8V4z"></path>
+        </svg>
+        <svg id="dock-icon-pause" class="dock-voice-center-icon" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="display: none">
+          <rect x="6" y="4" width="4" height="16" rx="1.5"></rect>
+          <rect x="14" y="4" width="4" height="16" rx="1.5"></rect>
+        </svg>
+      </span>
       <span class="dock-voice-wave" id="dock-voice-wave" aria-hidden="true">
         <span></span><span></span><span></span>
       </span>
@@ -1321,6 +1600,22 @@
           <span class="closer-look-counter" id="closer-look-counter">01 / 14</span>
         </div>
         <div class="closer-look-controls">
+          <button
+            type="button"
+            class="closer-listen-btn"
+            id="closer-look-listen-btn"
+            aria-label="Listen to architecture narration"
+            title="Play or pause voice-over narration for this project"
+          >
+            <svg id="closer-icon-play" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6 4l14 8-14 8V4z"></path>
+            </svg>
+            <svg id="closer-icon-pause" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display: none">
+              <rect x="6" y="4" width="4" height="16" rx="1.5"></rect>
+              <rect x="14" y="4" width="4" height="16" rx="1.5"></rect>
+            </svg>
+            <span id="closer-listen-label">Listen</span>
+          </button>
           <button type="button" class="closer-nav-btn" id="closer-prev-btn" aria-label="Previous project (Left arrow)">
             &#8592;
           </button>
@@ -1434,6 +1729,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261005-12"></script>
+  <script src="app.js?v=20261005-13"></script>
 </body>
 </html>
