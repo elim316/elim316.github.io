@@ -1696,13 +1696,16 @@
       const vh = Math.max(window.innerHeight || 800, 500);
 
       allStages.forEach((stage, idx) => {
+        const stageRect = stage.getBoundingClientRect();
+        if (stageRect.bottom < -160 || stageRect.top > vh + 160) return;
+
         const deck = stage.querySelector(".hardware-deck");
         const wordmark = stage.querySelector(".metallic-wordmark");
         if (!deck || !wordmark) return;
 
         let progress = 0;
         if (idx === 0) {
-          const heroHeight = Math.max(stage.offsetHeight, 500);
+          const heroHeight = Math.max(stageRect.height || 500, 500);
           progress = Math.min(Math.max(scrollY / (heroHeight * 0.65), 0), 1);
         } else {
           const deckRect = deck.getBoundingClientRect();
@@ -1740,6 +1743,18 @@
 
     window.addEventListener("resize", updateScrollPhysics);
     updateScrollPhysics();
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        const href = anchor.getAttribute("href");
+        if (!href || href === "#") return;
+        const targetEl = document.querySelector(href);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
 
     /* Mouse-following metallic wordmark colour reflection ONLY (zero movement) */
     allStages.forEach((stage) => {
@@ -2681,6 +2696,9 @@
       setVoiceUiState(false);
     });
 
+    let stageScrollTicking = false;
+    const stageReadCache = new Map();
+
     function updateStageDockOnScroll() {
       const vh = window.innerHeight || 800;
       const projectsSection = document.getElementById("projects");
@@ -2711,11 +2729,12 @@
       dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === bestIdx));
 
       if (prevIdx !== bestIdx) {
-        resetStageReadTimer();
+        resetStageReadTimer(false);
         if (isNarrating) {
           startOrSwitchNarration(true);
         }
       }
+      stageScrollTicking = false;
     }
 
     /* Estimate reading time of visible prose on the active stage + 10s buffer */
@@ -2731,7 +2750,10 @@
       durationMs: 36000,
     };
 
-    function estimateStageReadDuration(stageId) {
+    function estimateStageReadDuration(stageId, forceRefresh) {
+      if (!forceRefresh && stageReadCache.has(stageId)) {
+        return stageReadCache.get(stageId);
+      }
       const stageEl = document.getElementById(stageId);
       if (!stageEl) {
         return {
@@ -2747,20 +2769,22 @@
       let combinedText = "";
       if (readableNodes.length > 0) {
         readableNodes.forEach((node) => {
-          combinedText += ` ${node.innerText || node.textContent || ""}`;
+          combinedText += ` ${node.textContent || ""}`;
         });
       } else {
-        combinedText = stageEl.innerText || stageEl.textContent || "";
+        combinedText = stageEl.textContent || "";
       }
       const words = combinedText.trim().split(/\s+/).filter(Boolean).length;
       const readingSeconds = Math.max(8, Math.round(words / WORDS_PER_SECOND));
       const totalSeconds = readingSeconds + EXTRA_BUFFER_SECONDS;
-      return {
+      const est = {
         wordCount: words,
         readingSeconds,
         totalSeconds,
         durationMs: totalSeconds * 1000,
       };
+      stageReadCache.set(stageId, est);
+      return est;
     }
 
     function updateDotFillBars(progressPct, remainingSec) {
@@ -2779,11 +2803,11 @@
       });
     }
 
-    function resetStageReadTimer() {
+    function resetStageReadTimer(forceRefresh) {
       stageElapsedMs = 0;
       lastTickTs = performance.now();
       const cfg = stageConfigs[activeStageIdx] || stageConfigs[0];
-      currentReadEstimate = estimateStageReadDuration(cfg.id);
+      currentReadEstimate = estimateStageReadDuration(cfg.id, Boolean(forceRefresh));
       updateDotFillBars(0, currentReadEstimate.totalSeconds);
     }
 
@@ -2845,7 +2869,7 @@
       btn.addEventListener("click", () => {
         const idx = Number(btn.getAttribute("data-dock-idx") || 0);
         const target = stageConfigs[idx] ? document.getElementById(stageConfigs[idx].id) : null;
-        resetStageReadTimer();
+        resetStageReadTimer(false);
         if (target) target.scrollIntoView({ behavior: "smooth" });
       });
     });
@@ -2857,7 +2881,7 @@
       .forEach((el) => {
         el.addEventListener("click", (e) => {
           if (e.isTrusted) {
-            requestAnimationFrame(() => resetStageReadTimer());
+            requestAnimationFrame(() => resetStageReadTimer(true));
           }
           if (
             isNarrating &&
@@ -2894,9 +2918,22 @@
       });
     }
 
-    window.addEventListener("scroll", updateStageDockOnScroll, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!isAutoScrolling) {
+          stageElapsedMs = 0;
+          lastTickTs = performance.now();
+        }
+        if (!stageScrollTicking) {
+          requestAnimationFrame(updateStageDockOnScroll);
+          stageScrollTicking = true;
+        }
+      },
+      { passive: true }
+    );
     updateStageDockOnScroll();
-    resetStageReadTimer();
+    resetStageReadTimer(true);
   }
 
   /* Apple Bento Specs, Before/After Comparison, Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
@@ -3157,22 +3194,38 @@
     if (!track || cards.length === 0) return;
 
     let activeIdx = 0;
+    let isProgrammaticScroll = false;
+    let programmaticTimer = null;
+    let scrollTicking = false;
 
-    function scrollToCard(idx) {
-      const clamped = (idx + cards.length) % cards.length;
-      activeIdx = clamped;
-      const card = cards[clamped];
-      if (card) {
-        track.scrollTo({
-          left: card.offsetLeft - track.offsetLeft,
-          behavior: "smooth",
-        });
-      }
+    function setActiveDot(idx) {
+      activeIdx = idx;
       dots.forEach((d, i) => {
-        const isAct = i === clamped;
+        const isAct = i === idx;
         d.classList.toggle("active", isAct);
         d.setAttribute("aria-selected", isAct ? "true" : "false");
       });
+    }
+
+    function scrollToCard(idx) {
+      const clamped = (idx + cards.length) % cards.length;
+      setActiveDot(clamped);
+
+      const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+      const targetLeft =
+        cards.length > 1
+          ? Math.round((clamped / (cards.length - 1)) * maxScroll)
+          : 0;
+
+      isProgrammaticScroll = true;
+      if (programmaticTimer) clearTimeout(programmaticTimer);
+      track.scrollTo({
+        left: targetLeft,
+        behavior: "smooth",
+      });
+      programmaticTimer = setTimeout(() => {
+        isProgrammaticScroll = false;
+      }, 460);
     }
 
     if (prevBtn) {
@@ -3191,24 +3244,21 @@
     track.addEventListener(
       "scroll",
       () => {
-        const scrollLeft = track.scrollLeft;
-        let best = 0;
-        let bestDist = Infinity;
-        cards.forEach((c, i) => {
-          const dist = Math.abs(c.offsetLeft - track.offsetLeft - scrollLeft);
-          if (dist < bestDist) {
-            bestDist = dist;
-            best = i;
+        if (isProgrammaticScroll || scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+          scrollTicking = false;
+          if (isProgrammaticScroll) return;
+          const maxScroll = Math.max(1, track.scrollWidth - track.clientWidth);
+          const ratio = Math.min(1, Math.max(0, track.scrollLeft / maxScroll));
+          const best = Math.min(
+            cards.length - 1,
+            Math.max(0, Math.round(ratio * (cards.length - 1)))
+          );
+          if (best !== activeIdx) {
+            setActiveDot(best);
           }
         });
-        if (best !== activeIdx) {
-          activeIdx = best;
-          dots.forEach((d, i) => {
-            const isAct = i === best;
-            d.classList.toggle("active", isAct);
-            d.setAttribute("aria-selected", isAct ? "true" : "false");
-          });
-        }
       },
       { passive: true }
     );
@@ -3227,7 +3277,7 @@
 
   /* 2. Smooth-Gliding macOS/iOS Segmented Pill Indicator */
   function initSlidingSegmentedControls() {
-    const selectors = ["#about-chapter-tabs", "#filter-bar", "#bento-compare-bar"];
+    const selectors = ["#bento-compare-bar"];
     const updaters = [];
 
     selectors.forEach((sel) => {
@@ -3277,7 +3327,7 @@
     );
   }
 
-  /* 3. Interactive "X-Ray Specs" Toggle inside the 6 Hardware Stage Bezels */
+  /* 3. Interactive "More details" Toggle inside the 6 Hardware Stage Bezels */
   function initHardwareXraySpecs() {
     const stageSpecs = {
       "hero-stage": [
@@ -3425,7 +3475,7 @@
       btn.type = "button";
       btn.className = "bezel-xray-btn";
       btn.setAttribute("aria-expanded", "false");
-      btn.textContent = "X-Ray Specs";
+      btn.textContent = "More details";
       topBar.appendChild(btn);
 
       const drawer = document.createElement("div");
@@ -3452,7 +3502,7 @@
         const isOpen = bezel.classList.toggle("is-xray-open");
         btn.classList.toggle("is-active", isOpen);
         btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        btn.textContent = isOpen ? "Hide X-Ray" : "X-Ray Specs";
+        btn.textContent = isOpen ? "Hide details" : "More details";
       });
     });
   }
