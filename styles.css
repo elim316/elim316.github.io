@@ -2189,12 +2189,92 @@ a {
   bottom: 22px;
   z-index: 80;
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   gap: 8px;
   transform: translate3d(-50%, 0, 0);
   transition:
     opacity 280ms var(--ease-smooth),
     transform 280ms var(--spring-out);
+}
+
+.stage-dock-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stage-dock-teleprompter {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  max-width: min(680px, 92vw);
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-nav);
+  backdrop-filter: saturate(180%) blur(22px);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-card-hover);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  animation: teleprompterFadeIn 220ms var(--spring-out);
+}
+
+.stage-dock-teleprompter.is-visible {
+  display: inline-flex;
+}
+
+@keyframes teleprompterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.teleprompter-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--apple-blue);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.teleprompter-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: min(540px, 72vw);
+  letter-spacing: -0.01em;
+}
+
+.teleprompter-speed-btn {
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elevated);
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 180ms var(--ease-smooth),
+    border-color 180ms var(--ease-smooth),
+    transform 180ms var(--spring-out);
+}
+
+.teleprompter-speed-btn:hover {
+  border-color: var(--apple-blue);
+  background: var(--accent-subtle);
+  transform: scale(1.04);
 }
 
 .apple-stage-dock.is-hidden {
@@ -2800,6 +2880,470 @@ a {
 }
 
 /* ==========================================================================
+   7. Apple "Get the Highlights." Scroller, Sliding Segmented Pills,
+      Hardware X-Ray Specs Overlay & Side-by-Side System Comparison
+   ========================================================================== */
+
+.highlights-section {
+  padding-top: 72px;
+  padding-bottom: 40px;
+}
+
+.highlights-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.highlights-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.highlights-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.highlight-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--border-strong);
+  cursor: pointer;
+  transition:
+    width 320ms var(--spring-out),
+    background-color 220ms var(--ease-smooth);
+}
+
+.highlight-dot.active {
+  width: 28px;
+  background: var(--apple-blue);
+}
+
+.highlights-arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.highlight-arrow-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 180ms var(--spring-out),
+    border-color 180ms var(--ease-smooth),
+    background-color 180ms var(--ease-smooth);
+}
+
+.highlight-arrow-btn:hover {
+  transform: scale(1.06);
+  border-color: var(--apple-blue);
+  background: var(--accent-subtle);
+}
+
+.highlights-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(min(100%, 540px), 620px);
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 4px 16px;
+  scrollbar-width: none;
+}
+
+.highlights-track::-webkit-scrollbar {
+  display: none;
+}
+
+.highlight-card {
+  scroll-snap-align: start;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 26px 28px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  transition:
+    transform 320ms var(--spring-out),
+    box-shadow 320ms var(--ease-smooth),
+    border-color 240ms var(--ease-smooth);
+}
+
+.highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--apple-blue);
+}
+
+.highlight-eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.highlight-headline {
+  font-size: clamp(1.18rem, 2vw, 1.44rem);
+  font-weight: 650;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.highlight-visual {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlight-svg {
+  width: 100%;
+  height: 128px;
+  overflow: visible;
+}
+
+.highlight-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.highlight-meta {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.highlight-jump-pill {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--apple-link);
+}
+
+/* Smooth-gliding macOS/iOS Segmented Control Pill Indicator */
+.has-sliding-pill {
+  position: relative;
+}
+
+.seg-glide-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-pill);
+  background: var(--apple-blue);
+  box-shadow: 0 2px 10px rgba(0, 113, 227, 0.25);
+  pointer-events: none;
+  z-index: 0;
+  transition:
+    transform 360ms var(--spring-out),
+    width 360ms var(--spring-out),
+    height 360ms var(--spring-out);
+}
+
+.has-sliding-pill > button {
+  position: relative;
+  z-index: 1;
+}
+
+.has-sliding-pill.glide-ready > button.active {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.has-sliding-pill.glide-ready > button.active .filter-count {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* Interactive Hardware Stage X-Ray Specs Toggle & Overlay Drawer */
+.bezel-xray-btn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 180ms var(--ease-smooth),
+    color 180ms var(--ease-smooth),
+    border-color 180ms var(--ease-smooth),
+    transform 180ms var(--spring-out);
+}
+
+.bezel-xray-btn:hover {
+  border-color: var(--apple-blue);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.bezel-xray-btn.is-active {
+  background: var(--apple-blue);
+  border-color: var(--apple-blue);
+  color: #ffffff;
+}
+
+.bezel-xray-drawer {
+  display: none;
+  padding: 18px 22px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
+  animation: teleprompterFadeIn 240ms var(--spring-out);
+}
+
+.hardware-bezel.is-xray-open .bezel-xray-drawer {
+  display: block;
+}
+
+.xray-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  text-align: left;
+}
+
+.xray-spec-cell {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.xray-spec-label {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.xray-spec-val {
+  font-size: 0.88rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.xray-spec-sub {
+  font-size: 0.73rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Apple-Style "Compare Systems" Side-by-Side Architecture Selector */
+.compare-systems-box {
+  margin-top: 40px;
+  padding: 28px 30px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+}
+
+.compare-systems-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 22px;
+}
+
+.compare-systems-title {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.compare-systems-sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.compare-selectors-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.compare-select-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-strong);
+}
+
+.compare-select-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.compare-select {
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  max-width: 220px;
+}
+
+.compare-swap-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 200ms var(--spring-out),
+    border-color 180ms var(--ease-smooth),
+    background-color 180ms var(--ease-smooth);
+}
+
+.compare-swap-btn:hover {
+  transform: rotate(180deg) scale(1.06);
+  border-color: var(--apple-blue);
+  background: var(--accent-subtle);
+}
+
+.compare-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.compare-card {
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.compare-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.compare-card-title {
+  font-size: 1.08rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+}
+
+.compare-card-summary {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.compare-spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.compare-spec-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.compare-spec-key {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.compare-spec-value {
+  font-size: 0.79rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.42;
+}
+
+/* ==========================================================================
    Responsive, Print Executive CV & Reduced Motion
    ========================================================================== */
 
@@ -2812,7 +3356,9 @@ a {
   .skills-grid,
   .apple-bento-specs,
   .leadership-bento-grid,
-  .closer-look-specs-grid {
+  .closer-look-specs-grid,
+  .xray-spec-grid,
+  .compare-cards-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2843,6 +3389,8 @@ a {
   .cmd-backdrop,
   .scroll-cue,
   .hero-visual-stage,
+  .highlights-section,
+  .compare-systems-box,
   .filter-bar,
   .project-visual,
   .promo-links,
