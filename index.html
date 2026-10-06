@@ -66,14 +66,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261005-16" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261005-17" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261005-16" />
+  <link rel="stylesheet" href="styles.css?v=20261005-17" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -543,6 +543,177 @@
             (Unified to the exact same large BUILDER stage size & 2-column bezel grid)
          ====================================================================== -->
     <div id="featured" data-section-target="featured">
+      <!-- Apple-Inspired "Get the highlights." Horizontal Media Scroller -->
+      <section class="highlights-section container reveal-on-scroll" id="highlights-section" aria-label="Key portfolio highlights">
+        <div class="highlights-header">
+          <div>
+            <span class="section-eyebrow">KEY HIGHLIGHTS</span>
+            <h2 class="section-title">Get the highlights.</h2>
+          </div>
+          <div class="highlights-controls">
+            <div class="highlights-dots" id="highlights-dots" role="tablist" aria-label="Select highlight slide">
+              <button type="button" class="highlight-dot active" data-highlight-idx="0" role="tab" aria-selected="true" aria-label="Highlight 1: Jumpgate Landing Zone"></button>
+              <button type="button" class="highlight-dot" data-highlight-idx="1" role="tab" aria-selected="false" aria-label="Highlight 2: Gemini Agent Tracer"></button>
+              <button type="button" class="highlight-dot" data-highlight-idx="2" role="tab" aria-selected="false" aria-label="Highlight 3: IEEE Xplore Conformal AI"></button>
+              <button type="button" class="highlight-dot" data-highlight-idx="3" role="tab" aria-selected="false" aria-label="Highlight 4: 4,000+ Engineers &amp; Hackathon Honours"></button>
+            </div>
+            <div class="highlights-arrows">
+              <button type="button" class="highlight-arrow-btn" id="highlights-prev" aria-label="Previous highlight card">&#8249;</button>
+              <button type="button" class="highlight-arrow-btn" id="highlights-next" aria-label="Next highlight card">&#8250;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlights-track" id="highlights-track">
+          <!-- Highlight Card 1: Jumpgate -->
+          <article class="highlight-card" data-highlight-target="#showcase-jumpgate">
+            <div class="highlight-card-copy">
+              <span class="highlight-eyebrow">ZERO-TRUST AGENTIC CLOUD · TERRAFORM &amp; VERTEX AI</span>
+              <h3 class="highlight-headline">
+                Provision IM8-compliant dual-VPC agentic landing zones in under 3 minutes. $1.96M realised public sector ARR.
+              </h3>
+            </div>
+            <div class="highlight-visual">
+              <svg viewBox="0 0 520 150" class="highlight-svg" role="img" aria-label="Jumpgate Dual-VPC and 14-Step Vending Machine schematic">
+                <rect x="14" y="18" width="145" height="114" rx="14" class="trace-node node-accent" />
+                <text x="86" y="48" text-anchor="middle" class="visual-badge">INGRESS VPC · DMZ</text>
+                <text x="86" y="72" text-anchor="middle" class="visual-label">Cloud Armor WAF + L7 LB</text>
+                <text x="86" y="94" text-anchor="middle" class="visual-badge">14 / 14 Runtime Checks</text>
+                <text x="86" y="114" text-anchor="middle" class="visual-label">Zero Public IPs</text>
+
+                <line x1="159" y1="75" x2="205" y2="75" class="trace-edge" />
+                <line x1="159" y1="75" x2="205" y2="75" class="trace-packet" />
+
+                <rect x="205" y="18" width="145" height="114" rx="14" class="trace-node" />
+                <text x="277" y="48" text-anchor="middle" class="visual-badge">EGRESS VPC · BRAIN</text>
+                <text x="277" y="72" text-anchor="middle" class="visual-label">Private Service Connect</text>
+                <text x="277" y="94" text-anchor="middle" class="visual-badge">18 / 18 Static Checks</text>
+                <text x="277" y="114" text-anchor="middle" class="visual-label">Vertex AI &amp; Model Armor</text>
+
+                <line x1="350" y1="75" x2="392" y2="75" class="trace-edge" />
+                <line x1="350" y1="75" x2="392" y2="75" class="trace-packet" />
+
+                <rect x="392" y="18" width="114" height="114" rx="14" class="trace-node node-accent" />
+                <text x="449" y="48" text-anchor="middle" class="visual-badge">14-STEP ADLC</text>
+                <text x="449" y="72" text-anchor="middle" class="visual-label">&gt;=0.85 Judge Gate</text>
+                <text x="449" y="94" text-anchor="middle" class="visual-badge">&lt; 3 min Setup</text>
+                <text x="449" y="114" text-anchor="middle" class="visual-label">$1.96M ARR</text>
+              </svg>
+            </div>
+            <div class="highlight-card-footer">
+              <span class="highlight-meta">32 / 32 Security Checks · 70% Less Engineering Effort</span>
+              <span class="highlight-jump-pill">Explore Jumpgate Stage &#8595;</span>
+            </div>
+          </article>
+
+          <!-- Highlight Card 2: Agent Tracer -->
+          <article class="highlight-card" data-highlight-target="#showcase-agent-tracer">
+            <div class="highlight-card-copy">
+              <span class="highlight-eyebrow">AGENT OBSERVABILITY · GO, SVELTE 5 &amp; CONNECT-RPC</span>
+              <h3 class="highlight-headline">
+                Inspect multi-agent execution graphs, tool latency, and 128k context window saturation in real time.
+              </h3>
+            </div>
+            <div class="highlight-visual">
+              <svg viewBox="0 0 520 150" class="highlight-svg" role="img" aria-label="Agent Tracer live DAG and 128k context gauge schematic">
+                <rect x="16" y="24" width="118" height="102" rx="14" class="trace-node" />
+                <text x="75" y="54" text-anchor="middle" class="visual-badge">JSONL WATCHER</text>
+                <text x="75" y="78" text-anchor="middle" class="visual-label">fsnotify Tail</text>
+                <text x="75" y="100" text-anchor="middle" class="visual-badge">Zero Cloud Lock-In</text>
+
+                <line x1="134" y1="75" x2="180" y2="75" class="trace-edge" />
+                <line x1="134" y1="75" x2="180" y2="75" class="trace-packet" />
+
+                <rect x="180" y="24" width="150" height="102" rx="14" class="trace-node node-accent" />
+                <text x="255" y="54" text-anchor="middle" class="visual-badge">CONNECT-RPC STREAM</text>
+                <text x="255" y="78" text-anchor="middle" class="visual-label">Planner · Tool · Subagent</text>
+                <text x="255" y="100" text-anchor="middle" class="visual-badge">Sub-ms Span Diffs</text>
+
+                <line x1="330" y1="75" x2="374" y2="75" class="trace-edge" />
+                <line x1="330" y1="75" x2="374" y2="75" class="trace-packet" />
+
+                <rect x="374" y="24" width="130" height="102" rx="14" class="trace-node" />
+                <text x="439" y="54" text-anchor="middle" class="visual-badge">128K CONTEXT</text>
+                <text x="439" y="78" text-anchor="middle" class="visual-label">Token Burn Telemetry</text>
+                <text x="439" y="100" text-anchor="middle" class="visual-badge">Live Cost Estimator</text>
+              </svg>
+            </div>
+            <div class="highlight-card-footer">
+              <span class="highlight-meta">Native Sidecar · Real-Time DAG &amp; Span Inspector</span>
+              <span class="highlight-jump-pill">Explore Tracer Stage &#8595;</span>
+            </div>
+          </article>
+
+          <!-- Highlight Card 3: IEEE Xplore Conformal & Explainable AI -->
+          <article class="highlight-card" data-highlight-target="#showcase-uq-xai">
+            <div class="highlight-card-copy">
+              <span class="highlight-eyebrow">FIRST-AUTHOR IEEE XPLORE · CONFORMAL PREDICTION &amp; XAI</span>
+              <h3 class="highlight-headline">
+                95.2% empirical coverage (0.012 ECE) for battery health and 64.96% smaller prediction sets in medical imaging.
+              </h3>
+            </div>
+            <div class="highlight-visual">
+              <svg viewBox="0 0 520 150" class="highlight-svg" role="img" aria-label="Conformal prediction interval and SHAP attribution schematic">
+                <rect x="16" y="24" width="150" height="102" rx="14" class="trace-node node-accent" />
+                <text x="91" y="54" text-anchor="middle" class="visual-badge">ADAPTIVE CONFORMAL</text>
+                <text x="91" y="78" text-anchor="middle" class="visual-label">95.2% Empirical PICP</text>
+                <text x="91" y="100" text-anchor="middle" class="visual-badge">0.012 Calibration ECE</text>
+
+                <line x1="166" y1="75" x2="206" y2="75" class="trace-edge" />
+                <line x1="166" y1="75" x2="206" y2="75" class="trace-packet" />
+
+                <rect x="206" y="24" width="144" height="102" rx="14" class="trace-node" />
+                <text x="278" y="54" text-anchor="middle" class="visual-badge">SHAP · LIME · GRAD-CAM</text>
+                <text x="278" y="78" text-anchor="middle" class="visual-label">Feature Attribution</text>
+                <text x="278" y="100" text-anchor="middle" class="visual-badge">Voltage &amp; Temp Drivers</text>
+
+                <line x1="350" y1="75" x2="388" y2="75" class="trace-edge" />
+                <line x1="350" y1="75" x2="388" y2="75" class="trace-packet" />
+
+                <rect x="388" y="24" width="116" height="102" rx="14" class="trace-node node-accent" />
+                <text x="446" y="54" text-anchor="middle" class="visual-badge">MEDICAL XAI</text>
+                <text x="446" y="78" text-anchor="middle" class="visual-label">90.90% Coverage</text>
+                <text x="446" y="100" text-anchor="middle" class="visual-badge">-64.96% Set Size</text>
+              </svg>
+            </div>
+            <div class="highlight-card-footer">
+              <span class="highlight-meta">APSIPA ASC 2025 · IEEE Xplore Doc 11249263</span>
+              <span class="highlight-jump-pill">Explore Research Stage &#8595;</span>
+            </div>
+          </article>
+
+          <!-- Highlight Card 4: Technical Enablement & Hackathon Honours -->
+          <article class="highlight-card" data-highlight-target="#leadership-strip">
+            <div class="highlight-card-copy">
+              <span class="highlight-eyebrow">TECHNICAL ENABLEMENT &amp; NATIONAL HACKATHON HONOURS</span>
+              <h3 class="highlight-headline">
+                4,000+ engineers and students trained across GovTech, DBS, NTU, and A*STAR, plus 3x National Award Winner.
+              </h3>
+            </div>
+            <div class="highlight-visual">
+              <svg viewBox="0 0 520 150" class="highlight-svg" role="img" aria-label="4,000+ engineers trained and national hackathon honours schematic">
+                <rect x="16" y="24" width="225" height="102" rx="14" class="trace-node node-accent" />
+                <text x="128" y="54" text-anchor="middle" class="visual-badge">4,000+ ENGINEERS &amp; STUDENTS</text>
+                <text x="128" y="78" text-anchor="middle" class="visual-label">GovTech · DBS Bank · NTU · A*STAR</text>
+                <text x="128" y="100" text-anchor="middle" class="visual-badge">Agentic AI &amp; Cloud Buildathons</text>
+
+                <line x1="241" y1="75" x2="279" y2="75" class="trace-edge" />
+                <line x1="241" y1="75" x2="279" y2="75" class="trace-packet" />
+
+                <rect x="279" y="24" width="225" height="102" rx="14" class="trace-node" />
+                <text x="391" y="54" text-anchor="middle" class="visual-badge">3X NATIONAL HACKATHON HONOURS</text>
+                <text x="391" y="78" text-anchor="middle" class="visual-label">2nd Place NUS/Singtel LifeHack 2025</text>
+                <text x="391" y="100" text-anchor="middle" class="visual-badge">Overall Best AISG/SMU · DSTA TIL-AI</text>
+              </svg>
+            </div>
+            <div class="highlight-card-footer">
+              <span class="highlight-meta">Enterprise Workshops · Competitive Systems Engineering</span>
+              <span class="highlight-jump-pill">Explore Honours &amp; Enablement &#8595;</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <!-- Repo Showcase 00: Jumpgate Zero-Trust Agentic AI Landing Zone & Vending Machine -->
       <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-jumpgate">
         <div class="hero-copy">
@@ -1106,6 +1277,29 @@
       </div>
 
       <div id="projects-grid" class="promo-grid"></div>
+
+      <!-- Apple-Inspired "Compare Systems" Side-by-Side Architecture Selector -->
+      <div class="compare-systems-box reveal-on-scroll" id="compare-systems-box" aria-label="Compare two engineering systems side by side">
+        <div class="compare-systems-header">
+          <div>
+            <span class="section-eyebrow">SIDE-BY-SIDE ARCHITECTURE COMPARISON</span>
+            <h3 class="compare-systems-title">Compare systems.</h3>
+            <p class="compare-systems-sub">Select any two repositories to compare their runtime stack, verification gates, and system schematics.</p>
+          </div>
+          <div class="compare-selectors-bar">
+            <label class="compare-select-wrap" for="compare-select-a">
+              <span class="compare-select-badge">System A</span>
+              <select id="compare-select-a" class="compare-select" aria-label="Select first system to compare"></select>
+            </label>
+            <button type="button" class="compare-swap-btn" id="compare-swap-btn" aria-label="Swap compared systems" title="Swap systems">&#8644;</button>
+            <label class="compare-select-wrap" for="compare-select-b">
+              <span class="compare-select-badge">System B</span>
+              <select id="compare-select-b" class="compare-select" aria-label="Select second system to compare"></select>
+            </label>
+          </div>
+        </div>
+        <div class="compare-cards-grid" id="compare-cards-grid"></div>
+      </div>
     </section>
 
     <!-- ======================================================================
@@ -1487,6 +1681,20 @@
 
   <!-- Apple-Style Floating Bottom Stage Controller Pill -->
   <div class="apple-stage-dock" id="apple-stage-dock" role="region" aria-label="Interactive stage controller">
+    <div class="stage-dock-teleprompter" id="stage-dock-teleprompter" aria-live="polite">
+      <span class="teleprompter-dot" aria-hidden="true"></span>
+      <span class="teleprompter-text" id="teleprompter-text">Voice-over narration active</span>
+      <button
+        type="button"
+        class="teleprompter-speed-btn"
+        id="stage-dock-speed-btn"
+        aria-label="Toggle voice-over playback speed"
+        title="Cycle playback speed (1x / 1.25x / 1.5x)"
+      >
+        1x
+      </button>
+    </div>
+    <div class="stage-dock-row">
     <div class="stage-dock-pill">
       <span class="stage-dock-caption" id="stage-dock-caption">01 / 06 · BUILDER</span>
       <div class="stage-dock-dots" role="tablist" aria-label="Jump to stage">
@@ -1548,6 +1756,7 @@
       <span class="dock-plus-label">Closer look</span>
       <span class="dock-plus-circle" aria-hidden="true">+</span>
     </button>
+    </div>
   </div>
 
   <!-- Apple "Take a Closer Look" Full-Scale Architecture Sheet Modal -->
@@ -1693,6 +1902,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261005-16"></script>
+  <script src="app.js?v=20261005-17"></script>
 </body>
 </html>
