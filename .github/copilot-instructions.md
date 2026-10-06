@@ -49,9 +49,10 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261005-15`
+- Asset version in `index.html`: `?v=20261005-16`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
+  * Replaced the monospace `JetBrains Mono` coding font across all UI badges, readouts (such as `Linter: 0 hallucinated URLs`), eyebrows, pills, and SVG diagram labels with Apple's San Francisco (`SF Pro Display` / `SF Pro Text` / `-apple-system`) font stack (`--font-sans` and `--font-mono`) paired with `font-variant-numeric: tabular-nums`.
   * Made the active stage pill dot (`#apple-stage-dock .stage-dot-fill`) a live reading-time progress bar that estimates the reading time of the visible prose on the active stage (~228 WPM / 3.8 words per second) plus a 10-second buffer (or waits for voice-over completion if narration is active), fills smoothly from 0% to 100%, and automatically smooth-scrolls to the next stage when full.
   * Restored the clean `EL` rounded-square monogram for both the Chrome tab icon (`favicon.svg`) and the navbar logo (`.nav-monogram`).
   * Added `#showcase-jumpgate` (`JUMPGATE` wordmark + `#flagship-jumpgate-sandbox` interactive 4-node Dual-VPC & 14-step ADLC deck) as a full-bleed stage at the top of `#featured`, backed by `audio/stage-jumpgate.mp3` (9 neural voice-over tracks total).
