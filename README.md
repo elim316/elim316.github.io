@@ -124,9 +124,14 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261005-15`
+- Asset version in `index.html`: `?v=20261005-16`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
+  * Replaced the monospace `JetBrains Mono` coding font across all UI badges,
+    readouts (such as `Linter: 0 hallucinated URLs`), eyebrows, pills, and SVG
+    diagram labels with Apple's San Francisco (`SF Pro Display` / `SF Pro Text` /
+    `-apple-system`) font stack (`--font-sans` and `--font-mono`) paired with
+    `font-variant-numeric: tabular-nums`.
   * Made the active stage pill dot (`#apple-stage-dock .stage-dot-fill`) a live
     reading-time progress bar that estimates the reading time of the visible prose
     on the active stage (~228 WPM / 3.8 words per second) plus a 10-second buffer
