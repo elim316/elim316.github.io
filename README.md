@@ -124,19 +124,19 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261005-18`
+- Asset version in `index.html`: `?v=20261005-19`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
   * Added 6 Apple-inspired visual and functional upgrades:
-    1. "Get the highlights." horizontal snap carousel (`#highlights-section` with
+    1. "Get the highlights." horizontal carousel (`#highlights-section` with
        `#highlights-track`, `#highlights-dots`, and arrow controls) at the top of
        `#featured`.
     2. Smooth-gliding macOS/iOS segmented pill indicators (`.seg-glide-pill` via
-       `initSlidingSegmentedControls()`) across `#about-chapter-tabs`, `#filter-bar`,
-       and `#bento-compare-bar`.
-    3. Interactive `X-Ray Specs` toggle button (`.bezel-xray-btn`) and 4-column
-       architectural specification overlay drawer (`.bezel-xray-drawer`) inside all
-       6 hardware stage bezels (`initHardwareXraySpecs()`).
+       `initSlidingSegmentedControls()`) on `#bento-compare-bar` (while `#filter-bar`
+       uses `#filter-pill-bg` via `initFilters()`).
+    3. Interactive `More details` / `Hide details` toggle button (`.bezel-xray-btn`)
+       and 4-column architectural specification overlay drawer (`.bezel-xray-drawer`)
+       inside all 6 hardware stage bezels (`initHardwareXraySpecs()`).
     4. Live synced voice-over caption ribbon (`#stage-dock-teleprompter` +
        `#teleprompter-text`) and `1x / 1.25x / 1.5x` playback speed toggle
        (`#stage-dock-speed-btn`) above `#apple-stage-dock`.
