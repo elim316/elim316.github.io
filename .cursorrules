@@ -22,12 +22,13 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 3. Visual System & Layout Guardrails
 - Button Hierarchy: Paired CTA buttons must always pair `.apple-pill.solid` (blue primary `#0066cc`) for the primary action with `.apple-pill.outline` for the secondary action. Never style both buttons in a pair with the same solid colour.
-- 5 Scroll-Animated & Cursor-Interactive Hardware Stages (`initHeroScrollPhysics()` in `app.js`):
+- 6 Scroll-Animated & Cursor-Interactive Hardware Stages (`initHeroScrollPhysics()` in `app.js`):
   1. `#hero-stage` (Wordmark: `BUILDER`)
   2. `#about` (Wordmark: `PROFILE`)
-  3. `#showcase-agent-tracer` (Wordmark: `TRACER`)
-  4. `#showcase-meeting-prep` (Wordmark: `DOSSIER`)
-  5. `#showcase-uq-xai` (Wordmark: `RESEARCH`)
+  3. `#showcase-jumpgate` (Wordmark: `JUMPGATE`)
+  4. `#showcase-agent-tracer` (Wordmark: `TRACER`)
+  5. `#showcase-meeting-prep` (Wordmark: `DOSSIER`)
+  6. `#showcase-uq-xai` (Wordmark: `RESEARCH`)
   On scroll, `app.js` interpolates `--deck-tilt`, `--deck-scale`, `--deck-y`, `--wordmark-y`, and `--wordmark-scale` via `requestAnimationFrame` based on `deck.getBoundingClientRect()`. By default, `.metallic-wordmark` continuously runs `titaniumShimmer` (with `--wordmark-spot-size: 0px`). On `mousemove`, `app.js` toggles `.is-hovered` (activating `--wordmark-spot-size: 260px`) and updates `--wordmark-spot-x` and `--wordmark-spot-y` on the backdrop words only. Never move the words on mousemove (`--wordmark-mx` / `--wordmark-my` are forbidden), and never apply mouse tilt or mouse glare to `.hardware-deck` or `.hardware-bezel` (both the words and the box stay steady in position and only animate position on scroll).
 - Anti-Clipping & Overflow Guardrails (`styles.css`):
   - `.hardware-bezel`, `.bezel-grid` (`grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr)`), `.bezel-pane`, and `.about-mini-card` must preserve `min-width: 0; max-width: 100%; box-sizing: border-box; overflow: hidden;` so the right pane never overflows outside the rounded hardware bezel border.
@@ -48,9 +49,10 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261005-12`
+- Asset version in `index.html`: `?v=20261005-13`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
-  * Repurposed the bottom stage controller Play/Pause button (`#stage-dock-play-btn`) into a human neural voice-over narrator (`Listen` / `Pause` with live waveform indicator) backed by pre-generated Gemini neural TTS MP3s in `audio/` (`stage-builder.mp3`, `stage-profile-google.mp3`, `stage-profile-grab.mp3`, `stage-profile-astar.mp3`, `stage-profile-beyond.mp3`, `stage-tracer.mp3`, `stage-dossier.mp3`, `stage-research.mp3`) and a Web Speech API fallback.
-  * Added `jumpgate-agentic-lz` ("Jumpgate · Zero-Trust Agentic AI Landing Zone & Vending Machine") as the #1 curated project with custom interactive SVG visualisation, dual repository links (`Landing Zone Repo` & `Vending Machine Repo`), and integrated Jumpgate datapoints (`< 3 min` deploy down from 4-6 weeks, `14/14` Ingress & `18/18` Egress IM8 security checks, `14-step ADLC` with `>=0.85` LLM-as-a-Judge gate, and `$1.96M` realised public sector ARR + `$1.46M` pipeline) across `#hero-stage`, `#about`, `#journey`, `#bento-specs-grid`, and `#projects`.
-  * Removed mouse-movement parallax (`--wordmark-mx`, `--wordmark-my`) from `.metallic-wordmark` so the words never shift position on hover, keeping only the colour spotlight reflection (`--wordmark-spot-size: 260px`) and continuous default `titaniumShimmer` sparkle.
+  * Replaced the default `EL` navbar box and missing tab icon with a custom Apple Silicon / macOS squircle vector icon (`favicon.svg` + `.nav-apple-icon`).
+  * Added `#showcase-jumpgate` (`JUMPGATE` wordmark + `#flagship-jumpgate-sandbox` interactive 4-node Dual-VPC & 14-step ADLC deck) as a full-bleed stage at the top of `#featured`, backed by `audio/stage-jumpgate.mp3` (9 neural voice-over tracks total).
+  * Added a circular SVG progress ring (`#dock-voice-progress-circle`), hover/focus audio preloading, keyboard shortcut `V`, and a `Listen` / `Pause` button (`#closer-look-listen-btn`) inside the Closer Look (`+`) architecture modal.
+  * Added the Apple-style `With Jumpgate & Conformal AI` vs. `Legacy Baseline (Before)` comparison toggle (`#bento-compare-bar`) on `#bento-specs-grid` and the Hackathon Honours & 4,000+ Engineer Buildathon leadership showcase strip (`#leadership-strip`) in `#journey`.
