@@ -122,10 +122,16 @@ dependencies:
 
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
-- Last updated: 2026-10-05
-- Asset version in `index.html`: `?v=20261005-11`
+- Last updated: 2026-10-06
+- Asset version in `index.html`: `?v=20261005-12`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
+  * Repurposed the bottom stage controller Play/Pause button (`#stage-dock-play-btn`)
+    into a human neural voice-over narrator (`Listen` / `Pause` with live waveform
+    indicator) backed by pre-generated Gemini neural TTS MP3s in `audio/`
+    (`stage-builder.mp3`, `stage-profile-google.mp3`, `stage-profile-grab.mp3`,
+    `stage-profile-astar.mp3`, `stage-profile-beyond.mp3`, `stage-tracer.mp3`,
+    `stage-dossier.mp3`, `stage-research.mp3`) and a Web Speech API fallback.
   * Added `jumpgate-agentic-lz` ("Jumpgate · Zero-Trust Agentic AI Landing Zone
     & Vending Machine") as the #1 curated project with custom interactive SVG
     visualisation, dual repository links (`Landing Zone Repo` & `Vending Machine
