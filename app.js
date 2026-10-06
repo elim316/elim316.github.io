@@ -2216,7 +2216,7 @@
     });
   }
 
-  /* Apple Floating Bottom Stage Controller Pill */
+  /* Apple Floating Bottom Stage Controller Pill & Human Voice-Over Narrator */
   function initAppleStageDock() {
     const dock = document.getElementById("apple-stage-dock");
     const captionEl = document.getElementById("stage-dock-caption");
@@ -2224,18 +2224,192 @@
     const playBtn = document.getElementById("stage-dock-play-btn");
     const iconPause = document.getElementById("dock-icon-pause");
     const iconPlay = document.getElementById("dock-icon-play");
+    const voiceLabel = document.getElementById("dock-voice-label");
     const inspectBtn = document.getElementById("stage-dock-inspect-btn");
     if (!dock) return;
 
     const stageConfigs = [
-      { id: "hero-stage", label: "01 / 05 · BUILDER", projectId: "agent-tracer" },
-      { id: "about", label: "02 / 05 · PROFILE", projectId: "jumpgate-agentic-lz" },
-      { id: "showcase-agent-tracer", label: "03 / 05 · TRACER", projectId: "agent-tracer" },
-      { id: "showcase-meeting-prep", label: "04 / 05 · DOSSIER", projectId: "meeting-prep-agent" },
-      { id: "showcase-uq-xai", label: "05 / 05 · RESEARCH", projectId: "uq-xai-battery" },
+      {
+        id: "hero-stage",
+        label: "01 / 05 · BUILDER",
+        projectId: "jumpgate-agentic-lz",
+        audioSrc: "audio/stage-builder.mp3",
+        speechText:
+          "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include the Jumpgate zero-trust AI landing zone delivering under three-minute provisioning and 1.96 million dollars in realised public sector recurring revenue, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
+      },
+      {
+        id: "about",
+        label: "02 / 05 · PROFILE",
+        projectId: "jumpgate-agentic-lz",
+        audioSrc: "audio/stage-profile-google.mp3",
+        speechText:
+          "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses four to six weeks of infrastructure setup into under three minutes, passing all 14 Ingress and 18 Egress security checks. The platform has driven 1.96 million dollars in realised public sector recurring revenue with an additional 1.46 million dollar pipeline, alongside training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
+      },
+      {
+        id: "showcase-agent-tracer",
+        label: "03 / 05 · TRACER",
+        projectId: "agent-tracer",
+        audioSrc: "audio/stage-tracer.mp3",
+        speechText:
+          "Stage 3: Jetski Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
+      },
+      {
+        id: "showcase-meeting-prep",
+        label: "04 / 05 · DOSSIER",
+        projectId: "meeting-prep-agent",
+        audioSrc: "audio/stage-dossier.mp3",
+        speechText:
+          "Stage 4: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
+      },
+      {
+        id: "showcase-uq-xai",
+        label: "05 / 05 · RESEARCH",
+        projectId: "uq-xai-battery",
+        audioSrc: "audio/stage-research.mp3",
+        speechText:
+          "Stage 5: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
+      },
     ];
 
+    const aboutChapterAudio = {
+      google: {
+        audioSrc: "audio/stage-profile-google.mp3",
+        speechText: stageConfigs[1].speechText,
+      },
+      grab: {
+        audioSrc: "audio/stage-profile-grab.mp3",
+        speechText:
+          "About Elias Lim, Chapter 2: Backend Systems at Grab. At Grab in Singapore, I engineered scalable Golang backend microservices for real-time fraud detection across petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting controls, and high-coverage unit test suites.",
+      },
+      astar: {
+        audioSrc: "audio/stage-profile-astar.mp3",
+        speechText:
+          "About Elias Lim, Chapter 3: AI Research at A-STAR. As an AI Research Intern at A-STAR in Singapore, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 in IEEE Xplore.",
+      },
+      beyond: {
+        audioSrc: "audio/stage-profile-beyond.mp3",
+        speechText:
+          "About Elias Lim, Chapter 4: Glasgow, SIT, and Life Outside Code. I graduated with a Bachelor of Science with Honours in Computer Science, Second Upper Class, from the University of Glasgow and Singapore Institute of Technology, winning awards at NUS LifeHack, AI Singapore, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
+      },
+    };
+
     let activeStageIdx = 0;
+    let isNarrating = false;
+    let currentTrackKey = "";
+    const audioPlayer = new Audio();
+    audioPlayer.preload = "none";
+
+    function getActiveAboutChapterKey() {
+      const activeTab = document.querySelector("#about [data-about-tab].active");
+      return activeTab ? activeTab.getAttribute("data-about-tab") || "google" : "google";
+    }
+
+    function getTargetVoicePayload() {
+      if (activeStageIdx === 1) {
+        const chapKey = getActiveAboutChapterKey();
+        const chap = aboutChapterAudio[chapKey] || aboutChapterAudio.google;
+        return {
+          key: `profile-${chapKey}`,
+          audioSrc: chap.audioSrc,
+          speechText: chap.speechText,
+        };
+      }
+      const cfg = stageConfigs[activeStageIdx] || stageConfigs[0];
+      return {
+        key: cfg.id,
+        audioSrc: cfg.audioSrc,
+        speechText: cfg.speechText,
+      };
+    }
+
+    function setVoiceUiState(speaking) {
+      isNarrating = speaking;
+      if (playBtn) {
+        playBtn.classList.toggle("is-speaking", speaking);
+        playBtn.setAttribute("aria-pressed", speaking ? "true" : "false");
+        playBtn.setAttribute(
+          "aria-label",
+          speaking
+            ? "Pause voice-over narration"
+            : "Play voice-over narration for active section"
+        );
+      }
+      if (iconPlay) iconPlay.style.display = speaking ? "none" : "block";
+      if (iconPause) iconPause.style.display = speaking ? "block" : "none";
+      if (voiceLabel) voiceLabel.textContent = speaking ? "Pause" : "Listen";
+    }
+
+    function stopAllNarration() {
+      try {
+        audioPlayer.pause();
+      } catch (_) {}
+      if ("speechSynthesis" in window) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch (_) {}
+      }
+      setVoiceUiState(false);
+    }
+
+    function speakFallbackWithWebSpeech(text) {
+      if (!("speechSynthesis" in window)) {
+        setVoiceUiState(false);
+        return;
+      }
+      try {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = "en-GB";
+        utter.rate = 0.98;
+        const voices = window.speechSynthesis.getVoices() || [];
+        const preferred =
+          voices.find(
+            (v) =>
+              /en[-_](GB|US|AU)/i.test(v.lang) &&
+              /(Natural|Neural|Google UK English Male|Daniel|Arthur|Ryan|Oliver|Premium)/i.test(
+                v.name
+              )
+          ) ||
+          voices.find((v) => /en[-_]GB/i.test(v.lang)) ||
+          voices.find((v) => /^en/i.test(v.lang));
+        if (preferred) utter.voice = preferred;
+        utter.onend = () => setVoiceUiState(false);
+        utter.onerror = () => setVoiceUiState(false);
+        setVoiceUiState(true);
+        window.speechSynthesis.speak(utter);
+      } catch (_) {
+        setVoiceUiState(false);
+      }
+    }
+
+    function startOrSwitchNarration(forceRestart) {
+      const payload = getTargetVoicePayload();
+      if ("speechSynthesis" in window) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch (_) {}
+      }
+
+      if (!forceRestart && currentTrackKey === payload.key && audioPlayer.src) {
+        setVoiceUiState(true);
+        audioPlayer.play().catch(() => {
+          speakFallbackWithWebSpeech(payload.speechText);
+        });
+        return;
+      }
+
+      currentTrackKey = payload.key;
+      audioPlayer.src = payload.audioSrc;
+      audioPlayer.currentTime = 0;
+      setVoiceUiState(true);
+      audioPlayer.play().catch(() => {
+        speakFallbackWithWebSpeech(payload.speechText);
+      });
+    }
+
+    audioPlayer.addEventListener("ended", () => {
+      setVoiceUiState(false);
+    });
 
     function updateStageDockOnScroll() {
       const vh = window.innerHeight || 800;
@@ -2259,9 +2433,14 @@
         }
       });
 
+      const prevIdx = activeStageIdx;
       activeStageIdx = bestIdx;
       if (captionEl) captionEl.textContent = stageConfigs[bestIdx].label;
       dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === bestIdx));
+
+      if (isNarrating && prevIdx !== bestIdx) {
+        startOrSwitchNarration(true);
+      }
     }
 
     dotBtns.forEach((btn) => {
@@ -2272,15 +2451,21 @@
       });
     });
 
+    document.querySelectorAll("#about [data-about-tab], #about [data-about-card]").forEach((el) => {
+      el.addEventListener("click", () => {
+        if (isNarrating && activeStageIdx === 1) {
+          requestAnimationFrame(() => startOrSwitchNarration(true));
+        }
+      });
+    });
+
     if (playBtn) {
       playBtn.addEventListener("click", () => {
-        const paused = document.body.classList.toggle("is-animations-paused");
-        if (iconPause) iconPause.style.display = paused ? "none" : "block";
-        if (iconPlay) iconPlay.style.display = paused ? "block" : "none";
-        playBtn.setAttribute(
-          "aria-label",
-          paused ? "Resume live stage animations" : "Pause live stage animations"
-        );
+        if (isNarrating) {
+          stopAllNarration();
+        } else {
+          startOrSwitchNarration(false);
+        }
       });
     }
 
