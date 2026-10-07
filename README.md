@@ -1,4 +1,4 @@
-# Elias Lim · Personal Portfolio
+# Elias Lim, Personal Portfolio
 
 Live site: [https://elim316.github.io/](https://elim316.github.io/)
 
@@ -124,7 +124,7 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261005-20`
+- Asset version in `index.html`: `?v=20261007-21`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
   * Added 6 Apple-inspired visual and functional upgrades:
