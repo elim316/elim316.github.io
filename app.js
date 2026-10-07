@@ -2,6 +2,7 @@
   "use strict";
 
   const PROJECTS = [
+    /* [JUMPGATE HIDDEN — UNCOMMENT THIS OBJECT TO RE-ENABLE JUMPGATE IN PROJECTS]
     {
       id: "jumpgate-agentic-lz",
       title: "Jumpgate: Zero-Trust Agentic AI Landing Zone & Vending Machine",
@@ -18,6 +19,7 @@
       secondaryRepoUrl: "https://github.com/jarrettyeo/vending-machine-agent",
       secondaryRepoLabel: "Vending Machine Repo",
     },
+    */
     {
       id: "agent-tracer",
       title: "Jetski Agent Tracer Plugin",
@@ -817,18 +819,27 @@
 
     const chapters = {
       google: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GOOGLE CLOUD SINGAPORE",
-        bezelStatus: "APR 2026 TO PRESENT",
+        /* [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL FIELDS TO RE-ENABLE JUMPGATE IN GOOGLE CHAPTER]
         paneLabel: "JUMPGATE DUAL-VPC LANDING ZONE & 14-STEP AGENT VENDING MACHINE",
         paneBadge: "< 3 min, 32/32 IM8, $1.96M ARR",
-        readout: "Chapter 01 / 04",
-        story:
-          "At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup into under 3 minutes (passing 14/14 Ingress and 18/18 Egress security checks), driving $1.96M in realised public sector ARR (+$1.46M pipeline) and training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
+        story: "At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup into under 3 minutes (passing 14/14 Ingress and 18/18 Egress security checks), driving $1.96M in realised public sector ARR (+$1.46M pipeline) and training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
         bar1Label: "Jumpgate Dual-VPC & IM8 Security Posture",
         bar1Val: "< 3 min, 32 / 32 Checks",
-        bar1Width: "100%",
         bar2Label: "Public Sector ARR & Buildathon Reach",
         bar2Val: "$1.96M ARR, 4,000+ Trained",
+        */
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GOOGLE CLOUD SINGAPORE",
+        bezelStatus: "APR 2026 TO PRESENT",
+        paneLabel: "CLOUD RUN, VERTEX AI & MULTI-AGENT ORCHESTRATION",
+        paneBadge: "Cloud & AI, 4,000+ Trained",
+        readout: "Chapter 01 / 04",
+        story:
+          "At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Jetski Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
+        bar1Label: "Agentic Observability & Evaluation Rigour",
+        bar1Val: "36 / 36 Checks",
+        bar1Width: "100%",
+        bar2Label: "Enterprise Workshops & Buildathon Reach",
+        bar2Val: "4,000+ Trained",
         bar2Width: "95%",
       },
       grab: {
@@ -2024,6 +2035,7 @@
           if (btn) btn.click();
         },
       },
+      /* [JUMPGATE HIDDEN — UNCOMMENT TO RE-ENABLE JUMPGATE COMMAND PALETTE ITEM]
       {
         title: "Jump to Jumpgate Zero-Trust AI Landing Zone Stage",
         sub: "< 3 min Dual-VPC & 14-Step Vending Machine ($1.96M ARR, 32/32 IM8)",
@@ -2031,6 +2043,7 @@
         action: () =>
           document.getElementById("showcase-jumpgate")?.scrollIntoView({ behavior: "smooth" }),
       },
+      */
       {
         title: "Jump to About & Background",
         sub: "Google Cloud & AI Engineer, Grab, A*STAR Research, Glasgow & SIT",
@@ -2039,7 +2052,7 @@
       },
       {
         title: "Jump to Featured Repositories",
-        sub: "Jumpgate, Jetski Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
+        /* [JUMPGATE HIDDEN] */ sub: "Jetski Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
         badge: "Featured",
         action: () => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" }),
       },
@@ -2051,7 +2064,7 @@
       },
       {
         title: "Filter: Agentic & DevTools Projects",
-        sub: "Show Jumpgate Landing Zone, Agent Tracer, Jetski Harness, and Meeting Prep Agent",
+        /* [JUMPGATE HIDDEN] */ sub: "Show Agent Tracer, Jetski Harness, and Meeting Prep Agent",
         badge: "Filter",
         action: () => {
           setFilterCategory("agentic");
@@ -2111,7 +2124,7 @@
         title: "Take a Closer Look: Architecture Inspector",
         sub: "Open full-scale interactive architecture sheet modal",
         badge: "Inspector",
-        action: () => openCloserLookModal(PROJECTS[0]?.id || "jumpgate-agentic-lz"),
+        action: () => openCloserLookModal(PROJECTS[0]?.id || "agent-tracer"),
       },
       ...PROJECTS.map((p) => ({
         title: p.title,
@@ -2432,82 +2445,84 @@
     const stageConfigs = [
       {
         id: "hero-stage",
-        label: "01 / 06  BUILDER",
-        projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-builder.mp3?v=20261007-21",
+        label: "01 / 05  BUILDER",
+        projectId: "agent-tracer",
+        audioSrc: "audio/stage-builder.mp3?v=20261007-23",
         speechText:
-          "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include the Jumpgate zero-trust AI landing zone delivering under three-minute provisioning and 1.96 million dollars in realised public sector recurring revenue, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
+          "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Jetski Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
       },
       {
         id: "about",
-        label: "02 / 06  PROFILE",
-        projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-profile-google.mp3?v=20261007-21",
+        label: "02 / 05  PROFILE",
+        projectId: "agent-tracer",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261007-23",
         speechText:
-          "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses four to six weeks of infrastructure setup into under three minutes, passing all 14 Ingress and 18 Egress security checks. The platform has driven 1.96 million dollars in realised public sector recurring revenue with an additional 1.46 million dollar pipeline, alongside training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
+          "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Jetski Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
+      /* [JUMPGATE HIDDEN — UNCOMMENT THIS STAGE AND RE-INDEX 01/06..06/06 TO RE-ENABLE STAGE 3: JUMPGATE]
       {
         id: "showcase-jumpgate",
         label: "03 / 06  JUMPGATE",
         projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-jumpgate.mp3?v=20261007-21",
+        audioSrc: "audio/stage-jumpgate.mp3?v=20261007-23",
         speechText:
           "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to Vertex AI in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
       },
+      */
       {
         id: "showcase-agent-tracer",
-        label: "04 / 06  TRACER",
+        label: "03 / 05  TRACER",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-tracer.mp3?v=20261007-21",
+        audioSrc: "audio/stage-tracer.mp3?v=20261007-23",
         speechText:
-          "Stage 4: Jetski Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
+          "Stage 3: Jetski Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
       },
       {
         id: "showcase-meeting-prep",
-        label: "05 / 06  DOSSIER",
+        label: "04 / 05  DOSSIER",
         projectId: "meeting-prep-agent",
-        audioSrc: "audio/stage-dossier.mp3?v=20261007-21",
+        audioSrc: "audio/stage-dossier.mp3?v=20261007-23",
         speechText:
-          "Stage 5: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
+          "Stage 4: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
       },
       {
         id: "showcase-uq-xai",
-        label: "06 / 06  RESEARCH",
+        label: "05 / 05  RESEARCH",
         projectId: "uq-xai-battery",
-        audioSrc: "audio/stage-research.mp3?v=20261007-21",
+        audioSrc: "audio/stage-research.mp3?v=20261007-23",
         speechText:
-          "Stage 6: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
+          "Stage 5: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
       },
     ];
 
     const aboutChapterAudio = {
       google: {
-        audioSrc: "audio/stage-profile-google.mp3?v=20261007-21",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261007-23",
         speechText: stageConfigs[1].speechText,
       },
       grab: {
-        audioSrc: "audio/stage-profile-grab.mp3?v=20261007-21",
+        audioSrc: "audio/stage-profile-grab.mp3?v=20261007-23",
         speechText:
           "About Elias Lim, Chapter 2: Backend Systems at Grab. At Grab in Singapore, I engineered scalable Golang backend microservices for real-time fraud detection across petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting controls, and high-coverage unit test suites.",
       },
       astar: {
-        audioSrc: "audio/stage-profile-astar.mp3?v=20261007-21",
+        audioSrc: "audio/stage-profile-astar.mp3?v=20261007-23",
         speechText:
           "About Elias Lim, Chapter 3: AI Research at A-STAR. As an AI Research Intern at A-STAR in Singapore, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 in IEEE Xplore.",
       },
       beyond: {
-        audioSrc: "audio/stage-profile-beyond.mp3?v=20261007-21",
+        audioSrc: "audio/stage-profile-beyond.mp3?v=20261007-23",
         speechText:
           "About Elias Lim, Chapter 4: Glasgow, SIT, and Life Outside Code. I graduated with a Bachelor of Science with Honours in Computer Science, Second Upper Class, from the University of Glasgow and Singapore Institute of Technology, winning awards at NUS LifeHack, AI Singapore, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
       },
     };
 
     const projectAudioMap = {
-      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261007-21",
-      "agent-tracer": "audio/stage-tracer.mp3?v=20261007-21",
-      "jetski-harness": "audio/stage-tracer.mp3?v=20261007-21",
-      "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-21",
-      "uq-xai-battery": "audio/stage-research.mp3?v=20261007-21",
+      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261007-23",
+      "agent-tracer": "audio/stage-tracer.mp3?v=20261007-23",
+      "jetski-harness": "audio/stage-tracer.mp3?v=20261007-23",
+      "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-23",
+      "uq-xai-battery": "audio/stage-research.mp3?v=20261007-23",
     };
 
     let activeStageIdx = 0;
@@ -2948,30 +2963,31 @@
 
     const compareBtns = document.querySelectorAll("[data-compare-mode]");
     const bentoSpecComparison = {
+      /* [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL BENTO SPEC VALUES TO RE-ENABLE JUMPGATE] */
       after: [
         {
           statId: "bento-stat-1",
           deltaId: "bento-delta-1",
           capId: "bento-cap-1",
-          stat: "$1.96M",
-          delta: "+ $3.42M Total Pipe",
-          cap: "Realised Phase 1 public sector ARR (+$1.46M pipeline) via the Jumpgate AI landing zone.",
+          stat: "200k",
+          delta: "Zero Cloud Lock-In",
+          cap: "Live Connect-RPC trajectory spans and token context window gauge in Jetski Harness.",
         },
         {
           statId: "bento-stat-2",
           deltaId: "bento-delta-2",
           capId: "bento-cap-2",
-          stat: "< 3 min",
-          delta: "99.9% Faster Setup",
-          cap: "Self-service 14-step agent deployment (down from 4 to 6 weeks), plus 4,000+ engineers trained.",
+          stat: "4,000+",
+          delta: "4 Institutions",
+          cap: "Engineers and students trained across GovTech, DBS Bank, NTU Singapore, and A*STAR.",
         },
         {
           statId: "bento-stat-3",
           deltaId: "bento-delta-3",
           capId: "bento-cap-3",
           stat: "100%",
-          delta: "68 Automated Gates",
-          cap: "14/14 Ingress & 18/18 Egress IM8 cloud posture checks, plus 36/36 multi-corpus linter checks.",
+          delta: "36 Automated Gates",
+          cap: "36/36 multi-corpus linter assertions verifying zero hallucinated links across meeting dossiers.",
         },
         {
           statId: "bento-stat-4",
@@ -2987,17 +3003,17 @@
           statId: "bento-stat-1",
           deltaId: "bento-delta-1",
           capId: "bento-cap-1",
-          stat: "$0 ARR",
-          delta: "Pre-Jumpgate",
-          cap: "Fragmented agency proofs-of-concept blocked from production rollout before the IM8 Dual-VPC landing zone.",
+          stat: "Blind Logs",
+          delta: "Pre-Tracer",
+          cap: "Raw unindexed JSONL terminal dumps without visual span timing or 200k context compaction visibility.",
         },
         {
           statId: "bento-stat-2",
           deltaId: "bento-delta-2",
           capId: "bento-cap-2",
-          stat: "4-6 wks",
+          stat: "Ad-Hoc",
           delta: "Manual Baseline",
-          cap: "Manual Dual-VPC firewall rules, IAM bindings, and security reviews before automated Jumpgate Terraform provisioning.",
+          cap: "Fragmented workshop repositories and unguided setup before structured cloud buildathon toolkits.",
         },
         {
           statId: "bento-stat-3",
@@ -3335,32 +3351,33 @@
   function initHardwareXraySpecs() {
     const stageSpecs = {
       "hero-stage": [
+        /* [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL HERO SPECS TO RE-ENABLE JUMPGATE] */
         {
           label: "RUNTIME & TRANSPORT",
           val: "Go, Python & Connect-RPC",
-          sub: "Streaming sidecar telemetry + Terraform Dual-VPC provisioning",
+          sub: "Streaming sidecar telemetry + Terraform infrastructure as code",
         },
         {
-          label: "SECURITY POSTURE",
-          val: "IM8 Zero-Trust, 32/32",
-          sub: "14/14 Ingress runtime + 18/18 Egress static security gates",
+          label: "OBSERVABILITY",
+          val: "200k Token Gauge",
+          sub: "Real-time DAG trajectory spans & context compaction monitor",
         },
         {
           label: "EVALUATION GATE",
-          val: ">= 0.85 Judge, 36/36",
-          sub: "Automated LLM-as-a-Judge + zero-hallucination URL linter",
+          val: "36 / 36 Checks",
+          sub: "Automated multi-corpus linter verifying zero hallucinated links",
         },
         {
-          label: "PRODUCTION IMPACT",
-          val: "$1.96M ARR, < 3 min",
-          sub: "4,000+ engineers trained across GovTech, DBS, NTU & A*STAR",
+          label: "TECHNICAL REACH",
+          val: "4,000+ Trained",
+          sub: "Enterprise AI buildathons across GovTech, DBS, NTU & A*STAR",
         },
       ],
       about: [
         {
           label: "CLOUD ARCHITECTURE",
           val: "Google Singapore",
-          sub: "Jumpgate Dual-VPC landing zone & 14-step Vending Machine Agent",
+          sub: "Enterprise Cloud Run & Vertex AI systems + 4,000+ engineers trained",
         },
         {
           label: "HIGH-SCALE BACKEND",
