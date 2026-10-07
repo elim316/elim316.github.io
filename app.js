@@ -294,6 +294,7 @@
         ? projectOrId
         : PROJECTS.find((item) => item.id === projectOrId) || { id: projectOrId };
     const id = p.id;
+    const uid = ++visualInstanceCounter;
 
     switch (id) {
       case "jumpgate-agentic-lz":
@@ -693,10 +694,12 @@
 
     grid.innerHTML = filtered
       .map(
-        (p, idx) => `
+        (p, idx) => {
+          const safeSlug = sanitizeDomSlug(p.id);
+          return `
       <article
         class="project-card"
-        id="project-${escapeHtml(p.id)}"
+        id="project-${safeSlug}"
         style="--card-delay: ${Math.min(idx * 55, 360)}ms"
       >
         <div class="project-body">
@@ -713,7 +716,7 @@
             <button
               type="button"
               class="closer-look-trigger-btn"
-              data-closer-look-id="${escapeHtml(p.id)}"
+              data-closer-look-id="${safeSlug}"
               aria-label="Take a closer look at ${escapeHtml(p.title)}"
             >
               <span>Closer look</span>
@@ -722,7 +725,7 @@
             <button
               type="button"
               class="apple-text-link arch-toggle-btn"
-              data-drawer-target="drawer-${escapeHtml(p.id)}"
+              data-drawer-target="drawer-${safeSlug}"
               aria-expanded="false"
             >
               <span>Technical architecture</span>
@@ -750,7 +753,7 @@
             }
           </div>
 
-          <div class="arch-drawer" id="drawer-${escapeHtml(p.id)}">
+          <div class="arch-drawer" id="drawer-${safeSlug}">
             <div class="arch-collapse">
               <div class="arch-collapse-inner">
                 <p class="arch-text">${escapeHtml(p.architecture || p.summary)}</p>
@@ -767,7 +770,8 @@
           ${getProjectVisual(p)}
         </div>
       </article>
-    `
+    `;
+        }
       )
       .join("");
 
@@ -1421,7 +1425,12 @@
       },
     };
 
-    const sandboxes = rootContainer.querySelectorAll(".project-visual-sandbox");
+    const sandboxes = [
+      ...(rootContainer.matches && rootContainer.matches(".project-visual, #closer-look-visual")
+        ? [rootContainer]
+        : []),
+      ...rootContainer.querySelectorAll(".project-visual, #closer-look-visual, .project-visual-sandbox"),
+    ];
     sandboxes.forEach((box) => {
       if (box.dataset.sandboxBound === "1") return;
       box.dataset.sandboxBound = "1";
@@ -1624,7 +1633,8 @@
 
       if (!repos) {
         const ghRes = await fetch(
-          `https://api.github.com/users/${encodeURIComponent(config.githubUsername)}/repos?sort=updated&per_page=100`
+          `https://api.github.com/users/${encodeURIComponent(config.githubUsername)}/repos?sort=updated&per_page=100`,
+          { signal: AbortSignal.timeout(6000) }
         );
         if (ghRes.ok) {
           repos = await ghRes.json();
@@ -1669,9 +1679,7 @@
         if (stack.length === 0) stack.push("GitHub");
 
         PROJECTS.push({
-          id: String(repo.name || "repo")
-            .toLowerCase()
-            .replace(/[^a-z0-9-]+/g, "-"),
+          id: sanitizeDomSlug(repo.name || "repo"),
           title: formatRepoSlugToTitle(repo.name),
           category,
           categoryLabel: getCategoryLabel(category),
