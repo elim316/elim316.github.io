@@ -120,7 +120,7 @@
       architecture:
         "Streams webcam video through a PyTorch DeepLabV3+ResNet50 backbone to overlay semantic pixel masks via OpenCV and NumPy, paired with the Hugging Face BLIP vision-language model for live scene captioning.",
       stack: ["Python", "PyTorch", "DeepLabV3+", "BLIP", "OpenCV"],
-      repoUrl: "https://github.com/elim316/Semantic-Segmentation",
+      repoUrl: "https://github.com/elim316/real-time-cv-vlm-pipeline",
     },
     {
       id: "transport-gpt",
@@ -208,12 +208,32 @@
 
   let activeFilter = "all";
 
+  let visualInstanceCounter = 0;
+
   function escapeHtml(str) {
     return String(str || "")
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function sanitizeHttpUrl(rawUrl, fallback = "https://github.com/elim316") {
+    try {
+      const parsed = new URL(String(rawUrl || "").trim());
+      if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+        return parsed.href;
+      }
+    } catch (_) {}
+    return fallback;
+  }
+
+  function sanitizeDomSlug(rawId) {
+    return String(rawId || "")
+      .toLowerCase()
+      .replace(/[^a-z0-9-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   }
 
   function clipSvgLabel(text, maxLen) {
@@ -307,7 +327,7 @@
             </g>
           </svg>
           <div class="sandbox-bar" data-sandbox="jumpgate">
-            <span class="sandbox-readout" id="readout-jumpgate">Dual-VPC: 14/14 Ingress &amp; 18/18 Egress IM8 PASS</span>
+            <span class="sandbox-readout" data-role="readout-jumpgate">Dual-VPC: 14/14 Ingress &amp; 18/18 Egress IM8 PASS</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill active" data-jg-btn="vpc">32/32 IM8</button>
               <button type="button" class="sandbox-pill" data-jg-btn="adlc">&lt; 3m ADLC</button>
@@ -346,7 +366,7 @@
             </g>
           </svg>
           <div class="sandbox-bar" data-sandbox="agent-tracer">
-            <span class="sandbox-readout" id="readout-agent-tracer">Step #02 PLANNER, 640ms</span>
+            <span class="sandbox-readout" data-role="readout-agent-tracer">Step #02 PLANNER, 640ms</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-step-btn="user">#01 User</button>
               <button type="button" class="sandbox-pill active" data-step-btn="planner">#02 Plan</button>
@@ -359,7 +379,7 @@
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
             <defs>
-              <clipPath id="harness-bar-clip">
+              <clipPath id="harness-bar-clip-${uid}">
                 <rect x="28" y="75" width="264" height="6" rx="3" />
               </clipPath>
             </defs>
@@ -370,14 +390,14 @@
             <rect x="18" y="30" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
             <text x="87" y="43" text-anchor="middle" class="visual-label">PANE 3: TRACE GRAPH</text>
             <rect x="164" y="30" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="233" y="43" text-anchor="middle" class="visual-badge" id="harness-rpc-status">71% Cached</text>
+            <text x="233" y="43" text-anchor="middle" class="visual-badge" data-role="harness-rpc-status">71% Cached</text>
             <rect x="18" y="55" width="284" height="33" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="28" y="69" class="visual-label" id="harness-bar-label">CONTEXT WINDOW: 142k / 200k TOKENS</text>
+            <text x="28" y="69" class="visual-label" data-role="harness-bar-label">CONTEXT WINDOW: 142k / 200k TOKENS</text>
             <rect x="28" y="75" width="264" height="6" rx="3" fill="var(--bg-subtle)" />
-            <rect class="token-fill-bar" id="harness-token-bar" clip-path="url(#harness-bar-clip)" x="28" y="75" width="187" height="6" rx="3" fill="var(--accent)" />
+            <rect class="token-fill-bar" data-role="harness-token-bar" clip-path="url(#harness-bar-clip-${uid})" x="28" y="75" width="187" height="6" rx="3" fill="var(--accent)" />
           </svg>
           <div class="sandbox-bar" data-sandbox="jetski-harness">
-            <span class="sandbox-readout" id="readout-jetski-harness">142k / 200k, Healthy</span>
+            <span class="sandbox-readout" data-role="readout-jetski-harness">142k / 200k, Healthy</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-turn-btn="turn2">Turn 2</button>
               <button type="button" class="sandbox-pill active" data-turn-btn="turn8">Turn 8</button>
@@ -410,7 +430,7 @@
             <text x="277" y="50" text-anchor="middle" class="visual-label">BRIEF</text>
           </svg>
           <div class="sandbox-bar" data-sandbox="meeting-prep">
-            <span class="sandbox-readout" id="readout-meeting-prep">Linter: 0 hallucinated URLs</span>
+            <span class="sandbox-readout" data-role="readout-meeting-prep">Linter: 0 hallucinated URLs</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill active" data-prep-btn="linter">Linter</button>
               <button type="button" class="sandbox-pill" data-prep-btn="nbd">NBD Cron</button>
@@ -422,13 +442,13 @@
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
             <defs>
-              <clipPath id="kt-bars-clip">
+              <clipPath id="kt-bars-clip-${uid}">
                 <rect x="20" y="20" width="280" height="56" />
               </clipPath>
             </defs>
             <text x="24" y="14" class="visual-label">KNOWLEDGE TRACING MASTERY</text>
             <text x="296" y="14" text-anchor="end" class="visual-badge">2nd Place LifeHack</text>
-            <g clip-path="url(#kt-bars-clip)">
+            <g clip-path="url(#kt-bars-clip-${uid})">
               <rect class="kt-bar b1" x="44" y="48" width="36" height="32" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
               <rect class="kt-bar b2" x="108" y="40" width="36" height="40" rx="4" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
               <rect class="kt-bar b3" x="172" y="32" width="36" height="48" rx="4" fill="var(--accent)" />
@@ -504,13 +524,13 @@
       case "uq-xai-battery":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
-            <text x="20" y="16" class="visual-label" id="aci-svg-title">95% ADAPTIVE CONFORMAL INTERVAL (ACI)</text>
-            <path class="ci-band" id="aci-band-path" d="M 24 24 Q 110 34, 190 50 T 296 68 L 296 90 Q 190 74, 110 56 T 24 44 Z" fill="var(--accent)" />
+            <text x="20" y="16" class="visual-label" data-role="aci-svg-title">95% ADAPTIVE CONFORMAL INTERVAL (ACI)</text>
+            <path class="ci-band" data-role="aci-band-path" d="M 24 24 Q 110 34, 190 50 T 296 68 L 296 90 Q 190 74, 110 56 T 24 44 Z" fill="var(--accent)" />
             <path d="M 24 34 Q 110 45, 190 62 T 296 79" fill="none" stroke="var(--accent)" stroke-width="2.2" />
             <circle class="trace-node node-accent" cx="190" cy="62" r="4.5" />
           </svg>
           <div class="sandbox-bar" data-sandbox="uq-xai">
-            <span class="sandbox-readout" id="readout-uq-xai">PICP: 0.952, ECE: 0.012</span>
+            <span class="sandbox-readout" data-role="readout-uq-xai">PICP: 0.952, ECE: 0.012</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-ci-btn="90">90% ACI</button>
               <button type="button" class="sandbox-pill active" data-ci-btn="95">95% ACI</button>
@@ -685,7 +705,7 @@
             <span class="project-year">${escapeHtml(p.year || "2026")}</span>
           </div>
           <h3 class="project-title">
-            <a href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.title)}</a>
+            <a href="${escapeHtml(sanitizeHttpUrl(p.repoUrl))}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.title)}</a>
           </h3>
           <p class="project-summary">${escapeHtml(p.summary)}</p>
 
@@ -710,7 +730,7 @@
             </button>
             <a
               class="apple-text-link"
-              href="${escapeHtml(p.repoUrl)}"
+              href="${escapeHtml(sanitizeHttpUrl(p.repoUrl))}"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -720,7 +740,7 @@
               p.secondaryRepoUrl
                 ? `<a
                     class="apple-text-link"
-                    href="${escapeHtml(p.secondaryRepoUrl)}"
+                    href="${escapeHtml(sanitizeHttpUrl(p.secondaryRepoUrl))}"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -936,6 +956,7 @@
     });
 
     autoTimer = setInterval(() => {
+      if (document.hidden) return;
       currentIdx = (currentIdx + 1) % order.length;
       selectChapter(order[currentIdx]);
     }, 6500);
@@ -1035,6 +1056,7 @@
       });
 
       jgTimer = setInterval(() => {
+      if (document.hidden) return;
         jgIdx = (jgIdx + 1) % jgOrder.length;
         selectFlagshipJg(jgOrder[jgIdx]);
       }, 3600);
@@ -1084,6 +1106,7 @@
       });
 
       stepTimer = setInterval(() => {
+      if (document.hidden) return;
         stepIdx = (stepIdx + 1) % stepOrder.length;
         selectFlagshipStep(stepOrder[stepIdx]);
       }, 3200);
@@ -1140,6 +1163,7 @@
       });
 
       turnTimer = setInterval(() => {
+      if (document.hidden) return;
         turnIdx = (turnIdx + 1) % turnOrder.length;
         selectFlagshipTurn(turnOrder[turnIdx]);
       }, 3800);
@@ -1228,6 +1252,7 @@
       });
 
       prepTimer = setInterval(() => {
+      if (document.hidden) return;
         prepIdx = (prepIdx + 1) % prepOrder.length;
         selectPrepStage(prepOrder[prepIdx]);
       }, 3400);
@@ -1326,13 +1351,14 @@
       });
 
       ciTimer = setInterval(() => {
+      if (document.hidden) return;
         ciIdx = (ciIdx + 1) % ciOrder.length;
         selectUqLevel(ciOrder[ciIdx]);
       }, 3400);
     }
   }
 
-  function attachSandboxControls() {
+  function attachSandboxControls(rootContainer = document) {
     const jgData = {
       vpc: "Dual-VPC: 14/14 Ingress & 18/18 Egress IM8 PASS",
       adlc: "14-Step ADLC: 4-6 wks -> < 3 min (>=0.85 Judge)",
@@ -1340,72 +1366,12 @@
       arr: "Public Sector: $1.96M Realised + $1.46M Pipeline ARR",
     };
 
-    const jgCard = document.getElementById("project-jumpgate-agentic-lz");
-    if (jgCard) {
-      const readout = document.getElementById("readout-jumpgate");
-      const jgBtns = jgCard.querySelectorAll("[data-jg-btn]");
-      const jgNodes = jgCard.querySelectorAll("[data-jg]");
-
-      function selectJgStep(key) {
-        if (readout && jgData[key]) {
-          readout.textContent = jgData[key];
-        }
-        jgBtns.forEach((b) =>
-          b.classList.toggle("active", b.getAttribute("data-jg-btn") === key)
-        );
-        jgNodes.forEach((n) =>
-          n.classList.toggle("is-selected", n.getAttribute("data-jg") === key)
-        );
-      }
-
-      jgBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          selectJgStep(btn.getAttribute("data-jg-btn"));
-        });
-      });
-      jgNodes.forEach((node) => {
-        node.addEventListener("click", () => {
-          selectJgStep(node.getAttribute("data-jg"));
-        });
-      });
-    }
-
     const tracerData = {
       user: "Step #01 USER_INPUT, 12ms",
       planner: "Step #02 PLANNER, 640ms",
       mcp: "Step #03 CALL_MCP_TOOL, 310ms",
       subagent: "Step #04 SUBAGENT, 1.2s",
     };
-
-    const tracerCard = document.getElementById("project-agent-tracer");
-    if (tracerCard) {
-      const readout = document.getElementById("readout-agent-tracer");
-      const stepBtns = tracerCard.querySelectorAll("[data-step-btn]");
-      const svgNodes = tracerCard.querySelectorAll("[data-step]");
-
-      function selectTracerStep(stepKey) {
-        if (readout && tracerData[stepKey]) {
-          readout.textContent = tracerData[stepKey];
-        }
-        stepBtns.forEach((b) =>
-          b.classList.toggle("active", b.getAttribute("data-step-btn") === stepKey)
-        );
-        svgNodes.forEach((n) =>
-          n.classList.toggle("is-selected", n.getAttribute("data-step") === stepKey)
-        );
-      }
-
-      stepBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          selectTracerStep(btn.getAttribute("data-step-btn"));
-        });
-      });
-      svgNodes.forEach((node) => {
-        node.addEventListener("click", () => {
-          selectTracerStep(node.getAttribute("data-step"));
-        });
-      });
-    }
 
     const harnessTurns = {
       turn2: {
@@ -1431,51 +1397,11 @@
       },
     };
 
-    const harnessCard = document.getElementById("project-jetski-harness");
-    if (harnessCard) {
-      const bar = document.getElementById("harness-token-bar");
-      const barLabel = document.getElementById("harness-bar-label");
-      const rpcStatus = document.getElementById("harness-rpc-status");
-      const readout = document.getElementById("readout-jetski-harness");
-      const turnBtns = harnessCard.querySelectorAll("[data-turn-btn]");
-
-      turnBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const key = btn.getAttribute("data-turn-btn");
-          const cfg = harnessTurns[key];
-          if (!cfg) return;
-          turnBtns.forEach((b) => b.classList.toggle("active", b === btn));
-          if (bar) {
-            bar.setAttribute("width", String(cfg.width));
-            bar.setAttribute("fill", cfg.color);
-          }
-          if (barLabel) barLabel.textContent = cfg.label;
-          if (rpcStatus) rpcStatus.textContent = cfg.rpc;
-          if (readout) readout.textContent = cfg.readout;
-        });
-      });
-    }
-
     const prepData = {
       linter: "Linter: 0 hallucinated URLs",
       nbd: "Stage 1: 18:00 SGT NBD brief",
       t1h: "Stage 2: 60-min T-1h window",
     };
-
-    const prepCard = document.getElementById("project-meeting-prep-agent");
-    if (prepCard) {
-      const readout = document.getElementById("readout-meeting-prep");
-      const btns = prepCard.querySelectorAll("[data-prep-btn]");
-      btns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const key = btn.getAttribute("data-prep-btn");
-          btns.forEach((b) => b.classList.toggle("active", b === btn));
-          if (readout && prepData[key]) {
-            readout.textContent = prepData[key];
-          }
-        });
-      });
-    }
 
     const ciLevels = {
       "90": {
@@ -1495,25 +1421,119 @@
       },
     };
 
-    const uqCard = document.getElementById("project-uq-xai-battery");
-    if (uqCard) {
-      const band = document.getElementById("aci-band-path");
-      const title = document.getElementById("aci-svg-title");
-      const readout = document.getElementById("readout-uq-xai");
-      const ciBtns = uqCard.querySelectorAll("[data-ci-btn]");
+    const sandboxes = rootContainer.querySelectorAll(".project-visual-sandbox");
+    sandboxes.forEach((box) => {
+      if (box.dataset.sandboxBound === "1") return;
+      box.dataset.sandboxBound = "1";
 
-      ciBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const key = btn.getAttribute("data-ci-btn");
-          const cfg = ciLevels[key];
-          if (!cfg) return;
-          ciBtns.forEach((b) => b.classList.toggle("active", b === btn));
-          if (band) band.style.setProperty("--ci-scale", String(cfg.scale));
-          if (title) title.textContent = cfg.title;
-          if (readout) readout.textContent = cfg.readout;
+      const jgBtns = box.querySelectorAll("[data-jg-btn]");
+      if (jgBtns.length) {
+        const readout = box.querySelector('[data-role="readout-jumpgate"]');
+        const jgNodes = box.querySelectorAll("[data-jg]");
+        const selectJgStep = (key) => {
+          if (readout && jgData[key]) readout.textContent = jgData[key];
+          jgBtns.forEach((b) =>
+            b.classList.toggle("active", b.getAttribute("data-jg-btn") === key)
+          );
+          jgNodes.forEach((n) =>
+            n.classList.toggle("is-selected", n.getAttribute("data-jg") === key)
+          );
+        };
+        jgBtns.forEach((btn) =>
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectJgStep(btn.getAttribute("data-jg-btn"));
+          })
+        );
+        jgNodes.forEach((node) =>
+          node.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectJgStep(node.getAttribute("data-jg"));
+          })
+        );
+      }
+
+      const stepBtns = box.querySelectorAll("[data-step-btn]");
+      if (stepBtns.length) {
+        const readout = box.querySelector('[data-role="readout-agent-tracer"]');
+        const svgNodes = box.querySelectorAll("[data-step]");
+        const selectTracerStep = (stepKey) => {
+          if (readout && tracerData[stepKey]) readout.textContent = tracerData[stepKey];
+          stepBtns.forEach((b) =>
+            b.classList.toggle("active", b.getAttribute("data-step-btn") === stepKey)
+          );
+          svgNodes.forEach((n) =>
+            n.classList.toggle("is-selected", n.getAttribute("data-step") === stepKey)
+          );
+        };
+        stepBtns.forEach((btn) =>
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectTracerStep(btn.getAttribute("data-step-btn"));
+          })
+        );
+        svgNodes.forEach((node) =>
+          node.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectTracerStep(node.getAttribute("data-step"));
+          })
+        );
+      }
+
+      const turnBtns = box.querySelectorAll("[data-turn-btn]");
+      if (turnBtns.length) {
+        const bar = box.querySelector('[data-role="harness-token-bar"]');
+        const barLabel = box.querySelector('[data-role="harness-bar-label"]');
+        const rpcStatus = box.querySelector('[data-role="harness-rpc-status"]');
+        const readout = box.querySelector('[data-role="readout-jetski-harness"]');
+        turnBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const cfg = harnessTurns[btn.getAttribute("data-turn-btn")];
+            if (!cfg) return;
+            turnBtns.forEach((b) => b.classList.toggle("active", b === btn));
+            if (bar) {
+              bar.setAttribute("width", String(cfg.width));
+              bar.setAttribute("fill", cfg.color);
+            }
+            if (barLabel) barLabel.textContent = cfg.label;
+            if (rpcStatus) rpcStatus.textContent = cfg.rpc;
+            if (readout) readout.textContent = cfg.readout;
+          });
         });
-      });
-    }
+      }
+
+      const prepBtns = box.querySelectorAll("[data-prep-btn]");
+      if (prepBtns.length) {
+        const readout = box.querySelector('[data-role="readout-meeting-prep"]');
+        prepBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const key = btn.getAttribute("data-prep-btn");
+            prepBtns.forEach((b) => b.classList.toggle("active", b === btn));
+            if (readout && prepData[key]) readout.textContent = prepData[key];
+          });
+        });
+      }
+
+      const ciBtns = box.querySelectorAll("[data-ci-btn]");
+      if (ciBtns.length) {
+        const band = box.querySelector('[data-role="aci-band-path"]');
+        const title = box.querySelector('[data-role="aci-svg-title"]');
+        const readout = box.querySelector('[data-role="readout-uq-xai"]');
+        ciBtns.forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const cfg = ciLevels[btn.getAttribute("data-ci-btn")];
+            if (!cfg) return;
+            ciBtns.forEach((b) => b.classList.toggle("active", b === btn));
+            if (band) band.style.setProperty("--ci-scale", String(cfg.scale));
+            if (title) title.textContent = cfg.title;
+            if (readout) readout.textContent = cfg.readout;
+          });
+        });
+      }
+    });
   }
 
   function formatRepoSlugToTitle(name) {
@@ -1558,8 +1578,7 @@
         "elim316",
         "elim316.github.io",
         "CSC2106-IoT",
-        "real-time-cv-vlm-pipeline",
-        "WeatherPredictor",
+                "WeatherPredictor",
         "yolov6-object-detector",
         "Opencv-real-time-face-detection",
         "INF2007_Week2_Lab",
@@ -1571,7 +1590,7 @@
     };
 
     try {
-      const res = await fetch("./projects.json", { cache: "no-cache" });
+      const res = await fetch("./projects.json", { cache: "no-cache", signal: AbortSignal.timeout(5000) });
       if (res.ok) {
         const payload = await res.json();
         if (payload && typeof payload === "object") {
@@ -1635,7 +1654,7 @@
 
       let addedAny = false;
       publicNonFork.forEach((repo) => {
-        const htmlUrl = String(repo.html_url || "").replace(/\/+$/, "");
+        const htmlUrl = sanitizeHttpUrl(String(repo.html_url || "").replace(/\/+$/, ""));
         if (!htmlUrl || knownUrls.has(htmlUrl.toLowerCase())) return;
 
         const category = inferRepoCategory(repo);
@@ -2096,20 +2115,20 @@
         title: "Open GitHub Profile (@elim316)",
         sub: "https://github.com/elim316",
         badge: "External",
-        action: () => window.open("https://github.com/elim316", "_blank", "noopener"),
+        action: () => window.open("https://github.com/elim316", "_blank", "noopener,noreferrer"),
       },
       {
         title: "Open LinkedIn Profile",
         sub: "https://linkedin.com/in/eliaslim",
         badge: "External",
-        action: () => window.open("https://linkedin.com/in/eliaslim", "_blank", "noopener"),
+        action: () => window.open("https://linkedin.com/in/eliaslim", "_blank", "noopener,noreferrer"),
       },
       {
         title: "Open Google Scholar Profile",
         sub: "Published IEEE Xplore papers",
         badge: "External",
         action: () =>
-          window.open("https://scholar.google.com/citations?user=f2hfYeoAAAAJ", "_blank", "noopener"),
+          window.open("https://scholar.google.com/citations?user=f2hfYeoAAAAJ", "_blank", "noopener,noreferrer"),
       },
     ];
 
@@ -2278,23 +2297,26 @@
     }
     if (titleEl) titleEl.textContent = p.title;
     if (summaryEl) summaryEl.textContent = p.summary;
-    if (visualEl) visualEl.innerHTML = getProjectVisual(p);
+    if (visualEl) {
+      visualEl.innerHTML = getProjectVisual(p);
+      attachSandboxControls(visualEl);
+    }
     if (archEl) archEl.textContent = p.architecture || p.summary;
     if (stackEl) {
       stackEl.innerHTML = (p.stack || [])
         .map((t) => `<span class="stack-tag">${escapeHtml(t)}</span>`)
         .join("");
     }
-    if (repoLinkEl) repoLinkEl.setAttribute("href", p.repoUrl);
+    if (repoLinkEl) repoLinkEl.setAttribute("href", sanitizeHttpUrl(p.repoUrl));
     if (repoLabelEl) {
-      repoLabelEl.innerHTML = `${escapeHtml(p.repoLabel || "Open GitHub Repository")} &#8599;`;
+      repoLabelEl.textContent = `${p.repoLabel || "Open GitHub Repository"} ↗`;
     }
     if (secRepoLinkEl) {
       if (p.secondaryRepoUrl) {
-        secRepoLinkEl.setAttribute("href", p.secondaryRepoUrl);
+        secRepoLinkEl.setAttribute("href", sanitizeHttpUrl(p.secondaryRepoUrl));
         secRepoLinkEl.style.display = "inline-flex";
         if (secRepoLabelEl) {
-          secRepoLabelEl.innerHTML = `${escapeHtml(p.secondaryRepoLabel || "Agent Repo")} &#8599;`;
+          secRepoLabelEl.textContent = `${p.secondaryRepoLabel || "Agent Repo"} ↗`;
         }
       } else {
         secRepoLinkEl.style.display = "none";
@@ -2392,12 +2414,12 @@
     const inspectBtn = document.getElementById("stage-dock-inspect-btn");
 
     const closerListenBtn = document.getElementById("closer-look-listen-btn");
-    const closerListenPlay = document.getElementById("closer-listen-icon-play");
-    const closerListenPause = document.getElementById("closer-listen-icon-pause");
+    const closerListenPlay = document.getElementById("closer-icon-play");
+    const closerListenPause = document.getElementById("closer-icon-pause");
     const closerListenLabel = document.getElementById("closer-listen-label");
     if (!dock) return;
 
-    const RING_CIRCUMFERENCE = 62.83;
+    const RING_CIRCUMFERENCE = 56.55;
 
     const stageConfigs = [
       {
@@ -2800,6 +2822,7 @@
     }
 
     setInterval(() => {
+      if (document.hidden) return;
       const now = performance.now();
       const cmdOpen = document.getElementById("cmd-backdrop")?.classList.contains("is-open");
       const closerOpen = document
@@ -3066,6 +3089,7 @@
         }
       } else if (clean.startsWith("about-")) {
         const chap = clean.replace("about-", "");
+        if (!["google", "grab", "astar", "beyond"].includes(chap)) return;
         const tabBtn = document.querySelector(`[data-about-tab="${chap}"]`);
         if (tabBtn) {
           tabBtn.click();
@@ -3595,7 +3619,7 @@
               </div>
 
               <div class="promo-links" style="justify-content: flex-start; margin-top: 4px;">
-                <a href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer" class="apple-pill solid small">
+                <a href="${escapeHtml(sanitizeHttpUrl(p.repoUrl))}" target="_blank" rel="noopener noreferrer" class="apple-pill solid small">
                   <span>${escapeHtml(p.linkLabel || "GitHub")} &#8599;</span>
                 </a>
                 <button type="button" class="apple-pill outline small" data-compare-inspect="${escapeHtml(p.id)}">
@@ -3614,7 +3638,7 @@
         });
       });
 
-      initInteractiveCardVisuals(grid);
+      attachSandboxControls(grid);
     }
 
     selA.addEventListener("change", renderComparison);
