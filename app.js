@@ -22,7 +22,7 @@
     */
     {
       id: "agent-tracer",
-      title: "Jetski Agent Tracer Plugin",
+      title: "Antigravity Agent Tracer Plugin",
       category: "agentic",
       categoryLabel: "Agentic & DevTools",
       year: "2026",
@@ -31,11 +31,11 @@
       architecture:
         "Zero-dependency Python 3 HTTP backend with 1.5s delta-tail JSONL streaming, paired with a Vis.js and SVG topology frontend. Detects mid-text tool exit codes, strips metadata envelopes, and supports inline subagent trajectory drill-down.",
       stack: ["Python", "Vis.js", "SVG", "SSE / JSONL"],
-      repoUrl: "https://github.com/elim316/Jetski-Agent-Tracer-Plugin",
+      repoUrl: "https://github.com/elim316/Antigravity-Agent-Tracer-Plugin",
     },
     {
-      id: "jetski-harness",
-      title: "Jetski Harness",
+      id: "antigravity-harness",
+      title: "Antigravity Harness",
       category: "agentic",
       categoryLabel: "Agentic & DevTools",
       year: "2026",
@@ -44,7 +44,7 @@
       architecture:
         "Streams per-turn prompt, cached-context, and output token metrics from the local Language Server, calculates context window saturation against the 200k compaction threshold, and dispatches multi-session prompts.",
       stack: ["Python", "Connect-RPC", "JavaScript", "CSS Grid"],
-      repoUrl: "https://github.com/elim316/Jetski-Harness",
+      repoUrl: "https://github.com/elim316/Antigravity-Harness",
     },
     {
       id: "meeting-prep-agent",
@@ -57,7 +57,7 @@
       architecture:
         "Pairs a Next-Business-Day dossier generator with a stateless T-1h reminder partitioned into 60-minute windows. Verified by a 5-scenario, 36-check mock test harness with an automated linter that flags hallucinated names, bugs, and URLs.",
       stack: ["Python", "Multi-Corpus MCP", "Eval Harness", "Cron"],
-      repoUrl: "https://github.com/elim316/Jetski-Meeting-Prep-Agent",
+      repoUrl: "https://github.com/elim316/Antigravity-Meeting-Prep-Agent",
     },
     {
       id: "eduverse",
@@ -378,7 +378,7 @@
             </div>
           </div>
         `;
-      case "jetski-harness":
+      case "antigravity-harness":
         return `
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
             <defs>
@@ -399,8 +399,8 @@
             <rect x="28" y="75" width="264" height="6" rx="3" fill="var(--bg-subtle)" />
             <rect class="token-fill-bar" data-role="harness-token-bar" clip-path="url(#harness-bar-clip-${uid})" x="28" y="75" width="187" height="6" rx="3" fill="var(--accent)" />
           </svg>
-          <div class="sandbox-bar" data-sandbox="jetski-harness">
-            <span class="sandbox-readout" data-role="readout-jetski-harness">142k / 200k, Healthy</span>
+          <div class="sandbox-bar" data-sandbox="antigravity-harness">
+            <span class="sandbox-readout" data-role="readout-antigravity-harness">142k / 200k, Healthy</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-turn-btn="turn2">Turn 2</button>
               <button type="button" class="sandbox-pill active" data-turn-btn="turn8">Turn 8</button>
@@ -834,7 +834,7 @@
         paneBadge: "Cloud & AI, 4,000+ Trained",
         readout: "Chapter 01 / 04",
         story:
-          "At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Jetski Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
+          "At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
         bar1Label: "Agentic Observability & Evaluation Rigour",
         bar1Val: "36 / 36 Checks",
         bar1Width: "100%",
@@ -1505,7 +1505,7 @@
         const bar = box.querySelector('[data-role="harness-token-bar"]');
         const barLabel = box.querySelector('[data-role="harness-bar-label"]');
         const rpcStatus = box.querySelector('[data-role="harness-rpc-status"]');
-        const readout = box.querySelector('[data-role="readout-jetski-harness"]');
+        const readout = box.querySelector('[data-role="readout-antigravity-harness"]');
         turnBtns.forEach((btn) => {
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -2052,7 +2052,7 @@
       },
       {
         title: "Jump to Featured Repositories",
-        /* [JUMPGATE HIDDEN] */ sub: "Jetski Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
+        /* [JUMPGATE HIDDEN] */ sub: "Antigravity Agent Tracer, Meeting Prep Agent, and Battery Conformal Prediction",
         badge: "Featured",
         action: () => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" }),
       },
@@ -2064,7 +2064,7 @@
       },
       {
         title: "Filter: Agentic & DevTools Projects",
-        /* [JUMPGATE HIDDEN] */ sub: "Show Agent Tracer, Jetski Harness, and Meeting Prep Agent",
+        /* [JUMPGATE HIDDEN] */ sub: "Show Agent Tracer, Antigravity Harness, and Meeting Prep Agent",
         badge: "Filter",
         action: () => {
           setFilterCategory("agentic");
@@ -2307,7 +2307,7 @@
       const hasHumanAudio = [
         "jumpgate-agentic-lz",
         "agent-tracer",
-        "jetski-harness",
+        "antigravity-harness",
         "meeting-prep-agent",
         "uq-xai-battery",
       ].includes(p.id);
@@ -2447,24 +2447,24 @@
         id: "hero-stage",
         label: "01 / 05  BUILDER",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-builder.mp3?v=20261007-23",
+        audioSrc: "audio/stage-builder.mp3?v=20261007-24",
         speechText:
-          "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Jetski Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
+          "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Antigravity Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
       },
       {
         id: "about",
         label: "02 / 05  PROFILE",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-profile-google.mp3?v=20261007-23",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261007-24",
         speechText:
-          "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Jetski Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
+          "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
       /* [JUMPGATE HIDDEN — UNCOMMENT THIS STAGE AND RE-INDEX 01/06..06/06 TO RE-ENABLE STAGE 3: JUMPGATE]
       {
         id: "showcase-jumpgate",
         label: "03 / 06  JUMPGATE",
         projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-jumpgate.mp3?v=20261007-23",
+        audioSrc: "audio/stage-jumpgate.mp3?v=20261007-24",
         speechText:
           "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to Vertex AI in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
       },
@@ -2473,15 +2473,15 @@
         id: "showcase-agent-tracer",
         label: "03 / 05  TRACER",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-tracer.mp3?v=20261007-23",
+        audioSrc: "audio/stage-tracer.mp3?v=20261007-24",
         speechText:
-          "Stage 3: Jetski Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
+          "Stage 3: Antigravity Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
       },
       {
         id: "showcase-meeting-prep",
         label: "04 / 05  DOSSIER",
         projectId: "meeting-prep-agent",
-        audioSrc: "audio/stage-dossier.mp3?v=20261007-23",
+        audioSrc: "audio/stage-dossier.mp3?v=20261007-24",
         speechText:
           "Stage 4: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
       },
@@ -2489,7 +2489,7 @@
         id: "showcase-uq-xai",
         label: "05 / 05  RESEARCH",
         projectId: "uq-xai-battery",
-        audioSrc: "audio/stage-research.mp3?v=20261007-23",
+        audioSrc: "audio/stage-research.mp3?v=20261007-24",
         speechText:
           "Stage 5: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
       },
@@ -2497,32 +2497,32 @@
 
     const aboutChapterAudio = {
       google: {
-        audioSrc: "audio/stage-profile-google.mp3?v=20261007-23",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261007-24",
         speechText: stageConfigs[1].speechText,
       },
       grab: {
-        audioSrc: "audio/stage-profile-grab.mp3?v=20261007-23",
+        audioSrc: "audio/stage-profile-grab.mp3?v=20261007-24",
         speechText:
           "About Elias Lim, Chapter 2: Backend Systems at Grab. At Grab in Singapore, I engineered scalable Golang backend microservices for real-time fraud detection across petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting controls, and high-coverage unit test suites.",
       },
       astar: {
-        audioSrc: "audio/stage-profile-astar.mp3?v=20261007-23",
+        audioSrc: "audio/stage-profile-astar.mp3?v=20261007-24",
         speechText:
           "About Elias Lim, Chapter 3: AI Research at A-STAR. As an AI Research Intern at A-STAR in Singapore, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 in IEEE Xplore.",
       },
       beyond: {
-        audioSrc: "audio/stage-profile-beyond.mp3?v=20261007-23",
+        audioSrc: "audio/stage-profile-beyond.mp3?v=20261007-24",
         speechText:
           "About Elias Lim, Chapter 4: Glasgow, SIT, and Life Outside Code. I graduated with a Bachelor of Science with Honours in Computer Science, Second Upper Class, from the University of Glasgow and Singapore Institute of Technology, winning awards at NUS LifeHack, AI Singapore, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
       },
     };
 
     const projectAudioMap = {
-      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261007-23",
-      "agent-tracer": "audio/stage-tracer.mp3?v=20261007-23",
-      "jetski-harness": "audio/stage-tracer.mp3?v=20261007-23",
-      "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-23",
-      "uq-xai-battery": "audio/stage-research.mp3?v=20261007-23",
+      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261007-24",
+      "agent-tracer": "audio/stage-tracer.mp3?v=20261007-24",
+      "antigravity-harness": "audio/stage-tracer.mp3?v=20261007-24",
+      "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-24",
+      "uq-xai-battery": "audio/stage-research.mp3?v=20261007-24",
     };
 
     let activeStageIdx = 0;
@@ -2971,7 +2971,7 @@
           capId: "bento-cap-1",
           stat: "200k",
           delta: "Zero Cloud Lock-In",
-          cap: "Live Connect-RPC trajectory spans and token context window gauge in Jetski Harness.",
+          cap: "Live Connect-RPC trajectory spans and token context window gauge in Antigravity Harness.",
         },
         {
           statId: "bento-stat-2",
