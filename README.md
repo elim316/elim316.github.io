@@ -6,7 +6,7 @@ Live site: [https://elim316.github.io/](https://elim316.github.io/)
 ================================================================================
 AGENT HANDOFF & CONTINUATION GUIDE (HIDDEN FROM PUBLIC GITHUB RENDER)
 ================================================================================
-If you are an AI coding assistant (1P Google Gemini CLI / Antigravity / Jetski,
+If you are an AI coding assistant (1P Google Gemini CLI / Antigravity / Antigravity,
 or 3P Claude Code, Cursor, Windsurf, GitHub Copilot, OpenAI Codex, etc.) working
 on this repository for Elias Lim, read this entire hidden specification before
 making any changes. After completing your changes, keep `README.md` (this hidden
@@ -124,7 +124,7 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261007-23`
+- Asset version in `index.html`: `?v=20261007-24`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
   * Added 6 Apple-inspired visual and functional upgrades:
