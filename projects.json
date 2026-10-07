@@ -1,4 +1,26 @@
 {
+  "_comment": "To re-enable Jumpgate on the live portfolio, move the object inside _commentedOutProjects back to the top of projects[].",
+  "_commentedOutProjects": [
+    {
+      "id": "jumpgate-agentic-lz",
+      "title": "Jumpgate: Zero-Trust Agentic AI Landing Zone & Vending Machine",
+      "category": "agentic",
+      "categoryLabel": "Agentic & Cloud Security",
+      "year": "2026",
+      "summary": "Self-service Dual-VPC cloud landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup and IM8 security verification into under 3 minutes, driving $1.96M in realised public sector ARR (+$1.46M pipeline).",
+      "architecture": "Separates Ingress (Regional HTTPS ALB with TLS 1.3, Cloud Armor OWASP WAF, Serverless NEG, IAM-locked Cloud Run) from Egress (Secure Web Proxy Layer 7 domain allowlisting, Private Service Connect to Vertex AI, non-root SHA-256 pinned containers) in Terraform. Paired with a 4-agent, 14-step ADLC pipeline enforcing an >=0.85 LLM-as-a-Judge quality gate and passing 14/14 Ingress runtime and 18/18 Egress static security checks.",
+      "stack": [
+        "Terraform",
+        "Dual-VPC & PSC",
+        "14-Step ADLC",
+        "IM8 Security"
+      ],
+      "repoUrl": "https://github.com/RZOWQ/trainee-project-jumpgate-agentic-lz",
+      "repoLabel": "Landing Zone Repo",
+      "secondaryRepoUrl": "https://github.com/jarrettyeo/vending-machine-agent",
+      "secondaryRepoLabel": "Vending Machine Repo"
+    }
+  ],
   "config": {
     "githubUsername": "elim316",
     "autoDiscoverNewGithubRepos": true,
@@ -18,20 +40,6 @@
   },
   "projects": [
     {
-      "id": "jumpgate-agentic-lz",
-      "title": "Jumpgate: Zero-Trust Agentic AI Landing Zone & Vending Machine",
-      "category": "agentic",
-      "categoryLabel": "Agentic & Cloud Security",
-      "year": "2026",
-      "summary": "Self-service Dual-VPC cloud landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup and IM8 security verification into under 3 minutes, driving $1.96M in realised public sector ARR (+$1.46M pipeline).",
-      "architecture": "Separates Ingress (Regional HTTPS ALB with TLS 1.3, Cloud Armor OWASP WAF, Serverless NEG, IAM-locked Cloud Run) from Egress (Secure Web Proxy Layer 7 domain allowlisting, Private Service Connect to Vertex AI, non-root SHA-256 pinned containers) in Terraform. Paired with a 4-agent, 14-step ADLC pipeline enforcing an >=0.85 LLM-as-a-Judge quality gate and passing 14/14 Ingress runtime and 18/18 Egress static security checks.",
-      "stack": ["Terraform", "Dual-VPC & PSC", "14-Step ADLC", "IM8 Security"],
-      "repoUrl": "https://github.com/RZOWQ/trainee-project-jumpgate-agentic-lz",
-      "repoLabel": "Landing Zone Repo",
-      "secondaryRepoUrl": "https://github.com/jarrettyeo/vending-machine-agent",
-      "secondaryRepoLabel": "Vending Machine Repo"
-    },
-    {
       "id": "agent-tracer",
       "title": "Jetski Agent Tracer Plugin",
       "category": "agentic",
@@ -39,7 +47,12 @@
       "year": "2026",
       "summary": "Real-time execution graph and three-lane architecture visualiser for autonomous agents, streaming live JSONL transcripts into Timeline, Architecture, and Simplified views.",
       "architecture": "Zero-dependency Python 3 HTTP backend with 1.5s delta-tail JSONL streaming, paired with a Vis.js and SVG topology frontend. Detects mid-text tool exit codes, strips metadata envelopes, and supports inline subagent trajectory drill-down.",
-      "stack": ["Python", "Vis.js", "SVG", "SSE / JSONL"],
+      "stack": [
+        "Python",
+        "Vis.js",
+        "SVG",
+        "SSE / JSONL"
+      ],
       "repoUrl": "https://github.com/elim316/Jetski-Agent-Tracer-Plugin"
     },
     {
@@ -50,7 +63,12 @@
       "year": "2026",
       "summary": "Unified multi-agent workspace UI plugin combining a customisable 2x2 Bento grid, multi-session agent chat, embedded Agent Tracer graph, automation controls, and live token telemetry.",
       "architecture": "Streams per-turn prompt, cached-context, and output token metrics from the local Language Server, calculates context window saturation against the 200k compaction threshold, and dispatches multi-session prompts.",
-      "stack": ["Python", "Connect-RPC", "JavaScript", "CSS Grid"],
+      "stack": [
+        "Python",
+        "Connect-RPC",
+        "JavaScript",
+        "CSS Grid"
+      ],
       "repoUrl": "https://github.com/elim316/Jetski-Harness"
     },
     {
@@ -61,7 +79,12 @@
       "year": "2026",
       "summary": "Two-stage scheduled agent that researches external and cross-functional meetings across Calendar, Gmail, Chat, Drive, and People Directory to generate cited one-page briefing docs.",
       "architecture": "Pairs a Next-Business-Day dossier generator with a stateless T-1h reminder partitioned into 60-minute windows. Verified by a 5-scenario, 36-check mock test harness with an automated linter that flags hallucinated names, bugs, and URLs.",
-      "stack": ["Python", "Multi-Corpus MCP", "Eval Harness", "Cron"],
+      "stack": [
+        "Python",
+        "Multi-Corpus MCP",
+        "Eval Harness",
+        "Cron"
+      ],
       "repoUrl": "https://github.com/elim316/Jetski-Meeting-Prep-Agent"
     },
     {
@@ -72,7 +95,12 @@
       "year": "2025",
       "summary": "Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025. Adaptive learning platform pairing modular classroom routing with an ~85% accuracy Knowledge Tracing model.",
       "architecture": "Modular React, Next.js, and TypeScript platform deployed on Cloudflare Workers for low-latency serverless execution, integrated with a Python and PyTorch Knowledge Tracing (kt_models) recommendation engine.",
-      "stack": ["React", "TypeScript", "Cloudflare Workers", "PyTorch"],
+      "stack": [
+        "React",
+        "TypeScript",
+        "Cloudflare Workers",
+        "PyTorch"
+      ],
       "repoUrl": "https://github.com/elim316/eduverse"
     },
     {
@@ -83,7 +111,12 @@
       "year": "2026",
       "summary": "Built for Hack4Good. Centralised multi-branch event and volunteer management platform for MINDS, replacing scattered spreadsheets and forms across branches.",
       "architecture": "Role-based web application in TypeScript, Next.js App Router, and Supabase supporting staff, caregivers, and volunteers with unified calendar views, PostgreSQL RPC signup workflows, and real-time event coverage tracking.",
-      "stack": ["TypeScript", "Next.js", "Supabase", "PostgreSQL"],
+      "stack": [
+        "TypeScript",
+        "Next.js",
+        "Supabase",
+        "PostgreSQL"
+      ],
       "repoUrl": "https://github.com/elim316/Lobang-octagon"
     },
     {
@@ -94,7 +127,13 @@
       "year": "2025",
       "summary": "Full-stack serverless web application demonstrating cloud-portable CRUD workflows, real-time state synchronisation across browser tabs, and automated CI/CD.",
       "architecture": "React and Vite frontend deployed on Vercel backed by Supabase (Postgres, Auth, Realtime) and AWS serverless primitives provisioned with Terraform Infrastructure-as-Code and GitHub Actions.",
-      "stack": ["React", "Terraform", "Supabase", "AWS", "GitHub Actions"],
+      "stack": [
+        "React",
+        "Terraform",
+        "Supabase",
+        "AWS",
+        "GitHub Actions"
+      ],
       "repoUrl": "https://github.com/elim316/multi-cloud-serverless-app"
     },
     {
@@ -105,7 +144,12 @@
       "year": "2025",
       "summary": "First-author paper at APSIPA ASC 2025 (IEEE Xplore) from A*STAR research. Unified deep learning framework quantifying both model and data uncertainty for battery State-of-Health estimation.",
       "architecture": "Integrates Adaptive Conformal Inference (ACI), Prediction Interval Coverage Probability (PICP), Expected Calibration Error (ECE), and model-agnostic SHAP/LIME attributions into a CNN pipeline evaluated across McMaster and Oxford datasets.",
-      "stack": ["Python", "CNN", "Conformal Prediction", "SHAP / LIME"],
+      "stack": [
+        "Python",
+        "CNN",
+        "Conformal Prediction",
+        "SHAP / LIME"
+      ],
       "repoUrl": "https://github.com/elim316/UQ-XAI-battery-analytics"
     },
     {
@@ -116,7 +160,13 @@
       "year": "2025",
       "summary": "Real-time computer vision inspection pipeline combining live frame-by-frame DeepLabV3+ResNet50 semantic segmentation with context-aware natural language captions.",
       "architecture": "Streams webcam video through a PyTorch DeepLabV3+ResNet50 backbone to overlay semantic pixel masks via OpenCV and NumPy, paired with the Hugging Face BLIP vision-language model for live scene captioning.",
-      "stack": ["Python", "PyTorch", "DeepLabV3+", "BLIP", "OpenCV"],
+      "stack": [
+        "Python",
+        "PyTorch",
+        "DeepLabV3+",
+        "BLIP",
+        "OpenCV"
+      ],
       "repoUrl": "https://github.com/elim316/real-time-cv-vlm-pipeline"
     },
     {
@@ -127,7 +177,12 @@
       "year": "2024",
       "summary": "Built for the NUS NCS Innovation Challenge 2024. Multimodal traffic intelligence system combining live camera feeds, vehicle detection, and LLM synthesis.",
       "architecture": "Chains YOLOv3 computer vision detection on traffic camera streams with time-series congestion modelling and LangChain LLM prompts to produce plain-English routing advisories.",
-      "stack": ["Python", "LangChain", "YOLOv3", "Computer Vision"],
+      "stack": [
+        "Python",
+        "LangChain",
+        "YOLOv3",
+        "Computer Vision"
+      ],
       "repoUrl": "https://github.com/elim316/TransportGPT"
     },
     {
@@ -138,7 +193,12 @@
       "year": "2024",
       "summary": "Industry collaboration case study building a centralised web dashboard to monitor and control commercial HVAC units across building zones.",
       "architecture": "Combines a Svelte frontend and Three.js interactive 3D floor-plan visualiser with a Node.js and WebSocket backend streaming live telemetry and energy consumption metrics.",
-      "stack": ["Svelte", "Three.js", "Node.js", "WebSockets"],
+      "stack": [
+        "Svelte",
+        "Three.js",
+        "Node.js",
+        "WebSockets"
+      ],
       "repoUrl": "https://github.com/elim316/Panasonic-HVAC-Dashboard-overview"
     },
     {
@@ -149,7 +209,13 @@
       "year": "2024",
       "summary": "Semifinalist at DSTA BrainHack 2024 (TIL-AI). Voice-commanded multimodal defence pipeline linking spoken mission orders to live aircraft bounding box detection.",
       "architecture": "Containerised pipeline integrating OpenAI Whisper real-time speech transcription, a custom-trained text-to-JSON NLP parser (>85% parsing accuracy), and Vision-Language Modelling (~80% aircraft bounding box alignment accuracy).",
-      "stack": ["Python", "OpenAI Whisper", "NLP (>85%)", "VLM", "Docker"],
+      "stack": [
+        "Python",
+        "OpenAI Whisper",
+        "NLP (>85%)",
+        "VLM",
+        "Docker"
+      ],
       "repoUrl": "https://github.com/elim316/TIL-AI-brainhack2024-project-overview"
     },
     {
@@ -160,7 +226,12 @@
       "year": "2024",
       "summary": "Collaborative Android note-sharing, flashcard, and study-group application built with Kotlin, Jetpack Compose, Firebase, and MVVM architecture.",
       "architecture": "Native Android client architected with Kotlin, Jetpack Compose declarative UI, and MVVM state management, backed by Firebase Authentication, Cloud Firestore real-time document sync, and Cloud Storage.",
-      "stack": ["Kotlin", "Jetpack Compose", "Firebase", "Android MVVM"],
+      "stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Firebase",
+        "Android MVVM"
+      ],
       "repoUrl": "https://github.com/elim316/OnlyNotes-Note-Sharing-Application"
     },
     {
@@ -171,7 +242,12 @@
       "year": "2025",
       "summary": "Interactive personal finance and budgeting analytics application built with Python and Streamlit to visualise cashflow, savings goals, and spending categories.",
       "architecture": "Data-driven Python and Streamlit web application that ingests personal transaction ledgers, computes category-level budget variance and savings projections, and renders interactive financial health dashboards.",
-      "stack": ["Python", "Streamlit", "Financial Analytics", "Data Visualisation"],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "Financial Analytics",
+        "Data Visualisation"
+      ],
       "repoUrl": "https://github.com/elim316/LobangCube-showcase"
     }
   ]
