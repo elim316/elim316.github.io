@@ -1,6 +1,6 @@
 # AGENT HANDOFF & CONTINUATION GUIDE (`elim316.github.io`)
 
-If you are an AI coding assistant (1P Google Gemini CLI / Antigravity / Jetski, or 3P Cursor, Claude Code, Windsurf, GitHub Copilot, OpenAI Codex, etc.) working on this repository for Elias Lim, follow this specification before making any changes. After completing your changes, keep `.github/copilot-instructions.md`, `.cursorrules`, and the hidden HTML comment block inside `README.md` synchronised so the next agent can pick up seamlessly where you left off.
+If you are an AI coding assistant (1P Google Gemini CLI / Antigravity / Antigravity, or 3P Cursor, Claude Code, Windsurf, GitHub Copilot, OpenAI Codex, etc.) working on this repository for Elias Lim, follow this specification before making any changes. After completing your changes, keep `.github/copilot-instructions.md`, `.cursorrules`, and the hidden HTML comment block inside `README.md` synchronised so the next agent can pick up seamlessly where you left off.
 
 ## 1. Owner Preferences & Editorial Rules (Strict)
 - Spelling: Always use British English spelling across all UI copy, comments, and documentation (e.g., visualiser, customisable, synchronised, centralised, personalise, modelling, defence, behaviour, colour).
@@ -49,7 +49,7 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-06
-- Asset version in `index.html`: `?v=20261007-23`
+- Asset version in `index.html`: `?v=20261007-24`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
   * Added 6 Apple-inspired visual and functional upgrades: (1) "Get the highlights." horizontal carousel (`#highlights-section`) at the top of `#featured`, (2) smooth-gliding macOS/iOS segmented pill indicators (`.seg-glide-pill`) on `#bento-compare-bar` (while `#filter-bar` uses `#filter-pill-bg`), (3) interactive `More details` / `Hide details` toggle (`.bezel-xray-btn` + `.bezel-xray-drawer`) inside all 6 hardware stage bezels, (4) live synced voice-over caption ribbon (`#stage-dock-teleprompter`) and `1x / 1.25x / 1.5x` speed toggle (`#stage-dock-speed-btn`) on `#apple-stage-dock`, (5) scroll-triggered counter roll-ups and bar fills (`initScrollCountUpAndBars()`), and (6) side-by-side "Compare systems." selector (`#compare-systems-box`) in `#projects`.
