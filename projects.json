@@ -41,7 +41,7 @@
   "projects": [
     {
       "id": "agent-tracer",
-      "title": "Jetski Agent Tracer Plugin",
+      "title": "Antigravity Agent Tracer Plugin",
       "category": "agentic",
       "categoryLabel": "Agentic & DevTools",
       "year": "2026",
@@ -53,11 +53,11 @@
         "SVG",
         "SSE / JSONL"
       ],
-      "repoUrl": "https://github.com/elim316/Jetski-Agent-Tracer-Plugin"
+      "repoUrl": "https://github.com/elim316/Antigravity-Agent-Tracer-Plugin"
     },
     {
-      "id": "jetski-harness",
-      "title": "Jetski Harness",
+      "id": "antigravity-harness",
+      "title": "Antigravity Harness",
       "category": "agentic",
       "categoryLabel": "Agentic & DevTools",
       "year": "2026",
@@ -69,7 +69,7 @@
         "JavaScript",
         "CSS Grid"
       ],
-      "repoUrl": "https://github.com/elim316/Jetski-Harness"
+      "repoUrl": "https://github.com/elim316/Antigravity-Harness"
     },
     {
       "id": "meeting-prep-agent",
@@ -85,7 +85,7 @@
         "Eval Harness",
         "Cron"
       ],
-      "repoUrl": "https://github.com/elim316/Jetski-Meeting-Prep-Agent"
+      "repoUrl": "https://github.com/elim316/Antigravity-Meeting-Prep-Agent"
     },
     {
       "id": "eduverse",
