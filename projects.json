@@ -6,7 +6,6 @@
       "elim316",
       "elim316.github.io",
       "CSC2106-IoT",
-      "real-time-cv-vlm-pipeline",
       "WeatherPredictor",
       "yolov6-object-detector",
       "Opencv-real-time-face-detection",
@@ -118,7 +117,7 @@
       "summary": "Real-time computer vision inspection pipeline combining live frame-by-frame DeepLabV3+ResNet50 semantic segmentation with context-aware natural language captions.",
       "architecture": "Streams webcam video through a PyTorch DeepLabV3+ResNet50 backbone to overlay semantic pixel masks via OpenCV and NumPy, paired with the Hugging Face BLIP vision-language model for live scene captioning.",
       "stack": ["Python", "PyTorch", "DeepLabV3+", "BLIP", "OpenCV"],
-      "repoUrl": "https://github.com/elim316/Semantic-Segmentation"
+      "repoUrl": "https://github.com/elim316/real-time-cv-vlm-pipeline"
     },
     {
       "id": "transport-gpt",
