@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://elim316.github.io; media-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none';"
+  />
   <title>Elias Lim | Software, Agentic AI &amp; Machine Learning Engineer</title>
   <meta
     name="description"
@@ -10,13 +14,6 @@
   />
   <meta name="author" content="Elias Lim" />
   <link rel="canonical" href="https://elim316.github.io/" />
-
-  <!-- Custom SVG Monogram Favicon -->
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231d1d1f'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='%23f5f5f7' font-family='-apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue, sans-serif' font-size='26' font-weight='600'%3EEL%3C/text%3E%3C/svg%3E"
-  />
 
   <!-- OpenGraph / LinkedIn / Social Sharing Metadata -->
   <meta property="og:type" content="website" />
@@ -66,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261007-21" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261007-22" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261007-21" />
+  <link rel="stylesheet" href="styles.css?v=20261007-22" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -1413,7 +1410,7 @@
               </div>
               <span class="award-project-link">MINDSync Suite &#8599;</span>
             </button>
-            <button type="button" class="award-row-btn" data-bento-target="#inspect-til-ai-air-defence">
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-operation-guardian">
               <div class="award-row-main">
                 <span class="award-rank-pill rank-amber">Semifinalist</span>
                 <span class="award-event-name">DSTA BrainHack 2024 (TIL-AI)</span>
@@ -1694,22 +1691,22 @@
     <div class="stage-dock-pill">
       <span class="stage-dock-caption" id="stage-dock-caption">01 / 06 BUILDER</span>
       <div class="stage-dock-dots" role="tablist" aria-label="Jump to stage">
-        <button type="button" class="stage-dock-dot active" data-dock-idx="0" aria-label="Stage 1: Builder Overview">
+        <button type="button" role="tab" aria-selected="true" class="stage-dock-dot active" data-dock-idx="0" aria-label="Stage 1: Builder Overview">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="1" aria-label="Stage 2: Engineering Profile">
+        <button type="button" role="tab" aria-selected="false" class="stage-dock-dot" data-dock-idx="1" aria-label="Stage 2: Engineering Profile">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="2" aria-label="Stage 3: Jumpgate Zero-Trust Landing Zone">
+        <button type="button" role="tab" aria-selected="false" class="stage-dock-dot" data-dock-idx="2" aria-label="Stage 3: Jumpgate Zero-Trust Landing Zone">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="3" aria-label="Stage 4: Agent Tracer &amp; Harness">
+        <button type="button" role="tab" aria-selected="false" class="stage-dock-dot" data-dock-idx="3" aria-label="Stage 4: Agent Tracer &amp; Harness">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="4" aria-label="Stage 5: Meeting Prep Dossier Agent">
+        <button type="button" role="tab" aria-selected="false" class="stage-dock-dot" data-dock-idx="4" aria-label="Stage 5: Meeting Prep Dossier Agent">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" class="stage-dock-dot" data-dock-idx="5" aria-label="Stage 6: Battery UQ &amp; XAI Research">
+        <button type="button" role="tab" aria-selected="false" class="stage-dock-dot" data-dock-idx="5" aria-label="Stage 6: Battery UQ &amp; XAI Research">
           <span class="stage-dot-fill"></span>
         </button>
       </div>
@@ -1849,7 +1846,7 @@
       class="cmd-dialog"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="cmd-input"
+      aria-label="Search repositories, research papers, or actions"
     >
       <div class="cmd-search-bar">
         <svg class="cmd-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1898,6 +1895,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261007-21"></script>
+  <script src="app.js?v=20261007-22"></script>
 </body>
 </html>
