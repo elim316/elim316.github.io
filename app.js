@@ -4,7 +4,7 @@
   const PROJECTS = [
     {
       id: "jumpgate-agentic-lz",
-      title: "Jumpgate · Zero-Trust Agentic AI Landing Zone & Vending Machine",
+      title: "Jumpgate: Zero-Trust Agentic AI Landing Zone & Vending Machine",
       category: "agentic",
       categoryLabel: "Agentic & Cloud Security",
       year: "2026",
@@ -240,7 +240,7 @@
     const readout = escapeHtml(
       p.readout ||
         (Array.isArray(p.stack) && p.stack.length
-          ? p.stack.slice(0, 3).join(" · ")
+          ? p.stack.slice(0, 3).join(", ")
           : "Live GitHub Repository")
     );
 
@@ -293,7 +293,7 @@
             <g class="clickable-node" data-jg="adlc">
               <rect class="trace-node node-accent" x="114" y="26" width="92" height="48" rx="8" />
               <text x="160" y="46" text-anchor="middle" class="visual-badge">14-STEP ADLC</text>
-              <text x="160" y="61" text-anchor="middle" class="visual-label">&lt; 3m · &gt;=0.85</text>
+              <text x="160" y="61" text-anchor="middle" class="visual-label">&lt; 3m, &gt;=0.85</text>
             </g>
             <g class="clickable-node" data-jg="egress">
               <rect class="trace-node" x="232" y="10" width="78" height="36" rx="6" />
@@ -326,27 +326,27 @@
             <path class="trace-packet" d="M 206 60 L 232 72" />
             <g class="clickable-node" data-step="user">
               <rect class="trace-node" x="10" y="32" width="74" height="36" rx="7" />
-              <text x="47" y="48" text-anchor="middle" class="visual-label">01 · PROMPT</text>
+              <text x="47" y="48" text-anchor="middle" class="visual-label">01: PROMPT</text>
               <text x="47" y="60" text-anchor="middle" class="deck-svg-label">12ms</text>
             </g>
             <g class="clickable-node is-selected" data-step="planner">
               <rect class="trace-node node-accent" x="114" y="28" width="92" height="44" rx="8" />
-              <text x="160" y="47" text-anchor="middle" class="visual-badge">02 · PLANNER</text>
-              <text x="160" y="61" text-anchor="middle" class="visual-label">LLM · 640ms</text>
+              <text x="160" y="47" text-anchor="middle" class="visual-badge">02: PLANNER</text>
+              <text x="160" y="61" text-anchor="middle" class="visual-label">LLM, 640ms</text>
             </g>
             <g class="clickable-node" data-step="mcp">
               <rect class="trace-node node-accent" x="232" y="10" width="78" height="34" rx="6" />
-              <text x="271" y="25" text-anchor="middle" class="visual-badge">03 · MCP</text>
+              <text x="271" y="25" text-anchor="middle" class="visual-badge">03: MCP</text>
               <text x="271" y="37" text-anchor="middle" class="deck-svg-label">310ms</text>
             </g>
             <g class="clickable-node" data-step="subagent">
               <rect class="trace-node" x="232" y="54" width="78" height="34" rx="6" />
-              <text x="271" y="69" text-anchor="middle" class="visual-label">04 · SUB</text>
+              <text x="271" y="69" text-anchor="middle" class="visual-label">04: SUB</text>
               <text x="271" y="81" text-anchor="middle" class="deck-svg-label">1.2s</text>
             </g>
           </svg>
           <div class="sandbox-bar" data-sandbox="agent-tracer">
-            <span class="sandbox-readout" id="readout-agent-tracer">Step #02 PLANNER · 640ms</span>
+            <span class="sandbox-readout" id="readout-agent-tracer">Step #02 PLANNER, 640ms</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-step-btn="user">#01 User</button>
               <button type="button" class="sandbox-pill active" data-step-btn="planner">#02 Plan</button>
@@ -364,11 +364,11 @@
               </clipPath>
             </defs>
             <rect x="18" y="6" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
-            <text x="87" y="19" text-anchor="middle" class="visual-badge">PANE 1 · AGENT CHAT</text>
+            <text x="87" y="19" text-anchor="middle" class="visual-badge">PANE 1: AGENT CHAT</text>
             <rect x="164" y="6" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="233" y="19" text-anchor="middle" class="visual-label">PANE 2 · SUBAGENT</text>
+            <text x="233" y="19" text-anchor="middle" class="visual-label">PANE 2: SUBAGENT</text>
             <rect x="18" y="30" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="87" y="43" text-anchor="middle" class="visual-label">PANE 3 · TRACE GRAPH</text>
+            <text x="87" y="43" text-anchor="middle" class="visual-label">PANE 3: TRACE GRAPH</text>
             <rect x="164" y="30" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
             <text x="233" y="43" text-anchor="middle" class="visual-badge" id="harness-rpc-status">71% Cached</text>
             <rect x="18" y="55" width="284" height="33" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
@@ -377,7 +377,7 @@
             <rect class="token-fill-bar" id="harness-token-bar" clip-path="url(#harness-bar-clip)" x="28" y="75" width="187" height="6" rx="3" fill="var(--accent)" />
           </svg>
           <div class="sandbox-bar" data-sandbox="jetski-harness">
-            <span class="sandbox-readout" id="readout-jetski-harness">142k / 200k · Healthy</span>
+            <span class="sandbox-readout" id="readout-jetski-harness">142k / 200k, Healthy</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-turn-btn="turn2">Turn 2</button>
               <button type="button" class="sandbox-pill active" data-turn-btn="turn8">Turn 8</button>
@@ -441,7 +441,7 @@
             <text x="254" y="90" text-anchor="middle" class="visual-label">NET</text>
           </svg>
           <div class="sandbox-bar">
-            <span class="sandbox-readout">PyTorch kt_models · Adaptive routing</span>
+            <span class="sandbox-readout">PyTorch kt_models, Adaptive routing</span>
             <span class="visual-badge">Next.js + Python</span>
           </div>
         `;
@@ -466,7 +466,7 @@
             </g>
           </svg>
           <div class="sandbox-bar">
-            <span class="sandbox-readout">4 roles · Real-time coverage &amp; CSV export</span>
+            <span class="sandbox-readout">4 roles, Real-time coverage &amp; CSV export</span>
             <span class="visual-badge">Supabase RLS</span>
           </div>
         `;
@@ -483,9 +483,9 @@
             <path class="trace-packet" d="M 202 48 L 228 68" />
 
             <rect class="trace-node" x="14" y="10" width="76" height="28" rx="6" />
-            <text x="52" y="27" text-anchor="middle" class="visual-label">TAB A · UI</text>
+            <text x="52" y="27" text-anchor="middle" class="visual-label">TAB A: UI</text>
             <rect class="trace-node" x="14" y="56" width="76" height="28" rx="6" />
-            <text x="52" y="73" text-anchor="middle" class="visual-label">TAB B · UI</text>
+            <text x="52" y="73" text-anchor="middle" class="visual-label">TAB B: UI</text>
 
             <rect class="trace-node node-accent" x="118" y="24" width="84" height="48" rx="9" />
             <text x="160" y="45" text-anchor="middle" class="visual-badge">SUPABASE</text>
@@ -510,7 +510,7 @@
             <circle class="trace-node node-accent" cx="190" cy="62" r="4.5" />
           </svg>
           <div class="sandbox-bar" data-sandbox="uq-xai">
-            <span class="sandbox-readout" id="readout-uq-xai">PICP: 0.952 · ECE: 0.012</span>
+            <span class="sandbox-readout" id="readout-uq-xai">PICP: 0.952, ECE: 0.012</span>
             <div class="sandbox-pills">
               <button type="button" class="sandbox-pill" data-ci-btn="90">90% ACI</button>
               <button type="button" class="sandbox-pill active" data-ci-btn="95">95% ACI</button>
@@ -523,11 +523,11 @@
           <svg class="visual-svg" viewBox="0 0 320 96" aria-hidden="true">
             <rect x="16" y="8" width="288" height="58" rx="8" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
             <polygon points="24,60 96,34 224,34 296,60" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.2" />
-            <text x="90" y="54" text-anchor="middle" class="visual-label">ROAD MASK · 98%</text>
+            <text x="90" y="54" text-anchor="middle" class="visual-label">ROAD MASK, 98%</text>
             <g class="yolo-box yb-1">
               <rect x="158" y="16" width="84" height="34" rx="5" fill="var(--bg-elevated)" stroke="var(--signal-teal)" stroke-width="1.5" />
               <text x="200" y="31" text-anchor="middle" class="visual-badge">DEEPLABV3+</text>
-              <text x="200" y="43" text-anchor="middle" class="deck-svg-label">Vehicle · 0.94</text>
+              <text x="200" y="43" text-anchor="middle" class="deck-svg-label">Vehicle, 0.94</text>
             </g>
             <rect x="16" y="71" width="288" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.1" />
             <text x="160" y="84" text-anchor="middle" class="visual-badge">BLIP CAPTION: &quot;Active vehicle on urban roadway&quot;</text>
@@ -565,7 +565,7 @@
             </g>
             <g class="iso-zone iz-top">
               <polygon points="160,14 244,40 160,66 76,40" fill="var(--accent-subtle)" stroke="var(--accent)" stroke-width="1.5" />
-              <text x="160" y="44" text-anchor="middle" class="visual-badge">ZONE A · 21.5°C</text>
+              <text x="160" y="44" text-anchor="middle" class="visual-badge">ZONE A: 21.5°C</text>
             </g>
             <text x="20" y="18" class="visual-label">3D FLOOR PLAN</text>
           </svg>
@@ -598,7 +598,7 @@
             </g>
           </svg>
           <div class="sandbox-bar">
-            <span class="sandbox-readout">Semifinalist · Whisper ASR + NLP JSON + VLM lock</span>
+            <span class="sandbox-readout">Semifinalist, Whisper ASR + NLP JSON + VLM lock</span>
             <span class="visual-badge">DSTA TIL-AI</span>
           </div>
         `;
@@ -682,7 +682,7 @@
         <div class="project-body">
           <div class="project-meta-line">
             <span class="project-category">${escapeHtml(getCategoryLabel(p.category, p.categoryLabel))}</span>
-            <span class="project-year">· ${escapeHtml(p.year || "2026")}</span>
+            <span class="project-year">${escapeHtml(p.year || "2026")}</span>
           </div>
           <h3 class="project-title">
             <a href="${escapeHtml(p.repoUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.title)}</a>
@@ -793,25 +793,25 @@
 
     const chapters = {
       google: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GOOGLE CLOUD SINGAPORE",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GOOGLE CLOUD SINGAPORE",
         bezelStatus: "APR 2026 TO PRESENT",
         paneLabel: "JUMPGATE DUAL-VPC LANDING ZONE & 14-STEP AGENT VENDING MACHINE",
-        paneBadge: "< 3 min · 32/32 IM8 · $1.96M ARR",
+        paneBadge: "< 3 min, 32/32 IM8, $1.96M ARR",
         readout: "Chapter 01 / 04",
         story:
           "At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup into under 3 minutes (passing 14/14 Ingress and 18/18 Egress security checks), driving $1.96M in realised public sector ARR (+$1.46M pipeline) and training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
         bar1Label: "Jumpgate Dual-VPC & IM8 Security Posture",
-        bar1Val: "< 3 min · 32 / 32 Checks",
+        bar1Val: "< 3 min, 32 / 32 Checks",
         bar1Width: "100%",
         bar2Label: "Public Sector ARR & Buildathon Reach",
-        bar2Val: "$1.96M ARR · 4,000+ Trained",
+        bar2Val: "$1.96M ARR, 4,000+ Trained",
         bar2Width: "95%",
       },
       grab: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · GRAB SINGAPORE",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GRAB SINGAPORE",
         bezelStatus: "JAN 2026 TO MAR 2026",
         paneLabel: "REAL-TIME FRAUD DETECTION & GOLANG RUNTIME CONTROLS",
-        paneBadge: "Golang · Feature Flags · PB-Scale",
+        paneBadge: "Golang, Feature Flags & PB-Scale",
         readout: "Chapter 02 / 04",
         story:
           "At Grab, I engineered scalable Golang backend services for real-time fraud detection on petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting, and high-coverage unit test suites.",
@@ -823,10 +823,10 @@
         bar2Width: "90%",
       },
       astar: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · A*STAR SINGAPORE",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, A*STAR SINGAPORE",
         bezelStatus: "SEP 2024 TO MAY 2025",
         paneLabel: "UNCERTAINTY-AWARE DEEP LEARNING & EXPLAINABLE AI",
-        paneBadge: "PyTorch · Conformal UQ · IEEE",
+        paneBadge: "PyTorch, Conformal UQ & IEEE",
         readout: "Chapter 03 / 04",
         story:
           "As an AI Research Intern at A*STAR, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 (IEEE Xplore).",
@@ -838,10 +838,10 @@
         bar2Width: "95%",
       },
       beyond: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE · EDUCATION, HACKATHONS & LIFE",
-        bezelStatus: "GLASGOW · SIT · SINGAPORE",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, EDUCATION, HACKATHONS & LIFE",
+        bezelStatus: "GLASGOW, SIT & SINGAPORE",
         paneLabel: "HONOURS COMPUTER SCIENCE, HACKATHONS & LIFE OUTSIDE CODE",
-        paneBadge: "BSc (Hons) CS · 3x Awards",
+        paneBadge: "BSc (Hons) CS, 3x Awards",
         readout: "Chapter 04 / 04",
         story:
           "I graduated with a BSc (Hons) in Computer Science (Second Upper Class) from the University of Glasgow and Singapore Institute of Technology, placing at NUS LifeHack, AISG, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
@@ -947,10 +947,10 @@
       const fJgStages = {
         vpc: {
           readout: "Dual-VPC: 14/14 Ingress & 18/18 Egress IM8 PASS",
-          badge: "14/14 IN · 18/18 OUT",
+          badge: "14/14 IN, 18/18 OUT",
           b1Val: "4 to 6 Weeks -> < 3 Min",
           b1Width: "100%",
-          b2Val: "14/14 Ingress · 18/18 Egress",
+          b2Val: "14/14 Ingress, 18/18 Egress",
           b2Width: "100%",
           b3Val: "$1.96M Realised + $1.46M Pipe",
           b3Width: "96%",
@@ -967,7 +967,7 @@
         },
         egress: {
           readout: "Egress VPC: SWP L7 + PSC Vertex AI (0 Bypasses)",
-          badge: "SWP L7 · PSC · DLP",
+          badge: "SWP L7, PSC & DLP",
           b1Val: "Private Service Connect (Vertex)",
           b1Width: "100%",
           b2Val: "Model Armor + DLP Redaction",
@@ -977,7 +977,7 @@
         },
         arr: {
           readout: "Public Sector: $1.96M Realised + $1.46M Pipeline ARR",
-          badge: "$1.96M ARR · 4,000+ TRAINED",
+          badge: "$1.96M ARR, 4,000+ TRAINED",
           b1Val: "$1.96M Realised Public Sector ARR",
           b1Width: "100%",
           b2Val: "+$1.46M Qualified Pipeline",
@@ -1041,10 +1041,10 @@
     }
 
     const tracerData = {
-      user: "Step #01 USER_INPUT · 12ms",
-      planner: "Step #02 PLANNER · 640ms",
-      mcp: "Step #03 CALL_MCP_TOOL · 310ms",
-      subagent: "Step #04 SUBAGENT · 1.2s",
+      user: "Step #01 USER_INPUT, 12ms",
+      planner: "Step #02 PLANNER, 640ms",
+      mcp: "Step #03 CALL_MCP_TOOL, 310ms",
+      subagent: "Step #04 SUBAGENT, 1.2s",
     };
 
     const fTracer = document.getElementById("flagship-tracer-sandbox");
@@ -1093,19 +1093,19 @@
           width: 74,
           color: "var(--signal-green)",
           label: "CONTEXT SATURATION: 48k / 200k TOKENS",
-          readout: "48k / 200k · 42% Cached",
+          readout: "48k / 200k, 42% Cached",
         },
         turn8: {
           width: 219,
           color: "var(--accent)",
           label: "CONTEXT SATURATION: 142k / 200k TOKENS",
-          readout: "142k / 200k · 71% Cached",
+          readout: "142k / 200k, 71% Cached",
         },
         turn14: {
           width: 302,
           color: "var(--signal-amber)",
           label: "CONTEXT SATURATION: 196k / 200k (AUTO-COMPACT)",
-          readout: "196k / 200k · Auto-Compact",
+          readout: "196k / 200k, Auto-Compact",
         },
       };
 
@@ -1149,7 +1149,7 @@
     if (fPrep) {
       const fPrepStages = {
         nbd: {
-          readout: "Stage 1 · 18:00 SGT Next-Business-Day Dossier",
+          readout: "Stage 1: 18:00 SGT Next-Business-Day Dossier",
           badge: "Multi-Corpus MCP",
           b1Val: "Calendar + People",
           b1Width: "92%",
@@ -1159,7 +1159,7 @@
           b3Width: "94%",
         },
         linter: {
-          readout: "Stage 2 · Hallucination Linter (36/36 Checks)",
+          readout: "Stage 2: Hallucination Linter (36/36 Checks)",
           badge: "Zero Hallucinated URLs",
           b1Val: "100% Grounded",
           b1Width: "100%",
@@ -1169,7 +1169,7 @@
           b3Width: "100%",
         },
         t1h: {
-          readout: "Stage 3 · Stateless T-1h Pre-Meeting Reminder",
+          readout: "Stage 3: Stateless T-1h Pre-Meeting Reminder",
           badge: "60-Min Window",
           b1Val: "Cited One-Pager",
           b1Width: "98%",
@@ -1239,7 +1239,7 @@
         "90": {
           scale: 0.68,
           title: "CONFORMAL BAND (90% ACI)",
-          readout: "PICP: 0.904 · ECE: 0.018",
+          readout: "PICP: 0.904, ECE: 0.018",
           b1Label: "Prediction Interval Coverage (PICP @ 90%)",
           b1Val: "90.4% Empirical",
           b1Width: "90%",
@@ -1251,7 +1251,7 @@
         "95": {
           scale: 1.0,
           title: "CONFORMAL BAND (95% ACI)",
-          readout: "PICP: 0.952 · ECE: 0.012",
+          readout: "PICP: 0.952, ECE: 0.012",
           b1Label: "Prediction Interval Coverage (PICP @ 95%)",
           b1Val: "95.2% Empirical",
           b1Width: "95%",
@@ -1263,7 +1263,7 @@
         "99": {
           scale: 1.38,
           title: "CONFORMAL BAND (99% ACI)",
-          readout: "PICP: 0.989 · ECE: 0.009",
+          readout: "PICP: 0.989, ECE: 0.009",
           b1Label: "Prediction Interval Coverage (PICP @ 99%)",
           b1Val: "98.9% Empirical",
           b1Width: "99%",
@@ -1371,10 +1371,10 @@
     }
 
     const tracerData = {
-      user: "Step #01 USER_INPUT · 12ms",
-      planner: "Step #02 PLANNER · 640ms",
-      mcp: "Step #03 CALL_MCP_TOOL · 310ms",
-      subagent: "Step #04 SUBAGENT · 1.2s",
+      user: "Step #01 USER_INPUT, 12ms",
+      planner: "Step #02 PLANNER, 640ms",
+      mcp: "Step #03 CALL_MCP_TOOL, 310ms",
+      subagent: "Step #04 SUBAGENT, 1.2s",
     };
 
     const tracerCard = document.getElementById("project-agent-tracer");
@@ -1413,21 +1413,21 @@
         color: "var(--signal-green)",
         label: "CONTEXT WINDOW: 48k / 200k TOKENS",
         rpc: "42% Cached",
-        readout: "48k / 200k · Fresh",
+        readout: "48k / 200k, Fresh",
       },
       turn8: {
         width: 187,
         color: "var(--accent)",
         label: "CONTEXT WINDOW: 142k / 200k TOKENS",
         rpc: "71% Cached",
-        readout: "142k / 200k · Healthy",
+        readout: "142k / 200k, Healthy",
       },
       turn14: {
         width: 259,
         color: "var(--signal-amber)",
         label: "CONTEXT WINDOW: 196k / 200k (AUTO-COMPACT)",
         rpc: "86% Cached",
-        readout: "196k / 200k · Compact",
+        readout: "196k / 200k, Compact",
       },
     };
 
@@ -1481,17 +1481,17 @@
       "90": {
         scale: 0.68,
         title: "90% ADAPTIVE CONFORMAL INTERVAL (ACI)",
-        readout: "PICP: 0.904 · ECE: 0.018",
+        readout: "PICP: 0.904, ECE: 0.018",
       },
       "95": {
         scale: 1.0,
         title: "95% ADAPTIVE CONFORMAL INTERVAL (ACI)",
-        readout: "PICP: 0.952 · ECE: 0.012",
+        readout: "PICP: 0.952, ECE: 0.012",
       },
       "99": {
         scale: 1.38,
         title: "99% ADAPTIVE CONFORMAL INTERVAL (ACI)",
-        readout: "PICP: 0.989 · ECE: 0.009",
+        readout: "PICP: 0.989, ECE: 0.009",
       },
     };
 
@@ -1935,7 +1935,7 @@
           minute: "2-digit",
           hour12: false,
         });
-        el.textContent = `Singapore · ${formatter.format(now)} SGT`;
+        el.textContent = `Singapore, ${formatter.format(now)} SGT`;
       } catch (_) {
         el.textContent = "Singapore (GMT+8)";
       }
@@ -2088,7 +2088,7 @@
       },
       ...PROJECTS.map((p) => ({
         title: p.title,
-        sub: `${p.categoryLabel} · ${p.stack.join(", ")}`,
+        sub: `${p.categoryLabel}, ${p.stack.join(", ")}`,
         badge: "Project",
         action: () => openCloserLookModal(p.id),
       })),
@@ -2258,9 +2258,20 @@
     const secRepoLinkEl = document.getElementById("closer-look-secondary-repo-link");
     const secRepoLabelEl = document.getElementById("closer-look-secondary-repo-label");
     const copyLabelEl = document.getElementById("closer-copy-link-label");
+    const listenBtnEl = document.getElementById("closer-look-listen-btn");
 
     if (eyebrowEl) {
-      eyebrowEl.textContent = `${getCategoryLabel(p.category, p.categoryLabel).toUpperCase()} · ${p.year || "2026"}`;
+      eyebrowEl.textContent = `${getCategoryLabel(p.category, p.categoryLabel).toUpperCase()}, ${p.year || "2026"}`;
+    }
+    if (listenBtnEl) {
+      const hasHumanAudio = [
+        "jumpgate-agentic-lz",
+        "agent-tracer",
+        "jetski-harness",
+        "meeting-prep-agent",
+        "uq-xai-battery",
+      ].includes(p.id);
+      listenBtnEl.style.display = hasHumanAudio ? "inline-flex" : "none";
     }
     if (counterEl) {
       counterEl.textContent = `${String(closerLookIdx + 1).padStart(2, "0")} / ${String(PROJECTS.length).padStart(2, "0")}`;
@@ -2391,49 +2402,49 @@
     const stageConfigs = [
       {
         id: "hero-stage",
-        label: "01 / 06 · BUILDER",
+        label: "01 / 06  BUILDER",
         projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-builder.mp3",
+        audioSrc: "audio/stage-builder.mp3?v=20261007-21",
         speechText:
           "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include the Jumpgate zero-trust AI landing zone delivering under three-minute provisioning and 1.96 million dollars in realised public sector recurring revenue, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
       },
       {
         id: "about",
-        label: "02 / 06 · PROFILE",
+        label: "02 / 06  PROFILE",
         projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-profile-google.mp3",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261007-21",
         speechText:
           "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses four to six weeks of infrastructure setup into under three minutes, passing all 14 Ingress and 18 Egress security checks. The platform has driven 1.96 million dollars in realised public sector recurring revenue with an additional 1.46 million dollar pipeline, alongside training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
       {
         id: "showcase-jumpgate",
-        label: "03 / 06 · JUMPGATE",
+        label: "03 / 06  JUMPGATE",
         projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-jumpgate.mp3",
+        audioSrc: "audio/stage-jumpgate.mp3?v=20261007-21",
         speechText:
           "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to Vertex AI in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
       },
       {
         id: "showcase-agent-tracer",
-        label: "04 / 06 · TRACER",
+        label: "04 / 06  TRACER",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-tracer.mp3",
+        audioSrc: "audio/stage-tracer.mp3?v=20261007-21",
         speechText:
           "Stage 4: Jetski Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
       },
       {
         id: "showcase-meeting-prep",
-        label: "05 / 06 · DOSSIER",
+        label: "05 / 06  DOSSIER",
         projectId: "meeting-prep-agent",
-        audioSrc: "audio/stage-dossier.mp3",
+        audioSrc: "audio/stage-dossier.mp3?v=20261007-21",
         speechText:
           "Stage 5: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
       },
       {
         id: "showcase-uq-xai",
-        label: "06 / 06 · RESEARCH",
+        label: "06 / 06  RESEARCH",
         projectId: "uq-xai-battery",
-        audioSrc: "audio/stage-research.mp3",
+        audioSrc: "audio/stage-research.mp3?v=20261007-21",
         speechText:
           "Stage 6: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
       },
@@ -2441,32 +2452,32 @@
 
     const aboutChapterAudio = {
       google: {
-        audioSrc: "audio/stage-profile-google.mp3",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261007-21",
         speechText: stageConfigs[1].speechText,
       },
       grab: {
-        audioSrc: "audio/stage-profile-grab.mp3",
+        audioSrc: "audio/stage-profile-grab.mp3?v=20261007-21",
         speechText:
           "About Elias Lim, Chapter 2: Backend Systems at Grab. At Grab in Singapore, I engineered scalable Golang backend microservices for real-time fraud detection across petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting controls, and high-coverage unit test suites.",
       },
       astar: {
-        audioSrc: "audio/stage-profile-astar.mp3",
+        audioSrc: "audio/stage-profile-astar.mp3?v=20261007-21",
         speechText:
           "About Elias Lim, Chapter 3: AI Research at A-STAR. As an AI Research Intern at A-STAR in Singapore, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 in IEEE Xplore.",
       },
       beyond: {
-        audioSrc: "audio/stage-profile-beyond.mp3",
+        audioSrc: "audio/stage-profile-beyond.mp3?v=20261007-21",
         speechText:
           "About Elias Lim, Chapter 4: Glasgow, SIT, and Life Outside Code. I graduated with a Bachelor of Science with Honours in Computer Science, Second Upper Class, from the University of Glasgow and Singapore Institute of Technology, winning awards at NUS LifeHack, AI Singapore, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
       },
     };
 
     const projectAudioMap = {
-      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3",
-      "agent-tracer": "audio/stage-tracer.mp3",
-      "jetski-harness": "audio/stage-tracer.mp3",
-      "meeting-prep-agent": "audio/stage-dossier.mp3",
-      "uq-xai-battery": "audio/stage-research.mp3",
+      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261007-21",
+      "agent-tracer": "audio/stage-tracer.mp3?v=20261007-21",
+      "jetski-harness": "audio/stage-tracer.mp3?v=20261007-21",
+      "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-21",
+      "uq-xai-battery": "audio/stage-research.mp3?v=20261007-21",
     };
 
     let activeStageIdx = 0;
@@ -2587,70 +2598,25 @@
       try {
         audioPlayer.pause();
       } catch (_) {}
-      if ("speechSynthesis" in window) {
-        try {
-          window.speechSynthesis.cancel();
-        } catch (_) {}
-      }
       setVoiceUiState(false);
     }
 
-    function speakFallbackWithWebSpeech(text) {
-      if (!("speechSynthesis" in window)) {
+    function playPayload(payload, forceRestart) {
+      if (!payload || !payload.audioSrc) {
         setVoiceUiState(false);
         return;
-      }
-      try {
-        window.speechSynthesis.cancel();
-        currentSentences = splitIntoSentences(text);
-        updateTeleprompterProgress(0);
-        const utter = new SpeechSynthesisUtterance(text);
-        utter.lang = "en-GB";
-        utter.rate = 0.98 * speedRates[currentSpeedIdx];
-        const voices = window.speechSynthesis.getVoices() || [];
-        const preferred =
-          voices.find(
-            (v) =>
-              /en[-_](GB|US|AU)/i.test(v.lang) &&
-              /(Natural|Neural|Google UK English Male|Daniel|Arthur|Ryan|Oliver|Premium)/i.test(
-                v.name
-              )
-          ) ||
-          voices.find((v) => /en[-_]GB/i.test(v.lang)) ||
-          voices.find((v) => /^en/i.test(v.lang));
-        if (preferred) utter.voice = preferred;
-        utter.onend = () => setVoiceUiState(false);
-        utter.onerror = () => setVoiceUiState(false);
-        setVoiceUiState(true);
-        setRingProgress(0.5);
-        window.speechSynthesis.speak(utter);
-      } catch (_) {
-        setVoiceUiState(false);
-      }
-    }
-
-    function playPayload(payload, forceRestart) {
-      if (!payload) return;
-      if ("speechSynthesis" in window) {
-        try {
-          window.speechSynthesis.cancel();
-        } catch (_) {}
       }
 
       currentSentences = splitIntoSentences(payload.speechText || "");
       updateTeleprompterProgress(0);
 
-      if (!payload.audioSrc) {
-        currentTrackKey = payload.key;
-        speakFallbackWithWebSpeech(payload.speechText);
-        return;
-      }
-
       if (!forceRestart && currentTrackKey === payload.key && audioPlayer.src) {
         audioPlayer.playbackRate = speedRates[currentSpeedIdx];
         setVoiceUiState(true);
-        audioPlayer.play().catch(() => {
-          speakFallbackWithWebSpeech(payload.speechText);
+        audioPlayer.play().catch((err) => {
+          if (err && err.name === "NotAllowedError") {
+            setVoiceUiState(false);
+          }
         });
         return;
       }
@@ -2660,8 +2626,10 @@
       audioPlayer.currentTime = 0;
       audioPlayer.playbackRate = speedRates[currentSpeedIdx];
       setVoiceUiState(true);
-      audioPlayer.play().catch(() => {
-        speakFallbackWithWebSpeech(payload.speechText);
+      audioPlayer.play().catch((err) => {
+        if (err && err.name === "NotAllowedError") {
+          setVoiceUiState(false);
+        }
       });
     }
 
@@ -2673,6 +2641,10 @@
     playProjectNarrationFn = (proj) => {
       if (!proj) return;
       const mappedAudio = projectAudioMap[proj.id] || "";
+      if (!mappedAudio) {
+        setVoiceUiState(false);
+        return;
+      }
       const text = `${proj.title}. ${proj.summary} ${proj.architecture || ""}`;
       playPayload(
         {
@@ -2795,7 +2767,7 @@
           fillEl.style.width = `${progressPct.toFixed(1)}%`;
           btn.setAttribute(
             "title",
-            `${stageConfigs[i]?.label || ""} · Est. ${currentReadEstimate.readingSeconds}s read + 10s (${remainingSec}s to next stage)`
+            `${stageConfigs[i]?.label || ""}, Est. ${currentReadEstimate.readingSeconds}s read + 10s (${remainingSec}s to next stage)`
           );
         } else {
           fillEl.style.width = "0%";
@@ -3333,45 +3305,45 @@
       "hero-stage": [
         {
           label: "RUNTIME & TRANSPORT",
-          val: "Go · Python · Connect-RPC",
+          val: "Go, Python & Connect-RPC",
           sub: "Streaming sidecar telemetry + Terraform Dual-VPC provisioning",
         },
         {
           label: "SECURITY POSTURE",
-          val: "IM8 Zero-Trust · 32/32",
+          val: "IM8 Zero-Trust, 32/32",
           sub: "14/14 Ingress runtime + 18/18 Egress static security gates",
         },
         {
           label: "EVALUATION GATE",
-          val: ">= 0.85 Judge · 36/36",
+          val: ">= 0.85 Judge, 36/36",
           sub: "Automated LLM-as-a-Judge + zero-hallucination URL linter",
         },
         {
           label: "PRODUCTION IMPACT",
-          val: "$1.96M ARR · < 3 min",
+          val: "$1.96M ARR, < 3 min",
           sub: "4,000+ engineers trained across GovTech, DBS, NTU & A*STAR",
         },
       ],
       about: [
         {
           label: "CLOUD ARCHITECTURE",
-          val: "Google · Singapore",
+          val: "Google Singapore",
           sub: "Jumpgate Dual-VPC landing zone & 14-step Vending Machine Agent",
         },
         {
           label: "HIGH-SCALE BACKEND",
-          val: "Grab · Singapore",
+          val: "Grab Singapore",
           sub: "Golang fraud detection services, feature flags & rate limiting",
         },
         {
           label: "APPLIED ML RESEARCH",
-          val: "A*STAR · Singapore",
+          val: "A*STAR Singapore",
           sub: "First-author IEEE Xplore conformal UQ & SHAP/LIME explainability",
         },
         {
           label: "HONOURS & DEGREE",
-          val: "Glasgow & SIT · 2:1",
-          sub: "2nd Place LifeHack 2025 · Overall Best AISG/SMU · DSTA Semifinalist",
+          val: "Glasgow & SIT (2:1)",
+          sub: "2nd Place LifeHack 2025, Overall Best AISG/SMU, DSTA Semifinalist",
         },
       ],
       "showcase-jumpgate": [
@@ -3448,18 +3420,18 @@
         },
         {
           label: "CALIBRATION METRICS",
-          val: "95.2% PICP · 0.012 ECE",
+          val: "95.2% PICP, 0.012 ECE",
           sub: "Verified across McMaster and Oxford battery degradation datasets",
         },
         {
           label: "EXPLAINABILITY SUITE",
-          val: "SHAP · LIME · IG",
+          val: "SHAP, LIME & IG",
           sub: "Consistent physical attribution across voltage, temp & capacity",
         },
         {
           label: "PUBLICATION VENUE",
-          val: "IEEE Xplore · 2025",
-          sub: "First Author · APSIPA ASC 2025 (Document 11249263)",
+          val: "IEEE Xplore (2025)",
+          sub: "First Author, APSIPA ASC 2025 (Document 11249263)",
         },
       ],
     };
