@@ -124,7 +124,7 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-08
-- Asset version in `index.html`: `?v=20261008-25`
+- Asset version in `index.html`: `?v=20261008-26`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
   * Upgraded `#about-hardware-deck` into a macOS browser window tab bar (`.browser-top-bar` + `.browser-tab-strip`) right beside the traffic-light dots with `Next tab ->` cycling, zero text truncation, concise chapter stories, floating frosted carousel scroll buttons (`#highlights-edge-prev` / `#highlights-edge-next`) on `#highlights-section`, and stage `↑` / `↓` quick-scroll buttons (`#stage-dock-prev-btn` / `#stage-dock-next-btn`) inside `#apple-stage-dock`.
