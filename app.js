@@ -836,18 +836,11 @@
         nextTabLabel: "Next tab: Grab \u2192",
         story:
           "Customer Engineer at Google Singapore architecting secure Cloud Run and Vertex AI systems, creator of Antigravity Agent Tracer, and technical lead for buildathons training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.",
-        ms1Key: "ROLE & FOCUS",
-        ms1Val: "Customer Engineer at Google Cloud Singapore",
-        ms2Key: "SYSTEMS BUILT",
-        ms2Val: "Antigravity Agent Tracer, 200k Harness & Dossier Eval",
-        ms3Key: "COMMUNITY IMPACT",
-        ms3Val: "4,000+ Engineers & Students Trained Across 4 Institutions",
-        bar1Label: "Agentic Observability & Evaluation Rigour",
-        bar1Val: "36 / 36 Checks",
-        bar1Width: "100%",
-        bar2Label: "Enterprise Workshops & Buildathon Reach",
-        bar2Val: "4,000+ Trained",
-        bar2Width: "95%",
+        tags: [
+          "Antigravity Tracer & 200k Harness",
+          "36 / 36 Dossier Eval Checks",
+          "4,000+ Engineers Trained",
+        ],
       },
       grab: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GRAB SINGAPORE",
@@ -858,18 +851,11 @@
         nextTabLabel: "Next tab: A*STAR \u2192",
         story:
           "Software Engineer Intern at Grab building high-throughput Golang microservices for real-time fraud detection across petabyte-scale risk pipelines with dynamic runtime controls.",
-        ms1Key: "BACKEND ENGINEERING",
-        ms1Val: "Software Engineer Intern (Trust, Identity & Safety)",
-        ms2Key: "RUNTIME CONTROLS",
-        ms2Val: "Dynamic Feature Flags, Rate Limiting & High Test Coverage",
-        ms3Key: "PRODUCTION SCALE",
-        ms3Val: "Low-Latency Risk Scoring Across Petabyte-Scale Pipelines",
-        bar1Label: "Golang Microservices & Runtime Controls",
-        bar1Val: "Feature Flags + Rate Limit",
-        bar1Width: "94%",
-        bar2Label: "Risk Platform Scale & Test Reliability",
-        bar2Val: "Petabyte-Scale Pipeline",
-        bar2Width: "90%",
+        tags: [
+          "Golang Microservices",
+          "Dynamic Feature Flags & Rate Limits",
+          "Petabyte-Scale Risk Pipeline",
+        ],
       },
       astar: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, A*STAR SINGAPORE",
@@ -880,18 +866,11 @@
         nextTabLabel: "Next tab: Glasgow & Life \u2192",
         story:
           "AI Research Intern at A*STAR designing an uncertainty-aware deep learning and SHAP/LIME explainability framework for battery analytics, published as first author in IEEE Xplore.",
-        ms1Key: "FIRST-AUTHOR PUBLICATION",
-        ms1Val: "APSIPA ASC 2025 Paper in IEEE Xplore (Doc 11249263)",
-        ms2Key: "CALIBRATION ACCURACY",
-        ms2Val: "95.2% Empirical Coverage (0.012 ECE) via Conformal Inference",
-        ms3Key: "EXPLAINABLE AI",
-        ms3Val: "Unified SHAP, LIME & Physical Degradation Attribution",
-        bar1Label: "Calibrated Prediction Coverage (1 - alpha)",
-        bar1Val: "95.2% Empirical Coverage",
-        bar1Width: "95%",
-        bar2Label: "Publication & Interpretability Rigour",
-        bar2Val: "First-Author IEEE Paper",
-        bar2Width: "95%",
+        tags: [
+          "1st Author IEEE Xplore (APSIPA 2025)",
+          "95.2% Conformal Coverage (0.012 ECE)",
+          "SHAP & LIME Explainability",
+        ],
       },
       beyond: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, EDUCATION & LIFE",
@@ -902,18 +881,11 @@
         nextTabLabel: "Next tab: Google Cloud \u2192",
         story:
           "BSc (Hons) Computer Science (Second Upper Class) graduate from the University of Glasgow and SIT, 3x national hackathon award winner, and avid basketball and pickleball player.",
-        ms1Key: "UNIVERSITY HONOURS",
-        ms1Val: "BSc (Hons) Computer Science (2:1), Glasgow & SIT",
-        ms2Key: "NATIONAL HACKATHONS",
-        ms2Val: "2nd Place NUS LifeHack 2025, AISG Overall Best & DSTA TIL-AI",
-        ms3Key: "OUTSIDE THE TERMINAL",
-        ms3Val: "Basketball, Pickleball Courts & Vintage Thrifting",
-        bar1Label: "National Hackathons & Applied Prototypes",
-        bar1Val: "3x Award Winner / Finalist",
-        bar1Width: "93%",
-        bar2Label: "Life Outside Code (Basketball, Pickleball, Thrift)",
-        bar2Val: "Always Active",
-        bar2Width: "100%",
+        tags: [
+          "BSc (Hons) Computer Science (2:1)",
+          "3x National Hackathon Awards",
+          "Basketball, Pickleball & Thrifting",
+        ],
       },
     };
 
@@ -930,19 +902,9 @@
     const readoutEl = document.getElementById("about-active-pill-readout");
     const storyEl = document.getElementById("about-live-story");
 
-    const ms1KeyEl = document.getElementById("about-ms1-key");
-    const ms1ValEl = document.getElementById("about-ms1-val");
-    const ms2KeyEl = document.getElementById("about-ms2-key");
-    const ms2ValEl = document.getElementById("about-ms2-val");
-    const ms3KeyEl = document.getElementById("about-ms3-key");
-    const ms3ValEl = document.getElementById("about-ms3-val");
-
-    const bar1LabelEl = document.getElementById("about-bar1-label");
-    const bar1ValEl = document.getElementById("about-bar1-val");
-    const bar1FillEl = document.getElementById("about-bar1-fill");
-    const bar2LabelEl = document.getElementById("about-bar2-label");
-    const bar2ValEl = document.getElementById("about-bar2-val");
-    const bar2FillEl = document.getElementById("about-bar2-fill");
+    const tag1El = document.getElementById("about-tag-1");
+    const tag2El = document.getElementById("about-tag-2");
+    const tag3El = document.getElementById("about-tag-3");
 
     const order = ["google", "grab", "astar", "beyond"];
     let currentIdx = 0;
@@ -977,19 +939,11 @@
       if (storyEl) storyEl.textContent = data.story;
       if (nextTabLabelEl && data.nextTabLabel) nextTabLabelEl.textContent = data.nextTabLabel;
 
-      if (ms1KeyEl && data.ms1Key) ms1KeyEl.textContent = data.ms1Key;
-      if (ms1ValEl && data.ms1Val) ms1ValEl.textContent = data.ms1Val;
-      if (ms2KeyEl && data.ms2Key) ms2KeyEl.textContent = data.ms2Key;
-      if (ms2ValEl && data.ms2Val) ms2ValEl.textContent = data.ms2Val;
-      if (ms3KeyEl && data.ms3Key) ms3KeyEl.textContent = data.ms3Key;
-      if (ms3ValEl && data.ms3Val) ms3ValEl.textContent = data.ms3Val;
-
-      if (bar1LabelEl) bar1LabelEl.textContent = data.bar1Label;
-      if (bar1ValEl) bar1ValEl.textContent = data.bar1Val;
-      if (bar1FillEl) bar1FillEl.style.width = data.bar1Width;
-      if (bar2LabelEl) bar2LabelEl.textContent = data.bar2Label;
-      if (bar2ValEl) bar2ValEl.textContent = data.bar2Val;
-      if (bar2FillEl) bar2FillEl.style.width = data.bar2Width;
+      if (Array.isArray(data.tags)) {
+        if (tag1El && data.tags[0]) tag1El.textContent = data.tags[0];
+        if (tag2El && data.tags[1]) tag2El.textContent = data.tags[1];
+        if (tag3El && data.tags[2]) tag3El.textContent = data.tags[2];
+      }
     }
 
     function stopAutoCycle() {
