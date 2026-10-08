@@ -916,10 +916,33 @@ textarea {
   box-shadow: 0 2px 7px rgba(15, 23, 42, 0.08);
 }
 
+.browser-single-pane {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 20px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .about-svg-stage {
   position: relative;
   width: 100%;
-  min-height: 118px;
+  min-height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.browser-single-pane .hero-deck-svg {
+  height: 136px;
+  max-width: 580px;
+  margin: 0 auto;
 }
 
 .about-scene {
@@ -933,59 +956,37 @@ textarea {
 }
 
 .about-live-story {
-  font-size: 0.84rem;
-  line-height: 1.54;
+  font-size: 0.92rem;
+  line-height: 1.56;
   color: var(--text-secondary);
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
   transition: opacity 220ms var(--ease-smooth);
 }
 
-.about-milestone-list {
+.browser-single-footer {
   display: flex;
-  flex-direction: column;
-  gap: 7px;
-  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.about-milestone-row {
+.about-inline-tags {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 8px 11px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
-}
-
-.milestone-key {
-  font-size: 0.61rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--accent-text);
-  text-transform: uppercase;
-}
-
-.milestone-val {
-  font-size: 0.78rem;
-  font-weight: 550;
-  color: var(--text-primary);
-  line-height: 1.38;
-}
-
-.about-bars {
-  margin-top: 2px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 }
 
 .about-pane-actions {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
   gap: 8px;
-  padding-top: 6px;
-  border-top: 1px solid var(--border-subtle);
+  margin-left: auto;
 }
 
 .about-next-tab-btn,
