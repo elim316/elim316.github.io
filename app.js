@@ -830,11 +830,18 @@
         */
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GOOGLE CLOUD SINGAPORE",
         bezelStatus: "APR 2026 TO PRESENT",
-        paneLabel: "CLOUD RUN, VERTEX AI & MULTI-AGENT ORCHESTRATION",
-        paneBadge: "Cloud & AI, 4,000+ Trained",
-        readout: "Chapter 01 / 04",
+        paneLabel: "CLOUD RUN, VERTEX AI & AGENT TOOLING",
+        paneBadge: "Google Singapore",
+        readout: "Tab 01 / 04",
+        nextTabLabel: "Next tab: Grab \u2192",
         story:
-          "At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
+          "Customer Engineer at Google Singapore architecting secure Cloud Run and Vertex AI systems, creator of Antigravity Agent Tracer, and technical lead for buildathons training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.",
+        ms1Key: "ROLE & FOCUS",
+        ms1Val: "Customer Engineer at Google Cloud Singapore",
+        ms2Key: "SYSTEMS BUILT",
+        ms2Val: "Antigravity Agent Tracer, 200k Harness & Dossier Eval",
+        ms3Key: "COMMUNITY IMPACT",
+        ms3Val: "4,000+ Engineers & Students Trained Across 4 Institutions",
         bar1Label: "Agentic Observability & Evaluation Rigour",
         bar1Val: "36 / 36 Checks",
         bar1Width: "100%",
@@ -845,11 +852,18 @@
       grab: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GRAB SINGAPORE",
         bezelStatus: "JAN 2026 TO MAR 2026",
-        paneLabel: "REAL-TIME FRAUD DETECTION & GOLANG RUNTIME CONTROLS",
-        paneBadge: "Golang, Feature Flags & PB-Scale",
-        readout: "Chapter 02 / 04",
+        paneLabel: "GOLANG MICROSERVICES & RISK ENGINE",
+        paneBadge: "Grab Singapore",
+        readout: "Tab 02 / 04",
+        nextTabLabel: "Next tab: A*STAR \u2192",
         story:
-          "At Grab, I engineered scalable Golang backend services for real-time fraud detection on petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting, and high-coverage unit test suites.",
+          "Software Engineer Intern at Grab building high-throughput Golang microservices for real-time fraud detection across petabyte-scale risk pipelines with dynamic runtime controls.",
+        ms1Key: "BACKEND ENGINEERING",
+        ms1Val: "Software Engineer Intern (Trust, Identity & Safety)",
+        ms2Key: "RUNTIME CONTROLS",
+        ms2Val: "Dynamic Feature Flags, Rate Limiting & High Test Coverage",
+        ms3Key: "PRODUCTION SCALE",
+        ms3Val: "Low-Latency Risk Scoring Across Petabyte-Scale Pipelines",
         bar1Label: "Golang Microservices & Runtime Controls",
         bar1Val: "Feature Flags + Rate Limit",
         bar1Width: "94%",
@@ -860,26 +874,40 @@
       astar: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, A*STAR SINGAPORE",
         bezelStatus: "SEP 2024 TO MAY 2025",
-        paneLabel: "UNCERTAINTY-AWARE DEEP LEARNING & EXPLAINABLE AI",
-        paneBadge: "PyTorch, Conformal UQ & IEEE",
-        readout: "Chapter 03 / 04",
+        paneLabel: "CONFORMAL PREDICTION & EXPLAINABLE AI",
+        paneBadge: "A*STAR Singapore",
+        readout: "Tab 03 / 04",
+        nextTabLabel: "Next tab: Glasgow & Life \u2192",
         story:
-          "As an AI Research Intern at A*STAR, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 (IEEE Xplore).",
+          "AI Research Intern at A*STAR designing an uncertainty-aware deep learning and SHAP/LIME explainability framework for battery analytics, published as first author in IEEE Xplore.",
+        ms1Key: "FIRST-AUTHOR PUBLICATION",
+        ms1Val: "APSIPA ASC 2025 Paper in IEEE Xplore (Doc 11249263)",
+        ms2Key: "CALIBRATION ACCURACY",
+        ms2Val: "95.2% Empirical Coverage (0.012 ECE) via Conformal Inference",
+        ms3Key: "EXPLAINABLE AI",
+        ms3Val: "Unified SHAP, LIME & Physical Degradation Attribution",
         bar1Label: "Calibrated Prediction Coverage (1 - alpha)",
-        bar1Val: "90.4% Empirical Coverage",
-        bar1Width: "91%",
+        bar1Val: "95.2% Empirical Coverage",
+        bar1Width: "95%",
         bar2Label: "Publication & Interpretability Rigour",
         bar2Val: "First-Author IEEE Paper",
         bar2Width: "95%",
       },
       beyond: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, EDUCATION, HACKATHONS & LIFE",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, EDUCATION & LIFE",
         bezelStatus: "GLASGOW, SIT & SINGAPORE",
-        paneLabel: "HONOURS COMPUTER SCIENCE, HACKATHONS & LIFE OUTSIDE CODE",
-        paneBadge: "BSc (Hons) CS, 3x Awards",
-        readout: "Chapter 04 / 04",
+        paneLabel: "HONOURS CS, HACKATHONS & COURT SPORTS",
+        paneBadge: "Glasgow & SIT (2:1)",
+        readout: "Tab 04 / 04",
+        nextTabLabel: "Next tab: Google Cloud \u2192",
         story:
-          "I graduated with a BSc (Hons) in Computer Science (Second Upper Class) from the University of Glasgow and Singapore Institute of Technology, placing at NUS LifeHack, AISG, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
+          "BSc (Hons) Computer Science (Second Upper Class) graduate from the University of Glasgow and SIT, 3x national hackathon award winner, and avid basketball and pickleball player.",
+        ms1Key: "UNIVERSITY HONOURS",
+        ms1Val: "BSc (Hons) Computer Science (2:1), Glasgow & SIT",
+        ms2Key: "NATIONAL HACKATHONS",
+        ms2Val: "2nd Place NUS LifeHack 2025, AISG Overall Best & DSTA TIL-AI",
+        ms3Key: "OUTSIDE THE TERMINAL",
+        ms3Val: "Basketball, Pickleball Courts & Vintage Thrifting",
         bar1Label: "National Hackathons & Applied Prototypes",
         bar1Val: "3x Award Winner / Finalist",
         bar1Width: "93%",
@@ -892,6 +920,8 @@
     const tabBtns = aboutStage.querySelectorAll("[data-about-tab]");
     const cardBtns = aboutStage.querySelectorAll("[data-about-card]");
     const scenes = aboutStage.querySelectorAll("[data-about-scene]");
+    const nextTabBtn = document.getElementById("about-next-tab-btn");
+    const nextTabLabelEl = document.getElementById("about-next-tab-label");
 
     const bezelTitleEl = document.getElementById("about-bezel-title");
     const bezelStatusEl = document.getElementById("about-bezel-status");
@@ -899,6 +929,13 @@
     const paneBadgeEl = document.getElementById("about-pane-badge");
     const readoutEl = document.getElementById("about-active-pill-readout");
     const storyEl = document.getElementById("about-live-story");
+
+    const ms1KeyEl = document.getElementById("about-ms1-key");
+    const ms1ValEl = document.getElementById("about-ms1-val");
+    const ms2KeyEl = document.getElementById("about-ms2-key");
+    const ms2ValEl = document.getElementById("about-ms2-val");
+    const ms3KeyEl = document.getElementById("about-ms3-key");
+    const ms3ValEl = document.getElementById("about-ms3-val");
 
     const bar1LabelEl = document.getElementById("about-bar1-label");
     const bar1ValEl = document.getElementById("about-bar1-val");
@@ -938,6 +975,14 @@
       if (paneBadgeEl) paneBadgeEl.textContent = data.paneBadge;
       if (readoutEl) readoutEl.textContent = data.readout;
       if (storyEl) storyEl.textContent = data.story;
+      if (nextTabLabelEl && data.nextTabLabel) nextTabLabelEl.textContent = data.nextTabLabel;
+
+      if (ms1KeyEl && data.ms1Key) ms1KeyEl.textContent = data.ms1Key;
+      if (ms1ValEl && data.ms1Val) ms1ValEl.textContent = data.ms1Val;
+      if (ms2KeyEl && data.ms2Key) ms2KeyEl.textContent = data.ms2Key;
+      if (ms2ValEl && data.ms2Val) ms2ValEl.textContent = data.ms2Val;
+      if (ms3KeyEl && data.ms3Key) ms3KeyEl.textContent = data.ms3Key;
+      if (ms3ValEl && data.ms3Val) ms3ValEl.textContent = data.ms3Val;
 
       if (bar1LabelEl) bar1LabelEl.textContent = data.bar1Label;
       if (bar1ValEl) bar1ValEl.textContent = data.bar1Val;
@@ -961,6 +1006,14 @@
         if (key) selectChapter(key);
       });
     });
+
+    if (nextTabBtn) {
+      nextTabBtn.addEventListener("click", () => {
+        stopAutoCycle();
+        currentIdx = (currentIdx + 1) % order.length;
+        selectChapter(order[currentIdx]);
+      });
+    }
 
     cardBtns.forEach((card) => {
       card.addEventListener("click", () => {
@@ -2892,6 +2945,29 @@
       });
     });
 
+    const dockPrevBtn = document.getElementById("stage-dock-prev-btn");
+    const dockNextBtn = document.getElementById("stage-dock-next-btn");
+    if (dockPrevBtn) {
+      dockPrevBtn.addEventListener("click", () => {
+        const prevIdx = (activeStageIdx - 1 + stageConfigs.length) % stageConfigs.length;
+        const target = stageConfigs[prevIdx] ? document.getElementById(stageConfigs[prevIdx].id) : null;
+        resetStageReadTimer(false);
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+    if (dockNextBtn) {
+      dockNextBtn.addEventListener("click", () => {
+        if (activeStageIdx < stageConfigs.length - 1) {
+          const nextIdx = activeStageIdx + 1;
+          const target = stageConfigs[nextIdx] ? document.getElementById(stageConfigs[nextIdx].id) : null;
+          resetStageReadTimer(false);
+          if (target) target.scrollIntoView({ behavior: "smooth" });
+        } else {
+          document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    }
+
     document
       .querySelectorAll(
         "#about [data-about-tab], #about [data-about-card], [data-fjg-btn], [data-fstep-btn], [data-fturn-btn], [data-fprep-btn], [data-fci-btn]"
@@ -3248,11 +3324,20 @@
       }, 460);
     }
 
+    const edgePrevBtn = document.getElementById("highlights-edge-prev");
+    const edgeNextBtn = document.getElementById("highlights-edge-next");
+
     if (prevBtn) {
       prevBtn.addEventListener("click", () => scrollToCard(activeIdx - 1));
     }
     if (nextBtn) {
       nextBtn.addEventListener("click", () => scrollToCard(activeIdx + 1));
+    }
+    if (edgePrevBtn) {
+      edgePrevBtn.addEventListener("click", () => scrollToCard(activeIdx - 1));
+    }
+    if (edgeNextBtn) {
+      edgeNextBtn.addEventListener("click", () => scrollToCard(activeIdx + 1));
     }
     dots.forEach((dot) => {
       dot.addEventListener("click", () => {
