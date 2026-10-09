@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261009-27" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261009-28" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261009-27" />
+  <link rel="stylesheet" href="styles.css?v=20261009-28" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -82,8 +82,8 @@
       </a>
 
       <nav class="nav-links" id="nav-dock" aria-label="Primary Navigation">
-        <a href="#top" class="nav-link active" data-section="top" id="nav-overview">Overview</a>
-        <a href="#about" class="nav-link" data-section="about" id="nav-about">About</a>
+        <a href="#top" class="nav-link active" data-section="top" id="nav-overview">Profile</a>
+        <a href="#hero-stage" class="nav-link" data-section="about" id="nav-about">Builder</a>
         <a href="#featured" class="nav-link" data-section="featured" id="nav-featured">Featured Repos</a>
         <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">All Projects</a>
         <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Experience</a>
@@ -119,16 +119,17 @@
 
   <main id="top">
     <!-- ======================================================================
-         1. Initial Landing Hero Stage (Light Mode, Scroll-Animated Repo Preview)
+         1. Initial Landing Hero Stage (#about - PROFILE First)
+            (Light Mode, Scroll-Animated Career & Education Browser Window)
          ====================================================================== -->
-    <section class="hero-stage" id="hero-stage" data-section-target="top">
+    <section class="hero-stage" id="about" data-section-target="top">
       <div class="hero-copy">
         <span class="hero-eyebrow reveal-hero" style="--d: 20ms">
           CLOUD &amp; AI ENGINEER AT GOOGLE SINGAPORE
         </span>
         <h1 class="hero-headline reveal-hero" style="--d: 80ms">Elias Lim</h1>
         <p class="hero-subhead reveal-hero" style="--d: 140ms">
-          Cloud and AI engineer building secure cloud platforms, fast Go and Python backend services, reliable machine learning models, and practical AI developer tools.
+          First-Class / Second Upper Honours Computer Science graduate building secure cloud platforms, fast Go and Python backend services, reliable machine learning models, and practical AI developer tools across Google, Grab, and A*STAR.
         </p>
 
         <div class="cta-pill-group reveal-hero" style="--d: 200ms">
@@ -136,8 +137,8 @@
             <span>Browse projects</span>
             <span aria-hidden="true">&#8595;</span>
           </a>
-          <a href="#about" class="apple-pill outline" id="hero-about-btn">
-            <span>About me</span>
+          <a href="#hero-stage" class="apple-pill outline" id="hero-about-btn">
+            <span>Systems preview</span>
             <span aria-hidden="true">&#8595;</span>
           </a>
           <a
@@ -182,166 +183,10 @@
       <!-- Sculpted Metallic Backdrop Typography + Unified macOS Browser Window Stage -->
       <div class="hero-visual-stage reveal-hero" style="--d: 280ms">
         <div class="metallic-wordmark" id="hero-wordmark" aria-hidden="true">
-          BUILDER
-        </div>
-
-        <div class="hardware-deck" id="hero-hardware-deck">
-          <div class="hardware-bezel browser-window-bezel">
-            <div class="bezel-top-bar browser-top-bar">
-              <div class="bezel-dots" aria-hidden="true">
-                <span></span><span></span><span></span>
-              </div>
-
-              <div class="browser-tab-strip" id="hero-browser-tabs" role="tablist" aria-label="Featured system browser tabs">
-                <button type="button" class="browser-tab active" data-hero-tab="tracer" role="tab" aria-selected="true">
-                  <span>Agent Tracer</span>
-                </button>
-                <button type="button" class="browser-tab" data-hero-tab="research" role="tab" aria-selected="false">
-                  <span>Battery &amp; Medical AI</span>
-                </button>
-                <button type="button" class="browser-tab" data-hero-tab="dossier" role="tab" aria-selected="false">
-                  <span>Meeting Dossier</span>
-                </button>
-              </div>
-            </div>
-
-            <div class="browser-single-pane">
-              <div class="pane-header">
-                <span class="pane-label" id="hero-pane-label">ANTIGRAVITY AGENT TRACER &amp; WORKSPACE</span>
-                <span class="pane-badge" id="hero-pane-badge">Live Step Visualiser</span>
-              </div>
-
-              <div class="about-svg-stage" id="hero-svg-stage">
-                <!-- Tab 01: Agent Tracer -->
-                <svg class="hero-deck-svg about-scene is-active" data-hero-scene="tracer" viewBox="0 0 380 120" aria-hidden="true">
-                  <path class="trace-edge" d="M 96 54 L 136 54" />
-                  <path class="trace-edge" d="M 244 44 L 274 34" />
-                  <path class="trace-edge" d="M 244 64 L 274 76" />
-                  <path class="trace-packet hero-stream" d="M 96 54 L 136 54" />
-                  <path class="trace-packet hero-stream" d="M 244 44 L 274 34" />
-                  <path class="trace-packet hero-stream" d="M 244 64 L 274 76" />
-
-                  <rect class="deck-node" x="12" y="34" width="84" height="40" rx="8" />
-                  <text x="54" y="51" text-anchor="middle" class="visual-label">01: PROMPT</text>
-                  <text x="54" y="64" text-anchor="middle" class="deck-svg-label">User Input</text>
-
-                  <rect class="deck-node active-ring" x="136" y="30" width="108" height="48" rx="9" />
-                  <text x="190" y="50" text-anchor="middle" class="visual-badge">02: AI PLANNER</text>
-                  <text x="190" y="65" text-anchor="middle" class="visual-label">Reasoning, 640ms</text>
-
-                  <rect class="deck-node active-ring" x="274" y="14" width="94" height="36" rx="7" />
-                  <text x="321" y="30" text-anchor="middle" class="visual-badge">03: TOOL CALL</text>
-                  <text x="321" y="42" text-anchor="middle" class="deck-svg-label">Search, 310ms</text>
-
-                  <rect class="deck-node" x="274" y="58" width="94" height="36" rx="7" />
-                  <text x="321" y="74" text-anchor="middle" class="visual-label">04: SUBAGENT</text>
-                  <text x="321" y="86" text-anchor="middle" class="deck-svg-label">Verify, 1.2s</text>
-
-                  <text x="190" y="112" text-anchor="middle" class="deck-svg-sub">Shows every prompt, reasoning step, tool call &amp; subagent live</text>
-                </svg>
-
-                <!-- Tab 02: Battery & Medical AI -->
-                <svg class="hero-deck-svg about-scene" data-hero-scene="research" viewBox="0 0 380 120" aria-hidden="true">
-                  <path class="trace-edge" d="M 104 34 L 138 34" />
-                  <path class="trace-edge" d="M 242 34 L 276 34" />
-                  <path class="trace-packet hero-stream" d="M 104 34 L 138 34" />
-                  <path class="trace-packet hero-stream" d="M 242 34 L 276 34" />
-                  <rect class="deck-node" x="16" y="16" width="88" height="36" rx="7" />
-                  <text x="60" y="31" text-anchor="middle" class="visual-label">01: SENSORS</text>
-                  <text x="60" y="43" text-anchor="middle" class="deck-svg-label">Charge Cycles</text>
-                  <rect class="deck-node active-ring" x="138" y="14" width="104" height="40" rx="8" />
-                  <text x="190" y="31" text-anchor="middle" class="visual-badge">02: CONFIDENCE</text>
-                  <text x="190" y="44" text-anchor="middle" class="visual-label">95.2% Accuracy</text>
-                  <rect class="deck-node active-ring" x="276" y="16" width="88" height="36" rx="7" />
-                  <text x="320" y="31" text-anchor="middle" class="visual-badge">03: EXPLAINER</text>
-                  <text x="320" y="43" text-anchor="middle" class="deck-svg-label">Voltage &amp; Heat</text>
-                  <path
-                    class="ci-band"
-                    d="M 24 62 Q 130 68, 225 78 T 356 88 L 356 100 Q 225 90, 130 80 T 24 74 Z"
-                    fill="var(--accent)"
-                  />
-                  <path
-                    d="M 24 68 Q 130 74, 225 84 T 356 94"
-                    fill="none"
-                    stroke="var(--accent)"
-                    stroke-width="2.2"
-                  />
-                  <path class="trace-packet hero-stream" d="M 24 68 Q 130 74, 225 84 T 356 94" />
-                  <circle class="deck-node active-ring" cx="130" cy="74" r="4.5" />
-                  <circle class="deck-node active-ring" cx="225" cy="84" r="4.5" />
-                  <text x="190" y="113" text-anchor="middle" class="deck-svg-sub">First-author IEEE paper predicting battery health with clear error bounds</text>
-                </svg>
-
-                <!-- Tab 03: Meeting Dossier -->
-                <svg class="hero-deck-svg about-scene" data-hero-scene="dossier" viewBox="0 0 380 120" aria-hidden="true">
-                  <path class="trace-edge" d="M 108 56 L 134 56" />
-                  <path class="trace-edge" d="M 246 56 L 272 56" />
-                  <path class="trace-packet hero-stream" d="M 108 56 L 134 56" />
-                  <path class="trace-packet hero-stream" d="M 246 56 L 272 56" />
-                  <rect class="deck-node" x="14" y="28" width="94" height="56" rx="8" />
-                  <text x="61" y="51" text-anchor="middle" class="visual-label">01: GATHER</text>
-                  <text x="61" y="66" text-anchor="middle" class="deck-svg-label">Calendar &amp; Docs</text>
-                  <rect class="deck-node active-ring" x="134" y="22" width="112" height="68" rx="8" />
-                  <text x="190" y="47" text-anchor="middle" class="visual-badge">02: FACT CHECK</text>
-                  <text x="190" y="63" text-anchor="middle" class="visual-label">36 / 36 Verified</text>
-                  <text x="190" y="77" text-anchor="middle" class="deck-svg-label">0 Fake Links</text>
-                  <rect class="deck-node" x="272" y="28" width="94" height="56" rx="8" />
-                  <text x="319" y="51" text-anchor="middle" class="visual-label">03: BRIEFING</text>
-                  <text x="319" y="66" text-anchor="middle" class="deck-svg-label">Sent Before Call</text>
-                  <text x="190" y="112" text-anchor="middle" class="deck-svg-sub">Automated executive meeting briefings with 36 quality checks</text>
-                </svg>
-              </div>
-
-              <p class="about-live-story" id="hero-live-story">
-                Real-time visualiser that maps every prompt, planning step, tool call, and 200k memory window so engineers can see how AI agents think.
-              </p>
-
-              <div class="browser-single-footer">
-                <div class="about-inline-tags" id="hero-inline-tags">
-                  <span class="stack-tag" id="hero-tag-1">Live Step Timeline</span>
-                  <span class="stack-tag" id="hero-tag-2">200k Memory Meter</span>
-                  <span class="stack-tag" id="hero-tag-3">Zero Cloud Setup</span>
-                </div>
-
-                <div class="about-pane-actions">
-                  <button type="button" class="about-next-tab-btn" id="hero-next-tab-btn">
-                    <span id="hero-next-tab-label">Next tab: Battery &amp; Medical AI &#8594;</span>
-                  </button>
-                  <a href="#about" class="about-scroll-pill">
-                    <span>About me &#8595;</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <a href="#about" class="scroll-cue" aria-label="Scroll down to introduction and featured repositories">
-        <span>Scroll down to learn more and explore repositories</span>
-        <span class="scroll-chevron" aria-hidden="true">&#8595;</span>
-      </a>
-    </section>
-
-    <!-- ======================================================================
-         1B. Interactive Animated Self-Introduction Stage (#about)
-             (Matches the exact large BUILDER stage size with PROFILE backdrop & live visuals)
-         ====================================================================== -->
-    <section id="about" class="repo-showcase surface-white scroll-stage" data-section-target="about">
-      <div class="hero-copy">
-        <span class="hero-eyebrow">ABOUT ELIAS LIM IN SINGAPORE</span>
-        <h2 class="hero-headline stage-hero-headline">Cloud infrastructure. Backend systems. Applied AI.</h2>
-        <p class="hero-subhead">
-          First-Class / Second Upper Honours Computer Science graduate building secure cloud systems, fast backend services, and trustworthy AI across Google, Grab, and A*STAR.
-        </p>
-      </div>
-
-      <div class="hero-visual-stage">
-        <div class="metallic-wordmark" aria-hidden="true">
           PROFILE
         </div>
 
-        <div class="hardware-deck stage-deck" id="about-hardware-deck">
+        <div class="hardware-deck" id="about-hardware-deck">
           <div class="hardware-bezel browser-window-bezel">
             <div class="bezel-top-bar browser-top-bar">
               <div class="bezel-dots" aria-hidden="true">
@@ -516,6 +361,162 @@
                 <div class="about-pane-actions">
                   <button type="button" class="about-next-tab-btn" id="about-next-tab-btn">
                     <span id="about-next-tab-label">Next tab: Grab &#8594;</span>
+                  </button>
+                  <a href="#hero-stage" class="about-scroll-pill">
+                    <span>Systems &#8595;</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#hero-stage" class="scroll-cue" aria-label="Scroll down to systems overview and featured repositories">
+        <span>Scroll down to preview systems and explore repositories</span>
+        <span class="scroll-chevron" aria-hidden="true">&#8595;</span>
+      </a>
+    </section>
+
+    <!-- ======================================================================
+         1B. Interactive Systems Preview Stage (#hero-stage - BUILDER Second)
+             (Matches the exact large stage size with BUILDER backdrop & live visuals)
+         ====================================================================== -->
+    <section id="hero-stage" class="repo-showcase surface-white scroll-stage" data-section-target="about">
+      <div class="hero-copy">
+        <span class="hero-eyebrow">SYSTEMS &amp; ARCHITECTURE PREVIEW</span>
+        <h2 class="hero-headline stage-hero-headline">Cloud infrastructure. Backend systems. Applied AI.</h2>
+        <p class="hero-subhead">
+          A quick tour of real-time AI agent tracing, calibrated battery and medical models, and verified executive meeting briefings before exploring the repositories below.
+        </p>
+      </div>
+
+      <div class="hero-visual-stage">
+        <div class="metallic-wordmark" aria-hidden="true">
+          BUILDER
+        </div>
+
+        <div class="hardware-deck stage-deck" id="hero-hardware-deck">
+          <div class="hardware-bezel browser-window-bezel">
+            <div class="bezel-top-bar browser-top-bar">
+              <div class="bezel-dots" aria-hidden="true">
+                <span></span><span></span><span></span>
+              </div>
+
+              <div class="browser-tab-strip" id="hero-browser-tabs" role="tablist" aria-label="Featured system browser tabs">
+                <button type="button" class="browser-tab active" data-hero-tab="tracer" role="tab" aria-selected="true">
+                  <span>Agent Tracer</span>
+                </button>
+                <button type="button" class="browser-tab" data-hero-tab="research" role="tab" aria-selected="false">
+                  <span>Battery &amp; Medical AI</span>
+                </button>
+                <button type="button" class="browser-tab" data-hero-tab="dossier" role="tab" aria-selected="false">
+                  <span>Meeting Dossier</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="browser-single-pane">
+              <div class="pane-header">
+                <span class="pane-label" id="hero-pane-label">ANTIGRAVITY AGENT TRACER &amp; WORKSPACE</span>
+                <span class="pane-badge" id="hero-pane-badge">Live Step Visualiser</span>
+              </div>
+
+              <div class="about-svg-stage" id="hero-svg-stage">
+                <!-- Tab 01: Agent Tracer -->
+                <svg class="hero-deck-svg about-scene is-active" data-hero-scene="tracer" viewBox="0 0 380 120" aria-hidden="true">
+                  <path class="trace-edge" d="M 96 54 L 136 54" />
+                  <path class="trace-edge" d="M 244 44 L 274 34" />
+                  <path class="trace-edge" d="M 244 64 L 274 76" />
+                  <path class="trace-packet hero-stream" d="M 96 54 L 136 54" />
+                  <path class="trace-packet hero-stream" d="M 244 44 L 274 34" />
+                  <path class="trace-packet hero-stream" d="M 244 64 L 274 76" />
+
+                  <rect class="deck-node" x="12" y="34" width="84" height="40" rx="8" />
+                  <text x="54" y="51" text-anchor="middle" class="visual-label">01: PROMPT</text>
+                  <text x="54" y="64" text-anchor="middle" class="deck-svg-label">User Input</text>
+
+                  <rect class="deck-node active-ring" x="136" y="30" width="108" height="48" rx="9" />
+                  <text x="190" y="50" text-anchor="middle" class="visual-badge">02: AI PLANNER</text>
+                  <text x="190" y="65" text-anchor="middle" class="visual-label">Reasoning, 640ms</text>
+
+                  <rect class="deck-node active-ring" x="274" y="14" width="94" height="36" rx="7" />
+                  <text x="321" y="30" text-anchor="middle" class="visual-badge">03: TOOL CALL</text>
+                  <text x="321" y="42" text-anchor="middle" class="deck-svg-label">Search, 310ms</text>
+
+                  <rect class="deck-node" x="274" y="58" width="94" height="36" rx="7" />
+                  <text x="321" y="74" text-anchor="middle" class="visual-label">04: SUBAGENT</text>
+                  <text x="321" y="86" text-anchor="middle" class="deck-svg-label">Verify, 1.2s</text>
+
+                  <text x="190" y="112" text-anchor="middle" class="deck-svg-sub">Shows every prompt, reasoning step, tool call &amp; subagent live</text>
+                </svg>
+
+                <!-- Tab 02: Battery & Medical AI -->
+                <svg class="hero-deck-svg about-scene" data-hero-scene="research" viewBox="0 0 380 120" aria-hidden="true">
+                  <path class="trace-edge" d="M 104 34 L 138 34" />
+                  <path class="trace-edge" d="M 242 34 L 276 34" />
+                  <path class="trace-packet hero-stream" d="M 104 34 L 138 34" />
+                  <path class="trace-packet hero-stream" d="M 242 34 L 276 34" />
+                  <rect class="deck-node" x="16" y="16" width="88" height="36" rx="7" />
+                  <text x="60" y="31" text-anchor="middle" class="visual-label">01: SENSORS</text>
+                  <text x="60" y="43" text-anchor="middle" class="deck-svg-label">Charge Cycles</text>
+                  <rect class="deck-node active-ring" x="138" y="14" width="104" height="40" rx="8" />
+                  <text x="190" y="31" text-anchor="middle" class="visual-badge">02: CONFIDENCE</text>
+                  <text x="190" y="44" text-anchor="middle" class="visual-label">95.2% Accuracy</text>
+                  <rect class="deck-node active-ring" x="276" y="16" width="88" height="36" rx="7" />
+                  <text x="320" y="31" text-anchor="middle" class="visual-badge">03: EXPLAINER</text>
+                  <text x="320" y="43" text-anchor="middle" class="deck-svg-label">Voltage &amp; Heat</text>
+                  <path
+                    class="ci-band"
+                    d="M 24 62 Q 130 68, 225 78 T 356 88 L 356 100 Q 225 90, 130 80 T 24 74 Z"
+                    fill="var(--accent)"
+                  />
+                  <path
+                    d="M 24 68 Q 130 74, 225 84 T 356 94"
+                    fill="none"
+                    stroke="var(--accent)"
+                    stroke-width="2.2"
+                  />
+                  <path class="trace-packet hero-stream" d="M 24 68 Q 130 74, 225 84 T 356 94" />
+                  <circle class="deck-node active-ring" cx="130" cy="74" r="4.5" />
+                  <circle class="deck-node active-ring" cx="225" cy="84" r="4.5" />
+                  <text x="190" y="113" text-anchor="middle" class="deck-svg-sub">First-author IEEE paper predicting battery health with clear error bounds</text>
+                </svg>
+
+                <!-- Tab 03: Meeting Dossier -->
+                <svg class="hero-deck-svg about-scene" data-hero-scene="dossier" viewBox="0 0 380 120" aria-hidden="true">
+                  <path class="trace-edge" d="M 108 56 L 134 56" />
+                  <path class="trace-edge" d="M 246 56 L 272 56" />
+                  <path class="trace-packet hero-stream" d="M 108 56 L 134 56" />
+                  <path class="trace-packet hero-stream" d="M 246 56 L 272 56" />
+                  <rect class="deck-node" x="14" y="28" width="94" height="56" rx="8" />
+                  <text x="61" y="51" text-anchor="middle" class="visual-label">01: GATHER</text>
+                  <text x="61" y="66" text-anchor="middle" class="deck-svg-label">Calendar &amp; Docs</text>
+                  <rect class="deck-node active-ring" x="134" y="22" width="112" height="68" rx="8" />
+                  <text x="190" y="47" text-anchor="middle" class="visual-badge">02: FACT CHECK</text>
+                  <text x="190" y="63" text-anchor="middle" class="visual-label">36 / 36 Verified</text>
+                  <text x="190" y="77" text-anchor="middle" class="deck-svg-label">0 Fake Links</text>
+                  <rect class="deck-node" x="272" y="28" width="94" height="56" rx="8" />
+                  <text x="319" y="51" text-anchor="middle" class="visual-label">03: BRIEFING</text>
+                  <text x="319" y="66" text-anchor="middle" class="deck-svg-label">Sent Before Call</text>
+                  <text x="190" y="112" text-anchor="middle" class="deck-svg-sub">Automated executive meeting briefings with 36 quality checks</text>
+                </svg>
+              </div>
+
+              <p class="about-live-story" id="hero-live-story">
+                Real-time visualiser that maps every prompt, planning step, tool call, and 200k memory window so engineers can see how AI agents think.
+              </p>
+
+              <div class="browser-single-footer">
+                <div class="about-inline-tags" id="hero-inline-tags">
+                  <span class="stack-tag" id="hero-tag-1">Live Step Timeline</span>
+                  <span class="stack-tag" id="hero-tag-2">200k Memory Meter</span>
+                  <span class="stack-tag" id="hero-tag-3">Zero Cloud Setup</span>
+                </div>
+
+                <div class="about-pane-actions">
+                  <button type="button" class="about-next-tab-btn" id="hero-next-tab-btn">
+                    <span id="hero-next-tab-label">Next tab: Battery &amp; Medical AI &#8594;</span>
                   </button>
                   <a href="#highlights-section" class="about-scroll-pill">
                     <span>Highlights &#8595;</span>
@@ -1728,12 +1729,12 @@
     <div class="stage-dock-row">
     <div class="stage-dock-pill">
       <button type="button" class="stage-step-btn" id="stage-dock-prev-btn" aria-label="Scroll to previous section" title="Previous section (↑)">&#8593;</button>
-      <span class="stage-dock-caption" id="stage-dock-caption">01 / 05 BUILDER</span>
+      <span class="stage-dock-caption" id="stage-dock-caption">01 / 05 PROFILE</span>
       <div class="stage-dock-dots" role="tablist" aria-label="Jump to stage">
-        <button type="button" role="tab" aria-selected="true" class="stage-dock-dot active" data-dock-idx="0" aria-label="Stage 1: Builder Overview">
+        <button type="button" role="tab" aria-selected="true" class="stage-dock-dot active" data-dock-idx="0" aria-label="Stage 1: Engineering Profile">
           <span class="stage-dot-fill"></span>
         </button>
-        <button type="button" role="tab" aria-selected="false" class="stage-dock-dot" data-dock-idx="1" aria-label="Stage 2: Engineering Profile">
+        <button type="button" role="tab" aria-selected="false" class="stage-dock-dot" data-dock-idx="1" aria-label="Stage 2: Builder Overview">
           <span class="stage-dot-fill"></span>
         </button>
         <!-- [JUMPGATE HIDDEN — UNCOMMENT THIS DOT AND RE-INDEX 3..5 TO RE-ENABLE STAGE 3: JUMPGATE]
@@ -1937,6 +1938,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261009-27"></script>
+  <script src="app.js?v=20261009-28"></script>
 </body>
 </html>
