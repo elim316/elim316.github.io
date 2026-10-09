@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261008-26" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261009-27" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261008-26" />
+  <link rel="stylesheet" href="styles.css?v=20261009-27" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -128,7 +128,7 @@
         </span>
         <h1 class="hero-headline reveal-hero" style="--d: 80ms">Elias Lim</h1>
         <p class="hero-subhead reveal-hero" style="--d: 140ms">
-          Cloud and AI engineer experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling.
+          Cloud and AI engineer building secure cloud platforms, fast Go and Python backend services, reliable machine learning models, and practical AI developer tools.
         </p>
 
         <div class="cta-pill-group reveal-hero" style="--d: 200ms">
@@ -179,29 +179,41 @@
         </div>
       </div>
 
-      <!-- Sculpted Metallic Backdrop Typography + 3D Scroll-Tilting Project Stage -->
+      <!-- Sculpted Metallic Backdrop Typography + Unified macOS Browser Window Stage -->
       <div class="hero-visual-stage reveal-hero" style="--d: 280ms">
         <div class="metallic-wordmark" id="hero-wordmark" aria-hidden="true">
           BUILDER
         </div>
 
         <div class="hardware-deck" id="hero-hardware-deck">
-          <div class="hardware-bezel">
-            <div class="bezel-top-bar">
+          <div class="hardware-bezel browser-window-bezel">
+            <div class="bezel-top-bar browser-top-bar">
               <div class="bezel-dots" aria-hidden="true">
                 <span></span><span></span><span></span>
               </div>
-              <div class="bezel-title">FEATURED REPOSITORY PREVIEW, LIVE ARCHITECTURE</div>
+
+              <div class="browser-tab-strip" id="hero-browser-tabs" role="tablist" aria-label="Featured system browser tabs">
+                <button type="button" class="browser-tab active" data-hero-tab="tracer" role="tab" aria-selected="true">
+                  <span>Agent Tracer</span>
+                </button>
+                <button type="button" class="browser-tab" data-hero-tab="research" role="tab" aria-selected="false">
+                  <span>Battery &amp; Medical AI</span>
+                </button>
+                <button type="button" class="browser-tab" data-hero-tab="dossier" role="tab" aria-selected="false">
+                  <span>Meeting Dossier</span>
+                </button>
+              </div>
             </div>
 
-            <div class="bezel-grid">
-              <!-- Left Pane: 3-Lane Autonomous Execution Topology -->
-              <div class="bezel-pane">
-                <div class="pane-header">
-                  <span class="pane-label">elim316/Antigravity-Agent-Tracer-Plugin</span>
-                  <span class="pane-badge">Live Execution Graph</span>
-                </div>
-                <svg class="hero-deck-svg" viewBox="0 0 380 124" aria-hidden="true">
+            <div class="browser-single-pane">
+              <div class="pane-header">
+                <span class="pane-label" id="hero-pane-label">ANTIGRAVITY AGENT TRACER &amp; WORKSPACE</span>
+                <span class="pane-badge" id="hero-pane-badge">Live Step Visualiser</span>
+              </div>
+
+              <div class="about-svg-stage" id="hero-svg-stage">
+                <!-- Tab 01: Agent Tracer -->
+                <svg class="hero-deck-svg about-scene is-active" data-hero-scene="tracer" viewBox="0 0 380 120" aria-hidden="true">
                   <path class="trace-edge" d="M 96 54 L 136 54" />
                   <path class="trace-edge" d="M 244 44 L 274 34" />
                   <path class="trace-edge" d="M 244 64 L 274 76" />
@@ -214,66 +226,90 @@
                   <text x="54" y="64" text-anchor="middle" class="deck-svg-label">User Input</text>
 
                   <rect class="deck-node active-ring" x="136" y="30" width="108" height="48" rx="9" />
-                  <text x="190" y="50" text-anchor="middle" class="visual-badge">02: PLANNER</text>
-                  <text x="190" y="65" text-anchor="middle" class="visual-label">LLM, 640ms</text>
+                  <text x="190" y="50" text-anchor="middle" class="visual-badge">02: AI PLANNER</text>
+                  <text x="190" y="65" text-anchor="middle" class="visual-label">Reasoning, 640ms</text>
 
                   <rect class="deck-node active-ring" x="274" y="14" width="94" height="36" rx="7" />
-                  <text x="321" y="30" text-anchor="middle" class="visual-badge">03: MCP TOOL</text>
+                  <text x="321" y="30" text-anchor="middle" class="visual-badge">03: TOOL CALL</text>
                   <text x="321" y="42" text-anchor="middle" class="deck-svg-label">Search, 310ms</text>
 
                   <rect class="deck-node" x="274" y="58" width="94" height="36" rx="7" />
                   <text x="321" y="74" text-anchor="middle" class="visual-label">04: SUBAGENT</text>
                   <text x="321" y="86" text-anchor="middle" class="deck-svg-label">Verify, 1.2s</text>
 
-                  <text x="190" y="114" text-anchor="middle" class="deck-svg-sub">Visualises prompts, reasoning, tool calls &amp; subagents</text>
+                  <text x="190" y="112" text-anchor="middle" class="deck-svg-sub">Shows every prompt, reasoning step, tool call &amp; subagent live</text>
+                </svg>
+
+                <!-- Tab 02: Battery & Medical AI -->
+                <svg class="hero-deck-svg about-scene" data-hero-scene="research" viewBox="0 0 380 120" aria-hidden="true">
+                  <path class="trace-edge" d="M 104 34 L 138 34" />
+                  <path class="trace-edge" d="M 242 34 L 276 34" />
+                  <path class="trace-packet hero-stream" d="M 104 34 L 138 34" />
+                  <path class="trace-packet hero-stream" d="M 242 34 L 276 34" />
+                  <rect class="deck-node" x="16" y="16" width="88" height="36" rx="7" />
+                  <text x="60" y="31" text-anchor="middle" class="visual-label">01: SENSORS</text>
+                  <text x="60" y="43" text-anchor="middle" class="deck-svg-label">Charge Cycles</text>
+                  <rect class="deck-node active-ring" x="138" y="14" width="104" height="40" rx="8" />
+                  <text x="190" y="31" text-anchor="middle" class="visual-badge">02: CONFIDENCE</text>
+                  <text x="190" y="44" text-anchor="middle" class="visual-label">95.2% Accuracy</text>
+                  <rect class="deck-node active-ring" x="276" y="16" width="88" height="36" rx="7" />
+                  <text x="320" y="31" text-anchor="middle" class="visual-badge">03: EXPLAINER</text>
+                  <text x="320" y="43" text-anchor="middle" class="deck-svg-label">Voltage &amp; Heat</text>
+                  <path
+                    class="ci-band"
+                    d="M 24 62 Q 130 68, 225 78 T 356 88 L 356 100 Q 225 90, 130 80 T 24 74 Z"
+                    fill="var(--accent)"
+                  />
+                  <path
+                    d="M 24 68 Q 130 74, 225 84 T 356 94"
+                    fill="none"
+                    stroke="var(--accent)"
+                    stroke-width="2.2"
+                  />
+                  <path class="trace-packet hero-stream" d="M 24 68 Q 130 74, 225 84 T 356 94" />
+                  <circle class="deck-node active-ring" cx="130" cy="74" r="4.5" />
+                  <circle class="deck-node active-ring" cx="225" cy="84" r="4.5" />
+                  <text x="190" y="113" text-anchor="middle" class="deck-svg-sub">First-author IEEE paper predicting battery health with clear error bounds</text>
+                </svg>
+
+                <!-- Tab 03: Meeting Dossier -->
+                <svg class="hero-deck-svg about-scene" data-hero-scene="dossier" viewBox="0 0 380 120" aria-hidden="true">
+                  <path class="trace-edge" d="M 108 56 L 134 56" />
+                  <path class="trace-edge" d="M 246 56 L 272 56" />
+                  <path class="trace-packet hero-stream" d="M 108 56 L 134 56" />
+                  <path class="trace-packet hero-stream" d="M 246 56 L 272 56" />
+                  <rect class="deck-node" x="14" y="28" width="94" height="56" rx="8" />
+                  <text x="61" y="51" text-anchor="middle" class="visual-label">01: GATHER</text>
+                  <text x="61" y="66" text-anchor="middle" class="deck-svg-label">Calendar &amp; Docs</text>
+                  <rect class="deck-node active-ring" x="134" y="22" width="112" height="68" rx="8" />
+                  <text x="190" y="47" text-anchor="middle" class="visual-badge">02: FACT CHECK</text>
+                  <text x="190" y="63" text-anchor="middle" class="visual-label">36 / 36 Verified</text>
+                  <text x="190" y="77" text-anchor="middle" class="deck-svg-label">0 Fake Links</text>
+                  <rect class="deck-node" x="272" y="28" width="94" height="56" rx="8" />
+                  <text x="319" y="51" text-anchor="middle" class="visual-label">03: BRIEFING</text>
+                  <text x="319" y="66" text-anchor="middle" class="deck-svg-label">Sent Before Call</text>
+                  <text x="190" y="112" text-anchor="middle" class="deck-svg-sub">Automated executive meeting briefings with 36 quality checks</text>
                 </svg>
               </div>
 
-              <!-- Right Pane: Repository Highlights -->
-              <div class="bezel-pane">
-                <div class="pane-header">
-                  <span class="pane-label">CORE ENGINEERING METRICS</span>
-                  <span class="pane-badge">Verified</span>
+              <p class="about-live-story" id="hero-live-story">
+                Real-time visualiser that maps every prompt, planning step, tool call, and 200k memory window so engineers can see how AI agents think.
+              </p>
+
+              <div class="browser-single-footer">
+                <div class="about-inline-tags" id="hero-inline-tags">
+                  <span class="stack-tag" id="hero-tag-1">Live Step Timeline</span>
+                  <span class="stack-tag" id="hero-tag-2">200k Memory Meter</span>
+                  <span class="stack-tag" id="hero-tag-3">Zero Cloud Setup</span>
                 </div>
-                <div class="telemetry-metrics">
-                  <!-- [JUMPGATE HIDDEN — UNCOMMENT THIS BLOCK TO RE-ENABLE JUMPGATE]
-                  <div class="metric-row">
-                    <div class="metric-top">
-                      <span>Jumpgate Zero-Trust AI Landing Zone</span>
-                      <span class="metric-val">&lt; 3 min, $1.96M ARR</span>
-                    </div>
-                    <div class="metric-track">
-                      <div class="metric-fill fill-blue"></div>
-                    </div>
-                  </div>
-                  -->
-                  <div class="metric-row">
-                    <div class="metric-top">
-                      <span>Antigravity Agent Tracer &amp; 200k Harness</span>
-                      <span class="metric-val">Live Connect-RPC</span>
-                    </div>
-                    <div class="metric-track">
-                      <div class="metric-fill fill-blue"></div>
-                    </div>
-                  </div>
-                  <div class="metric-row">
-                    <div class="metric-top">
-                      <span>Battery SOH Conformal Coverage (IEEE)</span>
-                      <span class="metric-val">95.2% PICP</span>
-                    </div>
-                    <div class="metric-track">
-                      <div class="metric-fill fill-teal"></div>
-                    </div>
-                  </div>
-                  <div class="metric-row">
-                    <div class="metric-top">
-                      <span>Meeting Dossier Evaluation Harness</span>
-                      <span class="metric-val">36 / 36 Checks</span>
-                    </div>
-                    <div class="metric-track">
-                      <div class="metric-fill fill-green"></div>
-                    </div>
-                  </div>
+
+                <div class="about-pane-actions">
+                  <button type="button" class="about-next-tab-btn" id="hero-next-tab-btn">
+                    <span id="hero-next-tab-label">Next tab: Battery &amp; Medical AI &#8594;</span>
+                  </button>
+                  <a href="#about" class="about-scroll-pill">
+                    <span>About me &#8595;</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -296,7 +332,7 @@
         <span class="hero-eyebrow">ABOUT ELIAS LIM IN SINGAPORE</span>
         <h2 class="hero-headline stage-hero-headline">Cloud infrastructure. Backend systems. Applied AI.</h2>
         <p class="hero-subhead">
-          BSc (Hons) Computer Science graduate from the University of Glasgow and SIT, engineering secure cloud architectures, high-scale backend systems, and calibrated AI.
+          First-Class / Second Upper Honours Computer Science graduate building secure cloud systems, fast backend services, and trustworthy AI across Google, Grab, and A*STAR.
         </p>
       </div>
 
@@ -312,7 +348,7 @@
                 <span></span><span></span><span></span>
               </div>
 
-              <div class="browser-tab-strip" id="about-chapter-tabs" role="tablist" aria-label="Interactive career and personal chapters">
+              <div class="browser-tab-strip" id="about-chapter-tabs" role="tablist" aria-label="Interactive career and education tabs">
                 <button type="button" class="browser-tab active" data-about-tab="google" role="tab" aria-selected="true">
                   <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"/>
@@ -338,7 +374,7 @@
                     <rect width="24" height="24" rx="6" fill="#00539B"/>
                     <path d="M12 5L4 9l8 4 6.5-3.25V14.5h1.5V9L12 5zm-5 6.75v3.5L12 18l5-2.75v-3.5L12 14.5l-5-2.75z" fill="#ffffff"/>
                   </svg>
-                  <span>Glasgow &amp; Life</span>
+                  <span>Education</span>
                 </button>
               </div>
             </div>
@@ -351,7 +387,7 @@
               </div>
               -->
               <div class="pane-header">
-                <span class="pane-label" id="about-pane-label">CLOUD RUN, VERTEX AI &amp; AGENT TOOLING</span>
+                <span class="pane-label" id="about-pane-label">CLOUD ARCHITECTURE, VERTEX AI &amp; AGENT TOOLS</span>
                 <span class="pane-badge" id="about-pane-badge">Google Singapore</span>
               </div>
 
@@ -359,44 +395,44 @@
               <div class="about-svg-stage" id="about-svg-stage">
                 <!-- Chapter 01: Google Cloud & AI (Default Visible) -->
                 <svg class="hero-deck-svg about-scene is-active" data-about-scene="google" viewBox="0 0 380 120" aria-hidden="true">
-                  <text x="44" y="18" text-anchor="middle" class="deck-svg-label">INGRESS</text>
-                  <text x="180" y="18" text-anchor="middle" class="deck-svg-label">AGENT ORCHESTRATION</text>
-                  <text x="326" y="18" text-anchor="middle" class="deck-svg-label">VERTEX AI</text>
-                  <path class="trace-edge" d="M 68 58 L 148 58" />
-                  <path class="trace-edge" d="M 212 58 L 292 40" />
-                  <path class="trace-edge" d="M 212 58 L 292 80" />
-                  <path class="trace-packet hero-stream" d="M 68 58 L 148 58" />
-                  <path class="trace-packet hero-stream" d="M 212 58 L 292 40" />
-                  <path class="trace-packet hero-stream" d="M 212 58 L 292 80" />
-                  <rect class="deck-node" x="20" y="42" width="48" height="32" rx="7" />
-                  <text x="44" y="61" text-anchor="middle" class="visual-label">WAF</text>
-                  <rect class="deck-node active-ring" x="148" y="38" width="64" height="40" rx="8" />
-                  <text x="180" y="61" text-anchor="middle" class="visual-badge">RUN</text>
-                  <rect class="deck-node active-ring" x="292" y="24" width="68" height="28" rx="6" />
-                  <text x="326" y="41" text-anchor="middle" class="visual-label">GEMINI</text>
-                  <rect class="deck-node" x="292" y="66" width="68" height="28" rx="6" />
-                  <text x="326" y="83" text-anchor="middle" class="visual-label">TRACE</text>
-                  <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">Enterprise AI Architecture &amp; 4,000+ Trained</text>
+                  <text x="48" y="18" text-anchor="middle" class="deck-svg-label">SECURITY</text>
+                  <text x="180" y="18" text-anchor="middle" class="deck-svg-label">CLOUD BACKEND</text>
+                  <text x="322" y="18" text-anchor="middle" class="deck-svg-label">AI MODELS</text>
+                  <path class="trace-edge" d="M 74 58 L 144 58" />
+                  <path class="trace-edge" d="M 216 58 L 286 40" />
+                  <path class="trace-edge" d="M 216 58 L 286 80" />
+                  <path class="trace-packet hero-stream" d="M 74 58 L 144 58" />
+                  <path class="trace-packet hero-stream" d="M 216 58 L 286 40" />
+                  <path class="trace-packet hero-stream" d="M 216 58 L 286 80" />
+                  <rect class="deck-node" x="16" y="42" width="58" height="32" rx="7" />
+                  <text x="45" y="61" text-anchor="middle" class="visual-label">FIREWALL</text>
+                  <rect class="deck-node active-ring" x="144" y="38" width="72" height="40" rx="8" />
+                  <text x="180" y="61" text-anchor="middle" class="visual-badge">CLOUD RUN</text>
+                  <rect class="deck-node active-ring" x="286" y="24" width="76" height="28" rx="6" />
+                  <text x="324" y="41" text-anchor="middle" class="visual-label">GEMINI AI</text>
+                  <rect class="deck-node" x="286" y="66" width="76" height="28" rx="6" />
+                  <text x="324" y="83" text-anchor="middle" class="visual-label">TRACER</text>
+                  <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">Enterprise AI Systems &amp; 4,000+ Engineers Trained</text>
                 </svg>
 
                 <!-- Chapter 02: Grab -->
                 <svg class="hero-deck-svg about-scene" data-about-scene="grab" viewBox="0 0 380 120" aria-hidden="true">
-                  <text x="44" y="18" text-anchor="middle" class="deck-svg-label">INGRESS</text>
-                  <text x="182" y="18" text-anchor="middle" class="deck-svg-label">GOLANG CONTROLS</text>
-                  <text x="322" y="18" text-anchor="middle" class="deck-svg-label">RISK ENGINE</text>
+                  <text x="44" y="18" text-anchor="middle" class="deck-svg-label">TRAFFIC</text>
+                  <text x="182" y="18" text-anchor="middle" class="deck-svg-label">SAFETY CONTROLS</text>
+                  <text x="322" y="18" text-anchor="middle" class="deck-svg-label">FRAUD CHECK</text>
                   <path class="trace-edge" d="M 64 58 L 138 58" />
                   <path class="trace-edge" d="M 226 58 L 284 58" />
                   <path class="trace-packet hero-stream" d="M 64 58 L 138 58" />
                   <path class="trace-packet hero-stream" d="M 226 58 L 284 58" />
                   <circle class="deck-node" cx="44" cy="58" r="16" />
-                  <text x="44" y="61" text-anchor="middle" class="visual-label">API</text>
+                  <text x="44" y="61" text-anchor="middle" class="visual-label">APP</text>
                   <rect class="deck-node active-ring" x="138" y="36" width="88" height="44" rx="8" />
-                  <text x="182" y="55" text-anchor="middle" class="visual-badge">GO FLAGS</text>
+                  <text x="182" y="55" text-anchor="middle" class="visual-badge">GO SERVICE</text>
                   <text x="182" y="69" text-anchor="middle" class="visual-label">RATE LIMIT</text>
                   <rect class="deck-node active-ring" x="284" y="36" width="76" height="44" rx="8" />
-                  <text x="322" y="55" text-anchor="middle" class="visual-label">RISK API</text>
-                  <text x="322" y="69" text-anchor="middle" class="visual-badge">PB-Scale</text>
-                  <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">Real-time fraud detection services in Golang at Grab</text>
+                  <text x="322" y="55" text-anchor="middle" class="visual-label">RISK ENGINE</text>
+                  <text x="322" y="69" text-anchor="middle" class="visual-badge">Real-Time</text>
+                  <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">High-speed fraud protection services in Go at Grab</text>
                 </svg>
 
                 <!-- Chapter 03: A*STAR AI Research -->
@@ -406,14 +442,14 @@
                   <path class="trace-packet hero-stream" d="M 104 34 L 138 34" />
                   <path class="trace-packet hero-stream" d="M 242 34 L 276 34" />
                   <rect class="deck-node" x="16" y="16" width="88" height="36" rx="7" />
-                  <text x="60" y="31" text-anchor="middle" class="visual-label">01: CYCLES</text>
-                  <text x="60" y="43" text-anchor="middle" class="deck-svg-label">McMaster/Oxford</text>
+                  <text x="60" y="31" text-anchor="middle" class="visual-label">01: SENSORS</text>
+                  <text x="60" y="43" text-anchor="middle" class="deck-svg-label">Battery Data</text>
                   <rect class="deck-node active-ring" x="138" y="14" width="104" height="40" rx="8" />
-                  <text x="190" y="31" text-anchor="middle" class="visual-badge">02: CNN + ACI</text>
-                  <text x="190" y="44" text-anchor="middle" class="visual-label">95.2% PICP</text>
+                  <text x="190" y="31" text-anchor="middle" class="visual-badge">02: AI RANGE</text>
+                  <text x="190" y="44" text-anchor="middle" class="visual-label">95.2% Accurate</text>
                   <rect class="deck-node active-ring" x="276" y="16" width="88" height="36" rx="7" />
-                  <text x="320" y="31" text-anchor="middle" class="visual-badge">03: SHAP/LIME</text>
-                  <text x="320" y="43" text-anchor="middle" class="deck-svg-label">Explainable AI</text>
+                  <text x="320" y="31" text-anchor="middle" class="visual-badge">03: REASONS</text>
+                  <text x="320" y="43" text-anchor="middle" class="deck-svg-label">Voltage &amp; Heat</text>
                   <path
                     class="ci-band"
                     d="M 24 62 Q 130 68, 225 78 T 356 88 L 356 100 Q 225 90, 130 80 T 24 74 Z"
@@ -431,10 +467,10 @@
                   />
                   <circle class="deck-node active-ring" cx="130" cy="74" r="4.5" />
                   <circle class="deck-node active-ring" cx="225" cy="84" r="4.5" />
-                  <text x="190" y="113" text-anchor="middle" class="deck-svg-sub">First-author IEEE battery UQ &amp; SHAP/LIME framework</text>
+                  <text x="190" y="113" text-anchor="middle" class="deck-svg-sub">First-author IEEE research predicting battery lifespan with confidence bounds</text>
                 </svg>
 
-                <!-- Chapter 04: Glasgow, SIT & Beyond Code -->
+                <!-- Chapter 04: Education -->
                 <svg class="hero-deck-svg about-scene" data-about-scene="beyond" viewBox="0 0 380 120" aria-hidden="true">
                   <path class="trace-edge" d="M 124 53 L 134 53" />
                   <path class="trace-edge" d="M 246 53 L 256 53" />
@@ -449,15 +485,15 @@
                   <rect class="deck-node active-ring" x="134" y="16" width="112" height="74" rx="8" />
                   <text x="190" y="34" text-anchor="middle" class="visual-badge">3X HACKATHONS</text>
                   <text x="190" y="51" text-anchor="middle" class="visual-label">NUS LifeHack</text>
-                  <text x="190" y="66" text-anchor="middle" class="visual-label">AISG Overall</text>
-                  <text x="190" y="80" text-anchor="middle" class="deck-svg-label">DSTA TIL-AI</text>
+                  <text x="190" y="66" text-anchor="middle" class="visual-label">AI Singapore</text>
+                  <text x="190" y="80" text-anchor="middle" class="deck-svg-label">DSTA BrainHack</text>
 
                   <rect class="deck-node active-ring" x="256" y="16" width="112" height="74" rx="8" />
                   <text x="312" y="34" text-anchor="middle" class="visual-badge">OUTSIDE CODE</text>
                   <text x="312" y="51" text-anchor="middle" class="visual-label">Basketball</text>
                   <text x="312" y="66" text-anchor="middle" class="visual-label">Pickleball</text>
                   <text x="312" y="80" text-anchor="middle" class="deck-svg-label">Vintage Thrift</text>
-                  <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">Honours Computer Science, national hackathons &amp; court sports</text>
+                  <text x="190" y="110" text-anchor="middle" class="deck-svg-sub">Honours Computer Science degree, national hackathons &amp; court sports</text>
                 </svg>
               </div>
 
@@ -467,13 +503,13 @@
               </p>
               -->
               <p class="about-live-story" id="about-live-story">
-                Customer Engineer at Google Singapore architecting secure Cloud Run and Vertex AI systems, creator of Antigravity Agent Tracer, and technical lead for buildathons training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.
+                Customer Engineer at Google Singapore designing secure Cloud Run and Vertex AI systems, creator of Antigravity Agent Tracer, and technical lead for workshops training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.
               </p>
 
               <div class="browser-single-footer">
                 <div class="about-inline-tags" id="about-inline-tags">
-                  <span class="stack-tag" id="about-tag-1">Antigravity Tracer &amp; 200k Harness</span>
-                  <span class="stack-tag" id="about-tag-2">36 / 36 Dossier Eval Checks</span>
+                  <span class="stack-tag" id="about-tag-1">Antigravity Agent Tracer</span>
+                  <span class="stack-tag" id="about-tag-2">36 / 36 Briefing Quality Checks</span>
                   <span class="stack-tag" id="about-tag-3">4,000+ Engineers Trained</span>
                 </div>
 
@@ -494,7 +530,7 @@
 
     <!-- ======================================================================
          2. Full-Width Scroll-Animated Repository Showcases
-            (Unified to the exact same large BUILDER stage size & 2-column bezel grid)
+            (Unified to the exact same large BUILDER stage size & browser tab system)
          ====================================================================== -->
     <div id="featured" data-section-target="featured">
       <!-- Apple-Inspired "Get the highlights." Horizontal Media Scroller -->
@@ -510,7 +546,7 @@
               <button type="button" class="highlight-dot active" data-highlight-idx="0" role="tab" aria-selected="true" aria-label="Highlight 1: Jumpgate Landing Zone"></button>
               -->
               <button type="button" class="highlight-dot active" data-highlight-idx="0" role="tab" aria-selected="true" aria-label="Highlight 1: Antigravity Agent Tracer"></button>
-              <button type="button" class="highlight-dot" data-highlight-idx="1" role="tab" aria-selected="false" aria-label="Highlight 2: IEEE Xplore Conformal AI"></button>
+              <button type="button" class="highlight-dot" data-highlight-idx="1" role="tab" aria-selected="false" aria-label="Highlight 2: IEEE Xplore AI Research"></button>
               <button type="button" class="highlight-dot" data-highlight-idx="2" role="tab" aria-selected="false" aria-label="Highlight 3: 4,000+ Engineers &amp; Hackathon Honours"></button>
             </div>
             <div class="highlights-arrows">
@@ -577,34 +613,41 @@
             <!-- Highlight Card 1: Agent Tracer -->
             <article class="highlight-card" data-highlight-target="#showcase-agent-tracer">
               <div class="highlight-card-copy">
-                <span class="highlight-eyebrow">AGENT OBSERVABILITY</span>
+                <div class="highlight-top-meta">
+                  <span class="highlight-eyebrow">AI DEVELOPER TOOLS</span>
+                  <span class="highlight-stat-pill">Live Step Visualiser</span>
+                </div>
+                <div class="highlight-stat-hero-row">
+                  <span class="highlight-pop-number pop-blue">200k</span>
+                  <span class="highlight-pop-unit">token memory &amp; live step flow</span>
+                </div>
                 <h3 class="highlight-headline">
-                  Real-time agent DAGs and 128k token telemetry.
+                  Watch every step an AI agent takes in real time, without reading raw logs.
                 </h3>
               </div>
               <div class="highlight-visual">
-                <svg viewBox="0 0 520 140" class="highlight-svg" role="img" aria-label="Agent Tracer live DAG and 128k context gauge schematic">
+                <svg viewBox="0 0 520 140" class="highlight-svg" role="img" aria-label="Agent Tracer live step timeline and memory gauge">
                   <rect x="18" y="24" width="134" height="92" rx="14" class="trace-node" />
-                  <text x="85" y="62" text-anchor="middle" class="visual-badge">JSONL TAIL</text>
-                  <text x="85" y="86" text-anchor="middle" class="visual-label">Go fsnotify</text>
+                  <text x="85" y="60" text-anchor="middle" class="visual-badge">01: LIVE LOGS</text>
+                  <text x="85" y="84" text-anchor="middle" class="visual-label">Instant Capture</text>
 
                   <line x1="152" y1="70" x2="192" y2="70" class="trace-edge" />
                   <line x1="152" y1="70" x2="192" y2="70" class="trace-packet" />
 
                   <rect x="192" y="24" width="136" height="92" rx="14" class="trace-node node-accent" />
-                  <text x="260" y="62" text-anchor="middle" class="visual-badge">CONNECT-RPC</text>
-                  <text x="260" y="86" text-anchor="middle" class="visual-label">Sub-ms Span DAG</text>
+                  <text x="260" y="60" text-anchor="middle" class="visual-badge">02: VISUAL FLOW</text>
+                  <text x="260" y="84" text-anchor="middle" class="visual-label">Step-by-Step</text>
 
                   <line x1="328" y1="70" x2="368" y2="70" class="trace-edge" />
                   <line x1="328" y1="70" x2="368" y2="70" class="trace-packet" />
 
                   <rect x="368" y="24" width="134" height="92" rx="14" class="trace-node" />
-                  <text x="435" y="62" text-anchor="middle" class="visual-badge">128K GAUGE</text>
-                  <text x="435" y="86" text-anchor="middle" class="visual-label">Live Token Burn</text>
+                  <text x="435" y="60" text-anchor="middle" class="visual-badge">03: MEMORY BAR</text>
+                  <text x="435" y="84" text-anchor="middle" class="visual-label">200k Token Limit</text>
                 </svg>
               </div>
               <div class="highlight-card-footer">
-                <span class="highlight-meta">Go, Svelte 5 &amp; Connect-RPC</span>
+                <span class="highlight-meta">Built with Python, Go &amp; TypeScript</span>
                 <span class="highlight-jump-pill">Explore Tracer &#8595;</span>
               </div>
             </article>
@@ -612,34 +655,41 @@
             <!-- Highlight Card 2: IEEE Xplore Conformal & Explainable AI -->
             <article class="highlight-card" data-highlight-target="#showcase-uq-xai">
               <div class="highlight-card-copy">
-                <span class="highlight-eyebrow">FIRST-AUTHOR IEEE XPLORE</span>
+                <div class="highlight-top-meta">
+                  <span class="highlight-eyebrow">PUBLISHED IEEE RESEARCH</span>
+                  <span class="highlight-stat-pill">First-Author Paper</span>
+                </div>
+                <div class="highlight-stat-hero-row">
+                  <span class="highlight-pop-number pop-teal">95.2%</span>
+                  <span class="highlight-pop-unit">verified confidence range</span>
+                </div>
                 <h3 class="highlight-headline">
-                  95.2% calibrated battery &amp; medical AI.
+                  AI models that tell engineers how confident they are and why.
                 </h3>
               </div>
               <div class="highlight-visual">
-                <svg viewBox="0 0 520 140" class="highlight-svg" role="img" aria-label="Conformal prediction interval and SHAP attribution schematic">
+                <svg viewBox="0 0 520 140" class="highlight-svg" role="img" aria-label="Confidence range and explainable AI diagram">
                   <rect x="18" y="24" width="142" height="92" rx="14" class="trace-node node-accent" />
-                  <text x="89" y="62" text-anchor="middle" class="visual-badge">CONFORMAL UQ</text>
-                  <text x="89" y="86" text-anchor="middle" class="visual-label">95.2% Coverage</text>
+                  <text x="89" y="60" text-anchor="middle" class="visual-badge">95.2% ACCURACY</text>
+                  <text x="89" y="84" text-anchor="middle" class="visual-label">Confidence Range</text>
 
                   <line x1="160" y1="70" x2="196" y2="70" class="trace-edge" />
                   <line x1="160" y1="70" x2="196" y2="70" class="trace-packet" />
 
                   <rect x="196" y="24" width="128" height="92" rx="14" class="trace-node" />
-                  <text x="260" y="62" text-anchor="middle" class="visual-badge">SHAP &amp; LIME</text>
-                  <text x="260" y="86" text-anchor="middle" class="visual-label">Attribution</text>
+                  <text x="260" y="60" text-anchor="middle" class="visual-badge">KEY DRIVERS</text>
+                  <text x="260" y="84" text-anchor="middle" class="visual-label">Voltage &amp; Heat</text>
 
                   <line x1="324" y1="70" x2="360" y2="70" class="trace-edge" />
                   <line x1="324" y1="70" x2="360" y2="70" class="trace-packet" />
 
                   <rect x="360" y="24" width="142" height="92" rx="14" class="trace-node node-accent" />
-                  <text x="431" y="62" text-anchor="middle" class="visual-badge">MEDICAL XAI</text>
-                  <text x="431" y="86" text-anchor="middle" class="visual-label">-65% Set Size</text>
+                  <text x="431" y="60" text-anchor="middle" class="visual-badge">BATTERY HEALTH</text>
+                  <text x="431" y="84" text-anchor="middle" class="visual-label">A*STAR Research</text>
                 </svg>
               </div>
               <div class="highlight-card-footer">
-                <span class="highlight-meta">APSIPA ASC 2025</span>
+                <span class="highlight-meta">IEEE Xplore (APSIPA 2025)</span>
                 <span class="highlight-jump-pill">Explore Research &#8595;</span>
               </div>
             </article>
@@ -647,27 +697,34 @@
             <!-- Highlight Card 3: Technical Enablement & Hackathon Honours -->
             <article class="highlight-card" data-highlight-target="#leadership-strip">
               <div class="highlight-card-copy">
-                <span class="highlight-eyebrow">ENABLEMENT &amp; HONOURS</span>
+                <div class="highlight-top-meta">
+                  <span class="highlight-eyebrow">TECHNICAL LEADERSHIP</span>
+                  <span class="highlight-stat-pill">3x National Awards</span>
+                </div>
+                <div class="highlight-stat-hero-row">
+                  <span class="highlight-pop-number pop-emerald">4,000+</span>
+                  <span class="highlight-pop-unit">engineers &amp; students trained</span>
+                </div>
                 <h3 class="highlight-headline">
-                  4,000+ engineers trained &amp; 3x national awards.
+                  Hands-on cloud and AI workshops across Singapore's top institutions.
                 </h3>
               </div>
               <div class="highlight-visual">
-                <svg viewBox="0 0 520 140" class="highlight-svg" role="img" aria-label="4,000+ engineers trained and national hackathon honours schematic">
+                <svg viewBox="0 0 520 140" class="highlight-svg" role="img" aria-label="4,000+ engineers trained and national hackathon honours">
                   <rect x="18" y="24" width="222" height="92" rx="14" class="trace-node node-accent" />
-                  <text x="129" y="62" text-anchor="middle" class="visual-badge">4,000+ TRAINED</text>
-                  <text x="129" y="86" text-anchor="middle" class="visual-label">GovTech, DBS, NTU &amp; A*STAR</text>
+                  <text x="129" y="60" text-anchor="middle" class="visual-badge">4,000+ TRAINED</text>
+                  <text x="129" y="84" text-anchor="middle" class="visual-label">GovTech, DBS, NTU &amp; A*STAR</text>
 
                   <line x1="240" y1="70" x2="280" y2="70" class="trace-edge" />
                   <line x1="240" y1="70" x2="280" y2="70" class="trace-packet" />
 
                   <rect x="280" y="24" width="222" height="92" rx="14" class="trace-node" />
-                  <text x="391" y="62" text-anchor="middle" class="visual-badge">3X NATIONAL HONOURS</text>
-                  <text x="391" y="86" text-anchor="middle" class="visual-label">NUS LifeHack, AISG &amp; DSTA</text>
+                  <text x="391" y="60" text-anchor="middle" class="visual-badge">3X NATIONAL HONOURS</text>
+                  <text x="391" y="84" text-anchor="middle" class="visual-label">NUS LifeHack, AISG &amp; DSTA</text>
                 </svg>
               </div>
               <div class="highlight-card-footer">
-                <span class="highlight-meta">Cloud Buildathons &amp; Hackathons</span>
+                <span class="highlight-meta">Enterprise Workshops &amp; Hackathons</span>
                 <span class="highlight-jump-pill">Explore Honours &#8595;</span>
               </div>
             </article>
@@ -825,10 +882,10 @@
       <!-- Repo Showcase 01: Antigravity Agent Tracer & Harness -->
       <section class="repo-showcase surface-white scroll-stage" id="showcase-agent-tracer">
         <div class="hero-copy">
-          <span class="hero-eyebrow">AGENTIC OBSERVABILITY &amp; WORKSPACE, PYTHON &amp; VIS.JS</span>
+          <span class="hero-eyebrow">AI DEVELOPER WORKSPACE &amp; VISUALISER</span>
           <h2 class="hero-headline stage-hero-headline">Antigravity Agent Tracer &amp; Harness</h2>
           <p class="hero-subhead">
-            Visualise every step an AI agent takes in real time, from user prompt and LLM planning to tool execution and subagent delegation, paired with a 2x2 workspace that monitors 200k token context usage.
+            Watch every step an AI agent takes live, from user prompt and planning to tool calls and subagents, inside a unified workspace with a 200k token memory meter.
           </p>
           <div class="cta-pill-group">
             <a
@@ -862,93 +919,111 @@
           </div>
 
           <div class="hardware-deck stage-deck" id="flagship-tracer-sandbox">
-            <div class="hardware-bezel">
-              <div class="bezel-top-bar">
+            <div class="hardware-bezel browser-window-bezel">
+              <div class="bezel-top-bar browser-top-bar">
                 <div class="bezel-dots" aria-hidden="true">
                   <span></span><span></span><span></span>
                 </div>
-                <div class="bezel-title">ANTIGRAVITY AGENT TRACER &amp; HARNESS, INTERACTIVE ARCHITECTURE</div>
+                <div class="browser-tab-strip" role="tablist" aria-label="Agent Tracer workspace tabs">
+                  <button type="button" class="browser-tab active" data-tracer-tab="timeline" role="tab" aria-selected="true">
+                    <span>Execution Timeline</span>
+                  </button>
+                  <button type="button" class="browser-tab" data-tracer-tab="memory" role="tab" aria-selected="false">
+                    <span>200k Memory Meter</span>
+                  </button>
+                </div>
               </div>
 
-              <div class="bezel-grid">
-                <div class="bezel-pane">
-                  <div class="pane-header">
-                    <span class="pane-label">AGENT EXECUTION GRAPH (CLICK ANY STEP)</span>
-                    <span class="pane-badge" id="flagship-tracer-readout">Step #02 PLANNER, 640ms</span>
+              <div class="browser-single-pane">
+                <div class="pane-header">
+                  <span class="pane-label" id="tracer-pane-label">LIVE AGENT STEP VISUALISER (CLICK ANY STEP)</span>
+                  <span class="pane-badge" id="flagship-tracer-readout">Step 02: AI Planner (640ms)</span>
+                </div>
+
+                <div class="about-svg-stage">
+                  <!-- Tab 1: Execution Timeline -->
+                  <div class="about-scene is-active" data-tracer-scene="timeline">
+                    <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
+                      <path class="trace-edge" d="M 96 58 L 136 58" />
+                      <path class="trace-edge" d="M 244 46 L 274 34" />
+                      <path class="trace-edge" d="M 244 70 L 274 82" />
+                      <path class="trace-packet hero-stream" d="M 96 58 L 136 58" />
+                      <path class="trace-packet hero-stream" d="M 244 46 L 274 34" />
+                      <path class="trace-packet hero-stream" d="M 244 70 L 274 82" />
+
+                      <g class="clickable-node" data-fstep="user">
+                        <rect class="trace-node" x="12" y="38" width="84" height="40" rx="8" />
+                        <text x="54" y="55" text-anchor="middle" class="visual-label">01: PROMPT</text>
+                        <text x="54" y="68" text-anchor="middle" class="deck-svg-label">User, 12ms</text>
+                      </g>
+
+                      <g class="clickable-node is-selected" data-fstep="planner">
+                        <rect class="trace-node node-accent" x="136" y="34" width="108" height="48" rx="9" />
+                        <text x="190" y="54" text-anchor="middle" class="visual-badge">02: AI PLANNER</text>
+                        <text x="190" y="69" text-anchor="middle" class="visual-label">Reasoning, 640ms</text>
+                      </g>
+
+                      <g class="clickable-node" data-fstep="mcp">
+                        <rect class="trace-node node-accent" x="274" y="14" width="94" height="38" rx="7" />
+                        <text x="321" y="31" text-anchor="middle" class="visual-badge">03: TOOL CALL</text>
+                        <text x="321" y="43" text-anchor="middle" class="deck-svg-label">Search, 310ms</text>
+                      </g>
+
+                      <g class="clickable-node" data-fstep="subagent">
+                        <rect class="trace-node" x="274" y="62" width="94" height="38" rx="7" />
+                        <text x="321" y="79" text-anchor="middle" class="visual-label">04: SUBAGENT</text>
+                        <text x="321" y="91" text-anchor="middle" class="deck-svg-label">Verify, 1.2s</text>
+                      </g>
+                    </svg>
                   </div>
-                  <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
-                    <path class="trace-edge" d="M 96 58 L 136 58" />
-                    <path class="trace-edge" d="M 244 46 L 274 34" />
-                    <path class="trace-edge" d="M 244 70 L 274 82" />
-                    <path class="trace-packet hero-stream" d="M 96 58 L 136 58" />
-                    <path class="trace-packet hero-stream" d="M 244 46 L 274 34" />
-                    <path class="trace-packet hero-stream" d="M 244 70 L 274 82" />
 
-                    <g class="clickable-node" data-fstep="user">
-                      <rect class="trace-node" x="12" y="38" width="84" height="40" rx="8" />
-                      <text x="54" y="55" text-anchor="middle" class="visual-label">01: PROMPT</text>
-                      <text x="54" y="68" text-anchor="middle" class="deck-svg-label">User, 12ms</text>
-                    </g>
+                  <!-- Tab 2: 200k Memory Meter -->
+                  <div class="about-scene" data-tracer-scene="memory">
+                    <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
+                      <defs>
+                        <clipPath id="flagship-bar-clip">
+                          <rect x="30" y="86" width="320" height="7" rx="3.5" />
+                        </clipPath>
+                      </defs>
+                      <path class="trace-edge" d="M 176 22 L 204 22" />
+                      <path class="trace-edge" d="M 176 48 L 204 48" />
+                      <path class="trace-packet hero-stream" d="M 176 22 L 204 22" />
+                      <path class="trace-packet hero-stream" d="M 176 48 L 204 48" />
+                      <rect class="deck-node active-ring" x="18" y="10" width="158" height="22" rx="5" />
+                      <text x="97" y="24" text-anchor="middle" class="visual-badge">PANE 1: AGENT CHAT</text>
+                      <rect class="deck-node" x="204" y="10" width="158" height="22" rx="5" />
+                      <text x="283" y="24" text-anchor="middle" class="visual-label">PANE 2: SUBAGENTS</text>
+                      <rect class="deck-node active-ring" x="18" y="36" width="158" height="22" rx="5" />
+                      <text x="97" y="50" text-anchor="middle" class="visual-badge">PANE 3: STEP FLOW</text>
+                      <rect class="deck-node" x="204" y="36" width="158" height="22" rx="5" />
+                      <text x="283" y="50" text-anchor="middle" class="visual-label">PANE 4: SCHEDULES</text>
 
-                    <g class="clickable-node is-selected" data-fstep="planner">
-                      <rect class="trace-node node-accent" x="136" y="34" width="108" height="48" rx="9" />
-                      <text x="190" y="54" text-anchor="middle" class="visual-badge">02: PLANNER</text>
-                      <text x="190" y="69" text-anchor="middle" class="visual-label">LLM, 640ms</text>
-                    </g>
-
-                    <g class="clickable-node" data-fstep="mcp">
-                      <rect class="trace-node node-accent" x="274" y="14" width="94" height="38" rx="7" />
-                      <text x="321" y="31" text-anchor="middle" class="visual-badge">03: MCP TOOL</text>
-                      <text x="321" y="43" text-anchor="middle" class="deck-svg-label">Search, 310ms</text>
-                    </g>
-
-                    <g class="clickable-node" data-fstep="subagent">
-                      <rect class="trace-node" x="274" y="62" width="94" height="38" rx="7" />
-                      <text x="321" y="79" text-anchor="middle" class="visual-label">04: SUBAGENT</text>
-                      <text x="321" y="91" text-anchor="middle" class="deck-svg-label">Verify, 1.2s</text>
-                    </g>
-                  </svg>
-                  <div class="sandbox-pills">
-                    <button type="button" class="sandbox-pill" data-fstep-btn="user">01: User Prompt</button>
-                    <button type="button" class="sandbox-pill active" data-fstep-btn="planner">02: Planner LLM</button>
-                    <button type="button" class="sandbox-pill" data-fstep-btn="mcp">03: MCP Tool</button>
-                    <button type="button" class="sandbox-pill" data-fstep-btn="subagent">04: Subagent</button>
+                      <rect class="deck-node" x="18" y="64" width="344" height="38" rx="7" />
+                      <text x="30" y="79" class="visual-label" id="flagship-bar-label">MEMORY USED: 142k / 200k TOKENS (71% CACHED)</text>
+                      <rect x="30" y="86" width="320" height="7" rx="3.5" fill="var(--bg-subtle)" />
+                      <rect class="token-fill-bar" id="flagship-token-bar" clip-path="url(#flagship-bar-clip)" x="30" y="86" width="219" height="7" rx="3.5" fill="var(--accent)" />
+                    </svg>
                   </div>
                 </div>
 
-                <div class="bezel-pane">
-                  <div class="pane-header">
-                    <span class="pane-label">2x2 WORKSPACE &amp; CONTEXT WINDOW METER</span>
-                    <span class="pane-badge" id="flagship-harness-readout">142k / 200k, 71% Cached</span>
-                  </div>
-                  <svg class="hero-deck-svg" viewBox="0 0 360 110" aria-hidden="true">
-                    <defs>
-                      <clipPath id="flagship-bar-clip">
-                        <rect x="26" y="85" width="308" height="7" rx="3.5" />
-                      </clipPath>
-                    </defs>
-                    <path class="trace-edge" d="M 168 19 L 192 19" />
-                    <path class="trace-edge" d="M 168 45 L 192 45" />
-                    <path class="trace-packet hero-stream" d="M 168 19 L 192 19" />
-                    <path class="trace-packet hero-stream" d="M 168 45 L 192 45" />
-                    <rect class="deck-node active-ring" x="14" y="8" width="154" height="22" rx="5" />
-                    <text x="91" y="22" text-anchor="middle" class="visual-badge">PANE 1: AGENT CHAT</text>
-                    <rect class="deck-node" x="192" y="8" width="154" height="22" rx="5" />
-                    <text x="269" y="22" text-anchor="middle" class="visual-label">PANE 2: SUBAGENT</text>
-                    <rect class="deck-node active-ring" x="14" y="34" width="154" height="22" rx="5" />
-                    <text x="91" y="48" text-anchor="middle" class="visual-badge">PANE 3: TRACE GRAPH</text>
-                    <rect class="deck-node" x="192" y="34" width="154" height="22" rx="5" />
-                    <text x="269" y="48" text-anchor="middle" class="visual-label">PANE 4: AUTOMATIONS</text>
+                <p class="about-live-story" id="tracer-live-story">
+                  Turns raw background logs into an interactive visual timeline so engineers can inspect every prompt, reasoning step, and tool call at a glance.
+                </p>
 
-                    <rect class="deck-node" x="14" y="62" width="332" height="38" rx="7" />
-                    <text x="26" y="77" class="visual-label" id="flagship-bar-label">CONTEXT SATURATION: 142k / 200k TOKENS</text>
-                    <rect x="26" y="85" width="308" height="7" rx="3.5" fill="var(--bg-subtle)" />
-                    <rect class="token-fill-bar" id="flagship-token-bar" clip-path="url(#flagship-bar-clip)" x="26" y="85" width="219" height="7" rx="3.5" fill="var(--accent)" />
-                  </svg>
-                  <div class="sandbox-pills">
-                    <button type="button" class="sandbox-pill" data-fturn-btn="turn2">Turn 2: 48k</button>
-                    <button type="button" class="sandbox-pill active" data-fturn-btn="turn8">Turn 8: 142k</button>
-                    <button type="button" class="sandbox-pill" data-fturn-btn="turn14">Turn 14: 196k Compact</button>
+                <div class="browser-single-footer">
+                  <div class="about-inline-tags">
+                    <span class="stack-tag" id="tracer-tag-1">Visual Step Flow</span>
+                    <span class="stack-tag" id="tracer-tag-2">200k Memory Bar</span>
+                    <span class="stack-tag" id="tracer-tag-3">Zero Cloud Setup</span>
+                  </div>
+
+                  <div class="about-pane-actions">
+                    <button type="button" class="about-next-tab-btn" id="tracer-next-tab-btn">
+                      <span id="tracer-next-tab-label">Next tab: 200k Memory Meter &#8594;</span>
+                    </button>
+                    <a href="https://github.com/elim316/Antigravity-Agent-Tracer-Plugin" target="_blank" rel="noopener noreferrer" class="about-scroll-pill">
+                      <span>Open Repo &#8599;</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -960,10 +1035,10 @@
       <!-- Repo Showcase 02: Smart Meeting Prep & Dossier Agent -->
       <section class="repo-showcase surface-alabaster scroll-stage" id="showcase-meeting-prep">
         <div class="hero-copy">
-          <span class="hero-eyebrow">MULTI-CORPUS AGENT &amp; EVALUATION HARNESS, PYTHON</span>
+          <span class="hero-eyebrow">AUTOMATED EXECUTIVE BRIEFINGS &amp; FACT CHECKER</span>
           <h2 class="hero-headline stage-hero-headline">Smart Meeting Prep &amp; Dossier Agent</h2>
           <p class="hero-subhead">
-            Two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings, verified by a 5-scenario, 36-check hallucination linter.
+            Pulls together emails, chats, calendar invites, and documents into clean one-page meeting briefings, backed by 36 automated quality checks so links are never made up.
           </p>
           <div class="cta-pill-group">
             <a
@@ -987,20 +1062,31 @@
           </div>
 
           <div class="hardware-deck stage-deck" id="flagship-prep-sandbox">
-            <div class="hardware-bezel">
-              <div class="bezel-top-bar">
+            <div class="hardware-bezel browser-window-bezel">
+              <div class="bezel-top-bar browser-top-bar">
                 <div class="bezel-dots" aria-hidden="true">
                   <span></span><span></span><span></span>
                 </div>
-                <div class="bezel-title">MEETING PREP &amp; DOSSIER AGENT, EVALUATION HARNESS</div>
+                <div class="browser-tab-strip" role="tablist" aria-label="Meeting Dossier workflow tabs">
+                  <button type="button" class="browser-tab" data-fprep-btn="nbd" role="tab" aria-selected="false">
+                    <span>6 PM Evening Brief</span>
+                  </button>
+                  <button type="button" class="browser-tab active" data-fprep-btn="linter" role="tab" aria-selected="true">
+                    <span>36-Check Fact Linter</span>
+                  </button>
+                  <button type="button" class="browser-tab" data-fprep-btn="t1h" role="tab" aria-selected="false">
+                    <span>1-Hour Reminder</span>
+                  </button>
+                </div>
               </div>
 
-              <div class="bezel-grid">
-                <div class="bezel-pane">
-                  <div class="pane-header">
-                    <span class="pane-label">TWO-STAGE SCHEDULED PIPELINE</span>
-                    <span class="pane-badge" id="flagship-prep-readout">Stage 2: Hallucination Linter (36/36)</span>
-                  </div>
+              <div class="browser-single-pane">
+                <div class="pane-header">
+                  <span class="pane-label">TWO-STAGE SCHEDULED PIPELINE (CLICK ANY TAB OR STEP)</span>
+                  <span class="pane-badge" id="flagship-prep-readout">36 / 36 Quality Checks Passed</span>
+                </div>
+
+                <div class="about-svg-stage">
                   <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
                     <path class="trace-edge" d="M 108 58 L 132 58" />
                     <path class="trace-edge" d="M 248 58 L 272 58" />
@@ -1009,63 +1095,43 @@
 
                     <g class="clickable-node" data-fprep="nbd">
                       <rect class="trace-node" x="14" y="24" width="94" height="68" rx="8" />
-                      <text x="61" y="48" text-anchor="middle" class="visual-label">01: STAGE 1</text>
-                      <text x="61" y="66" text-anchor="middle" class="visual-badge">18:00 NBD</text>
+                      <text x="61" y="48" text-anchor="middle" class="visual-label">01: EVENING</text>
+                      <text x="61" y="66" text-anchor="middle" class="visual-badge">6 PM Day Before</text>
                     </g>
 
                     <g class="clickable-node is-selected" data-fprep="linter">
                       <rect class="trace-node node-accent" x="132" y="18" width="116" height="80" rx="8" />
-                      <text x="190" y="42" text-anchor="middle" class="visual-label">02: LINTER</text>
+                      <text x="190" y="42" text-anchor="middle" class="visual-label">02: FACT CHECK</text>
                       <text x="190" y="60" text-anchor="middle" class="visual-badge">&#10003; 36 Checks</text>
-                      <text x="190" y="76" text-anchor="middle" class="visual-label">0 Hallucinations</text>
+                      <text x="190" y="76" text-anchor="middle" class="visual-label">0 Fake Links</text>
                     </g>
 
                     <g class="clickable-node" data-fprep="t1h">
                       <rect class="trace-node" x="272" y="24" width="94" height="68" rx="8" />
-                      <text x="319" y="48" text-anchor="middle" class="visual-label">03: STAGE 2</text>
-                      <text x="319" y="66" text-anchor="middle" class="visual-badge">T-1h Window</text>
+                      <text x="319" y="48" text-anchor="middle" class="visual-label">03: PRE-CALL</text>
+                      <text x="319" y="66" text-anchor="middle" class="visual-badge">1 Hour Before</text>
                     </g>
                   </svg>
-                  <div class="sandbox-pills">
-                    <button type="button" class="sandbox-pill" data-fprep-btn="nbd">01: 18:00 NBD Cron</button>
-                    <button type="button" class="sandbox-pill active" data-fprep-btn="linter">02: 36-Check Linter</button>
-                    <button type="button" class="sandbox-pill" data-fprep-btn="t1h">03: T-1h Window</button>
-                  </div>
                 </div>
 
-                <div class="bezel-pane">
-                  <div class="pane-header">
-                    <span class="pane-label">5-SCENARIO MOCK EVALUATION SUITE</span>
-                    <span class="pane-badge" id="flagship-prep-badge">Zero Hallucinated URLs</span>
+                <p class="about-live-story" id="prep-live-story">
+                  Every citation, participant role, and document link is checked across 36 automated rules before delivery so busy teams never see invented facts.
+                </p>
+
+                <div class="browser-single-footer">
+                  <div class="about-inline-tags">
+                    <span class="stack-tag" id="prep-tag-1">100% Verified Links</span>
+                    <span class="stack-tag" id="prep-tag-2">Calendar, Gmail &amp; Docs</span>
+                    <span class="stack-tag" id="prep-tag-3">Zero Duplicate Alerts</span>
                   </div>
-                  <div class="telemetry-metrics">
-                    <div class="metric-row">
-                      <div class="metric-top">
-                        <span>Citation &amp; Source URL Verification</span>
-                        <span class="metric-val" id="flagship-prep-bar1-val">100% Grounded</span>
-                      </div>
-                      <div class="metric-track">
-                        <div class="metric-fill fill-green" id="flagship-prep-bar1-fill" style="width: 100%"></div>
-                      </div>
-                    </div>
-                    <div class="metric-row">
-                      <div class="metric-top">
-                        <span>Cross-Corpus Synthesis (Calendar/Gmail/Chat/Drive)</span>
-                        <span class="metric-val" id="flagship-prep-bar2-val">5 / 5 Scenarios</span>
-                      </div>
-                      <div class="metric-track">
-                        <div class="metric-fill fill-blue" id="flagship-prep-bar2-fill" style="width: 100%"></div>
-                      </div>
-                    </div>
-                    <div class="metric-row">
-                      <div class="metric-top">
-                        <span>Stateless 60-Min Window Partitioning</span>
-                        <span class="metric-val" id="flagship-prep-bar3-val">Zero Duplicates</span>
-                      </div>
-                      <div class="metric-track">
-                        <div class="metric-fill fill-teal" id="flagship-prep-bar3-fill" style="width: 100%"></div>
-                      </div>
-                    </div>
+
+                  <div class="about-pane-actions">
+                    <button type="button" class="about-next-tab-btn" id="prep-next-tab-btn">
+                      <span id="prep-next-tab-label">Next tab: 1-Hour Reminder &#8594;</span>
+                    </button>
+                    <a href="https://github.com/elim316/Antigravity-Meeting-Prep-Agent" target="_blank" rel="noopener noreferrer" class="about-scroll-pill">
+                      <span>Open Repo &#8599;</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -1078,9 +1144,9 @@
       <section class="repo-showcase surface-white scroll-stage" id="showcase-uq-xai">
         <div class="hero-copy">
           <span class="hero-eyebrow">FIRST AUTHOR, APSIPA ASC 2025 &amp; IEEE XPLORE (DOC 11249263)</span>
-          <h2 class="hero-headline stage-hero-headline">Uncertainty &amp; Explainable AI for Battery Analytics</h2>
+          <h2 class="hero-headline stage-hero-headline">Uncertainty &amp; Explainable AI for Battery Health</h2>
           <p class="hero-subhead">
-            Unified deep learning framework quantifying both model and data uncertainty via Adaptive Conformal Inference (ACI), calibration metrics (PICP, ECE), and SHAP/LIME attributions.
+            Deep learning framework that predicts battery health alongside a guaranteed confidence range (95.2% accuracy) and explains which sensor signals drove every forecast.
           </p>
           <div class="cta-pill-group">
             <a
@@ -1110,20 +1176,31 @@
           </div>
 
           <div class="hardware-deck stage-deck" id="flagship-uq-sandbox">
-            <div class="hardware-bezel">
-              <div class="bezel-top-bar">
+            <div class="hardware-bezel browser-window-bezel">
+              <div class="bezel-top-bar browser-top-bar">
                 <div class="bezel-dots" aria-hidden="true">
                   <span></span><span></span><span></span>
                 </div>
-                <div class="bezel-title">A*STAR BATTERY SOH FRAMEWORK, CONFORMAL &amp; XAI SANDBOX</div>
+                <div class="browser-tab-strip" role="tablist" aria-label="Battery confidence level tabs">
+                  <button type="button" class="browser-tab" data-fci-btn="90" role="tab" aria-selected="false">
+                    <span>90% Confidence</span>
+                  </button>
+                  <button type="button" class="browser-tab active" data-fci-btn="95" role="tab" aria-selected="true">
+                    <span>95% Confidence (IEEE)</span>
+                  </button>
+                  <button type="button" class="browser-tab" data-fci-btn="99" role="tab" aria-selected="false">
+                    <span>99% Safety Margin</span>
+                  </button>
+                </div>
               </div>
 
-              <div class="bezel-grid">
-                <div class="bezel-pane">
-                  <div class="pane-header">
-                    <span class="pane-label" id="flagship-aci-title">CONFORMAL BAND (95% ACI)</span>
-                    <span class="pane-badge" id="flagship-aci-readout">PICP: 0.952, ECE: 0.012</span>
-                  </div>
+              <div class="browser-single-pane">
+                <div class="pane-header">
+                  <span class="pane-label" id="flagship-aci-title">BATTERY HEALTH FORECAST &amp; CONFIDENCE RANGE (95% TARGET)</span>
+                  <span class="pane-badge" id="flagship-aci-readout">95.2% Verified Coverage</span>
+                </div>
+
+                <div class="about-svg-stage">
                   <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
                     <path class="trace-edge" d="M 102 28 L 136 28" />
                     <path class="trace-edge" d="M 244 28 L 278 28" />
@@ -1132,20 +1209,20 @@
 
                     <g class="clickable-node" data-fci-node="90">
                       <rect class="trace-node" x="14" y="10" width="88" height="36" rx="7" />
-                      <text x="58" y="25" text-anchor="middle" class="visual-label">01: CYCLES</text>
-                      <text x="58" y="37" text-anchor="middle" class="deck-svg-label">90% ACI, 0.904</text>
+                      <text x="58" y="25" text-anchor="middle" class="visual-label">01: SENSORS</text>
+                      <text x="58" y="37" text-anchor="middle" class="deck-svg-label">90% Band</text>
                     </g>
 
                     <g class="clickable-node is-selected" data-fci-node="95">
                       <rect class="trace-node node-accent" x="136" y="8" width="108" height="40" rx="8" />
-                      <text x="190" y="25" text-anchor="middle" class="visual-badge">02: CNN + ACI</text>
-                      <text x="190" y="39" text-anchor="middle" class="visual-label">95% ACI, 0.952</text>
+                      <text x="190" y="25" text-anchor="middle" class="visual-badge">02: AI MODEL</text>
+                      <text x="190" y="39" text-anchor="middle" class="visual-label">95.2% Accuracy</text>
                     </g>
 
                     <g class="clickable-node" data-fci-node="99">
                       <rect class="trace-node" x="278" y="10" width="88" height="36" rx="7" />
-                      <text x="322" y="25" text-anchor="middle" class="visual-label">03: SHAP/LIME</text>
-                      <text x="322" y="37" text-anchor="middle" class="deck-svg-label">99% ACI, 0.989</text>
+                      <text x="322" y="25" text-anchor="middle" class="visual-label">03: EXPLAINER</text>
+                      <text x="322" y="37" text-anchor="middle" class="deck-svg-label">99% Safety</text>
                     </g>
 
                     <path
@@ -1166,48 +1243,28 @@
                     />
                     <circle class="trace-node node-accent" cx="130" cy="73" r="4.5" />
                     <circle class="trace-node node-accent" cx="230" cy="85" r="4.5" />
-                    <text x="22" y="110" class="visual-label">McMaster &amp; Oxford Degradation Curve</text>
+                    <text x="22" y="110" class="visual-label">McMaster &amp; Oxford Battery Ageing Curve</text>
                   </svg>
-                  <div class="sandbox-pills">
-                    <button type="button" class="sandbox-pill" data-fci-btn="90">90% Confidence</button>
-                    <button type="button" class="sandbox-pill active" data-fci-btn="95">95% Confidence</button>
-                    <button type="button" class="sandbox-pill" data-fci-btn="99">99% Confidence</button>
-                  </div>
                 </div>
 
-                <div class="bezel-pane">
-                  <div class="pane-header">
-                    <span class="pane-label">CALIBRATION &amp; POST-HOC EXPLAINABILITY</span>
-                    <span class="pane-badge" id="flagship-uq-badge">SHAP, LIME & IG</span>
+                <p class="about-live-story" id="uq-live-story">
+                  Rather than outputting a blind single guess, the model wraps every battery health forecast in a verified 95.2% confidence band and highlights voltage and heat impact.
+                </p>
+
+                <div class="browser-single-footer">
+                  <div class="about-inline-tags">
+                    <span class="stack-tag" id="uq-tag-1">95.2% Confidence Band</span>
+                    <span class="stack-tag" id="uq-tag-2">Voltage &amp; Heat Drivers</span>
+                    <span class="stack-tag" id="uq-tag-3">IEEE Xplore First Author</span>
                   </div>
-                  <div class="telemetry-metrics">
-                    <div class="metric-row">
-                      <div class="metric-top">
-                        <span id="flagship-uq-bar1-label">Prediction Interval Coverage (PICP @ 95%)</span>
-                        <span class="metric-val" id="flagship-uq-bar1-val">95.2% Empirical</span>
-                      </div>
-                      <div class="metric-track">
-                        <div class="metric-fill fill-teal" id="flagship-uq-bar1-fill" style="width: 95%"></div>
-                      </div>
-                    </div>
-                    <div class="metric-row">
-                      <div class="metric-top">
-                        <span>Expected Calibration Error (ECE Reduction)</span>
-                        <span class="metric-val" id="flagship-uq-bar2-val">0.012 ECE</span>
-                      </div>
-                      <div class="metric-track">
-                        <div class="metric-fill fill-blue" id="flagship-uq-bar2-fill" style="width: 92%"></div>
-                      </div>
-                    </div>
-                    <div class="metric-row">
-                      <div class="metric-top">
-                        <span>Feature Attribution Consistency (SHAP / LIME)</span>
-                        <span class="metric-val" id="flagship-uq-bar3-val">Voltage &amp; Temp</span>
-                      </div>
-                      <div class="metric-track">
-                        <div class="metric-fill fill-green" id="flagship-uq-bar3-fill" style="width: 94%"></div>
-                      </div>
-                    </div>
+
+                  <div class="about-pane-actions">
+                    <button type="button" class="about-next-tab-btn" id="uq-next-tab-btn">
+                      <span id="uq-next-tab-label">Next tab: 99% Safety Margin &#8594;</span>
+                    </button>
+                    <a href="https://ieeexplore.ieee.org/document/11249263" target="_blank" rel="noopener noreferrer" class="about-scroll-pill">
+                      <span>Read Paper &#8599;</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -1528,13 +1585,13 @@
     <section id="stack" class="section container" data-section-target="stack">
       <div class="section-header reveal-on-scroll">
         <div>
-          <span class="section-eyebrow">SPECIFICATIONS &amp; TELEMETRY</span>
+          <span class="section-eyebrow">BY THE NUMBERS</span>
           <h2 class="section-title">By the numbers. Built for production.</h2>
-          <p class="section-subtitle">Compare the production architecture against legacy baselines, or click any tile below to filter repositories.</p>
+          <p class="section-subtitle">Compare the automated AI systems against traditional manual baselines, or click any tile below to explore the repositories.</p>
         </div>
 
         <!-- Apple-Style Before vs. After Architecture Comparison Toggle -->
-        <div class="bento-compare-bar" id="bento-compare-bar" role="tablist" aria-label="Compare production architecture vs legacy baseline">
+        <div class="bento-compare-bar" id="bento-compare-bar" role="tablist" aria-label="Compare automated AI systems vs traditional baseline">
           <!-- [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL BENTO BUTTON & TILES TO RE-ENABLE JUMPGATE] -->
           <button
             type="button"
@@ -1543,7 +1600,7 @@
             role="tab"
             aria-selected="true"
           >
-            With Agentic &amp; Conformal AI
+            With Automated AI Systems
           </button>
           <button
             type="button"
@@ -1552,7 +1609,7 @@
             role="tab"
             aria-selected="false"
           >
-            Legacy Baseline (Before)
+            Traditional Baseline (Before)
           </button>
         </div>
       </div>
@@ -1561,38 +1618,38 @@
       <div class="apple-bento-specs reveal-on-scroll" id="bento-specs-grid">
         <button type="button" class="bento-spec-tile" data-bento-target="#inspect-agent-tracer">
           <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">REAL-TIME AGENT TELEMETRY</span>
-            <span class="bento-delta-pill" id="bento-delta-1">Zero Cloud Lock-In</span>
+            <span class="bento-spec-eyebrow">AGENT VISIBILITY</span>
+            <span class="bento-delta-pill" id="bento-delta-1">Live Visual Timeline</span>
           </div>
           <span class="bento-spec-stat stat-blue" id="bento-stat-1">200k</span>
-          <span class="bento-spec-caption" id="bento-cap-1">Live Connect-RPC trajectory spans and token context window gauge in Antigravity Harness.</span>
+          <span class="bento-spec-caption" id="bento-cap-1">Live step-by-step agent visualiser and 200k token memory bar inside Antigravity Harness.</span>
         </button>
 
         <button type="button" class="bento-spec-tile" data-bento-target="#about-google">
           <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">TECHNICAL ENABLEMENT</span>
-            <span class="bento-delta-pill" id="bento-delta-2">4 Institutions</span>
+            <span class="bento-spec-eyebrow">TECHNICAL WORKSHOPS</span>
+            <span class="bento-delta-pill" id="bento-delta-2">4 Partner Institutions</span>
           </div>
           <span class="bento-spec-stat stat-teal" id="bento-stat-2">4,000+</span>
-          <span class="bento-spec-caption" id="bento-cap-2">Engineers and students trained across GovTech, DBS Bank, NTU Singapore, and A*STAR.</span>
+          <span class="bento-spec-caption" id="bento-cap-2">Engineers and students trained in hands-on cloud and AI workshops across GovTech, DBS, NTU, and A*STAR.</span>
         </button>
 
         <button type="button" class="bento-spec-tile" data-bento-target="#projects-agentic">
           <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">EVALUATION RIGOUR</span>
-            <span class="bento-delta-pill" id="bento-delta-3">36 Automated Gates</span>
+            <span class="bento-spec-eyebrow">FACT VERIFICATION</span>
+            <span class="bento-delta-pill" id="bento-delta-3">36 Quality Checks</span>
           </div>
           <span class="bento-spec-stat stat-emerald" id="bento-stat-3">100%</span>
-          <span class="bento-spec-caption" id="bento-cap-3">36/36 multi-corpus linter assertions verifying zero hallucinated links across meeting dossiers.</span>
+          <span class="bento-spec-caption" id="bento-cap-3">Automated fact checks verifying every document link and speaker role before sending meeting briefings.</span>
         </button>
 
         <button type="button" class="bento-spec-tile" data-bento-target="#projects-ml">
           <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">IEEE XPLORE RESEARCH</span>
-            <span class="bento-delta-pill" id="bento-delta-4">0.012 ECE Calibrated</span>
+            <span class="bento-spec-eyebrow">IEEE PUBLISHED AI</span>
+            <span class="bento-delta-pill" id="bento-delta-4">Verified Error Range</span>
           </div>
           <span class="bento-spec-stat stat-amber" id="bento-stat-4">95.2%</span>
-          <span class="bento-spec-caption" id="bento-cap-4">Empirical conformal coverage (PICP) for battery State-of-Health deep learning at A*STAR.</span>
+          <span class="bento-spec-caption" id="bento-cap-4">Verified confidence range for deep learning battery health predictions published in IEEE Xplore.</span>
         </button>
       </div>
 
@@ -1880,6 +1937,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261008-26"></script>
+  <script src="app.js?v=20261009-27"></script>
 </body>
 </html>
