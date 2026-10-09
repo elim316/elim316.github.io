@@ -123,11 +123,11 @@ dependencies:
 
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
-- Last updated: 2026-10-08
-- Asset version in `index.html`: `?v=20261008-26`
+- Last updated: 2026-10-09
+- Asset version in `index.html`: `?v=20261009-27`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
-  * Upgraded `#about-hardware-deck` into a macOS browser window tab bar (`.browser-top-bar` + `.browser-tab-strip`) right beside the traffic-light dots with `Next tab ->` cycling, zero text truncation, concise chapter stories, floating frosted carousel scroll buttons (`#highlights-edge-prev` / `#highlights-edge-next`) on `#highlights-section`, and stage `↑` / `↓` quick-scroll buttons (`#stage-dock-prev-btn` / `#stage-dock-next-btn`) inside `#apple-stage-dock`.
+  * Unified all 5 visible stage windows (`#hero-hardware-deck`, `#about-hardware-deck` with `Education` tab, `#flagship-tracer-sandbox`, `#flagship-prep-sandbox`, and `#flagship-uq-sandbox`) onto connected top macOS browser tabs (`.browser-window-bezel` + `.browser-top-bar` + `.browser-tab-strip` + `.browser-single-pane`), added Apple-style oversized gradient KPI numbers (`200k`, `95.2%`, `4,000+` via `.highlight-pop-number`) to `#highlights-section`, fixed descender clipping on `.bento-spec-stat` (`line-height: 1.24; padding-bottom: 4px`), and replaced technical acronyms (`No UQ`, `Ad-Hoc`, `JSONL`, `PICP`, `ECE`) across `#highlights-section` and `#stack` with recruiter-friendly plain English.
   * Added 6 Apple-inspired visual and functional upgrades:
     1. "Get the highlights." horizontal carousel (`#highlights-section` with
        `#highlights-track`, `#highlights-dots`, and arrow controls) at the top of
