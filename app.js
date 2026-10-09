@@ -860,20 +860,20 @@
       astar: {
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, A*STAR SINGAPORE",
         bezelStatus: "SEP 2024 TO MAY 2025",
-        paneLabel: "CONFORMAL PREDICTION & EXPLAINABLE AI",
+        paneLabel: "BATTERY HEALTH AI & EXPLAINABILITY",
         paneBadge: "A*STAR Singapore",
         readout: "Tab 03 / 04",
-        nextTabLabel: "Next tab: Glasgow & Life \u2192",
+        nextTabLabel: "Next tab: Education \u2192",
         story:
-          "AI Research Intern at A*STAR designing an uncertainty-aware deep learning and SHAP/LIME explainability framework for battery analytics, published as first author in IEEE Xplore.",
+          "AI Research Intern at A*STAR building deep learning models that predict battery health with a verified 95.2% confidence range and explain which sensor signals matter most, published as first author in IEEE Xplore.",
         tags: [
           "1st Author IEEE Xplore (APSIPA 2025)",
-          "95.2% Conformal Coverage (0.012 ECE)",
-          "SHAP & LIME Explainability",
+          "95.2% Confidence Range",
+          "Voltage & Heat Drivers",
         ],
       },
       beyond: {
-        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, EDUCATION & LIFE",
+        bezelTitle: "INTERACTIVE ENGINEERING PROFILE, EDUCATION",
         bezelStatus: "GLASGOW, SIT & SINGAPORE",
         paneLabel: "HONOURS CS, HACKATHONS & COURT SPORTS",
         paneBadge: "Glasgow & SIT (2:1)",
@@ -985,6 +985,93 @@
   }
 
   function initFlagshipSandboxes() {
+    /* 0. Stage 1 Hero Browser Window (#hero-hardware-deck) */
+    const heroDeck = document.getElementById("hero-hardware-deck");
+    if (heroDeck) {
+      const heroTabs = {
+        tracer: {
+          paneLabel: "ANTIGRAVITY AGENT TRACER & WORKSPACE",
+          paneBadge: "Live Step Visualiser",
+          nextLabel: "Next tab: Battery & Medical AI \u2192",
+          story:
+            "Real-time visualiser that maps every prompt, planning step, tool call, and 200k memory window so engineers can see how AI agents think.",
+          tags: ["Live Step Timeline", "200k Memory Meter", "Zero Cloud Setup"],
+        },
+        research: {
+          paneLabel: "BATTERY HEALTH AI & EXPLAINABILITY (IEEE XPLORE)",
+          paneBadge: "95.2% Confidence Band",
+          nextLabel: "Next tab: Meeting Dossier \u2192",
+          story:
+            "First-author IEEE research predicting battery health alongside a verified 95.2% confidence range and clear sensor explanations.",
+          tags: ["95.2% Confidence Band", "Voltage & Heat Drivers", "A*STAR Singapore"],
+        },
+        dossier: {
+          paneLabel: "SMART MEETING PREP & DOSSIER AGENT",
+          paneBadge: "36 / 36 Fact Checks",
+          nextLabel: "Next tab: Agent Tracer \u2192",
+          story:
+            "Scheduled AI workflow that prepares one-page executive meeting briefings from Calendar, Gmail, and Docs with zero made-up links.",
+          tags: ["36 Automated Checks", "Calendar, Gmail & Docs", "Zero Fake Links"],
+        },
+      };
+
+      const hTabBtns = heroDeck.querySelectorAll("[data-hero-tab]");
+      const hScenes = heroDeck.querySelectorAll("[data-hero-scene]");
+      const hPaneLabel = document.getElementById("hero-pane-label");
+      const hPaneBadge = document.getElementById("hero-pane-badge");
+      const hStory = document.getElementById("hero-live-story");
+      const hTag1 = document.getElementById("hero-tag-1");
+      const hTag2 = document.getElementById("hero-tag-2");
+      const hTag3 = document.getElementById("hero-tag-3");
+      const hNextBtn = document.getElementById("hero-next-tab-btn");
+      const hNextLabel = document.getElementById("hero-next-tab-label");
+      const hOrder = ["tracer", "research", "dossier"];
+      let hIdx = 0;
+      let hTimer = null;
+
+      function selectHeroTab(key) {
+        const cfg = heroTabs[key];
+        if (!cfg) return;
+        hIdx = Math.max(0, hOrder.indexOf(key));
+        hTabBtns.forEach((b) => {
+          const active = b.getAttribute("data-hero-tab") === key;
+          b.classList.toggle("active", active);
+          b.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        hScenes.forEach((s) => {
+          s.classList.toggle("is-active", s.getAttribute("data-hero-scene") === key);
+        });
+        if (hPaneLabel) hPaneLabel.textContent = cfg.paneLabel;
+        if (hPaneBadge) hPaneBadge.textContent = cfg.paneBadge;
+        if (hStory) hStory.textContent = cfg.story;
+        if (hNextLabel) hNextLabel.textContent = cfg.nextLabel;
+        if (hTag1 && cfg.tags[0]) hTag1.textContent = cfg.tags[0];
+        if (hTag2 && cfg.tags[1]) hTag2.textContent = cfg.tags[1];
+        if (hTag3 && cfg.tags[2]) hTag3.textContent = cfg.tags[2];
+      }
+
+      hTabBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (hTimer) clearInterval(hTimer);
+          selectHeroTab(btn.getAttribute("data-hero-tab"));
+        });
+      });
+
+      if (hNextBtn) {
+        hNextBtn.addEventListener("click", () => {
+          if (hTimer) clearInterval(hTimer);
+          hIdx = (hIdx + 1) % hOrder.length;
+          selectHeroTab(hOrder[hIdx]);
+        });
+      }
+
+      hTimer = setInterval(() => {
+        if (document.hidden) return;
+        hIdx = (hIdx + 1) % hOrder.length;
+        selectHeroTab(hOrder[hIdx]);
+      }, 6000);
+    }
+
     const fJumpgate = document.getElementById("flagship-jumpgate-sandbox");
     if (fJumpgate) {
       const fJgStages = {
@@ -1078,32 +1165,89 @@
       });
 
       jgTimer = setInterval(() => {
-      if (document.hidden) return;
+        if (document.hidden) return;
         jgIdx = (jgIdx + 1) % jgOrder.length;
         selectFlagshipJg(jgOrder[jgIdx]);
       }, 3600);
     }
 
     const tracerData = {
-      user: "Step #01 USER_INPUT, 12ms",
-      planner: "Step #02 PLANNER, 640ms",
-      mcp: "Step #03 CALL_MCP_TOOL, 310ms",
-      subagent: "Step #04 SUBAGENT, 1.2s",
+      user: "Step 01: User Prompt (12ms)",
+      planner: "Step 02: AI Planner (640ms)",
+      mcp: "Step 03: Tool Search (310ms)",
+      subagent: "Step 04: Subagent Check (1.2s)",
     };
 
     const fTracer = document.getElementById("flagship-tracer-sandbox");
     if (fTracer) {
       const fReadout = document.getElementById("flagship-tracer-readout");
+      const tPaneLabel = document.getElementById("tracer-pane-label");
+      const tStory = document.getElementById("tracer-live-story");
+      const tNextBtn = document.getElementById("tracer-next-tab-btn");
+      const tNextLabel = document.getElementById("tracer-next-tab-label");
+      const tTabs = fTracer.querySelectorAll("[data-tracer-tab]");
+      const tScenes = fTracer.querySelectorAll("[data-tracer-scene]");
       const fStepBtns = fTracer.querySelectorAll("[data-fstep-btn]");
       const fSvgNodes = fTracer.querySelectorAll("[data-fstep]");
       const stepOrder = ["user", "planner", "mcp", "subagent"];
       let stepIdx = 1;
       let stepTimer = null;
 
+      const tracerTabMeta = {
+        timeline: {
+          label: "LIVE AGENT STEP VISUALISER (CLICK ANY STEP)",
+          readout: "Step 02: AI Planner (640ms)",
+          story:
+            "Turns raw background logs into an interactive visual timeline so engineers can inspect every prompt, reasoning step, and tool call at a glance.",
+          nextLabel: "Next tab: 200k Memory Meter \u2192",
+        },
+        memory: {
+          label: "FOUR-PANE WORKSPACE & 200K MEMORY METER",
+          readout: "142k / 200k Tokens Used",
+          story:
+            "Tracks live memory usage across chat, subagents, step visualiser, and scheduled jobs, compacting older history automatically before hitting 200k tokens.",
+          nextLabel: "Next tab: Execution Timeline \u2192",
+        },
+      };
+
+      const tTabOrder = ["timeline", "memory"];
+      let tTabIdx = 0;
+
+      function selectTracerTab(tabKey) {
+        const cfg = tracerTabMeta[tabKey];
+        if (!cfg) return;
+        tTabIdx = Math.max(0, tTabOrder.indexOf(tabKey));
+        tTabs.forEach((b) => {
+          const active = b.getAttribute("data-tracer-tab") === tabKey;
+          b.classList.toggle("active", active);
+          b.setAttribute("aria-selected", active ? "true" : "false");
+        });
+        tScenes.forEach((s) => {
+          s.classList.toggle("is-active", s.getAttribute("data-tracer-scene") === tabKey);
+        });
+        if (tPaneLabel) tPaneLabel.textContent = cfg.label;
+        if (fReadout) fReadout.textContent = cfg.readout;
+        if (tStory) tStory.textContent = cfg.story;
+        if (tNextLabel) tNextLabel.textContent = cfg.nextLabel;
+      }
+
+      tTabs.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectTracerTab(btn.getAttribute("data-tracer-tab"));
+        });
+      });
+
+      if (tNextBtn) {
+        tNextBtn.addEventListener("click", () => {
+          tTabIdx = (tTabIdx + 1) % tTabOrder.length;
+          selectTracerTab(tTabOrder[tTabIdx]);
+        });
+      }
+
       function selectFlagshipStep(stepKey) {
         if (!stepKey || !tracerData[stepKey]) return;
         stepIdx = Math.max(0, stepOrder.indexOf(stepKey));
-        if (fReadout) {
+        if (fReadout && tTabOrder[tTabIdx] === "timeline") {
           fReadout.textContent = tracerData[stepKey];
         }
         fStepBtns.forEach((b) =>
@@ -1128,112 +1272,39 @@
       });
 
       stepTimer = setInterval(() => {
-      if (document.hidden) return;
+        if (document.hidden) return;
         stepIdx = (stepIdx + 1) % stepOrder.length;
         selectFlagshipStep(stepOrder[stepIdx]);
-      }, 3200);
-
-      const fTurns = {
-        turn2: {
-          width: 74,
-          color: "var(--signal-green)",
-          label: "CONTEXT SATURATION: 48k / 200k TOKENS",
-          readout: "48k / 200k, 42% Cached",
-        },
-        turn8: {
-          width: 219,
-          color: "var(--accent)",
-          label: "CONTEXT SATURATION: 142k / 200k TOKENS",
-          readout: "142k / 200k, 71% Cached",
-        },
-        turn14: {
-          width: 302,
-          color: "var(--signal-amber)",
-          label: "CONTEXT SATURATION: 196k / 200k (AUTO-COMPACT)",
-          readout: "196k / 200k, Auto-Compact",
-        },
-      };
-
-      const fBar = document.getElementById("flagship-token-bar");
-      const fBarLabel = document.getElementById("flagship-bar-label");
-      const fHarnessReadout = document.getElementById("flagship-harness-readout");
-      const fTurnBtns = fTracer.querySelectorAll("[data-fturn-btn]");
-      const turnOrder = ["turn2", "turn8", "turn14"];
-      let turnIdx = 1;
-      let turnTimer = null;
-
-      function selectFlagshipTurn(key) {
-        const cfg = fTurns[key];
-        if (!cfg) return;
-        turnIdx = Math.max(0, turnOrder.indexOf(key));
-        fTurnBtns.forEach((b) =>
-          b.classList.toggle("active", b.getAttribute("data-fturn-btn") === key)
-        );
-        if (fBar) {
-          fBar.setAttribute("width", String(cfg.width));
-          fBar.setAttribute("fill", cfg.color);
-        }
-        if (fBarLabel) fBarLabel.textContent = cfg.label;
-        if (fHarnessReadout) fHarnessReadout.textContent = cfg.readout;
-      }
-
-      fTurnBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          if (turnTimer) clearInterval(turnTimer);
-          selectFlagshipTurn(btn.getAttribute("data-fturn-btn"));
-        });
-      });
-
-      turnTimer = setInterval(() => {
-      if (document.hidden) return;
-        turnIdx = (turnIdx + 1) % turnOrder.length;
-        selectFlagshipTurn(turnOrder[turnIdx]);
-      }, 3800);
+      }, 3400);
     }
 
     const fPrep = document.getElementById("flagship-prep-sandbox");
     if (fPrep) {
       const fPrepStages = {
         nbd: {
-          readout: "Stage 1: 18:00 SGT Next-Business-Day Dossier",
-          badge: "Multi-Corpus MCP",
-          b1Val: "Calendar + People",
-          b1Width: "92%",
-          b2Val: "5 / 5 Scenarios",
-          b2Width: "100%",
-          b3Val: "18:00 SGT Cron",
-          b3Width: "94%",
+          readout: "Stage 1: 6 PM Evening Briefing",
+          story:
+            "Every evening at 6 PM, the agent scans tomorrow's meetings across Calendar, Gmail, Chat, and Docs to assemble a clean one-page briefing.",
+          nextLabel: "Next tab: 36-Check Fact Linter \u2192",
         },
         linter: {
-          readout: "Stage 2: Hallucination Linter (36/36 Checks)",
-          badge: "Zero Hallucinated URLs",
-          b1Val: "100% Grounded",
-          b1Width: "100%",
-          b2Val: "36 / 36 Verified",
-          b2Width: "100%",
-          b3Val: "Zero Duplicates",
-          b3Width: "100%",
+          readout: "36 / 36 Quality Checks Passed",
+          story:
+            "Every citation, participant role, and document link is checked across 36 automated rules before delivery so busy teams never see invented facts.",
+          nextLabel: "Next tab: 1-Hour Reminder \u2192",
         },
         t1h: {
-          readout: "Stage 3: Stateless T-1h Pre-Meeting Reminder",
-          badge: "60-Min Window",
-          b1Val: "Cited One-Pager",
-          b1Width: "98%",
-          b2Val: "Gmail + Chat + Drive",
-          b2Width: "96%",
-          b3Val: "Stateless Partition",
-          b3Width: "100%",
+          readout: "Stage 3: 1-Hour Pre-Call Reminder",
+          story:
+            "One hour before each call starts, a fresh pre-meeting reminder catches last-minute thread replies without sending duplicate notifications.",
+          nextLabel: "Next tab: 6 PM Evening Brief \u2192",
         },
       };
 
       const pReadout = document.getElementById("flagship-prep-readout");
-      const pBadge = document.getElementById("flagship-prep-badge");
-      const pB1Val = document.getElementById("flagship-prep-bar1-val");
-      const pB1Fill = document.getElementById("flagship-prep-bar1-fill");
-      const pB2Val = document.getElementById("flagship-prep-bar2-val");
-      const pB2Fill = document.getElementById("flagship-prep-bar2-fill");
-      const pB3Val = document.getElementById("flagship-prep-bar3-val");
-      const pB3Fill = document.getElementById("flagship-prep-bar3-fill");
+      const pStory = document.getElementById("prep-live-story");
+      const pNextBtn = document.getElementById("prep-next-tab-btn");
+      const pNextLabel = document.getElementById("prep-next-tab-label");
       const pBtns = fPrep.querySelectorAll("[data-fprep-btn]");
       const pNodes = fPrep.querySelectorAll("[data-fprep]");
       const prepOrder = ["nbd", "linter", "t1h"];
@@ -1244,20 +1315,17 @@
         const cfg = fPrepStages[key];
         if (!cfg) return;
         prepIdx = Math.max(0, prepOrder.indexOf(key));
-        pBtns.forEach((b) =>
-          b.classList.toggle("active", b.getAttribute("data-fprep-btn") === key)
-        );
+        pBtns.forEach((b) => {
+          const active = b.getAttribute("data-fprep-btn") === key;
+          b.classList.toggle("active", active);
+          b.setAttribute("aria-selected", active ? "true" : "false");
+        });
         pNodes.forEach((n) =>
           n.classList.toggle("is-selected", n.getAttribute("data-fprep") === key)
         );
         if (pReadout) pReadout.textContent = cfg.readout;
-        if (pBadge) pBadge.textContent = cfg.badge;
-        if (pB1Val) pB1Val.textContent = cfg.b1Val;
-        if (pB1Fill) pB1Fill.style.width = cfg.b1Width;
-        if (pB2Val) pB2Val.textContent = cfg.b2Val;
-        if (pB2Fill) pB2Fill.style.width = cfg.b2Width;
-        if (pB3Val) pB3Val.textContent = cfg.b3Val;
-        if (pB3Fill) pB3Fill.style.width = cfg.b3Width;
+        if (pStory && cfg.story) pStory.textContent = cfg.story;
+        if (pNextLabel && cfg.nextLabel) pNextLabel.textContent = cfg.nextLabel;
       }
 
       pBtns.forEach((btn) => {
@@ -1272,12 +1340,19 @@
           selectPrepStage(node.getAttribute("data-fprep"));
         });
       });
+      if (pNextBtn) {
+        pNextBtn.addEventListener("click", () => {
+          if (prepTimer) clearInterval(prepTimer);
+          prepIdx = (prepIdx + 1) % prepOrder.length;
+          selectPrepStage(prepOrder[prepIdx]);
+        });
+      }
 
       prepTimer = setInterval(() => {
-      if (document.hidden) return;
+        if (document.hidden) return;
         prepIdx = (prepIdx + 1) % prepOrder.length;
         selectPrepStage(prepOrder[prepIdx]);
-      }, 3400);
+      }, 4500);
     }
 
     const fUq = document.getElementById("flagship-uq-sandbox");
@@ -1285,52 +1360,36 @@
       const fCiLevels = {
         "90": {
           scale: 0.68,
-          title: "CONFORMAL BAND (90% ACI)",
-          readout: "PICP: 0.904, ECE: 0.018",
-          b1Label: "Prediction Interval Coverage (PICP @ 90%)",
-          b1Val: "90.4% Empirical",
-          b1Width: "90%",
-          b2Val: "0.018 ECE",
-          b2Width: "88%",
-          b3Val: "Discharge Cycle & Temp",
-          b3Width: "91%",
+          title: "BATTERY HEALTH FORECAST & CONFIDENCE RANGE (90% TARGET)",
+          readout: "90.4% Verified Coverage",
+          story:
+            "Tighter 90% confidence band for routine battery health checks, highlighting early capacity fade across discharge cycles and operating temperature.",
+          nextLabel: "Next tab: 95% Confidence (IEEE) \u2192",
         },
         "95": {
           scale: 1.0,
-          title: "CONFORMAL BAND (95% ACI)",
-          readout: "PICP: 0.952, ECE: 0.012",
-          b1Label: "Prediction Interval Coverage (PICP @ 95%)",
-          b1Val: "95.2% Empirical",
-          b1Width: "95%",
-          b2Val: "0.012 ECE",
-          b2Width: "93%",
-          b3Val: "Voltage & Temp",
-          b3Width: "95%",
+          title: "BATTERY HEALTH FORECAST & CONFIDENCE RANGE (95% TARGET)",
+          readout: "95.2% Verified Coverage",
+          story:
+            "Rather than outputting a blind single guess, the model wraps every battery health forecast in a verified 95.2% confidence band and highlights voltage and heat impact.",
+          nextLabel: "Next tab: 99% Safety Margin \u2192",
         },
         "99": {
           scale: 1.38,
-          title: "CONFORMAL BAND (99% ACI)",
-          readout: "PICP: 0.989, ECE: 0.009",
-          b1Label: "Prediction Interval Coverage (PICP @ 99%)",
-          b1Val: "98.9% Empirical",
-          b1Width: "99%",
-          b2Val: "0.009 ECE",
-          b2Width: "97%",
-          b3Val: "SHAP + LIME + IG",
-          b3Width: "98%",
+          title: "BATTERY HEALTH FORECAST & CONFIDENCE RANGE (99% TARGET)",
+          readout: "98.9% Verified Coverage",
+          story:
+            "Wide 99% safety margin designed for high-reliability battery management systems where catching worst-case ageing is critical.",
+          nextLabel: "Next tab: 90% Confidence \u2192",
         },
       };
 
       const fBand = document.getElementById("flagship-aci-band");
       const fTitle = document.getElementById("flagship-aci-title");
       const fReadout = document.getElementById("flagship-aci-readout");
-      const uB1Label = document.getElementById("flagship-uq-bar1-label");
-      const uB1Val = document.getElementById("flagship-uq-bar1-val");
-      const uB1Fill = document.getElementById("flagship-uq-bar1-fill");
-      const uB2Val = document.getElementById("flagship-uq-bar2-val");
-      const uB2Fill = document.getElementById("flagship-uq-bar2-fill");
-      const uB3Val = document.getElementById("flagship-uq-bar3-val");
-      const uB3Fill = document.getElementById("flagship-uq-bar3-fill");
+      const uStory = document.getElementById("uq-live-story");
+      const uNextBtn = document.getElementById("uq-next-tab-btn");
+      const uNextLabel = document.getElementById("uq-next-tab-label");
       const fCiBtns = fUq.querySelectorAll("[data-fci-btn]");
       const fCiNodes = fUq.querySelectorAll("[data-fci-node]");
       const ciOrder = ["90", "95", "99"];
@@ -1341,22 +1400,19 @@
         const cfg = fCiLevels[key];
         if (!cfg) return;
         ciIdx = Math.max(0, ciOrder.indexOf(key));
-        fCiBtns.forEach((b) =>
-          b.classList.toggle("active", b.getAttribute("data-fci-btn") === key)
-        );
+        fCiBtns.forEach((b) => {
+          const active = b.getAttribute("data-fci-btn") === key;
+          b.classList.toggle("active", active);
+          b.setAttribute("aria-selected", active ? "true" : "false");
+        });
         fCiNodes.forEach((n) =>
           n.classList.toggle("is-selected", n.getAttribute("data-fci-node") === key)
         );
         if (fBand) fBand.style.setProperty("--ci-scale", String(cfg.scale));
         if (fTitle) fTitle.textContent = cfg.title;
         if (fReadout) fReadout.textContent = cfg.readout;
-        if (uB1Label) uB1Label.textContent = cfg.b1Label;
-        if (uB1Val) uB1Val.textContent = cfg.b1Val;
-        if (uB1Fill) uB1Fill.style.width = cfg.b1Width;
-        if (uB2Val) uB2Val.textContent = cfg.b2Val;
-        if (uB2Fill) uB2Fill.style.width = cfg.b2Width;
-        if (uB3Val) uB3Val.textContent = cfg.b3Val;
-        if (uB3Fill) uB3Fill.style.width = cfg.b3Width;
+        if (uStory && cfg.story) uStory.textContent = cfg.story;
+        if (uNextLabel && cfg.nextLabel) uNextLabel.textContent = cfg.nextLabel;
       }
 
       fCiBtns.forEach((btn) => {
@@ -1371,12 +1427,19 @@
           selectUqLevel(node.getAttribute("data-fci-node"));
         });
       });
+      if (uNextBtn) {
+        uNextBtn.addEventListener("click", () => {
+          if (ciTimer) clearInterval(ciTimer);
+          ciIdx = (ciIdx + 1) % ciOrder.length;
+          selectUqLevel(ciOrder[ciIdx]);
+        });
+      }
 
       ciTimer = setInterval(() => {
-      if (document.hidden) return;
+        if (document.hidden) return;
         ciIdx = (ciIdx + 1) % ciOrder.length;
         selectUqLevel(ciOrder[ciIdx]);
-      }, 3400);
+      }, 4500);
     }
   }
 
@@ -3000,32 +3063,32 @@
           deltaId: "bento-delta-1",
           capId: "bento-cap-1",
           stat: "200k",
-          delta: "Zero Cloud Lock-In",
-          cap: "Live Connect-RPC trajectory spans and token context window gauge in Antigravity Harness.",
+          delta: "Live Visual Timeline",
+          cap: "Live step-by-step agent visualiser and 200k token memory bar inside Antigravity Harness.",
         },
         {
           statId: "bento-stat-2",
           deltaId: "bento-delta-2",
           capId: "bento-cap-2",
           stat: "4,000+",
-          delta: "4 Institutions",
-          cap: "Engineers and students trained across GovTech, DBS Bank, NTU Singapore, and A*STAR.",
+          delta: "4 Partner Institutions",
+          cap: "Engineers and students trained in hands-on cloud and AI workshops across GovTech, DBS, NTU, and A*STAR.",
         },
         {
           statId: "bento-stat-3",
           deltaId: "bento-delta-3",
           capId: "bento-cap-3",
           stat: "100%",
-          delta: "36 Automated Gates",
-          cap: "36/36 multi-corpus linter assertions verifying zero hallucinated links across meeting dossiers.",
+          delta: "36 Quality Checks",
+          cap: "Automated fact checks verifying every document link and speaker role before sending meeting briefings.",
         },
         {
           statId: "bento-stat-4",
           deltaId: "bento-delta-4",
           capId: "bento-cap-4",
           stat: "95.2%",
-          delta: "0.012 ECE Calibrated",
-          cap: "Empirical conformal coverage (PICP) for battery State-of-Health deep learning at A*STAR.",
+          delta: "Verified Error Range",
+          cap: "Verified confidence range for deep learning battery health predictions published in IEEE Xplore.",
         },
       ],
       before: [
@@ -3034,32 +3097,32 @@
           deltaId: "bento-delta-1",
           capId: "bento-cap-1",
           stat: "Blind Logs",
-          delta: "Pre-Tracer",
-          cap: "Raw unindexed JSONL terminal dumps without visual span timing or 200k context compaction visibility.",
+          delta: "Raw Text Only",
+          cap: "Scrolling through thousands of raw terminal lines with zero visual step flow or memory warnings.",
         },
         {
           statId: "bento-stat-2",
           deltaId: "bento-delta-2",
           capId: "bento-cap-2",
-          stat: "Ad-Hoc",
-          delta: "Manual Baseline",
-          cap: "Fragmented workshop repositories and unguided setup before structured cloud buildathon toolkits.",
+          stat: "Manual Setup",
+          delta: "Unstructured Docs",
+          cap: "Scattered code folders and hours of manual cloud setup before guided hands-on workshop templates.",
         },
         {
           statId: "bento-stat-3",
           deltaId: "bento-delta-3",
           capId: "bento-cap-3",
-          stat: "0 Gates",
-          delta: "Manual Audit",
-          cap: "Unverified single-prompt summaries and manual cloud security reviews without automated runtime or static posture gates.",
+          stat: "0 Checks",
+          delta: "Unverified Text",
+          cap: "One-shot AI summaries that could invent broken document links or send duplicate meeting alerts.",
         },
         {
           statId: "bento-stat-4",
           deltaId: "bento-delta-4",
           capId: "bento-cap-4",
-          stat: "No UQ",
-          delta: "Point Estimates",
-          cap: "Standard deep neural networks without distribution-free prediction intervals or SHAP/LIME feature attribution guarantees.",
+          stat: "Single Guess",
+          delta: "No Error Bounds",
+          cap: "Standard neural networks outputting a single number with no confidence range or explanation of why.",
         },
       ],
     };
@@ -3572,8 +3635,8 @@
     if (!("IntersectionObserver" in window)) return;
 
     const statTargets = [
-      { id: "bento-stat-1", prefix: "$", target: 1.96, decimals: 2, suffix: "M" },
-      { id: "bento-stat-2", prefix: "< ", target: 3, decimals: 0, suffix: " min" },
+      { id: "bento-stat-1", prefix: "", target: 200, decimals: 0, suffix: "k" },
+      { id: "bento-stat-2", prefix: "", target: 4000, decimals: 0, suffix: "+", comma: true },
       { id: "bento-stat-3", prefix: "", target: 100, decimals: 0, suffix: "%" },
       { id: "bento-stat-4", prefix: "", target: 95.2, decimals: 1, suffix: "%" },
     ];
@@ -3584,15 +3647,20 @@
           if (!entry.isIntersecting) return;
           const el = entry.target;
           statObserver.unobserve(el);
+          if (el.closest(".is-legacy-mode")) return;
           const cfg = statTargets.find((s) => s.id === el.id);
           if (!cfg) return;
           const duration = 900;
           const startTs = performance.now();
           function step(now) {
+            if (el.closest(".is-legacy-mode")) return;
             const p = Math.min(1, (now - startTs) / duration);
             const eased = 1 - Math.pow(1 - p, 3);
-            const val = (cfg.target * eased).toFixed(cfg.decimals);
-            el.textContent = `${cfg.prefix}${val}${cfg.suffix}`;
+            const rawNum = cfg.target * eased;
+            const formatted = cfg.comma
+              ? Math.round(rawNum).toLocaleString("en-GB")
+              : rawNum.toFixed(cfg.decimals);
+            el.textContent = `${cfg.prefix}${formatted}${cfg.suffix}`;
             if (p < 1) {
               requestAnimationFrame(step);
             }
