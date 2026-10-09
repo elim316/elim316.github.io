@@ -24,7 +24,7 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 - Button Hierarchy: Paired CTA buttons must always pair `.apple-pill.solid` (blue primary `#0066cc`) for the primary action with `.apple-pill.outline` for the secondary action. Never style both buttons in a pair with the same solid colour.
 - Scroll-Animated & Cursor-Interactive Hardware Stages (`initHeroScrollPhysics()` in `app.js`):
   1. `#about` (Wordmark: `PROFILE`)
-  2. `#hero-stage` (Wordmark: `BUILDER`)
+  2. `#hero-stage` (Wordmark: `BUILDER`, commented out so `PROFILE` flows straight into `#highlights-section`)
   3. `#showcase-jumpgate` (Wordmark: `JUMPGATE`, commented out)
   4. `#showcase-agent-tracer` (Wordmark: `TRACER`)
   5. `#showcase-meeting-prep` (Wordmark: `DOSSIER`)
@@ -49,9 +49,10 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-09
-- Asset version in `index.html`: `?v=20261009-28`
+- Asset version in `index.html`: `?v=20261009-29`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
+  * Commented out the duplicate middle `BUILDER` stage (`#hero-stage`) so `PROFILE` (`01 / 04 PROFILE`) flows straight into `Get the highlights.` (`#highlights-section`), surfaced one-click `Save CV (PDF)` buttons in both the top hero bar (`#hero-print-cv-btn`) and bottom closing banner (`#closing-cta` / `#footer-print-cv-btn`), rewrote all 13 `PROJECTS` summaries/architectures and IEEE publication cards in crisp plain British English (`?v=20261009-29`).
   * Swapped Stage 01 (`#about` with `PROFILE` backdrop and `Google Cloud / Grab / A*STAR / Education` tabs) above Stage 02 (`#hero-stage` with `BUILDER` backdrop and featured system tabs) so first-time visitors see career credentials immediately above the fold, synchronized navbar links (`Profile` / `Builder`), `#apple-stage-dock` dots, and voice narration triggers in `app.js`.
   * Unified all 5 visible stage windows (`#about-hardware-deck` with `Education` tab, `#hero-hardware-deck`, `#flagship-tracer-sandbox`, `#flagship-prep-sandbox`, and `#flagship-uq-sandbox`) onto connected top macOS browser tabs (`.browser-window-bezel` + `.browser-top-bar` + `.browser-tab-strip` + `.browser-single-pane`), added Apple-style oversized gradient KPI numbers (`200k`, `95.2%`, `4,000+` via `.highlight-pop-number`) to `#highlights-section`, fixed descender clipping on `.bento-spec-stat` (`line-height: 1.24; padding-bottom: 4px`), and replaced technical acronyms (`No UQ`, `Ad-Hoc`, `JSONL`, `PICP`, `ECE`) across `#highlights-section` and `#stack` with recruiter-friendly plain English.
   * Added 6 Apple-inspired visual and functional upgrades: (1) "Get the highlights." horizontal carousel (`#highlights-section`) at the top of `#featured`, (2) smooth-gliding macOS/iOS segmented pill indicators (`.seg-glide-pill`) on `#bento-compare-bar` (while `#filter-bar` uses `#filter-pill-bg`), (3) interactive `More details` / `Hide details` toggle (`.bezel-xray-btn` + `.bezel-xray-drawer`) inside all 6 hardware stage bezels, (4) live synced voice-over caption ribbon (`#stage-dock-teleprompter`) and `1x / 1.25x / 1.5x` speed toggle (`#stage-dock-speed-btn`) on `#apple-stage-dock`, (5) scroll-triggered counter roll-ups and bar fills (`initScrollCountUpAndBars()`), and (6) side-by-side "Compare systems." selector (`#compare-systems-box`) in `#projects`.
