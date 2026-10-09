@@ -2514,20 +2514,20 @@
 
     const stageConfigs = [
       {
-        id: "hero-stage",
-        label: "01 / 05  BUILDER",
-        projectId: "agent-tracer",
-        audioSrc: "audio/stage-builder.mp3?v=20261007-24",
-        speechText:
-          "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Antigravity Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
-      },
-      {
         id: "about",
-        label: "02 / 05  PROFILE",
+        label: "01 / 05  PROFILE",
         projectId: "agent-tracer",
         audioSrc: "audio/stage-profile-google.mp3?v=20261007-24",
         speechText:
           "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
+      },
+      {
+        id: "hero-stage",
+        label: "02 / 05  BUILDER",
+        projectId: "agent-tracer",
+        audioSrc: "audio/stage-builder.mp3?v=20261007-24",
+        speechText:
+          "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Antigravity Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
       },
       /* [JUMPGATE HIDDEN — UNCOMMENT THIS STAGE AND RE-INDEX 01/06..06/06 TO RE-ENABLE STAGE 3: JUMPGATE]
       {
@@ -2568,7 +2568,7 @@
     const aboutChapterAudio = {
       google: {
         audioSrc: "audio/stage-profile-google.mp3?v=20261007-24",
-        speechText: stageConfigs[1].speechText,
+        speechText: stageConfigs[0].speechText,
       },
       grab: {
         audioSrc: "audio/stage-profile-grab.mp3?v=20261007-24",
@@ -2625,7 +2625,8 @@
     }
 
     function getTargetVoicePayload() {
-      if (activeStageIdx === 1) {
+      const cfg = stageConfigs[activeStageIdx] || stageConfigs[0];
+      if (cfg.id === "about") {
         const chapKey = getActiveAboutChapterKey();
         const chap = aboutChapterAudio[chapKey] || aboutChapterAudio.google;
         return {
@@ -2634,7 +2635,6 @@
           speechText: chap.speechText,
         };
       }
-      const cfg = stageConfigs[activeStageIdx] || stageConfigs[0];
       return {
         key: cfg.id,
         audioSrc: cfg.audioSrc,
@@ -2996,7 +2996,7 @@
           }
           if (
             isNarrating &&
-            activeStageIdx === 1 &&
+            stageConfigs[activeStageIdx]?.id === "about" &&
             (el.hasAttribute("data-about-tab") || el.hasAttribute("data-about-card"))
           ) {
             requestAnimationFrame(() => startOrSwitchNarration(true));
