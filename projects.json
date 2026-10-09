@@ -45,13 +45,13 @@
       "category": "agentic",
       "categoryLabel": "Agentic & DevTools",
       "year": "2026",
-      "summary": "Real-time execution graph and three-lane architecture visualiser for autonomous agents, streaming live JSONL transcripts into Timeline, Architecture, and Simplified views.",
-      "architecture": "Zero-dependency Python 3 HTTP backend with 1.5s delta-tail JSONL streaming, paired with a Vis.js and SVG topology frontend. Detects mid-text tool exit codes, strips metadata envelopes, and supports inline subagent trajectory drill-down.",
+      "summary": "Real-time visual step timeline and three-lane architecture explorer for AI agents, turning raw background transcripts into clear Timeline, Architecture, and Simplified views.",
+      "architecture": "Lightweight zero-dependency Python 3 server streaming live conversation logs every 1.5 seconds into an interactive Vis.js and SVG frontend. Automatically catches failed tool calls, strips internal log noise, and lets engineers inspect child subagent runs inline.",
       "stack": [
         "Python",
         "Vis.js",
         "SVG",
-        "SSE / JSONL"
+        "Live Logs"
       ],
       "repoUrl": "https://github.com/elim316/Antigravity-Agent-Tracer-Plugin"
     },
@@ -61,8 +61,8 @@
       "category": "agentic",
       "categoryLabel": "Agentic & DevTools",
       "year": "2026",
-      "summary": "Unified multi-agent workspace UI plugin combining a customisable 2x2 Bento grid, multi-session agent chat, embedded Agent Tracer graph, automation controls, and live token telemetry.",
-      "architecture": "Streams per-turn prompt, cached-context, and output token metrics from the local Language Server, calculates context window saturation against the 200k compaction threshold, and dispatches multi-session prompts.",
+      "summary": "Unified multi-agent workspace combining a customisable two-by-two split view, parallel agent chat sessions, embedded Agent Tracer timeline, scheduled tasks, and live 200k memory tracking.",
+      "architecture": "Streams per-turn prompt, cached-memory, and output token counts from the local language service, tracks memory usage against the 200k token limit, and lets engineers prompt multiple agents side by side.",
       "stack": [
         "Python",
         "Connect-RPC",
@@ -77,13 +77,13 @@
       "category": "agentic",
       "categoryLabel": "Agentic & DevTools",
       "year": "2026",
-      "summary": "Two-stage scheduled agent that researches external and cross-functional meetings across Calendar, Gmail, Chat, Drive, and People Directory to generate cited one-page briefing docs.",
-      "architecture": "Pairs a Next-Business-Day dossier generator with a stateless T-1h reminder partitioned into 60-minute windows. Verified by a 5-scenario, 36-check mock test harness with an automated linter that flags hallucinated names, bugs, and URLs.",
+      "summary": "Two-stage scheduled agent that pulls context across Calendar, Gmail, Chat, Drive, and People Directory to deliver verified one-page meeting briefings.",
+      "architecture": "Pairs an evening preview briefing with a one-hour pre-call reminder. Backed by a 5-scenario, 36-check automated test suite that catches invented speaker titles, broken links, and duplicate alerts before anything is sent.",
       "stack": [
         "Python",
-        "Multi-Corpus MCP",
-        "Eval Harness",
-        "Cron"
+        "Workspace APIs",
+        "36 Quality Checks",
+        "Scheduler"
       ],
       "repoUrl": "https://github.com/elim316/Antigravity-Meeting-Prep-Agent"
     },
@@ -93,8 +93,8 @@
       "category": "fullstack",
       "categoryLabel": "Full-Stack & Cloud",
       "year": "2025",
-      "summary": "Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025. Adaptive learning platform pairing modular classroom routing with an ~85% accuracy Knowledge Tracing model.",
-      "architecture": "Modular React, Next.js, and TypeScript platform deployed on Cloudflare Workers for low-latency serverless execution, integrated with a Python and PyTorch Knowledge Tracing (kt_models) recommendation engine.",
+      "summary": "Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025. Adaptive learning platform pairing interactive lessons with an ~85% accurate student mastery model.",
+      "architecture": "Modular React, Next.js, and TypeScript web platform running on Cloudflare Workers for fast global response times, paired with a Python and PyTorch student mastery engine that tailors practice topics automatically.",
       "stack": [
         "React",
         "TypeScript",
@@ -109,8 +109,8 @@
       "category": "fullstack",
       "categoryLabel": "Full-Stack & Cloud",
       "year": "2026",
-      "summary": "Built for Hack4Good. Centralised multi-branch event and volunteer management platform for MINDS, replacing scattered spreadsheets and forms across branches.",
-      "architecture": "Role-based web application in TypeScript, Next.js App Router, and Supabase supporting staff, caregivers, and volunteers with unified calendar views, PostgreSQL RPC signup workflows, and real-time event coverage tracking.",
+      "summary": "Built for Hack4Good. Centralised multi-branch event and volunteer platform for MINDS, replacing scattered spreadsheets and manual sign-up forms across centres.",
+      "architecture": "Role-based web application built with TypeScript, Next.js, and Supabase supporting staff, caregivers, and volunteers with shared calendars, conflict-free sign-ups, and live shift coverage tracking.",
       "stack": [
         "TypeScript",
         "Next.js",
@@ -125,8 +125,8 @@
       "category": "fullstack",
       "categoryLabel": "Full-Stack & Cloud",
       "year": "2025",
-      "summary": "Full-stack serverless web application demonstrating cloud-portable CRUD workflows, real-time state synchronisation across browser tabs, and automated CI/CD.",
-      "architecture": "React and Vite frontend deployed on Vercel backed by Supabase (Postgres, Auth, Realtime) and AWS serverless primitives provisioned with Terraform Infrastructure-as-Code and GitHub Actions.",
+      "summary": "Full-stack serverless web application showcasing portable cloud architecture, live data sync across open browser tabs, and automated deployment pipelines.",
+      "architecture": "React and Vite frontend hosted on Vercel backed by Supabase authentication and live database sync, paired with AWS serverless resources managed through automated Terraform templates and GitHub Actions.",
       "stack": [
         "React",
         "Terraform",
@@ -142,12 +142,12 @@
       "category": "ml",
       "categoryLabel": "ML & Research",
       "year": "2025",
-      "summary": "First-author paper at APSIPA ASC 2025 (IEEE Xplore) from A*STAR research. Unified deep learning framework quantifying both model and data uncertainty for battery State-of-Health estimation.",
-      "architecture": "Integrates Adaptive Conformal Inference (ACI), Prediction Interval Coverage Probability (PICP), Expected Calibration Error (ECE), and model-agnostic SHAP/LIME attributions into a CNN pipeline evaluated across McMaster and Oxford datasets.",
+      "summary": "First-author paper at APSIPA ASC 2025 (IEEE Xplore) from A*STAR research. Deep learning framework that predicts battery health inside a verified 95.2% confidence band.",
+      "architecture": "Combines calibrated deep neural networks with SHAP and LIME feature explanations across the McMaster and Oxford datasets so engineers see both the confidence range (0.012 calibration error) and whether voltage or heat drove each forecast.",
       "stack": [
         "Python",
-        "CNN",
-        "Conformal Prediction",
+        "Deep Learning",
+        "95.2% Confidence",
         "SHAP / LIME"
       ],
       "repoUrl": "https://github.com/elim316/UQ-XAI-battery-analytics"
@@ -158,8 +158,8 @@
       "category": "ml",
       "categoryLabel": "ML & Research",
       "year": "2025",
-      "summary": "Real-time computer vision inspection pipeline combining live frame-by-frame DeepLabV3+ResNet50 semantic segmentation with context-aware natural language captions.",
-      "architecture": "Streams webcam video through a PyTorch DeepLabV3+ResNet50 backbone to overlay semantic pixel masks via OpenCV and NumPy, paired with the Hugging Face BLIP vision-language model for live scene captioning.",
+      "summary": "Live computer vision pipeline that highlights objects pixel by pixel on webcam video while describing each scene in plain English.",
+      "architecture": "Processes live video streams through a PyTorch DeepLabV3+ vision model to colour-code distinct objects via OpenCV, paired with the BLIP vision-language model to generate live scene descriptions.",
       "stack": [
         "Python",
         "PyTorch",
@@ -175,8 +175,8 @@
       "category": "ml",
       "categoryLabel": "ML & Research",
       "year": "2024",
-      "summary": "Built for the NUS NCS Innovation Challenge 2024. Multimodal traffic intelligence system combining live camera feeds, vehicle detection, and LLM synthesis.",
-      "architecture": "Chains YOLOv3 computer vision detection on traffic camera streams with time-series congestion modelling and LangChain LLM prompts to produce plain-English routing advisories.",
+      "summary": "Built for the NUS NCS Innovation Challenge 2024. Traffic intelligence system combining live road camera feeds, vehicle counting, and natural-language route updates.",
+      "architecture": "Pairs real-time YOLOv3 vehicle detection on road camera feeds with traffic flow forecasting and language models to summarise congestion bottlenecks and suggest clearer alternative routes.",
       "stack": [
         "Python",
         "LangChain",
@@ -191,8 +191,8 @@
       "category": "fullstack",
       "categoryLabel": "Full-Stack & Cloud",
       "year": "2024",
-      "summary": "Industry collaboration case study building a centralised web dashboard to monitor and control commercial HVAC units across building zones.",
-      "architecture": "Combines a Svelte frontend and Three.js interactive 3D floor-plan visualiser with a Node.js and WebSocket backend streaming live telemetry and energy consumption metrics.",
+      "summary": "Industry project creating a centralised web dashboard to monitor and control commercial air-conditioning systems across building floors.",
+      "architecture": "Combines a Svelte web interface and interactive 3D floor-plan visualiser in Three.js with a live WebSocket backend streaming room temperatures, unit status, and energy usage.",
       "stack": [
         "Svelte",
         "Three.js",
@@ -207,13 +207,13 @@
       "category": "ml",
       "categoryLabel": "ML & Research",
       "year": "2024",
-      "summary": "Semifinalist at DSTA BrainHack 2024 (TIL-AI). Voice-commanded multimodal defence pipeline linking spoken mission orders to live aircraft bounding box detection.",
-      "architecture": "Containerised pipeline integrating OpenAI Whisper real-time speech transcription, a custom-trained text-to-JSON NLP parser (>85% parsing accuracy), and Vision-Language Modelling (~80% aircraft bounding box alignment accuracy).",
+      "summary": "Semifinalist at DSTA BrainHack 2024 (TIL-AI). Voice-controlled AI pipeline that turns spoken mission instructions into live aircraft detection on screen.",
+      "architecture": "Dockerised system linking OpenAI Whisper speech-to-text, a custom language parser (>85% accuracy) that extracts target descriptions, and a vision-language detector (~80% box alignment accuracy) to lock onto matching aircraft.",
       "stack": [
         "Python",
         "OpenAI Whisper",
         "NLP (>85%)",
-        "VLM",
+        "Vision AI",
         "Docker"
       ],
       "repoUrl": "https://github.com/elim316/TIL-AI-brainhack2024-project-overview"
@@ -224,8 +224,8 @@
       "category": "fullstack",
       "categoryLabel": "Full-Stack & Cloud",
       "year": "2024",
-      "summary": "Collaborative Android note-sharing, flashcard, and study-group application built with Kotlin, Jetpack Compose, Firebase, and MVVM architecture.",
-      "architecture": "Native Android client architected with Kotlin, Jetpack Compose declarative UI, and MVVM state management, backed by Firebase Authentication, Cloud Firestore real-time document sync, and Cloud Storage.",
+      "summary": "Collaborative Android study application for sharing class notes, flashcards, and study groups, built with Kotlin, Jetpack Compose, and Firebase.",
+      "architecture": "Native Android app structured with clean MVVM architecture and Jetpack Compose screens, backed by Firebase sign-in, real-time Cloud Firestore document sync, and cloud file storage.",
       "stack": [
         "Kotlin",
         "Jetpack Compose",
@@ -240,8 +240,8 @@
       "category": "fullstack",
       "categoryLabel": "Full-Stack & Cloud",
       "year": "2025",
-      "summary": "Interactive personal finance and budgeting analytics application built with Python and Streamlit to visualise cashflow, savings goals, and spending categories.",
-      "architecture": "Data-driven Python and Streamlit web application that ingests personal transaction ledgers, computes category-level budget variance and savings projections, and renders interactive financial health dashboards.",
+      "summary": "Interactive personal finance and budgeting app built with Python and Streamlit to visualise monthly cashflow, savings progress, and spending habits.",
+      "architecture": "Python and Streamlit web application that organises personal spending records, tracks budget goals by category, and renders interactive visual charts.",
       "stack": [
         "Python",
         "Streamlit",
