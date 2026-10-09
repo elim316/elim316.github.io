@@ -27,10 +27,10 @@
       categoryLabel: "Agentic & DevTools",
       year: "2026",
       summary:
-        "Real-time execution graph and three-lane architecture visualiser for autonomous agents, streaming live JSONL transcripts into Timeline, Architecture, and Simplified views.",
+        "Real-time visual step timeline and three-lane architecture explorer for AI agents, turning raw background transcripts into clear Timeline, Architecture, and Simplified views.",
       architecture:
-        "Zero-dependency Python 3 HTTP backend with 1.5s delta-tail JSONL streaming, paired with a Vis.js and SVG topology frontend. Detects mid-text tool exit codes, strips metadata envelopes, and supports inline subagent trajectory drill-down.",
-      stack: ["Python", "Vis.js", "SVG", "SSE / JSONL"],
+        "Lightweight zero-dependency Python 3 server streaming live conversation logs every 1.5 seconds into an interactive Vis.js and SVG frontend. Automatically catches failed tool calls, strips internal log noise, and lets engineers inspect child subagent runs inline.",
+      stack: ["Python", "Vis.js", "SVG", "Live Logs"],
       repoUrl: "https://github.com/elim316/Antigravity-Agent-Tracer-Plugin",
     },
     {
@@ -40,9 +40,9 @@
       categoryLabel: "Agentic & DevTools",
       year: "2026",
       summary:
-        "Unified multi-agent workspace UI plugin combining a customisable 2x2 Bento grid, multi-session agent chat, embedded Agent Tracer graph, automation controls, and live token telemetry.",
+        "Unified multi-agent workspace combining a customisable two-by-two split view, parallel agent chat sessions, embedded Agent Tracer timeline, scheduled tasks, and live 200k memory tracking.",
       architecture:
-        "Streams per-turn prompt, cached-context, and output token metrics from the local Language Server, calculates context window saturation against the 200k compaction threshold, and dispatches multi-session prompts.",
+        "Streams per-turn prompt, cached-memory, and output token counts from the local language service, tracks memory usage against the 200k token limit, and lets engineers prompt multiple agents side by side.",
       stack: ["Python", "Connect-RPC", "JavaScript", "CSS Grid"],
       repoUrl: "https://github.com/elim316/Antigravity-Harness",
     },
@@ -53,10 +53,10 @@
       categoryLabel: "Agentic & DevTools",
       year: "2026",
       summary:
-        "Two-stage scheduled agent that researches external and cross-functional meetings across Calendar, Gmail, Chat, Drive, and People Directory to generate cited one-page briefing docs.",
+        "Two-stage scheduled agent that pulls context across Calendar, Gmail, Chat, Drive, and People Directory to deliver verified one-page meeting briefings.",
       architecture:
-        "Pairs a Next-Business-Day dossier generator with a stateless T-1h reminder partitioned into 60-minute windows. Verified by a 5-scenario, 36-check mock test harness with an automated linter that flags hallucinated names, bugs, and URLs.",
-      stack: ["Python", "Multi-Corpus MCP", "Eval Harness", "Cron"],
+        "Pairs an evening preview briefing with a one-hour pre-call reminder. Backed by a 5-scenario, 36-check automated test suite that catches invented speaker titles, broken links, and duplicate alerts before anything is sent.",
+      stack: ["Python", "Workspace APIs", "36 Quality Checks", "Scheduler"],
       repoUrl: "https://github.com/elim316/Antigravity-Meeting-Prep-Agent",
     },
     {
@@ -66,9 +66,9 @@
       categoryLabel: "Full-Stack & Cloud",
       year: "2025",
       summary:
-        "Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025. Adaptive learning platform pairing modular classroom routing with an ~85% accuracy Knowledge Tracing model.",
+        "Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025. Adaptive learning platform pairing interactive lessons with an ~85% accurate student mastery model.",
       architecture:
-        "Modular React, Next.js, and TypeScript platform deployed on Cloudflare Workers for low-latency serverless execution, integrated with a Python and PyTorch Knowledge Tracing (kt_models) recommendation engine.",
+        "Modular React, Next.js, and TypeScript web platform running on Cloudflare Workers for fast global response times, paired with a Python and PyTorch student mastery engine that tailors practice topics automatically.",
       stack: ["React", "TypeScript", "Cloudflare Workers", "PyTorch"],
       repoUrl: "https://github.com/elim316/eduverse",
     },
@@ -79,9 +79,9 @@
       categoryLabel: "Full-Stack & Cloud",
       year: "2026",
       summary:
-        "Built for Hack4Good. Centralised multi-branch event and volunteer management platform for MINDS, replacing scattered spreadsheets and forms across branches.",
+        "Built for Hack4Good. Centralised multi-branch event and volunteer platform for MINDS, replacing scattered spreadsheets and manual sign-up forms across centres.",
       architecture:
-        "Role-based web application in TypeScript, Next.js App Router, and Supabase supporting staff, caregivers, and volunteers with unified calendar views, PostgreSQL RPC signup workflows, and real-time event coverage tracking.",
+        "Role-based web application built with TypeScript, Next.js, and Supabase supporting staff, caregivers, and volunteers with shared calendars, conflict-free sign-ups, and live shift coverage tracking.",
       stack: ["TypeScript", "Next.js", "Supabase", "PostgreSQL"],
       repoUrl: "https://github.com/elim316/Lobang-octagon",
     },
@@ -92,9 +92,9 @@
       categoryLabel: "Full-Stack & Cloud",
       year: "2025",
       summary:
-        "Full-stack serverless web application demonstrating cloud-portable CRUD workflows, real-time state synchronisation across browser tabs, and automated CI/CD.",
+        "Full-stack serverless web application showcasing portable cloud architecture, live data sync across open browser tabs, and automated deployment pipelines.",
       architecture:
-        "React and Vite frontend deployed on Vercel backed by Supabase (Postgres, Auth, Realtime) and AWS serverless primitives provisioned with Terraform Infrastructure-as-Code and GitHub Actions.",
+        "React and Vite frontend hosted on Vercel backed by Supabase authentication and live database sync, paired with AWS serverless resources managed through automated Terraform templates and GitHub Actions.",
       stack: ["React", "Terraform", "Supabase", "AWS", "GitHub Actions"],
       repoUrl: "https://github.com/elim316/multi-cloud-serverless-app",
     },
@@ -105,10 +105,10 @@
       categoryLabel: "ML & Research",
       year: "2025",
       summary:
-        "First-author paper at APSIPA ASC 2025 (IEEE Xplore) from A*STAR research. Unified deep learning framework quantifying both model and data uncertainty for battery State-of-Health estimation.",
+        "First-author paper at APSIPA ASC 2025 (IEEE Xplore) from A*STAR research. Deep learning framework that predicts battery health inside a verified 95.2% confidence band.",
       architecture:
-        "Integrates Adaptive Conformal Inference (ACI), Prediction Interval Coverage Probability (PICP), Expected Calibration Error (ECE), and model-agnostic SHAP/LIME attributions into a CNN pipeline evaluated across McMaster and Oxford datasets.",
-      stack: ["Python", "CNN", "Conformal Prediction", "SHAP / LIME"],
+        "Combines calibrated deep neural networks with SHAP and LIME feature explanations across the McMaster and Oxford datasets so engineers see both the confidence range (0.012 calibration error) and whether voltage or heat drove each forecast.",
+      stack: ["Python", "Deep Learning", "95.2% Confidence", "SHAP / LIME"],
       repoUrl: "https://github.com/elim316/UQ-XAI-battery-analytics",
     },
     {
@@ -118,9 +118,9 @@
       categoryLabel: "ML & Research",
       year: "2025",
       summary:
-        "Real-time computer vision inspection pipeline combining live frame-by-frame DeepLabV3+ResNet50 semantic segmentation with context-aware natural language captions.",
+        "Live computer vision pipeline that highlights objects pixel by pixel on webcam video while describing each scene in plain English.",
       architecture:
-        "Streams webcam video through a PyTorch DeepLabV3+ResNet50 backbone to overlay semantic pixel masks via OpenCV and NumPy, paired with the Hugging Face BLIP vision-language model for live scene captioning.",
+        "Processes live video streams through a PyTorch DeepLabV3+ vision model to colour-code distinct objects via OpenCV, paired with the BLIP vision-language model to generate live scene descriptions.",
       stack: ["Python", "PyTorch", "DeepLabV3+", "BLIP", "OpenCV"],
       repoUrl: "https://github.com/elim316/real-time-cv-vlm-pipeline",
     },
@@ -131,9 +131,9 @@
       categoryLabel: "ML & Research",
       year: "2024",
       summary:
-        "Built for the NUS NCS Innovation Challenge 2024. Multimodal traffic intelligence system combining live camera feeds, vehicle detection, and LLM synthesis.",
+        "Built for the NUS NCS Innovation Challenge 2024. Traffic intelligence system combining live road camera feeds, vehicle counting, and natural-language route updates.",
       architecture:
-        "Chains YOLOv3 computer vision detection on traffic camera streams with time-series congestion modelling and LangChain LLM prompts to produce plain-English routing advisories.",
+        "Pairs real-time YOLOv3 vehicle detection on road camera feeds with traffic flow forecasting and language models to summarise congestion bottlenecks and suggest clearer alternative routes.",
       stack: ["Python", "LangChain", "YOLOv3", "Computer Vision"],
       repoUrl: "https://github.com/elim316/TransportGPT",
     },
@@ -144,9 +144,9 @@
       categoryLabel: "Full-Stack & Cloud",
       year: "2024",
       summary:
-        "Industry collaboration case study building a centralised web dashboard to monitor and control commercial HVAC units across building zones.",
+        "Industry project creating a centralised web dashboard to monitor and control commercial air-conditioning systems across building floors.",
       architecture:
-        "Combines a Svelte frontend and Three.js interactive 3D floor-plan visualiser with a Node.js and WebSocket backend streaming live telemetry and energy consumption metrics.",
+        "Combines a Svelte web interface and interactive 3D floor-plan visualiser in Three.js with a live WebSocket backend streaming room temperatures, unit status, and energy usage.",
       stack: ["Svelte", "Three.js", "Node.js", "WebSockets"],
       repoUrl: "https://github.com/elim316/Panasonic-HVAC-Dashboard-overview",
     },
@@ -157,10 +157,10 @@
       categoryLabel: "ML & Research",
       year: "2024",
       summary:
-        "Semifinalist at DSTA BrainHack 2024 (TIL-AI). Voice-commanded multimodal defence pipeline linking spoken mission orders to live aircraft bounding box detection.",
+        "Semifinalist at DSTA BrainHack 2024 (TIL-AI). Voice-controlled AI pipeline that turns spoken mission instructions into live aircraft detection on screen.",
       architecture:
-        "Containerised pipeline integrating OpenAI Whisper real-time speech transcription, a custom-trained text-to-JSON NLP parser (>85% parsing accuracy), and Vision-Language Modelling (~80% aircraft bounding box alignment accuracy).",
-      stack: ["Python", "OpenAI Whisper", "NLP (>85%)", "VLM", "Docker"],
+        "Dockerised system linking OpenAI Whisper speech-to-text, a custom language parser (>85% accuracy) that extracts target descriptions, and a vision-language detector (~80% box alignment accuracy) to lock onto matching aircraft.",
+      stack: ["Python", "OpenAI Whisper", "NLP (>85%)", "Vision AI", "Docker"],
       repoUrl: "https://github.com/elim316/TIL-AI-brainhack2024-project-overview",
     },
     {
@@ -170,9 +170,9 @@
       categoryLabel: "Full-Stack & Cloud",
       year: "2024",
       summary:
-        "Collaborative Android note-sharing, flashcard, and study-group application built with Kotlin, Jetpack Compose, Firebase, and MVVM architecture.",
+        "Collaborative Android study application for sharing class notes, flashcards, and study groups, built with Kotlin, Jetpack Compose, and Firebase.",
       architecture:
-        "Native Android client architected with Kotlin, Jetpack Compose declarative UI, and MVVM state management, backed by Firebase Authentication, Cloud Firestore real-time document sync, and Cloud Storage.",
+        "Native Android app structured with clean MVVM architecture and Jetpack Compose screens, backed by Firebase sign-in, real-time Cloud Firestore document sync, and cloud file storage.",
       stack: ["Kotlin", "Jetpack Compose", "Firebase", "Android MVVM"],
       repoUrl: "https://github.com/elim316/OnlyNotes-Note-Sharing-Application",
     },
@@ -183,9 +183,9 @@
       categoryLabel: "Full-Stack & Cloud",
       year: "2025",
       summary:
-        "Interactive personal finance and budgeting analytics application built with Python and Streamlit to visualise cashflow, savings goals, and spending categories.",
+        "Interactive personal finance and budgeting app built with Python and Streamlit to visualise monthly cashflow, savings progress, and spending habits.",
       architecture:
-        "Data-driven Python and Streamlit web application that ingests personal transaction ledgers, computes category-level budget variance and savings projections, and renders interactive financial health dashboards.",
+        "Python and Streamlit web application that organises personal spending records, tracks budget goals by category, and renders interactive visual charts.",
       stack: ["Python", "Streamlit", "Financial Analytics", "Data Visualisation"],
       repoUrl: "https://github.com/elim316/LobangCube-showcase",
     },
@@ -2515,12 +2515,13 @@
     const stageConfigs = [
       {
         id: "about",
-        label: "01 / 05  PROFILE",
+        label: "01 / 04  PROFILE",
         projectId: "agent-tracer",
         audioSrc: "audio/stage-profile-google.mp3?v=20261007-24",
         speechText:
           "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
+      /* [BUILDER STAGE HIDDEN — UNCOMMENT THIS ENTRY AND RE-INDEX TO RESTORE SEPARATE BUILDER STAGE]
       {
         id: "hero-stage",
         label: "02 / 05  BUILDER",
@@ -2529,7 +2530,8 @@
         speechText:
           "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Antigravity Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
       },
-      /* [JUMPGATE HIDDEN — UNCOMMENT THIS STAGE AND RE-INDEX 01/06..06/06 TO RE-ENABLE STAGE 3: JUMPGATE]
+      */
+      /* [JUMPGATE HIDDEN — UNCOMMENT THIS STAGE AND RE-INDEX TO RE-ENABLE STAGE: JUMPGATE]
       {
         id: "showcase-jumpgate",
         label: "03 / 06  JUMPGATE",
@@ -2541,27 +2543,27 @@
       */
       {
         id: "showcase-agent-tracer",
-        label: "03 / 05  TRACER",
+        label: "02 / 04  TRACER",
         projectId: "agent-tracer",
         audioSrc: "audio/stage-tracer.mp3?v=20261007-24",
         speechText:
-          "Stage 3: Antigravity Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
+          "Stage 2: Antigravity Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
       },
       {
         id: "showcase-meeting-prep",
-        label: "04 / 05  DOSSIER",
+        label: "03 / 04  DOSSIER",
         projectId: "meeting-prep-agent",
         audioSrc: "audio/stage-dossier.mp3?v=20261007-24",
         speechText:
-          "Stage 4: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
+          "Stage 3: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
       },
       {
         id: "showcase-uq-xai",
-        label: "05 / 05  RESEARCH",
+        label: "04 / 04  RESEARCH",
         projectId: "uq-xai-battery",
         audioSrc: "audio/stage-research.mp3?v=20261007-24",
         speechText:
-          "Stage 5: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
+          "Stage 4: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
       },
     ];
 
@@ -3049,10 +3051,11 @@
 
   /* Apple Bento Specs, Before/After Comparison, Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
   function initBentoSpecsAndSkillFilters() {
-    const printBtn = document.getElementById("print-cv-btn");
-    if (printBtn) {
-      printBtn.addEventListener("click", () => window.print());
-    }
+    document
+      .querySelectorAll("#print-cv-btn, #hero-print-cv-btn, #footer-print-cv-btn")
+      .forEach((btn) => {
+        btn.addEventListener("click", () => window.print());
+      });
 
     const compareBtns = document.querySelectorAll("[data-compare-mode]");
     const bentoSpecComparison = {
