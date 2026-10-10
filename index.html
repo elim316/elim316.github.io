@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-32" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-33" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261010-32" />
+  <link rel="stylesheet" href="styles.css?v=20261010-33" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -836,15 +836,15 @@
                 <div class="tracer-sandbox-console" id="tracer-sandbox-console" style="display: none;">
                   <div class="tracer-console-top">
                     <div class="tracer-console-scenarios" role="tablist" aria-label="Select sample agent trace">
-                      <span class="tracer-console-kicker">ACTIVE TRACE:</span>
+                      <span class="tracer-console-kicker">CHOOSE EXAMPLE:</span>
                       <button type="button" class="tracer-sc-pill active" data-host-sc="a1000000-0000-4000-8000-000000000001">
-                        01: PR Security Audit
+                        01: Payment Safety Check
                       </button>
                       <button type="button" class="tracer-sc-pill" data-host-sc="a2000000-0000-4000-8000-000000000002">
-                        02: Dual-VPC Firewall
+                        02: Cloud Safety Rules
                       </button>
                       <button type="button" class="tracer-sc-pill" data-host-sc="a3000000-0000-4000-8000-000000000003">
-                        03: 177k Compaction
+                        03: Long-Chat Memory
                       </button>
                     </div>
                     <a href="sandbox/agent-tracer/index.html" target="_blank" rel="noopener noreferrer" class="tracer-fullscreen-pill">
@@ -854,16 +854,16 @@
 
                   <div class="tracer-console-guide">
                     <div class="tracer-doing-copy">
-                      <span class="tracer-doing-badge">What it is doing now</span>
-                      <span id="tracer-host-doing-text">Lead agent inspects payment-gateway/src/webhook_handler.py, launches two parallel review subagents (HMAC signature check and Redis lock check), applies a +14 / -4 line patch, and verifies pytest.</span>
+                      <span class="tracer-doing-badge">Plain-English summary</span>
+                      <span id="tracer-host-doing-text">A lead AI reads a payment file, assigns two specialist helper AIs to double-check security at the same time, fixes four risky lines, and runs an automatic test to be sure.</span>
                     </div>
                     <div class="tracer-tour-row">
-                      <span class="tracer-tour-prompt">How to interact (click any canvas box below or jump to a step):</span>
+                      <span class="tracer-tour-prompt">Pop-up explanation bubbles (click any canvas box below or jump to a bubble):</span>
                       <div class="tracer-tour-actions" id="tracer-host-tour-actions">
-                        <button type="button" class="tracer-tour-pill" data-host-act="subagents">1. Inspect Parallel Subagents</button>
-                        <button type="button" class="tracer-tour-pill" data-host-act="drill_subagent">2. Drill into Child Subagent</button>
-                        <button type="button" class="tracer-tour-pill" data-host-act="diff">3. View Code Diff</button>
-                        <button type="button" class="tracer-tour-pill" data-host-act="topology">4. Toggle Topology Graph</button>
+                        <button type="button" class="tracer-tour-pill" data-host-act="tour_0">Bubble 1: Human Goal</button>
+                        <button type="button" class="tracer-tour-pill" data-host-act="tour_1">Bubble 2: Helper AIs</button>
+                        <button type="button" class="tracer-tour-pill" data-host-act="tour_2">Bubble 3: Inside Helper AI</button>
+                        <button type="button" class="tracer-tour-pill" data-host-act="tour_3">Bubble 4: Red &amp; Green Fix</button>
                       </div>
                     </div>
                   </div>
@@ -883,27 +883,44 @@
                       <g class="clickable-node" data-fstep="user">
                         <rect class="trace-node" x="12" y="38" width="84" height="40" rx="8" />
                         <text x="54" y="55" text-anchor="middle" class="visual-label">01: PROMPT</text>
-                        <text x="54" y="68" text-anchor="middle" class="deck-svg-label">User, 12ms</text>
+                        <text x="54" y="68" text-anchor="middle" class="deck-svg-label">Human goal</text>
                       </g>
 
                       <g class="clickable-node is-selected" data-fstep="planner">
                         <rect class="trace-node node-accent" x="136" y="34" width="108" height="48" rx="9" />
                         <text x="190" y="54" text-anchor="middle" class="visual-badge">02: AI PLANNER</text>
-                        <text x="190" y="69" text-anchor="middle" class="visual-label">Reasoning, 640ms</text>
+                        <text x="190" y="69" text-anchor="middle" class="visual-label">Writes plan</text>
                       </g>
 
                       <g class="clickable-node" data-fstep="mcp">
                         <rect class="trace-node node-accent" x="274" y="14" width="94" height="38" rx="7" />
                         <text x="321" y="31" text-anchor="middle" class="visual-badge">03: TOOL CALL</text>
-                        <text x="321" y="43" text-anchor="middle" class="deck-svg-label">Search, 310ms</text>
+                        <text x="321" y="43" text-anchor="middle" class="deck-svg-label">Reads files</text>
                       </g>
 
                       <g class="clickable-node" data-fstep="subagent">
                         <rect class="trace-node" x="274" y="62" width="94" height="38" rx="7" />
                         <text x="321" y="79" text-anchor="middle" class="visual-label">04: SUBAGENT</text>
-                        <text x="321" y="91" text-anchor="middle" class="deck-svg-label">Verify, 1.2s</text>
+                        <text x="321" y="91" text-anchor="middle" class="deck-svg-label">Helper AI</text>
                       </g>
                     </svg>
+
+                    <!-- Dynamic Pop-Up Speech Bubble Explaining the Selected Step for Non-Technical Readers -->
+                    <div class="tracer-step-bubble" id="tracer-overview-bubble" style="--step-arrow-x: 50%;" aria-live="polite">
+                      <div class="tracer-bubble-top">
+                        <span class="tracer-bubble-kicker" id="tracer-bubble-kicker">STEP 2 OF 4: AI BRAIN</span>
+                        <span class="tracer-bubble-hint">Click any box above to see what it means</span>
+                      </div>
+                      <div class="tracer-bubble-main">
+                        <div class="tracer-bubble-text">
+                          <div class="tracer-bubble-title" id="tracer-bubble-title">The AI pauses to write a clear plan first</div>
+                          <div class="tracer-bubble-desc" id="tracer-bubble-desc">Like a thoughtful project lead, the main AI breaks the request into smaller steps before editing anything so nothing gets missed.</div>
+                        </div>
+                        <button type="button" class="tracer-bubble-next-btn" id="tracer-bubble-next-btn">
+                          <span id="tracer-bubble-next-label">Next bubble: Tool Call &#8594;</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
                   <!-- Tab 2: 200k Memory Meter -->
@@ -1924,6 +1941,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261010-32"></script>
+  <script src="app.js?v=20261010-33"></script>
 </body>
 </html>
