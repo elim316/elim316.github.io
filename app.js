@@ -1394,12 +1394,24 @@
         fStepBtns.forEach((b) =>
           b.classList.toggle("active", b.getAttribute("data-fstep-btn") === stepKey)
         );
-        fSvgNodes.forEach((n) =>
-          n.classList.toggle("is-selected", n.getAttribute("data-fstep") === stepKey)
-        );
+        let activeSvgEl = null;
+        fSvgNodes.forEach((n) => {
+          const isMatch = n.getAttribute("data-fstep") === stepKey;
+          n.classList.toggle("is-selected", isMatch);
+          if (isMatch) activeSvgEl = n;
+        });
         const bMeta = stepBubbleMeta[stepKey];
         if (bMeta && ovBubbleEl) {
-          ovBubbleEl.style.setProperty("--step-arrow-x", bMeta.arrowX);
+          let arrowVal = bMeta.arrowX;
+          if (activeSvgEl && typeof activeSvgEl.getBoundingClientRect === "function") {
+            const nRect = activeSvgEl.getBoundingClientRect();
+            const bRect = ovBubbleEl.getBoundingClientRect();
+            if (nRect.width > 0 && bRect.width > 0) {
+              const px = Math.max(24, Math.min(bRect.width - 24, nRect.left + nRect.width / 2 - bRect.left));
+              arrowVal = Math.round(px) + "px";
+            }
+          }
+          ovBubbleEl.style.setProperty("--step-arrow-x", arrowVal);
           if (ovBubbleKicker) ovBubbleKicker.textContent = bMeta.kicker;
           if (ovBubbleTitle) ovBubbleTitle.textContent = bMeta.title;
           if (ovBubbleDesc) ovBubbleDesc.textContent = bMeta.desc;
