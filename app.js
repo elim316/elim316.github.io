@@ -1247,8 +1247,8 @@
           kicker: "STEP 4 OF 4: HELPER AIs",
           title: "Specialist helper AIs check safety in parallel",
           desc: "The lead AI hands off separate safety checks to focused helper AIs at the same time, cutting a slow manual review down to seconds.",
-          nextLabel: "Try Interactive Sandbox \u2192",
-          nextStep: "__sandbox__",
+          nextLabel: "Close Bubble",
+          nextStep: "__close__",
         },
       };
 
@@ -1402,6 +1402,7 @@
         });
         const bMeta = stepBubbleMeta[stepKey];
         if (bMeta && ovBubbleEl) {
+          ovBubbleEl.style.display = "";
           let arrowVal = bMeta.arrowX;
           if (activeSvgEl && typeof activeSvgEl.getBoundingClientRect === "function") {
             const nRect = activeSvgEl.getBoundingClientRect();
@@ -1424,7 +1425,9 @@
           if (stepTimer) clearInterval(stepTimer);
           const curKey = stepOrder[stepIdx] || "planner";
           const bMeta = stepBubbleMeta[curKey];
-          if (bMeta && bMeta.nextStep === "__sandbox__") {
+          if (bMeta && bMeta.nextStep === "__close__") {
+            if (ovBubbleEl) ovBubbleEl.style.display = "none";
+          } else if (bMeta && bMeta.nextStep === "__sandbox__") {
             selectTracerTab("sandbox");
           } else if (bMeta && bMeta.nextStep) {
             selectFlagshipStep(bMeta.nextStep);
