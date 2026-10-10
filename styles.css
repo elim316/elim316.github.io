@@ -3955,6 +3955,123 @@ textarea {
   }
 }
 
+.tracer-step-bubble {
+  position: relative;
+  margin-top: 10px;
+  padding: 12px 15px;
+  border-radius: 13px;
+  background: var(--bg-elevated);
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border-subtle));
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  --step-arrow-x: 50%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tracer-step-bubble::before,
+.tracer-step-bubble::after {
+  content: "";
+  position: absolute;
+  left: var(--step-arrow-x);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  transition: left 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tracer-step-bubble::before {
+  top: -8px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid color-mix(in srgb, var(--accent) 40%, var(--border-subtle));
+}
+
+.tracer-step-bubble::after {
+  top: -6.5px;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid var(--bg-elevated);
+}
+
+.tracer-bubble-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+
+.tracer-bubble-kicker {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  background: var(--accent-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.tracer-bubble-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.tracer-bubble-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.tracer-bubble-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.tracer-bubble-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.tracer-bubble-desc {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.tracer-bubble-next-btn {
+  flex-shrink: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  background: var(--accent-subtle);
+  color: var(--accent-text);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.tracer-bubble-next-btn:hover {
+  background: var(--apple-blue);
+  color: #ffffff;
+}
+
+@media (max-width: 680px) {
+  .tracer-bubble-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
