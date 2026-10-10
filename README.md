@@ -129,10 +129,10 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-10
-- Asset version in `index.html`: `?v=20261010-30`
+- Asset version in `index.html`: `?v=20261010-31`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
-  * Added the standalone interactive browser sandbox (`sandbox/agent-tracer/index.html` + `sandbox/agent-tracer/sandbox-mock.js`) for Antigravity Agent Tracer with 3 live multi-agent trace scenarios (`01: PR Security Audit`, `02: Dual-VPC Firewall Posture`, `03: 177k Context Compaction`), integrated it into Stage 02 (`#showcase-agent-tracer`) via a primary `Launch Live Sandbox` button and a 3rd browser tab (`Interactive Sandbox`, `data-tracer-tab="sandbox"` with lazy-loaded `#tracer-embedded-iframe`), and added `frame-src 'self'` to `index.html` CSP (`?v=20261010-30`).
+  * Added the standalone interactive browser sandbox (`sandbox/agent-tracer/index.html` + `sandbox/agent-tracer/sandbox-mock.js`) for Antigravity Agent Tracer with 3 live multi-agent trace scenarios (`01: PR Security Audit`, `02: Dual-VPC Firewall Posture`, `03: 177k Context Compaction`), made `Live Interactive Sandbox` the default accented tab in Stage 02 (`#showcase-agent-tracer`) with an integrated tab-box Scenario Switcher, plain-English live explanation (`#tracer-sandbox-console`), and one-click Guided Action pills (`postMessage` to canvas), and auto-opened the right-hand Session Overview & Briefing panel on desktop (`?v=20261010-31`).
   * Unified all 5 visible stage windows (`#hero-hardware-deck`, `#about-hardware-deck` with `Education` tab, `#flagship-tracer-sandbox`, `#flagship-prep-sandbox`, and `#flagship-uq-sandbox`) onto connected top macOS browser tabs (`.browser-window-bezel` + `.browser-top-bar` + `.browser-tab-strip` + `.browser-single-pane`), added Apple-style oversized gradient KPI numbers (`200k`, `95.2%`, `4,000+` via `.highlight-pop-number`) to `#highlights-section`, fixed descender clipping on `.bento-spec-stat` (`line-height: 1.24; padding-bottom: 4px`), and replaced technical acronyms (`No UQ`, `Ad-Hoc`, `JSONL`, `PICP`, `ECE`) across `#highlights-section` and `#stack` with recruiter-friendly plain English.
   * Added 6 Apple-inspired visual and functional upgrades:
     1. "Get the highlights." horizontal carousel (`#highlights-section` with
