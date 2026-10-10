@@ -1217,33 +1217,68 @@
         },
       };
 
+      const stepBubbleMeta = {
+        user: {
+          arrowX: "14%",
+          kicker: "STEP 1 OF 4: HUMAN GOAL",
+          title: "A person sets the goal in plain English",
+          desc: "Everything begins here. Instead of writing technical instructions, a person simply asks the AI to check a payment file so customers are never double-charged.",
+          nextLabel: "Next bubble: AI Planner \u2192",
+          nextStep: "planner",
+        },
+        planner: {
+          arrowX: "50%",
+          kicker: "STEP 2 OF 4: AI BRAIN",
+          title: "The AI pauses to write a clear plan first",
+          desc: "Like a thoughtful project lead, the main AI breaks the request into smaller steps before editing anything so nothing gets missed.",
+          nextLabel: "Next bubble: Tool Call \u2192",
+          nextStep: "mcp",
+        },
+        mcp: {
+          arrowX: "84%",
+          kicker: "STEP 3 OF 4: READING REAL FILES",
+          title: "The AI reads real files instead of guessing",
+          desc: "Rather than relying on memory alone, the AI opens real documents and code files so every decision is grounded in facts.",
+          nextLabel: "Next bubble: Helper AI \u2192",
+          nextStep: "subagent",
+        },
+        subagent: {
+          arrowX: "84%",
+          kicker: "STEP 4 OF 4: HELPER AIs",
+          title: "Specialist helper AIs check safety in parallel",
+          desc: "The lead AI hands off separate safety checks to focused helper AIs at the same time, cutting a slow manual review down to seconds.",
+          nextLabel: "Try Interactive Sandbox \u2192",
+          nextStep: "__sandbox__",
+        },
+      };
+
       const hostScenarioMeta = {
         "a1000000-0000-4000-8000-000000000001": {
           doing:
-            "Lead agent inspects payment-gateway/src/webhook_handler.py, launches two parallel review subagents (HMAC signature check and Redis lock check), applies a +14 / -4 line patch, and verifies pytest.",
+            "A lead AI reads a payment file, assigns two specialist helper AIs to double-check security at the same time, fixes four risky lines, and runs an automatic test to be sure.",
           actions: [
-            { label: "1. Inspect Parallel Subagents", act: "subagents" },
-            { label: "2. Drill into Child Subagent", act: "drill_subagent" },
-            { label: "3. View Code Diff", act: "diff" },
-            { label: "4. Toggle Topology Graph", act: "topology" },
+            { label: "Bubble 1: Human Goal", act: "tour_0" },
+            { label: "Bubble 2: Helper AIs", act: "tour_1" },
+            { label: "Bubble 3: Inside Helper AI", act: "tour_2" },
+            { label: "Bubble 4: Red & Green Fix", act: "tour_3" },
           ],
         },
         "a2000000-0000-4000-8000-000000000002": {
           doing:
-            "Infrastructure agent inspects four Terraform modules (main.tf, firewall.tf, nat.tf, outputs.tf) concurrently and verifies all 14 ingress and 18 egress network firewall rules.",
+            "An infrastructure AI opens four cloud rulebooks side by side and checks every digital doorway so private data stays locked away from the public internet.",
           actions: [
-            { label: "1. Inspect Parallel Reads", act: "parallel_reads" },
-            { label: "2. View Policy Gate Result", act: "last_tool" },
-            { label: "3. Toggle Topology Graph", act: "topology" },
+            { label: "Bubble 1: Cloud Request", act: "tour_0" },
+            { label: "Bubble 2: Reading 4 Files at Once", act: "tour_1" },
+            { label: "Bubble 3: Safety Pass Result", act: "tour_2" },
           ],
         },
         "a3000000-0000-4000-8000-000000000003": {
           doing:
-            "Near the 200k limit (177k tokens used), the runtime automatically compacts 148 earlier steps into a 14k checkpoint summary and finishes migrating three handlers without losing context.",
+            "When a long chat nearly fills the AI's short-term memory, the system summarises 148 earlier steps onto one clean page of notes so work continues smoothly.",
           actions: [
-            { label: "1. View Handler Patch", act: "diff" },
-            { label: "2. Session Telemetry", act: "overview" },
-            { label: "3. Toggle Topology Graph", act: "topology" },
+            { label: "Bubble 1: Memory Summary", act: "tour_0" },
+            { label: "Bubble 2: Clean File Update", act: "tour_1" },
+            { label: "Bubble 3: Final Result", act: "tour_2" },
           ],
         },
       };
@@ -1256,6 +1291,12 @@
       const switchSandboxBtn = document.getElementById("tracer-switch-to-sandbox-btn");
       const hostDoingEl = document.getElementById("tracer-host-doing-text");
       const hostTourEl = document.getElementById("tracer-host-tour-actions");
+      const ovBubbleEl = document.getElementById("tracer-overview-bubble");
+      const ovBubbleKicker = document.getElementById("tracer-bubble-kicker");
+      const ovBubbleTitle = document.getElementById("tracer-bubble-title");
+      const ovBubbleDesc = document.getElementById("tracer-bubble-desc");
+      const ovBubbleNextBtn = document.getElementById("tracer-bubble-next-btn");
+      const ovBubbleNextLabel = document.getElementById("tracer-bubble-next-label");
 
       function postToTracerSandbox(action, arg) {
         const embFrame = document.getElementById("tracer-embedded-iframe");
@@ -1356,6 +1397,27 @@
         fSvgNodes.forEach((n) =>
           n.classList.toggle("is-selected", n.getAttribute("data-fstep") === stepKey)
         );
+        const bMeta = stepBubbleMeta[stepKey];
+        if (bMeta && ovBubbleEl) {
+          ovBubbleEl.style.setProperty("--step-arrow-x", bMeta.arrowX);
+          if (ovBubbleKicker) ovBubbleKicker.textContent = bMeta.kicker;
+          if (ovBubbleTitle) ovBubbleTitle.textContent = bMeta.title;
+          if (ovBubbleDesc) ovBubbleDesc.textContent = bMeta.desc;
+          if (ovBubbleNextLabel) ovBubbleNextLabel.textContent = bMeta.nextLabel;
+        }
+      }
+
+      if (ovBubbleNextBtn) {
+        ovBubbleNextBtn.addEventListener("click", () => {
+          if (stepTimer) clearInterval(stepTimer);
+          const curKey = stepOrder[stepIdx] || "planner";
+          const bMeta = stepBubbleMeta[curKey];
+          if (bMeta && bMeta.nextStep === "__sandbox__") {
+            selectTracerTab("sandbox");
+          } else if (bMeta && bMeta.nextStep) {
+            selectFlagshipStep(bMeta.nextStep);
+          }
+        });
       }
 
       fStepBtns.forEach((btn) => {
