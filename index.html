@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-40" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-41" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261010-40" />
+  <link rel="stylesheet" href="styles.css?v=20261010-41" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -1033,7 +1033,7 @@
                 </div>
                 <div class="browser-tab-strip" role="tablist" aria-label="Meeting Dossier workflow tabs">
                   <button type="button" class="browser-tab active" data-prep-tab="pipeline" role="tab" aria-selected="true">
-                    <span>Dossier Pipeline</span>
+                    <span>Day Calendar View</span>
                   </button>
                   <button type="button" class="browser-tab" data-prep-tab="linter" role="tab" aria-selected="false">
                     <span>36-Check Fact Linter</span>
@@ -1046,9 +1046,9 @@
 
               <div class="browser-single-pane">
                 <div class="pane-header" id="prep-diagram-header">
-                  <span class="pane-label" id="prep-pane-label">TWO-STAGE SCHEDULED PIPELINE (CLICK ANY STEP)</span>
+                  <span class="pane-label" id="prep-pane-label">DAY CALENDAR BRIEFING VIEW (CLICK ANY CALENDAR SLOT)</span>
                   <div class="pane-header-right">
-                    <span class="pane-badge" id="flagship-prep-readout">36 / 36 Quality Checks Passed</span>
+                    <span class="pane-badge" id="flagship-prep-readout">2 Briefings Ready, 4 Filtered Out</span>
                     <button type="button" class="pane-launch-sandbox-btn" id="prep-switch-to-sandbox-btn">
                       <span>Try Interactive Sandbox &#8594;</span>
                     </button>
@@ -1078,13 +1078,13 @@
                   <div class="tracer-console-guide">
                     <div class="tracer-doing-copy">
                       <span class="tracer-doing-badge">Summary</span>
-                      <span id="prep-host-doing-text">Scans tomorrow's day calendar from 09:00 to 18:00, skips 4 routine blocks, highlights 2 important calls in blue with one-page briefings, and checks every link across 36 rules.</span>
+                      <span id="prep-host-doing-text">Scans tomorrow's day calendar from 09:00 to 15:00, skips 4 routine blocks, highlights 2 important calls in blue with one-page briefings, and checks every link across 36 rules.</span>
                     </div>
                     <div class="tracer-tour-row">
                       <span class="tracer-tour-prompt">Pop-up explanation bubbles (click any calendar slot below or jump to a bubble):</span>
                       <div class="tracer-tour-actions" id="prep-host-tour-actions">
                         <button type="button" class="tracer-tour-pill" data-prep-act="tour_0">Bubble 1: Calendar Clutter</button>
-                        <button type="button" class="tracer-tour-pill" data-prep-act="tour_1">Bubble 2: 10:15 Acme Sync</button>
+                        <button type="button" class="tracer-tour-pill" data-prep-act="tour_1">Bubble 2: 10:00 Acme Sync</button>
                         <button type="button" class="tracer-tour-pill" data-prep-act="tour_2">Bubble 3: 13:00 Cross-Team</button>
                         <button type="button" class="tracer-tour-pill" data-prep-act="tour_3">Bubble 4: Fact Checker</button>
                       </div>
@@ -1093,31 +1093,49 @@
                 </div>
 
                 <div class="about-svg-stage">
-                  <!-- Tab 1: Dossier Pipeline (Explanation & Overview - Active by default) -->
+                  <!-- Tab 1: Interactive Day Calendar View (Active by default) -->
                   <div class="about-scene is-active" data-prep-scene="pipeline">
-                    <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
-                      <path class="trace-edge" d="M 108 58 L 132 58" />
-                      <path class="trace-edge" d="M 248 58 L 272 58" />
-                      <path class="trace-packet hero-stream" d="M 108 58 L 132 58" />
-                      <path class="trace-packet hero-stream" d="M 248 58 L 272 58" />
+                    <svg class="hero-deck-svg" viewBox="0 0 420 132" aria-hidden="true">
+                      <!-- Subtle Horizontal Calendar Time Grid Lines -->
+                      <line x1="40" y1="24" x2="408" y2="24" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3" />
+                      <line x1="40" y1="66" x2="408" y2="66" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3" />
+                      <line x1="40" y1="108" x2="408" y2="108" stroke="var(--border)" stroke-width="1" stroke-dasharray="3 3" />
 
+                      <!-- Left Hour Ruler Labels -->
+                      <text x="34" y="28" text-anchor="end" class="visual-label">09:00</text>
+                      <text x="34" y="70" text-anchor="end" class="visual-label">11:00</text>
+                      <text x="34" y="112" text-anchor="end" class="visual-label">14:00</text>
+
+                      <!-- Slot 1 (09:00 - Filtered Noise vs Qualified Morning Scan) -->
                       <g class="clickable-node" data-fprep="nbd">
-                        <rect class="trace-node" x="14" y="24" width="94" height="68" rx="8" />
-                        <text x="61" y="48" text-anchor="middle" class="visual-label">01: EVENING</text>
-                        <text x="61" y="66" text-anchor="middle" class="visual-badge">5 PM Day Before</text>
+                        <rect class="trace-node" x="46" y="12" width="112" height="106" rx="8" />
+                        <text x="102" y="31" text-anchor="middle" class="visual-label">THU 09:00 SCAN</text>
+                        <rect x="54" y="40" width="96" height="28" rx="5" style="fill: var(--bg-subtle); stroke: var(--border); stroke-dasharray: 2.5 2;" />
+                        <text x="102" y="57" text-anchor="middle" class="visual-label">09:00 Standup (Skip)</text>
+                        <rect x="54" y="76" width="96" height="32" rx="5" style="fill: rgba(0, 102, 204, 0.1); stroke: var(--accent);" />
+                        <text x="102" y="96" text-anchor="middle" class="visual-badge">10:00 Acme Sync</text>
                       </g>
 
+                      <!-- Slot 2 (Selected by default - 10:00 Briefing + 36 Fact Checks) -->
                       <g class="clickable-node is-selected" data-fprep="linter">
-                        <rect class="trace-node node-accent" x="132" y="18" width="116" height="80" rx="8" />
-                        <text x="190" y="42" text-anchor="middle" class="visual-label">02: FACT CHECK</text>
-                        <text x="190" y="60" text-anchor="middle" class="visual-badge">&#10003; 36 Checks</text>
-                        <text x="190" y="76" text-anchor="middle" class="visual-label">0 Fake Links</text>
+                        <rect class="trace-node node-accent" x="168" y="8" width="118" height="114" rx="8" />
+                        <text x="227" y="29" text-anchor="middle" class="visual-badge">&#10003; 1-PAGE DOSSIER</text>
+                        <rect x="177" y="38" width="100" height="34" rx="5" style="fill: rgba(0, 102, 204, 0.1); stroke: var(--accent);" />
+                        <text x="227" y="53" text-anchor="middle" class="visual-badge">36 / 36 Checked</text>
+                        <text x="227" y="66" text-anchor="middle" class="visual-label">0 Invented URLs</text>
+                        <text x="227" y="92" text-anchor="middle" class="visual-label">People + Gmail</text>
+                        <text x="227" y="107" text-anchor="middle" class="visual-label">+ Shared Docs</text>
                       </g>
 
+                      <!-- Slot 3 (14:00 - Live 1-Hour Reminder Band on Calendar) -->
                       <g class="clickable-node" data-fprep="t1h">
-                        <rect class="trace-node" x="272" y="24" width="94" height="68" rx="8" />
-                        <text x="319" y="48" text-anchor="middle" class="visual-label">03: PRE-CALL</text>
-                        <text x="319" y="66" text-anchor="middle" class="visual-badge">1 Hour Before</text>
+                        <rect class="trace-node" x="296" y="12" width="112" height="106" rx="8" />
+                        <text x="352" y="31" text-anchor="middle" class="visual-label">14:00 1H WINDOW</text>
+                        <line x1="302" y1="44" x2="402" y2="44" stroke="#ef4444" stroke-width="1.5" />
+                        <circle cx="305" cy="44" r="3" fill="#ef4444" />
+                        <rect x="304" y="54" width="96" height="52" rx="5" style="fill: rgba(0, 102, 204, 0.08); stroke: var(--accent); stroke-dasharray: 3 2;" />
+                        <text x="352" y="76" text-anchor="middle" class="visual-badge">14:10 Northwind</text>
+                        <text x="352" y="93" text-anchor="middle" class="visual-label">Reminded Once</text>
                       </g>
                     </svg>
 
@@ -1125,7 +1143,7 @@
                     <div class="tracer-step-bubble" id="prep-overview-bubble" style="--step-arrow-x: 50%;" aria-live="polite">
                       <div class="tracer-bubble-top">
                         <span class="tracer-bubble-kicker" id="prep-bubble-kicker">STEP 2 OF 3: ZERO FAKE LINKS</span>
-                        <span class="tracer-bubble-hint">Click any box above to see what it means</span>
+                        <span class="tracer-bubble-hint">Click any calendar column above or open Interactive Sandbox</span>
                       </div>
                       <div class="tracer-bubble-main">
                         <div class="tracer-bubble-text">
@@ -1167,7 +1185,7 @@
                     <iframe
                       id="prep-embedded-iframe"
                       class="tracer-sandbox-frame"
-                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261010-40"
+                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261010-41"
                       title="Interactive Meeting Prep Dossier Sandbox"
                     ></iframe>
                   </div>
@@ -2044,6 +2062,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261010-40"></script>
+  <script src="app.js?v=20261010-41"></script>
 </body>
 </html>
