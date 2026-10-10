@@ -1206,11 +1206,18 @@
           readout: "142k / 200k Tokens Used",
           story:
             "Tracks live memory usage across chat, subagents, step visualiser, and scheduled jobs, compacting older history automatically before hitting 200k tokens.",
+          nextLabel: "Next tab: Interactive Sandbox \u2192",
+        },
+        sandbox: {
+          label: "INTERACTIVE AGENT TRACER WORKSPACE (CLICK NODES OR SWITCH SCENARIOS)",
+          readout: "Live Client-Side Sandbox",
+          story:
+            "Explore three full multi-agent execution traces directly in your browser across Timeline and Topology views, complete with subagent drill-down and unified code diffs.",
           nextLabel: "Next tab: Execution Timeline \u2192",
         },
       };
 
-      const tTabOrder = ["timeline", "memory"];
+      const tTabOrder = ["timeline", "memory", "sandbox"];
       let tTabIdx = 0;
 
       function selectTracerTab(tabKey) {
@@ -1225,6 +1232,12 @@
         tScenes.forEach((s) => {
           s.classList.toggle("is-active", s.getAttribute("data-tracer-scene") === tabKey);
         });
+        if (tabKey === "sandbox") {
+          const embFrame = document.getElementById("tracer-embedded-iframe");
+          if (embFrame && !embFrame.getAttribute("src") && embFrame.dataset.src) {
+            embFrame.setAttribute("src", embFrame.dataset.src);
+          }
+        }
         if (tPaneLabel) tPaneLabel.textContent = cfg.label;
         if (fReadout) fReadout.textContent = cfg.readout;
         if (tStory) tStory.textContent = cfg.story;
