@@ -953,27 +953,6 @@ textarea {
   z-index: 3;
 }
 
-.browser-tab-live {
-  color: var(--accent, #0066cc);
-  font-weight: 600;
-  background: color-mix(in srgb, var(--accent, #0066cc) 7%, transparent);
-}
-
-.browser-tab-live.active {
-  background: var(--bg-canvas);
-  color: var(--accent, #0066cc);
-  border-top: 2px solid var(--accent, #0066cc);
-}
-
-.live-tab-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #34a853;
-  box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.18);
-  flex-shrink: 0;
-}
-
 .pane-header-right {
   display: inline-flex;
   align-items: center;
@@ -1102,16 +1081,11 @@ textarea {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #137333;
-  background: rgba(52, 168, 83, 0.14);
+  color: var(--accent, #0066cc);
+  background: color-mix(in srgb, var(--accent, #0066cc) 10%, transparent);
   padding: 2px 8px;
   border-radius: 999px;
   flex-shrink: 0;
-}
-
-[data-theme="dark"] .tracer-doing-badge {
-  color: #81c995;
-  background: rgba(129, 201, 149, 0.18);
 }
 
 .tracer-tour-row {
