@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-31" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-32" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261010-31" />
+  <link rel="stylesheet" href="styles.css?v=20261010-32" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -808,33 +808,32 @@
                   <span></span><span></span><span></span>
                 </div>
                 <div class="browser-tab-strip" role="tablist" aria-label="Agent Tracer workspace tabs">
-                  <button type="button" class="browser-tab browser-tab-live active" data-tracer-tab="sandbox" role="tab" aria-selected="true">
-                    <span class="live-tab-dot" aria-hidden="true"></span>
-                    <span>Live Interactive Sandbox</span>
-                  </button>
-                  <button type="button" class="browser-tab" data-tracer-tab="timeline" role="tab" aria-selected="false">
+                  <button type="button" class="browser-tab active" data-tracer-tab="timeline" role="tab" aria-selected="true">
                     <span>Execution Timeline</span>
                   </button>
                   <button type="button" class="browser-tab" data-tracer-tab="memory" role="tab" aria-selected="false">
                     <span>200k Memory Meter</span>
+                  </button>
+                  <button type="button" class="browser-tab" data-tracer-tab="sandbox" role="tab" aria-selected="false">
+                    <span>Interactive Sandbox</span>
                   </button>
                 </div>
               </div>
 
               <div class="browser-single-pane">
                 <!-- Standard Diagram Header (shown on Execution Timeline & 200k Memory Meter tabs) -->
-                <div class="pane-header" id="tracer-diagram-header" style="display: none;">
+                <div class="pane-header" id="tracer-diagram-header">
                   <span class="pane-label" id="tracer-pane-label">LIVE AGENT STEP VISUALISER (CLICK ANY STEP)</span>
                   <div class="pane-header-right">
                     <span class="pane-badge" id="flagship-tracer-readout">Step 02: AI Planner (640ms)</span>
                     <button type="button" class="pane-launch-sandbox-btn" id="tracer-switch-to-sandbox-btn">
-                      <span>Try Live Sandbox &#8594;</span>
+                      <span>Try Interactive Sandbox &#8594;</span>
                     </button>
                   </div>
                 </div>
 
-                <!-- Integrated Tab-Box Sandbox Console & Guide (shown when Live Interactive Sandbox is active) -->
-                <div class="tracer-sandbox-console" id="tracer-sandbox-console">
+                <!-- Integrated Tab-Box Sandbox Console & Guide (shown when Interactive Sandbox tab is selected) -->
+                <div class="tracer-sandbox-console" id="tracer-sandbox-console" style="display: none;">
                   <div class="tracer-console-top">
                     <div class="tracer-console-scenarios" role="tablist" aria-label="Select sample agent trace">
                       <span class="tracer-console-kicker">ACTIVE TRACE:</span>
@@ -871,19 +870,8 @@
                 </div>
 
                 <div class="about-svg-stage">
-                  <!-- Tab 1: Live Interactive Browser Sandbox (Active by default) -->
-                  <div class="about-scene tracer-sandbox-scene is-active" data-tracer-scene="sandbox">
-                    <iframe
-                      id="tracer-embedded-iframe"
-                      class="tracer-sandbox-frame"
-                      src="sandbox/agent-tracer/index.html?embed=1"
-                      data-src="sandbox/agent-tracer/index.html?embed=1"
-                      title="Interactive Agent Tracer Sandbox"
-                    ></iframe>
-                  </div>
-
-                  <!-- Tab 2: Execution Timeline -->
-                  <div class="about-scene" data-tracer-scene="timeline">
+                  <!-- Tab 1: Execution Timeline (Explanation & Overview - Active by default) -->
+                  <div class="about-scene is-active" data-tracer-scene="timeline">
                     <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
                       <path class="trace-edge" d="M 96 58 L 136 58" />
                       <path class="trace-edge" d="M 244 46 L 274 34" />
@@ -918,7 +906,7 @@
                     </svg>
                   </div>
 
-                  <!-- Tab 3: 200k Memory Meter -->
+                  <!-- Tab 2: 200k Memory Meter -->
                   <div class="about-scene" data-tracer-scene="memory">
                     <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
                       <defs>
@@ -945,10 +933,20 @@
                       <rect class="token-fill-bar" id="flagship-token-bar" clip-path="url(#flagship-bar-clip)" x="30" y="86" width="219" height="7" rx="3.5" fill="var(--accent)" />
                     </svg>
                   </div>
+
+                  <!-- Tab 3: Interactive Sandbox (Last Tab) -->
+                  <div class="about-scene tracer-sandbox-scene" data-tracer-scene="sandbox">
+                    <iframe
+                      id="tracer-embedded-iframe"
+                      class="tracer-sandbox-frame"
+                      data-src="sandbox/agent-tracer/index.html?embed=1"
+                      title="Interactive Agent Tracer Sandbox"
+                    ></iframe>
+                  </div>
                 </div>
 
                 <p class="about-live-story" id="tracer-live-story">
-                  Explore three live multi-agent execution runs right inside the browser, complete with subagent drill-down, colour-coded unified code diffs, and real-time topology views.
+                  Turns raw background logs into an interactive visual timeline so engineers can inspect every prompt, reasoning step, and tool call at a glance.
                 </p>
 
                 <div class="browser-single-footer">
@@ -1926,6 +1924,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261010-31"></script>
+  <script src="app.js?v=20261010-32"></script>
 </body>
 </html>
