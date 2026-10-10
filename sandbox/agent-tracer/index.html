@@ -308,16 +308,18 @@
       }
       .sandbox-coach-reopen {
         position: absolute;
-        left: 14px;
-        bottom: 14px;
+        top: 10px;
+        right: 12px;
+        left: auto;
+        bottom: auto;
         z-index: 46;
         border: 1px solid rgba(0, 102, 204, 0.32);
         background: rgba(255, 255, 255, 0.94);
         color: #0066cc;
         font-family: inherit;
-        font-size: 11.5px;
+        font-size: 11px;
         font-weight: 600;
-        padding: 5px 12px;
+        padding: 4px 11px;
         border-radius: 999px;
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
         cursor: pointer;
@@ -373,7 +375,10 @@
         html[data-theme="dark"] .goalbar-step,
         html[data-theme="dark"] #goalBarSelect {
             color: #8ab4f8;
-            background: rgba(138,180,248,0.16);
+            background-color: rgba(138,180,248,0.16);
+        }
+        html[data-theme="dark"] #goalBarSelect {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238ab4f8' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
         }
         html[data-theme="dark"] #goalBarSelect option {
             background: #181b23;
@@ -383,14 +388,14 @@
         html[data-theme="dark"] .issue-row.slow-row .tool { color: #fbbf24; }
         html[data-theme="dark"] .markdown-body code { background: rgba(255,255,255,0.1); }
 
-        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; height: 100vh; overflow: hidden; background: var(--background, #f8f9fa); color: var(--foreground, #202124); }
+        body { margin: 0; width: 100%; max-width: 100vw; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; height: 100vh; overflow: hidden; box-sizing: border-box; background: var(--background, #f8f9fa); color: var(--foreground, #202124); }
         
-        #left { flex: 1 1 68%; min-width: 0; min-height: 0; border-right: 1px solid var(--border, #dadce0); box-sizing: border-box; background: var(--background, #f8f9fa); display: flex; flex-direction: column; position: relative; z-index: 20; }
-        #right { width: 32%; min-width: 280px; max-width: 420px; display: flex; flex-direction: column; box-sizing: border-box; background: var(--card, #fff); transition: height 0.18s ease, width 0.18s ease; position: relative; z-index: 10; }
+        #left { flex: 1 1 0%; width: 0; min-width: 0; min-height: 0; overflow: hidden; border-right: 1px solid var(--border, #dadce0); box-sizing: border-box; background: var(--background, #f8f9fa); display: flex; flex-direction: column; position: relative; z-index: 20; }
+        #right { flex: 0 0 clamp(248px, 31%, 336px); width: clamp(248px, 31%, 336px); min-width: 0; max-width: 37%; overflow-x: hidden; display: flex; flex-direction: column; box-sizing: border-box; background: var(--card, #fff); transition: height 0.18s ease, width 0.18s ease; position: relative; z-index: 10; }
         #right-bar { display: none; align-items: center; justify-content: space-between; padding: 6px 12px; background: var(--secondary, #f1f3f4); border-bottom: 1px solid var(--border, #dadce0); cursor: pointer; user-select: none; flex-shrink: 0; font-size: 11px; font-weight: 600; color: var(--muted-foreground, #5f6368); }
         #right-bar:hover { color: var(--foreground, #202124); }
-        #inspector { flex: 1; overflow-y: auto; padding: 16px 18px; box-sizing: border-box; }
-        body.inspector-collapsed #right { width: 0 !important; min-width: 0 !important; overflow: hidden; border: none; }
+        #inspector { flex: 1; width: 100%; min-width: 0; overflow-y: auto; overflow-x: hidden; overflow-wrap: anywhere; word-break: break-word; padding: 14px 16px; box-sizing: border-box; }
+        body.inspector-collapsed #right { width: 0 !important; flex: 0 0 0px !important; min-width: 0 !important; overflow: hidden; border: none; }
         
         /* Two rows: identity strip on top, wrapping toolbar underneath. */
         .header { padding: 7px 12px; background: var(--card, #fff); border-bottom: 1px solid var(--border, #dadce0); display: flex; flex-direction: column; gap: 6px; position: relative; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; box-sizing: border-box; }
@@ -401,7 +406,7 @@
         .status-dot { width: 7px; height: 7px; background-color: #34a853; border-radius: 50%; margin-right: 5px; flex-shrink: 0; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(52, 168, 83, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 168, 83, 0); } }
 
-        .toolbar { display: flex; align-items: center; flex-wrap: wrap; column-gap: 8px; row-gap: 6px; }
+        .toolbar { display: flex; align-items: center; flex-wrap: wrap; column-gap: 8px; row-gap: 6px; min-width: 0; }
         .tb-group { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--muted-foreground, #5f6368); white-space: nowrap; }
         .tb-group label { cursor: pointer; user-select: none; font-weight: 500; white-space: nowrap; }
         .tb-group input[type=checkbox] { cursor: pointer; margin: 0; }
@@ -410,14 +415,14 @@
         .tb-btn.ghost { background: var(--card, #fff); border: 1px solid var(--border, #dadce0); color: var(--foreground, #3c4043); font-weight: 500; }
 
         /* Sticky goal bar. */
-        .goalbar { display: flex; align-items: flex-start; gap: 10px; padding: 7px 12px; background: var(--card, #fff); border-bottom: 1px solid var(--border, #dadce0); box-shadow: inset 3px 0 0 #4285F4; flex-shrink: 0; box-sizing: border-box; position: relative; z-index: 10; }
+        .goalbar { display: flex; align-items: flex-start; gap: 10px; padding: 7px 12px; background: var(--card, #fff); border-bottom: 1px solid var(--border, #dadce0); box-shadow: inset 3px 0 0 #4285F4; flex-shrink: 0; box-sizing: border-box; position: relative; z-index: 10; min-width: 0; }
         .goalbar.hidden { display: none; }
 
         .goalbar-nav { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
         .goalbar-step { width: 22px; height: 22px; padding: 0; line-height: 1; font-size: 14px; font-weight: 700; cursor: pointer; color: #1967D2; background: rgba(66,133,244,0.12); border: none; border-radius: 4px; transition: background 0.15s ease; }
         .goalbar-step:hover:not(:disabled) { background: rgba(66,133,244,0.24); }
         .goalbar-step:disabled { opacity: 0.35; cursor: default; }
-        #goalBarSelect { max-width: 175px; height: 22px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; color: #1967D2; background: rgba(66,133,244,0.12); border: none; border-radius: 12px; padding: 0 8px; cursor: pointer; outline: none; }
+        #goalBarSelect { appearance: none; -webkit-appearance: none; max-width: 196px; height: 22px; font-size: 11px; font-weight: 700; letter-spacing: 0.2px; color: #1967D2; background-color: rgba(66,133,244,0.12); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231967D2' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; border: none; border-radius: 12px; padding: 0 26px 0 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; outline: none; }
 
         .goalbar-body { flex: 1; min-width: 0; cursor: pointer; }
         .goalbar-main { font-size: 12.5px; font-weight: 600; color: var(--foreground, #202124); line-height: 1.35; }
@@ -434,7 +439,7 @@
         
         .swimlanes-labels { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; z-index: 2; pointer-events: none; }
         .swimlane-row-label { flex: 1; position: relative; }
-        .swimlane-header { font-weight: 600; font-size: 12.5px; color: var(--muted-foreground, #5f6368); padding: 7px 11px; background: var(--card, #fff); opacity: 0.9; box-shadow: 1px 1px 3px rgba(0,0,0,0.05); display: inline-block; border-bottom-right-radius: 8px; border-right: 1px solid var(--border, #dadce0); border-bottom: 1px solid var(--border, #dadce0); pointer-events: auto; cursor: pointer; transition: all 0.2s ease; }
+        .swimlane-header { font-weight: 600; font-size: 11px; letter-spacing: 0.01em; color: var(--muted-foreground, #5f6368); padding: 4px 10px; background: var(--card, #fff); opacity: 0.92; box-shadow: 1px 1px 3px rgba(0,0,0,0.05); display: inline-block; border-bottom-right-radius: 7px; border-right: 1px solid var(--border, #dadce0); border-bottom: 1px solid var(--border, #dadce0); pointer-events: auto; cursor: pointer; transition: all 0.2s ease; }
         .swimlane-header:hover { background: var(--card, #fff); opacity: 1; box-shadow: 1px 2px 6px rgba(0,0,0,0.1); color: var(--foreground, #202124); }
 
         /* Search + issue navigation */
@@ -1084,7 +1089,7 @@
                             <animateTransform attributeName="transform" type="rotate" from="0 815 236" to="360 815 236" dur="60s" repeatCount="indefinite" />
                         </circle>
                         <text id="topo-simple-tools-title" x="815" y="25" text-anchor="middle" fill="#FCD34D" font-size="18.5" font-weight="800" letter-spacing="2">TOOL SET</text>
-                        <text id="topo-simple-tools-sub" x="815" y="45" text-anchor="middle" fill="#B45309" font-size="14" font-weight="700" letter-spacing="0.6">8 agent tools · 0 calls</text>
+                        <text id="topo-simple-tools-sub" x="815" y="45" text-anchor="middle" fill="#B45309" font-size="14" font-weight="700" letter-spacing="0.6">8 agent tools, 0 calls</text>
                         <g id="topo-simple-tools-chips"></g>
                         <g id="topo-simple-tools-panel"></g>
                     </g>
@@ -1097,7 +1102,7 @@
                         <circle id="topo-simple-sub-body" cx="815" cy="614" r="112" fill="url(#topo-grad-sub-off-dark)" stroke="#334155" stroke-width="2.2" style="transition: stroke 300ms ease;" />
                         <g id="topo-simple-sub-pulse"></g>
                         <text id="topo-simple-sub-title" x="815" y="452" text-anchor="middle" fill="#64748B" font-size="18" font-weight="800" letter-spacing="1.6">SUBAGENTS &amp; TASKS</text>
-                        <text id="topo-simple-sub-subtitle" x="815" y="472" text-anchor="middle" fill="#334155" font-size="13.5" font-weight="700" letter-spacing="0.6">4 orchestration tools · idle</text>
+                        <text id="topo-simple-sub-subtitle" x="815" y="472" text-anchor="middle" fill="#334155" font-size="13.5" font-weight="700" letter-spacing="0.6">4 orchestration tools, idle</text>
                         <g id="topo-simple-sub-glyph" transform="translate(815, 614)" style="transition: opacity 200ms ease;">
                             <rect x="-18" y="-12" width="36" height="25" rx="6" fill="none" stroke="#475569" stroke-width="2.2" />
                             <circle cx="-6.5" cy="0.5" r="3" fill="#475569" />
@@ -1126,7 +1131,7 @@
                         <circle id="topo-simple-core-body" cx="440" cy="380" r="98" fill="url(#topo-grad-core-dark)" stroke="#5EEAD4" stroke-width="2.8" filter="url(#topo-neon-soft)" />
                         <g id="topo-simple-core-pulse"></g>
                         <text id="topo-simple-core-title" x="440" y="373" text-anchor="middle" fill="#CCFBF1" font-size="22" font-weight="800" letter-spacing="1.4">AGENT CORE</text>
-                        <text id="topo-simple-core-sub" x="440" y="398" text-anchor="middle" fill="#5EEAD4" font-size="14" font-weight="700" letter-spacing="1.4">GEMINI · PLANNER</text>
+                        <text id="topo-simple-core-sub" x="440" y="398" text-anchor="middle" fill="#5EEAD4" font-size="14" font-weight="700" letter-spacing="1.4">GEMINI, PLANNER</text>
                         <circle id="topo-simple-core-dot" cx="440" cy="416" r="4.5" fill="#34D399">
                             <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite" />
                         </circle>
@@ -1282,26 +1287,24 @@
             return Math.round((minX + maxX) / 2);
         }
 
-        // 2. If the latest turn fits inside the viewport, centre the latest turn
+        // 2. Keep the opening turn's USER REQUEST + MAIN AGENT + parallel SUBAGENTS
+        // cleanly framed from the left without slicing the first node under swimlane badges.
         const turns = window.graphTurns || [];
-        const lastTurn = turns.length ? turns[turns.length - 1] : null;
-        if (lastTurn && typeof lastTurn.minX === 'number' && typeof lastTurn.maxX === 'number') {
-            const turnSpan = (lastTurn.maxX - lastTurn.minX) + NODE_PAD * 2;
-            if (turnSpan <= visibleW) {
-                return Math.round((lastTurn.minX + lastTurn.maxX) / 2);
-            }
+        const firstTurn = turns.length ? turns[0] : null;
+        if (firstTurn && typeof firstTurn.minX === 'number') {
+            const leftEdgeX = Math.max(firstTurn.minX - 245, 95);
+            return Math.round(leftEdgeX + visibleW / 2);
         }
 
-        // 3. Otherwise align the right edge of the latest node (+ NODE_PAD) with the right edge of the viewport
+        // 3. Fallback: align the right edge of the latest node (+ NODE_PAD) with the right edge of the viewport
         return Math.round((maxX + NODE_PAD) - (visibleW / 2));
     }
 
     function laneOffsetFor(height) {
         if (!height || height <= 20) return 240;
-        // Prefer lining up with the CSS band (a third of the height), but the
-        // fit constraint wins: a lane pushed off the bottom is worse than a
-        // cramped one. The floor only matters on absurdly short panels.
-        return Math.min(height / 3, Math.max(60, height / 2 - NODE_HALF_H));
+        // Align strictly with the 3 equal CSS swimlane bands (1/3 of canvas height)
+        // while keeping at least 162px separation so parallel subagents never overlap.
+        return Math.max(162, Math.round(height / 3));
     }
 
     // Returns true when the geometry actually moved, so callers can skip
@@ -1618,9 +1621,9 @@
                         '</div>' +
                         '<div class="session-item-meta">' +
                         '<span>' + escapeHtml(c.id.slice(0, 8)) + '</span>' +
-                        '<span>· ' + (c.stepCount || 0) + ' steps</span>' +
-                        '<span>· ' + (c.toolCount || c.toolCallCount || 0) + ' tools</span>' +
-                        (subCount > 0 ? '<span style="color:#8B5CF6; font-weight:700;">· ' + subCount + ' sub</span>' : '') +
+                        '<span>' + (c.stepCount || 0) + ' steps</span>' +
+                        '<span>' + (c.toolCount || c.toolCallCount || 0) + ' tools</span>' +
+                        (subCount > 0 ? '<span style="color:#8B5CF6; font-weight:700;">' + subCount + ' sub</span>' : '') +
                         (c.updatedAt ? '<span style="margin-left:auto;">' + escapeHtml(formatStamp(c.updatedAt)) + '</span>' : '') +
                         '</div>' +
                         '</button>';
@@ -1761,7 +1764,7 @@
             dot.addEventListener('mouseenter', () => {
                 const r = dot.getBoundingClientRect();
                 const stamp = formatStamp(cp.time);
-                checkpointTip.textContent = '#' + (i + 1) + (stamp ? ' · ' + stamp : '') + ' · ' + cp.label;
+                checkpointTip.textContent = '#' + (i + 1) + (stamp ? ', ' + stamp : '') + ', ' + cp.label;
                 checkpointTip.style.left = (r.left + r.width / 2) + 'px';
                 checkpointTip.style.bottom = (window.innerHeight - r.top + 10) + 'px';
                 checkpointTip.classList.add('show');
@@ -1783,8 +1786,8 @@
             });
             mark.addEventListener('mouseenter', () => {
                 const r = mark.getBoundingClientRect();
-                checkpointTip.textContent = (iss.requestNum ? 'Request ' + iss.requestNum + ' · ' : '') +
-                                            iss.tool + ' — ' + iss.detail;
+                checkpointTip.textContent = (iss.requestNum ? 'Request ' + iss.requestNum + ', ' : '') +
+                                            iss.tool + ': ' + iss.detail;
                 checkpointTip.style.left = (r.left + r.width / 2) + 'px';
                 checkpointTip.style.bottom = (window.innerHeight - r.top + 10) + 'px';
                 checkpointTip.classList.add('show');
@@ -1878,7 +1881,7 @@
             const opt = document.createElement('option');
             opt.value = String(i);
             const label = t.num > 0 ? 'Request ' + t.num : 'Session start';
-            opt.textContent = label + ' — ' + truncate(goalHeadline(t), 70);
+            opt.textContent = label + ': ' + truncate(goalHeadline(t), 48);
             goalBarSelect.appendChild(opt);
         });
     }
@@ -2312,7 +2315,7 @@
         let html = '<div id="inspector-title" style="color:#1967D2"><span>MATCHES</span>' + inspectorBackBtnHtml() + '</div>' +
                    '<div class="inspector-section"><div class="inspector-label">' +
                    searchMatches.length + ' node' + (searchMatches.length === 1 ? '' : 's') +
-                   ' matching “' + escapeHtml(searchTerm.trim()) + '” — click one to jump to it</div>';
+                   ' matching “' + escapeHtml(searchTerm.trim()) + '”: click one to jump to it</div>';
         searchMatches.forEach((m, i) => {
             html += '<button class="issue-row match-row' + (i === searchCursor ? ' active' : '') +
                     '" data-match="' + i + '">' +
@@ -2384,7 +2387,7 @@
         if (!nodes || !nodes.length) return;
         const y_user_scaled = BASE_Y_USER / currentZoom;
         const y_tool_scaled = BASE_Y_TOOL / currentZoom;
-        const subSpreadScaled = Math.min(115, Math.max(58, Math.abs(BASE_Y_TOOL) * 0.44)) / currentZoom;
+        const subSpreadScaled = Math.max(104, Math.min(132, Math.abs(BASE_Y_TOOL) * 0.62)) / currentZoom;
         const updates = [];
         nodes.forEach(n => {
             if (n.id.startsWith('user_') || n.id.startsWith('gap_') || n.id.startsWith('sys_')) {
@@ -2559,11 +2562,11 @@
     function formatLiveSubLine(meta) {
         if (!meta || !meta.steps) return '';
         const st = meta.status === 'RUNNING' ? 'LIVE' : (meta.status === 'ERROR' || meta.errors > 0 ? 'ERR' : 'DONE');
-        let line = '[' + st + ' · ' + meta.steps + ' steps · ' + (meta.tools || 0) + ' tools';
+        let line = '[' + st + ': ' + meta.steps + ' steps, ' + (meta.tools || 0) + ' tools';
         if (meta.status === 'RUNNING' && meta.lastTool) {
-            line += ' · ' + truncate(meta.lastTool, 14);
+            line += ', ' + truncate(meta.lastTool, 14);
         } else if (meta.durationMs && meta.durationMs >= 1000) {
-            line += ' · ' + formatDuration(meta.durationMs);
+            line += ', ' + formatDuration(meta.durationMs);
         }
         line += ']';
         return line;
@@ -2817,7 +2820,7 @@
         network = new vis.Network(container, graphData, options);
         
         // Draws the translucent band grouping each turn. The goal text itself is no
-        // longer painted here — canvas text scrolls away with the graph and shrinks
+        // longer painted here: canvas text scrolls away with the graph and shrinks
         // with zoom. It lives in the sticky goal bar above the canvas instead.
         network.on("beforeDrawing", function (ctx) {
             if (!showSummaries || !window.graphTurns || window.graphTurns.length === 0) return;
@@ -2883,7 +2886,7 @@
     }
 
     // Prompts are stored wrapped in an envelope (`<USER_REQUEST>`) with metadata
-    // and system blocks appended. Showing that raw is noise — strip it back to
+    // and system blocks appended. Showing that raw is noise: strip it back to
     // what the person actually typed.
     function cleanUserText(str) {
         if (!str) return '';
@@ -3042,7 +3045,7 @@
         let Y_USER = BASE_Y_USER / currentZoom;  
         let Y_AGENT = 0;    
         let Y_TOOL = BASE_Y_TOOL / currentZoom;
-        const subSpreadScaled = Math.min(115, Math.max(58, Math.abs(BASE_Y_TOOL) * 0.44)) / currentZoom;
+        const subSpreadScaled = Math.max(104, Math.min(132, Math.abs(BASE_Y_TOOL) * 0.62)) / currentZoom;
         
         if (data.length > 0 && !nodes.get('start')) {
             newNodes.push({ id: 'start', label: 'START', shape: 'ellipse', color: { background: pal.start.bg, border: pal.start.border }, font: { color: pal.start.font, face: 'system-ui', size: 14 }, x: currentX, y: Y_AGENT });
@@ -3743,7 +3746,7 @@
     //
     // Results never *begin* with "Error": the `Created At:` preamble comes first,
     // and tools state trouble mid-text. A leading-keyword regex therefore matched
-    // zero of 402 real results while missing 11 non-zero exits — i.e. it reported
+    // zero of 402 real results while missing 11 non-zero exits: i.e. it reported
     // a clean run every time. Match how each tool genuinely reports failure, and
     // stay conservative: a bare mention of "error" is not enough, because it turns
     // up constantly in file contents and search hits the agent is merely reading.
@@ -3989,9 +3992,9 @@
         const isErr = meta.status === 'ERROR' || meta.errors > 0;
         const cls = isErr ? ' error' : (isRun ? ' running' : '');
         const tag = isErr ? 'ERROR' : (isRun ? 'RUNNING' : 'DONE');
-        let txt = tag + ' · ' + meta.steps + ' steps · ' + (meta.tools || 0) + ' tools';
-        if (isRun && meta.lastTool) txt += ' · ' + truncate(meta.lastTool, 16);
-        else if (meta.durationMs && meta.durationMs >= 1000) txt += ' · ' + formatDuration(meta.durationMs);
+        let txt = tag + ', ' + meta.steps + ' steps, ' + (meta.tools || 0) + ' tools';
+        if (isRun && meta.lastTool) txt += ', ' + truncate(meta.lastTool, 16);
+        else if (meta.durationMs && meta.durationMs >= 1000) txt += ', ' + formatDuration(meta.durationMs);
         return '<div><span class="sub-live-badge' + cls + '">' + escapeHtml(txt) + '</span></div>';
     }
 
@@ -4054,7 +4057,7 @@
                         '<div class="subagent-card-info">' +
                         '<div class="subagent-card-role">' + escapeHtml(sa.role || sa.typeName || 'Subagent') + '</div>' +
                         '<div class="subagent-card-meta">ID: ' + escapeHtml(sa.id.slice(0, 8)) + '…' +
-                        (sa.prompt ? ' · ' + escapeHtml(truncate(sa.prompt, 52)) : '') + '</div>' +
+                        (sa.prompt ? ', ' + escapeHtml(truncate(sa.prompt, 52)) : '') + '</div>' +
                         renderSubagentLiveBadgeHtml(sa.id) +
                         '</div>' +
                         '<button type="button" class="subagent-trace-btn ov-subagent-btn" data-sub-idx="' + idx + '">Trace Subagent →</button>' +
@@ -4111,15 +4114,15 @@
         const sorted = slowNodes.slice().sort((a, b) => b.ms - a.ms);
         html += '<div class="inspector-section"><div class="inspector-label">' +
                 sorted.length + ' call' + (sorted.length === 1 ? '' : 's') +
-                ' ≥ 10s (ranked slowest first) — click one to jump to it</div>';
+                ' ≥ 10s (ranked slowest first): click one to jump to it</div>';
         sorted.forEach((item, i) => {
             html += '<button class="issue-row slow-row" data-slow="' + i + '">' +
                     '<span class="req">' + formatDuration(item.ms) + '</span>' +
                     '<span class="body"><span class="tool">' + escapeHtml(item.tool) +
-                    (item.requestNum ? ' <span class="when" style="font-weight:400;">· Req #' + item.requestNum + '</span>' : '') +
+                    (item.requestNum ? ' <span class="when" style="font-weight:400;">Req #' + item.requestNum + '</span>' : '') +
                     '</span>' +
                     '<span class="detail">' + escapeHtml(item.detail || '') +
-                    (item.time ? ' <span class="when">· ' + formatStamp(item.time) + '</span>' : '') +
+                    (item.time ? ' <span class="when">' + formatStamp(item.time) + '</span>' : '') +
                     '</span></span></button>';
         });
         html += '</div>';
@@ -4161,14 +4164,14 @@
 
         html += '<div class="inspector-section"><div class="inspector-label">' +
                 issueNodes.length + (issueNodes.length === 1 ? ' failure' : ' failures') +
-                ' — click one to jump to it</div>';
+                ': click one to jump to it</div>';
         issueNodes.forEach((iss, i) => {
             html += '<button class="issue-row' + (i === issueCursor ? ' active' : '') +
                     '" data-issue="' + i + '">' +
                     '<span class="req">' + (iss.requestNum ? '#' + iss.requestNum : '—') + '</span>' +
                     '<span class="body"><span class="tool">' + escapeHtml(iss.tool) + '</span>' +
                     '<span class="detail">' + escapeHtml(iss.detail || '') +
-                    (iss.time ? ' <span class="when">· ' + formatStamp(iss.time) + '</span>' : '') +
+                    (iss.time ? ' <span class="when">' + formatStamp(iss.time) + '</span>' : '') +
                     '</span></span></button>';
         });
         html += '</div>';
@@ -4261,7 +4264,7 @@
                 const mark = t.failed ? '[FAILED]' : (t.running ? '[RUNNING]' : '[OK]');
                 const dur = t.ms ? ' _(' + formatDuration(t.ms) + ')_' : '';
                 const what = t.summary ? t.summary.headline : '';
-                lines.push('- ' + mark + ' **' + t.name + '**' + dur + (what ? ' — ' + what : ''));
+                lines.push('- ' + mark + ' **' + t.name + '**' + dur + (what ? ': ' + what : ''));
             });
             const failed = turn.tools.filter(t => t.failed).length;
             if (failed) { lines.push(''); lines.push('> ' + failed + ' of these failed.'); }
@@ -4348,7 +4351,7 @@
         inspectorEl.innerHTML =
             '<div id="inspector-title" style="color:#F9AB00"><span>COPY MANUALLY</span>' + inspectorBackBtnHtml() + '</div>' +
             '<div class="inspector-section"><div class="inspector-label">' +
-            'This panel is not allowed to write to the clipboard. The text is selected below — press Ctrl+C.' +
+            'This panel is not allowed to write to the clipboard. The text is selected below: press Ctrl+C.' +
             '</div><textarea id="copyFallbackBox" style="width:100%; height:340px; font-family:monospace; ' +
             'font-size:11px; padding:8px; box-sizing:border-box; border:1px solid var(--border,#dadce0); ' +
             'border-radius:6px; background:var(--secondary,#f8f9fa); color:var(--foreground,#202124);">' +
@@ -5714,8 +5717,8 @@
                             args: previewArgs,
                             targetHint: targetHint,
                             timestamp: ts,
-                            summary: cls.short + (argPairs ? ' · ' + argPairs : ''),
-                            gist: (humanAction ? humanAction + ' — ' : '') + (targetHint || argPairs || cls.short),
+                            summary: cls.short + (argPairs ? ', ' + argPairs : ''),
+                            gist: (humanAction ? humanAction + ': ' : '') + (targetHint || argPairs || cls.short),
                         };
                         builtEvents.push(callEv);
 
@@ -5728,7 +5731,7 @@
                             const ms = timing ? timing.ms : 0;
                             if (resTs > prevTimestamp) prevTimestamp = resTs;
 
-                            const durStr = timing ? ' · ' + formatDuration(timing.ms) : '';
+                            const durStr = timing ? ', ' + formatDuration(timing.ms) : '';
                             const headline = sumObj && sumObj.headline ? truncate(sumObj.headline, 85) : '';
                             const resEv = {
                                 id: 'ev_res_' + step.step_index + '_' + tIdx,
@@ -5753,7 +5756,7 @@
                                 args: previewArgs,
                                 targetHint: targetHint,
                                 timestamp: resTs,
-                                summary: cls.short + durStr + (headline ? ' · ' + headline : ''),
+                                summary: cls.short + durStr + (headline ? ', ' + headline : ''),
                                 gist: headline || (cls.short + ' completed' + durStr),
                             };
                             builtEvents.push(resEv);
@@ -5904,7 +5907,7 @@
         const route = TOPO_ROUTES[ev.message_type] || TOPO_ROUTES.TOOL_CALL;
         const badgeColor = ev.accentColor || route.color;
 
-        posEl.textContent = (scopedIdx + 1) + ' / ' + total + (ev.reqNum ? ' · Turn #' + ev.reqNum : '');
+        posEl.textContent = (scopedIdx + 1) + ' / ' + total + (ev.reqNum ? ', Turn #' + ev.reqNum : '');
         if (btnTopoStepFirst) btnTopoStepFirst.disabled = scopedIdx <= 0;
         if (btnTopoStepPrev)  btnTopoStepPrev.disabled = scopedIdx <= 0;
         if (btnTopoStepNext)  btnTopoStepNext.disabled = scopedIdx >= total - 1;
@@ -5914,7 +5917,7 @@
         if (ev.durationMs && ev.durationMs > 0) {
             const slow = ev.durationMs >= SLOW_MS;
             durHtml = '<span class="topo-hud-dur" style="' + (slow ? 'border-color:#f59e0b;color:#f59e0b;' : '') + '">' +
-                      (slow ? 'SLOW · ' : '') + formatDuration(ev.durationMs) + '</span>';
+                      (slow ? 'SLOW, ' : '') + formatDuration(ev.durationMs) + '</span>';
         }
 
         const toolLabel = ev.tool ? '<span class="topo-hud-tool">' + escapeHtml(ev.tool) + '</span>' : '';
@@ -6016,12 +6019,12 @@
             const pct = (seg.weight / totalWeight) * 100;
             const isSel = selectedEv && (selectedEv.id === seg.ev.id || (selectedEv.nodeId && selectedEv.nodeId === seg.ev.nodeId && seg.ev.message_type !== 'AGENT_THINKING'));
             const durTxt = seg.ms > 0 ? formatDuration(seg.ms) : '<100ms';
-            const tip = seg.fullLabel + ' · ' + durTxt + (seg.ev.targetHint ? ' (' + seg.ev.targetHint + ')' : '') + ' — Click to preview, double-click to inspect';
+            const tip = seg.fullLabel + ', ' + durTxt + (seg.ev.targetHint ? ' (' + seg.ev.targetHint + ')' : '') + ': Click to preview, double-click to inspect';
             const showInlineText = pct >= 9 && segments.length <= 24;
             let inlineLabel = '';
             if (showInlineText) {
                 const baseLbl = truncate(seg.label, pct >= 18 ? 14 : 8);
-                inlineLabel = escapeHtml((pct >= 20 && seg.ms > 0 && segments.length <= 8) ? (baseLbl + ' · ' + durTxt) : baseLbl);
+                inlineLabel = escapeHtml((pct >= 20 && seg.ms > 0 && segments.length <= 8) ? (baseLbl + ', ' + durTxt) : baseLbl);
             }
             trackHtml += '<div class="wf-seg' + (isSel ? ' active' : '') + '" data-wf-idx="' + idx + '" style="flex:' + seg.weight.toFixed(1) + ' 1 0px; min-width:' + minW + 'px;' + maxSegStyle + ' background:' + seg.color + '; display:flex; align-items:center; justify-content:center; overflow:hidden; font-size:9.5px; font-weight:700; color:#fff; font-family:ui-monospace,monospace;" title="' + escapeHtml(tip) + '">' + inlineLabel + '</div>';
         });
@@ -6030,7 +6033,7 @@
         const combinedMs = thinkTotalMs + toolTotalMs;
         if (combinedMs > 0) {
             const toolPct = Math.round((toolTotalMs / combinedMs) * 100);
-            sumEl.textContent = 'Think ' + formatDuration(thinkTotalMs) + ' · Tools ' + formatDuration(toolTotalMs) + ' (' + toolPct + '%)';
+            sumEl.textContent = 'Think ' + formatDuration(thinkTotalMs) + ', Tools ' + formatDuration(toolTotalMs) + ' (' + toolPct + '%)';
         } else {
             sumEl.textContent = segments.length + ' steps in turn';
         }
@@ -6202,7 +6205,7 @@
         if (headersLayer) {
             headersLayer.innerHTML =
                 '<text x="130" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">I/O TERMINALS</text>' +
-                '<text x="420" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">ORCHESTRATION CORE · ' + scopeBadgeText + '</text>' +
+                '<text x="420" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">ORCHESTRATION CORE, ' + scopeBadgeText + '</text>' +
                 '<text x="845" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">CAPABILITY CLUSTERS &amp; TOOLS</text>';
         }
 
@@ -6417,8 +6420,8 @@
             const hasExtraBadges = st.slow > 0 || st.errors > 0;
             const summaryText = st.calls > 0
                 ? (hasExtraBadges && st.totalMs > 0
-                    ? (st.calls + ' · ' + formatDuration(st.totalMs))
-                    : (st.calls + (st.calls === 1 ? ' call' : ' calls') + (st.totalMs > 0 ? ' · ' + formatDuration(st.totalMs) : '')))
+                    ? (st.calls + ', ' + formatDuration(st.totalMs))
+                    : (st.calls + (st.calls === 1 ? ' call' : ' calls') + (st.totalMs > 0 ? ', ' + formatDuration(st.totalMs) : '')))
                 : 'Idle';
             const sumW = Math.max(48, Math.round(summaryText.length * 6.8 + 14));
             rightX -= sumW;
@@ -6515,8 +6518,8 @@
                     clustersSvg += '<text x="' + (px + pillW - 6) + '" y="' + txtY + '" text-anchor="end" fill="' + (t.errors > 0 ? '#EF4444' : c.accent) + '" font-size="' + (isCompactPills ? '10.5' : '11') + '" font-weight="800" font-family="ui-monospace, monospace">' + escapeHtml(badgeStr) + '</text>';
                 }
                 const pillTip = isSubRolePill
-                    ? (t.rawName + (subLive && subLive.steps ? (' [' + subLive.status + ' · ' + subLive.steps + ' steps · ' + (subLive.tools || 0) + ' tools]') : '') + ' — Click to inspect, double-click to trace subagent trajectory')
-                    : (t.rawName + ' (' + t.calls + ' calls' + (t.lastTarget ? ' · Latest: ' + t.lastTarget : '') + ') — Click to inspect');
+                    ? (t.rawName + (subLive && subLive.steps ? (' [' + subLive.status + ', ' + subLive.steps + ' steps, ' + (subLive.tools || 0) + ' tools]') : '') + ': Click to inspect, double-click to trace subagent trajectory')
+                    : (t.rawName + ' (' + t.calls + ' calls' + (t.lastTarget ? ', Latest: ' + t.lastTarget : '') + '): Click to inspect');
                 clustersSvg += '<title>' + escapeHtml(pillTip) + '</title></g>';
             });
 
@@ -6770,7 +6773,7 @@
             const c = g.querySelector('circle');
             const txt = g.querySelector('text');
             const ttl = g.querySelector('title');
-            if (ttl) ttl.textContent = tool.name + (calls ? ' (' + calls + ' call' + (calls === 1 ? '' : 's') + ' — click to inspect' + (isSub ? ', double-click to trace subagent' : '') + ')' : ' (0 calls)');
+            if (ttl) ttl.textContent = tool.name + (calls ? ' (' + calls + ' call' + (calls === 1 ? '' : 's') + ': click to inspect' + (isSub ? ', double-click to trace subagent' : '') + ')' : ' (0 calls)');
 
             if (c) {
                 c.setAttribute('r', String(ringStyle.chipR));
@@ -6911,7 +6914,7 @@
         const toolsSub = document.getElementById('topo-simple-tools-sub');
         if (toolsSub) {
             toolsSub.setAttribute('fill', isDarkMode ? '#F59E0B' : '#B45309');
-            toolsSub.textContent = topoSimpleTools.length + ' agent tools · ' + totalToolCalls + ' call' + (totalToolCalls === 1 ? '' : 's');
+            toolsSub.textContent = topoSimpleTools.length + ' agent tools, ' + totalToolCalls + ' call' + (totalToolCalls === 1 ? '' : 's');
         }
         const toolPos = topoRingPositions(topoSimpleTools, TOPO_SIMPLE_NODES.tools);
         const toolRingStyle = topoRingStyleFor(topoSimpleTools.length);
@@ -6965,10 +6968,10 @@
         if (subSubtitle) {
             subSubtitle.setAttribute('fill', subActive ? (isDarkMode ? '#F472B6' : '#DB2777') : (isDarkMode ? '#64748B' : '#475569'));
             subSubtitle.textContent = subActive
-                ? 'ACTIVE · DELEGATING'
+                ? 'ACTIVE, DELEGATING'
                 : (spawnedSubCount > 0
-                    ? (spawnedSubCount + ' subagent' + (spawnedSubCount === 1 ? '' : 's') + ' · ' + totalSubCalls + ' calls')
-                    : (topoSimpleSubTools.length + ' orchestration tools · ' + totalSubCalls + ' calls'));
+                    ? (spawnedSubCount + ' subagent' + (spawnedSubCount === 1 ? '' : 's') + ', ' + totalSubCalls + ' calls')
+                    : (topoSimpleSubTools.length + ' orchestration tools, ' + totalSubCalls + ' calls'));
         }
         const subGlyph = document.getElementById('topo-simple-sub-glyph');
         if (subGlyph) {
@@ -7007,7 +7010,7 @@
         const coreSub = document.getElementById('topo-simple-core-sub');
         if (coreSub) {
             coreSub.setAttribute('fill', isDarkMode ? '#5EEAD4' : '#0F766E');
-            coreSub.textContent = topoCoreThinking ? 'THINKING · IN FLIGHT' : ('GEMINI · ' + (checkpoints.length || 0) + ' REQ');
+            coreSub.textContent = topoCoreThinking ? 'THINKING, IN FLIGHT' : ('GEMINI, ' + (checkpoints.length || 0) + ' REQ');
         }
         const cp = pulseFor('core');
         const corePulseEl = document.getElementById('topo-simple-core-pulse');
@@ -7023,7 +7026,7 @@
         if (userLayer) {
             userLayer.innerHTML = buildSimpleEndpointSVG(
                 TOPO_SIMPLE_NODES.user, 'user', 'USER PROMPT',
-                (topoCounts.USER_PROMPT || 0) + ' requests · in',
+                (topoCounts.USER_PROMPT || 0) + ' requests, in',
                 userActive, pulseFor('user'),
                 isDarkMode ? {
                     ring: '#4ADE80',
@@ -7048,7 +7051,7 @@
         if (replyLayer) {
             replyLayer.innerHTML = buildSimpleEndpointSVG(
                 TOPO_SIMPLE_NODES.reply, 'reply', 'AGENT OUTPUT',
-                (topoCounts.AGENT_REPLY || 0) + ' replies · out',
+                (topoCounts.AGENT_REPLY || 0) + ' replies, out',
                 replyActive, pulseFor('reply'),
                 isDarkMode ? {
                     ring: '#A78BFA',
@@ -7165,7 +7168,7 @@
             html += '<div class="empty-state" style="font-size:13px;">No telemetry events recorded yet.</div>';
             inspectorEl.innerHTML = html;
         } else {
-            html += '<div class="inspector-label" style="margin-bottom:8px;">Click any event to animate &amp; preview in HUD · Double-click to inspect full step</div>';
+            html += '<div class="inspector-label" style="margin-bottom:8px;">Click any event to animate &amp; preview in HUD, Double-click to inspect full step</div>';
             html += '<div id="topoLogList" style="border:1px solid var(--border,#dbe3ee); border-radius:8px; overflow:hidden;">';
             visible.forEach((ev, idx) => {
                 const route = TOPO_ROUTES[ev.message_type] || TOPO_ROUTES.TOOL_CALL;
@@ -7426,7 +7429,7 @@
                 const headline = it.tSummaryObj && it.tSummaryObj.headline ? it.tSummaryObj.headline : '';
                 text += '<div class="subagent-card inspector-group-tool-item" data-group-idx="' + idx + '" style="cursor:pointer;">' +
                         '<div class="subagent-card-info">' +
-                        '<div class="subagent-card-role">#' + (idx + 1) + ' · ' + escapeHtmlRaw(tName) + (dur ? ' <span style="font-weight:500; color:var(--muted-foreground,#64748b);">(' + escapeHtmlRaw(dur) + ')</span>' : '') + ' · ' + statusBadge + '</div>' +
+                        '<div class="subagent-card-role">#' + (idx + 1) + ', ' + escapeHtmlRaw(tName) + (dur ? ' <span style="font-weight:500; color:var(--muted-foreground,#64748b);">(' + escapeHtmlRaw(dur) + ')</span>' : '') + ', ' + statusBadge + '</div>' +
                         '<div style="font-size:12px; color:var(--foreground,#202124); margin-top:2px;">' + escapeHtmlRaw(desc) + '</div>' +
                         (headline ? '<div class="subagent-card-meta">' + escapeHtmlRaw(truncate(headline, 95)) + '</div>' : '') +
                         '</div>' +
@@ -7457,7 +7460,7 @@
                     '<div class="inspector-section"><div class="inspector-label">Why this exists</div>' +
                     '<div style="background:var(--secondary,#f8f9fa); border:1px solid var(--border,#eee); border-left:4px solid #BDC1C6; border-radius:6px; padding:14px; font-size:13px; line-height:1.5;">' +
                     (isEph
-                        ? 'Background context the platform injected for the agent to read — relevant memories, available skills, and environment details. Not written by you or the agent.'
+                        ? 'Background context the platform injected for the agent to read: relevant memories, available skills, and environment details. Not written by you or the agent.'
                         : 'A notice from the platform itself, such as a restart or a state change. Not written by you or the agent.') +
                     '</div></div>' +
                     '<div class="inspector-section"><div class="inspector-label">Content</div>' +
@@ -7588,7 +7591,7 @@
             if (data.running) {
                 text += '<div class="inspector-section"><div class="inspector-label">Result</div>' +
                         '<div style="background:'+warnBg+'; border:1px solid #F9AB00; border-radius:6px; padding:12px; font-size:13px; color:'+warnText+';">' +
-                        'Still running — no result recorded yet.</div></div>';
+                        'Still running: no result recorded yet.</div></div>';
             } else if (data.result) {
                 const accent = data.failed ? '#D93025' : '#34A853';
                 const bg = data.failed ? errBg : 'var(--secondary,#f8f9fa)';
@@ -7605,11 +7608,11 @@
                     durChip = '<span style="margin-left:8px; font-size:11px; font-weight:600; letter-spacing:0; text-transform:none; ' +
                               'padding:2px 7px; border-radius:10px; ' +
                               (slow ? 'background:'+errBg+'; color:'+errText+';' : 'background:var(--secondary,#e8f0fe); color:var(--muted-foreground,#5f6368);') +
-                              '" title="' + escapeHtmlRaw(tip) + '">' + (slow ? 'SLOW · ' : '') + formatDuration(timing.ms) + '</span>';
+                              '" title="' + escapeHtmlRaw(tip) + '">' + (slow ? 'SLOW, ' : '') + formatDuration(timing.ms) + '</span>';
                 }
 
                 text += '<div class="inspector-section"><div class="inspector-label">' +
-                        (data.failed ? 'Result — failed' : 'Result') + durChip + '</div>';
+                        (data.failed ? 'Result: failed' : 'Result') + durChip + '</div>';
 
                 if (summary) {
                     const chips = summary.stats.map(s =>
@@ -8003,11 +8006,10 @@
             const posMap = network.getPositions([nodeId]);
             const p = posMap && posMap[nodeId];
             if (!p) return;
-            const yOffset = p.y <= 40 ? -68 : 74;
             network.moveTo({
-                position: { x: p.x, y: p.y },
+                position: { x: p.x, y: 0 },
                 scale: 1.0,
-                offset: { x: 42, y: yOffset },
+                offset: { x: 38, y: 0 },
                 animation: animateMs > 0 ? { duration: animateMs, easingFunction: "easeInOutQuad" } : false
             });
         } catch (_) {}
