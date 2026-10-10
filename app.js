@@ -1457,78 +1457,254 @@
 
     const fPrep = document.getElementById("flagship-prep-sandbox");
     if (fPrep) {
-      const fPrepStages = {
-        nbd: {
-          readout: "Stage 1: 6 PM Evening Briefing",
-          story:
-            "Every evening at 6 PM, the agent scans tomorrow's meetings across Calendar, Gmail, Chat, and Docs to assemble a clean one-page briefing.",
-          nextLabel: "Next tab: 36-Check Fact Linter \u2192",
-        },
-        linter: {
-          readout: "36 / 36 Quality Checks Passed",
-          story:
-            "Every citation, participant role, and document link is checked across 36 automated rules before delivery so busy teams never see invented facts.",
-          nextLabel: "Next tab: 1-Hour Reminder \u2192",
-        },
-        t1h: {
-          readout: "Stage 3: 1-Hour Pre-Call Reminder",
-          story:
-            "One hour before each call starts, a fresh pre-meeting reminder catches last-minute thread replies without sending duplicate notifications.",
-          nextLabel: "Next tab: 6 PM Evening Brief \u2192",
-        },
-      };
-
       const pReadout = document.getElementById("flagship-prep-readout");
+      const pPaneLabel = document.getElementById("prep-pane-label");
       const pStory = document.getElementById("prep-live-story");
       const pNextBtn = document.getElementById("prep-next-tab-btn");
       const pNextLabel = document.getElementById("prep-next-tab-label");
-      const pBtns = fPrep.querySelectorAll("[data-fprep-btn]");
+      const pTabs = fPrep.querySelectorAll("[data-prep-tab]");
+      const pScenes = fPrep.querySelectorAll("[data-prep-scene]");
       const pNodes = fPrep.querySelectorAll("[data-fprep]");
-      const prepOrder = ["nbd", "linter", "t1h"];
+      const pDiagramHeader = document.getElementById("prep-diagram-header");
+      const pSandboxConsole = document.getElementById("prep-sandbox-console");
+      const switchPrepSandboxBtn = document.getElementById("prep-switch-to-sandbox-btn");
+      const pHostDoingEl = document.getElementById("prep-host-doing-text");
+      const pHostTourEl = document.getElementById("prep-host-tour-actions");
+      const pOvBubbleEl = document.getElementById("prep-overview-bubble");
+      const pOvBubbleKicker = document.getElementById("prep-bubble-kicker");
+      const pOvBubbleTitle = document.getElementById("prep-bubble-title");
+      const pOvBubbleDesc = document.getElementById("prep-bubble-desc");
+      const pOvBubbleNextBtn = document.getElementById("prep-bubble-next-btn");
+      const pOvBubbleNextLabel = document.getElementById("prep-bubble-next-label");
+
+      const pTabMeta = {
+        pipeline: {
+          label: "TWO-STAGE SCHEDULED PIPELINE (CLICK ANY STEP)",
+          readout: "36 / 36 Quality Checks Passed",
+          story:
+            "Every citation, participant role, and document link is checked across 36 automated rules before delivery so busy teams never see invented facts.",
+          nextLabel: "Next tab: 36-Check Fact Linter \u2192",
+        },
+        linter: {
+          label: "MULTI-SOURCE WORKSPACE FACT VERIFIER",
+          readout: "0 Invented URLs or Roles",
+          story:
+            "Cross-checks Calendar, People Directory, Gmail threads, Chat rooms, and Google Drive files so every line in your briefing links back to a real document.",
+          nextLabel: "Next tab: Interactive Sandbox \u2192",
+        },
+        sandbox: {
+          label: "INTERACTIVE DOSSIER SANDBOX",
+          readout: "Client-Side Sandbox",
+          story:
+            "Explore three real calendar schedules right inside the browser, inspect generated one-page briefings, and test the live fake-link blocker.",
+          nextLabel: "Next tab: Dossier Pipeline \u2192",
+        },
+      };
+
+      const prepBubbleMeta = {
+        nbd: {
+          arrowX: "16%",
+          kicker: "STEP 1 OF 3: 5 PM EVENING RUN",
+          title: "Spots real external & cross-team calls automatically",
+          desc: "Every weekday at 5 PM, the assistant looks ahead at tomorrow's calendar, skips team stand-ups, focus blocks, and declined invites, and researches only the meetings that need preparation.",
+          nextLabel: "Next bubble: Fact Check \u2192",
+          nextStep: "linter",
+        },
+        linter: {
+          arrowX: "50%",
+          kicker: "STEP 2 OF 3: ZERO FAKE LINKS",
+          title: "Every link and person is verified before emailing",
+          desc: "Before sending anything to your inbox, 36 automatic checks verify every document link, participant role, and ticket ID so the AI never makes up fake facts.",
+          nextLabel: "Next bubble: Pre-Call \u2192",
+          nextStep: "t1h",
+        },
+        t1h: {
+          arrowX: "84%",
+          kicker: "STEP 3 OF 3: 1-HOUR PRE-CALL REMINDER",
+          title: "One calm reminder an hour before your call starts",
+          desc: "An hourly check catches same-day bookings and overnight email replies right before you join, without sending noisy duplicate alerts.",
+          nextLabel: "Close Bubble",
+          nextStep: "__close__",
+        },
+      };
+
+      const prepHostScenarioMeta = {
+        next_day_mixed: {
+          doing:
+            "Scans 7 calendar invites for tomorrow, automatically skips 5 routine internal blocks, writes two cited one-page briefings, and checks every link across 36 rules.",
+          actions: [
+            { label: "Bubble 1: Calendar Filter", act: "tour_0" },
+            { label: "Bubble 2: Workspace Search", act: "tour_1" },
+            { label: "Bubble 3: 1-Page Briefing", act: "tour_2" },
+            { label: "Bubble 4: Fact Checker", act: "tour_3" },
+          ],
+        },
+        next_day_cold_lead: {
+          doing:
+            "When tomorrow includes a first-time call with a brand-new external company and zero past emails, the assistant writes 'No prior context found' rather than guessing.",
+          actions: [
+            { label: "Bubble 1: New Contact", act: "tour_0" },
+            { label: "Bubble 2: Honest Empty State", act: "tour_1" },
+            { label: "Bubble 3: 7 / 7 Checks", act: "tour_2" },
+          ],
+        },
+        t1h_window: {
+          doing:
+            "Checks meetings starting 60 to 120 minutes away so same-day bookings get a fresh briefing while earlier and later calls never receive duplicate alerts.",
+          actions: [
+            { label: "Bubble 1: 60-Min Window", act: "tour_0" },
+            { label: "Bubble 2: Same-Day Catch-Up", act: "tour_1" },
+            { label: "Bubble 3: Zero Duplicates", act: "tour_2" },
+          ],
+        },
+      };
+
+      const pTabOrder = ["pipeline", "linter", "sandbox"];
+      let pTabIdx = 0;
+      const prepStepOrder = ["nbd", "linter", "t1h"];
       let prepIdx = 1;
       let prepTimer = null;
 
-      function selectPrepStage(key) {
-        const cfg = fPrepStages[key];
+      function postToPrepSandbox(action, arg) {
+        const embFrame = document.getElementById("prep-embedded-iframe");
+        if (embFrame && embFrame.contentWindow) {
+          embFrame.contentWindow.postMessage(
+            { source: "portfolio-prep-host", action, arg },
+            "*"
+          );
+        }
+      }
+
+      function bindPrepHostTourButtons() {
+        if (!pHostTourEl) return;
+        pHostTourEl.querySelectorAll("[data-prep-act]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            postToPrepSandbox(btn.getAttribute("data-prep-act"));
+          });
+        });
+      }
+      bindPrepHostTourButtons();
+
+      fPrep.querySelectorAll("[data-prep-sc]").forEach((scBtn) => {
+        scBtn.addEventListener("click", () => {
+          const scId = scBtn.getAttribute("data-prep-sc");
+          fPrep.querySelectorAll("[data-prep-sc]").forEach((b) => {
+            b.classList.toggle("active", b === scBtn);
+          });
+          const meta = prepHostScenarioMeta[scId];
+          if (meta) {
+            if (pHostDoingEl) pHostDoingEl.textContent = meta.doing;
+            if (pHostTourEl) {
+              pHostTourEl.innerHTML = meta.actions
+                .map(
+                  (a) =>
+                    `<button type="button" class="tracer-tour-pill" data-prep-act="${a.act}">${a.label}</button>`
+                )
+                .join("");
+              bindPrepHostTourButtons();
+            }
+          }
+          postToPrepSandbox("scenario", scId);
+        });
+      });
+
+      function selectPrepTab(tabKey) {
+        const cfg = pTabMeta[tabKey];
         if (!cfg) return;
-        prepIdx = Math.max(0, prepOrder.indexOf(key));
-        pBtns.forEach((b) => {
-          const active = b.getAttribute("data-fprep-btn") === key;
+        pTabIdx = Math.max(0, pTabOrder.indexOf(tabKey));
+        pTabs.forEach((b) => {
+          const active = b.getAttribute("data-prep-tab") === tabKey;
           b.classList.toggle("active", active);
           b.setAttribute("aria-selected", active ? "true" : "false");
         });
-        pNodes.forEach((n) =>
-          n.classList.toggle("is-selected", n.getAttribute("data-fprep") === key)
-        );
+        pScenes.forEach((s) => {
+          s.classList.toggle("is-active", s.getAttribute("data-prep-scene") === tabKey);
+        });
+        const isSandbox = tabKey === "sandbox";
+        if (pDiagramHeader) pDiagramHeader.style.display = isSandbox ? "none" : "flex";
+        if (pSandboxConsole) pSandboxConsole.style.display = isSandbox ? "flex" : "none";
+        if (isSandbox) {
+          const embFrame = document.getElementById("prep-embedded-iframe");
+          if (embFrame && !embFrame.getAttribute("src") && embFrame.dataset.src) {
+            embFrame.setAttribute("src", embFrame.dataset.src);
+          }
+        }
+        if (pPaneLabel) pPaneLabel.textContent = cfg.label;
         if (pReadout) pReadout.textContent = cfg.readout;
-        if (pStory && cfg.story) pStory.textContent = cfg.story;
-        if (pNextLabel && cfg.nextLabel) pNextLabel.textContent = cfg.nextLabel;
+        if (pStory) pStory.textContent = cfg.story;
+        if (pNextLabel) pNextLabel.textContent = cfg.nextLabel;
       }
 
-      pBtns.forEach((btn) => {
+      if (switchPrepSandboxBtn) {
+        switchPrepSandboxBtn.addEventListener("click", () => selectPrepTab("sandbox"));
+      }
+
+      pTabs.forEach((btn) => {
         btn.addEventListener("click", () => {
-          if (prepTimer) clearInterval(prepTimer);
-          selectPrepStage(btn.getAttribute("data-fprep-btn"));
+          selectPrepTab(btn.getAttribute("data-prep-tab"));
         });
       });
+
+      if (pNextBtn) {
+        pNextBtn.addEventListener("click", () => {
+          pTabIdx = (pTabIdx + 1) % pTabOrder.length;
+          selectPrepTab(pTabOrder[pTabIdx]);
+        });
+      }
+
+      function selectPrepStage(key) {
+        const bMeta = prepBubbleMeta[key];
+        if (!bMeta) return;
+        prepIdx = Math.max(0, prepStepOrder.indexOf(key));
+        let activeSvgEl = null;
+        pNodes.forEach((n) => {
+          const isMatch = n.getAttribute("data-fprep") === key;
+          n.classList.toggle("is-selected", isMatch);
+          if (isMatch) activeSvgEl = n;
+        });
+        if (pOvBubbleEl) {
+          pOvBubbleEl.style.display = "";
+          let arrowVal = bMeta.arrowX;
+          if (activeSvgEl && typeof activeSvgEl.getBoundingClientRect === "function") {
+            const nRect = activeSvgEl.getBoundingClientRect();
+            const bRect = pOvBubbleEl.getBoundingClientRect();
+            if (nRect.width > 0 && bRect.width > 0) {
+              const px = Math.max(24, Math.min(bRect.width - 24, nRect.left + nRect.width / 2 - bRect.left));
+              arrowVal = Math.round(px) + "px";
+            }
+          }
+          pOvBubbleEl.style.setProperty("--step-arrow-x", arrowVal);
+          if (pOvBubbleKicker) pOvBubbleKicker.textContent = bMeta.kicker;
+          if (pOvBubbleTitle) pOvBubbleTitle.textContent = bMeta.title;
+          if (pOvBubbleDesc) pOvBubbleDesc.textContent = bMeta.desc;
+          if (pOvBubbleNextLabel) pOvBubbleNextLabel.textContent = bMeta.nextLabel;
+        }
+      }
+
+      if (pOvBubbleNextBtn) {
+        pOvBubbleNextBtn.addEventListener("click", () => {
+          if (prepTimer) clearInterval(prepTimer);
+          const curKey = prepStepOrder[prepIdx] || "linter";
+          const bMeta = prepBubbleMeta[curKey];
+          if (bMeta && bMeta.nextStep === "__close__") {
+            if (pOvBubbleEl) pOvBubbleEl.style.display = "none";
+          } else if (bMeta && bMeta.nextStep) {
+            selectPrepStage(bMeta.nextStep);
+          }
+        });
+      }
+
       pNodes.forEach((node) => {
         node.addEventListener("click", () => {
           if (prepTimer) clearInterval(prepTimer);
           selectPrepStage(node.getAttribute("data-fprep"));
         });
       });
-      if (pNextBtn) {
-        pNextBtn.addEventListener("click", () => {
-          if (prepTimer) clearInterval(prepTimer);
-          prepIdx = (prepIdx + 1) % prepOrder.length;
-          selectPrepStage(prepOrder[prepIdx]);
-        });
-      }
 
       prepTimer = setInterval(() => {
         if (document.hidden) return;
-        prepIdx = (prepIdx + 1) % prepOrder.length;
-        selectPrepStage(prepOrder[prepIdx]);
+        prepIdx = (prepIdx + 1) % prepStepOrder.length;
+        selectPrepStage(prepStepOrder[prepIdx]);
       }, 4500);
     }
 
