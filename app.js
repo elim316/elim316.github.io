@@ -1221,7 +1221,7 @@
         user: {
           arrowX: "14%",
           kicker: "STEP 1 OF 4: HUMAN GOAL",
-          title: "A person sets the goal in plain English",
+          title: "A person sets the goal",
           desc: "Everything begins here. Instead of writing technical instructions, a person simply asks the AI to check a payment file so customers are never double-charged.",
           nextLabel: "Next bubble: AI Planner \u2192",
           nextStep: "planner",
