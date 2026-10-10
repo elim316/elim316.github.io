@@ -129,10 +129,10 @@ dependencies:
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
 - Last updated: 2026-10-10
-- Asset version in `index.html`: `?v=20261010-33`
+- Asset version in `index.html`: `?v=20261010-34`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
-  * Added plain-English pop-up explanation speech bubbles (`#tracer-overview-bubble` beneath the 4 SVG steps on Tab 1 `Execution Timeline` with dynamic pointer tail `--step-arrow-x`, plus `#sandboxCoachBubble` floating inside `.canvas-wrapper` of `sandbox/agent-tracer/index.html` tracking active nodes via `network.canvasToDOM()` and translating any clicked canvas box into non-technical everyday English), ordered Stage 02 (`#showcase-agent-tracer`) tabs as `Execution Timeline` first, `200k Memory Meter` second, and `Interactive Sandbox` last (`?v=20261010-33`).
+  * Added plain-English pop-up explanation speech bubbles (`#tracer-overview-bubble` beneath the 4 SVG steps on Tab 1 `Execution Timeline` with dynamic pointer tail `--step-arrow-x`, plus `#sandboxCoachBubble` floating inside `.canvas-wrapper` of `sandbox/agent-tracer/index.html` tracking active nodes via `network.canvasToDOM()` and translating any clicked canvas box into non-technical everyday English), ordered Stage 02 (`#showcase-agent-tracer`) tabs as `Execution Timeline` first, `200k Memory Meter` second, and `Interactive Sandbox` last (`?v=20261010-34`).
   * Unified all 5 visible stage windows (`#hero-hardware-deck`, `#about-hardware-deck` with `Education` tab, `#flagship-tracer-sandbox`, `#flagship-prep-sandbox`, and `#flagship-uq-sandbox`) onto connected top macOS browser tabs (`.browser-window-bezel` + `.browser-top-bar` + `.browser-tab-strip` + `.browser-single-pane`), added Apple-style oversized gradient KPI numbers (`200k`, `95.2%`, `4,000+` via `.highlight-pop-number`) to `#highlights-section`, fixed descender clipping on `.bento-spec-stat` (`line-height: 1.24; padding-bottom: 4px`), and replaced technical acronyms (`No UQ`, `Ad-Hoc`, `JSONL`, `PICP`, `ECE`) across `#highlights-section` and `#stack` with recruiter-friendly plain English.
   * Added 6 Apple-inspired visual and functional upgrades:
     1. "Get the highlights." horizontal carousel (`#highlights-section` with
