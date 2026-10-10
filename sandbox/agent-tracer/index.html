@@ -610,7 +610,7 @@
         html[data-theme="dark"] .subagent-trace-btn { color: #C4B5FD; border-color: #A78BFA; }
         html[data-theme="dark"] .subagent-trace-btn:hover { background: #8B5CF6; color: #ffffff; }
 
-        #inspector-title { font-weight: 600; font-size: 13.5px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border, #eee); display: flex; align-items: center; gap: 8px; color: var(--foreground, #202124); }
+        #inspector-title { font-weight: 600; font-size: 13px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border, #eee); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 8px; max-width: 100%; box-sizing: border-box; color: var(--foreground, #202124); }
         .inspector-back-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; background: var(--secondary, #f1f3f4); border: 1px solid var(--border, #dadce0); color: var(--foreground, #202124); font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap; flex-shrink: 0; font-family: inherit; }
         .inspector-back-btn:hover { border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); background: var(--card, #fff); }
         html[data-theme="dark"] .inspector-back-btn { background: #1e293b; border-color: #334155; color: #cbd5e1; }
@@ -7485,7 +7485,7 @@
                 ? '<button class="subagent-trace-btn" onclick="window.toggleStepToolsCollapse(\'' + escapeHtmlRaw(data.parentId) + '\', true)" style="padding:3px 9px; font-size:10.5px; margin-right:6px;">Collapse Step Tools (' + siblingRegularTools + ')</button>'
                 : '';
 
-            text += '<div id="inspector-title" style="color:'+titleColor+'"><span>' + prettyName + '</span><span style="display:flex;align-items:center;gap:4px;">' + collapseSiblingsBtn + backBtn + '</span></div>';
+            text += '<div id="inspector-title" style="color:'+titleColor+'"><span style="white-space:nowrap;">' + prettyName + '</span><span style="display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px;margin-left:auto;">' + collapseSiblingsBtn + backBtn + '</span></div>';
 
             // Human-readable headline: what the agent is doing, in plain English.
             const headline = (data.subagent && data.subagent.role) ? ('Subagent: ' + data.subagent.role) : (targs.toolSummary || targs.toolAction);
