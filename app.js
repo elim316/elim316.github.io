@@ -1194,6 +1194,13 @@
       let stepTimer = null;
 
       const tracerTabMeta = {
+        sandbox: {
+          label: "LIVE INTERACTIVE WORKSPACE (CLICK NODES OR USE QUICK TOUR)",
+          readout: "Live Client-Side Sandbox",
+          story:
+            "Explore three live multi-agent execution runs right inside the browser, complete with subagent drill-down, colour-coded unified code diffs, and real-time topology views.",
+          nextLabel: "Next tab: Execution Timeline \u2192",
+        },
         timeline: {
           label: "LIVE AGENT STEP VISUALISER (CLICK ANY STEP)",
           readout: "Step 02: AI Planner (640ms)",
@@ -1206,19 +1213,92 @@
           readout: "142k / 200k Tokens Used",
           story:
             "Tracks live memory usage across chat, subagents, step visualiser, and scheduled jobs, compacting older history automatically before hitting 200k tokens.",
-          nextLabel: "Next tab: Interactive Sandbox \u2192",
-        },
-        sandbox: {
-          label: "INTERACTIVE AGENT TRACER WORKSPACE (CLICK NODES OR SWITCH SCENARIOS)",
-          readout: "Live Client-Side Sandbox",
-          story:
-            "Explore three full multi-agent execution traces directly in your browser across Timeline and Topology views, complete with subagent drill-down and unified code diffs.",
-          nextLabel: "Next tab: Execution Timeline \u2192",
+          nextLabel: "Next tab: Live Interactive Sandbox \u2192",
         },
       };
 
-      const tTabOrder = ["timeline", "memory", "sandbox"];
+      const hostScenarioMeta = {
+        "a1000000-0000-4000-8000-000000000001": {
+          doing:
+            "Lead agent inspects payment-gateway/src/webhook_handler.py, launches two parallel review subagents (HMAC signature check and Redis lock check), applies a +14 / -4 line patch, and verifies pytest.",
+          actions: [
+            { label: "1. Inspect Parallel Subagents", act: "subagents" },
+            { label: "2. Drill into Child Subagent", act: "drill_subagent" },
+            { label: "3. View Code Diff", act: "diff" },
+            { label: "4. Toggle Topology Graph", act: "topology" },
+          ],
+        },
+        "a2000000-0000-4000-8000-000000000002": {
+          doing:
+            "Infrastructure agent inspects four Terraform modules (main.tf, firewall.tf, nat.tf, outputs.tf) concurrently and verifies all 14 ingress and 18 egress network firewall rules.",
+          actions: [
+            { label: "1. Inspect Parallel Reads", act: "parallel_reads" },
+            { label: "2. View Policy Gate Result", act: "last_tool" },
+            { label: "3. Toggle Topology Graph", act: "topology" },
+          ],
+        },
+        "a3000000-0000-4000-8000-000000000003": {
+          doing:
+            "Near the 200k limit (177k tokens used), the runtime automatically compacts 148 earlier steps into a 14k checkpoint summary and finishes migrating three handlers without losing context.",
+          actions: [
+            { label: "1. View Handler Patch", act: "diff" },
+            { label: "2. Session Telemetry", act: "overview" },
+            { label: "3. Toggle Topology Graph", act: "topology" },
+          ],
+        },
+      };
+
+      const tTabOrder = ["sandbox", "timeline", "memory"];
       let tTabIdx = 0;
+
+      const tDiagramHeader = document.getElementById("tracer-diagram-header");
+      const tSandboxConsole = document.getElementById("tracer-sandbox-console");
+      const switchSandboxBtn = document.getElementById("tracer-switch-to-sandbox-btn");
+      const hostDoingEl = document.getElementById("tracer-host-doing-text");
+      const hostTourEl = document.getElementById("tracer-host-tour-actions");
+
+      function postToTracerSandbox(action, arg) {
+        const embFrame = document.getElementById("tracer-embedded-iframe");
+        if (embFrame && embFrame.contentWindow) {
+          embFrame.contentWindow.postMessage(
+            { source: "portfolio-tracer-host", action, arg },
+            "*"
+          );
+        }
+      }
+
+      function bindHostTourButtons() {
+        if (!hostTourEl) return;
+        hostTourEl.querySelectorAll("[data-host-act]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            postToTracerSandbox(btn.getAttribute("data-host-act"));
+          });
+        });
+      }
+      bindHostTourButtons();
+
+      fTracer.querySelectorAll("[data-host-sc]").forEach((scBtn) => {
+        scBtn.addEventListener("click", () => {
+          const scId = scBtn.getAttribute("data-host-sc");
+          fTracer.querySelectorAll("[data-host-sc]").forEach((b) => {
+            b.classList.toggle("active", b === scBtn);
+          });
+          const meta = hostScenarioMeta[scId];
+          if (meta) {
+            if (hostDoingEl) hostDoingEl.textContent = meta.doing;
+            if (hostTourEl) {
+              hostTourEl.innerHTML = meta.actions
+                .map(
+                  (a) =>
+                    `<button type="button" class="tracer-tour-pill" data-host-act="${a.act}">${a.label}</button>`
+                )
+                .join("");
+              bindHostTourButtons();
+            }
+          }
+          postToTracerSandbox("scenario", scId);
+        });
+      });
 
       function selectTracerTab(tabKey) {
         const cfg = tracerTabMeta[tabKey];
@@ -1232,7 +1312,10 @@
         tScenes.forEach((s) => {
           s.classList.toggle("is-active", s.getAttribute("data-tracer-scene") === tabKey);
         });
-        if (tabKey === "sandbox") {
+        const isSandbox = tabKey === "sandbox";
+        if (tDiagramHeader) tDiagramHeader.style.display = isSandbox ? "none" : "flex";
+        if (tSandboxConsole) tSandboxConsole.style.display = isSandbox ? "flex" : "none";
+        if (isSandbox) {
           const embFrame = document.getElementById("tracer-embedded-iframe");
           if (embFrame && !embFrame.getAttribute("src") && embFrame.dataset.src) {
             embFrame.setAttribute("src", embFrame.dataset.src);
@@ -1242,6 +1325,10 @@
         if (fReadout) fReadout.textContent = cfg.readout;
         if (tStory) tStory.textContent = cfg.story;
         if (tNextLabel) tNextLabel.textContent = cfg.nextLabel;
+      }
+
+      if (switchSandboxBtn) {
+        switchSandboxBtn.addEventListener("click", () => selectTracerTab("sandbox"));
       }
 
       tTabs.forEach((btn) => {
