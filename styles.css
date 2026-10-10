@@ -3968,30 +3968,20 @@ textarea {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.tracer-step-bubble::before,
-.tracer-step-bubble::after {
+.tracer-step-bubble::before {
   content: "";
   position: absolute;
+  top: -6.5px;
   left: var(--step-arrow-x);
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--bg-elevated);
+  border-top: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border-subtle));
+  border-left: 1px solid color-mix(in srgb, var(--accent) 34%, var(--border-subtle));
+  border-top-left-radius: 2.5px;
+  transform: translateX(-50%) rotate(45deg);
   pointer-events: none;
   transition: left 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.tracer-step-bubble::before {
-  top: -8px;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid color-mix(in srgb, var(--accent) 40%, var(--border-subtle));
-}
-
-.tracer-step-bubble::after {
-  top: -6.5px;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 7px solid var(--bg-elevated);
 }
 
 .tracer-bubble-top {
