@@ -1531,29 +1531,29 @@
       const prepHostScenarioMeta = {
         next_day_mixed: {
           doing:
-            "Scans 7 calendar invites for tomorrow, automatically skips 5 routine internal blocks, writes two cited one-page briefings, and checks every link across 36 rules.",
+            "Scans tomorrow's day calendar from 09:00 to 18:00, skips 4 routine blocks, highlights 2 important calls in blue with one-page briefings, and checks every link across 36 rules.",
           actions: [
-            { label: "Bubble 1: Calendar Filter", act: "tour_0" },
-            { label: "Bubble 2: Workspace Search", act: "tour_1" },
-            { label: "Bubble 3: 1-Page Briefing", act: "tour_2" },
+            { label: "Bubble 1: Calendar Clutter", act: "tour_0" },
+            { label: "Bubble 2: 10:15 Acme Sync", act: "tour_1" },
+            { label: "Bubble 3: 13:00 Cross-Team", act: "tour_2" },
             { label: "Bubble 4: Fact Checker", act: "tour_3" },
           ],
         },
         next_day_cold_lead: {
           doing:
-            "When tomorrow includes a first-time call with a brand-new external company and zero past emails, the assistant writes 'No prior context found' rather than guessing.",
+            "Shows a first-time 13:30 call on Friday's calendar with a brand-new external contact where zero past emails exist, writing 'No prior context found' rather than guessing.",
           actions: [
-            { label: "Bubble 1: New Contact", act: "tour_0" },
+            { label: "Bubble 1: 13:30 Intro Call", act: "tour_0" },
             { label: "Bubble 2: Honest Empty State", act: "tour_1" },
             { label: "Bubble 3: 7 / 7 Checks", act: "tour_2" },
           ],
         },
         t1h_window: {
           doing:
-            "Checks meetings starting 60 to 120 minutes away so same-day bookings get a fresh briefing while earlier and later calls never receive duplicate alerts.",
+            "Highlights the live 14:00 to 15:00 reminder window band on the day calendar so the 14:15 client call gets reminded once without alerting 13:30 or 15:30 calls twice.",
           actions: [
-            { label: "Bubble 1: 60-Min Window", act: "tour_0" },
-            { label: "Bubble 2: Same-Day Catch-Up", act: "tour_1" },
+            { label: "Bubble 1: Shaded 1h Band", act: "tour_0" },
+            { label: "Bubble 2: Same-Day Booking", act: "tour_1" },
             { label: "Bubble 3: Zero Duplicates", act: "tour_2" },
           ],
         },
