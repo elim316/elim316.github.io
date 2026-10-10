@@ -138,6 +138,201 @@
         background: rgba(59, 130, 246, 0.12);
         border-color: rgba(96, 165, 250, 0.28);
       }
+      .sandbox-coach-bubble {
+        position: absolute;
+        z-index: 48;
+        width: min(334px, calc(100% - 28px));
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: saturate(180%) blur(18px);
+        -webkit-backdrop-filter: saturate(180%) blur(18px);
+        border: 1px solid rgba(0, 102, 204, 0.34);
+        border-radius: 14px;
+        box-shadow: 0 14px 34px rgba(15, 23, 42, 0.16), 0 2px 8px rgba(0, 102, 204, 0.08);
+        padding: 12px 14px 11px 14px;
+        color: #1d1d1f;
+        pointer-events: auto;
+        transition: left 0.22s cubic-bezier(0.22, 1, 0.36, 1), top 0.22s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.18s ease;
+        --bubble-arrow-x: 44px;
+      }
+      .sandbox-coach-bubble.hidden {
+        display: none !important;
+      }
+      html[data-theme="dark"] .sandbox-coach-bubble {
+        background: rgba(24, 28, 40, 0.96);
+        border-color: rgba(96, 165, 250, 0.45);
+        color: #f1f5f9;
+        box-shadow: 0 16px 38px rgba(0, 0, 0, 0.48);
+      }
+      .sandbox-coach-bubble::before,
+      .sandbox-coach-bubble::after {
+        content: "";
+        position: absolute;
+        left: clamp(20px, var(--bubble-arrow-x), calc(100% - 20px));
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        pointer-events: none;
+      }
+      .sandbox-coach-bubble.arrow-top::before {
+        top: -9px;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-bottom: 9px solid rgba(0, 102, 204, 0.36);
+      }
+      .sandbox-coach-bubble.arrow-top::after {
+        top: -7.5px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid rgba(255, 255, 255, 0.98);
+      }
+      html[data-theme="dark"] .sandbox-coach-bubble.arrow-top::after {
+        border-bottom-color: rgba(24, 28, 40, 0.98);
+      }
+      .sandbox-coach-bubble.arrow-bottom::before {
+        bottom: -9px;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-top: 9px solid rgba(0, 102, 204, 0.36);
+      }
+      .sandbox-coach-bubble.arrow-bottom::after {
+        bottom: -7.5px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid rgba(255, 255, 255, 0.98);
+      }
+      html[data-theme="dark"] .sandbox-coach-bubble.arrow-bottom::after {
+        border-top-color: rgba(24, 28, 40, 0.98);
+      }
+      .coach-bubble-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 5px;
+      }
+      .coach-bubble-step {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #0066cc;
+        background: rgba(0, 102, 204, 0.09);
+        padding: 2px 7px;
+        border-radius: 999px;
+      }
+      html[data-theme="dark"] .coach-bubble-step {
+        color: #60a5fa;
+        background: rgba(96, 165, 250, 0.16);
+      }
+      .coach-bubble-close {
+        border: none;
+        background: transparent;
+        color: #6e6e73;
+        font-size: 15px;
+        line-height: 1;
+        padding: 2px 4px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .coach-bubble-close:hover {
+        background: rgba(0, 0, 0, 0.06);
+        color: #1d1d1f;
+      }
+      .coach-bubble-title {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
+        margin-bottom: 4px;
+        color: inherit;
+      }
+      .coach-bubble-body {
+        font-size: 12px;
+        line-height: 1.48;
+        color: #424245;
+        margin-bottom: 9px;
+      }
+      html[data-theme="dark"] .coach-bubble-body {
+        color: #cbd5e1;
+      }
+      .coach-bubble-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding-top: 7px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      html[data-theme="dark"] .coach-bubble-footer {
+        border-top-color: rgba(255, 255, 255, 0.08);
+      }
+      .coach-bubble-hint {
+        font-size: 10.5px;
+        color: #6e6e73;
+      }
+      html[data-theme="dark"] .coach-bubble-hint {
+        color: #94a3b8;
+      }
+      .coach-bubble-nav {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .coach-nav-btn {
+        border: 1px solid rgba(0, 0, 0, 0.14);
+        background: #ffffff;
+        color: #1d1d1f;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 999px;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.14s ease;
+      }
+      .coach-nav-btn:hover {
+        border-color: #0066cc;
+        color: #0066cc;
+      }
+      .coach-nav-btn.primary {
+        background: #0066cc;
+        border-color: #0066cc;
+        color: #ffffff;
+      }
+      .coach-nav-btn.primary:hover {
+        background: #0055b3;
+        color: #ffffff;
+      }
+      html[data-theme="dark"] .coach-nav-btn {
+        background: #242938;
+        border-color: #3b4256;
+        color: #e2e8f0;
+      }
+      html[data-theme="dark"] .coach-nav-btn.primary {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #ffffff;
+      }
+      .sandbox-coach-reopen {
+        position: absolute;
+        left: 14px;
+        bottom: 14px;
+        z-index: 46;
+        border: 1px solid rgba(0, 102, 204, 0.32);
+        background: rgba(255, 255, 255, 0.94);
+        color: #0066cc;
+        font-family: inherit;
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 999px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+      .sandbox-coach-reopen.hidden {
+        display: none !important;
+      }
       .ov-guide-kicker {
         font-size: 10px;
         font-weight: 700;
@@ -551,22 +746,22 @@
       <div class="sandbox-banner-top">
         <div class="sandbox-banner-left">
           <a class="sandbox-back-link" href="../../index.html#showcase-agent-tracer">&larr; Back to Portfolio</a>
-          <span style="font-weight:600; letter-spacing:-0.01em;">Select Active Trace:</span>
+          <span style="font-weight:600; letter-spacing:-0.01em;">Select Active Example:</span>
           <div class="sandbox-scenario-pills" role="tablist" aria-label="Sample multi-agent scenarios">
-            <button type="button" class="sandbox-sc-btn is-active" data-sc-id="a1000000-0000-4000-8000-000000000001">01: PR Security Audit (Subagents + Diff)</button>
-            <button type="button" class="sandbox-sc-btn" data-sc-id="a2000000-0000-4000-8000-000000000002">02: Dual-VPC Firewall Posture</button>
-            <button type="button" class="sandbox-sc-btn" data-sc-id="a3000000-0000-4000-8000-000000000003">03: 177k Context Compaction</button>
+            <button type="button" class="sandbox-sc-btn is-active" data-sc-id="a1000000-0000-4000-8000-000000000001">01: Payment Safety Check</button>
+            <button type="button" class="sandbox-sc-btn" data-sc-id="a2000000-0000-4000-8000-000000000002">02: Cloud Safety Rules</button>
+            <button type="button" class="sandbox-sc-btn" data-sc-id="a3000000-0000-4000-8000-000000000003">03: Long-Chat Memory</button>
           </div>
         </div>
-        <span style="font-size:11px; color:var(--muted-foreground,#6e6e73);">Click any swimlane node or use Quick Tour buttons below</span>
+        <span style="font-size:11px; color:var(--muted-foreground,#6e6e73);">Click any canvas box for a plain-English speech bubble</span>
       </div>
       <div class="sandbox-guide-row">
-        <span class="sandbox-doing-text" id="sandboxDoingText">Currently running: Lead agent audits a payment webhook pull request via two parallel review subagents and applies a verified code patch.</span>
+        <span class="sandbox-doing-text" id="sandboxDoingText">In plain English: A lead AI reads a payment file, assigns two specialist helper AIs to double-check security at the same time, fixes four risky lines, and runs an automatic test to be sure.</span>
         <div class="sandbox-tour-pills" id="sandboxTourPills">
-          <button type="button" class="sandbox-tour-btn" data-tour-act="subagents">1. Inspect Subagents</button>
-          <button type="button" class="sandbox-tour-btn" data-tour-act="drill_subagent">2. Drill into Child Agent</button>
-          <button type="button" class="sandbox-tour-btn" data-tour-act="diff">3. View Code Diff</button>
-          <button type="button" class="sandbox-tour-btn" data-tour-act="topology">4. Topology Graph</button>
+          <button type="button" class="sandbox-tour-btn" data-tour-act="tour_0">Bubble 1: Human Goal</button>
+          <button type="button" class="sandbox-tour-btn" data-tour-act="tour_1">Bubble 2: Helper AIs</button>
+          <button type="button" class="sandbox-tour-btn" data-tour-act="tour_2">Bubble 3: Inside Helper AI</button>
+          <button type="button" class="sandbox-tour-btn" data-tour-act="tour_3">Bubble 4: Red &amp; Green Fix</button>
         </div>
       </div>
     </div>
@@ -690,6 +885,24 @@
             <div class="swimlane-row-label"><div class="swimlane-header" onclick="window.showExplanation('agent')" title="Click for info">Multi-Agent<span class="lane-sub"> Workflow</span></div></div>
             <div class="swimlane-row-label"><div class="swimlane-header" onclick="window.showExplanation('tools')" title="Click for info">Tools<span class="lane-sub"> & Functions</span></div></div>
         </div>
+
+        <!-- Plain-English Pop-Up Speech Bubble Coachmark for Non-Technical Visitors -->
+        <div class="sandbox-coach-bubble arrow-top" id="sandboxCoachBubble" role="region" aria-live="polite" aria-label="Plain-English step explanation bubble">
+            <div class="coach-bubble-top">
+                <span class="coach-bubble-step" id="coachBubbleStep">Bubble 1 of 4</span>
+                <button type="button" class="coach-bubble-close" id="coachBubbleClose" title="Hide plain-English bubble" aria-label="Hide bubble">&#215;</button>
+            </div>
+            <div class="coach-bubble-title" id="coachBubbleTitle">A person types a plain-English goal</div>
+            <div class="coach-bubble-body" id="coachBubbleBody">Instead of writing technical instructions, a person simply asks the lead AI to review a payment file and make sure duplicate charges cannot slip through.</div>
+            <div class="coach-bubble-footer">
+                <span class="coach-bubble-hint" id="coachBubbleHint">Click any box on the canvas to explain it</span>
+                <div class="coach-bubble-nav">
+                    <button type="button" class="coach-nav-btn" id="coachBubblePrev">&#8592; Back</button>
+                    <button type="button" class="coach-nav-btn primary" id="coachBubbleNext">Next Bubble &#8594;</button>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="sandbox-coach-reopen hidden" id="sandboxCoachReopenBtn">Show Plain-English Bubbles</button>
 
         <!-- Architectural Blueprint & Simplified Orbital Topology Views -->
         <div id="topology-wrapper">
@@ -7494,45 +7707,137 @@
 
     const SCENARIO_GUIDES = {
         "a1000000-0000-4000-8000-000000000001": {
-            doing: "Lead agent audits payment-gateway/src/webhook_handler.py, fans out two parallel subagents (HMAC signature review and Redis lock review), applies a replay-protection patch (+14 / -4 lines), and verifies pytest.",
+            doing: "A lead AI reads a payment file, assigns two specialist helper AIs to double-check security at the same time, fixes four risky lines, and runs an automatic test to be sure.",
             tour: [
-                { label: "1. Inspect Subagents", act: "subagents" },
-                { label: "2. Drill into Child Agent", act: "drill_subagent" },
-                { label: "3. View Code Diff", act: "diff" },
-                { label: "4. Topology Graph", act: "topology" }
+                { label: "Bubble 1: Human Goal", act: "tour_0" },
+                { label: "Bubble 2: Helper AIs", act: "tour_1" },
+                { label: "Bubble 3: Inside Helper AI", act: "tour_2" },
+                { label: "Bubble 4: Red & Green Fix", act: "tour_3" }
+            ],
+            bubbles: [
+                {
+                    step: "Bubble 1 of 4",
+                    title: "A person sets the goal in plain English",
+                    body: "Everything starts in this top orange lane. A person asks the AI to check a payment file so customers can never be charged twice by accident.",
+                    act: "first_user"
+                },
+                {
+                    step: "Bubble 2 of 4",
+                    title: "The main AI hires two helper AIs at once",
+                    body: "Instead of doing everything alone, the lead AI splits the safety review between two specialist helper AIs in parallel to finish in half the time.",
+                    act: "subagents"
+                },
+                {
+                    step: "Bubble 3 of 4",
+                    title: "Peeking inside a helper AI's private notes",
+                    body: "You are now inside the first helper AI's own workspace. It quietly reads the payment rules, spots a gap, and reports back to the main AI.",
+                    act: "drill_subagent"
+                },
+                {
+                    step: "Bubble 4 of 4",
+                    title: "Checking the exact red-and-green fix",
+                    body: "Back on the main timeline, the right-hand panel highlights old lines in red and safer new lines in green so a human can verify every change.",
+                    act: "diff_from_parent"
+                }
             ]
         },
         "a2000000-0000-4000-8000-000000000002": {
-            doing: "Infrastructure agent inspects four Terraform modules (main.tf, firewall.tf, nat.tf, outputs.tf) in parallel and verifies all 14 ingress and 18 egress network firewall rules.",
+            doing: "An infrastructure AI opens four cloud rulebooks side by side and checks every digital doorway so private data stays locked away from the public internet.",
             tour: [
-                { label: "1. Parallel File Reads", act: "parallel_reads" },
-                { label: "2. Firewall Check Result", act: "last_tool" },
-                { label: "3. Topology Graph", act: "topology" }
+                { label: "Bubble 1: Cloud Request", act: "tour_0" },
+                { label: "Bubble 2: Reading 4 Files at Once", act: "tour_1" },
+                { label: "Bubble 3: Safety Pass Result", act: "tour_2" }
+            ],
+            bubbles: [
+                {
+                    step: "Bubble 1 of 3",
+                    title: "Checking cloud doors before launch",
+                    body: "A person asks the AI to check whether any private cloud servers accidentally left a door open to the public internet.",
+                    act: "first_user"
+                },
+                {
+                    step: "Bubble 2 of 3",
+                    title: "Reading four cloud rulebooks side by side",
+                    body: "In the bottom cyan lane, the AI opens four setup files at the exact same moment instead of reading them slowly one by one.",
+                    act: "parallel_reads"
+                },
+                {
+                    step: "Bubble 3 of 3",
+                    title: "Every safety rule passes automatically",
+                    body: "The final check confirms all 14 incoming rules and 18 outgoing rules pass with zero public exposure.",
+                    act: "last_tool"
+                }
             ]
         },
         "a3000000-0000-4000-8000-000000000003": {
-            doing: "At 177k / 200k tokens, the runtime compacts 148 earlier steps into a 14k checkpoint summary and seamlessly migrates billing, audit_log, and notification handlers.",
+            doing: "When a long chat nearly fills the AI's short-term memory, the system summarises 148 earlier steps onto one clean page of notes so work continues smoothly.",
             tour: [
-                { label: "1. View Handler Diff", act: "diff" },
-                { label: "2. Session Telemetry", act: "overview" },
-                { label: "3. Topology Graph", act: "topology" }
+                { label: "Bubble 1: Memory Summary", act: "tour_0" },
+                { label: "Bubble 2: Clean File Update", act: "tour_1" },
+                { label: "Bubble 3: Final Result", act: "tour_2" }
+            ],
+            bubbles: [
+                {
+                    step: "Bubble 1 of 3",
+                    title: "Tidy notes keep long projects on track",
+                    body: "AI models have a fixed short-term memory limit. Here the system neatly summarises 148 earlier steps into a short briefing so nothing important is forgotten.",
+                    act: "first_user"
+                },
+                {
+                    step: "Bubble 2 of 3",
+                    title: "Updating three files without losing the thread",
+                    body: "Using its fresh summary note, the AI cleanly updates the billing, audit, and notification files in one coordinated pass.",
+                    act: "diff"
+                },
+                {
+                    step: "Bubble 3 of 3",
+                    title: "Automatic test confirms everything works",
+                    body: "Before finishing, the AI runs the test suite in the bottom lane to prove all three updated features behave as expected.",
+                    act: "last_tool"
+                }
             ]
         },
         "b1000000-0000-4000-8000-000000000001": {
-            doing: "Child Subagent (CryptoHMACReviewer): Inspecting HMAC SHA-256 signature verification and constant-time digest comparison in webhook_handler.py.",
+            doing: "Helper AI 1 (Signature Checker): Reading the payment file to check that digital signatures cannot be forged or replayed.",
             tour: [
-                { label: "Return to Parent Trace", act: "return_parent" },
-                { label: "Topology Graph", act: "topology" }
+                { label: "Return to Main AI", act: "return_parent" },
+                { label: "Topology Map", act: "topology" }
+            ],
+            bubbles: [
+                {
+                    step: "Helper AI View",
+                    title: "Inside Helper AI 1's own workspace",
+                    body: "This smaller timeline shows the private steps taken by the first specialist helper AI before sending its findings back to the main AI.",
+                    act: "first_user"
+                },
+                {
+                    step: "Back to Main AI",
+                    title: "Returning to the main AI timeline",
+                    body: "Now that Helper AI 1 has finished checking digital signatures, we jump back to the main AI timeline to inspect the final green-and-red fix.",
+                    act: "diff_from_parent"
+                }
             ]
         },
         "b2000000-0000-4000-8000-000000000002": {
-            doing: "Child Subagent (ConcurrencyLockReviewer): Auditing Redis SET NX PX idempotency keys under concurrent Stripe webhook delivery bursts.",
+            doing: "Helper AI 2 (Duplicate Charge Blocker): Checking that sudden bursts of repeat payment messages cannot trigger double billing.",
             tour: [
-                { label: "Return to Parent Trace", act: "return_parent" },
-                { label: "Topology Graph", act: "topology" }
+                { label: "Return to Main AI", act: "return_parent" },
+                { label: "Topology Map", act: "topology" }
+            ],
+            bubbles: [
+                {
+                    step: "Helper AI View",
+                    title: "Inside Helper AI 2's own workspace",
+                    body: "This helper AI focuses purely on making sure two identical payment requests arriving at the same millisecond only charge once.",
+                    act: "first_user"
+                }
             ]
         }
     };
+
+    let coachDismissed = false;
+    let coachRootScenario = "a1000000-0000-4000-8000-000000000001";
+    let coachStepIndex = 0;
 
     function getActiveScenarioId() {
         if (typeof activeConvId !== "undefined" && activeConvId) return activeConvId;
@@ -7540,11 +7845,167 @@
         return "a1000000-0000-4000-8000-000000000001";
     }
 
+    function explainNodeInPlainEnglish(data) {
+        if (!data) {
+            return {
+                step: "Plain-English Guide",
+                title: "Click any box on this timeline",
+                body: "Orange boxes are human requests, purple boxes show the AI planning its next move, and cyan boxes show real tools opening or editing files."
+            };
+        }
+        if (data.type === "USER_INPUT") {
+            return {
+                step: "Human Request (Orange Lane)",
+                title: "A person gives the AI a goal",
+                body: "This orange box marks where a human typed an instruction in plain language to kick off the workflow."
+            };
+        }
+        if (data.type === "PLANNER_RESPONSE") {
+            if (data.tool_calls && data.tool_calls.length > 0) {
+                return {
+                    step: "AI Brain Planning (Purple Lane)",
+                    title: "The AI decides which tools to use next",
+                    body: "Think of this purple box as the AI thinking out loud. It reads what happened so far and chooses the next tool or helper AI to run."
+                };
+            }
+            return {
+                step: "AI Final Answer (Purple Lane)",
+                title: "The AI wraps up and reports back",
+                body: "All file edits and automated checks have passed, so the AI writes a clear summary of everything it fixed for the user."
+            };
+        }
+        if (data.type === "TOOL_GROUP" || (data.items && data.items.length > 1)) {
+            return {
+                step: "Multi-Tasking (Cyan Lane)",
+                title: "Doing several lookups at the same time",
+                body: "Instead of waiting for one file after another, the AI runs " + (data.items ? data.items.length : "multiple") + " actions side by side to save time."
+            };
+        }
+        const toolName = (data.tool && data.tool.name) ? data.tool.name : "";
+        if (toolName === "invoke_subagent") {
+            return {
+                step: "Teamwork Step (Helper AIs)",
+                title: "Handing off work to specialist helper AIs",
+                body: "Just like a project lead delegating tasks to teammates, the main AI launches separate helper AIs to audit security in parallel."
+            };
+        }
+        if (toolName === "replace_file_content" || toolName === "write_to_file") {
+            return {
+                step: "Editing a File (Cyan Lane)",
+                title: "Making a surgical before-and-after edit",
+                body: "The AI updates real code here. Look at the panel on the right to see old lines highlighted in red and safer new lines highlighted in green."
+            };
+        }
+        if (toolName === "view_file" || toolName === "read_file") {
+            return {
+                step: "Reading a File (Cyan Lane)",
+                title: "Reading the real document instead of guessing",
+                body: "Before changing anything, the AI opens and reads the actual file so its plan is grounded in facts rather than guesswork."
+            };
+        }
+        if (toolName === "run_command") {
+            return {
+                step: "Running a Safety Test (Cyan Lane)",
+                title: "Double-checking that the fix actually works",
+                body: "After editing the file, the AI runs an automated check in a safe sandbox to prove everything passes with zero errors."
+            };
+        }
+        return {
+            step: "Tool Action (Cyan Lane)",
+            title: "Using an external tool step by step",
+            body: "Every cyan box records an exact tool action taken by the AI so humans can audit what happened and how long it took."
+        };
+    }
+
+    function positionCoachBubbleOverNode(targetNodeId) {
+        const bubbleEl = document.getElementById("sandboxCoachBubble");
+        const reopenEl = document.getElementById("sandboxCoachReopenBtn");
+        const wrapperEl = document.getElementById("canvas-wrapper");
+        if (!bubbleEl || !wrapperEl) return;
+
+        if (coachDismissed || (typeof viewMode !== "undefined" && viewMode !== "timeline")) {
+            bubbleEl.classList.add("hidden");
+            if (reopenEl) {
+                reopenEl.classList.toggle("hidden", typeof viewMode !== "undefined" && viewMode !== "timeline");
+            }
+            return;
+        }
+
+        bubbleEl.classList.remove("hidden");
+        if (reopenEl) reopenEl.classList.add("hidden");
+
+        const nodeId = targetNodeId || selectedNodeId;
+        const wrapW = wrapperEl.clientWidth || 680;
+        const wrapH = wrapperEl.clientHeight || 480;
+        const bubW = Math.min(334, wrapW - 28);
+        const bubH = bubbleEl.offsetHeight || 148;
+
+        let domX = Math.round(wrapW * 0.34);
+        let domY = Math.round(wrapH * 0.28);
+
+        if (network && nodeId && typeof network.getPositions === "function") {
+            try {
+                const posMap = network.getPositions([nodeId]);
+                const p = posMap && posMap[nodeId];
+                if (p && typeof network.canvasToDOM === "function") {
+                    const d = network.canvasToDOM(p);
+                    if (d && Number.isFinite(d.x) && Number.isFinite(d.y)) {
+                        domX = d.x;
+                        domY = d.y;
+                    }
+                }
+            } catch (_) {}
+        }
+
+        const placeBelow = domY < wrapH * 0.52;
+        const rawLeft = domX - bubW * 0.35;
+        const clampedLeft = Math.max(14, Math.min(wrapW - bubW - 14, rawLeft));
+        const arrowX = Math.max(22, Math.min(bubW - 22, domX - clampedLeft));
+
+        let topPx = placeBelow ? (domY + 34) : (domY - bubH - 34);
+        topPx = Math.max(12, Math.min(wrapH - bubH - 12, topPx));
+
+        bubbleEl.classList.toggle("arrow-top", placeBelow);
+        bubbleEl.classList.toggle("arrow-bottom", !placeBelow);
+        bubbleEl.style.left = Math.round(clampedLeft) + "px";
+        bubbleEl.style.top = Math.round(topPx) + "px";
+        bubbleEl.style.setProperty("--bubble-arrow-x", Math.round(arrowX) + "px");
+    }
+
+    function setCoachBubbleContent(stepText, titleText, bodyText, hintText) {
+        const stepEl = document.getElementById("coachBubbleStep");
+        const titleEl = document.getElementById("coachBubbleTitle");
+        const bodyEl = document.getElementById("coachBubbleBody");
+        const hintEl = document.getElementById("coachBubbleHint");
+        if (stepEl && stepText) stepEl.textContent = stepText;
+        if (titleEl && titleText) titleEl.textContent = titleText;
+        if (bodyEl && bodyText) bodyEl.textContent = bodyText;
+        if (hintEl && hintText) hintEl.textContent = hintText;
+    }
+
+    function bindCoachNetworkListeners() {
+        if (!network || network.__coachListenersBound) return;
+        network.__coachListenersBound = true;
+        network.on("dragging", () => positionCoachBubbleOverNode());
+        network.on("dragEnd", () => positionCoachBubbleOverNode());
+        network.on("zoom", () => positionCoachBubbleOverNode());
+        network.on("animationFinished", () => positionCoachBubbleOverNode());
+        network.on("click", (props) => {
+            if (props && props.nodes && props.nodes.length > 0) {
+                const nid = props.nodes[0];
+                const info = explainNodeInPlainEnglish(rawDataMap ? rawDataMap[nid] : null);
+                coachDismissed = false;
+                setCoachBubbleContent(info.step, info.title, info.body, "Click Next Bubble for guided steps");
+                requestAnimationFrame(() => positionCoachBubbleOverNode(nid));
+            }
+        });
+    }
+
     function syncSandboxBannerUI() {
         const curId = getActiveScenarioId();
         const cfg = SCENARIO_GUIDES[curId] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
         const doingEl = document.getElementById("sandboxDoingText");
-        if (doingEl) doingEl.textContent = "Currently running: " + cfg.doing;
+        if (doingEl) doingEl.textContent = "In plain English: " + cfg.doing;
         const pillsEl = document.getElementById("sandboxTourPills");
         if (pillsEl) {
             pillsEl.innerHTML = cfg.tour.map(t =>
@@ -7554,6 +8015,7 @@
                 b.addEventListener("click", () => window.sandboxRunAction(b.dataset.tourAct));
             });
         }
+        bindCoachNetworkListeners();
     }
 
     window.getSandboxGuideCardHtml = function() {
@@ -7563,14 +8025,14 @@
             '<button type="button" class="sandbox-tour-btn" onclick="window.sandboxRunAction(\'' + t.act + '\')">' + t.label + '</button>'
         ).join("");
         return '<div class="ov-guide-card">' +
-            '<div class="ov-guide-kicker">What This Trace Is Doing</div>' +
+            '<div class="ov-guide-kicker">Plain-English Summary</div>' +
             '<div>' + cfg.doing + '</div>' +
-            '<div style="margin-top:6px; font-size:11px; color:var(--muted-foreground,#5f6368);">How to explore: Click any swimlane node on the left canvas, or jump straight to a highlight below:</div>' +
+            '<div style="margin-top:6px; font-size:11px; color:var(--muted-foreground,#5f6368);">Click any box on the left canvas for a pop-up explanation bubble, or step through the highlights below:</div>' +
             '<div class="ov-guide-actions">' + btns + '</div>' +
             '</div>';
     };
 
-    function focusAndSelectNode(predicate) {
+    function focusAndSelectNode(predicate, bubbleOverride) {
         if (typeof setViewMode === "function" && viewMode !== "timeline") {
             setViewMode("timeline", false);
         }
@@ -7578,26 +8040,102 @@
         const found = entries.find(([id, d]) => predicate(id, d));
         if (!found) {
             renderOverview();
+            positionCoachBubbleOverNode();
             return;
         }
         const [targetId, targetData] = found;
         selectedNodeId = targetId;
         hasSelection = true;
-        document.body.classList.remove("inspector-collapsed");
+        if (window.innerWidth >= 900) {
+            document.body.classList.remove("inspector-collapsed");
+        }
         if (network && typeof network.selectNodes === "function") {
             try {
                 network.selectNodes([targetId]);
-                network.focus(targetId, { scale: 1.0, animation: { duration: 380, easingFunction: "easeInOutQuad" } });
+                network.focus(targetId, { scale: 1.0, animation: { duration: 360, easingFunction: "easeInOutQuad" } });
             } catch (_) {}
         }
-        renderInspector(targetData, targetId, true);
+        renderInspector(targetData, targetId, false);
+        const info = bubbleOverride || explainNodeInPlainEnglish(targetData);
+        coachDismissed = false;
+        setCoachBubbleContent(info.step, info.title, info.body, "Click any box on the canvas to explain it");
+        setTimeout(() => positionCoachBubbleOverNode(targetId), 60);
+        setTimeout(() => positionCoachBubbleOverNode(targetId), 400);
+    }
+
+    function runGuidedBubbleStep(idx) {
+        const rootCfg = SCENARIO_GUIDES[coachRootScenario] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
+        const list = rootCfg.bubbles || [];
+        if (!list.length) return;
+        coachStepIndex = ((idx % list.length) + list.length) % list.length;
+        const item = list[coachStepIndex];
+        coachDismissed = false;
+
+        if (item.act === "drill_subagent") {
+            if (typeof drillIntoSubagent === "function") {
+                drillIntoSubagent("b1000000-0000-4000-8000-000000000001", "Signature Checker AI");
+                setTimeout(() => {
+                    syncSandboxBannerUI();
+                    focusAndSelectNode((_, d) => d && d.type === "USER_INPUT", item);
+                }, 140);
+            }
+            return;
+        }
+
+        if (item.act === "diff_from_parent") {
+            if (convStack && convStack.length > 0) {
+                const top = convStack.pop();
+                activeConvId = top.id;
+                updateSessionBreadcrumbUI();
+                loadData().then(() => {
+                    syncSandboxBannerUI();
+                    focusAndSelectNode((_, d) => d && ((d.tool && (d.tool.name === "replace_file_content" || d.tool.name === "write_to_file")) || (d.items && d.items.some(it => it.tool && it.tool.name === "replace_file_content"))), item);
+                });
+                return;
+            }
+            focusAndSelectNode((_, d) => d && ((d.tool && (d.tool.name === "replace_file_content" || d.tool.name === "write_to_file")) || (d.items && d.items.some(it => it.tool && it.tool.name === "replace_file_content"))), item);
+            return;
+        }
+
+        if (convStack && convStack.length > 0 && item.act !== "drill_subagent") {
+            const top = convStack.pop();
+            activeConvId = top.id;
+            updateSessionBreadcrumbUI();
+            loadData().then(() => {
+                syncSandboxBannerUI();
+                runGuidedBubbleStep(coachStepIndex);
+            });
+            return;
+        }
+
+        if (item.act === "first_user") {
+            focusAndSelectNode((_, d) => d && d.type === "USER_INPUT", item);
+        } else if (item.act === "subagents") {
+            focusAndSelectNode((_, d) => d && d.tool && (d.tool.name === "invoke_subagent" || (d.subagents && d.subagents.length)), item);
+        } else if (item.act === "diff") {
+            focusAndSelectNode((_, d) => d && ((d.tool && (d.tool.name === "replace_file_content" || d.tool.name === "write_to_file")) || (d.items && d.items.some(it => it.tool && it.tool.name === "replace_file_content"))), item);
+        } else if (item.act === "parallel_reads") {
+            focusAndSelectNode((_, d) => d && ((d.items && d.items.length > 1) || (d.tool && (d.tool.name === "view_file" || d.tool.name === "read_file"))), item);
+        } else if (item.act === "last_tool") {
+            const allTools = Object.entries(rawDataMap || {}).filter(([_, d]) => d && (d.tool || d.items));
+            if (allTools.length) {
+                const [tid] = allTools[allTools.length - 1];
+                focusAndSelectNode((id) => id === tid, item);
+            }
+        }
     }
 
     window.sandboxRunAction = function(action, arg) {
+        if (action && action.indexOf("tour_") === 0) {
+            const stepNum = parseInt(action.replace("tour_", ""), 10) || 0;
+            runGuidedBubbleStep(stepNum);
+            return;
+        }
         if (action === "scenario" && arg) {
             document.querySelectorAll(".sandbox-sc-btn").forEach(b => {
                 b.classList.toggle("is-active", b.dataset.scId === arg);
             });
+            coachRootScenario = arg;
             manualConvId = arg;
             const matchedBtn = document.querySelector('.sandbox-sc-btn[data-sc-id="' + arg + '"]');
             manualConvLabel = matchedBtn ? matchedBtn.textContent.trim() : arg;
@@ -7607,22 +8145,16 @@
             updateSessionBreadcrumbUI();
             loadData().then(() => {
                 syncSandboxBannerUI();
-                renderOverview();
+                runGuidedBubbleStep(0);
             });
             return;
         }
         if (action === "subagents") {
-            focusAndSelectNode((_, d) => d && d.tool && (d.tool.name === "invoke_subagent" || (d.subagents && d.subagents.length)));
+            runGuidedBubbleStep(1);
             return;
         }
         if (action === "drill_subagent") {
-            if (typeof drillIntoSubagent === "function") {
-                drillIntoSubagent("b1000000-0000-4000-8000-000000000001", "CryptoHMACReviewer");
-                setTimeout(() => {
-                    syncSandboxBannerUI();
-                    renderOverview();
-                }, 120);
-            }
+            runGuidedBubbleStep(2);
             return;
         }
         if (action === "return_parent") {
@@ -7632,7 +8164,7 @@
                 updateSessionBreadcrumbUI();
                 loadData().then(() => {
                     syncSandboxBannerUI();
-                    renderOverview();
+                    runGuidedBubbleStep(0);
                 });
             }
             return;
@@ -7642,31 +8174,47 @@
             return;
         }
         if (action === "parallel_reads") {
-            focusAndSelectNode((_, d) => d && ((d.items && d.items.length > 1) || (d.tool && (d.tool.name === "view_file" || d.tool.name === "read_file"))));
+            runGuidedBubbleStep(1);
             return;
         }
         if (action === "last_tool") {
-            const allTools = Object.entries(rawDataMap || {}).filter(([_, d]) => d && (d.tool || d.items));
-            if (allTools.length) {
-                const [tid, tdata] = allTools[allTools.length - 1];
-                selectedNodeId = tid;
-                hasSelection = true;
-                document.body.classList.remove("inspector-collapsed");
-                if (network) {
-                    try { network.selectNodes([tid]); network.focus(tid, { scale: 1.0, animation: { duration: 380 } }); } catch (_) {}
-                }
-                renderInspector(tdata, tid, true);
-            }
+            runGuidedBubbleStep(2);
             return;
         }
         if (action === "topology") {
             if (typeof setViewMode === "function") {
                 setViewMode(viewMode === "topology" ? "timeline" : "topology", false);
+                positionCoachBubbleOverNode();
             }
             return;
         }
         renderOverview();
     };
+
+    const closeBtnEl = document.getElementById("coachBubbleClose");
+    const reopenBtnEl = document.getElementById("sandboxCoachReopenBtn");
+    const prevBtnEl = document.getElementById("coachBubblePrev");
+    const nextBtnEl = document.getElementById("coachBubbleNext");
+
+    if (closeBtnEl) {
+        closeBtnEl.addEventListener("click", () => {
+            coachDismissed = true;
+            positionCoachBubbleOverNode();
+        });
+    }
+    if (reopenBtnEl) {
+        reopenBtnEl.addEventListener("click", () => {
+            coachDismissed = false;
+            positionCoachBubbleOverNode();
+        });
+    }
+    if (prevBtnEl) {
+        prevBtnEl.addEventListener("click", () => runGuidedBubbleStep(coachStepIndex - 1));
+    }
+    if (nextBtnEl) {
+        nextBtnEl.addEventListener("click", () => runGuidedBubbleStep(coachStepIndex + 1));
+    }
+    window.addEventListener("resize", () => positionCoachBubbleOverNode());
 
     window.addEventListener("message", (ev) => {
         const msg = ev && ev.data;
@@ -7686,8 +8234,8 @@
 
     setTimeout(() => {
         syncSandboxBannerUI();
-        if (!hasSelection) renderOverview();
-    }, 350);
+        runGuidedBubbleStep(0);
+    }, 380);
 </script>
 </body>
 </html>
