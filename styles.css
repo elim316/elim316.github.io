@@ -514,7 +514,12 @@ textarea {
     translateY(var(--deck-y, 0px))
     scale(var(--deck-scale, 0.96));
   transform-style: preserve-3d;
+  transition: max-width 280ms var(--ease-smooth);
   will-change: transform;
+}
+
+#flagship-tracer-sandbox:has([data-tracer-tab="sandbox"].active) {
+  max-width: min(1160px, 95vw);
 }
 
 .hardware-bezel {
@@ -1174,7 +1179,9 @@ textarea {
 
 .tracer-sandbox-frame {
   width: 100%;
-  height: 520px;
+  max-width: 100%;
+  height: 640px;
+  box-sizing: border-box;
   border: 1px solid var(--border-subtle, #d2d2d7);
   border-radius: 10px;
   background: #ffffff;
