@@ -394,7 +394,8 @@
         #right { flex: 0 0 clamp(248px, 31%, 336px); width: clamp(248px, 31%, 336px); min-width: 0; max-width: 37%; overflow-x: hidden; display: flex; flex-direction: column; box-sizing: border-box; background: var(--card, #fff); transition: height 0.18s ease, width 0.18s ease; position: relative; z-index: 10; }
         #right-bar { display: none; align-items: center; justify-content: space-between; padding: 6px 12px; background: var(--secondary, #f1f3f4); border-bottom: 1px solid var(--border, #dadce0); cursor: pointer; user-select: none; flex-shrink: 0; font-size: 11px; font-weight: 600; color: var(--muted-foreground, #5f6368); }
         #right-bar:hover { color: var(--foreground, #202124); }
-        #inspector { flex: 1; width: 100%; min-width: 0; overflow-y: auto; overflow-x: hidden; overflow-wrap: anywhere; word-break: break-word; padding: 14px 16px; box-sizing: border-box; }
+        #inspector { flex: 1; width: 100%; min-width: 0; overflow-y: auto; overflow-x: hidden; overflow-wrap: break-word; padding: 14px 16px; box-sizing: border-box; }
+        #inspector .inspector-header { flex-wrap: wrap; row-gap: 6px; }
         body.inspector-collapsed #right { width: 0 !important; flex: 0 0 0px !important; min-width: 0 !important; overflow: hidden; border: none; }
         
         /* Two rows: identity strip on top, wrapping toolbar underneath. */
@@ -2387,7 +2388,7 @@
         if (!nodes || !nodes.length) return;
         const y_user_scaled = BASE_Y_USER / currentZoom;
         const y_tool_scaled = BASE_Y_TOOL / currentZoom;
-        const subSpreadScaled = Math.max(104, Math.min(132, Math.abs(BASE_Y_TOOL) * 0.62)) / currentZoom;
+        const subSpreadScaled = Math.max(118, Math.min(144, Math.abs(BASE_Y_TOOL) * 0.68)) / currentZoom;
         const updates = [];
         nodes.forEach(n => {
             if (n.id.startsWith('user_') || n.id.startsWith('gap_') || n.id.startsWith('sys_')) {
@@ -3045,7 +3046,7 @@
         let Y_USER = BASE_Y_USER / currentZoom;  
         let Y_AGENT = 0;    
         let Y_TOOL = BASE_Y_TOOL / currentZoom;
-        const subSpreadScaled = Math.max(104, Math.min(132, Math.abs(BASE_Y_TOOL) * 0.62)) / currentZoom;
+        const subSpreadScaled = Math.max(118, Math.min(144, Math.abs(BASE_Y_TOOL) * 0.68)) / currentZoom;
         
         if (data.length > 0 && !nodes.get('start')) {
             newNodes.push({ id: 'start', label: 'START', shape: 'ellipse', color: { background: pal.start.bg, border: pal.start.border }, font: { color: pal.start.font, face: 'system-ui', size: 14 }, x: currentX, y: Y_AGENT });
@@ -3081,7 +3082,7 @@
                     previousPlannerIds = [gId];
                 }
 
-                currentX += 280;
+                currentX += 340;
                 let uId = 'user_' + index;
                 const prompt = cleanUserText(step.content) || 'Initiating...';
                 // The request itself is the goal; the agent's restatement of it is
@@ -3103,7 +3104,7 @@
             }
             else if (step.type === 'ERROR_MESSAGE') {
                 // Errors were previously dropped entirely. They must always be visible.
-                currentX += 260;
+                currentX += 340;
                 let eId = 'error_' + index;
                 if (!nodes.get(eId)) {
                     let summary = wrapText(truncate(step.content || 'Unknown error', 90), 30);
@@ -3125,7 +3126,7 @@
             }
             else if (step.type === 'CHECKPOINT') {
                 // Context compaction milestone - a genuinely meaningful boundary.
-                currentX += 260;
+                currentX += 340;
                 let cId = 'ckpt_' + index;
                 if (!nodes.get(cId)) {
                     newNodes.push({ id: cId, label: 'CONTEXT CHECKPOINT\nEarlier history summarized', shape: 'box',
@@ -3224,8 +3225,8 @@
                 // Use a 2-row grid when 4+ tools are expanded so a single step doesn't stretch the timeline
                 const toolRows = (!toolsCollapsed && visibleToolCount >= 4) ? 2 : 1;
                 const toolCols = visibleToolCount > 0 ? Math.ceil(visibleToolCount / toolRows) : 0;
-                const TOOL_COL_STEP = 235;
-                const stepBaseX = currentX + 260;
+                const TOOL_COL_STEP = 295;
+                const stepBaseX = currentX + 405;
                 const toolSpanWidth = toolCols > 1 ? (toolCols - 1) * TOOL_COL_STEP : 0;
 
                 if (!collapse) {
@@ -3459,8 +3460,8 @@
                     const M = expandedSubEntries.length;
                     const maxPerCol = 3;
                     const numCols = Math.ceil(M / maxPerCol);
-                    const subStartX = currentX + 250;
-                    const SUB_COL_STEP = 250;
+                    const subStartX = currentX + 415;
+                    const SUB_COL_STEP = 360;
                     const spawnedNodeIds = [];
 
                     expandedSubEntries.forEach((entry, globalIdx) => {
@@ -7985,6 +7986,20 @@
         bubbleEl.style.setProperty("--bubble-arrow-x", Math.round(arrowX) + "px");
     }
 
+    function syncCoachBubbleNavButtons() {
+        const rootCfg = SCENARIO_GUIDES[coachRootScenario] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
+        const list = rootCfg.bubbles || [];
+        const prevBtnEl = document.getElementById("coachBubblePrev");
+        const nextBtnEl = document.getElementById("coachBubbleNext");
+        if (prevBtnEl) {
+            prevBtnEl.style.display = coachStepIndex <= 0 ? "none" : "inline-flex";
+        }
+        if (nextBtnEl) {
+            const isLast = coachStepIndex >= Math.max(0, list.length - 1);
+            nextBtnEl.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
+        }
+    }
+
     function setCoachBubbleContent(stepText, titleText, bodyText, hintText) {
         const stepEl = document.getElementById("coachBubbleStep");
         const titleEl = document.getElementById("coachBubbleTitle");
@@ -7994,6 +8009,7 @@
         if (titleEl && titleText) titleEl.textContent = titleText;
         if (bodyEl && bodyText) bodyEl.textContent = bodyText;
         if (hintEl && hintText) hintEl.textContent = hintText;
+        syncCoachBubbleNavButtons();
     }
 
     function centerCameraWithBubbleRoom(nodeId, animateMs) {
@@ -8009,7 +8025,7 @@
             network.moveTo({
                 position: { x: p.x, y: 0 },
                 scale: 1.0,
-                offset: { x: 38, y: 0 },
+                offset: { x: 76, y: 0 },
                 animation: animateMs > 0 ? { duration: animateMs, easingFunction: "easeInOutQuad" } : false
             });
         } catch (_) {}
@@ -8028,7 +8044,10 @@
                 selectedNodeId = nid;
                 const info = explainNodeInPlainEnglish(rawDataMap ? rawDataMap[nid] : null);
                 coachDismissed = false;
-                setCoachBubbleContent(info.step, info.title, info.body, "Click Next Bubble for guided steps");
+                setCoachBubbleContent(info.step, info.title, info.body, "Click any other box or Close Bubble when done");
+                const nextBtnEl = document.getElementById("coachBubbleNext");
+                if (nextBtnEl) nextBtnEl.textContent = "Close Bubble";
+                coachStepIndex = 99;
                 centerCameraWithBubbleRoom(nid, 260);
                 setTimeout(() => positionCoachBubbleOverNode(nid), 40);
                 setTimeout(() => positionCoachBubbleOverNode(nid), 290);
@@ -8103,7 +8122,7 @@
         const rootCfg = SCENARIO_GUIDES[coachRootScenario] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
         const list = rootCfg.bubbles || [];
         if (!list.length) return;
-        coachStepIndex = ((idx % list.length) + list.length) % list.length;
+        coachStepIndex = Math.max(0, Math.min(list.length - 1, idx));
         const item = list[coachStepIndex];
         coachDismissed = false;
 
@@ -8250,14 +8269,32 @@
     if (reopenBtnEl) {
         reopenBtnEl.addEventListener("click", () => {
             coachDismissed = false;
-            positionCoachBubbleOverNode();
+            const rootCfg = SCENARIO_GUIDES[coachRootScenario] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
+            const list = rootCfg.bubbles || [];
+            if (coachStepIndex >= list.length) {
+                runGuidedBubbleStep(0);
+            } else {
+                syncCoachBubbleNavButtons();
+                positionCoachBubbleOverNode();
+            }
         });
     }
     if (prevBtnEl) {
-        prevBtnEl.addEventListener("click", () => runGuidedBubbleStep(coachStepIndex - 1));
+        prevBtnEl.addEventListener("click", () => {
+            if (coachStepIndex > 0) runGuidedBubbleStep(coachStepIndex - 1);
+        });
     }
     if (nextBtnEl) {
-        nextBtnEl.addEventListener("click", () => runGuidedBubbleStep(coachStepIndex + 1));
+        nextBtnEl.addEventListener("click", () => {
+            const rootCfg = SCENARIO_GUIDES[coachRootScenario] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
+            const list = rootCfg.bubbles || [];
+            if (coachStepIndex >= Math.max(0, list.length - 1)) {
+                coachDismissed = true;
+                positionCoachBubbleOverNode();
+            } else {
+                runGuidedBubbleStep(coachStepIndex + 1);
+            }
+        });
     }
     window.addEventListener("resize", () => positionCoachBubbleOverNode());
 
