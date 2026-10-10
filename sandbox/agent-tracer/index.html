@@ -5,16 +5,14 @@
     <style>
       .sandbox-banner {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 7px 14px;
+        flex-direction: column;
+        gap: 6px;
+        padding: 8px 14px;
         background: #f5f5f7;
         border-bottom: 1px solid #d2d2d7;
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
         font-size: 12px;
         color: #1d1d1f;
-        flex-wrap: wrap;
         z-index: 200;
       }
       html[data-theme="dark"] .sandbox-banner {
@@ -22,11 +20,16 @@
         border-bottom-color: #2e3340;
         color: #f5f5f7;
       }
+      /* When embedded inside Stage 02 tab box, parent tab box renders unified header + guided actions */
       body.is-embedded .sandbox-banner {
-        padding: 5px 10px;
+        display: none !important;
       }
-      body.is-embedded .sandbox-back-link {
-        display: none;
+      .sandbox-banner-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
       }
       .sandbox-banner-left {
         display: flex;
@@ -73,6 +76,84 @@
         background: #0066cc;
         border-color: #0066cc;
         color: #ffffff;
+      }
+      .sandbox-guide-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding-top: 5px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        font-size: 11.5px;
+      }
+      html[data-theme="dark"] .sandbox-guide-row {
+        border-top-color: rgba(255, 255, 255, 0.08);
+      }
+      .sandbox-doing-text {
+        color: #3a3a3c;
+        line-height: 1.4;
+      }
+      html[data-theme="dark"] .sandbox-doing-text {
+        color: #cbd5e1;
+      }
+      .sandbox-tour-pills {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .sandbox-tour-btn {
+        border: 1px solid rgba(0, 102, 204, 0.28);
+        background: rgba(0, 102, 204, 0.07);
+        color: #0066cc;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 2.5px 9px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .sandbox-tour-btn:hover {
+        background: #0066cc;
+        color: #ffffff;
+        border-color: #0066cc;
+      }
+      html[data-theme="dark"] .sandbox-tour-btn {
+        background: rgba(102, 178, 255, 0.14);
+        border-color: rgba(102, 178, 255, 0.32);
+        color: #66b2ff;
+      }
+      .ov-guide-card {
+        background: rgba(0, 102, 204, 0.06);
+        border: 1px solid rgba(0, 102, 204, 0.22);
+        border-radius: 9px;
+        padding: 11px 12px;
+        margin-bottom: 14px;
+        font-size: 12px;
+        line-height: 1.48;
+      }
+      html[data-theme="dark"] .ov-guide-card {
+        background: rgba(59, 130, 246, 0.12);
+        border-color: rgba(96, 165, 250, 0.28);
+      }
+      .ov-guide-kicker {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #0066cc;
+        margin-bottom: 4px;
+      }
+      html[data-theme="dark"] .ov-guide-kicker {
+        color: #66b2ff;
+      }
+      .ov-guide-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 8px;
       }
     </style>
     <meta charset="utf-8">
@@ -467,16 +548,27 @@
 
 <div id="left">
     <div class="sandbox-banner" id="sandboxBanner">
-      <div class="sandbox-banner-left">
-        <a class="sandbox-back-link" href="../../index.html#showcase-agent-tracer">&larr; Back to Portfolio</a>
-        <span style="font-weight:600; letter-spacing:-0.01em;">Interactive Trace Sandbox:</span>
-        <div class="sandbox-scenario-pills" role="tablist" aria-label="Sample multi-agent scenarios">
-          <button type="button" class="sandbox-sc-btn is-active" data-sc-id="a1000000-0000-4000-8000-000000000001">01: PR Security Audit (Subagents + Diff)</button>
-          <button type="button" class="sandbox-sc-btn" data-sc-id="a2000000-0000-4000-8000-000000000002">02: Dual-VPC Firewall Posture</button>
-          <button type="button" class="sandbox-sc-btn" data-sc-id="a3000000-0000-4000-8000-000000000003">03: 177k Context Compaction</button>
+      <div class="sandbox-banner-top">
+        <div class="sandbox-banner-left">
+          <a class="sandbox-back-link" href="../../index.html#showcase-agent-tracer">&larr; Back to Portfolio</a>
+          <span style="font-weight:600; letter-spacing:-0.01em;">Select Active Trace:</span>
+          <div class="sandbox-scenario-pills" role="tablist" aria-label="Sample multi-agent scenarios">
+            <button type="button" class="sandbox-sc-btn is-active" data-sc-id="a1000000-0000-4000-8000-000000000001">01: PR Security Audit (Subagents + Diff)</button>
+            <button type="button" class="sandbox-sc-btn" data-sc-id="a2000000-0000-4000-8000-000000000002">02: Dual-VPC Firewall Posture</button>
+            <button type="button" class="sandbox-sc-btn" data-sc-id="a3000000-0000-4000-8000-000000000003">03: 177k Context Compaction</button>
+          </div>
+        </div>
+        <span style="font-size:11px; color:var(--muted-foreground,#6e6e73);">Click any swimlane node or use Quick Tour buttons below</span>
+      </div>
+      <div class="sandbox-guide-row">
+        <span class="sandbox-doing-text" id="sandboxDoingText">Currently running: Lead agent audits a payment webhook pull request via two parallel review subagents and applies a verified code patch.</span>
+        <div class="sandbox-tour-pills" id="sandboxTourPills">
+          <button type="button" class="sandbox-tour-btn" data-tour-act="subagents">1. Inspect Subagents</button>
+          <button type="button" class="sandbox-tour-btn" data-tour-act="drill_subagent">2. Drill into Child Agent</button>
+          <button type="button" class="sandbox-tour-btn" data-tour-act="diff">3. View Code Diff</button>
+          <button type="button" class="sandbox-tour-btn" data-tour-act="topology">4. Topology Graph</button>
         </div>
       </div>
-      <span style="font-size:11px; color:var(--muted-foreground,#6e6e73);">Click any node, switch Timeline or Topology view, or inspect subagents</span>
     </div>
     <div class="header">
         <div class="header-row">
@@ -3715,6 +3807,10 @@
 
         const backToLog = (typeof viewMode !== 'undefined' && (viewMode === 'topology' || viewMode === 'simple_topo')) ? inspectorBackBtnHtml() : '';
         let html = '<div id="inspector-title" style="color:#1967D2"><span>SESSION OVERVIEW</span>' + backToLog + '</div>';
+
+        if (typeof window.getSandboxGuideCardHtml === 'function') {
+            html += window.getSandboxGuideCardHtml();
+        }
 
         html += '<div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;">' +
                 tile('Requests', s.requests) +
@@ -7392,19 +7488,206 @@
     if (new URLSearchParams(window.location.search).get("embed") === "1") {
         document.body.classList.add("is-embedded");
     }
-    document.querySelectorAll(".sandbox-sc-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelectorAll(".sandbox-sc-btn").forEach(b => b.classList.remove("is-active"));
-            btn.classList.add("is-active");
-            manualConvId = btn.dataset.scId;
-            manualConvLabel = btn.textContent.trim();
+    if (window.innerWidth >= 780) {
+        document.body.classList.remove("inspector-collapsed");
+    }
+
+    const SCENARIO_GUIDES = {
+        "a1000000-0000-4000-8000-000000000001": {
+            doing: "Lead agent audits payment-gateway/src/webhook_handler.py, fans out two parallel subagents (HMAC signature review and Redis lock review), applies a replay-protection patch (+14 / -4 lines), and verifies pytest.",
+            tour: [
+                { label: "1. Inspect Subagents", act: "subagents" },
+                { label: "2. Drill into Child Agent", act: "drill_subagent" },
+                { label: "3. View Code Diff", act: "diff" },
+                { label: "4. Topology Graph", act: "topology" }
+            ]
+        },
+        "a2000000-0000-4000-8000-000000000002": {
+            doing: "Infrastructure agent inspects four Terraform modules (main.tf, firewall.tf, nat.tf, outputs.tf) in parallel and verifies all 14 ingress and 18 egress network firewall rules.",
+            tour: [
+                { label: "1. Parallel File Reads", act: "parallel_reads" },
+                { label: "2. Firewall Check Result", act: "last_tool" },
+                { label: "3. Topology Graph", act: "topology" }
+            ]
+        },
+        "a3000000-0000-4000-8000-000000000003": {
+            doing: "At 177k / 200k tokens, the runtime compacts 148 earlier steps into a 14k checkpoint summary and seamlessly migrates billing, audit_log, and notification handlers.",
+            tour: [
+                { label: "1. View Handler Diff", act: "diff" },
+                { label: "2. Session Telemetry", act: "overview" },
+                { label: "3. Topology Graph", act: "topology" }
+            ]
+        },
+        "b1000000-0000-4000-8000-000000000001": {
+            doing: "Child Subagent (CryptoHMACReviewer): Inspecting HMAC SHA-256 signature verification and constant-time digest comparison in webhook_handler.py.",
+            tour: [
+                { label: "Return to Parent Trace", act: "return_parent" },
+                { label: "Topology Graph", act: "topology" }
+            ]
+        },
+        "b2000000-0000-4000-8000-000000000002": {
+            doing: "Child Subagent (ConcurrencyLockReviewer): Auditing Redis SET NX PX idempotency keys under concurrent Stripe webhook delivery bursts.",
+            tour: [
+                { label: "Return to Parent Trace", act: "return_parent" },
+                { label: "Topology Graph", act: "topology" }
+            ]
+        }
+    };
+
+    function getActiveScenarioId() {
+        if (typeof activeConvId !== "undefined" && activeConvId) return activeConvId;
+        if (typeof manualConvId !== "undefined" && manualConvId) return manualConvId;
+        return "a1000000-0000-4000-8000-000000000001";
+    }
+
+    function syncSandboxBannerUI() {
+        const curId = getActiveScenarioId();
+        const cfg = SCENARIO_GUIDES[curId] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
+        const doingEl = document.getElementById("sandboxDoingText");
+        if (doingEl) doingEl.textContent = "Currently running: " + cfg.doing;
+        const pillsEl = document.getElementById("sandboxTourPills");
+        if (pillsEl) {
+            pillsEl.innerHTML = cfg.tour.map(t =>
+                '<button type="button" class="sandbox-tour-btn" data-tour-act="' + t.act + '">' + t.label + '</button>'
+            ).join("");
+            pillsEl.querySelectorAll("[data-tour-act]").forEach(b => {
+                b.addEventListener("click", () => window.sandboxRunAction(b.dataset.tourAct));
+            });
+        }
+    }
+
+    window.getSandboxGuideCardHtml = function() {
+        const curId = getActiveScenarioId();
+        const cfg = SCENARIO_GUIDES[curId] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
+        const btns = cfg.tour.map(t =>
+            '<button type="button" class="sandbox-tour-btn" onclick="window.sandboxRunAction(\'' + t.act + '\')">' + t.label + '</button>'
+        ).join("");
+        return '<div class="ov-guide-card">' +
+            '<div class="ov-guide-kicker">What This Trace Is Doing</div>' +
+            '<div>' + cfg.doing + '</div>' +
+            '<div style="margin-top:6px; font-size:11px; color:var(--muted-foreground,#5f6368);">How to explore: Click any swimlane node on the left canvas, or jump straight to a highlight below:</div>' +
+            '<div class="ov-guide-actions">' + btns + '</div>' +
+            '</div>';
+    };
+
+    function focusAndSelectNode(predicate) {
+        if (typeof setViewMode === "function" && viewMode !== "timeline") {
+            setViewMode("timeline", false);
+        }
+        const entries = Object.entries(rawDataMap || {});
+        const found = entries.find(([id, d]) => predicate(id, d));
+        if (!found) {
+            renderOverview();
+            return;
+        }
+        const [targetId, targetData] = found;
+        selectedNodeId = targetId;
+        hasSelection = true;
+        document.body.classList.remove("inspector-collapsed");
+        if (network && typeof network.selectNodes === "function") {
+            try {
+                network.selectNodes([targetId]);
+                network.focus(targetId, { scale: 1.0, animation: { duration: 380, easingFunction: "easeInOutQuad" } });
+            } catch (_) {}
+        }
+        renderInspector(targetData, targetId, true);
+    }
+
+    window.sandboxRunAction = function(action, arg) {
+        if (action === "scenario" && arg) {
+            document.querySelectorAll(".sandbox-sc-btn").forEach(b => {
+                b.classList.toggle("is-active", b.dataset.scId === arg);
+            });
+            manualConvId = arg;
+            const matchedBtn = document.querySelector('.sandbox-sc-btn[data-sc-id="' + arg + '"]');
+            manualConvLabel = matchedBtn ? matchedBtn.textContent.trim() : arg;
             convStack = [];
             selectedNodeId = null;
             hasSelection = false;
             updateSessionBreadcrumbUI();
-            loadData();
+            loadData().then(() => {
+                syncSandboxBannerUI();
+                renderOverview();
+            });
+            return;
+        }
+        if (action === "subagents") {
+            focusAndSelectNode((_, d) => d && d.tool && (d.tool.name === "invoke_subagent" || (d.subagents && d.subagents.length)));
+            return;
+        }
+        if (action === "drill_subagent") {
+            if (typeof drillIntoSubagent === "function") {
+                drillIntoSubagent("b1000000-0000-4000-8000-000000000001", "CryptoHMACReviewer");
+                setTimeout(() => {
+                    syncSandboxBannerUI();
+                    renderOverview();
+                }, 120);
+            }
+            return;
+        }
+        if (action === "return_parent") {
+            if (convStack && convStack.length > 0) {
+                const top = convStack.pop();
+                activeConvId = top.id;
+                updateSessionBreadcrumbUI();
+                loadData().then(() => {
+                    syncSandboxBannerUI();
+                    renderOverview();
+                });
+            }
+            return;
+        }
+        if (action === "diff") {
+            focusAndSelectNode((_, d) => d && ((d.tool && (d.tool.name === "replace_file_content" || d.tool.name === "write_to_file")) || (d.items && d.items.some(it => it.tool && it.tool.name === "replace_file_content"))));
+            return;
+        }
+        if (action === "parallel_reads") {
+            focusAndSelectNode((_, d) => d && ((d.items && d.items.length > 1) || (d.tool && (d.tool.name === "view_file" || d.tool.name === "read_file"))));
+            return;
+        }
+        if (action === "last_tool") {
+            const allTools = Object.entries(rawDataMap || {}).filter(([_, d]) => d && (d.tool || d.items));
+            if (allTools.length) {
+                const [tid, tdata] = allTools[allTools.length - 1];
+                selectedNodeId = tid;
+                hasSelection = true;
+                document.body.classList.remove("inspector-collapsed");
+                if (network) {
+                    try { network.selectNodes([tid]); network.focus(tid, { scale: 1.0, animation: { duration: 380 } }); } catch (_) {}
+                }
+                renderInspector(tdata, tid, true);
+            }
+            return;
+        }
+        if (action === "topology") {
+            if (typeof setViewMode === "function") {
+                setViewMode(viewMode === "topology" ? "timeline" : "topology", false);
+            }
+            return;
+        }
+        renderOverview();
+    };
+
+    window.addEventListener("message", (ev) => {
+        const msg = ev && ev.data;
+        if (!msg || msg.source !== "portfolio-tracer-host") return;
+        window.sandboxRunAction(msg.action, msg.arg);
+    });
+
+    document.querySelectorAll("[data-tour-act]").forEach(btn => {
+        btn.addEventListener("click", () => window.sandboxRunAction(btn.dataset.tourAct));
+    });
+
+    document.querySelectorAll(".sandbox-sc-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            window.sandboxRunAction("scenario", btn.dataset.scId);
         });
     });
+
+    setTimeout(() => {
+        syncSandboxBannerUI();
+        if (!hasSelection) renderOverview();
+    }, 350);
 </script>
 </body>
 </html>
