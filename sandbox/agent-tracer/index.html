@@ -751,10 +751,10 @@
             <button type="button" class="sandbox-sc-btn" data-sc-id="a3000000-0000-4000-8000-000000000003">03: Long-Chat Memory</button>
           </div>
         </div>
-        <span style="font-size:11px; color:var(--muted-foreground,#6e6e73);">Click any canvas box for a plain-English speech bubble</span>
+        <span style="font-size:11px; color:var(--muted-foreground,#6e6e73);">Click any canvas box for an explanation bubble</span>
       </div>
       <div class="sandbox-guide-row">
-        <span class="sandbox-doing-text" id="sandboxDoingText">In plain English: A lead AI reads a payment file, assigns two specialist helper AIs to double-check security at the same time, fixes four risky lines, and runs an automatic test to be sure.</span>
+        <span class="sandbox-doing-text" id="sandboxDoingText">Summary: A lead AI reads a payment file, assigns two specialist helper AIs to double-check security at the same time, fixes four risky lines, and runs an automatic test to be sure.</span>
         <div class="sandbox-tour-pills" id="sandboxTourPills">
           <button type="button" class="sandbox-tour-btn" data-tour-act="tour_0">Bubble 1: Human Goal</button>
           <button type="button" class="sandbox-tour-btn" data-tour-act="tour_1">Bubble 2: Helper AIs</button>
@@ -791,7 +791,7 @@
             </div>
             <div class="tb-group" id="timelineTogglesGroup">
                 <input type="checkbox" id="toggleSummaries" checked>
-                <label for="toggleSummaries" title="Show a one-line plain-English summary on each node">Summaries</label>
+                <label for="toggleSummaries" title="Show a one-line summary on each node">Summaries</label>
                 <input type="checkbox" id="toggleAutoFollow" checked style="margin-left:4px;">
                 <label for="toggleAutoFollow" title="Automatically pan to newly added nodes">Auto-Follow</label>
                 <input type="checkbox" id="toggleSimpleView" checked style="margin-left:4px;">
@@ -885,12 +885,12 @@
         </div>
 
         <!-- Plain-English Pop-Up Speech Bubble Coachmark for Non-Technical Visitors -->
-        <div class="sandbox-coach-bubble arrow-top" id="sandboxCoachBubble" role="region" aria-live="polite" aria-label="Plain-English step explanation bubble">
+        <div class="sandbox-coach-bubble arrow-top" id="sandboxCoachBubble" role="region" aria-live="polite" aria-label="Step explanation bubble">
             <div class="coach-bubble-top">
                 <span class="coach-bubble-step" id="coachBubbleStep">Bubble 1 of 4</span>
-                <button type="button" class="coach-bubble-close" id="coachBubbleClose" title="Hide plain-English bubble" aria-label="Hide bubble">&#215;</button>
+                <button type="button" class="coach-bubble-close" id="coachBubbleClose" title="Hide bubble" aria-label="Hide bubble">&#215;</button>
             </div>
-            <div class="coach-bubble-title" id="coachBubbleTitle">A person types a plain-English goal</div>
+            <div class="coach-bubble-title" id="coachBubbleTitle">A person sets the goal</div>
             <div class="coach-bubble-body" id="coachBubbleBody">Instead of writing technical instructions, a person simply asks the lead AI to review a payment file and make sure duplicate charges cannot slip through.</div>
             <div class="coach-bubble-footer">
                 <span class="coach-bubble-hint" id="coachBubbleHint">Click any box on the canvas to explain it</span>
@@ -900,7 +900,7 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="sandbox-coach-reopen hidden" id="sandboxCoachReopenBtn">Show Plain-English Bubbles</button>
+        <button type="button" class="sandbox-coach-reopen hidden" id="sandboxCoachReopenBtn">Show Explanation Bubbles</button>
 
         <!-- Architectural Blueprint & Simplified Orbital Topology Views -->
         <div id="topology-wrapper">
@@ -7713,7 +7713,7 @@
             bubbles: [
                 {
                     step: "Bubble 1 of 4",
-                    title: "A person sets the goal in plain English",
+                    title: "A person sets the goal",
                     body: "Everything starts in this top orange lane. A person asks the AI to check a payment file so customers can never be charged twice by accident.",
                     act: "first_user"
                 },
@@ -7844,7 +7844,7 @@
     function explainNodeInPlainEnglish(data) {
         if (!data) {
             return {
-                step: "Plain-English Guide",
+                step: "Step Guide",
                 title: "Click any box on this timeline",
                 body: "Orange boxes are human requests, purple boxes show the AI planning its next move, and cyan boxes show real tools opening or editing files."
             };
@@ -8059,7 +8059,7 @@
         const curId = getActiveScenarioId();
         const cfg = SCENARIO_GUIDES[curId] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
         const doingEl = document.getElementById("sandboxDoingText");
-        if (doingEl) doingEl.textContent = "In plain English: " + cfg.doing;
+        if (doingEl) doingEl.textContent = "Summary: " + cfg.doing;
         const pillsEl = document.getElementById("sandboxTourPills");
         if (pillsEl) {
             pillsEl.innerHTML = cfg.tour.map(t =>
@@ -8079,7 +8079,7 @@
             '<button type="button" class="sandbox-tour-btn" onclick="window.sandboxRunAction(\'' + t.act + '\')">' + t.label + '</button>'
         ).join("");
         return '<div class="ov-guide-card">' +
-            '<div class="ov-guide-kicker">Plain-English Summary</div>' +
+            '<div class="ov-guide-kicker">Summary</div>' +
             '<div>' + cfg.doing + '</div>' +
             '<div style="margin-top:6px; font-size:11px; color:var(--muted-foreground,#5f6368);">Click any box on the left canvas for a pop-up explanation bubble, or step through the highlights below:</div>' +
             '<div class="ov-guide-actions">' + btns + '</div>' +
