@@ -994,6 +994,19 @@ textarea {
   animation: heroRise 420ms var(--spring-out) forwards;
 }
 
+.tracer-sandbox-scene.is-active {
+  width: 100%;
+}
+
+.tracer-sandbox-frame {
+  width: 100%;
+  height: 460px;
+  border: 1px solid var(--border-subtle, #d2d2d7);
+  border-radius: 10px;
+  background: #ffffff;
+  display: block;
+}
+
 .about-live-story {
   font-size: 0.92rem;
   line-height: 1.56;
