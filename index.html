@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://elim316.github.io; media-src 'self'; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'self'; form-action 'none';"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://elim316.github.io; media-src 'self'; connect-src 'self' https://api.github.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';"
   />
   <title>Elias Lim | Software, Agentic AI &amp; Machine Learning Engineer</title>
   <meta
@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261009-29" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-30" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261009-29" />
+  <link rel="stylesheet" href="styles.css?v=20261010-30" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -763,10 +763,19 @@
           </p>
           <div class="cta-pill-group">
             <a
-              href="https://github.com/elim316/Antigravity-Agent-Tracer-Plugin"
+              href="sandbox/agent-tracer/index.html"
               target="_blank"
               rel="noopener noreferrer"
               class="apple-pill solid"
+              id="tracer-launch-sandbox-cta"
+            >
+              <span>Launch Live Sandbox &#8599;</span>
+            </a>
+            <a
+              href="https://github.com/elim316/Antigravity-Agent-Tracer-Plugin"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill outline"
             >
               <svg class="brand-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
@@ -804,6 +813,9 @@
                   </button>
                   <button type="button" class="browser-tab" data-tracer-tab="memory" role="tab" aria-selected="false">
                     <span>200k Memory Meter</span>
+                  </button>
+                  <button type="button" class="browser-tab" data-tracer-tab="sandbox" role="tab" aria-selected="false">
+                    <span>Interactive Sandbox</span>
                   </button>
                 </div>
               </div>
@@ -878,6 +890,16 @@
                       <rect class="token-fill-bar" id="flagship-token-bar" clip-path="url(#flagship-bar-clip)" x="30" y="86" width="219" height="7" rx="3.5" fill="var(--accent)" />
                     </svg>
                   </div>
+
+                  <!-- Tab 3: Live Interactive Browser Sandbox -->
+                  <div class="about-scene tracer-sandbox-scene" data-tracer-scene="sandbox">
+                    <iframe
+                      id="tracer-embedded-iframe"
+                      class="tracer-sandbox-frame"
+                      data-src="sandbox/agent-tracer/index.html?embed=1"
+                      title="Interactive Agent Tracer Sandbox"
+                    ></iframe>
+                  </div>
                 </div>
 
                 <p class="about-live-story" id="tracer-live-story">
@@ -895,8 +917,8 @@
                     <button type="button" class="about-next-tab-btn" id="tracer-next-tab-btn">
                       <span id="tracer-next-tab-label">Next tab: 200k Memory Meter &#8594;</span>
                     </button>
-                    <a href="https://github.com/elim316/Antigravity-Agent-Tracer-Plugin" target="_blank" rel="noopener noreferrer" class="about-scroll-pill">
-                      <span>Open Repo &#8599;</span>
+                    <a href="sandbox/agent-tracer/index.html" target="_blank" rel="noopener noreferrer" class="about-scroll-pill">
+                      <span>Full Sandbox &#8599;</span>
                     </a>
                   </div>
                 </div>
@@ -1859,6 +1881,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261009-29"></script>
+  <script src="app.js?v=20261010-30"></script>
 </body>
 </html>
