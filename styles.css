@@ -518,7 +518,8 @@ textarea {
   will-change: transform;
 }
 
-#flagship-tracer-sandbox:has([data-tracer-tab="sandbox"].active) {
+#flagship-tracer-sandbox:has([data-tracer-tab="sandbox"].active),
+#flagship-prep-sandbox:has([data-prep-tab="sandbox"].active) {
   max-width: min(1160px, 95vw);
 }
 
