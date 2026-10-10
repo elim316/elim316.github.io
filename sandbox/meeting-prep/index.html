@@ -173,32 +173,38 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding: 9px 14px;
+    padding: 7px 12px;
     background: var(--bg);
     border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .toolbar-left, .toolbar-right {
     display: flex;
     align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    gap: 7px;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  body.is-embedded #theme-btn {
+    display: none;
   }
 
   .cal-date-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 700;
     color: var(--fg);
+    white-space: nowrap;
   }
 
   .cal-date-day {
     background: var(--red);
     color: #ffffff;
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 700;
     padding: 2px 6px;
     border-radius: 5px;
@@ -209,14 +215,15 @@
   .status-pill {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-size: 11px;
+    gap: 4px;
+    font-size: 10.5px;
     font-weight: 600;
     color: var(--green);
     background: var(--green-soft);
     border: 1px solid var(--green-border);
-    padding: 2px 8px;
+    padding: 2px 7px;
     border-radius: 999px;
+    white-space: nowrap;
   }
 
   .tool-btn {
@@ -224,11 +231,12 @@
     background: var(--bg-card);
     color: var(--fg-secondary);
     font-family: inherit;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
-    padding: 4px 9px;
+    padding: 3px 8px;
     border-radius: 7px;
     cursor: pointer;
+    white-space: nowrap;
     transition: all 0.15s ease;
   }
 
@@ -494,44 +502,32 @@
     border: 1px solid var(--border);
   }
 
-  /* Floating Speech Bubble Anchored Inside the Calendar Grid */
+  /* Speech Bubble Docked Cleanly Above the Day Calendar Grid (Never Covers Events) */
   .coach-bubble {
-    position: absolute;
-    right: 16px;
-    top: 108px;
-    width: min(330px, calc(100% - 76px));
+    position: relative;
+    margin: 5px 10px 4px;
     background: var(--bg-card);
     border: 1.5px solid var(--accent);
-    border-radius: 13px;
-    padding: 11px 14px;
-    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.2);
-    z-index: 25;
-    transition: top 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 10px;
+    padding: 7px 11px;
+    box-shadow: 0 5px 14px rgba(0, 102, 204, 0.1);
+    flex-shrink: 0;
+    z-index: 10;
   }
 
-  .coach-bubble::before {
+  .coach-bubble::after {
     content: "";
     position: absolute;
-    top: var(--tail-y, -6.5px);
-    left: var(--tail-x, 28px);
-    width: 11px;
-    height: 11px;
+    bottom: -6px;
+    left: 42px;
+    width: 10px;
+    height: 10px;
     background: var(--bg-card);
-    border-top: 1.5px solid var(--accent);
-    border-left: 1.5px solid var(--accent);
-    border-top-left-radius: 2px;
-    transform: rotate(45deg);
-    pointer-events: none;
-  }
-
-  .coach-bubble.tail-bottom::before {
-    top: auto;
-    bottom: -6.5px;
-    border-top: none;
-    border-left: none;
     border-bottom: 1.5px solid var(--accent);
     border-right: 1.5px solid var(--accent);
     border-bottom-right-radius: 2px;
+    transform: rotate(45deg);
+    pointer-events: none;
   }
 
   .coach-bubble.is-hidden {
@@ -543,17 +539,17 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   .coach-bubble-step {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--accent);
     background: var(--accent-soft);
-    padding: 2px 8px;
+    padding: 1.5px 6px;
     border-radius: 999px;
   }
 
@@ -561,25 +557,25 @@
     border: none;
     background: transparent;
     color: var(--fg-muted);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     cursor: pointer;
-    padding: 0 4px;
+    padding: 0 3px;
     line-height: 1;
   }
 
   .coach-bubble-title {
-    font-size: 12.5px;
+    font-size: 11.5px;
     font-weight: 700;
     color: var(--fg);
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
 
   .coach-bubble-desc {
-    font-size: 11.5px;
-    line-height: 1.44;
+    font-size: 10.5px;
+    line-height: 1.35;
     color: var(--fg-secondary);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 
   .coach-bubble-footer {
@@ -587,14 +583,15 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding-top: 6px;
+    padding-top: 4px;
     border-top: 1px solid var(--border);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .coach-bubble-hint {
-    font-size: 10px;
+    font-size: 9.5px;
     color: var(--fg-muted);
+    white-space: nowrap;
   }
 
   .coach-bubble-nav {
@@ -609,9 +606,9 @@
     background: var(--bg);
     color: var(--fg);
     font-family: inherit;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
-    padding: 3.5px 10px;
+    padding: 3px 9px;
     border-radius: 999px;
     cursor: pointer;
   }
@@ -897,27 +894,27 @@
         <span id="calendar-filter-summary">2 Briefings Ready, 4 Filtered Out</span>
       </div>
 
+      <div class="coach-bubble" id="prepCoachBubble" role="region" aria-live="polite">
+        <div class="coach-bubble-top">
+          <span class="coach-bubble-step" id="coachBubbleStep">BUBBLE 1 OF 4</span>
+          <button type="button" class="coach-bubble-close" id="coachBubbleClose" title="Close explanation bubble">&#215;</button>
+        </div>
+        <div class="coach-bubble-title" id="coachBubbleTitle">Skipping routine calendar clutter</div>
+        <div class="coach-bubble-desc" id="coachBubbleDesc">
+          Out of 6 calendar blocks tomorrow, the assistant automatically skips internal stand-ups, focus blocks, large town halls, and declined invites so you only get briefed on real external or cross-team calls.
+        </div>
+        <div class="coach-bubble-footer">
+          <span class="coach-bubble-hint">Click any block on the calendar below</span>
+          <div class="coach-bubble-nav">
+            <button type="button" class="coach-nav-btn" id="coachBubblePrev">&#8592; Back</button>
+            <button type="button" class="coach-nav-btn primary" id="coachBubbleNext">Next Bubble &#8594;</button>
+          </div>
+        </div>
+      </div>
+
       <div id="calendar-scroll">
         <div class="calendar-day-canvas" id="calendar-day-canvas">
           <!-- Hourly grid rows + positioned event blocks rendered by JS -->
-        </div>
-
-        <div class="coach-bubble" id="prepCoachBubble" role="region" aria-live="polite">
-          <div class="coach-bubble-top">
-            <span class="coach-bubble-step" id="coachBubbleStep">BUBBLE 1 OF 4</span>
-            <button type="button" class="coach-bubble-close" id="coachBubbleClose" title="Close explanation bubble">&#215;</button>
-          </div>
-          <div class="coach-bubble-title" id="coachBubbleTitle">Skipping routine calendar clutter</div>
-          <div class="coach-bubble-desc" id="coachBubbleDesc">
-            Out of 6 calendar blocks tomorrow, the assistant automatically skips internal stand-ups, focus blocks, large town halls, and declined invites so you only get briefed on real external or cross-team calls.
-          </div>
-          <div class="coach-bubble-footer">
-            <span class="coach-bubble-hint">Click any block on the calendar</span>
-            <div class="coach-bubble-nav">
-              <button type="button" class="coach-nav-btn" id="coachBubblePrev">&#8592; Back</button>
-              <button type="button" class="coach-nav-btn primary" id="coachBubbleNext">Next Bubble &#8594;</button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -942,21 +939,24 @@
   }
 
   const START_HOUR = 9;
-  const END_HOUR = 18;
-  const HOUR_PX = 55.2;
+  const END_HOUR = 15;
+  const HOUR_PX = 52;
 
   const SCENARIOS = {
     next_day_mixed: {
       dayChip: "THU",
       dateTitle: "Tomorrow's Schedule (24 Sep)",
       calSummary: "2 Briefings Ready, 4 Filtered Out",
+      startHour: 9,
+      endHour: 15,
+      hourPx: 52,
       events: [
-        { id: "ev_standup", startH: 9.0, durH: 0.75, time: "09:00 - 09:45", title: "Infra Pod Standup", people: "Alex Morgan, Priya Nair, Wei Tan (Same Team)", qualified: false, skipReason: "Skipped: own-team standup" },
-        { id: "ev_acme", startH: 10.25, durH: 1.25, time: "10:15 - 11:30", title: "Acme <> Platform: API Rollout Sync", people: "Alex Chen (Director, Acme), Jordan Lee (TPM, Acme), Dana Martin", qualified: true, badge: "Briefing Ready", dossierKey: "acme" },
-        { id: "ev_auth", startH: 13.0, durH: 1.25, time: "13:00 - 14:15", title: "Payments x Identity: Auth Migration Review", people: "Rahul Khan (Identity PM), Sofia Barros (Security), Dana Martin", qualified: true, badge: "Briefing Ready", dossierKey: "auth" },
-        { id: "ev_allhands", startH: 14.75, durH: 1.0, time: "14:45 - 15:45", title: "Q3 Company All Hands", people: "312 invitees across engineering & product", qualified: false, skipReason: "Skipped: 312 attendees" },
-        { id: "ev_focus", startH: 16.0, durH: 1.0, time: "16:00 - 17:00", title: "Focus Time: Deep Work", people: "Personal calendar block", qualified: false, skipReason: "Skipped: focus block" },
-        { id: "ev_globex", startH: 17.25, durH: 0.75, time: "17:15 - 18:00", title: "Globex Vendor Demo", people: "Val Reyes (Globex Sales) - Invitation Declined", qualified: false, skipReason: "Skipped: declined invite" }
+        { id: "ev_standup", startH: 9.0, durH: 0.85, time: "09:00 - 09:50", title: "Infra Pod Standup", people: "Alex Morgan, Priya Nair, Wei Tan (Same Team)", qualified: false, skipReason: "Skipped: own-team standup" },
+        { id: "ev_acme", startH: 10.0, durH: 1.0, time: "10:00 - 11:00", title: "Acme <> Platform: API Rollout Sync", people: "Alex Chen (Director, Acme), Jordan Lee (TPM, Acme), Dana Martin", qualified: true, badge: "Briefing Ready", dossierKey: "acme" },
+        { id: "ev_allhands", startH: 11.15, durH: 0.8, time: "11:10 - 12:00", title: "Q3 Company All Hands", people: "312 invitees across engineering & product", qualified: false, skipReason: "Skipped: 312 attendees" },
+        { id: "ev_focus", startH: 12.1, durH: 0.8, time: "12:05 - 12:55", title: "Focus Time: Deep Work", people: "Personal calendar block", qualified: false, skipReason: "Skipped: focus block" },
+        { id: "ev_auth", startH: 13.0, durH: 1.0, time: "13:00 - 14:00", title: "Payments x Identity: Auth Migration Review", people: "Rahul Khan (Identity PM), Sofia Barros (Security), Dana Martin", qualified: true, badge: "Briefing Ready", dossierKey: "auth" },
+        { id: "ev_globex", startH: 14.15, durH: 0.8, time: "14:10 - 15:00", title: "Globex Vendor Demo", people: "Val Reyes (Globex Sales) - Invitation Declined", qualified: false, skipReason: "Skipped: declined invite" }
       ],
       dossiers: {
         acme: {
@@ -1009,7 +1009,7 @@
       ],
       tour: [
         { anchorEventId: "ev_standup", dossierKey: "acme", rightTab: "doc", stepLabel: "BUBBLE 1 OF 4", title: "Skipping routine calendar clutter", desc: "Out of 6 calendar blocks tomorrow, the assistant automatically ignores internal stand-ups, focus blocks, town halls, and declined invites so you only focus on real external or cross-team calls." },
-        { anchorEventId: "ev_acme", dossierKey: "acme", rightTab: "doc", stepLabel: "BUBBLE 2 OF 4", title: "10:15 Acme Sync: Briefing built overnight", desc: "Because Alex Chen and Jordan Lee are external partners, the assistant pulled unanswered Gmail threads, Chat notes, and shared decks into a one-page briefing on the right." },
+        { anchorEventId: "ev_acme", dossierKey: "acme", rightTab: "doc", stepLabel: "BUBBLE 2 OF 4", title: "10:00 Acme Sync: Briefing built overnight", desc: "Because Alex Chen and Jordan Lee are external partners, the assistant pulled unanswered Gmail threads, Chat notes, and shared decks into a one-page briefing on the right." },
         { anchorEventId: "ev_auth", dossierKey: "auth", rightTab: "doc", stepLabel: "BUBBLE 3 OF 4", title: "13:00 Cross-team review: Click any blue event", desc: "Click between blue blocks on the calendar (like Payments x Identity) to switch the one-page briefing and see open tasks awaiting your reply." },
         { anchorEventId: "ev_acme", dossierKey: "acme", rightTab: "linter", stepLabel: "BUBBLE 4 OF 4", title: "36 automatic checks block invented links", desc: "Before sending your briefing, a strict fact checker verifies every URL, person's name, and ticket number against real workspace data so the AI can never make up fake links." }
       ]
@@ -1019,10 +1019,13 @@
       dayChip: "FRI",
       dateTitle: "Tomorrow's Schedule (25 Sep)",
       calSummary: "1 New External Call, 2 Internal Blocks",
+      startHour: 9,
+      endHour: 13,
+      hourPx: 66,
       events: [
-        { id: "ev_standup2", startH: 9.5, durH: 0.75, time: "09:30 - 10:15", title: "Weekly Architecture Sync", people: "Internal Engineering Team", qualified: false, skipReason: "Skipped: own-team sync" },
-        { id: "ev_initech", startH: 13.5, durH: 1.25, time: "13:30 - 14:45", title: "Initech <> Platform: Intro Call", people: "Marta Novak (VP Data Platform, Initech)", qualified: true, badge: "First-Time External", dossierKey: "initech" },
-        { id: "ev_focus2", startH: 16.0, durH: 1.25, time: "16:00 - 17:15", title: "Deep Work: Code Review Block", people: "Personal calendar block", qualified: false, skipReason: "Skipped: focus block" }
+        { id: "ev_standup2", startH: 9.15, durH: 0.85, time: "09:10 - 10:00", title: "Weekly Architecture Sync", people: "Internal Engineering Team", qualified: false, skipReason: "Skipped: own-team sync" },
+        { id: "ev_initech", startH: 10.5, durH: 1.15, time: "10:30 - 11:40", title: "Initech <> Platform: Intro Call", people: "Marta Novak (VP Data Platform, Initech)", qualified: true, badge: "First-Time External", dossierKey: "initech" },
+        { id: "ev_focus2", startH: 12.15, durH: 0.85, time: "12:10 - 13:00", title: "Deep Work: Code Review Block", people: "Personal calendar block", qualified: false, skipReason: "Skipped: focus block" }
       ],
       dossiers: {
         initech: {
@@ -1048,7 +1051,7 @@
         { label: "Zero Invented Past Meetings (7 / 7)", sub: "Verified zero made-up recaps, fake Google Doc links, or invented bug numbers.", pass: true }
       ],
       tour: [
-        { anchorEventId: "ev_initech", dossierKey: "initech", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Brand-new external contact on calendar", desc: "Tomorrow at 13:30 is a first-time introductory call with Marta Novak at Initech, someone you have never emailed or met before." },
+        { anchorEventId: "ev_initech", dossierKey: "initech", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Brand-new external contact on calendar", desc: "Tomorrow at 10:30 is a first-time introductory call with Marta Novak at Initech, someone you have never emailed or met before." },
         { anchorEventId: "ev_initech", dossierKey: "initech", rightTab: "doc", stepLabel: "BUBBLE 2 OF 3", title: "Never invents fake past meetings", desc: "Ordinary AI tools often hallucinate plausible-sounding past recaps. This assistant states 'No prior context found' clearly so you walk in knowing it is a fresh introduction." },
         { anchorEventId: "ev_initech", dossierKey: "initech", rightTab: "linter", stepLabel: "BUBBLE 3 OF 3", title: "Verified 100% grounded", desc: "All 7 anti-guessing checks pass, ensuring zero fake document links or invented action items slip through." }
       ]
@@ -1058,13 +1061,16 @@
       dayChip: "NOW",
       dateTitle: "Live Day View (Current Time: 13:00)",
       calSummary: "1 Inside [14:00 - 15:00] Reminder Band",
+      startHour: 12,
+      endHour: 16,
+      hourPx: 68,
       nowHour: 13.0,
       windowStartH: 14.0,
       windowEndH: 15.0,
       events: [
-        { id: "ev_umbrella", startH: 13.5, durH: 0.75, time: "13:30 (In 30m)", title: "Umbrella Logistics QBR", people: "Gwen Osei (CTO, Umbrella Logistics)", qualified: false, skipReason: "Reminded at 12:00 run" },
-        { id: "ev_northwind", startH: 14.25, durH: 0.75, time: "14:15 (In 75m)", title: "Northwind Integration Kickoff", people: "Tom Hale (Head of Integrations, Northwind), Dana Martin", qualified: true, badge: "Matched 1h Window", dossierKey: "northwind" },
-        { id: "ev_stark", startH: 15.5, durH: 1.0, time: "15:30 (In 150m)", title: "Stark Industries Procurement Review", people: "Pete Stark (Procurement Lead, Stark Industries)", qualified: false, skipReason: "Queued for 14:00 run" }
+        { id: "ev_umbrella", startH: 13.25, durH: 0.65, time: "13:15 (In 15m)", title: "Umbrella Logistics QBR", people: "Gwen Osei (CTO, Umbrella Logistics)", qualified: false, skipReason: "Reminded at 12:00 run" },
+        { id: "ev_northwind", startH: 14.15, durH: 0.75, time: "14:10 (In 70m)", title: "Northwind Integration Kickoff", people: "Tom Hale (Head of Integrations, Northwind), Dana Martin", qualified: true, badge: "Matched 1h Window", dossierKey: "northwind" },
+        { id: "ev_stark", startH: 15.25, durH: 0.85, time: "15:15 (In 135m)", title: "Stark Industries Procurement Review", people: "Pete Stark (Procurement Lead, Stark Industries)", qualified: false, skipReason: "Queued for 14:00 run" }
       ],
       dossiers: {
         northwind: {
@@ -1084,15 +1090,15 @@
             "Share exact connector rate-limit figures to unblock Tom Hale's engineering team.",
             "Walk through Northwind Integration Scope Draft together live."
           ],
-          footer: "Stateless hourly window [14:00 - 15:00): Umbrella QBR (13:30) and Stark Review (15:30) outside band so every call gets reminded once."
+          footer: "Stateless hourly window [14:00 - 15:00): Umbrella QBR (13:15) and Stark Review (15:15) outside band so every call gets reminded once."
         }
       },
       checks: [
-        { label: "Exact 60-Minute Window Match (6 / 6)", sub: "Matched Northwind Kickoff (14:15) inside the shaded band while skipping 13:30 and 15:30 meetings so no call receives two emails.", pass: true },
+        { label: "Exact 60-Minute Window Match (6 / 6)", sub: "Matched Northwind Kickoff (14:10) inside the shaded band while skipping 13:15 and 15:15 meetings so no call receives two emails.", pass: true },
         { label: "Google Drive Reuse Check", sub: "Reuses existing evening briefing doc when present instead of creating duplicate files.", pass: true }
       ],
       tour: [
-        { anchorEventId: "ev_northwind", dossierKey: "northwind", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Shaded 1-hour reminder window on calendar", desc: "At 13:00 (red line), the hourly check inspects only the shaded 14:00 to 15:00 band so Northwind Kickoff (14:15) is matched once without spamming earlier or later calls." },
+        { anchorEventId: "ev_northwind", dossierKey: "northwind", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Shaded 1-hour reminder window on calendar", desc: "At 13:00 (red line), the hourly check inspects only the shaded 14:00 to 15:00 band so Northwind Kickoff (14:10) is matched once without spamming earlier or later calls." },
         { anchorEventId: "ev_northwind", dossierKey: "northwind", rightTab: "doc", stepLabel: "BUBBLE 2 OF 3", title: "Catches same-day calendar bookings", desc: "Even if a client call was added this morning after last night's evening run, the hourly calendar scan spots it and writes a fresh one-page briefing." },
         { anchorEventId: "ev_northwind", dossierKey: "northwind", rightTab: "linter", stepLabel: "BUBBLE 3 OF 3", title: "Zero duplicate alerts guaranteed", desc: "Because each hourly band moves down the calendar grid cleanly without overlapping, every meeting gets reminded once with zero extra database setup." }
       ]
@@ -1130,6 +1136,13 @@
     const sc = SCENARIOS[curScenarioKey];
     if (!sc) return;
 
+    const startH = sc.startHour || START_HOUR;
+    const endH = sc.endHour || END_HOUR;
+    const hPx = sc.hourPx || 46;
+    const totalH = (endH - startH + 1) * hPx;
+    calCanvas.style.height = totalH + "px";
+    calCanvas.style.minHeight = totalH + "px";
+
     dayChipEl.textContent = sc.dayChip;
     dateTitleEl.textContent = sc.dateTitle;
     calSummary.textContent = sc.calSummary;
@@ -1151,22 +1164,22 @@
     }
 
     let html = "";
-    for (let h = START_HOUR; h <= END_HOUR; h++) {
+    for (let h = startH; h <= endH; h++) {
       html += `
-        <div class="cal-hour-row">
+        <div class="cal-hour-row" style="height:${hPx}px;">
           <div class="cal-hour-label">${formatHourLabel(h)}</div>
         </div>
       `;
     }
 
     if (typeof sc.nowHour === "number") {
-      const nowTop = (sc.nowHour - START_HOUR) * HOUR_PX;
+      const nowTop = Math.round((sc.nowHour - startH) * hPx);
       html += `<div class="cal-now-line" style="top:${nowTop}px;"></div>`;
     }
 
     if (typeof sc.windowStartH === "number" && typeof sc.windowEndH === "number") {
-      const winTop = (sc.windowStartH - START_HOUR) * HOUR_PX;
-      const winHeight = (sc.windowEndH - sc.windowStartH) * HOUR_PX;
+      const winTop = Math.round((sc.windowStartH - startH) * hPx);
+      const winHeight = Math.round((sc.windowEndH - sc.windowStartH) * hPx);
       html += `
         <div class="cal-window-band" style="top:${winTop}px;height:${winHeight}px;">
           <span class="cal-window-tag">Active 1-Hour Scan Band (14:00 - 15:00)</span>
@@ -1175,8 +1188,8 @@
     }
 
     sc.events.forEach(ev => {
-      const topPx = Math.round((ev.startH - START_HOUR) * HOUR_PX) + 2;
-      const heightPx = Math.max(40, Math.round(ev.durH * HOUR_PX) - 4);
+      const topPx = Math.round((ev.startH - startH) * hPx) + 2;
+      const heightPx = Math.max(38, Math.round(ev.durH * hPx) - 4);
       const isSelected = ev.dossierKey && ev.dossierKey === curDossierKey;
       html += `
         <div
@@ -1184,7 +1197,6 @@
           data-ev-id="${ev.id}"
           data-dossier="${ev.dossierKey || ""}"
           data-top-px="${topPx}"
-          data-height-px="${heightPx}"
           style="top:${topPx}px;height:${heightPx}px;"
         >
           <div class="cal-ev-left">
@@ -1271,17 +1283,9 @@
 
   function positionBubbleNearEvent(evId) {
     const el = calCanvas.querySelector(`[data-ev-id="${evId}"]`);
-    if (!el) return;
-    const topPx = parseInt(el.getAttribute("data-top-px"), 10) || 60;
-    const hPx = parseInt(el.getAttribute("data-height-px"), 10) || 52;
-    const bubbleHeight = 148;
-    if (topPx + hPx + bubbleHeight + 16 < 540) {
-      coachBubble.style.top = (topPx + hPx + 9) + "px";
-      coachBubble.classList.remove("tail-bottom");
-    } else {
-      coachBubble.style.top = Math.max(12, topPx - bubbleHeight - 9) + "px";
-      coachBubble.classList.add("tail-bottom");
-    }
+    if (!el || !calScroll) return;
+    const topPx = parseInt(el.getAttribute("data-top-px"), 10) || 0;
+    calScroll.scrollTop = Math.max(0, topPx - 28);
   }
 
   function runTourStep(idx) {
