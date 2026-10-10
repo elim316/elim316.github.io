@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meeting Prep &amp; Dossier Sandbox | Elias Lim</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-canvas: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-subtle: #f1f5f9;
+    --fg: #1d1d1f;
+    --fg-secondary: #424245;
+    --fg-muted: #6e6e73;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --accent: #0066cc;
+    --accent-soft: rgba(0, 102, 204, 0.09);
+    --green: #15803d;
+    --green-soft: #dcfce7;
+    --green-border: #86efac;
+    --red: #b91c1c;
+    --red-soft: #fee2e2;
+    --red-border: #fca5a5;
+    --amber: #b45309;
+    --amber-soft: #fef3c7;
+    --amber-border: #fde68a;
+    --purple: #6d28d9;
+    --purple-soft: #f3e8ff;
+    --purple-border: #d8b4fe;
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", sans-serif;
+  }
+
+  [data-theme="dark"] {
+    --bg: #111315;
+    --bg-canvas: #0c0e11;
+    --bg-card: #181b20;
+    --bg-subtle: #20242b;
+    --fg: #f5f5f7;
+    --fg-secondary: #d1d5db;
+    --fg-muted: #9ca3af;
+    --border: #2a2f38;
+    --border-strong: #374151;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59, 130, 246, 0.16);
+    --green: #4ade80;
+    --green-soft: rgba(34, 197, 94, 0.14);
+    --green-border: rgba(74, 222, 128, 0.35);
+    --red: #f87171;
+    --red-soft: rgba(239, 68, 68, 0.15);
+    --red-border: rgba(248, 113, 113, 0.35);
+    --amber: #fbbf24;
+    --amber-soft: rgba(245, 158, 11, 0.15);
+    --amber-border: rgba(251, 191, 36, 0.35);
+    --purple: #c084fc;
+    --purple-soft: rgba(192, 132, 252, 0.15);
+    --purple-border: rgba(192, 132, 252, 0.35);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Standalone Top Bar (hidden when embedded in portfolio iframe) */
+  #standalone-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 16px;
+    background: linear-gradient(90deg, #0f172a, #1e293b);
+    color: #f8fafc;
+    font-size: 12.5px;
+    flex-wrap: wrap;
+  }
+
+  body.is-embedded #standalone-banner {
+    display: none;
+  }
+
+  .banner-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .banner-pill {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.25);
+    color: #93c5fd;
+  }
+
+  .banner-sc-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .banner-sc-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.06);
+    color: #e2e8f0;
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .banner-sc-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .banner-sc-btn.active {
+    background: #2563eb;
+    border-color: #3b82f6;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .banner-link {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  /* Main Two-Column Workspace */
+  #app {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow: hidden;
+  }
+
+  body.is-embedded #app {
+    height: 100%;
+  }
+
+  /* Left Pane: Live Calendar & Multi-Stage Pipeline Visualiser */
+  #left-pane {
+    flex: 1 1 0%;
+    width: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    background: var(--bg-canvas);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 9px 14px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .toolbar-left, .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .app-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--fg);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--green);
+    background: var(--green-soft);
+    border: 1px solid var(--green-border);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .tool-btn {
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--fg-secondary);
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .tool-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .tool-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  .tool-btn.trap-btn {
+    border-color: var(--amber-border);
+    background: var(--amber-soft);
+    color: var(--amber);
+  }
+
+  .tool-btn.trap-btn.is-trapped {
+    border-color: var(--red-border);
+    background: var(--red-soft);
+    color: var(--red);
+  }
+
+  /* Interactive Pipeline + Calendar Canvas */
+  #canvas-stage {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+  }
+
+  .stage-section-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* 4-Step Pipeline Strip */
+  .pipeline-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .pipe-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-strong);
+    border-radius: 11px;
+    padding: 10px 11px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    position: relative;
+    min-width: 0;
+  }
+
+  .pipe-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .pipe-card.is-selected {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    box-shadow: 0 6px 18px rgba(0, 102, 204, 0.12);
+  }
+
+  .pipe-step-num {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+
+  .pipe-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 3px;
+    line-height: 1.25;
+  }
+
+  .pipe-sub {
+    font-size: 11px;
+    color: var(--fg-muted);
+    line-height: 1.35;
+  }
+
+  /* Calendar Invites Grid */
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .event-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 13px;
+    border-radius: 10px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-wrap: wrap;
+  }
+
+  .event-row:hover {
+    border-color: var(--border-strong);
+  }
+
+  .event-row.is-qualified {
+    border-left: 4px solid var(--green);
+  }
+
+  .event-row.is-skipped {
+    opacity: 0.72;
+    background: var(--bg-subtle);
+  }
+
+  .event-row.is-selected {
+    border-color: var(--accent);
+    opacity: 1;
+    background: var(--accent-soft);
+    box-shadow: 0 4px 14px rgba(0, 102, 204, 0.1);
+  }
+
+  .event-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .event-time {
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--fg-secondary);
+    background: var(--bg-subtle);
+    padding: 3px 7px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .event-info {
+    min-width: 0;
+  }
+
+  .event-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--fg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .event-people {
+    font-size: 11px;
+    color: var(--fg-muted);
+    margin-top: 1px;
+  }
+
+  .event-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+
+  .event-badge.qual {
+    background: var(--green-soft);
+    color: var(--green);
+    border: 1px solid var(--green-border);
+  }
+
+  .event-badge.skip {
+    background: var(--bg);
+    color: var(--fg-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* Speech Bubble Directly Below the 4 Pipeline Step Cards */
+  .coach-bubble {
+    position: relative;
+    width: 100%;
+    background: var(--bg-card);
+    border: 1.5px solid var(--accent);
+    border-radius: 12px;
+    padding: 11px 14px;
+    box-shadow: 0 8px 22px rgba(0, 102, 204, 0.11);
+    --bubble-arrow-x: 12.5%;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .coach-bubble::before {
+    content: "";
+    position: absolute;
+    top: -6.5px;
+    left: var(--bubble-arrow-x);
+    width: 11px;
+    height: 11px;
+    background: var(--bg-card);
+    border-top: 1.5px solid var(--accent);
+    border-left: 1.5px solid var(--accent);
+    border-top-left-radius: 2px;
+    transform: translateX(-50%) rotate(45deg);
+    pointer-events: none;
+    transition: left 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .coach-bubble.is-hidden {
+    display: none;
+  }
+
+  .coach-bubble-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+
+  .coach-bubble-step {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .coach-bubble-close {
+    border: none;
+    background: transparent;
+    color: var(--fg-muted);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+  }
+
+  .coach-bubble-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+
+  .coach-bubble-desc {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--fg-secondary);
+    margin-bottom: 9px;
+  }
+
+  .coach-bubble-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 7px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .coach-bubble-hint {
+    font-size: 10.5px;
+    color: var(--fg-muted);
+  }
+
+  .coach-bubble-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+  }
+
+  .coach-nav-btn {
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .coach-nav-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  /* Right Pane: Live Briefing Doc & 36-Check Fact Linter */
+  #right-pane {
+    width: 44%;
+    min-width: 290px;
+    max-width: 480px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    overflow: hidden;
+  }
+
+  .right-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .right-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .right-tab-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+  }
+
+  .right-tab {
+    border: 1px solid var(--border-strong);
+    background: var(--bg-subtle);
+    color: var(--fg-secondary);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3.5px 9px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .right-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  #right-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .doc-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 13px;
+    background: var(--bg);
+  }
+
+  .doc-header-tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    margin-bottom: 4px;
+  }
+
+  .doc-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .doc-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-secondary);
+    margin: 10px 0 5px;
+  }
+
+  .doc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--fg-secondary);
+  }
+
+  .doc-list li {
+    padding-left: 11px;
+    position: relative;
+  }
+
+  .doc-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 4.5px;
+    height: 4.5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .cite-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 1px 7px;
+    border-radius: 999px;
+    margin-left: 4px;
+  }
+
+  .cite-chip.fake-alert {
+    color: var(--red);
+    background: var(--red-soft);
+    border: 1px solid var(--red-border);
+  }
+
+  .linter-summary-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--green-soft);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+    flex-wrap: wrap;
+  }
+
+  .linter-summary-banner.failed {
+    background: var(--red-soft);
+    border-color: var(--red-border);
+    color: var(--red);
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 9px 11px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 12px;
+  }
+
+  .check-item.fail-row {
+    border-color: var(--red-border);
+    background: var(--red-soft);
+  }
+
+  .check-label {
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 2px;
+  }
+
+  .check-sub {
+    font-size: 11px;
+    color: var(--fg-muted);
+    line-height: 1.38;
+  }
+
+  .check-pill {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: var(--green-soft);
+    color: var(--green);
+    flex-shrink: 0;
+  }
+
+  .check-pill.fail {
+    background: var(--red);
+    color: #ffffff;
+  }
+
+  .digest-footer-note {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--fg-muted);
+    padding: 9px 11px;
+    border-radius: 8px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 820px) {
+    #app {
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    #left-pane, #right-pane {
+      width: 100%;
+      max-width: 100%;
+      flex: none;
+    }
+    .pipeline-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="standalone-banner">
+    <div class="banner-left">
+      <span class="banner-pill">Interactive Sandbox</span>
+      <span>Smart Meeting Prep &amp; Dossier Generator</span>
+      <div class="banner-sc-group">
+        <button type="button" class="banner-sc-btn active" data-sc="next_day_mixed">01: Busy Day (7 Invites)</button>
+        <button type="button" class="banner-sc-btn" data-sc="next_day_cold_lead">02: Brand-New Contact</button>
+        <button type="button" class="banner-sc-btn" data-sc="t1h_window">03: 1-Hour Pre-Call Window</button>
+      </div>
+    </div>
+    <a href="../../index.html#showcase-meeting-prep" class="banner-link">Back to Portfolio &#8599;</a>
+  </div>
+
+  <div id="app">
+    <div id="left-pane">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <span class="app-title">Dossier Pipeline</span>
+          <span class="status-pill" id="left-status-pill">36 / 36 Checks Passed</span>
+        </div>
+        <div class="toolbar-right">
+          <button type="button" class="tool-btn trap-btn" id="toggle-fake-link-btn" title="Simulate what happens if an AI tries to invent a fake link">
+            Test Fake Link Blocker
+          </button>
+          <button type="button" class="tool-btn" id="theme-btn">Dark</button>
+        </div>
+      </div>
+
+      <div id="canvas-stage">
+        <div>
+          <div class="stage-section-label">
+            <span>Automated 4-Step Workflow (Click Any Step)</span>
+            <span id="schedule-clock-readout">Scheduled: 5:00 PM Evening Run</span>
+          </div>
+          <div class="pipeline-row" id="pipeline-cards"></div>
+        </div>
+
+        <div class="coach-bubble" id="prepCoachBubble" role="region" aria-live="polite">
+          <div class="coach-bubble-top">
+            <span class="coach-bubble-step" id="coachBubbleStep">BUBBLE 1 OF 4</span>
+            <button type="button" class="coach-bubble-close" id="coachBubbleClose" title="Close explanation bubble">&#215;</button>
+          </div>
+          <div class="coach-bubble-title" id="coachBubbleTitle">Skipping routine calendar clutter</div>
+          <div class="coach-bubble-desc" id="coachBubbleDesc">
+            Out of 6 calendar items tomorrow, the assistant automatically ignores internal stand-ups, focus blocks, large town halls, and declined invites so you only see real external or cross-team calls.
+          </div>
+          <div class="coach-bubble-footer">
+            <span class="coach-bubble-hint">Click any step box above or invite below to inspect it</span>
+            <div class="coach-bubble-nav">
+              <button type="button" class="coach-nav-btn" id="coachBubblePrev">&#8592; Back</button>
+              <button type="button" class="coach-nav-btn primary" id="coachBubbleNext">Next Bubble &#8594;</button>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="stage-section-label">
+            <span id="calendar-list-heading">Tomorrow's Calendar Invites (Click Any Invite)</span>
+            <span id="calendar-filter-summary">2 Qualified, 5 Filtered Out</span>
+          </div>
+          <div class="events-list" id="events-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="right-pane">
+      <div class="right-header">
+        <span class="right-title" id="right-pane-heading">1-PAGE BRIEFING DOC</span>
+        <div class="right-tab-group">
+          <button type="button" class="right-tab active" data-rtab="doc">1-Page Briefing</button>
+          <button type="button" class="right-tab" data-rtab="linter">Fact Checker (36)</button>
+        </div>
+      </div>
+      <div id="right-body"></div>
+    </div>
+  </div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("embed") === "1" || window.self !== window.top) {
+    document.body.classList.add("is-embedded");
+  }
+
+  const SCENARIOS = {
+    next_day_mixed: {
+      clock: "Scheduled: 5:00 PM Evening Run",
+      calSummary: "2 Qualified, 5 Filtered Out",
+      steps: [
+        { id: "cal_filter", num: "Step 01", title: "Calendar Filter", sub: "2 real calls kept, 5 routine blocks skipped" },
+        { id: "corpus_scan", num: "Step 02", title: "Workspace Search", sub: "Pulls Gmail, Chat, Drive & People directory" },
+        { id: "doc_brief", num: "Step 03", title: "1-Page Briefing", sub: "Writes cited briefing doc with clickable links" },
+        { id: "fact_linter", num: "Step 04", title: "Fact Linter", sub: "36 checks verify every link, name & bug ID" }
+      ],
+      events: [
+        { id: "ev_standup", time: "09:00", title: "Infra Pod Standup", people: "Alex Morgan, Priya Nair, Wei Tan (Same Team)", qualified: false, skipReason: "Skipped: own-team standup" },
+        { id: "ev_acme", time: "10:30", title: "Acme <> Platform: API Rollout Sync", people: "Alex Chen (Director, Acme), Jordan Lee (TPM, Acme), Dana Martin", qualified: true, badge: "Qualified: External Partner", dossierKey: "acme" },
+        { id: "ev_auth", time: "13:00", title: "Payments x Identity: Auth Migration Review", people: "Rahul Khan (Identity PM), Sofia Barros (Security), Dana Martin", qualified: true, badge: "Qualified: Cross-Team", dossierKey: "auth" },
+        { id: "ev_allhands", time: "15:00", title: "Q3 Company All Hands", people: "312 invitees across engineering & product", qualified: false, skipReason: "Skipped: 312 attendees" },
+        { id: "ev_focus", time: "16:00", title: "Focus Time: Deep Work", people: "Personal calendar block", qualified: false, skipReason: "Skipped: focus block" },
+        { id: "ev_globex", time: "17:30", title: "Globex Vendor Demo", people: "Val Reyes (Globex Sales) - Invitation Declined", qualified: false, skipReason: "Skipped: declined invite" }
+      ],
+      dossiers: {
+        acme: {
+          docTitle: "Meeting Prep Dossier - Acme <> Platform: API Rollout Sync",
+          attendees: [
+            { text: "Alex Chen, Director of Engineering at Acme Corp (last met 10 days ago)", cite: "People Directory" },
+            { text: "Jordan Lee, Technical Programme Manager at Acme Corp", cite: "People Directory" },
+            { text: "Dana Martin, Partner Engineering Lead (APAC)", cite: "People Directory" }
+          ],
+          recap: [
+            { text: "Agreed to complete staging cutover first, followed by general launch two weeks later.", cite: "Calendar Notes (10d ago)" }
+          ],
+          blockers: [
+            { text: "Alex Chen's security team has not signed off on OAuth scope updates yet.", cite: "Gmail: Security Status" },
+            { text: "Jordan Lee asked 6 days ago whether staging cutover can move to code freeze week (awaiting your reply).", cite: "Gmail: Cutover Window" },
+            { text: "QA test coverage on v2 endpoints is at 60% and requires one extra sprint.", cite: "Chat: Acme x Platform" }
+          ],
+          agenda: [
+            "Confirm target sign-off date for Acme security review on OAuth scopes.",
+            "Reply to Jordan Lee on locking the staging cutover window.",
+            "Review updated launch timeline in Q4 Roadmap & Launch Plan deck."
+          ],
+          footer: "Filtered from digest: Infra Pod Standup (own-team standup), Q3 Company All Hands (312 attendees), Focus Time (focus block), Globex Vendor Demo (declined)."
+        },
+        auth: {
+          docTitle: "Meeting Prep Dossier - Payments x Identity: Auth Migration Review",
+          attendees: [
+            { text: "Rahul Khan, Product Manager (Identity Platform PM)", cite: "People Directory" },
+            { text: "Sofia Barros, Security Engineer (Security Reviews)", cite: "People Directory" }
+          ],
+          recap: [
+            { text: "Split authentication migration into two phases; Phase 1 owner still unassigned.", cite: "Calendar Notes (21d ago)" }
+          ],
+          blockers: [
+            { text: "Rahul Khan is waiting on your review of the Token Exchange Design doc before booking sprint capacity.", cite: "Drive: Token Exchange Doc" },
+            { text: "Security review ticket b/412998877 needs a named engineering owner before review.", cite: "Chat: payments-identity-sync" }
+          ],
+          agenda: [
+            "Approve or comment on Rahul Khan's Token Exchange Design document.",
+            "Assign Phase 1 engineering owner for security ticket b/412998877."
+          ],
+          footer: "Filtered from digest: Infra Pod Standup (own-team standup), Q3 Company All Hands (312 attendees), Focus Time (focus block), Globex Vendor Demo (declined)."
+        }
+      },
+      checks: [
+        { label: "Attendee Identity & Title Check", sub: "Verified Alex Chen, Jordan Lee, Rahul Khan, and Sofia Barros against People Directory; declined vendor Val Reyes excluded.", pass: true },
+        { label: "Source Link Verification (17 / 17)", sub: "Every Gmail thread, Chat message, and Google Drive link matched exact workspace IDs with zero invented URLs.", pass: true },
+        { label: "Routine Noise Filtering", sub: "Skipped same-team standup, 312-person broadcast, focus block, and declined invite automatically.", pass: true },
+        { label: "Transparency Footer Present", sub: "Single-line summary lists every skipped meeting and the 2-to-3 word reason it was filtered.", pass: true }
+      ],
+      tour: [
+        { targetStep: "cal_filter", eventId: "ev_acme", rightTab: "doc", stepLabel: "BUBBLE 1 OF 4", title: "Skipping routine calendar clutter", desc: "Out of 6 calendar items tomorrow, the assistant automatically ignores internal stand-ups, focus blocks, large town halls, and declined invites so you only see real external or cross-team calls." },
+        { targetStep: "corpus_scan", eventId: "ev_acme", rightTab: "doc", stepLabel: "BUBBLE 2 OF 4", title: "Gathering emails, chats, and shared decks", desc: "Instead of you digging through five tabs at night, the assistant pulls unanswered Gmail questions, recent Chat updates, and shared Google Slides into one tidy summary." },
+        { targetStep: "doc_brief", eventId: "ev_auth", rightTab: "doc", stepLabel: "BUBBLE 3 OF 4", title: "One-page briefing per important call", desc: "Click between qualified meetings on the left (like Payments x Identity) to see each participant's real role, open blockers waiting on you, and suggested talking points." },
+        { targetStep: "fact_linter", eventId: "ev_acme", rightTab: "linter", stepLabel: "BUBBLE 4 OF 4", title: "36 automatic checks block invented links", desc: "Before sending your briefing, a strict fact checker verifies every URL, person's name, and ticket number against real workspace data so the AI can never make up fake links." }
+      ]
+    },
+
+    next_day_cold_lead: {
+      clock: "Scheduled: 5:00 PM Evening Run",
+      calSummary: "1 New External Intro Call",
+      steps: [
+        { id: "cal_filter", num: "Step 01", title: "Calendar Filter", sub: "Spots external call with Marta Novak (Initech)" },
+        { id: "corpus_scan", num: "Step 02", title: "Workspace Search", sub: "Finds 0 prior emails, chats, or shared files" },
+        { id: "doc_brief", num: "Step 03", title: "Honest Briefing", sub: "Writes 'No prior context found' instead of guessing" },
+        { id: "fact_linter", num: "Step 04", title: "Anti-Guessing Gate", sub: "7 / 7 checks confirm zero invented facts" }
+      ],
+      events: [
+        { id: "ev_initech", time: "14:00", title: "Initech <> Platform: Intro Call", people: "Marta Novak (VP Data Platform, Initech)", qualified: true, badge: "Qualified: New External Contact", dossierKey: "initech" }
+      ],
+      dossiers: {
+        initech: {
+          docTitle: "Meeting Prep Dossier - Initech <> Platform: Intro Call",
+          attendees: [
+            { text: "Marta Novak, VP Data Platform at Initech (first-time meeting)", cite: "Directory Match" }
+          ],
+          recap: [
+            { text: "No prior context found across Calendar, Gmail, Chat, or Google Drive.", cite: "Verified Empty History" }
+          ],
+          blockers: [
+            { text: "No prior email threads, open tickets, or shared documents exist with Initech.", cite: "0 Fabricated Items" }
+          ],
+          agenda: [
+            "Introduce Core Platform architecture and understand Initech's data platform priorities.",
+            "Agree on follow-up technical evaluation owners and next steps."
+          ],
+          footer: "Zero prior history mode active: assistant explicitly reports when no past files exist rather than guessing."
+        }
+      },
+      checks: [
+        { label: "Explicit Empty-History Honesty", sub: "Confirmed exact phrase 'No prior context found' when zero past emails or docs exist.", pass: true },
+        { label: "Zero Invented Past Meetings (7 / 7)", sub: "Verified zero made-up recaps, fake Google Doc links, or invented bug numbers.", pass: true }
+      ],
+      tour: [
+        { targetStep: "cal_filter", eventId: "ev_initech", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Brand-new external contact spotted", desc: "Tomorrow includes a first-time introductory call with Marta Novak at Initech, someone you have never emailed or met before." },
+        { targetStep: "doc_brief", eventId: "ev_initech", rightTab: "doc", stepLabel: "BUBBLE 2 OF 3", title: "Never invents fake history", desc: "Ordinary AI assistants often make up plausible-sounding past meetings. This assistant states 'No prior context found' clearly so you walk in knowing it is a fresh introduction." },
+        { targetStep: "fact_linter", eventId: "ev_initech", rightTab: "linter", stepLabel: "BUBBLE 3 OF 3", title: "Verified 100% grounded", desc: "All 7 anti-guessing checks pass, ensuring zero fake document links or invented action items slip through." }
+      ]
+    },
+
+    t1h_window: {
+      clock: "Hourly Check: Window [NOW + 60m, NOW + 120m)",
+      calSummary: "1 in Window (+75m), 2 Outside Window",
+      steps: [
+        { id: "cal_filter", num: "Step 01", title: "60-Min Window", sub: "Matches only calls starting 60 to 120 mins away" },
+        { id: "corpus_scan", num: "Step 02", title: "Drive Dedupe Check", sub: "Reuses last night's doc if already created" },
+        { id: "doc_brief", num: "Step 03", title: "Fast Catch-Up", sub: "Adds replies received since last night" },
+        { id: "fact_linter", num: "Step 04", title: "Single Alert Rule", sub: "Guarantees zero duplicate reminder emails" }
+      ],
+      events: [
+        { id: "ev_umbrella", time: "In 30m", title: "Umbrella Logistics QBR", people: "Gwen Osei (CTO, Umbrella Logistics)", qualified: false, skipReason: "Outside window (already reminded earlier)" },
+        { id: "ev_northwind", time: "In 75m", title: "Northwind Integration Kickoff", people: "Tom Hale (Head of Integrations, Northwind), Dana Martin", qualified: true, badge: "Inside [60m, 120m) Window", dossierKey: "northwind" },
+        { id: "ev_stark", time: "In 150m", title: "Stark Industries Procurement Review", people: "Pete Stark (Procurement Lead, Stark Industries)", qualified: false, skipReason: "Outside window (reminded next hour)" }
+      ],
+      dossiers: {
+        northwind: {
+          docTitle: "1-Hour Pre-Call Reminder - Northwind Integration Kickoff",
+          attendees: [
+            { text: "Tom Hale, Head of Integrations at Northwind Traders", cite: "People Directory" },
+            { text: "Dana Martin, Partner Engineering Lead (APAC)", cite: "People Directory" }
+          ],
+          recap: [
+            { text: "Same-day booking spotted in the 60-to-120 minute pre-call window; fast research pass completed in 38 seconds.", cite: "Stateless Hourly Window" }
+          ],
+          blockers: [
+            { text: "Tom Hale asked 2 days ago for connector rate-limit numbers and is still waiting for your reply.", cite: "Gmail: Scoping Questions" },
+            { text: "Shared scope document has connector endpoints listed with rate limits marked TBD.", cite: "Drive: Northwind Scope Draft" }
+          ],
+          agenda: [
+            "Share exact connector rate-limit figures to unblock Tom Hale's engineering team.",
+            "Walk through Northwind Integration Scope Draft together live."
+          ],
+          footer: "Stateless hourly window [NOW + 60m, NOW + 120m): Umbrella QBR (+30m) and Stark Review (+150m) skipped so every call gets reminded once."
+        }
+      },
+      checks: [
+        { label: "Exact 60-Minute Window Match (6 / 6)", sub: "Matched Northwind Kickoff (+75m) while skipping +30m and +150m meetings so no meeting ever receives two emails.", pass: true },
+        { label: "Google Drive Reuse Check", sub: "Reuses existing evening briefing doc when present instead of creating duplicate files.", pass: true }
+      ],
+      tour: [
+        { targetStep: "cal_filter", eventId: "ev_northwind", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Smart 1-hour reminder window", desc: "Every hour, the assistant checks only meetings starting between 60 and 120 minutes from now (+75m Northwind Kickoff), so you never get spammed twice for the same call." },
+        { targetStep: "doc_brief", eventId: "ev_northwind", rightTab: "doc", stepLabel: "BUBBLE 2 OF 3", title: "Catches last-minute bookings", desc: "Even if someone booked a client call this morning after last night's 5 PM run, the 1-hour check spots it and builds a fresh one-page briefing automatically." },
+        { targetStep: "fact_linter", eventId: "ev_northwind", rightTab: "linter", stepLabel: "BUBBLE 3 OF 3", title: "Zero duplicate files or emails", desc: "Because each hourly window never overlaps, every external meeting gets one evening briefing and one 1-hour reminder with zero extra setup." }
+      ]
+    }
+  };
+
+  let curScenarioKey = "next_day_mixed";
+  let curStepId = "cal_filter";
+  let curDossierKey = "acme";
+  let curRightTab = "doc";
+  let fakeLinkInjected = false;
+  let curTourIdx = 0;
+
+  const pipeContainer = document.getElementById("pipeline-cards");
+  const eventsContainer = document.getElementById("events-list");
+  const rightBody = document.getElementById("right-body");
+  const rightHeading = document.getElementById("right-pane-heading");
+  const statusPill = document.getElementById("left-status-pill");
+  const clockReadout = document.getElementById("schedule-clock-readout");
+  const calSummary = document.getElementById("calendar-filter-summary");
+  const trapBtn = document.getElementById("toggle-fake-link-btn");
+  const coachBubble = document.getElementById("prepCoachBubble");
+  const coachStep = document.getElementById("coachBubbleStep");
+  const coachTitle = document.getElementById("coachBubbleTitle");
+  const coachDesc = document.getElementById("coachBubbleDesc");
+  const coachPrev = document.getElementById("coachBubblePrev");
+  const coachNext = document.getElementById("coachBubbleNext");
+  const coachClose = document.getElementById("coachBubbleClose");
+
+  function renderAll() {
+    const sc = SCENARIOS[curScenarioKey];
+    if (!sc) return;
+
+    clockReadout.textContent = sc.clock;
+    calSummary.textContent = sc.calSummary;
+
+    if (fakeLinkInjected) {
+      statusPill.textContent = "BLOCKED: 1 Fake Link Caught";
+      statusPill.style.background = "var(--red-soft)";
+      statusPill.style.color = "var(--red)";
+      statusPill.style.borderColor = "var(--red-border)";
+      trapBtn.textContent = "Remove Fake Link Test";
+      trapBtn.classList.add("is-trapped");
+    } else {
+      statusPill.textContent = "36 / 36 Checks Passed";
+      statusPill.style.background = "";
+      statusPill.style.color = "";
+      statusPill.style.borderColor = "";
+      trapBtn.textContent = "Test Fake Link Blocker";
+      trapBtn.classList.remove("is-trapped");
+    }
+
+    pipeContainer.innerHTML = sc.steps.map(st => `
+      <div class="pipe-card ${st.id === curStepId ? "is-selected" : ""}" data-step-id="${st.id}">
+        <div class="pipe-step-num">${st.num}</div>
+        <div class="pipe-title">${st.title}</div>
+        <div class="pipe-sub">${st.sub}</div>
+      </div>
+    `).join("");
+
+    eventsContainer.innerHTML = sc.events.map(ev => {
+      const isSelected = ev.dossierKey && ev.dossierKey === curDossierKey;
+      return `
+        <div class="event-row ${ev.qualified ? "is-qualified" : "is-skipped"} ${isSelected ? "is-selected" : ""}" data-ev-id="${ev.id}" data-dossier="${ev.dossierKey || ""}">
+          <div class="event-main">
+            <span class="event-time">${ev.time}</span>
+            <div class="event-info">
+              <div class="event-title">${ev.title}</div>
+              <div class="event-people">${ev.people}</div>
+            </div>
+          </div>
+          <span class="event-badge ${ev.qualified ? "qual" : "skip"}">${ev.qualified ? ev.badge : ev.skipReason}</span>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll(".right-tab").forEach(tb => {
+      tb.classList.toggle("active", tb.getAttribute("data-rtab") === curRightTab);
+    });
+
+    if (curRightTab === "doc") {
+      rightHeading.textContent = "1-PAGE BRIEFING DOC";
+      const d = sc.dossiers[curDossierKey] || Object.values(sc.dossiers)[0];
+      const fakeHtml = fakeLinkInjected
+        ? `<li>Unverified claim: "Signed 3-year contract in Q1" <span class="cite-chip fake-alert">BLOCKED: docs.google.com/d/invented-link</span></li>`
+        : "";
+      rightBody.innerHTML = `
+        <div class="doc-card">
+          <div class="doc-header-tag">Generated Google Doc Dossier</div>
+          <div class="doc-title">${d.docTitle}</div>
+
+          <div class="doc-section-title">Attendee Context</div>
+          <ul class="doc-list">
+            ${d.attendees.map(a => `<li>${a.text} <span class="cite-chip">${a.cite}</span></li>`).join("")}
+          </ul>
+
+          <div class="doc-section-title">Last Meeting Recap</div>
+          <ul class="doc-list">
+            ${d.recap.map(r => `<li>${r.text} <span class="cite-chip">${r.cite}</span></li>`).join("")}
+            ${fakeHtml}
+          </ul>
+
+          <div class="doc-section-title">Open Blockers &amp; Unanswered Asks</div>
+          <ul class="doc-list">
+            ${d.blockers.map(b => `<li>${b.text} <span class="cite-chip">${b.cite}</span></li>`).join("")}
+          </ul>
+
+          <div class="doc-section-title">Suggested Talking Points</div>
+          <ul class="doc-list">
+            ${d.agenda.map(g => `<li>${g}</li>`).join("")}
+          </ul>
+        </div>
+        <div class="digest-footer-note">${d.footer}</div>
+      `;
+    } else {
+      rightHeading.textContent = "36-CHECK FACT LINTER";
+      const bannerHtml = fakeLinkInjected
+        ? `<div class="linter-summary-banner failed"><span>HOLD DELIVERY: 1 Invented URL Caught</span><span>Blocked Before Emailing</span></div>`
+        : `<div class="linter-summary-banner"><span>ALL 36 QUALITY CHECKS PASSED</span><span>100% Grounded Sources</span></div>`;
+      const trapCheckRow = fakeLinkInjected
+        ? `<div class="check-item fail-row">
+             <div>
+               <div class="check-label">Unverified URL Caught &amp; Stripped</div>
+               <div class="check-sub">Detected docs.google.com/d/invented-link which does not exist in Google Drive search results. Delivery halted until removed.</div>
+             </div>
+             <span class="check-pill fail">CAUGHT</span>
+           </div>`
+        : "";
+      rightBody.innerHTML = `
+        ${bannerHtml}
+        ${trapCheckRow}
+        ${sc.checks.map(c => `
+          <div class="check-item">
+            <div>
+              <div class="check-label">${c.label}</div>
+              <div class="check-sub">${c.sub}</div>
+            </div>
+            <span class="check-pill">PASS</span>
+          </div>
+        `).join("")}
+      `;
+    }
+  }
+
+  const stepArrowMap = {
+    cal_filter: "12.5%",
+    corpus_scan: "37.5%",
+    doc_brief: "62.5%",
+    fact_linter: "87.5%"
+  };
+
+  function runTourStep(idx) {
+    const sc = SCENARIOS[curScenarioKey];
+    if (!sc || !sc.tour || !sc.tour.length) return;
+    curTourIdx = Math.max(0, Math.min(idx, sc.tour.length - 1));
+    const item = sc.tour[curTourIdx];
+    curStepId = item.targetStep;
+    if (item.eventId) {
+      const evObj = sc.events.find(e => e.id === item.eventId);
+      if (evObj && evObj.dossierKey) curDossierKey = evObj.dossierKey;
+    }
+    curRightTab = item.rightTab;
+    renderAll();
+
+    coachBubble.classList.remove("is-hidden");
+    coachBubble.style.setProperty("--bubble-arrow-x", stepArrowMap[curStepId] || "50%");
+    coachStep.textContent = item.stepLabel;
+    coachTitle.textContent = item.title;
+    coachDesc.textContent = item.desc;
+    coachPrev.style.display = curTourIdx === 0 ? "none" : "inline-flex";
+    const isLast = curTourIdx === sc.tour.length - 1;
+    coachNext.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
+  }
+
+  pipeContainer.addEventListener("click", (e) => {
+    const card = e.target.closest(".pipe-card");
+    if (!card) return;
+    curStepId = card.getAttribute("data-step-id");
+    curRightTab = curStepId === "fact_linter" ? "linter" : "doc";
+    const sc = SCENARIOS[curScenarioKey];
+    const matchIdx = sc.tour.findIndex(t => t.targetStep === curStepId);
+    if (matchIdx >= 0) {
+      runTourStep(matchIdx);
+    } else {
+      coachBubble.style.setProperty("--bubble-arrow-x", stepArrowMap[curStepId] || "50%");
+      renderAll();
+    }
+  });
+
+  eventsContainer.addEventListener("click", (e) => {
+    const row = e.target.closest(".event-row");
+    if (!row) return;
+    const dKey = row.getAttribute("data-dossier");
+    if (dKey) {
+      curDossierKey = dKey;
+      curRightTab = "doc";
+      renderAll();
+    } else {
+      coachBubble.classList.remove("is-hidden");
+      coachStep.textContent = "FILTERED OUT AUTOMATICALLY";
+      coachTitle.textContent = row.querySelector(".event-title").textContent;
+      coachDesc.textContent = "Skipped on purpose (" + row.querySelector(".event-badge").textContent + ") so your briefing stays short and never wastes time on routine blocks.";
+    }
+  });
+
+  document.querySelectorAll(".right-tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      curRightTab = btn.getAttribute("data-rtab");
+      renderAll();
+    });
+  });
+
+  document.querySelectorAll(".banner-sc-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      curScenarioKey = btn.getAttribute("data-sc");
+      document.querySelectorAll(".banner-sc-btn").forEach(b => b.classList.toggle("active", b === btn));
+      const firstQual = SCENARIOS[curScenarioKey].events.find(e => e.dossierKey);
+      curDossierKey = firstQual ? firstQual.dossierKey : "";
+      runTourStep(0);
+    });
+  });
+
+  trapBtn.addEventListener("click", () => {
+    fakeLinkInjected = !fakeLinkInjected;
+    curRightTab = "linter";
+    renderAll();
+  });
+
+  document.getElementById("theme-btn").addEventListener("click", (e) => {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
+    e.currentTarget.textContent = isDark ? "Dark" : "Light";
+  });
+
+  coachPrev.addEventListener("click", () => runTourStep(curTourIdx - 1));
+  coachNext.addEventListener("click", () => {
+    const sc = SCENARIOS[curScenarioKey];
+    if (curTourIdx >= sc.tour.length - 1) {
+      coachBubble.classList.add("is-hidden");
+    } else {
+      runTourStep(curTourIdx + 1);
+    }
+  });
+  coachClose.addEventListener("click", () => coachBubble.classList.add("is-hidden"));
+
+  window.addEventListener("message", (ev) => {
+    const msg = ev.data || {};
+    if (msg.source !== "portfolio-prep-host") return;
+    if (msg.action === "scenario" && SCENARIOS[msg.arg]) {
+      curScenarioKey = msg.arg;
+      const firstQual = SCENARIOS[curScenarioKey].events.find(e => e.dossierKey);
+      curDossierKey = firstQual ? firstQual.dossierKey : "";
+      runTourStep(0);
+    } else if (typeof msg.action === "string" && msg.action.startsWith("tour_")) {
+      runTourStep(parseInt(msg.action.split("_")[1], 10) || 0);
+    }
+  });
+
+  runTourStep(0);
+})();
+</script>
+</body>
+</html>
