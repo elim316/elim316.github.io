@@ -163,45 +163,37 @@
         color: #f1f5f9;
         box-shadow: 0 16px 38px rgba(0, 0, 0, 0.48);
       }
-      .sandbox-coach-bubble::before,
-      .sandbox-coach-bubble::after {
+      .sandbox-coach-bubble::before {
         content: "";
         position: absolute;
-        left: clamp(20px, var(--bubble-arrow-x), calc(100% - 20px));
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
+        left: clamp(22px, var(--bubble-arrow-x), calc(100% - 22px));
+        width: 12px;
+        height: 12px;
+        background: #ffffff;
         pointer-events: none;
+        transform: translateX(-50%) rotate(45deg);
       }
       .sandbox-coach-bubble.arrow-top::before {
-        top: -9px;
-        border-left: 9px solid transparent;
-        border-right: 9px solid transparent;
-        border-bottom: 9px solid rgba(0, 102, 204, 0.36);
+        top: -6.5px;
+        border-top: 1px solid rgba(0, 102, 204, 0.34);
+        border-left: 1px solid rgba(0, 102, 204, 0.34);
+        border-top-left-radius: 2.5px;
       }
-      .sandbox-coach-bubble.arrow-top::after {
-        top: -7.5px;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-bottom: 8px solid rgba(255, 255, 255, 0.98);
-      }
-      html[data-theme="dark"] .sandbox-coach-bubble.arrow-top::after {
-        border-bottom-color: rgba(24, 28, 40, 0.98);
+      html[data-theme="dark"] .sandbox-coach-bubble.arrow-top::before {
+        background: #181c28;
+        border-top-color: rgba(96, 165, 250, 0.45);
+        border-left-color: rgba(96, 165, 250, 0.45);
       }
       .sandbox-coach-bubble.arrow-bottom::before {
-        bottom: -9px;
-        border-left: 9px solid transparent;
-        border-right: 9px solid transparent;
-        border-top: 9px solid rgba(0, 102, 204, 0.36);
+        bottom: -6.5px;
+        border-bottom: 1px solid rgba(0, 102, 204, 0.34);
+        border-right: 1px solid rgba(0, 102, 204, 0.34);
+        border-bottom-right-radius: 2.5px;
       }
-      .sandbox-coach-bubble.arrow-bottom::after {
-        bottom: -7.5px;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid rgba(255, 255, 255, 0.98);
-      }
-      html[data-theme="dark"] .sandbox-coach-bubble.arrow-bottom::after {
-        border-top-color: rgba(24, 28, 40, 0.98);
+      html[data-theme="dark"] .sandbox-coach-bubble.arrow-bottom::before {
+        background: #181c28;
+        border-bottom-color: rgba(96, 165, 250, 0.45);
+        border-right-color: rgba(96, 165, 250, 0.45);
       }
       .coach-bubble-top {
         display: flex;
@@ -7937,32 +7929,50 @@
         const nodeId = targetNodeId || selectedNodeId;
         const wrapW = wrapperEl.clientWidth || 680;
         const wrapH = wrapperEl.clientHeight || 480;
-        const bubW = Math.min(334, wrapW - 28);
+        const minLeft = wrapW >= 620 ? 168 : 14;
+        const bubW = Math.min(334, wrapW - minLeft - 16);
+        bubbleEl.style.width = bubW + "px";
         const bubH = bubbleEl.offsetHeight || 148;
 
-        let domX = Math.round(wrapW * 0.34);
-        let domY = Math.round(wrapH * 0.28);
+        let centerX = Math.round((minLeft + wrapW) * 0.46);
+        let topEdgeY = Math.round(wrapH * 0.22);
+        let bottomEdgeY = Math.round(wrapH * 0.36);
 
-        if (network && nodeId && typeof network.getPositions === "function") {
+        if (network && nodeId && typeof network.canvasToDOM === "function") {
             try {
-                const posMap = network.getPositions([nodeId]);
-                const p = posMap && posMap[nodeId];
-                if (p && typeof network.canvasToDOM === "function") {
-                    const d = network.canvasToDOM(p);
-                    if (d && Number.isFinite(d.x) && Number.isFinite(d.y)) {
-                        domX = d.x;
-                        domY = d.y;
+                const bb = typeof network.getBoundingBox === "function" ? network.getBoundingBox(nodeId) : null;
+                if (bb && Number.isFinite(bb.left) && Number.isFinite(bb.right)) {
+                    const topDom = network.canvasToDOM({ x: (bb.left + bb.right) / 2, y: bb.top });
+                    const botDom = network.canvasToDOM({ x: (bb.left + bb.right) / 2, y: bb.bottom });
+                    if (topDom && botDom && Number.isFinite(topDom.x)) {
+                        centerX = topDom.x;
+                        topEdgeY = topDom.y;
+                        bottomEdgeY = botDom.y;
+                    }
+                } else {
+                    const posMap = network.getPositions([nodeId]);
+                    const p = posMap && posMap[nodeId];
+                    if (p) {
+                        const d = network.canvasToDOM(p);
+                        if (d && Number.isFinite(d.x)) {
+                            centerX = d.x;
+                            topEdgeY = d.y - 34;
+                            bottomEdgeY = d.y + 34;
+                        }
                     }
                 }
             } catch (_) {}
         }
 
-        const placeBelow = domY < wrapH * 0.52;
-        const rawLeft = domX - bubW * 0.35;
-        const clampedLeft = Math.max(14, Math.min(wrapW - bubW - 14, rawLeft));
-        const arrowX = Math.max(22, Math.min(bubW - 22, domX - clampedLeft));
+        const spaceBelow = wrapH - bottomEdgeY;
+        const spaceAbove = topEdgeY;
+        const placeBelow = spaceBelow >= (bubH + 18) || spaceBelow >= spaceAbove;
 
-        let topPx = placeBelow ? (domY + 34) : (domY - bubH - 34);
+        const rawLeft = centerX - (bubW / 2);
+        const clampedLeft = Math.max(minLeft, Math.min(wrapW - bubW - 14, rawLeft));
+        const arrowX = Math.max(24, Math.min(bubW - 24, centerX - clampedLeft));
+
+        let topPx = placeBelow ? (bottomEdgeY + 13) : (topEdgeY - bubH - 13);
         topPx = Math.max(12, Math.min(wrapH - bubH - 12, topPx));
 
         bubbleEl.classList.toggle("arrow-top", placeBelow);
@@ -7983,6 +7993,26 @@
         if (hintEl && hintText) hintEl.textContent = hintText;
     }
 
+    function centerCameraWithBubbleRoom(nodeId, animateMs) {
+        if (!network || !nodeId || typeof network.getPositions !== "function") return;
+        try {
+            autoFollow = false;
+            if (typeof toggleAutoFollow !== "undefined" && toggleAutoFollow) {
+                toggleAutoFollow.checked = false;
+            }
+            const posMap = network.getPositions([nodeId]);
+            const p = posMap && posMap[nodeId];
+            if (!p) return;
+            const yOffset = p.y <= 40 ? -68 : 74;
+            network.moveTo({
+                position: { x: p.x, y: p.y },
+                scale: 1.0,
+                offset: { x: 42, y: yOffset },
+                animation: animateMs > 0 ? { duration: animateMs, easingFunction: "easeInOutQuad" } : false
+            });
+        } catch (_) {}
+    }
+
     function bindCoachNetworkListeners() {
         if (!network || network.__coachListenersBound) return;
         network.__coachListenersBound = true;
@@ -7993,10 +8023,13 @@
         network.on("click", (props) => {
             if (props && props.nodes && props.nodes.length > 0) {
                 const nid = props.nodes[0];
+                selectedNodeId = nid;
                 const info = explainNodeInPlainEnglish(rawDataMap ? rawDataMap[nid] : null);
                 coachDismissed = false;
                 setCoachBubbleContent(info.step, info.title, info.body, "Click Next Bubble for guided steps");
-                requestAnimationFrame(() => positionCoachBubbleOverNode(nid));
+                centerCameraWithBubbleRoom(nid, 260);
+                setTimeout(() => positionCoachBubbleOverNode(nid), 40);
+                setTimeout(() => positionCoachBubbleOverNode(nid), 290);
             }
         });
     }
@@ -8032,7 +8065,7 @@
             '</div>';
     };
 
-    function focusAndSelectNode(predicate, bubbleOverride) {
+    function focusAndSelectNode(predicate, bubbleOverride, instantOpt) {
         if (typeof setViewMode === "function" && viewMode !== "timeline") {
             setViewMode("timeline", false);
         }
@@ -8052,15 +8085,16 @@
         if (network && typeof network.selectNodes === "function") {
             try {
                 network.selectNodes([targetId]);
-                network.focus(targetId, { scale: 1.0, animation: { duration: 360, easingFunction: "easeInOutQuad" } });
             } catch (_) {}
         }
+        centerCameraWithBubbleRoom(targetId, instantOpt ? 0 : 320);
         renderInspector(targetData, targetId, false);
         const info = bubbleOverride || explainNodeInPlainEnglish(targetData);
         coachDismissed = false;
         setCoachBubbleContent(info.step, info.title, info.body, "Click any box on the canvas to explain it");
-        setTimeout(() => positionCoachBubbleOverNode(targetId), 60);
-        setTimeout(() => positionCoachBubbleOverNode(targetId), 400);
+        requestAnimationFrame(() => positionCoachBubbleOverNode(targetId));
+        setTimeout(() => positionCoachBubbleOverNode(targetId), 120);
+        setTimeout(() => positionCoachBubbleOverNode(targetId), 360);
     }
 
     function runGuidedBubbleStep(idx) {
@@ -8072,13 +8106,18 @@
         coachDismissed = false;
 
         if (item.act === "drill_subagent") {
-            if (typeof drillIntoSubagent === "function") {
-                drillIntoSubagent("b1000000-0000-4000-8000-000000000001", "Signature Checker AI");
-                setTimeout(() => {
-                    syncSandboxBannerUI();
-                    focusAndSelectNode((_, d) => d && d.type === "USER_INPUT", item);
-                }, 140);
+            const subId = "b1000000-0000-4000-8000-000000000001";
+            if (!convStack.some(s => s.id === (activeConvId || coachRootScenario))) {
+                convStack.push({ id: activeConvId || coachRootScenario, label: "Main AI Timeline" });
             }
+            activeConvId = subId;
+            autoFollow = false;
+            if (typeof toggleAutoFollow !== "undefined" && toggleAutoFollow) toggleAutoFollow.checked = false;
+            updateSessionBreadcrumbUI();
+            loadData().then(() => {
+                syncSandboxBannerUI();
+                focusAndSelectNode((_, d) => d && ((d.tool && (d.tool.name === "view_file" || d.tool.name === "read_file")) || d.type === "USER_INPUT"), item, true);
+            });
             return;
         }
 
@@ -8086,10 +8125,12 @@
             if (convStack && convStack.length > 0) {
                 const top = convStack.pop();
                 activeConvId = top.id;
+                autoFollow = false;
+                if (typeof toggleAutoFollow !== "undefined" && toggleAutoFollow) toggleAutoFollow.checked = false;
                 updateSessionBreadcrumbUI();
                 loadData().then(() => {
                     syncSandboxBannerUI();
-                    focusAndSelectNode((_, d) => d && ((d.tool && (d.tool.name === "replace_file_content" || d.tool.name === "write_to_file")) || (d.items && d.items.some(it => it.tool && it.tool.name === "replace_file_content"))), item);
+                    focusAndSelectNode((_, d) => d && ((d.tool && (d.tool.name === "replace_file_content" || d.tool.name === "write_to_file")) || (d.items && d.items.some(it => it.tool && it.tool.name === "replace_file_content"))), item, true);
                 });
                 return;
             }
@@ -8100,6 +8141,8 @@
         if (convStack && convStack.length > 0 && item.act !== "drill_subagent") {
             const top = convStack.pop();
             activeConvId = top.id;
+            autoFollow = false;
+            if (typeof toggleAutoFollow !== "undefined" && toggleAutoFollow) toggleAutoFollow.checked = false;
             updateSessionBreadcrumbUI();
             loadData().then(() => {
                 syncSandboxBannerUI();
