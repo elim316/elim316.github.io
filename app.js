@@ -1194,13 +1194,6 @@
       let stepTimer = null;
 
       const tracerTabMeta = {
-        sandbox: {
-          label: "LIVE INTERACTIVE WORKSPACE (CLICK NODES OR USE QUICK TOUR)",
-          readout: "Live Client-Side Sandbox",
-          story:
-            "Explore three live multi-agent execution runs right inside the browser, complete with subagent drill-down, colour-coded unified code diffs, and real-time topology views.",
-          nextLabel: "Next tab: Execution Timeline \u2192",
-        },
         timeline: {
           label: "LIVE AGENT STEP VISUALISER (CLICK ANY STEP)",
           readout: "Step 02: AI Planner (640ms)",
@@ -1213,7 +1206,14 @@
           readout: "142k / 200k Tokens Used",
           story:
             "Tracks live memory usage across chat, subagents, step visualiser, and scheduled jobs, compacting older history automatically before hitting 200k tokens.",
-          nextLabel: "Next tab: Live Interactive Sandbox \u2192",
+          nextLabel: "Next tab: Interactive Sandbox \u2192",
+        },
+        sandbox: {
+          label: "INTERACTIVE AGENT TRACER WORKSPACE",
+          readout: "Client-Side Sandbox",
+          story:
+            "Explore three live multi-agent execution runs right inside the browser, complete with subagent drill-down, colour-coded unified code diffs, and real-time topology views.",
+          nextLabel: "Next tab: Execution Timeline \u2192",
         },
       };
 
@@ -1248,7 +1248,7 @@
         },
       };
 
-      const tTabOrder = ["sandbox", "timeline", "memory"];
+      const tTabOrder = ["timeline", "memory", "sandbox"];
       let tTabIdx = 0;
 
       const tDiagramHeader = document.getElementById("tracer-diagram-header");
