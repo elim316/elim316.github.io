@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-38" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261010-39" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261010-38" />
+  <link rel="stylesheet" href="styles.css?v=20261010-39" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -998,13 +998,21 @@
           </p>
           <div class="cta-pill-group">
             <a
-              href="https://github.com/elim316/Antigravity-Meeting-Prep-Agent"
+              href="sandbox/meeting-prep/index.html"
               target="_blank"
               rel="noopener noreferrer"
               class="apple-pill solid"
             >
+              <span>Launch Live Sandbox &#8599;</span>
+            </a>
+            <a
+              href="https://github.com/elim316/Antigravity-Meeting-Prep-Agent"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="apple-pill outline"
+            >
               <svg class="brand-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-              <span>View Repository &#8599;</span>
+              <span>View Dossier Agent Repo &#8599;</span>
             </a>
             <a href="#project-meeting-prep-agent" class="apple-pill outline">
               <span>Technical specs &#8595;</span>
@@ -1024,50 +1032,145 @@
                   <span></span><span></span><span></span>
                 </div>
                 <div class="browser-tab-strip" role="tablist" aria-label="Meeting Dossier workflow tabs">
-                  <button type="button" class="browser-tab" data-fprep-btn="nbd" role="tab" aria-selected="false">
-                    <span>6 PM Evening Brief</span>
+                  <button type="button" class="browser-tab active" data-prep-tab="pipeline" role="tab" aria-selected="true">
+                    <span>Dossier Pipeline</span>
                   </button>
-                  <button type="button" class="browser-tab active" data-fprep-btn="linter" role="tab" aria-selected="true">
+                  <button type="button" class="browser-tab" data-prep-tab="linter" role="tab" aria-selected="false">
                     <span>36-Check Fact Linter</span>
                   </button>
-                  <button type="button" class="browser-tab" data-fprep-btn="t1h" role="tab" aria-selected="false">
-                    <span>1-Hour Reminder</span>
+                  <button type="button" class="browser-tab" data-prep-tab="sandbox" role="tab" aria-selected="false">
+                    <span>Interactive Sandbox</span>
                   </button>
                 </div>
               </div>
 
               <div class="browser-single-pane">
-                <div class="pane-header">
-                  <span class="pane-label">TWO-STAGE SCHEDULED PIPELINE (CLICK ANY TAB OR STEP)</span>
-                  <span class="pane-badge" id="flagship-prep-readout">36 / 36 Quality Checks Passed</span>
+                <div class="pane-header" id="prep-diagram-header">
+                  <span class="pane-label" id="prep-pane-label">TWO-STAGE SCHEDULED PIPELINE (CLICK ANY STEP)</span>
+                  <div class="pane-header-right">
+                    <span class="pane-badge" id="flagship-prep-readout">36 / 36 Quality Checks Passed</span>
+                    <button type="button" class="pane-launch-sandbox-btn" id="prep-switch-to-sandbox-btn">
+                      <span>Try Interactive Sandbox &#8594;</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Integrated Tab-Box Sandbox Console & Guide (shown when Interactive Sandbox tab is selected) -->
+                <div class="tracer-sandbox-console" id="prep-sandbox-console" style="display: none;">
+                  <div class="tracer-console-top">
+                    <div class="tracer-console-scenarios" role="tablist" aria-label="Select sample calendar scenario">
+                      <span class="tracer-console-kicker">CHOOSE EXAMPLE:</span>
+                      <button type="button" class="tracer-sc-pill active" data-prep-sc="next_day_mixed">
+                        01: Busy Day (7 Invites)
+                      </button>
+                      <button type="button" class="tracer-sc-pill" data-prep-sc="next_day_cold_lead">
+                        02: Brand-New Contact
+                      </button>
+                      <button type="button" class="tracer-sc-pill" data-prep-sc="t1h_window">
+                        03: 1-Hour Pre-Call Window
+                      </button>
+                    </div>
+                    <a href="sandbox/meeting-prep/index.html" target="_blank" rel="noopener noreferrer" class="tracer-fullscreen-pill">
+                      <span>Open Full Screen &#8599;</span>
+                    </a>
+                  </div>
+
+                  <div class="tracer-console-guide">
+                    <div class="tracer-doing-copy">
+                      <span class="tracer-doing-badge">Summary</span>
+                      <span id="prep-host-doing-text">Scans 7 calendar invites for tomorrow, automatically skips 5 routine internal blocks, writes two cited one-page briefings, and checks every link across 36 rules.</span>
+                    </div>
+                    <div class="tracer-tour-row">
+                      <span class="tracer-tour-prompt">Pop-up explanation bubbles (click any item below or jump to a bubble):</span>
+                      <div class="tracer-tour-actions" id="prep-host-tour-actions">
+                        <button type="button" class="tracer-tour-pill" data-prep-act="tour_0">Bubble 1: Calendar Filter</button>
+                        <button type="button" class="tracer-tour-pill" data-prep-act="tour_1">Bubble 2: Workspace Search</button>
+                        <button type="button" class="tracer-tour-pill" data-prep-act="tour_2">Bubble 3: 1-Page Briefing</button>
+                        <button type="button" class="tracer-tour-pill" data-prep-act="tour_3">Bubble 4: Fact Checker</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="about-svg-stage">
-                  <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
-                    <path class="trace-edge" d="M 108 58 L 132 58" />
-                    <path class="trace-edge" d="M 248 58 L 272 58" />
-                    <path class="trace-packet hero-stream" d="M 108 58 L 132 58" />
-                    <path class="trace-packet hero-stream" d="M 248 58 L 272 58" />
+                  <!-- Tab 1: Dossier Pipeline (Explanation & Overview - Active by default) -->
+                  <div class="about-scene is-active" data-prep-scene="pipeline">
+                    <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
+                      <path class="trace-edge" d="M 108 58 L 132 58" />
+                      <path class="trace-edge" d="M 248 58 L 272 58" />
+                      <path class="trace-packet hero-stream" d="M 108 58 L 132 58" />
+                      <path class="trace-packet hero-stream" d="M 248 58 L 272 58" />
 
-                    <g class="clickable-node" data-fprep="nbd">
-                      <rect class="trace-node" x="14" y="24" width="94" height="68" rx="8" />
-                      <text x="61" y="48" text-anchor="middle" class="visual-label">01: EVENING</text>
-                      <text x="61" y="66" text-anchor="middle" class="visual-badge">6 PM Day Before</text>
-                    </g>
+                      <g class="clickable-node" data-fprep="nbd">
+                        <rect class="trace-node" x="14" y="24" width="94" height="68" rx="8" />
+                        <text x="61" y="48" text-anchor="middle" class="visual-label">01: EVENING</text>
+                        <text x="61" y="66" text-anchor="middle" class="visual-badge">5 PM Day Before</text>
+                      </g>
 
-                    <g class="clickable-node is-selected" data-fprep="linter">
-                      <rect class="trace-node node-accent" x="132" y="18" width="116" height="80" rx="8" />
-                      <text x="190" y="42" text-anchor="middle" class="visual-label">02: FACT CHECK</text>
-                      <text x="190" y="60" text-anchor="middle" class="visual-badge">&#10003; 36 Checks</text>
-                      <text x="190" y="76" text-anchor="middle" class="visual-label">0 Fake Links</text>
-                    </g>
+                      <g class="clickable-node is-selected" data-fprep="linter">
+                        <rect class="trace-node node-accent" x="132" y="18" width="116" height="80" rx="8" />
+                        <text x="190" y="42" text-anchor="middle" class="visual-label">02: FACT CHECK</text>
+                        <text x="190" y="60" text-anchor="middle" class="visual-badge">&#10003; 36 Checks</text>
+                        <text x="190" y="76" text-anchor="middle" class="visual-label">0 Fake Links</text>
+                      </g>
 
-                    <g class="clickable-node" data-fprep="t1h">
-                      <rect class="trace-node" x="272" y="24" width="94" height="68" rx="8" />
-                      <text x="319" y="48" text-anchor="middle" class="visual-label">03: PRE-CALL</text>
-                      <text x="319" y="66" text-anchor="middle" class="visual-badge">1 Hour Before</text>
-                    </g>
-                  </svg>
+                      <g class="clickable-node" data-fprep="t1h">
+                        <rect class="trace-node" x="272" y="24" width="94" height="68" rx="8" />
+                        <text x="319" y="48" text-anchor="middle" class="visual-label">03: PRE-CALL</text>
+                        <text x="319" y="66" text-anchor="middle" class="visual-badge">1 Hour Before</text>
+                      </g>
+                    </svg>
+
+                    <!-- Dynamic Pop-Up Speech Bubble Explaining the Selected Stage -->
+                    <div class="tracer-step-bubble" id="prep-overview-bubble" style="--step-arrow-x: 50%;" aria-live="polite">
+                      <div class="tracer-bubble-top">
+                        <span class="tracer-bubble-kicker" id="prep-bubble-kicker">STEP 2 OF 3: ZERO FAKE LINKS</span>
+                        <span class="tracer-bubble-hint">Click any box above to see what it means</span>
+                      </div>
+                      <div class="tracer-bubble-main">
+                        <div class="tracer-bubble-text">
+                          <div class="tracer-bubble-title" id="prep-bubble-title">Every link and person is verified before emailing</div>
+                          <div class="tracer-bubble-desc" id="prep-bubble-desc">Before sending anything to your inbox, 36 automatic checks verify every document link, participant role, and ticket ID so the AI never makes up fake facts.</div>
+                        </div>
+                        <button type="button" class="tracer-bubble-next-btn" id="prep-bubble-next-btn">
+                          <span id="prep-bubble-next-label">Next bubble: Pre-Call &#8594;</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab 2: 36-Check Fact Linter Breakdown -->
+                  <div class="about-scene" data-prep-scene="linter">
+                    <svg class="hero-deck-svg" viewBox="0 0 380 116" aria-hidden="true">
+                      <path class="trace-edge" d="M 176 22 L 204 22" />
+                      <path class="trace-edge" d="M 176 48 L 204 48" />
+                      <path class="trace-packet hero-stream" d="M 176 22 L 204 22" />
+                      <path class="trace-packet hero-stream" d="M 176 48 L 204 48" />
+                      <rect class="deck-node active-ring" x="18" y="10" width="158" height="22" rx="5" />
+                      <text x="97" y="24" text-anchor="middle" class="visual-badge">CALENDAR + PEOPLE</text>
+                      <rect class="deck-node" x="204" y="10" width="158" height="22" rx="5" />
+                      <text x="283" y="24" text-anchor="middle" class="visual-label">GMAIL + CHAT THREADS</text>
+                      <rect class="deck-node active-ring" x="18" y="36" width="158" height="22" rx="5" />
+                      <text x="97" y="50" text-anchor="middle" class="visual-badge">SHARED DRIVE DOCS</text>
+                      <rect class="deck-node" x="204" y="36" width="158" height="22" rx="5" />
+                      <text x="283" y="50" text-anchor="middle" class="visual-label">SILENCE DISCIPLINE</text>
+
+                      <rect class="deck-node" x="18" y="64" width="344" height="38" rx="7" />
+                      <text x="30" y="79" class="visual-label">QUALITY GATE: 36 / 36 CHECKS PASSED (0 INVENTED URLS)</text>
+                      <rect x="30" y="86" width="320" height="7" rx="3.5" fill="var(--bg-subtle)" />
+                      <rect class="token-fill-bar" x="30" y="86" width="320" height="7" rx="3.5" fill="var(--accent)" />
+                    </svg>
+                  </div>
+
+                  <!-- Tab 3: Interactive Sandbox (Last Tab) -->
+                  <div class="about-scene tracer-sandbox-scene" data-prep-scene="sandbox">
+                    <iframe
+                      id="prep-embedded-iframe"
+                      class="tracer-sandbox-frame"
+                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261010-39"
+                      title="Interactive Meeting Prep Dossier Sandbox"
+                    ></iframe>
+                  </div>
                 </div>
 
                 <p class="about-live-story" id="prep-live-story">
@@ -1083,10 +1186,10 @@
 
                   <div class="about-pane-actions">
                     <button type="button" class="about-next-tab-btn" id="prep-next-tab-btn">
-                      <span id="prep-next-tab-label">Next tab: 1-Hour Reminder &#8594;</span>
+                      <span id="prep-next-tab-label">Next tab: 36-Check Fact Linter &#8594;</span>
                     </button>
-                    <a href="https://github.com/elim316/Antigravity-Meeting-Prep-Agent" target="_blank" rel="noopener noreferrer" class="about-scroll-pill">
-                      <span>Open Repo &#8599;</span>
+                    <a href="sandbox/meeting-prep/index.html" target="_blank" rel="noopener noreferrer" class="about-scroll-pill">
+                      <span>Full Sandbox &#8599;</span>
                     </a>
                   </div>
                 </div>
@@ -1941,6 +2044,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261010-38"></script>
+  <script src="app.js?v=20261010-39"></script>
 </body>
 </html>
