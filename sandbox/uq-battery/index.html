@@ -702,7 +702,7 @@
             <span class="pop-step" id="popStepLabel">BUBBLE 1 OF 4</span>
             <button type="button" class="pop-close" id="popCloseBtn" title="Close bubble">&#215;</button>
           </div>
-          <div class="pop-title" id="popTitle">Cycle 340: Capacity Knee-Point Onset</div>
+          <div class="pop-title" id="popTitle">Cycle 120: Early Healthy Regime</div>
           <div class="pop-meta" id="popMeta">CNN Prediction: 89.2% SOH | 95% Interval: [87.4%, 91.0%]</div>
           <div class="pop-desc" id="popDesc">
             Lithium-plating and solid-electrolyte interphase growth accelerate capacity fade past Cycle 340. Click "XAI Drivers ->" below any node to inspect the 4-method feature attribution breakdown.
@@ -941,7 +941,7 @@
       if (isBubbleOpen) {
         showBubbleForCycle(activeCycleIdx);
       } else {
-        pop.classList.add("is-hidden");
+        closeBatteryBubble();
       }
     }
   }
@@ -1059,6 +1059,7 @@
     const lo = (c.soh - ci.halfWidth).toFixed(1);
     const hi = (c.soh + ci.halfWidth).toFixed(1);
 
+    pop.style.display = "";
     pop.classList.remove("is-hidden");
     popStepLabel.textContent = `BUBBLE ${activeCycleIdx + 1} OF ${ds.cycles.length}`;
     popTitle.textContent = c.title;
@@ -1248,22 +1249,25 @@
   modeBtnXai.addEventListener("click", () => setViewMode("xai", activeCycleIdx));
   popOpenXaiBtn.addEventListener("click", () => setViewMode("xai", activeCycleIdx));
 
-  popClose.addEventListener("click", () => {
-    isBubbleOpen = false;
-    pop.classList.add("is-hidden");
+  pop.addEventListener("click", (e) => e.stopPropagation());
+
+  popClose.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeBatteryBubble();
   });
 
-  popPrev.addEventListener("click", () => {
+  popPrev.addEventListener("click", (e) => {
+    e.stopPropagation();
     if (activeCycleIdx > 0) {
       showBubbleForCycle(activeCycleIdx - 1);
     }
   });
 
-  popNext.addEventListener("click", () => {
+  popNext.addEventListener("click", (e) => {
+    e.stopPropagation();
     const total = DATASETS[curDataset].cycles.length;
-    if (activeCycleIdx >= total - 1) {
-      isBubbleOpen = false;
-      pop.classList.add("is-hidden");
+    if (activeCycleIdx >= total - 1 || popNext.textContent.indexOf("Close") !== -1) {
+      closeBatteryBubble();
     } else {
       showBubbleForCycle(activeCycleIdx + 1);
     }
@@ -1283,7 +1287,7 @@
   });
 
   renderCurvePlot();
-  setTimeout(() => showBubbleForCycle(1), 60);
+  setTimeout(() => { if (isBubbleOpen) showBubbleForCycle(0); }, 60);
 })();
 </script>
 </body>
