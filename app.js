@@ -1697,83 +1697,171 @@
 
     const fUq = document.getElementById("flagship-uq-sandbox");
     if (fUq) {
-      const fCiLevels = {
-        "90": {
-          scale: 0.68,
-          title: "BATTERY HEALTH FORECAST & CONFIDENCE RANGE (90% TARGET)",
-          readout: "90.4% Verified Coverage",
-          story:
-            "Tighter 90% confidence band for routine battery health checks, highlighting early capacity fade across discharge cycles and operating temperature.",
-          nextLabel: "Next tab: 95% Confidence (IEEE) \u2192",
-        },
-        "95": {
-          scale: 1.0,
-          title: "BATTERY HEALTH FORECAST & CONFIDENCE RANGE (95% TARGET)",
+      const uqTabMeta = {
+        sandbox: {
+          title: "INTERACTIVE BATTERY UQ & XAI DIGITAL TWIN (MCMASTER & OXFORD)",
           readout: "95.2% Verified Coverage",
           story:
-            "Rather than outputting a blind single guess, the model wraps every battery health forecast in a verified 95.2% confidence band and highlights voltage and heat impact.",
-          nextLabel: "Next tab: 99% Safety Margin \u2192",
+            "Interactive digital twin plotting CNN State-of-Health forecasts alongside calibrated Adaptive Conformal Inference safety bands and 4-method XAI sensor attributions.",
+          nextLabel: "Next tab: Conformal Calibration (ACI) \u2192",
         },
-        "99": {
-          scale: 1.38,
-          title: "BATTERY HEALTH FORECAST & CONFIDENCE RANGE (99% TARGET)",
-          readout: "98.9% Verified Coverage",
+        aci: {
+          title: "CONFORMAL CALIBRATION ARCHITECTURE (MC DROPOUT + SENSOR NOISE)",
+          readout: "0.012 ECE (95.2% PICP)",
           story:
-            "Wide 99% safety margin designed for high-reliability battery management systems where catching worst-case ageing is critical.",
-          nextLabel: "Next tab: 90% Confidence \u2192",
+            "Fuses Monte Carlo Dropout epistemic variance with aleatoric sensor uncertainty via Adaptive Conformal Inference to preserve guaranteed 95.2% empirical coverage under cell drift.",
+          nextLabel: "Next tab: Pipeline Overview \u2192",
+        },
+        overview: {
+          title: "END-TO-END UQ & 4-METHOD XAI PIPELINE OVERVIEW",
+          readout: "SHAP R\u00b2 = 0.94 Stability",
+          story:
+            "Rather than outputting a blind single guess, the model wraps every battery health forecast in a verified 95.2% confidence band and highlights voltage and heat impact.",
+          nextLabel: "Next tab: Interactive UQ & XAI Lab \u2192",
         },
       };
 
+      const uqBubbleMeta = {
+        "90": {
+          kicker: "STEP 1 OF 3: RAW TELEMETRY INGESTION",
+          title: "Multi-sensor discharge curves capture subtle ageing shifts",
+          desc: "Streams terminal voltage drop (dV/dt), internal resistance growth, and surface cell temperature across thousands of McMaster and Oxford cycling curves.",
+          nextLabel: "Next bubble: Calibrated Confidence \u2192",
+          nextStep: "95",
+          arrowX: "22%",
+          scale: 0.72,
+        },
+        "95": {
+          kicker: "STEP 2 OF 3: CALIBRATED CONFIDENCE",
+          title: "Every forecast carries a verified safety band",
+          desc: "Combines Monte Carlo Dropout and sensor noise through Adaptive Conformal Inference to hold 95.2% empirical coverage on unseen Oxford battery cells.",
+          nextLabel: "Next bubble: XAI Attribution \u2192",
+          nextStep: "99",
+          arrowX: "50%",
+          scale: 1.0,
+        },
+        "99": {
+          kicker: "STEP 3 OF 3: 4-METHOD XAI ATTRIBUTION",
+          title: "Pinpoints whether voltage drop or heat drove capacity fade",
+          desc: "Cross-validates SHAP, Integrated Gradients, LIME, and Counterfactuals (R\u00b2 = 0.94 fidelity) so battery engineers see exact physical root causes before cell retirement.",
+          nextLabel: "Close Bubble",
+          nextStep: "__close__",
+          arrowX: "80%",
+          scale: 1.32,
+        },
+      };
+
+      const uTabs = fUq.querySelectorAll("[data-uq-tab]");
+      const uScenes = fUq.querySelectorAll("[data-uq-scene]");
+      const uDiagHeader = document.getElementById("uq-diagram-header");
+      const switchUqSandboxBtn = document.getElementById("uq-switch-to-sandbox-btn");
       const fBand = document.getElementById("flagship-aci-band");
       const fTitle = document.getElementById("flagship-aci-title");
       const fReadout = document.getElementById("flagship-aci-readout");
       const uStory = document.getElementById("uq-live-story");
       const uNextBtn = document.getElementById("uq-next-tab-btn");
       const uNextLabel = document.getElementById("uq-next-tab-label");
-      const fCiBtns = fUq.querySelectorAll("[data-fci-btn]");
       const fCiNodes = fUq.querySelectorAll("[data-fci-node]");
+      const uOvBubbleEl = document.getElementById("uq-overview-bubble");
+      const uOvBubbleKicker = document.getElementById("uq-bubble-kicker");
+      const uOvBubbleTitle = document.getElementById("uq-bubble-title");
+      const uOvBubbleDesc = document.getElementById("uq-bubble-desc");
+      const uOvBubbleNextBtn = document.getElementById("uq-bubble-next-btn");
+      const uOvBubbleNextLabel = document.getElementById("uq-bubble-next-label");
+
+      const uTabOrder = ["sandbox", "aci", "overview"];
+      let uTabIdx = 0;
       const ciOrder = ["90", "95", "99"];
       let ciIdx = 1;
       let ciTimer = null;
 
-      function selectUqLevel(key) {
-        const cfg = fCiLevels[key];
+      function selectUqTab(tabKey) {
+        const cfg = uqTabMeta[tabKey];
         if (!cfg) return;
-        ciIdx = Math.max(0, ciOrder.indexOf(key));
-        fCiBtns.forEach((b) => {
-          const active = b.getAttribute("data-fci-btn") === key;
-          b.classList.toggle("active", active);
-          b.setAttribute("aria-selected", active ? "true" : "false");
+        uTabIdx = Math.max(0, uTabOrder.indexOf(tabKey));
+        uTabs.forEach((t) => {
+          const active = t.getAttribute("data-uq-tab") === tabKey;
+          t.classList.toggle("active", active);
+          t.setAttribute("aria-selected", active ? "true" : "false");
         });
-        fCiNodes.forEach((n) =>
-          n.classList.toggle("is-selected", n.getAttribute("data-fci-node") === key)
-        );
-        if (fBand) fBand.style.setProperty("--ci-scale", String(cfg.scale));
+        uScenes.forEach((sc) => {
+          sc.classList.toggle("is-active", sc.getAttribute("data-uq-scene") === tabKey);
+        });
+        if (uDiagHeader) {
+          uDiagHeader.style.display = tabKey === "sandbox" ? "none" : "";
+        }
         if (fTitle) fTitle.textContent = cfg.title;
         if (fReadout) fReadout.textContent = cfg.readout;
-        if (uStory && cfg.story) uStory.textContent = cfg.story;
-        if (uNextLabel && cfg.nextLabel) uNextLabel.textContent = cfg.nextLabel;
+        if (uStory) uStory.textContent = cfg.story;
+        if (uNextLabel) uNextLabel.textContent = cfg.nextLabel;
       }
 
-      fCiBtns.forEach((btn) => {
+      if (switchUqSandboxBtn) {
+        switchUqSandboxBtn.addEventListener("click", () => selectUqTab("sandbox"));
+      }
+
+      uTabs.forEach((btn) => {
         btn.addEventListener("click", () => {
-          if (ciTimer) clearInterval(ciTimer);
-          selectUqLevel(btn.getAttribute("data-fci-btn"));
+          selectUqTab(btn.getAttribute("data-uq-tab"));
         });
       });
+
+      if (uNextBtn) {
+        uNextBtn.addEventListener("click", () => {
+          uTabIdx = (uTabIdx + 1) % uTabOrder.length;
+          selectUqTab(uTabOrder[uTabIdx]);
+        });
+      }
+
+      function selectUqLevel(key) {
+        const bMeta = uqBubbleMeta[key];
+        if (!bMeta) return;
+        ciIdx = Math.max(0, ciOrder.indexOf(key));
+        let activeSvgEl = null;
+        fCiNodes.forEach((n) => {
+          const isMatch = n.getAttribute("data-fci-node") === key;
+          n.classList.toggle("is-selected", isMatch);
+          if (isMatch) activeSvgEl = n;
+        });
+        if (fBand) fBand.style.setProperty("--ci-scale", String(bMeta.scale));
+        if (uOvBubbleEl) {
+          uOvBubbleEl.style.display = "";
+          let arrowVal = bMeta.arrowX;
+          if (activeSvgEl && typeof activeSvgEl.getBoundingClientRect === "function") {
+            const nRect = activeSvgEl.getBoundingClientRect();
+            const bRect = uOvBubbleEl.getBoundingClientRect();
+            if (nRect.width > 0 && bRect.width > 0) {
+              const px = Math.max(24, Math.min(bRect.width - 24, nRect.left + nRect.width / 2 - bRect.left));
+              arrowVal = Math.round(px) + "px";
+            }
+          }
+          uOvBubbleEl.style.setProperty("--step-arrow-x", arrowVal);
+          if (uOvBubbleKicker) uOvBubbleKicker.textContent = bMeta.kicker;
+          if (uOvBubbleTitle) uOvBubbleTitle.textContent = bMeta.title;
+          if (uOvBubbleDesc) uOvBubbleDesc.textContent = bMeta.desc;
+          if (uOvBubbleNextLabel) uOvBubbleNextLabel.textContent = bMeta.nextLabel;
+        }
+      }
+
+      if (uOvBubbleNextBtn) {
+        uOvBubbleNextBtn.addEventListener("click", () => {
+          if (ciTimer) clearInterval(ciTimer);
+          const curKey = ciOrder[ciIdx] || "95";
+          const bMeta = uqBubbleMeta[curKey];
+          if (bMeta && bMeta.nextStep === "__close__") {
+            if (uOvBubbleEl) uOvBubbleEl.style.display = "none";
+          } else if (bMeta && bMeta.nextStep) {
+            selectUqLevel(bMeta.nextStep);
+          }
+        });
+      }
+
       fCiNodes.forEach((node) => {
         node.addEventListener("click", () => {
           if (ciTimer) clearInterval(ciTimer);
           selectUqLevel(node.getAttribute("data-fci-node"));
         });
       });
-      if (uNextBtn) {
-        uNextBtn.addEventListener("click", () => {
-          if (ciTimer) clearInterval(ciTimer);
-          ciIdx = (ciIdx + 1) % ciOrder.length;
-          selectUqLevel(ciOrder[ciIdx]);
-        });
-      }
 
       ciTimer = setInterval(() => {
         if (document.hidden) return;
