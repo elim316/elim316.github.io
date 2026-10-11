@@ -12,7 +12,7 @@
       summary:
         "Self-service Dual-VPC cloud landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup and IM8 security verification into under 3 minutes, driving $1.96M in realised public sector ARR (+$1.46M pipeline).",
       architecture:
-        "Separates Ingress (Regional HTTPS ALB with TLS 1.3, Cloud Armor OWASP WAF, Serverless NEG, IAM-locked Cloud Run) from Egress (Secure Web Proxy Layer 7 domain allowlisting, Private Service Connect to Vertex AI, non-root SHA-256 pinned containers) in Terraform. Paired with a 4-agent, 14-step ADLC pipeline enforcing an >=0.85 LLM-as-a-Judge quality gate and passing 14/14 Ingress runtime and 18/18 Egress static security checks.",
+        "Separates Ingress (Regional HTTPS ALB with TLS 1.3, Cloud Armor OWASP WAF, Serverless NEG, IAM-locked Cloud Run) from Egress (Secure Web Proxy Layer 7 domain allowlisting, Private Service Connect to the Gemini platform, non-root SHA-256 pinned containers) in Terraform. Paired with a 4-agent, 14-step ADLC pipeline enforcing an >=0.85 LLM-as-a-Judge quality gate and passing 14/14 Ingress runtime and 18/18 Egress static security checks.",
       stack: ["Terraform", "Dual-VPC & PSC", "14-Step ADLC", "IM8 Security"],
       repoUrl: "https://github.com/RZOWQ/trainee-project-jumpgate-agentic-lz",
       repoLabel: "Landing Zone Repo",
@@ -830,12 +830,12 @@
         */
         bezelTitle: "INTERACTIVE ENGINEERING PROFILE, GOOGLE CLOUD SINGAPORE",
         bezelStatus: "APR 2026 TO PRESENT",
-        paneLabel: "CLOUD RUN, VERTEX AI & AGENT TOOLING",
+        paneLabel: "CLOUD RUN, GEMINI PLATFORM & AGENT TOOLING",
         paneBadge: "Google Singapore",
         readout: "Tab 01 / 04",
         nextTabLabel: "Next tab: Grab \u2192",
         story:
-          "Customer Engineer at Google Singapore architecting secure Cloud Run and Vertex AI systems, creator of Antigravity Agent Tracer, and technical lead for buildathons training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.",
+          "Customer Engineer at Google Singapore architecting secure Cloud Run and Gemini platform systems, creator of Antigravity Agent Tracer, and technical lead for buildathons training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.",
         tags: [
           "Antigravity Tracer & 200k Harness",
           "36 / 36 Dossier Eval Checks",
@@ -1096,9 +1096,9 @@
           b3Width: "94%",
         },
         egress: {
-          readout: "Egress VPC: SWP L7 + PSC Vertex AI (0 Bypasses)",
+          readout: "Egress VPC: SWP L7 + PSC Gemini platform (0 Bypasses)",
           badge: "SWP L7, PSC & DLP",
-          b1Val: "Private Service Connect (Vertex)",
+          b1Val: "Private Service Connect (Gemini)",
           b1Width: "100%",
           b2Val: "Model Armor + DLP Redaction",
           b2Width: "100%",
@@ -1893,7 +1893,7 @@
     const jgData = {
       vpc: "Dual-VPC: 14/14 Ingress & 18/18 Egress IM8 PASS",
       adlc: "14-Step ADLC: 4-6 wks -> < 3 min (>=0.85 Judge)",
-      egress: "Egress VPC: SWP L7 + PSC Vertex AI (0 Bypasses)",
+      egress: "Egress VPC: SWP L7 + PSC Gemini platform (0 Bypasses)",
       arr: "Public Sector: $1.96M Realised + $1.46M Pipeline ARR",
     };
 
@@ -2963,9 +2963,9 @@
         id: "about",
         label: "01 / 04  PROFILE",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-profile-google.mp3?v=20261007-24",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261011-49",
         speechText:
-          "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure enterprise AI systems on Cloud Run and Vertex AI, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
+          "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure AI systems on Cloud Run and the Gemini platform, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
       /* [BUILDER STAGE HIDDEN — UNCOMMENT THIS ENTRY AND RE-INDEX TO RESTORE SEPARATE BUILDER STAGE]
       {
@@ -2982,9 +2982,9 @@
         id: "showcase-jumpgate",
         label: "03 / 06  JUMPGATE",
         projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-jumpgate.mp3?v=20261007-24",
+        audioSrc: "audio/stage-jumpgate.mp3?v=20261011-49",
         speechText:
-          "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to Vertex AI in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
+          "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to the Gemini platform in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
       },
       */
       {
@@ -3015,7 +3015,7 @@
 
     const aboutChapterAudio = {
       google: {
-        audioSrc: "audio/stage-profile-google.mp3?v=20261007-24",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261011-49",
         speechText: stageConfigs[0].speechText,
       },
       grab: {
@@ -3036,7 +3036,7 @@
     };
 
     const projectAudioMap = {
-      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261007-24",
+      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261011-49",
       "agent-tracer": "audio/stage-tracer.mp3?v=20261007-24",
       "antigravity-harness": "audio/stage-tracer.mp3?v=20261007-24",
       "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-24",
@@ -3046,6 +3046,8 @@
     let activeStageIdx = 0;
     let isNarrating = false;
     let currentTrackKey = "";
+    let lastTabInteractionTs = 0;
+    let isAudioAutoAdvancing = false;
     const audioPlayer = new Audio();
     audioPlayer.preload = "none";
     const preloadedSet = new Set();
@@ -3224,11 +3226,44 @@
         const ratio = audioPlayer.currentTime / audioPlayer.duration;
         setRingProgress(ratio);
         updateTeleprompterProgress(ratio);
+        const remSec = Math.max(0, Math.ceil(audioPlayer.duration - audioPlayer.currentTime));
+        updateDotFillBars(ratio * 100, remSec);
+        if (ratio > 0.72 && stageConfigs[activeStageIdx + 1]?.audioSrc) {
+          preloadAudioUrl(stageConfigs[activeStageIdx + 1].audioSrc);
+        }
       }
     });
 
     audioPlayer.addEventListener("ended", () => {
+      if (activeStageIdx < stageConfigs.length - 1) {
+        const nextIdx = activeStageIdx + 1;
+        const nextCfg = stageConfigs[nextIdx];
+        const nextEl = nextCfg ? document.getElementById(nextCfg.id) : null;
+        if (nextEl && nextCfg) {
+          isAudioAutoAdvancing = true;
+          isAutoScrolling = true;
+          activeStageIdx = nextIdx;
+          if (captionEl) captionEl.textContent = nextCfg.label;
+          dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === nextIdx));
+          updateDotFillBars(0, Math.ceil(audioPlayer.duration || 30));
+          nextEl.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => {
+            isAutoScrolling = false;
+            isAudioAutoAdvancing = false;
+            playPayload(
+              {
+                key: nextCfg.id,
+                audioSrc: nextCfg.audioSrc,
+                speechText: nextCfg.speechText,
+              },
+              true
+            );
+          }, 520);
+          return;
+        }
+      }
       setVoiceUiState(false);
+      document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
     });
 
     let stageScrollTicking = false;
@@ -3265,7 +3300,8 @@
 
       if (prevIdx !== bestIdx) {
         resetStageReadTimer(false);
-        if (isNarrating) {
+        const recentTabClick = performance.now() - lastTabInteractionTs < 650;
+        if (isNarrating && !isAudioAutoAdvancing && !recentTabClick) {
           startOrSwitchNarration(true);
         }
       }
@@ -3381,11 +3417,8 @@
       stageElapsedMs += deltaMs;
 
       let effectiveDurationMs = currentReadEstimate.durationMs;
-      if (isNarrating && audioPlayer.duration > 0) {
-        effectiveDurationMs = Math.max(
-          effectiveDurationMs,
-          (audioPlayer.duration + 2) * 1000
-        );
+      if (isNarrating) {
+        return;
       }
 
       const pct = Math.min(100, (stageElapsedMs / effectiveDurationMs) * 100);
@@ -3435,19 +3468,13 @@
 
     document
       .querySelectorAll(
-        "#about [data-about-tab], #about [data-about-card], [data-fjg-btn], [data-fstep-btn], [data-fturn-btn], [data-fprep-btn], [data-fci-btn]"
+        "#about [data-about-tab], #about [data-about-card], [data-tracer-tab], [data-prep-tab], [data-uq-tab], [data-fjg-btn], [data-fstep-btn], [data-fturn-btn], [data-fprep-btn], [data-fci-btn], .about-next-tab-btn"
       )
       .forEach((el) => {
         el.addEventListener("click", (e) => {
-          if (e.isTrusted) {
+          lastTabInteractionTs = performance.now();
+          if (e.isTrusted && !isNarrating) {
             requestAnimationFrame(() => resetStageReadTimer(true));
-          }
-          if (
-            isNarrating &&
-            stageConfigs[activeStageIdx]?.id === "about" &&
-            (el.hasAttribute("data-about-tab") || el.hasAttribute("data-about-card"))
-          ) {
-            requestAnimationFrame(() => startOrSwitchNarration(true));
           }
         });
       });
@@ -3928,7 +3955,7 @@
         {
           label: "CLOUD ARCHITECTURE",
           val: "Google Singapore",
-          sub: "Enterprise Cloud Run & Vertex AI systems + 4,000+ engineers trained",
+          sub: "Cloud Run & Gemini platform systems + 4,000+ engineers trained",
         },
         {
           label: "HIGH-SCALE BACKEND",
