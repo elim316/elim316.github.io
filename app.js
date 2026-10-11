@@ -722,7 +722,7 @@
               aria-label="Take a closer look at ${escapeHtml(p.title)}"
             >
               <span>Closer look</span>
-              <span class="closer-look-plus-icon" aria-hidden="true">+</span>
+              <span class="apple-card-plus" aria-hidden="true">+</span>
             </button>
             <button
               type="button"
@@ -2418,6 +2418,50 @@
       );
       sections.forEach((s) => observer.observe(s));
     }
+
+    const localnavTitle = document.getElementById("localnav-active-title");
+    const localnavLinks = document.querySelectorAll("[data-localnav-target]");
+    const chapterTargets = [
+      { id: "about", title: "Elias Lim" },
+      { id: "highlights-section", title: "Highlights" },
+      { id: "showcase-agent-tracer", title: "Antigravity Agent Tracer" },
+      { id: "showcase-meeting-prep", title: "Smart Meeting Dossier" },
+      { id: "showcase-uq-xai", title: "Battery UQ & XAI Research" },
+      { id: "projects", title: "All Systems" },
+      { id: "journey", title: "Experience & Honours" },
+      { id: "publications", title: "Published Research" },
+      { id: "stack", title: "By the Numbers" },
+    ];
+    if ("IntersectionObserver" in window && localnavLinks.length > 0) {
+      const chapterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const targetId = entry.target.id;
+              const match = chapterTargets.find((c) => c.id === targetId);
+              if (match && localnavTitle) {
+                localnavTitle.textContent = match.title;
+              }
+              const mappedNavId =
+                targetId === "journey" || targetId === "publications" || targetId === "stack"
+                  ? "projects"
+                  : targetId;
+              localnavLinks.forEach((lnk) => {
+                lnk.classList.toggle(
+                  "active",
+                  lnk.getAttribute("data-localnav-target") === mappedNavId
+                );
+              });
+            }
+          });
+        },
+        { rootMargin: "-22% 0px -58% 0px", threshold: 0.04 }
+      );
+      chapterTargets.forEach((item) => {
+        const el = document.getElementById(item.id);
+        if (el) chapterObserver.observe(el);
+      });
+    }
   }
 
   function initScrollReveal() {
@@ -2963,7 +3007,7 @@
         id: "about",
         label: "01 / 04  PROFILE",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-profile-google.mp3?v=20261011-49",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261011-50",
         speechText:
           "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure AI systems on Cloud Run and the Gemini platform, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
@@ -2982,7 +3026,7 @@
         id: "showcase-jumpgate",
         label: "03 / 06  JUMPGATE",
         projectId: "jumpgate-agentic-lz",
-        audioSrc: "audio/stage-jumpgate.mp3?v=20261011-49",
+        audioSrc: "audio/stage-jumpgate.mp3?v=20261011-50",
         speechText:
           "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to the Gemini platform in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
       },
@@ -3015,7 +3059,7 @@
 
     const aboutChapterAudio = {
       google: {
-        audioSrc: "audio/stage-profile-google.mp3?v=20261011-49",
+        audioSrc: "audio/stage-profile-google.mp3?v=20261011-50",
         speechText: stageConfigs[0].speechText,
       },
       grab: {
@@ -3036,7 +3080,7 @@
     };
 
     const projectAudioMap = {
-      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261011-49",
+      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261011-50",
       "agent-tracer": "audio/stage-tracer.mp3?v=20261007-24",
       "antigravity-harness": "audio/stage-tracer.mp3?v=20261007-24",
       "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-24",
@@ -3525,7 +3569,7 @@
   /* Apple Bento Specs, Before/After Comparison, Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
   function initBentoSpecsAndSkillFilters() {
     document
-      .querySelectorAll("#print-cv-btn, #hero-print-cv-btn, #footer-print-cv-btn")
+      .querySelectorAll("#print-cv-btn, #hero-print-cv-btn, #footer-print-cv-btn, #localnav-print-cv-btn")
       .forEach((btn) => {
         btn.addEventListener("click", () => window.print());
       });
