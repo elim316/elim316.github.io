@@ -52,10 +52,10 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-11
-- Asset version in `index.html`: `?v=20261011-51`
+- Asset version in `index.html`: `?v=20261011-52`
 - SessionStorage cache key in `app.js`: `gh_repos_v4_elim316`
 - Recent milestones completed:
-  * Removed all `Save CV` buttons across `index.html` and `app.js` and upgraded `#apple-localnav` (`initNavHighlight()` in `app.js`) so its left section label and right subheading links dynamically swap and highlight based on whichever top heading pill (`Profile`, `Featured Repos`, `All Projects`, `Experience`, `Research`, `Toolkit`) is currently active on scroll or top-nav click (`?v=20261011-51`).
+  * Removed all `Save CV` buttons across `index.html` and `app.js` and upgraded `#apple-localnav` (`initNavHighlight()` in `app.js`) so its left section label and right subheading links dynamically swap and highlight based on whichever top heading pill (`Profile`, `Featured Repos`, `All Projects`, `Experience`, `Research`, `Toolkit`) is currently active on scroll or top-nav click (`?v=20261011-52`).
   * Added authentic self-hosted Apple San Francisco webfonts (`fonts/SFProDisplay-*.woff2` and `fonts/SFProText-*.woff2` with optical sizing across `index.html`, `styles.css`, and all 3 sandboxes) alongside 6 signature Apple aesthetic details: two-tier sticky sub-navigation ribbon (`#apple-localnav` beneath slim 44px `#site-header` with `scroll-padding-top: 104px`), two-tone editorial headlines (`.apple-tone-muted`), Liquid Glass inner specular hairlines (`--glass-specular`) and concentric 28px/16px radii, container-aligned horizontal highlight track gutters, circular dark `+` action controls (`.apple-card-plus`), and continuous scroll-linked stage framing (`?v=20261011-50`).
   * Launched the 3rd live zero-backend browser sandbox for Repo Showcase 03 (`#showcase-uq-xai` / `sandbox/uq-battery/index.html`, IEEE Xplore Doc `11249263`), featuring interactive CNN State-of-Health & Adaptive Conformal Inference curves across McMaster and Oxford battery cells, stacked cycle checkpoints with `XAI Drivers ->` triggers, floating speech bubbles (`#uqPopoverBubble`) with `isBubbleOpen` state preservation, and a full 4-method XAI attribution report sheet (`?v=20261011-49`).
   * Upgraded Stage 03 (`#showcase-meeting-prep` / `sandbox/meeting-prep/index.html`) with a multi-column Week Calendar + authentic Google Docs Briefing workspace and `isBubbleOpen` persistence (`?v=20261011-45`).
