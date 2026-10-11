@@ -1,3 +1,69 @@
+/* Self-Hosted Authentic Apple San Francisco Typography (SF Pro Display + SF Pro Text) */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display Regular'), local('SF Pro Display'),
+       url('fonts/SFProDisplay-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display Medium'), local('SF Pro Display'),
+       url('fonts/SFProDisplay-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display Semibold'), local('SF Pro Display'),
+       url('fonts/SFProDisplay-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display Bold'), local('SF Pro Display'),
+       url('fonts/SFProDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  src: local('SF Pro Text Regular'), local('SF Pro Text'),
+       url('fonts/SFProText-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  src: local('SF Pro Text Medium'), local('SF Pro Text'),
+       url('fonts/SFProText-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  src: local('SF Pro Text Semibold'), local('SF Pro Text'),
+       url('fonts/SFProText-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  src: local('SF Pro Text Bold'), local('SF Pro Text'),
+       url('fonts/SFProText-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==========================================================================
    Elias Lim · Light-First Scroll-Animated Repository Showcase (styles.css)
    Scroll-Driven 3D Stage · Full-Width Repo Showcases · 2-Column Promo Grid
@@ -53,13 +119,16 @@
     #cbd5e1 100%
   );
 
-  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Plus Jakarta Sans', Arial, sans-serif;
-  --font-mono: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', 'Plus Jakarta Sans', Arial, sans-serif;
+  --font-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+
+  --glass-specular: inset 0 1px 0 rgba(255, 255, 255, 0.88), inset 0 0 0 0.5px rgba(255, 255, 255, 0.52);
 
   --max-width: 1080px;
-  --radius-sm: 10px;
+  --radius-sm: 12px;
   --radius-md: 20px;
-  --radius-lg: 26px;
+  --radius-lg: 28px;
   --radius-pill: 980px;
 
   --spring-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -101,6 +170,7 @@
   --shadow-card-hover: 0 18px 46px rgba(0, 0, 0, 0.7);
   --shadow-deck: 0 28px 70px rgba(0, 0, 0, 0.85);
   --shadow-modal: 0 32px 76px rgba(0, 0, 0, 0.82);
+  --glass-specular: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
 
   --wordmark-gradient: linear-gradient(
     112deg,
@@ -125,6 +195,7 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-padding-top: 104px;
 }
 
 body {
@@ -167,11 +238,12 @@ textarea {
   position: sticky;
   top: 0;
   z-index: 60;
-  height: 48px;
+  height: 44px;
   background: var(--bg-nav);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(22px);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
   border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--glass-specular);
 }
 
 .nav-content {
@@ -529,11 +601,11 @@ textarea {
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
-  border-radius: 22px;
+  border-radius: 28px;
   padding: 20px 24px 24px;
   background: var(--bg-elevated);
-  border: 1.5px solid var(--border-strong);
-  box-shadow: var(--shadow-deck);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--glass-specular), var(--shadow-deck);
   text-align: left;
   transition:
     border-color 240ms var(--ease-smooth),
@@ -3418,12 +3490,16 @@ textarea {
 .highlights-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(min(100%, 480px), 540px);
-  gap: 20px;
+  grid-auto-columns: minmax(min(88vw, 460px), 530px);
+  gap: 22px;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 4px 16px;
+  padding-top: 6px;
+  padding-bottom: 20px;
+  padding-inline: max(24px, calc((100vw - 1080px) / 2 + 24px));
+  scroll-padding-inline-start: max(24px, calc((100vw - 1080px) / 2 + 24px));
+  scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
 
@@ -3440,7 +3516,8 @@ textarea {
   flex-direction: column;
   justify-content: space-between;
   gap: 18px;
-  box-shadow: var(--shadow-card);
+  scroll-snap-align: start;
+  box-shadow: var(--glass-specular), var(--shadow-card);
   cursor: pointer;
   transition:
     transform 320ms var(--spring-out),
@@ -4118,5 +4195,202 @@ textarea {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Apple Signature Typography, Two-Tone Editorial Cadence, Two-Tier Sticky
+   Sub-Navigation (ac-localnav), and Circular + Disclosure Controls
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+.hero-headline,
+.section-title,
+.compare-systems-title,
+.leadership-title,
+.closing-cta-title,
+.closer-look-title,
+.project-title,
+.highlight-pop-number,
+.bento-spec-stat {
+  font-family: var(--font-display);
+}
+
+.apple-tone-muted {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.apple-localnav {
+  position: sticky;
+  top: 44px;
+  z-index: 55;
+  height: 46px;
+  background: rgba(245, 245, 247, 0.78);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: var(--glass-specular);
+  transition: background-color 240ms var(--ease-smooth);
+}
+
+[data-theme="dark"] .apple-localnav {
+  background: rgba(18, 18, 20, 0.78);
+}
+
+.localnav-inner {
+  max-width: 1080px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.localnav-title {
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.localnav-chapters {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.localnav-chapters::-webkit-scrollbar {
+  display: none;
+}
+
+.localnav-link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  padding: 4px 0;
+  border-bottom: 1.5px solid transparent;
+  transition:
+    color 180ms var(--ease-smooth),
+    border-color 180ms var(--ease-smooth);
+}
+
+.localnav-link:hover,
+.localnav-link.active {
+  color: var(--text-primary);
+}
+
+.localnav-link.active {
+  border-bottom-color: var(--text-primary);
+}
+
+.localnav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.localnav-pill-cta {
+  padding: 4px 13px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--apple-blue);
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition:
+    background-color 180ms var(--ease-smooth),
+    transform 180ms var(--spring-out);
+}
+
+.localnav-pill-cta:hover {
+  background: var(--apple-blue-hover);
+  transform: scale(1.03);
+}
+
+.highlights-section {
+  padding-top: 44px;
+  padding-bottom: 24px;
+  max-width: none;
+}
+
+.highlights-carousel-shell {
+  position: relative;
+  width: 100%;
+}
+
+.highlights-edge-btn.edge-prev {
+  left: max(12px, calc((100vw - 1080px) / 2 - 18px));
+}
+
+.highlights-edge-btn.edge-next {
+  right: max(12px, calc((100vw - 1080px) / 2 - 18px));
+}
+
+.highlight-footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.apple-card-plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--bg-elevated);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1;
+  flex-shrink: 0;
+  transition:
+    transform 260ms var(--spring-bounce),
+    background-color 200ms var(--ease-smooth),
+    color 200ms var(--ease-smooth);
+}
+
+.highlight-card:hover .apple-card-plus,
+.project-card:hover .apple-card-plus,
+.closer-look-trigger-btn:hover .apple-card-plus {
+  transform: scale(1.08) rotate(90deg);
+  background: var(--apple-blue);
+  color: #ffffff;
+}
+
+.project-card,
+.bento-spec-tile,
+.leadership-card,
+.pub-card,
+.closing-cta-card,
+.stage-dock-pill,
+.stage-dock-action-btn {
+  box-shadow: var(--glass-specular), var(--shadow-card);
+}
+
+@media (max-width: 820px) {
+  .localnav-chapters {
+    display: none;
+  }
+}
+
+@media print {
+  .apple-localnav {
+    display: none !important;
   }
 }
