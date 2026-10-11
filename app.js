@@ -386,12 +386,18 @@
                 <rect x="28" y="75" width="264" height="6" rx="3" />
               </clipPath>
             </defs>
-            <rect x="18" y="6" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
-            <text x="87" y="19" text-anchor="middle" class="visual-badge">PANE 1: AGENT CHAT</text>
-            <rect x="164" y="6" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="233" y="19" text-anchor="middle" class="visual-label">PANE 2: SUBAGENT</text>
-            <rect x="18" y="30" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
-            <text x="87" y="43" text-anchor="middle" class="visual-label">PANE 3: TRACE GRAPH</text>
+            <g class="clickable-node" data-turn-btn="turn2">
+              <rect data-role="harness-pane-turn2" x="18" y="6" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
+              <text data-role="harness-pane-text-turn2" x="87" y="19" text-anchor="middle" class="visual-badge">PANE 1: AGENT CHAT</text>
+            </g>
+            <g class="clickable-node" data-turn-btn="turn8">
+              <rect data-role="harness-pane-turn8" x="164" y="6" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+              <text data-role="harness-pane-text-turn8" x="233" y="19" text-anchor="middle" class="visual-label">PANE 2: SUBAGENT</text>
+            </g>
+            <g class="clickable-node" data-turn-btn="turn14">
+              <rect data-role="harness-pane-turn14" x="18" y="30" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
+              <text data-role="harness-pane-text-turn14" x="87" y="43" text-anchor="middle" class="visual-label">PANE 3: TRACE GRAPH</text>
+            </g>
             <rect x="164" y="30" width="138" height="20" rx="5" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
             <text x="233" y="43" text-anchor="middle" class="visual-badge" data-role="harness-rpc-status">71% Cached</text>
             <rect x="18" y="55" width="284" height="33" rx="6" fill="var(--bg-elevated)" stroke="var(--border-strong)" stroke-width="1.2" />
@@ -416,15 +422,15 @@
             <text x="56" y="55" text-anchor="middle" class="visual-badge">NBD Dossier</text>
             <path class="trace-edge" d="M 98 46 L 122 46" />
             <path class="trace-packet" d="M 98 46 L 122 46" />
-            <g class="check-pill c1 is-highlighted">
+            <g class="check-pill c1 is-highlighted clickable-node" data-prep-btn="linter">
               <rect x="122" y="12" width="104" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
               <text x="174" y="25" text-anchor="middle" class="visual-badge">&#10003; Citations</text>
             </g>
-            <g class="check-pill c2 is-highlighted">
+            <g class="check-pill c2 is-highlighted clickable-node" data-prep-btn="nbd">
               <rect x="122" y="36" width="104" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
               <text x="174" y="49" text-anchor="middle" class="visual-badge">&#10003; 36/36 Checks</text>
             </g>
-            <g class="check-pill c3 is-highlighted">
+            <g class="check-pill c3 is-highlighted clickable-node" data-prep-btn="t1h">
               <rect x="122" y="60" width="104" height="19" rx="5" fill="var(--bg-elevated)" stroke="var(--accent)" stroke-width="1.2" />
               <text x="174" y="73" text-anchor="middle" class="visual-badge">&#10003; T-1h Window</text>
             </g>
@@ -1889,7 +1895,12 @@
     }
   }
 
-  function attachSandboxControls(rootContainer = document) {
+  let sandboxDelegationReady = false;
+
+  function attachSandboxControls() {
+    if (sandboxDelegationReady) return;
+    sandboxDelegationReady = true;
+
     const jgData = {
       vpc: "Dual-VPC: 14/14 Ingress & 18/18 Egress IM8 PASS",
       adlc: "14-Step ADLC: 4-6 wks -> < 3 min (>=0.85 Judge)",
@@ -1937,137 +1948,142 @@
     const ciLevels = {
       "90": {
         scale: 0.68,
+        pathD: "M 24 28 Q 110 38, 190 54 T 296 72 L 296 86 Q 190 70, 110 52 T 24 40 Z",
         title: "90% ADAPTIVE CONFORMAL INTERVAL (ACI)",
         readout: "PICP: 0.904, ECE: 0.018",
       },
       "95": {
         scale: 1.0,
+        pathD: "M 24 24 Q 110 34, 190 50 T 296 68 L 296 90 Q 190 74, 110 56 T 24 44 Z",
         title: "95% ADAPTIVE CONFORMAL INTERVAL (ACI)",
         readout: "PICP: 0.952, ECE: 0.012",
       },
       "99": {
         scale: 1.38,
+        pathD: "M 24 19 Q 110 29, 190 45 T 296 63 L 296 95 Q 190 79, 110 61 T 24 49 Z",
         title: "99% ADAPTIVE CONFORMAL INTERVAL (ACI)",
         readout: "PICP: 0.989, ECE: 0.009",
       },
     };
 
-    const sandboxes = [
-      ...(rootContainer.matches && rootContainer.matches(".project-visual, #closer-look-visual")
-        ? [rootContainer]
-        : []),
-      ...rootContainer.querySelectorAll(".project-visual, #closer-look-visual, .project-visual-sandbox"),
-    ];
-    sandboxes.forEach((box) => {
-      if (box.dataset.sandboxBound === "1") return;
-      box.dataset.sandboxBound = "1";
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!target || typeof target.closest !== "function") return;
 
-      const jgBtns = box.querySelectorAll("[data-jg-btn]");
-      if (jgBtns.length) {
+      const jgTrigger = target.closest("[data-jg-btn], [data-jg]");
+      if (jgTrigger) {
+        const box = jgTrigger.closest(".project-visual, #closer-look-visual, .project-visual-sandbox");
+        if (!box) return;
+        e.stopPropagation();
+        const key = jgTrigger.getAttribute("data-jg-btn") || jgTrigger.getAttribute("data-jg");
         const readout = box.querySelector('[data-role="readout-jumpgate"]');
-        const jgNodes = box.querySelectorAll("[data-jg]");
-        const selectJgStep = (key) => {
-          if (readout && jgData[key]) readout.textContent = jgData[key];
-          jgBtns.forEach((b) =>
-            b.classList.toggle("active", b.getAttribute("data-jg-btn") === key)
-          );
-          jgNodes.forEach((n) =>
-            n.classList.toggle("is-selected", n.getAttribute("data-jg") === key)
-          );
-        };
-        jgBtns.forEach((btn) =>
-          btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            selectJgStep(btn.getAttribute("data-jg-btn"));
-          })
+        if (readout && jgData[key]) readout.textContent = jgData[key];
+        box.querySelectorAll("button[data-jg-btn]").forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-jg-btn") === key)
         );
-        jgNodes.forEach((node) =>
-          node.addEventListener("click", (e) => {
-            e.stopPropagation();
-            selectJgStep(node.getAttribute("data-jg"));
-          })
+        box.querySelectorAll("[data-jg]").forEach((n) =>
+          n.classList.toggle("is-selected", n.getAttribute("data-jg") === key)
         );
+        return;
       }
 
-      const stepBtns = box.querySelectorAll("[data-step-btn]");
-      if (stepBtns.length) {
+      const stepTrigger = target.closest("[data-step-btn], [data-step]");
+      if (stepTrigger) {
+        const box = stepTrigger.closest(".project-visual, #closer-look-visual, .project-visual-sandbox");
+        if (!box) return;
+        e.stopPropagation();
+        const stepKey =
+          stepTrigger.getAttribute("data-step-btn") || stepTrigger.getAttribute("data-step");
         const readout = box.querySelector('[data-role="readout-agent-tracer"]');
-        const svgNodes = box.querySelectorAll("[data-step]");
-        const selectTracerStep = (stepKey) => {
-          if (readout && tracerData[stepKey]) readout.textContent = tracerData[stepKey];
-          stepBtns.forEach((b) =>
-            b.classList.toggle("active", b.getAttribute("data-step-btn") === stepKey)
-          );
-          svgNodes.forEach((n) =>
-            n.classList.toggle("is-selected", n.getAttribute("data-step") === stepKey)
-          );
-        };
-        stepBtns.forEach((btn) =>
-          btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            selectTracerStep(btn.getAttribute("data-step-btn"));
-          })
+        if (readout && tracerData[stepKey]) readout.textContent = tracerData[stepKey];
+        box.querySelectorAll("button[data-step-btn]").forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-step-btn") === stepKey)
         );
-        svgNodes.forEach((node) =>
-          node.addEventListener("click", (e) => {
-            e.stopPropagation();
-            selectTracerStep(node.getAttribute("data-step"));
-          })
+        box.querySelectorAll("[data-step]").forEach((n) =>
+          n.classList.toggle("is-selected", n.getAttribute("data-step") === stepKey)
         );
+        return;
       }
 
-      const turnBtns = box.querySelectorAll("[data-turn-btn]");
-      if (turnBtns.length) {
+      const turnTrigger = target.closest("[data-turn-btn]");
+      if (turnTrigger) {
+        const box = turnTrigger.closest(".project-visual, #closer-look-visual, .project-visual-sandbox");
+        if (!box) return;
+        e.stopPropagation();
+        const turnKey = turnTrigger.getAttribute("data-turn-btn");
+        const cfg = harnessTurns[turnKey];
+        if (!cfg) return;
+        box.querySelectorAll("button[data-turn-btn]").forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-turn-btn") === turnKey)
+        );
+        ["turn2", "turn8", "turn14"].forEach((k) => {
+          const rectEl = box.querySelector(`[data-role="harness-pane-${k}"]`);
+          const textEl = box.querySelector(`[data-role="harness-pane-text-${k}"]`);
+          const isSelected = k === turnKey;
+          if (rectEl) {
+            rectEl.setAttribute("stroke", isSelected ? "var(--accent)" : "var(--border-strong)");
+          }
+          if (textEl) {
+            textEl.setAttribute("class", isSelected ? "visual-badge" : "visual-label");
+          }
+        });
         const bar = box.querySelector('[data-role="harness-token-bar"]');
         const barLabel = box.querySelector('[data-role="harness-bar-label"]');
         const rpcStatus = box.querySelector('[data-role="harness-rpc-status"]');
         const readout = box.querySelector('[data-role="readout-antigravity-harness"]');
-        turnBtns.forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const cfg = harnessTurns[btn.getAttribute("data-turn-btn")];
-            if (!cfg) return;
-            turnBtns.forEach((b) => b.classList.toggle("active", b === btn));
-            if (bar) {
-              bar.setAttribute("width", String(cfg.width));
-              bar.setAttribute("fill", cfg.color);
-            }
-            if (barLabel) barLabel.textContent = cfg.label;
-            if (rpcStatus) rpcStatus.textContent = cfg.rpc;
-            if (readout) readout.textContent = cfg.readout;
-          });
-        });
+        if (bar) {
+          bar.setAttribute("width", String(cfg.width));
+          bar.style.width = `${cfg.width}px`;
+          bar.setAttribute("fill", cfg.color);
+          bar.style.fill = cfg.color;
+        }
+        if (barLabel) barLabel.textContent = cfg.label;
+        if (rpcStatus) rpcStatus.textContent = cfg.rpc;
+        if (readout) readout.textContent = cfg.readout;
+        return;
       }
 
-      const prepBtns = box.querySelectorAll("[data-prep-btn]");
-      if (prepBtns.length) {
+      const prepTrigger = target.closest("[data-prep-btn]");
+      if (prepTrigger) {
+        const box = prepTrigger.closest(".project-visual, #closer-look-visual, .project-visual-sandbox");
+        if (!box) return;
+        e.stopPropagation();
+        const key = prepTrigger.getAttribute("data-prep-btn");
+        if (!prepData[key]) return;
+        box.querySelectorAll("button[data-prep-btn]").forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-prep-btn") === key)
+        );
+        box.querySelectorAll("g.check-pill[data-prep-btn]").forEach((g) => {
+          const match = g.getAttribute("data-prep-btn") === key;
+          g.style.opacity = match ? "1" : "0.52";
+          const r = g.querySelector("rect");
+          if (r) r.setAttribute("stroke", match ? "var(--accent)" : "var(--border-strong)");
+        });
         const readout = box.querySelector('[data-role="readout-meeting-prep"]');
-        prepBtns.forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const key = btn.getAttribute("data-prep-btn");
-            prepBtns.forEach((b) => b.classList.toggle("active", b === btn));
-            if (readout && prepData[key]) readout.textContent = prepData[key];
-          });
-        });
+        if (readout) readout.textContent = prepData[key];
+        return;
       }
 
-      const ciBtns = box.querySelectorAll("[data-ci-btn]");
-      if (ciBtns.length) {
+      const ciTrigger = target.closest("[data-ci-btn]");
+      if (ciTrigger) {
+        const box = ciTrigger.closest(".project-visual, #closer-look-visual, .project-visual-sandbox");
+        if (!box) return;
+        e.stopPropagation();
+        const key = ciTrigger.getAttribute("data-ci-btn");
+        const cfg = ciLevels[key];
+        if (!cfg) return;
+        box.querySelectorAll("button[data-ci-btn]").forEach((b) =>
+          b.classList.toggle("active", b.getAttribute("data-ci-btn") === key)
+        );
         const band = box.querySelector('[data-role="aci-band-path"]');
         const title = box.querySelector('[data-role="aci-svg-title"]');
         const readout = box.querySelector('[data-role="readout-uq-xai"]');
-        ciBtns.forEach((btn) => {
-          btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            const cfg = ciLevels[btn.getAttribute("data-ci-btn")];
-            if (!cfg) return;
-            ciBtns.forEach((b) => b.classList.toggle("active", b === btn));
-            if (band) band.style.setProperty("--ci-scale", String(cfg.scale));
-            if (title) title.textContent = cfg.title;
-            if (readout) readout.textContent = cfg.readout;
-          });
-        });
+        if (band) {
+          band.setAttribute("d", cfg.pathD);
+          band.style.setProperty("--ci-scale", String(cfg.scale));
+        }
+        if (title) title.textContent = cfg.title;
+        if (readout) readout.textContent = cfg.readout;
       }
     });
   }
