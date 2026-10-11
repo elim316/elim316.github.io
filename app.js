@@ -1559,7 +1559,7 @@
         },
       };
 
-      const pTabOrder = ["pipeline", "linter", "sandbox"];
+      const pTabOrder = ["sandbox", "linter", "pipeline"];
       let pTabIdx = 0;
       const prepStepOrder = ["nbd", "linter", "t1h"];
       let prepIdx = 1;
@@ -1591,19 +1591,6 @@
           fPrep.querySelectorAll("[data-prep-sc]").forEach((b) => {
             b.classList.toggle("active", b === scBtn);
           });
-          const meta = prepHostScenarioMeta[scId];
-          if (meta) {
-            if (pHostDoingEl) pHostDoingEl.textContent = meta.doing;
-            if (pHostTourEl) {
-              pHostTourEl.innerHTML = meta.actions
-                .map(
-                  (a) =>
-                    `<button type="button" class="tracer-tour-pill" data-prep-act="${a.act}">${a.label}</button>`
-                )
-                .join("");
-              bindPrepHostTourButtons();
-            }
-          }
           postToPrepSandbox("scenario", scId);
         });
       });
@@ -1622,7 +1609,7 @@
         });
         const isSandbox = tabKey === "sandbox";
         if (pDiagramHeader) pDiagramHeader.style.display = isSandbox ? "none" : "flex";
-        if (pSandboxConsole) pSandboxConsole.style.display = isSandbox ? "flex" : "none";
+        if (pSandboxConsole) pSandboxConsole.style.display = "none";
         if (isSandbox) {
           const embFrame = document.getElementById("prep-embedded-iframe");
           if (embFrame && !embFrame.getAttribute("src") && embFrame.dataset.src) {
