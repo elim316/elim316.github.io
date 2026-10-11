@@ -63,14 +63,14 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261011-46" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261011-47" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css?v=20261011-46" />
+  <link rel="stylesheet" href="styles.css?v=20261011-47" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -880,15 +880,15 @@
                       <path class="trace-packet hero-stream" d="M 244 46 L 274 34" />
                       <path class="trace-packet hero-stream" d="M 244 70 L 274 82" />
 
-                      <g class="clickable-node" data-fstep="user">
-                        <rect class="trace-node" x="12" y="38" width="84" height="40" rx="8" />
-                        <text x="54" y="55" text-anchor="middle" class="visual-label">01: PROMPT</text>
+                      <g class="clickable-node is-selected" data-fstep="user">
+                        <rect class="trace-node node-accent" x="12" y="38" width="84" height="40" rx="8" />
+                        <text x="54" y="55" text-anchor="middle" class="visual-badge">01: PROMPT</text>
                         <text x="54" y="68" text-anchor="middle" class="deck-svg-label">Human goal</text>
                       </g>
 
-                      <g class="clickable-node is-selected" data-fstep="planner">
-                        <rect class="trace-node node-accent" x="136" y="34" width="108" height="48" rx="9" />
-                        <text x="190" y="54" text-anchor="middle" class="visual-badge">02: AI PLANNER</text>
+                      <g class="clickable-node" data-fstep="planner">
+                        <rect class="trace-node" x="136" y="34" width="108" height="48" rx="9" />
+                        <text x="190" y="54" text-anchor="middle" class="visual-label">02: AI PLANNER</text>
                         <text x="190" y="69" text-anchor="middle" class="visual-label">Writes plan</text>
                       </g>
 
@@ -906,18 +906,21 @@
                     </svg>
 
                     <!-- Dynamic Pop-Up Speech Bubble Explaining the Selected Step for Non-Technical Readers -->
-                    <div class="tracer-step-bubble" id="tracer-overview-bubble" style="--step-arrow-x: 50%;" aria-live="polite">
+                    <div class="tracer-step-bubble" id="tracer-overview-bubble" style="--step-arrow-x: 14%;" aria-live="polite">
                       <div class="tracer-bubble-top">
-                        <span class="tracer-bubble-kicker" id="tracer-bubble-kicker">STEP 2 OF 4: AI BRAIN</span>
-                        <span class="tracer-bubble-hint">Click any box above to see what it means</span>
+                        <span class="tracer-bubble-kicker" id="tracer-bubble-kicker">STEP 1 OF 4: HUMAN GOAL</span>
+                        <div class="tracer-bubble-top-right">
+                          <span class="tracer-bubble-hint">Click any box above to see what it means</span>
+                          <button type="button" class="tracer-bubble-close-btn" id="tracer-bubble-close-btn" title="Close bubble" aria-label="Close bubble">&#215;</button>
+                        </div>
                       </div>
                       <div class="tracer-bubble-main">
                         <div class="tracer-bubble-text">
-                          <div class="tracer-bubble-title" id="tracer-bubble-title">The AI pauses to write a clear plan first</div>
-                          <div class="tracer-bubble-desc" id="tracer-bubble-desc">Like a thoughtful project lead, the main AI breaks the request into smaller steps before editing anything so nothing gets missed.</div>
+                          <div class="tracer-bubble-title" id="tracer-bubble-title">A person sets the goal</div>
+                          <div class="tracer-bubble-desc" id="tracer-bubble-desc">Everything begins here. Instead of writing technical instructions, a person simply asks the AI to check a payment file so customers are never double-charged.</div>
                         </div>
                         <button type="button" class="tracer-bubble-next-btn" id="tracer-bubble-next-btn">
-                          <span id="tracer-bubble-next-label">Next bubble: Tool Call &#8594;</span>
+                          <span id="tracer-bubble-next-label">Next bubble: AI Planner &#8594;</span>
                         </button>
                       </div>
                     </div>
@@ -956,7 +959,7 @@
                     <iframe
                       id="tracer-embedded-iframe"
                       class="tracer-sandbox-frame"
-                      data-src="sandbox/agent-tracer/index.html?embed=1&amp;v=20261010-38"
+                      data-src="sandbox/agent-tracer/index.html?embed=1&amp;v=20261011-47"
                       title="Interactive Agent Tracer Sandbox"
                     ></iframe>
                   </div>
@@ -1082,8 +1085,8 @@
                     <iframe
                       id="prep-embedded-iframe"
                       class="tracer-sandbox-frame"
-                      src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261011-45"
-                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261011-45"
+                      src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261011-47"
+                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261011-47"
                       title="Interactive Meeting Prep Week Calendar"
                     ></iframe>
                   </div>
@@ -1120,17 +1123,17 @@
                       <text x="34" y="28" text-anchor="end" class="visual-label">09:00</text>
                       <text x="34" y="70" text-anchor="end" class="visual-label">11:00</text>
                       <text x="34" y="112" text-anchor="end" class="visual-label">14:00</text>
-                      <g class="clickable-node" data-fprep="nbd">
-                        <rect class="trace-node" x="46" y="12" width="112" height="106" rx="8" />
-                        <text x="102" y="31" text-anchor="middle" class="visual-label">THU 09:00 SCAN</text>
+                      <g class="clickable-node is-selected" data-fprep="nbd">
+                        <rect class="trace-node node-accent" x="46" y="12" width="112" height="106" rx="8" />
+                        <text x="102" y="31" text-anchor="middle" class="visual-badge">THU 09:00 SCAN</text>
                         <rect x="54" y="40" width="96" height="28" rx="5" style="fill: var(--bg-subtle); stroke: var(--border); stroke-dasharray: 2.5 2;" />
                         <text x="102" y="57" text-anchor="middle" class="visual-label">09:00 Standup (Skip)</text>
                         <rect x="54" y="76" width="96" height="32" rx="5" style="fill: rgba(0, 102, 204, 0.1); stroke: var(--accent);" />
                         <text x="102" y="96" text-anchor="middle" class="visual-badge">10:00 Acme Sync</text>
                       </g>
-                      <g class="clickable-node is-selected" data-fprep="linter">
-                        <rect class="trace-node node-accent" x="168" y="8" width="118" height="114" rx="8" />
-                        <text x="227" y="29" text-anchor="middle" class="visual-badge">&#10003; 1-PAGE DOSSIER</text>
+                      <g class="clickable-node" data-fprep="linter">
+                        <rect class="trace-node" x="168" y="8" width="118" height="114" rx="8" />
+                        <text x="227" y="29" text-anchor="middle" class="visual-label">&#10003; 1-PAGE DOSSIER</text>
                         <rect x="177" y="38" width="100" height="34" rx="5" style="fill: rgba(0, 102, 204, 0.1); stroke: var(--accent);" />
                         <text x="227" y="53" text-anchor="middle" class="visual-badge">36 / 36 Checked</text>
                         <text x="227" y="66" text-anchor="middle" class="visual-label">0 Invented URLs</text>
@@ -1148,18 +1151,21 @@
                       </g>
                     </svg>
 
-                    <div class="tracer-step-bubble" id="prep-overview-bubble" style="--step-arrow-x: 50%;" aria-live="polite">
+                    <div class="tracer-step-bubble" id="prep-overview-bubble" style="--step-arrow-x: 16%;" aria-live="polite">
                       <div class="tracer-bubble-top">
-                        <span class="tracer-bubble-kicker" id="prep-bubble-kicker">STEP 2 OF 3: ZERO FAKE LINKS</span>
-                        <span class="tracer-bubble-hint">Click any column above to inspect</span>
+                        <span class="tracer-bubble-kicker" id="prep-bubble-kicker">STEP 1 OF 3: 5 PM EVENING RUN</span>
+                        <div class="tracer-bubble-top-right">
+                          <span class="tracer-bubble-hint">Click any column above to inspect</span>
+                          <button type="button" class="tracer-bubble-close-btn" id="prep-bubble-close-btn" title="Close bubble" aria-label="Close bubble">&#215;</button>
+                        </div>
                       </div>
                       <div class="tracer-bubble-main">
                         <div class="tracer-bubble-text">
-                          <div class="tracer-bubble-title" id="prep-bubble-title">Every link and person is verified before emailing</div>
-                          <div class="tracer-bubble-desc" id="prep-bubble-desc">Before sending anything to your inbox, 36 automatic checks verify every document link, participant role, and ticket ID so the AI never makes up fake facts.</div>
+                          <div class="tracer-bubble-title" id="prep-bubble-title">Spots real external &amp; cross-team calls automatically</div>
+                          <div class="tracer-bubble-desc" id="prep-bubble-desc">Every weekday at 5 PM, the assistant looks ahead at tomorrow's calendar, skips team stand-ups, focus blocks, and declined invites, and researches only the meetings that need preparation.</div>
                         </div>
                         <button type="button" class="tracer-bubble-next-btn" id="prep-bubble-next-btn">
-                          <span id="prep-bubble-next-label">Next bubble: Pre-Call &#8594;</span>
+                          <span id="prep-bubble-next-label">Next bubble: Fact Check &#8594;</span>
                         </button>
                       </div>
                     </div>
@@ -1271,8 +1277,8 @@
                     <iframe
                       id="uq-embedded-iframe"
                       class="tracer-sandbox-frame"
-                      src="sandbox/uq-battery/index.html?embed=1&amp;v=20261011-46"
-                      data-src="sandbox/uq-battery/index.html?embed=1&amp;v=20261011-46"
+                      src="sandbox/uq-battery/index.html?embed=1&amp;v=20261011-47"
+                      data-src="sandbox/uq-battery/index.html?embed=1&amp;v=20261011-47"
                       title="Interactive Battery UQ and XAI Digital Twin"
                     ></iframe>
                   </div>
@@ -1308,15 +1314,15 @@
                       <path class="trace-packet hero-stream" d="M 102 28 L 136 28" />
                       <path class="trace-packet hero-stream" d="M 244 28 L 278 28" />
 
-                      <g class="clickable-node" data-fci-node="90">
-                        <rect class="trace-node" x="14" y="10" width="88" height="36" rx="7" />
-                        <text x="58" y="25" text-anchor="middle" class="visual-label">01: SENSORS</text>
+                      <g class="clickable-node is-selected" data-fci-node="90">
+                        <rect class="trace-node node-accent" x="14" y="10" width="88" height="36" rx="7" />
+                        <text x="58" y="25" text-anchor="middle" class="visual-badge">01: SENSORS</text>
                         <text x="58" y="37" text-anchor="middle" class="deck-svg-label">Voltage + Heat</text>
                       </g>
 
-                      <g class="clickable-node is-selected" data-fci-node="95">
-                        <rect class="trace-node node-accent" x="136" y="8" width="108" height="40" rx="8" />
-                        <text x="190" y="25" text-anchor="middle" class="visual-badge">02: CNN + ACI</text>
+                      <g class="clickable-node" data-fci-node="95">
+                        <rect class="trace-node" x="136" y="8" width="108" height="40" rx="8" />
+                        <text x="190" y="25" text-anchor="middle" class="visual-label">02: CNN + ACI</text>
                         <text x="190" y="39" text-anchor="middle" class="visual-label">95.2% Confidence</text>
                       </g>
 
@@ -1347,18 +1353,21 @@
                       <text x="22" y="110" class="visual-label">McMaster &amp; Oxford Battery Ageing Curve</text>
                     </svg>
 
-                    <div class="tracer-step-bubble" id="uq-overview-bubble" style="--step-arrow-x: 50%;" aria-live="polite">
+                    <div class="tracer-step-bubble" id="uq-overview-bubble" style="--step-arrow-x: 22%;" aria-live="polite">
                       <div class="tracer-bubble-top">
-                        <span class="tracer-bubble-kicker" id="uq-bubble-kicker">STEP 2 OF 3: CALIBRATED CONFIDENCE</span>
-                        <span class="tracer-bubble-hint">Click any stage above to inspect</span>
+                        <span class="tracer-bubble-kicker" id="uq-bubble-kicker">STEP 1 OF 3: RAW TELEMETRY INGESTION</span>
+                        <div class="tracer-bubble-top-right">
+                          <span class="tracer-bubble-hint">Click any stage above to inspect</span>
+                          <button type="button" class="tracer-bubble-close-btn" id="uq-bubble-close-btn" title="Close bubble" aria-label="Close bubble">&#215;</button>
+                        </div>
                       </div>
                       <div class="tracer-bubble-main">
                         <div class="tracer-bubble-text">
-                          <div class="tracer-bubble-title" id="uq-bubble-title">Every forecast carries a verified safety band</div>
-                          <div class="tracer-bubble-desc" id="uq-bubble-desc">Combines Monte Carlo Dropout and sensor noise through Adaptive Conformal Inference to hold 95.2% empirical coverage on unseen Oxford battery cells.</div>
+                          <div class="tracer-bubble-title" id="uq-bubble-title">Multi-sensor discharge curves capture subtle ageing shifts</div>
+                          <div class="tracer-bubble-desc" id="uq-bubble-desc">Streams terminal voltage drop (dV/dt), internal resistance growth, and surface cell temperature across thousands of McMaster and Oxford cycling curves.</div>
                         </div>
                         <button type="button" class="tracer-bubble-next-btn" id="uq-bubble-next-btn">
-                          <span id="uq-bubble-next-label">Next bubble: XAI Attribution &#8594;</span>
+                          <span id="uq-bubble-next-label">Next bubble: Calibrated Confidence &#8594;</span>
                         </button>
                       </div>
                     </div>
@@ -2103,6 +2112,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261011-46"></script>
+  <script src="app.js?v=20261011-47"></script>
 </body>
 </html>
