@@ -1189,6 +1189,19 @@ textarea {
   display: block;
 }
 
+#flagship-prep-sandbox:has([data-prep-tab="sandbox"].active) .browser-single-pane {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#flagship-prep-sandbox .tracer-sandbox-frame {
+  border: none;
+  border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+  border-radius: 0;
+  height: 604px;
+}
+
 .about-live-story {
   font-size: 0.92rem;
   line-height: 1.56;
