@@ -3,55 +3,36 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Meeting Prep &amp; Dossier Sandbox | Elias Lim</title>
+<title>Meeting Prep &amp; Dossier Calendar | Elias Lim</title>
 <style>
   :root {
     --bg: #ffffff;
-    --bg-canvas: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-subtle: #f1f5f9;
-    --fg: #1d1d1f;
-    --fg-secondary: #424245;
-    --fg-muted: #6e6e73;
-    --border: #e2e8f0;
-    --border-strong: #cbd5e1;
-    --grid-line: #ebeef2;
-    --accent: #0066cc;
-    --accent-soft: rgba(0, 102, 204, 0.09);
-    --green: #15803d;
-    --green-soft: #dcfce7;
-    --green-border: #86efac;
-    --red: #b91c1c;
-    --red-soft: #fee2e2;
-    --red-border: #fca5a5;
-    --amber: #b45309;
-    --amber-soft: #fef3c7;
-    --amber-border: #fde68a;
+    --bg-sub: #f8fafc;
+    --fg: #1f2937;
+    --fg-sub: #4b5563;
+    --fg-muted: #6b7280;
+    --border: #e5e7eb;
+    --border-soft: #f1f5f9;
+    --accent: #1d63b8;
+    --col-blue: #1d63b8;
+    --col-green: #2b8a3e;
+    --col-lime: #74b816;
+    --col-pink: #e64980;
+    --col-grey: #6b7280;
+    --col-purple: #6741d9;
+    --col-orange: #e8590c;
+    --col-red: #c92a2a;
     --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", sans-serif;
   }
 
   [data-theme="dark"] {
-    --bg: #111315;
-    --bg-canvas: #0c0e11;
-    --bg-card: #181b20;
-    --bg-subtle: #20242b;
-    --fg: #f5f5f7;
-    --fg-secondary: #d1d5db;
+    --bg: #121519;
+    --bg-sub: #181c22;
+    --fg: #f3f4f6;
+    --fg-sub: #d1d5db;
     --fg-muted: #9ca3af;
-    --border: #2a2f38;
-    --border-strong: #374151;
-    --grid-line: #1f242d;
-    --accent: #3b82f6;
-    --accent-soft: rgba(59, 130, 246, 0.16);
-    --green: #4ade80;
-    --green-soft: rgba(34, 197, 94, 0.14);
-    --green-border: rgba(74, 222, 128, 0.35);
-    --red: #f87171;
-    --red-soft: rgba(239, 68, 68, 0.15);
-    --red-border: rgba(248, 113, 113, 0.35);
-    --amber: #fbbf24;
-    --amber-soft: rgba(245, 158, 11, 0.15);
-    --amber-border: rgba(251, 191, 36, 0.35);
+    --border: #2a303b;
+    --border-soft: #1f242d;
   }
 
   * {
@@ -70,308 +51,441 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Standalone Top Bar (hidden when embedded in portfolio iframe) */
-  #standalone-banner {
+  /* Standalone Top Bar (hidden when embedded inside portfolio stage) */
+  #standalone-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 8px 16px;
-    background: linear-gradient(90deg, #0f172a, #1e293b);
-    color: #f8fafc;
-    font-size: 12.5px;
-    flex-wrap: wrap;
+    padding: 7px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-sub);
+    font-size: 12px;
   }
 
-  body.is-embedded #standalone-banner {
+  body.is-embedded #standalone-bar {
     display: none;
   }
 
-  .banner-left {
+  .standalone-left {
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .banner-pill {
-    font-size: 10.5px;
+  .standalone-brand {
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 2px 8px;
-    border-radius: 999px;
-    background: rgba(59, 130, 246, 0.25);
-    color: #93c5fd;
+    font-size: 13px;
+    color: var(--fg);
+    margin-right: 6px;
   }
 
-  .banner-sc-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .banner-sc-btn {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.06);
-    color: #e2e8f0;
+  .sc-chip {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg-sub);
     font-family: inherit;
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 500;
-    padding: 4px 10px;
+    padding: 3px 10px;
     border-radius: 999px;
     cursor: pointer;
-    transition: all 0.15s ease;
   }
 
-  .banner-sc-btn:hover {
-    background: rgba(255, 255, 255, 0.14);
-  }
-
-  .banner-sc-btn.active {
-    background: #2563eb;
-    border-color: #3b82f6;
+  .sc-chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
     color: #ffffff;
     font-weight: 600;
   }
 
-  .banner-link {
-    color: #93c5fd;
+  .standalone-back {
+    color: var(--accent);
     text-decoration: none;
     font-weight: 600;
     font-size: 12px;
   }
 
-  /* Main Two-Column Workspace */
-  #app {
+  /* Main Calendar App Shell (Matches Classic Week Calendar Layout) */
+  #cal-app {
     display: flex;
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 37px);
+    background: var(--bg);
     overflow: hidden;
+    position: relative;
   }
 
-  body.is-embedded #app {
+  body.is-embedded #cal-app {
     height: 100%;
   }
 
-  /* Left Pane: Day Calendar Schedule View */
-  #left-pane {
-    flex: 1 1 0%;
-    width: 0;
-    min-width: 0;
+  /* Left Sidebar: Mini Month Calendar + Solid Colour Category Bars */
+  #cal-sidebar {
+    width: 186px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    padding: 12px 12px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--border);
-    background: var(--bg-card);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 7px 12px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    flex-wrap: nowrap;
-  }
-
-  .toolbar-left, .toolbar-right {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    flex-wrap: nowrap;
-    min-width: 0;
-  }
-
-  body.is-embedded #theme-btn {
-    display: none;
-  }
-
-  .cal-date-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--fg);
-    white-space: nowrap;
-  }
-
-  .cal-date-day {
-    background: var(--red);
-    color: #ffffff;
-    font-size: 9.5px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: var(--green);
-    background: var(--green-soft);
-    border: 1px solid var(--green-border);
-    padding: 2px 7px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-
-  .tool-btn {
-    border: 1px solid var(--border-strong);
-    background: var(--bg-card);
-    color: var(--fg-secondary);
-    font-family: inherit;
-    font-size: 10.5px;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 7px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.15s ease;
-  }
-
-  .tool-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .tool-btn.trap-btn {
-    border-color: var(--amber-border);
-    background: var(--amber-soft);
-    color: var(--amber);
-  }
-
-  .tool-btn.trap-btn.is-trapped {
-    border-color: var(--red-border);
-    background: var(--red-soft);
-    color: var(--red);
-  }
-
-  /* Legend Strip below Calendar Toolbar */
-  .cal-legend-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 6px 14px;
-    background: var(--bg-subtle);
-    border-bottom: 1px solid var(--border);
-    font-size: 11px;
-    color: var(--fg-muted);
-    flex-wrap: wrap;
-  }
-
-  .legend-items {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .legend-dot {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: 500;
-  }
-
-  .legend-swatch {
-    width: 9px;
-    height: 9px;
-    border-radius: 2.5px;
-    display: inline-block;
-  }
-
-  .legend-swatch.qual {
-    background: var(--accent);
-  }
-
-  .legend-swatch.skip {
-    background: var(--border-strong);
-  }
-
-  /* Scrollable Day Time Grid */
-  #calendar-scroll {
-    flex: 1;
+    gap: 14px;
     overflow-y: auto;
-    position: relative;
-    background: var(--bg-card);
-  }
-
-  .calendar-day-canvas {
-    position: relative;
-    height: 552px; /* 10 slots (09:00 to 18:00) * 55.2px */
-    min-height: 552px;
-    width: 100%;
-  }
-
-  .cal-hour-row {
-    position: relative;
-    height: 55.2px;
-    border-bottom: 1px solid var(--grid-line);
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .cal-hour-label {
-    width: 52px;
-    flex-shrink: 0;
-    padding: 4px 8px 0 10px;
-    font-size: 10.5px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    color: var(--fg-muted);
-    text-align: right;
+    background: var(--bg);
     user-select: none;
   }
 
-  /* Active 60-Min Reminder Window Band (shown in Scenario 03) */
-  .cal-window-band {
-    position: absolute;
-    left: 52px;
-    right: 0;
-    background: rgba(0, 102, 204, 0.07);
-    border-top: 1.5px dashed var(--accent);
-    border-bottom: 1.5px dashed var(--accent);
-    pointer-events: none;
-    z-index: 2;
+  .mini-cal-head {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    padding: 3px 10px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 6px;
+    padding: 0 2px;
   }
 
-  .cal-window-tag {
+  .mini-cal-arrow {
+    color: var(--fg-muted);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0 4px;
+  }
+
+  .mini-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px 0;
+    text-align: center;
+    font-size: 10.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mini-cal-dow {
+    color: var(--fg-muted);
+    font-weight: 600;
     font-size: 10px;
+    padding-bottom: 4px;
+  }
+
+  .mini-cal-day {
+    padding: 3px 0;
+    border-radius: 4px;
+    color: var(--fg);
+    cursor: pointer;
+  }
+
+  .mini-cal-day.muted {
+    color: var(--fg-muted);
+    opacity: 0.55;
+  }
+
+  .mini-cal-day.in-week {
+    background: rgba(29, 99, 184, 0.08);
+    font-weight: 600;
+  }
+
+  .mini-cal-day.is-today {
+    background: var(--accent);
+    color: #ffffff;
     font-weight: 700;
-    color: var(--accent);
-    background: var(--bg-card);
-    border: 1px solid var(--accent);
-    padding: 1px 7px;
     border-radius: 999px;
   }
 
-  .cal-now-line {
+  .sidebar-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--fg);
+    padding: 4px 2px 6px;
+    border-top: 1px solid var(--border);
+  }
+
+  .cal-cat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .cal-cat-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.12s ease;
+  }
+
+  .cal-cat-bar:hover {
+    opacity: 0.9;
+  }
+
+  .cal-cat-bar.is-muted {
+    opacity: 0.35;
+  }
+
+  .sidebar-foot-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 2px 0;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--fg-sub);
+    cursor: pointer;
+  }
+
+  /* Main Right Calendar Area */
+  #cal-main {
+    flex: 1 1 0%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    position: relative;
+  }
+
+  /* Clean Calendar Top Bar (< Today > | Sep 21 - 26, 2026 ... Day Week Agenda) */
+  #cal-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .cal-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cal-pill-group {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg-sub);
+    overflow: hidden;
+  }
+
+  .cal-nav-btn {
+    border: none;
+    background: transparent;
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 3px 9px;
+    cursor: pointer;
+  }
+
+  .cal-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .cal-range-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-left: 4px;
+  }
+
+  .cal-views-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .cal-view-tab {
+    border: none;
+    background: transparent;
+    color: var(--fg-sub);
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .cal-view-tab.active {
+    background: var(--border);
+    color: var(--fg);
+    font-weight: 700;
+  }
+
+  .cal-check-btn {
+    border: 1px solid var(--border);
+    background: var(--bg-sub);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+
+  .cal-check-btn.is-alert {
+    background: #fee2e2;
+    border-color: #fca5a5;
+    color: #b91c1c;
+  }
+
+  /* Week Header + All-Day Banners + Scrollable Hourly Columns */
+  #week-header-wrap {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .week-day-names {
+    display: grid;
+    grid-template-columns: 46px repeat(6, 1fr);
+    border-bottom: 1px solid var(--border);
+    font-size: 11.5px;
+  }
+
+  .week-gutter-lbl {
+    padding: 5px 6px;
+    color: var(--fg-muted);
+    font-size: 10.5px;
+    text-align: right;
+    border-right: 1px solid var(--border);
+  }
+
+  .week-col-head {
+    padding: 5px 8px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--fg-sub);
+    border-right: 1px solid var(--border);
+  }
+
+  .week-col-head:last-child {
+    border-right: none;
+  }
+
+  .week-col-head.is-focus-day {
+    color: var(--accent);
+    font-weight: 700;
+    background: rgba(29, 99, 184, 0.04);
+  }
+
+  /* Top All-Day / Automation Banner Rows (Matches Image 2 Top Strips) */
+  .allday-banners {
+    display: grid;
+    grid-template-columns: 46px repeat(6, 1fr);
+    padding: 3px 0;
+    gap: 2px 3px;
+    background: rgba(241, 245, 249, 0.55);
+  }
+
+  .allday-gutter {
+    border-right: 1px solid var(--border);
+  }
+
+  .allday-strip {
+    height: 17px;
+    line-height: 17px;
+    padding: 0 7px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+
+  /* Scrollable Multi-Column Time Grid */
+  #week-grid-scroll {
+    flex: 1 1 0%;
+    overflow-y: auto;
+    position: relative;
+    background: var(--bg);
+  }
+
+  #week-grid-canvas {
+    position: relative;
+    display: grid;
+    grid-template-columns: 46px repeat(6, 1fr);
+    height: 450px; /* 9 hours (9am to 6pm) * 50px */
+    min-height: 450px;
+  }
+
+  .time-gutter-col {
+    border-right: 1px solid var(--border);
+    position: relative;
+    user-select: none;
+  }
+
+  .time-hour-cell {
+    height: 50px;
+    padding: 3px 6px 0 0;
+    text-align: right;
+    font-size: 10.5px;
+    color: var(--fg-muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-col {
+    position: relative;
+    border-right: 1px solid var(--border);
+    background-image:
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border-soft) 1px, transparent 1px);
+    background-size: 100% 50px, 100% 25px;
+    background-position: 0 49px, 0 24px;
+  }
+
+  .day-col:last-child {
+    border-right: none;
+  }
+
+  .day-col.is-focus-day {
+    background-color: rgba(29, 99, 184, 0.02);
+  }
+
+  /* Shaded 1-Hour Reminder Band when Scenario 03 is Active */
+  .hour-scan-band {
     position: absolute;
-    left: 48px;
+    left: 0;
     right: 0;
-    height: 2px;
-    background: var(--red);
-    z-index: 4;
+    background: rgba(232, 89, 12, 0.12);
+    border-top: 2px solid var(--col-orange);
+    border-bottom: 2px solid var(--col-orange);
+    z-index: 2;
     pointer-events: none;
   }
 
-  .cal-now-line::before {
+  .now-time-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #dc2626;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .now-time-line::before {
     content: "";
     position: absolute;
     left: -4px;
@@ -379,555 +493,337 @@
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: var(--red);
+    background: #dc2626;
   }
 
-  /* Calendar Event Blocks on Time Grid */
-  .cal-event-block {
+  /* Solid Rounded Calendar Event Blocks (Matches Image 2) */
+  .cal-block {
     position: absolute;
-    left: 58px;
-    right: 12px;
-    border-radius: 8px;
-    padding: 6px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
+    left: 3px;
+    right: 3px;
+    border-radius: 5px;
+    padding: 4px 6px;
+    color: #ffffff;
+    font-size: 10.5px;
+    line-height: 1.25;
     cursor: pointer;
+    overflow: hidden;
     z-index: 3;
-    transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
-    overflow: hidden;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.15s ease;
   }
 
-  .cal-event-block.is-qualified {
-    background: var(--accent-soft);
-    border: 1px solid rgba(0, 102, 204, 0.28);
-    border-left: 4px solid var(--accent);
-    color: var(--fg);
+  .cal-block:hover {
+    z-index: 6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
   }
 
-  .cal-event-block.is-qualified:hover {
-    background: rgba(0, 102, 204, 0.14);
+  .cal-block.is-selected {
+    z-index: 7;
+    outline: 2.5px solid #111827;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
   }
 
-  .cal-event-block.is-skipped {
-    background: var(--bg-subtle);
-    border: 1px dashed var(--border-strong);
-    border-left: 3.5px solid var(--border-strong);
-    color: var(--fg-muted);
-    opacity: 0.84;
+  [data-theme="dark"] .cal-block.is-selected {
+    outline: 2.5px solid #ffffff;
   }
 
-  .cal-event-block.is-skipped:hover {
-    opacity: 1;
-    border-color: var(--fg-muted);
+  .cal-block.is-dimmed {
+    opacity: 0.22;
   }
 
-  .cal-event-block.is-selected {
-    background: rgba(0, 102, 204, 0.15);
-    border: 1.5px solid var(--accent);
-    border-left: 4.5px solid var(--accent);
-    box-shadow: 0 5px 16px rgba(0, 102, 204, 0.16);
-    opacity: 1;
-    z-index: 5;
-  }
-
-  .cal-ev-left {
-    min-width: 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .cal-ev-top-line {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    min-width: 0;
-  }
-
-  .cal-ev-time {
-    font-size: 10.5px;
+  .cal-block-title {
     font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--accent);
-    flex-shrink: 0;
+    margin-bottom: 1px;
   }
 
-  .cal-event-block.is-skipped .cal-ev-time {
-    color: var(--fg-muted);
+  .cal-block-sub {
+    font-size: 9.5px;
+    opacity: 0.92;
   }
 
-  .cal-ev-title {
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .cal-event-block.is-skipped .cal-ev-title {
-    text-decoration: line-through;
-    text-decoration-color: var(--border-strong);
-  }
-
-  .cal-ev-sub {
-    font-size: 10.5px;
-    color: var(--fg-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 1px;
-  }
-
-  .cal-ev-pill {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2.5px 8px;
-    border-radius: 999px;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-
-  .cal-ev-pill.qual {
-    background: var(--green-soft);
-    color: var(--green);
-    border: 1px solid var(--green-border);
-  }
-
-  .cal-ev-pill.skip {
-    background: var(--bg-card);
-    color: var(--fg-muted);
-    border: 1px solid var(--border);
-  }
-
-  /* Speech Bubble Docked Cleanly Above the Day Calendar Grid (Never Covers Events) */
-  .coach-bubble {
-    position: relative;
-    margin: 5px 10px 4px;
-    background: var(--bg-card);
-    border: 1.5px solid var(--accent);
-    border-radius: 10px;
-    padding: 7px 11px;
-    box-shadow: 0 5px 14px rgba(0, 102, 204, 0.1);
-    flex-shrink: 0;
-    z-index: 10;
-  }
-
-  .coach-bubble::after {
-    content: "";
+  /* Floating Pop-Up Bubble Next to Active Event Block */
+  #calPopoverBubble {
     position: absolute;
-    bottom: -6px;
-    left: 42px;
-    width: 10px;
-    height: 10px;
-    background: var(--bg-card);
-    border-bottom: 1.5px solid var(--accent);
-    border-right: 1.5px solid var(--accent);
-    border-bottom-right-radius: 2px;
-    transform: rotate(45deg);
-    pointer-events: none;
+    width: 318px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.2), 0 0 0 1px rgba(15, 23, 42, 0.05);
+    padding: 12px 14px;
+    z-index: 30;
+    transition: top 0.18s ease, left 0.18s ease;
   }
 
-  .coach-bubble.is-hidden {
+  #calPopoverBubble.is-hidden {
     display: none;
   }
 
-  .coach-bubble-top {
+  /* Left/Right Directional Pointer Arrow on Pop-Up Bubble */
+  #calPopoverArrow {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    background: var(--bg);
+    transform: rotate(45deg);
+    top: 22px;
+  }
+
+  #calPopoverBubble.arrow-left #calPopoverArrow {
+    left: -6px;
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  #calPopoverBubble.arrow-right #calPopoverArrow {
+    right: -6px;
+    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .pop-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
   }
 
-  .coach-bubble-step {
-    font-size: 9px;
+  .pop-step {
+    font-size: 9.5px;
     font-weight: 700;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--accent);
-    background: var(--accent-soft);
-    padding: 1.5px 6px;
+    letter-spacing: 0.05em;
+    padding: 2px 7px;
     border-radius: 999px;
+    background: rgba(29, 99, 184, 0.1);
+    color: var(--accent);
   }
 
-  .coach-bubble-close {
+  .pop-close {
     border: none;
     background: transparent;
     color: var(--fg-muted);
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
     cursor: pointer;
     padding: 0 3px;
-    line-height: 1;
   }
 
-  .coach-bubble-title {
-    font-size: 11.5px;
+  .pop-title {
+    font-size: 13px;
     font-weight: 700;
     color: var(--fg);
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    line-height: 1.28;
   }
 
-  .coach-bubble-desc {
+  .pop-meta {
     font-size: 10.5px;
-    line-height: 1.35;
-    color: var(--fg-secondary);
-    margin-bottom: 4px;
+    color: var(--fg-muted);
+    margin-bottom: 7px;
   }
 
-  .coach-bubble-footer {
+  .pop-desc {
+    font-size: 11.5px;
+    line-height: 1.44;
+    color: var(--fg-sub);
+    margin-bottom: 8px;
+  }
+
+  .pop-bullets {
+    list-style: none;
+    background: var(--bg-sub);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 9px;
+    margin-bottom: 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 10.5px;
+    color: var(--fg);
+  }
+
+  .pop-bullets li {
+    line-height: 1.35;
+  }
+
+  .pop-cite {
+    color: var(--accent);
+    font-weight: 600;
+    margin-left: 3px;
+  }
+
+  .pop-cite.alert {
+    color: #dc2626;
+  }
+
+  .pop-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    padding-top: 4px;
-    border-top: 1px solid var(--border);
-    flex-wrap: nowrap;
-  }
-
-  .coach-bubble-hint {
-    font-size: 9.5px;
-    color: var(--fg-muted);
-    white-space: nowrap;
-  }
-
-  .coach-bubble-nav {
-    display: inline-flex;
-    align-items: center;
     gap: 6px;
-    margin-left: auto;
+    padding-top: 7px;
+    border-top: 1px solid var(--border);
   }
 
-  .coach-nav-btn {
-    border: 1px solid var(--border-strong);
-    background: var(--bg);
-    color: var(--fg);
+  .pop-link-btn {
+    border: none;
+    background: transparent;
+    color: var(--accent);
     font-family: inherit;
     font-size: 10.5px;
     font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 999px;
     cursor: pointer;
+    padding: 0;
   }
 
-  .coach-nav-btn.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #ffffff;
-  }
-
-  /* Right Pane: Live Briefing Doc & 36-Check Fact Linter */
-  #right-pane {
-    width: 44%;
-    min-width: 290px;
-    max-width: 480px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    background: var(--bg-card);
-    overflow: hidden;
-  }
-
-  .right-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px 8px;
-    padding: 9px 14px;
-    border-bottom: 1px solid var(--border);
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .right-title {
-    font-size: 11.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent);
-    white-space: nowrap;
-  }
-
-  .right-tab-group {
+  .pop-nav-btns {
     display: inline-flex;
-    flex-wrap: wrap;
     align-items: center;
     gap: 5px;
     margin-left: auto;
   }
 
-  .right-tab {
-    border: 1px solid var(--border-strong);
-    background: var(--bg-subtle);
-    color: var(--fg-secondary);
+  .pop-btn {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg);
     font-family: inherit;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     padding: 3.5px 9px;
     border-radius: 999px;
     cursor: pointer;
   }
 
-  .right-tab.active {
+  .pop-btn.primary {
     background: var(--accent);
     border-color: var(--accent);
     color: #ffffff;
   }
 
-  #right-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .doc-card {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 13px;
-    background: var(--bg);
-  }
-
-  .doc-header-tag {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--fg-muted);
-    margin-bottom: 4px;
-  }
-
-  .doc-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--fg);
-    margin-bottom: 8px;
-    line-height: 1.3;
-  }
-
-  .doc-section-title {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--fg-secondary);
-    margin: 10px 0 5px;
-  }
-
-  .doc-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 12px;
-    line-height: 1.45;
-    color: var(--fg-secondary);
-  }
-
-  .doc-list li {
-    padding-left: 11px;
-    position: relative;
-  }
-
-  .doc-list li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 7px;
-    width: 4.5px;
-    height: 4.5px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-
-  .cite-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 10.5px;
-    font-weight: 600;
-    color: var(--accent);
-    background: var(--accent-soft);
-    padding: 1px 7px;
-    border-radius: 999px;
-    margin-left: 4px;
-  }
-
-  .cite-chip.fake-alert {
-    color: var(--red);
-    background: var(--red-soft);
-    border: 1px solid var(--red-border);
-  }
-
-  .linter-summary-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    background: var(--green-soft);
-    border: 1px solid var(--green-border);
-    color: var(--green);
-    font-size: 12px;
-    font-weight: 700;
-    flex-wrap: wrap;
-  }
-
-  .linter-summary-banner.failed {
-    background: var(--red-soft);
-    border-color: var(--red-border);
-    color: var(--red);
-  }
-
-  .check-item {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 9px 11px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    font-size: 12px;
-  }
-
-  .check-item.fail-row {
-    border-color: var(--red-border);
-    background: var(--red-soft);
-  }
-
-  .check-label {
-    font-weight: 600;
-    color: var(--fg);
-    margin-bottom: 2px;
-  }
-
-  .check-sub {
-    font-size: 11px;
-    color: var(--fg-muted);
-    line-height: 1.38;
-  }
-
-  .check-pill {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 7px;
-    border-radius: 999px;
-    background: var(--green-soft);
-    color: var(--green);
-    flex-shrink: 0;
-  }
-
-  .check-pill.fail {
-    background: var(--red);
-    color: #ffffff;
-  }
-
-  .digest-footer-note {
-    font-size: 11px;
-    font-style: italic;
-    color: var(--fg-muted);
-    padding: 9px 11px;
-    border-radius: 8px;
-    background: var(--bg-subtle);
-    border: 1px solid var(--border);
-    line-height: 1.4;
-  }
-
-  @media (max-width: 820px) {
-    #app {
-      flex-direction: column;
-      overflow-y: auto;
-    }
-    #left-pane, #right-pane {
-      width: 100%;
-      max-width: 100%;
-      flex: none;
+  @media (max-width: 720px) {
+    #cal-sidebar {
+      display: none;
     }
   }
 </style>
 </head>
 <body>
-  <div id="standalone-banner">
-    <div class="banner-left">
-      <span class="banner-pill">Interactive Sandbox</span>
-      <span>Smart Meeting Prep &amp; Dossier Generator</span>
-      <div class="banner-sc-group">
-        <button type="button" class="banner-sc-btn active" data-sc="next_day_mixed">01: Busy Day (6 Invites)</button>
-        <button type="button" class="banner-sc-btn" data-sc="next_day_cold_lead">02: Brand-New Contact</button>
-        <button type="button" class="banner-sc-btn" data-sc="t1h_window">03: 1-Hour Pre-Call Window</button>
-      </div>
+  <div id="standalone-bar">
+    <div class="standalone-left">
+      <span class="standalone-brand">Smart Meeting Prep Calendar</span>
+      <button type="button" class="sc-chip active" data-sc="next_day_mixed">01: Full Week Schedule</button>
+      <button type="button" class="sc-chip" data-sc="next_day_cold_lead">02: Brand-New Contact</button>
+      <button type="button" class="sc-chip" data-sc="t1h_window">03: 1-Hour Pre-Call Window</button>
     </div>
-    <a href="../../index.html#showcase-meeting-prep" class="banner-link">Back to Portfolio &#8599;</a>
+    <a href="../../index.html#showcase-meeting-prep" class="standalone-back">Back to Portfolio &#8599;</a>
   </div>
 
-  <div id="app">
-    <div id="left-pane">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <div class="cal-date-badge">
-            <span class="cal-date-day" id="cal-day-chip">THU</span>
-            <span id="cal-date-title">24 Sep Calendar</span>
+  <div id="cal-app">
+    <!-- Left Sidebar (Mini Month Calendar + Colour Category Bars) -->
+    <aside id="cal-sidebar">
+      <div>
+        <div class="mini-cal-head">
+          <span class="mini-cal-arrow">&#8249;</span>
+          <span>September 2026</span>
+          <span class="mini-cal-arrow">&#8250;</span>
+        </div>
+        <div class="mini-cal-grid" id="mini-cal-grid"></div>
+      </div>
+
+      <div>
+        <div class="sidebar-section-head">
+          <span>Calendars</span>
+          <span>&#8963;</span>
+        </div>
+        <div class="cal-cat-list" id="cal-cat-list">
+          <button type="button" class="cal-cat-bar" data-cat="external" style="background: var(--col-blue);">External Partners</button>
+          <button type="button" class="cal-cat-bar" data-cat="crossteam" style="background: var(--col-green);">Cross-Team Syncs</button>
+          <button type="button" class="cal-cat-bar" data-cat="t1h" style="background: var(--col-orange);">1h Pre-Call Window</button>
+          <button type="button" class="cal-cat-bar" data-cat="standup" style="background: var(--col-grey);">Internal Stand-ups</button>
+          <button type="button" class="cal-cat-bar" data-cat="focus" style="background: var(--col-lime);">Focus &amp; Prep Time</button>
+          <button type="button" class="cal-cat-bar" data-cat="broadcast" style="background: var(--col-pink);">Town Halls &amp; Reviews</button>
+          <button type="button" class="cal-cat-bar" data-cat="declined" style="background: var(--col-red);">Declined / OOO</button>
+        </div>
+      </div>
+
+      <div class="sidebar-foot-row" id="sidebar-reset-filter">
+        <span>Filter Categories</span>
+        <span id="filter-state-label">All Shown</span>
+      </div>
+    </aside>
+
+    <!-- Main Multi-Day Week Calendar Grid -->
+    <div id="cal-main">
+      <div id="cal-topbar">
+        <div class="cal-nav-left">
+          <div class="cal-pill-group">
+            <button type="button" class="cal-nav-btn" id="btn-prev-sc" title="Previous example">&#8249;</button>
+            <button type="button" class="cal-nav-btn" id="btn-today">Today</button>
+            <button type="button" class="cal-nav-btn" id="btn-next-sc" title="Next example">&#8250;</button>
           </div>
-          <span class="status-pill" id="left-status-pill">36 / 36 Checks Passed</span>
+          <span class="cal-range-label" id="cal-range-label">Sep 21 - 26, 2026</span>
         </div>
-        <div class="toolbar-right">
-          <button type="button" class="tool-btn trap-btn" id="toggle-fake-link-btn" title="Simulate what happens if an AI tries to invent a fake link">
-            Test Fake Link Blocker
-          </button>
-          <button type="button" class="tool-btn" id="theme-btn">Dark</button>
+
+        <div class="cal-views-right">
+          <button type="button" class="cal-view-tab" data-sc-view="next_day_cold_lead">New Contact</button>
+          <button type="button" class="cal-view-tab active" data-sc-view="next_day_mixed">Week</button>
+          <button type="button" class="cal-view-tab" data-sc-view="t1h_window">1h Window</button>
+          <button type="button" class="cal-check-btn" id="btn-fake-link">Test Fake Link Check</button>
+          <a href="index.html" target="_blank" rel="noopener noreferrer" class="cal-check-btn" id="btn-fullscreen-ext" style="text-decoration:none;color:var(--accent);">Full Screen &#8599;</a>
         </div>
       </div>
 
-      <div class="cal-legend-bar">
-        <div class="legend-items">
-          <span class="legend-dot"><span class="legend-swatch qual"></span>Briefing Created (Click to Read)</span>
-          <span class="legend-dot"><span class="legend-swatch skip"></span>Filtered Noise (Click Why)</span>
-        </div>
-        <span id="calendar-filter-summary">2 Briefings Ready, 4 Filtered Out</span>
-      </div>
-
-      <div class="coach-bubble" id="prepCoachBubble" role="region" aria-live="polite">
-        <div class="coach-bubble-top">
-          <span class="coach-bubble-step" id="coachBubbleStep">BUBBLE 1 OF 4</span>
-          <button type="button" class="coach-bubble-close" id="coachBubbleClose" title="Close explanation bubble">&#215;</button>
-        </div>
-        <div class="coach-bubble-title" id="coachBubbleTitle">Skipping routine calendar clutter</div>
-        <div class="coach-bubble-desc" id="coachBubbleDesc">
-          Out of 6 calendar blocks tomorrow, the assistant automatically skips internal stand-ups, focus blocks, large town halls, and declined invites so you only get briefed on real external or cross-team calls.
-        </div>
-        <div class="coach-bubble-footer">
-          <span class="coach-bubble-hint">Click any block on the calendar below</span>
-          <div class="coach-bubble-nav">
-            <button type="button" class="coach-nav-btn" id="coachBubblePrev">&#8592; Back</button>
-            <button type="button" class="coach-nav-btn primary" id="coachBubbleNext">Next Bubble &#8594;</button>
+      <div id="week-header-wrap">
+        <div class="week-day-names" id="week-day-names"></div>
+        <div class="allday-banners" id="allday-banners">
+          <div class="allday-gutter"></div>
+          <div class="allday-strip" style="grid-column: 2 / 5; background: var(--col-red);" data-banner="noise">
+            Auto-Filtered: Stand-ups, Focus Blocks &amp; Declined Invites
+          </div>
+          <div class="allday-strip" style="grid-column: 5 / 8; background: var(--col-orange);" data-banner="t1h">
+            Hourly 1h Pre-Call Scanner (Zero Duplicate Reminders)
+          </div>
+          <div class="allday-gutter"></div>
+          <div class="allday-strip" style="grid-column: 2 / 7; background: var(--col-green);" data-banner="linter">
+            5pm Evening Briefing Run: 36/36 Grounding &amp; Link Checks Passed
+          </div>
+          <div class="allday-strip" style="grid-column: 7 / 8; background: var(--col-blue);" data-banner="cold">
+            Honest Empty History
           </div>
         </div>
       </div>
 
-      <div id="calendar-scroll">
-        <div class="calendar-day-canvas" id="calendar-day-canvas">
-          <!-- Hourly grid rows + positioned event blocks rendered by JS -->
+      <div id="week-grid-scroll">
+        <div id="week-grid-canvas">
+          <!-- Rendered by JS: 9am-5pm left ruler + 6 day columns + solid event blocks -->
         </div>
-      </div>
-    </div>
 
-    <div id="right-pane">
-      <div class="right-header">
-        <span class="right-title" id="right-pane-heading">1-PAGE BRIEFING DOC</span>
-        <div class="right-tab-group">
-          <button type="button" class="right-tab active" data-rtab="doc">1-Page Briefing</button>
-          <button type="button" class="right-tab" data-rtab="linter">Fact Checker (36)</button>
+        <!-- Floating Pop-Up Bubble Pointing Directly at Calendar Event Blocks -->
+        <div id="calPopoverBubble" class="arrow-left" role="dialog" aria-live="polite">
+          <div id="calPopoverArrow"></div>
+          <div class="pop-top">
+            <span class="pop-step" id="popStepLabel">BUBBLE 1 OF 4</span>
+            <button type="button" class="pop-close" id="popCloseBtn" title="Close bubble">&#215;</button>
+          </div>
+          <div class="pop-title" id="popTitle">Acme &lt;&gt; Platform: API Rollout Sync</div>
+          <div class="pop-meta" id="popMeta">Thu 24 Sep, 10:00am - 11:15am | 1-Page Briefing Created</div>
+          <div class="pop-desc" id="popDesc">
+            Pulled unanswered Gmail threads, Chat notes, and shared Drive docs into a one-page briefing the evening before so you walk in prepared.
+          </div>
+          <ul class="pop-bullets" id="popBullets"></ul>
+          <div class="pop-footer">
+            <button type="button" class="pop-link-btn" id="popFakeToggle">Test fake AI link</button>
+            <div class="pop-nav-btns">
+              <button type="button" class="pop-btn" id="popPrevBtn">&#8592; Back</button>
+              <button type="button" class="pop-btn primary" id="popNextBtn">Next Bubble &#8594;</button>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="right-body"></div>
     </div>
   </div>
 
@@ -938,448 +834,508 @@
     document.body.classList.add("is-embedded");
   }
 
-  const START_HOUR = 9;
-  const END_HOUR = 15;
-  const HOUR_PX = 52;
+  const DAYS = [
+    { label: "Mon 21", dayNum: 21 },
+    { label: "Tue 22", dayNum: 22 },
+    { label: "Wed 23", dayNum: 23 },
+    { label: "Thu 24", dayNum: 24 },
+    { label: "Fri 25", dayNum: 25 },
+    { label: "Sat 26", dayNum: 26 }
+  ];
 
-  const SCENARIOS = {
-    next_day_mixed: {
-      dayChip: "THU",
-      dateTitle: "Tomorrow's Schedule (24 Sep)",
-      calSummary: "2 Briefings Ready, 4 Filtered Out",
-      startHour: 9,
-      endHour: 15,
-      hourPx: 52,
-      events: [
-        { id: "ev_standup", startH: 9.0, durH: 0.85, time: "09:00 - 09:50", title: "Infra Pod Standup", people: "Alex Morgan, Priya Nair, Wei Tan (Same Team)", qualified: false, skipReason: "Skipped: own-team standup" },
-        { id: "ev_acme", startH: 10.0, durH: 1.0, time: "10:00 - 11:00", title: "Acme <> Platform: API Rollout Sync", people: "Alex Chen (Director, Acme), Jordan Lee (TPM, Acme), Dana Martin", qualified: true, badge: "Briefing Ready", dossierKey: "acme" },
-        { id: "ev_allhands", startH: 11.15, durH: 0.8, time: "11:10 - 12:00", title: "Q3 Company All Hands", people: "312 invitees across engineering & product", qualified: false, skipReason: "Skipped: 312 attendees" },
-        { id: "ev_focus", startH: 12.1, durH: 0.8, time: "12:05 - 12:55", title: "Focus Time: Deep Work", people: "Personal calendar block", qualified: false, skipReason: "Skipped: focus block" },
-        { id: "ev_auth", startH: 13.0, durH: 1.0, time: "13:00 - 14:00", title: "Payments x Identity: Auth Migration Review", people: "Rahul Khan (Identity PM), Sofia Barros (Security), Dana Martin", qualified: true, badge: "Briefing Ready", dossierKey: "auth" },
-        { id: "ev_globex", startH: 14.15, durH: 0.8, time: "14:10 - 15:00", title: "Globex Vendor Demo", people: "Val Reyes (Globex Sales) - Invitation Declined", qualified: false, skipReason: "Skipped: declined invite" }
-      ],
-      dossiers: {
-        acme: {
-          docTitle: "Meeting Prep Dossier - Acme <> Platform: API Rollout Sync",
-          attendees: [
-            { text: "Alex Chen, Director of Engineering at Acme Corp (last met 10 days ago)", cite: "People Directory" },
-            { text: "Jordan Lee, Technical Programme Manager at Acme Corp", cite: "People Directory" },
-            { text: "Dana Martin, Partner Engineering Lead (APAC)", cite: "People Directory" }
-          ],
-          recap: [
-            { text: "Agreed to complete staging cutover first, followed by general launch two weeks later.", cite: "Calendar Notes (10d ago)" }
-          ],
-          blockers: [
-            { text: "Alex Chen's security team has not signed off on OAuth scope updates yet.", cite: "Gmail: Security Status" },
-            { text: "Jordan Lee asked 6 days ago whether staging cutover can move to code freeze week (awaiting your reply).", cite: "Gmail: Cutover Window" },
-            { text: "QA test coverage on v2 endpoints is at 60% and requires one extra sprint.", cite: "Chat: Acme x Platform" }
-          ],
-          agenda: [
-            "Confirm target sign-off date for Acme security review on OAuth scopes.",
-            "Reply to Jordan Lee on locking the staging cutover window.",
-            "Review updated launch timeline in Q4 Roadmap & Launch Plan deck."
-          ],
-          footer: "Filtered from digest: Infra Pod Standup (own-team standup), Q3 Company All Hands (312 attendees), Focus Time (focus block), Globex Vendor Demo (declined)."
-        },
-        auth: {
-          docTitle: "Meeting Prep Dossier - Payments x Identity: Auth Migration Review",
-          attendees: [
-            { text: "Rahul Khan, Product Manager (Identity Platform PM)", cite: "People Directory" },
-            { text: "Sofia Barros, Security Engineer (Security Reviews)", cite: "People Directory" }
-          ],
-          recap: [
-            { text: "Split authentication migration into two phases; Phase 1 owner still unassigned.", cite: "Calendar Notes (21d ago)" }
-          ],
-          blockers: [
-            { text: "Rahul Khan is waiting on your review of the Token Exchange Design doc before booking sprint capacity.", cite: "Drive: Token Exchange Doc" },
-            { text: "Security review ticket b/412998877 needs a named engineering owner before review.", cite: "Chat: payments-identity-sync" }
-          ],
-          agenda: [
-            "Approve or comment on Rahul Khan's Token Exchange Design document.",
-            "Assign Phase 1 engineering owner for security ticket b/412998877."
-          ],
-          footer: "Filtered from digest: Infra Pod Standup (own-team standup), Q3 Company All Hands (312 attendees), Focus Time (focus block), Globex Vendor Demo (declined)."
-        }
-      },
-      checks: [
-        { label: "Attendee Identity & Title Check", sub: "Verified Alex Chen, Jordan Lee, Rahul Khan, and Sofia Barros against People Directory; declined vendor Val Reyes excluded.", pass: true },
-        { label: "Source Link Verification (17 / 17)", sub: "Every Gmail thread, Chat message, and Google Drive link matched exact workspace IDs with zero invented URLs.", pass: true },
-        { label: "Routine Noise Filtering", sub: "Skipped same-team standup, 312-person broadcast, focus block, and declined invite automatically.", pass: true },
-        { label: "Transparency Footer Present", sub: "Single-line summary lists every skipped meeting and the 2-to-3 word reason it was filtered.", pass: true }
-      ],
-      tour: [
-        { anchorEventId: "ev_standup", dossierKey: "acme", rightTab: "doc", stepLabel: "BUBBLE 1 OF 4", title: "Skipping routine calendar clutter", desc: "Out of 6 calendar blocks tomorrow, the assistant automatically ignores internal stand-ups, focus blocks, town halls, and declined invites so you only focus on real external or cross-team calls." },
-        { anchorEventId: "ev_acme", dossierKey: "acme", rightTab: "doc", stepLabel: "BUBBLE 2 OF 4", title: "10:00 Acme Sync: Briefing built overnight", desc: "Because Alex Chen and Jordan Lee are external partners, the assistant pulled unanswered Gmail threads, Chat notes, and shared decks into a one-page briefing on the right." },
-        { anchorEventId: "ev_auth", dossierKey: "auth", rightTab: "doc", stepLabel: "BUBBLE 3 OF 4", title: "13:00 Cross-team review: Click any blue event", desc: "Click between blue blocks on the calendar (like Payments x Identity) to switch the one-page briefing and see open tasks awaiting your reply." },
-        { anchorEventId: "ev_acme", dossierKey: "acme", rightTab: "linter", stepLabel: "BUBBLE 4 OF 4", title: "36 automatic checks block invented links", desc: "Before sending your briefing, a strict fact checker verifies every URL, person's name, and ticket number against real workspace data so the AI can never make up fake links." }
+  const START_H = 9;
+  const END_H = 17;
+  const HOUR_PX = 50;
+
+  /* Full Week Calendar Events Across Mon 21 - Sat 26 (Solid Colour Blocks Like Reference Pic 2) */
+  const EVENTS = [
+    {
+      id: "mon_standup",
+      col: 0, startH: 9.25, durH: 1.0,
+      color: "var(--col-grey)", cat: "standup",
+      timeText: "9:15am Infra Pod Standup",
+      subText: "Alex Morgan, Priya Nair",
+      meta: "Mon 21 Sep, 9:15am - 10:15am | Auto-Skipped",
+      desc: "Internal stand-up with your immediate engineering team is skipped automatically so daily briefings only cover external partners and cross-team reviews.",
+      bullets: [
+        { t: "Rule matched: Same-team recurring daily sync", c: "Calendar Filter" },
+        { t: "Listed in single-line transparency footer only", c: "Zero Inbox Noise" }
       ]
     },
-
-    next_day_cold_lead: {
-      dayChip: "FRI",
-      dateTitle: "Tomorrow's Schedule (25 Sep)",
-      calSummary: "1 New External Call, 2 Internal Blocks",
-      startHour: 9,
-      endHour: 13,
-      hourPx: 66,
-      events: [
-        { id: "ev_standup2", startH: 9.15, durH: 0.85, time: "09:10 - 10:00", title: "Weekly Architecture Sync", people: "Internal Engineering Team", qualified: false, skipReason: "Skipped: own-team sync" },
-        { id: "ev_initech", startH: 10.5, durH: 1.15, time: "10:30 - 11:40", title: "Initech <> Platform: Intro Call", people: "Marta Novak (VP Data Platform, Initech)", qualified: true, badge: "First-Time External", dossierKey: "initech" },
-        { id: "ev_focus2", startH: 12.15, durH: 0.85, time: "12:10 - 13:00", title: "Deep Work: Code Review Block", people: "Personal calendar block", qualified: false, skipReason: "Skipped: focus block" }
-      ],
-      dossiers: {
-        initech: {
-          docTitle: "Meeting Prep Dossier - Initech <> Platform: Intro Call",
-          attendees: [
-            { text: "Marta Novak, VP Data Platform at Initech (first-time external introduction)", cite: "Directory Match" }
-          ],
-          recap: [
-            { text: "No prior context found across Calendar, Gmail, Chat, or Google Drive.", cite: "Verified Empty History" }
-          ],
-          blockers: [
-            { text: "No prior email threads, open tickets, or shared documents exist with Initech.", cite: "0 Fabricated Items" }
-          ],
-          agenda: [
-            "Introduce Core Platform architecture and understand Initech's data platform priorities.",
-            "Agree on follow-up technical evaluation owners and next steps."
-          ],
-          footer: "Zero prior history mode active: assistant explicitly reports when no past files exist rather than guessing."
-        }
-      },
-      checks: [
-        { label: "Explicit Empty-History Honesty", sub: "Confirmed exact phrase 'No prior context found' when zero past emails or docs exist.", pass: true },
-        { label: "Zero Invented Past Meetings (7 / 7)", sub: "Verified zero made-up recaps, fake Google Doc links, or invented bug numbers.", pass: true }
-      ],
-      tour: [
-        { anchorEventId: "ev_initech", dossierKey: "initech", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Brand-new external contact on calendar", desc: "Tomorrow at 10:30 is a first-time introductory call with Marta Novak at Initech, someone you have never emailed or met before." },
-        { anchorEventId: "ev_initech", dossierKey: "initech", rightTab: "doc", stepLabel: "BUBBLE 2 OF 3", title: "Never invents fake past meetings", desc: "Ordinary AI tools often hallucinate plausible-sounding past recaps. This assistant states 'No prior context found' clearly so you walk in knowing it is a fresh introduction." },
-        { anchorEventId: "ev_initech", dossierKey: "initech", rightTab: "linter", stepLabel: "BUBBLE 3 OF 3", title: "Verified 100% grounded", desc: "All 7 anti-guessing checks pass, ensuring zero fake document links or invented action items slip through." }
+    {
+      id: "mon_prep",
+      col: 0, startH: 12.0, durH: 1.1,
+      color: "var(--col-lime)", cat: "focus",
+      timeText: "12pm Architecture Focus Block",
+      subText: "Personal Deep Work",
+      meta: "Mon 21 Sep, 12:00pm - 1:05pm | Auto-Skipped",
+      desc: "Personal solo focus blocks have zero external attendees and are skipped cleanly without generating unnecessary briefing emails.",
+      bullets: [
+        { t: "Rule matched: Solo focus block (1 attendee)", c: "Calendar Filter" }
       ]
     },
-
-    t1h_window: {
-      dayChip: "NOW",
-      dateTitle: "Live Day View (Current Time: 13:00)",
-      calSummary: "1 Inside [14:00 - 15:00] Reminder Band",
-      startHour: 12,
-      endHour: 16,
-      hourPx: 68,
-      nowHour: 13.0,
-      windowStartH: 14.0,
-      windowEndH: 15.0,
-      events: [
-        { id: "ev_umbrella", startH: 13.25, durH: 0.65, time: "13:15 (In 15m)", title: "Umbrella Logistics QBR", people: "Gwen Osei (CTO, Umbrella Logistics)", qualified: false, skipReason: "Reminded at 12:00 run" },
-        { id: "ev_northwind", startH: 14.15, durH: 0.75, time: "14:10 (In 70m)", title: "Northwind Integration Kickoff", people: "Tom Hale (Head of Integrations, Northwind), Dana Martin", qualified: true, badge: "Matched 1h Window", dossierKey: "northwind" },
-        { id: "ev_stark", startH: 15.25, durH: 0.85, time: "15:15 (In 135m)", title: "Stark Industries Procurement Review", people: "Pete Stark (Procurement Lead, Stark Industries)", qualified: false, skipReason: "Queued for 14:00 run" }
-      ],
-      dossiers: {
-        northwind: {
-          docTitle: "1-Hour Pre-Call Reminder - Northwind Integration Kickoff",
-          attendees: [
-            { text: "Tom Hale, Head of Integrations at Northwind Traders", cite: "People Directory" },
-            { text: "Dana Martin, Partner Engineering Lead (APAC)", cite: "People Directory" }
-          ],
-          recap: [
-            { text: "Same-day booking spotted inside the 14:00 - 15:00 pre-call window; fast research pass completed in 38 seconds.", cite: "Stateless Hourly Window" }
-          ],
-          blockers: [
-            { text: "Tom Hale asked 2 days ago for connector rate-limit numbers and is still waiting for your reply.", cite: "Gmail: Scoping Questions" },
-            { text: "Shared scope document has connector endpoints listed with rate limits marked TBD.", cite: "Drive: Northwind Scope Draft" }
-          ],
-          agenda: [
-            "Share exact connector rate-limit figures to unblock Tom Hale's engineering team.",
-            "Walk through Northwind Integration Scope Draft together live."
-          ],
-          footer: "Stateless hourly window [14:00 - 15:00): Umbrella QBR (13:15) and Stark Review (15:15) outside band so every call gets reminded once."
-        }
-      },
-      checks: [
-        { label: "Exact 60-Minute Window Match (6 / 6)", sub: "Matched Northwind Kickoff (14:10) inside the shaded band while skipping 13:15 and 15:15 meetings so no call receives two emails.", pass: true },
-        { label: "Google Drive Reuse Check", sub: "Reuses existing evening briefing doc when present instead of creating duplicate files.", pass: true }
-      ],
-      tour: [
-        { anchorEventId: "ev_northwind", dossierKey: "northwind", rightTab: "doc", stepLabel: "BUBBLE 1 OF 3", title: "Shaded 1-hour reminder window on calendar", desc: "At 13:00 (red line), the hourly check inspects only the shaded 14:00 to 15:00 band so Northwind Kickoff (14:10) is matched once without spamming earlier or later calls." },
-        { anchorEventId: "ev_northwind", dossierKey: "northwind", rightTab: "doc", stepLabel: "BUBBLE 2 OF 3", title: "Catches same-day calendar bookings", desc: "Even if a client call was added this morning after last night's evening run, the hourly calendar scan spots it and writes a fresh one-page briefing." },
-        { anchorEventId: "ev_northwind", dossierKey: "northwind", rightTab: "linter", stepLabel: "BUBBLE 3 OF 3", title: "Zero duplicate alerts guaranteed", desc: "Because each hourly band moves down the calendar grid cleanly without overlapping, every meeting gets reminded once with zero extra database setup." }
+    {
+      id: "mon_stripe",
+      col: 0, startH: 14.25, durH: 1.6,
+      color: "var(--col-blue)", cat: "external",
+      timeText: "2:15pm Partner Sync: FinPay",
+      subText: "Claire Tan / Dev Patel",
+      meta: "Mon 21 Sep, 2:15pm - 3:50pm | 1-Page Briefing Ready",
+      desc: "External partner call matched during Sunday 5pm scan. Summarised open webhook retry questions from Gmail and linked the shared Q4 rollout sheet.",
+      bullets: [
+        { t: "Claire Tan (VP Eng, FinPay) asked for staging webhook IP allowlist", c: "Gmail Thread" },
+        { t: "36 / 36 fact checks passed with zero invented links", c: "Verified Doc" }
+      ]
+    },
+    {
+      id: "tue_sec",
+      col: 1, startH: 9.5, durH: 1.1,
+      color: "var(--col-grey)", cat: "standup",
+      timeText: "9:30am Core Team Triage",
+      subText: "Internal Bug Scrub",
+      meta: "Tue 22 Sep, 9:30am - 10:35am | Auto-Skipped",
+      desc: "Routine internal bug triage is filtered out automatically so you never waste morning reading time on meetings with your own squad.",
+      bullets: [
+        { t: "Rule matched: Internal squad triage", c: "Skipped" }
+      ]
+    },
+    {
+      id: "tue_allhands",
+      col: 1, startH: 11.5, durH: 2.2,
+      color: "var(--col-pink)", cat: "broadcast",
+      timeText: "11:30am Q3 Company All-Hands",
+      subText: "312 Invitees Across Org",
+      meta: "Tue 22 Sep, 11:30am - 1:40pm | Skipped (>50 Attendees)",
+      desc: "Large town halls and broadcast invites (>50 guests) are excluded automatically so big company-wide announcements never trigger personal prep docs.",
+      bullets: [
+        { t: "312 invitees detected on Google Calendar event", c: "Broadcast Filter" }
+      ]
+    },
+    {
+      id: "tue_auth",
+      col: 1, startH: 14.5, durH: 1.5,
+      color: "var(--col-green)", cat: "crossteam",
+      timeText: "2:30pm Payments x Identity",
+      subText: "Rahul Khan / Sofia Barros",
+      meta: "Tue 22 Sep, 2:30pm - 4:00pm | Cross-Team Briefing Ready",
+      desc: "Cross-team review between Payments and Identity leadership. Highlights Rahul Khan's pending Token Exchange design doc waiting for your sign-off.",
+      bullets: [
+        { t: "Rahul Khan (Identity PM) awaiting sign-off on Token Exchange Doc", c: "Drive Doc" },
+        { t: "Security ticket b/412998877 needs Phase 1 owner", c: "Google Chat" }
+      ]
+    },
+    {
+      id: "wed_standup",
+      col: 2, startH: 10.0, durH: 1.1,
+      color: "var(--col-grey)", cat: "standup",
+      timeText: "10am Weekly Infra Sync",
+      subText: "Same-Team Pod Check-in",
+      meta: "Wed 23 Sep, 10:00am - 11:05am | Auto-Skipped",
+      desc: "Skipped automatically because all participants report to the same engineering pod.",
+      bullets: [
+        { t: "Rule matched: Own-team weekly check-in", c: "Skipped" }
+      ]
+    },
+    {
+      id: "wed_focus",
+      col: 2, startH: 12.25, durH: 1.5,
+      color: "var(--col-lime)", cat: "focus",
+      timeText: "12:15pm Code Review Block",
+      subText: "Deep Work Block",
+      meta: "Wed 23 Sep, 12:15pm - 1:45pm | Auto-Skipped",
+      desc: "Protected calendar focus block ignored by the briefing generator.",
+      bullets: [
+        { t: "Rule matched: Focus time calendar event", c: "Skipped" }
+      ]
+    },
+    {
+      id: "thu_acme",
+      col: 3, startH: 10.0, durH: 1.5,
+      color: "var(--col-blue)", cat: "external",
+      timeText: "10am Acme <> Platform Sync",
+      subText: "Alex Chen / Jordan Lee",
+      meta: "Thu 24 Sep, 10:00am - 11:30am | 1-Page Briefing Created",
+      desc: "External customer call with Acme Corp. The evening before, the assistant pulled unanswered Gmail threads, Chat notes, and shared Drive docs into a one-page dossier.",
+      bullets: [
+        { t: "Alex Chen (Director, Acme) security team reviewing OAuth scopes", c: "Gmail" },
+        { t: "Jordan Lee asked 6d ago if staging cutover moves to freeze week", c: "Needs Reply" },
+        { t: "All 36 link and participant grounding checks passed", c: "36/36 Verified" }
+      ]
+    },
+    {
+      id: "thu_review",
+      col: 3, startH: 13.25, durH: 1.25,
+      color: "var(--col-pink)", cat: "broadcast",
+      timeText: "1:15pm Org Design Review",
+      subText: "84 Invitees (Broadcast)",
+      meta: "Thu 24 Sep, 1:15pm - 2:30pm | Auto-Skipped",
+      desc: "Skipped because 84 invitees exceed the small-meeting briefing threshold.",
+      bullets: [
+        { t: "84 attendees detected; logged cleanly in transparency footer", c: "Skipped" }
+      ]
+    },
+    {
+      id: "thu_northwind",
+      col: 3, startH: 15.0, durH: 1.5,
+      color: "var(--col-orange)", cat: "t1h",
+      timeText: "3pm Northwind Kickoff (1h Window)",
+      subText: "Tom Hale / Dana Martin",
+      meta: "Thu 24 Sep, 3:00pm - 4:30pm | Caught by 2pm Hourly Scan",
+      desc: "Booked same morning after last night's 5pm run! At 2:00pm (red line), the hourly scan inspects only the 3:00pm - 4:00pm band so same-day calls get briefed once with zero duplicates.",
+      bullets: [
+        { t: "Tom Hale (Head of Integrations) asked 2d ago for connector rate limits", c: "Gmail" },
+        { t: "Stateless hourly band guarantees zero duplicate emails", c: "1h Window" }
+      ]
+    },
+    {
+      id: "fri_initech",
+      col: 4, startH: 10.25, durH: 1.5,
+      color: "var(--col-blue)", cat: "external",
+      timeText: "10:15am Initech Intro Call",
+      subText: "Marta Novak (First-Time)",
+      meta: "Fri 25 Sep, 10:15am - 11:45am | Brand-New Contact",
+      desc: "First-time external call with Marta Novak (VP Data Platform, Initech). When zero past emails or docs exist, the assistant states 'No prior context found' honestly instead of guessing.",
+      bullets: [
+        { t: "Marta Novak verified via People Directory (first-time introduction)", c: "Directory" },
+        { t: "Explicitly states 'No prior context found' with 0 invented recaps", c: "7/7 Checks" }
+      ]
+    },
+    {
+      id: "fri_declined",
+      col: 4, startH: 13.75, durH: 1.35,
+      color: "var(--col-red)", cat: "declined",
+      timeText: "1:45pm Globex Vendor Demo",
+      subText: "Declined Invitation",
+      meta: "Fri 25 Sep, 1:45pm - 3:05pm | Skipped (Declined)",
+      desc: "Because you declined this cold vendor invite on Google Calendar, the assistant skips it automatically instead of wasting prep time.",
+      bullets: [
+        { t: "RSVP status = Declined on primary calendar", c: "Skipped" }
+      ]
+    },
+    {
+      id: "sat_prep",
+      col: 5, startH: 11.0, durH: 1.35,
+      color: "var(--col-purple)", cat: "broadcast",
+      timeText: "11am Buildathon Mentor Slot",
+      subText: "Optional Office Hours",
+      meta: "Sat 26 Sep, 11:00am - 12:20pm | Optional Slot",
+      desc: "Optional weekend mentoring office hours; skipped unless external guests confirm attendance.",
+      bullets: [
+        { t: "No confirmed external partner attendees", c: "Skipped" }
       ]
     }
+  ];
+
+  const SCENARIO_TOURS = {
+    next_day_mixed: ["thu_acme", "mon_standup", "tue_auth", "thu_northwind"],
+    next_day_cold_lead: ["fri_initech", "thu_acme", "fri_declined"],
+    t1h_window: ["thu_northwind", "thu_review", "thu_acme"]
   };
 
-  let curScenarioKey = "next_day_mixed";
-  let curDossierKey = "acme";
-  let curRightTab = "doc";
-  let fakeLinkInjected = false;
-  let curTourIdx = 0;
+  let curScenario = "next_day_mixed";
+  let curTourStep = 0;
+  let activeEventId = "thu_acme";
+  let mutedCats = new Set();
+  let fakeLinkActive = false;
 
-  const calCanvas = document.getElementById("calendar-day-canvas");
-  const calScroll = document.getElementById("calendar-scroll");
-  const dayChipEl = document.getElementById("cal-day-chip");
-  const dateTitleEl = document.getElementById("cal-date-title");
-  const rightBody = document.getElementById("right-body");
-  const rightHeading = document.getElementById("right-pane-heading");
-  const statusPill = document.getElementById("left-status-pill");
-  const calSummary = document.getElementById("calendar-filter-summary");
-  const trapBtn = document.getElementById("toggle-fake-link-btn");
-  const coachBubble = document.getElementById("prepCoachBubble");
-  const coachStep = document.getElementById("coachBubbleStep");
-  const coachTitle = document.getElementById("coachBubbleTitle");
-  const coachDesc = document.getElementById("coachBubbleDesc");
-  const coachPrev = document.getElementById("coachBubblePrev");
-  const coachNext = document.getElementById("coachBubbleNext");
-  const coachClose = document.getElementById("coachBubbleClose");
+  const miniCalGrid = document.getElementById("mini-cal-grid");
+  const weekDayNames = document.getElementById("week-day-names");
+  const canvas = document.getElementById("week-grid-canvas");
+  const pop = document.getElementById("calPopoverBubble");
+  const popStepLabel = document.getElementById("popStepLabel");
+  const popTitle = document.getElementById("popTitle");
+  const popMeta = document.getElementById("popMeta");
+  const popDesc = document.getElementById("popDesc");
+  const popBullets = document.getElementById("popBullets");
+  const popPrev = document.getElementById("popPrevBtn");
+  const popNext = document.getElementById("popNextBtn");
+  const popClose = document.getElementById("popCloseBtn");
+  const popFakeToggle = document.getElementById("popFakeToggle");
+  const topFakeBtn = document.getElementById("btn-fake-link");
+  const filterLabel = document.getElementById("filter-state-label");
 
-  function formatHourLabel(h) {
-    return String(h).padStart(2, "0") + ":00";
+  /* Build Left Mini Month Calendar (September 2026) */
+  function renderMiniCal() {
+    const dows = ["S", "M", "T", "W", "T", "F", "S"];
+    let h = dows.map(d => `<div class="mini-cal-dow">${d}</div>`).join("");
+    const cells = [
+      { n: 30, m: true }, { n: 31, m: true }, { n: 1 }, { n: 2 }, { n: 3 }, { n: 4 }, { n: 5 },
+      { n: 6 }, { n: 7 }, { n: 8 }, { n: 9 }, { n: 10 }, { n: 11 }, { n: 12 },
+      { n: 13 }, { n: 14 }, { n: 15 }, { n: 16 }, { n: 17 }, { n: 18 }, { n: 19 },
+      { n: 20 }, { n: 21, w: true }, { n: 22, w: true }, { n: 23, w: true }, { n: 24, w: true, t: true }, { n: 25, w: true }, { n: 26, w: true },
+      { n: 27 }, { n: 28 }, { n: 29 }, { n: 30 }, { n: 1, m: true }, { n: 2, m: true }, { n: 3, m: true }
+    ];
+    cells.forEach(c => {
+      const cls = [
+        "mini-cal-day",
+        c.m ? "muted" : "",
+        c.w ? "in-week" : "",
+        c.t ? "is-today" : ""
+      ].filter(Boolean).join(" ");
+      h += `<div class="${cls}" data-day="${c.n}">${c.n}</div>`;
+    });
+    miniCalGrid.innerHTML = h;
   }
 
-  function renderAll() {
-    const sc = SCENARIOS[curScenarioKey];
-    if (!sc) return;
+  function formatHour(h) {
+    if (h === 12) return "12pm";
+    return h > 12 ? (h - 12) + "pm" : h + "am";
+  }
 
-    const startH = sc.startHour || START_HOUR;
-    const endH = sc.endHour || END_HOUR;
-    const hPx = sc.hourPx || 46;
-    const totalH = (endH - startH + 1) * hPx;
-    calCanvas.style.height = totalH + "px";
-    calCanvas.style.minHeight = totalH + "px";
+  function renderCalendarGrid() {
+    const activeEv = EVENTS.find(e => e.id === activeEventId) || EVENTS[8];
+    let headHtml = `<div class="week-gutter-lbl">W39</div>`;
+    DAYS.forEach((d, idx) => {
+      const isFocus = activeEv && activeEv.col === idx;
+      headHtml += `<div class="week-col-head ${isFocus ? "is-focus-day" : ""}">${d.label}</div>`;
+    });
+    weekDayNames.innerHTML = headHtml;
 
-    dayChipEl.textContent = sc.dayChip;
-    dateTitleEl.textContent = sc.dateTitle;
-    calSummary.textContent = sc.calSummary;
-
-    if (fakeLinkInjected) {
-      statusPill.textContent = "BLOCKED: 1 Fake Link Caught";
-      statusPill.style.background = "var(--red-soft)";
-      statusPill.style.color = "var(--red)";
-      statusPill.style.borderColor = "var(--red-border)";
-      trapBtn.textContent = "Remove Fake Link Test";
-      trapBtn.classList.add("is-trapped");
-    } else {
-      statusPill.textContent = "36 / 36 Checks Passed";
-      statusPill.style.background = "";
-      statusPill.style.color = "";
-      statusPill.style.borderColor = "";
-      trapBtn.textContent = "Test Fake Link Blocker";
-      trapBtn.classList.remove("is-trapped");
+    let gutterHtml = `<div class="time-gutter-col">`;
+    for (let h = START_H; h <= END_H; h++) {
+      gutterHtml += `<div class="time-hour-cell">${formatHour(h)}</div>`;
     }
+    gutterHtml += `</div>`;
 
-    let html = "";
-    for (let h = startH; h <= endH; h++) {
-      html += `
-        <div class="cal-hour-row" style="height:${hPx}px;">
-          <div class="cal-hour-label">${formatHourLabel(h)}</div>
-        </div>
-      `;
-    }
+    let colsHtml = "";
+    for (let c = 0; c < 6; c++) {
+      const isFocus = activeEv && activeEv.col === c;
+      let inner = "";
 
-    if (typeof sc.nowHour === "number") {
-      const nowTop = Math.round((sc.nowHour - startH) * hPx);
-      html += `<div class="cal-now-line" style="top:${nowTop}px;"></div>`;
-    }
+      if (curScenario === "t1h_window" && c === 3) {
+        const nowY = Math.round((14.0 - START_H) * HOUR_PX);
+        const bandY = Math.round((15.0 - START_H) * HOUR_PX);
+        inner += `<div class="now-time-line" style="top:${nowY}px;"></div>`;
+        inner += `<div class="hour-scan-band" style="top:${bandY}px;height:${HOUR_PX * 1.5}px;"></div>`;
+      }
 
-    if (typeof sc.windowStartH === "number" && typeof sc.windowEndH === "number") {
-      const winTop = Math.round((sc.windowStartH - startH) * hPx);
-      const winHeight = Math.round((sc.windowEndH - sc.windowStartH) * hPx);
-      html += `
-        <div class="cal-window-band" style="top:${winTop}px;height:${winHeight}px;">
-          <span class="cal-window-tag">Active 1-Hour Scan Band (14:00 - 15:00)</span>
-        </div>
-      `;
-    }
-
-    sc.events.forEach(ev => {
-      const topPx = Math.round((ev.startH - startH) * hPx) + 2;
-      const heightPx = Math.max(38, Math.round(ev.durH * hPx) - 4);
-      const isSelected = ev.dossierKey && ev.dossierKey === curDossierKey;
-      html += `
-        <div
-          class="cal-event-block ${ev.qualified ? "is-qualified" : "is-skipped"} ${isSelected ? "is-selected" : ""}"
-          data-ev-id="${ev.id}"
-          data-dossier="${ev.dossierKey || ""}"
-          data-top-px="${topPx}"
-          style="top:${topPx}px;height:${heightPx}px;"
-        >
-          <div class="cal-ev-left">
-            <div class="cal-ev-top-line">
-              <span class="cal-ev-time">${ev.time}</span>
-              <span class="cal-ev-title">${ev.title}</span>
-            </div>
-            <div class="cal-ev-sub">${ev.people}</div>
+      EVENTS.filter(ev => ev.col === c).forEach(ev => {
+        const topPx = Math.round((ev.startH - START_H) * HOUR_PX) + 2;
+        const heightPx = Math.max(36, Math.round(ev.durH * HOUR_PX) - 4);
+        const isSel = ev.id === activeEventId;
+        const isDim = mutedCats.has(ev.cat);
+        inner += `
+          <div
+            class="cal-block ${isSel ? "is-selected" : ""} ${isDim ? "is-dimmed" : ""}"
+            data-ev-id="${ev.id}"
+            style="top:${topPx}px;height:${heightPx}px;background:${ev.color};"
+          >
+            <div class="cal-block-title">${ev.timeText}</div>
+            <div class="cal-block-sub">${ev.subText}</div>
           </div>
-          <span class="cal-ev-pill ${ev.qualified ? "qual" : "skip"}">${ev.qualified ? ev.badge : ev.skipReason}</span>
-        </div>
-      `;
-    });
+        `;
+      });
 
-    calCanvas.innerHTML = html;
+      colsHtml += `<div class="day-col ${isFocus ? "is-focus-day" : ""}" data-col="${c}">${inner}</div>`;
+    }
 
-    document.querySelectorAll(".right-tab").forEach(tb => {
-      tb.classList.toggle("active", tb.getAttribute("data-rtab") === curRightTab);
-    });
+    canvas.innerHTML = gutterHtml + colsHtml;
+  }
 
-    if (curRightTab === "doc") {
-      rightHeading.textContent = "1-PAGE BRIEFING DOC";
-      const d = sc.dossiers[curDossierKey] || Object.values(sc.dossiers)[0];
-      const fakeHtml = fakeLinkInjected
-        ? `<li>Unverified claim: "Signed 3-year contract in Q1" <span class="cite-chip fake-alert">BLOCKED: docs.google.com/d/invented-link</span></li>`
-        : "";
-      rightBody.innerHTML = `
-        <div class="doc-card">
-          <div class="doc-header-tag">Generated Google Doc Dossier</div>
-          <div class="doc-title">${d.docTitle}</div>
+  function showPopoverForEvent(evId, stepBadgeText) {
+    const ev = EVENTS.find(e => e.id === evId) || EVENTS[8];
+    activeEventId = ev.id;
+    renderCalendarGrid();
 
-          <div class="doc-section-title">Attendee Context</div>
-          <ul class="doc-list">
-            ${d.attendees.map(a => `<li>${a.text} <span class="cite-chip">${a.cite}</span></li>`).join("")}
-          </ul>
+    const tourArr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
+    const tIdx = tourArr.indexOf(ev.id);
+    if (tIdx >= 0) curTourStep = tIdx;
 
-          <div class="doc-section-title">Last Meeting Recap</div>
-          <ul class="doc-list">
-            ${d.recap.map(r => `<li>${r.text} <span class="cite-chip">${r.cite}</span></li>`).join("")}
-            ${fakeHtml}
-          </ul>
+    pop.classList.remove("is-hidden");
+    popStepLabel.textContent = stepBadgeText || (
+      tIdx >= 0 ? `BUBBLE ${tIdx + 1} OF ${tourArr.length}` : "CALENDAR EVENT BRIEFING"
+    );
+    popTitle.textContent = ev.timeText.replace(/^[0-9:apm]+\s+/, "");
+    popMeta.textContent = fakeLinkActive
+      ? "HOLD DELIVERY: Unverified Link Caught by Check #19"
+      : ev.meta;
+    popDesc.textContent = fakeLinkActive
+      ? "Simulated hallucinated link docs.google.com/d/invented-link detected! Because that URL does not exist in your real Google Drive search results, delivery is blocked automatically before emailing."
+      : ev.desc;
 
-          <div class="doc-section-title">Open Blockers &amp; Unanswered Asks</div>
-          <ul class="doc-list">
-            ${d.blockers.map(b => `<li>${b.text} <span class="cite-chip">${b.cite}</span></li>`).join("")}
-          </ul>
+    const listItems = fakeLinkActive
+      ? [
+          { t: "BLOCKED URL: docs.google.com/d/invented-link", c: "Caught & Stripped", alert: true },
+          ...ev.bullets
+        ]
+      : ev.bullets;
 
-          <div class="doc-section-title">Suggested Talking Points</div>
-          <ul class="doc-list">
-            ${d.agenda.map(g => `<li>${g}</li>`).join("")}
-          </ul>
-        </div>
-        <div class="digest-footer-note">${d.footer}</div>
-      `;
-    } else {
-      rightHeading.textContent = "36-CHECK FACT LINTER";
-      const bannerHtml = fakeLinkInjected
-        ? `<div class="linter-summary-banner failed"><span>HOLD DELIVERY: 1 Invented URL Caught</span><span>Blocked Before Emailing</span></div>`
-        : `<div class="linter-summary-banner"><span>ALL 36 QUALITY CHECKS PASSED</span><span>100% Grounded Sources</span></div>`;
-      const trapCheckRow = fakeLinkInjected
-        ? `<div class="check-item fail-row">
-             <div>
-               <div class="check-label">Unverified URL Caught &amp; Stripped</div>
-               <div class="check-sub">Detected docs.google.com/d/invented-link which does not exist in Google Drive search results. Delivery halted until removed.</div>
-             </div>
-             <span class="check-pill fail">CAUGHT</span>
-           </div>`
-        : "";
-      rightBody.innerHTML = `
-        ${bannerHtml}
-        ${trapCheckRow}
-        ${sc.checks.map(c => `
-          <div class="check-item">
-            <div>
-              <div class="check-label">${c.label}</div>
-              <div class="check-sub">${c.sub}</div>
-            </div>
-            <span class="check-pill">PASS</span>
-          </div>
-        `).join("")}
-      `;
+    popBullets.innerHTML = listItems
+      .map(b => `<li style="padding-left:7px;border-left:2px solid var(--accent);">${b.t} <span class="pop-cite ${b.alert ? "alert" : ""}">(${b.c})</span></li>`)
+      .join("");
+
+    popPrev.style.display = curTourStep === 0 ? "none" : "inline-flex";
+    const isLast = curTourStep >= tourArr.length - 1;
+    popNext.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
+
+    /* Position Pop-Up Bubble Cleanly Next to Clicked Block Without Overflowing Any Edge */
+    const blockEl = canvas.querySelector(`[data-ev-id="${ev.id}"]`);
+    const scrollEl = document.getElementById("week-grid-scroll");
+    if (blockEl && scrollEl) {
+      const bRect = blockEl.getBoundingClientRect();
+      const sRect = scrollEl.getBoundingClientRect();
+      const bubW = 318;
+      const bubH = pop.offsetHeight || 226;
+
+      let leftPx;
+      if (ev.col <= 2) {
+        /* Event is in Mon-Wed: open bubble to the RIGHT of the calendar block */
+        leftPx = (bRect.right - sRect.left) + 10;
+        pop.classList.remove("arrow-right");
+        pop.classList.add("arrow-left");
+      } else {
+        /* Event is in Thu-Sat: open bubble to the LEFT of the calendar block */
+        leftPx = (bRect.left - sRect.left) - bubW - 10;
+        pop.classList.remove("arrow-left");
+        pop.classList.add("arrow-right");
+      }
+      leftPx = Math.max(54, Math.min(sRect.width - bubW - 10, leftPx));
+
+      let topPx = (bRect.top - sRect.top) + scrollEl.scrollTop - 10;
+      topPx = Math.max(8, Math.min(scrollEl.scrollHeight - bubH - 12, topPx));
+
+      pop.style.left = Math.round(leftPx) + "px";
+      pop.style.top = Math.round(topPx) + "px";
     }
   }
 
-  function positionBubbleNearEvent(evId) {
-    const el = calCanvas.querySelector(`[data-ev-id="${evId}"]`);
-    if (!el || !calScroll) return;
-    const topPx = parseInt(el.getAttribute("data-top-px"), 10) || 0;
-    calScroll.scrollTop = Math.max(0, topPx - 28);
+  function applyScenario(key) {
+    if (!SCENARIO_TOURS[key]) return;
+    curScenario = key;
+    curTourStep = 0;
+
+    document.querySelectorAll("[data-sc]").forEach(b => {
+      b.classList.toggle("active", b.getAttribute("data-sc") === key);
+    });
+    document.querySelectorAll("[data-sc-view]").forEach(b => {
+      b.classList.toggle("active", b.getAttribute("data-sc-view") === key);
+    });
+
+    const firstId = SCENARIO_TOURS[key][0];
+    showPopoverForEvent(firstId);
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ source: "prep-sandbox-child", scenario: key }, "*");
+    }
   }
 
-  function runTourStep(idx) {
-    const sc = SCENARIOS[curScenarioKey];
-    if (!sc || !sc.tour || !sc.tour.length) return;
-    curTourIdx = Math.max(0, Math.min(idx, sc.tour.length - 1));
-    const item = sc.tour[curTourIdx];
-    if (item.dossierKey) curDossierKey = item.dossierKey;
-    curRightTab = item.rightTab;
-    renderAll();
-
-    coachBubble.classList.remove("is-hidden");
-    coachStep.textContent = item.stepLabel;
-    coachTitle.textContent = item.title;
-    coachDesc.textContent = item.desc;
-    coachPrev.style.display = curTourIdx === 0 ? "none" : "inline-flex";
-    const isLast = curTourIdx === sc.tour.length - 1;
-    coachNext.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
-    positionBubbleNearEvent(item.anchorEventId);
+  function toggleFakeLinkTrap() {
+    fakeLinkActive = !fakeLinkActive;
+    topFakeBtn.textContent = fakeLinkActive ? "Clear Fake Link Test" : "Test Fake Link Check";
+    topFakeBtn.classList.toggle("is-alert", fakeLinkActive);
+    popFakeToggle.textContent = fakeLinkActive ? "Clear fake link test" : "Test fake AI link";
+    showPopoverForEvent(activeEventId, fakeLinkActive ? "BLOCKED BY FACT CHECKER" : null);
   }
 
-  calCanvas.addEventListener("click", (e) => {
-    const block = e.target.closest(".cal-event-block");
-    if (!block) return;
-    const dKey = block.getAttribute("data-dossier");
-    const evId = block.getAttribute("data-ev-id");
-    if (dKey) {
-      curDossierKey = dKey;
-      curRightTab = "doc";
-      renderAll();
-      positionBubbleNearEvent(evId);
-    } else {
-      coachBubble.classList.remove("is-hidden");
-      coachStep.textContent = "FILTERED CALENDAR BLOCK";
-      coachTitle.textContent = block.querySelector(".cal-ev-title").textContent;
-      coachDesc.textContent = "Automatically skipped (" + block.querySelector(".cal-ev-pill").textContent + ") so your daily briefing stays focused strictly on external partners and cross-team reviews.";
-      positionBubbleNearEvent(evId);
+  canvas.addEventListener("click", (e) => {
+    const blk = e.target.closest(".cal-block");
+    if (blk) {
+      showPopoverForEvent(blk.getAttribute("data-ev-id"));
     }
   });
 
-  document.querySelectorAll(".right-tab").forEach(btn => {
-    btn.addEventListener("click", () => {
-      curRightTab = btn.getAttribute("data-rtab");
-      renderAll();
-    });
+  document.getElementById("allday-banners").addEventListener("click", (e) => {
+    const strip = e.target.closest(".allday-strip");
+    if (!strip) return;
+    const kind = strip.getAttribute("data-banner");
+    if (kind === "noise") showPopoverForEvent("mon_standup", "SILENCE FILTER");
+    else if (kind === "t1h") applyScenario("t1h_window");
+    else if (kind === "cold") applyScenario("next_day_cold_lead");
+    else showPopoverForEvent("thu_acme", "36 / 36 CHECKS PASSED");
   });
 
-  document.querySelectorAll(".banner-sc-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      curScenarioKey = btn.getAttribute("data-sc");
-      document.querySelectorAll(".banner-sc-btn").forEach(b => b.classList.toggle("active", b === btn));
-      const firstQual = SCENARIOS[curScenarioKey].events.find(e => e.dossierKey);
-      curDossierKey = firstQual ? firstQual.dossierKey : "";
-      runTourStep(0);
-    });
+  document.getElementById("cal-cat-list").addEventListener("click", (e) => {
+    const btn = e.target.closest(".cal-cat-bar");
+    if (!btn) return;
+    const cat = btn.getAttribute("data-cat");
+    if (mutedCats.has(cat)) mutedCats.delete(cat);
+    else mutedCats.add(cat);
+    btn.classList.toggle("is-muted", mutedCats.has(cat));
+    filterLabel.textContent = mutedCats.size ? `${7 - mutedCats.size}/7 Shown` : "All Shown";
+    renderCalendarGrid();
   });
 
-  trapBtn.addEventListener("click", () => {
-    fakeLinkInjected = !fakeLinkInjected;
-    curRightTab = "linter";
-    renderAll();
+  document.getElementById("sidebar-reset-filter").addEventListener("click", () => {
+    mutedCats.clear();
+    document.querySelectorAll(".cal-cat-bar").forEach(b => b.classList.remove("is-muted"));
+    filterLabel.textContent = "All Shown";
+    renderCalendarGrid();
   });
 
-  document.getElementById("theme-btn").addEventListener("click", (e) => {
-    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-    document.documentElement.setAttribute("data-theme", isDark ? "light" : "dark");
-    e.currentTarget.textContent = isDark ? "Dark" : "Light";
+  document.querySelectorAll("[data-sc]").forEach(btn => {
+    btn.addEventListener("click", () => applyScenario(btn.getAttribute("data-sc")));
   });
 
-  coachPrev.addEventListener("click", () => runTourStep(curTourIdx - 1));
-  coachNext.addEventListener("click", () => {
-    const sc = SCENARIOS[curScenarioKey];
-    if (curTourIdx >= sc.tour.length - 1) {
-      coachBubble.classList.add("is-hidden");
-    } else {
-      runTourStep(curTourIdx + 1);
+  document.querySelectorAll("[data-sc-view]").forEach(btn => {
+    btn.addEventListener("click", () => applyScenario(btn.getAttribute("data-sc-view")));
+  });
+
+  const scOrder = ["next_day_mixed", "next_day_cold_lead", "t1h_window"];
+  document.getElementById("btn-prev-sc").addEventListener("click", () => {
+    const i = (scOrder.indexOf(curScenario) + scOrder.length - 1) % scOrder.length;
+    applyScenario(scOrder[i]);
+  });
+  document.getElementById("btn-next-sc").addEventListener("click", () => {
+    const i = (scOrder.indexOf(curScenario) + 1) % scOrder.length;
+    applyScenario(scOrder[i]);
+  });
+  document.getElementById("btn-today").addEventListener("click", () => applyScenario("next_day_mixed"));
+
+  topFakeBtn.addEventListener("click", toggleFakeLinkTrap);
+  popFakeToggle.addEventListener("click", toggleFakeLinkTrap);
+  popClose.addEventListener("click", () => pop.classList.add("is-hidden"));
+
+  popPrev.addEventListener("click", () => {
+    const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
+    if (curTourStep > 0) {
+      curTourStep--;
+      showPopoverForEvent(arr[curTourStep]);
     }
   });
-  coachClose.addEventListener("click", () => coachBubble.classList.add("is-hidden"));
+
+  popNext.addEventListener("click", () => {
+    const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
+    if (curTourStep >= arr.length - 1) {
+      pop.classList.add("is-hidden");
+    } else {
+      curTourStep++;
+      showPopoverForEvent(arr[curTourStep]);
+    }
+  });
 
   window.addEventListener("message", (ev) => {
-    const msg = ev.data || {};
-    if (msg.source !== "portfolio-prep-host") return;
-    if (msg.action === "scenario" && SCENARIOS[msg.arg]) {
-      curScenarioKey = msg.arg;
-      const firstQual = SCENARIOS[curScenarioKey].events.find(e => e.dossierKey);
-      curDossierKey = firstQual ? firstQual.dossierKey : "";
-      runTourStep(0);
-    } else if (typeof msg.action === "string" && msg.action.startsWith("tour_")) {
-      runTourStep(parseInt(msg.action.split("_")[1], 10) || 0);
+    const msg = ev && ev.data;
+    if (!msg || typeof msg !== "object") return;
+    if (msg.source === "portfolio-prep-host") {
+      if (msg.action === "scenario" && msg.arg) {
+        applyScenario(msg.arg);
+      } else if (typeof msg.action === "string" && msg.action.startsWith("tour_")) {
+        const idx = parseInt(msg.action.replace("tour_", ""), 10) || 0;
+        const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
+        curTourStep = Math.max(0, Math.min(idx, arr.length - 1));
+        showPopoverForEvent(arr[curTourStep]);
+      } else if (msg.action === "toggle_fake_link") {
+        toggleFakeLinkTrap();
+      }
+      return;
+    }
+    if (msg.type === "prepScenario" && msg.scenario) {
+      applyScenario(msg.scenario);
+    } else if (msg.type === "prepAction" && msg.action) {
+      if (msg.action.startsWith("tour_")) {
+        const idx = parseInt(msg.action.replace("tour_", ""), 10) || 0;
+        const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
+        curTourStep = Math.max(0, Math.min(idx, arr.length - 1));
+        showPopoverForEvent(arr[curTourStep]);
+      } else if (msg.action === "toggle_fake_link") {
+        toggleFakeLinkTrap();
+      }
+    } else if (msg.type === "setTheme") {
+      document.documentElement.setAttribute("data-theme", msg.theme === "dark" ? "dark" : "light");
     }
   });
 
-  runTourStep(0);
+  renderMiniCal();
+  applyScenario(params.get("scenario") || "next_day_mixed");
 })();
 </script>
 </body>
