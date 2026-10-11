@@ -7921,12 +7921,14 @@
 
         if (coachDismissed || (typeof viewMode !== "undefined" && viewMode !== "timeline")) {
             bubbleEl.classList.add("hidden");
+            bubbleEl.style.display = "none";
             if (reopenEl) {
                 reopenEl.classList.toggle("hidden", typeof viewMode !== "undefined" && viewMode !== "timeline");
             }
             return;
         }
 
+        bubbleEl.style.display = "";
         bubbleEl.classList.remove("hidden");
         if (reopenEl) reopenEl.classList.add("hidden");
 
@@ -8255,40 +8257,44 @@
         renderOverview();
     };
 
+    const coachBubbleBoxEl = document.getElementById("sandboxCoachBubble");
     const closeBtnEl = document.getElementById("coachBubbleClose");
     const reopenBtnEl = document.getElementById("sandboxCoachReopenBtn");
     const prevBtnEl = document.getElementById("coachBubblePrev");
     const nextBtnEl = document.getElementById("coachBubbleNext");
 
+    if (coachBubbleBoxEl) {
+        ["mousedown", "pointerdown", "click"].forEach(evName => {
+            coachBubbleBoxEl.addEventListener(evName, (e) => e.stopPropagation());
+        });
+    }
+
     if (closeBtnEl) {
-        closeBtnEl.addEventListener("click", () => {
+        closeBtnEl.addEventListener("click", (e) => {
+            e.stopPropagation();
             coachDismissed = true;
             positionCoachBubbleOverNode();
         });
     }
     if (reopenBtnEl) {
-        reopenBtnEl.addEventListener("click", () => {
+        reopenBtnEl.addEventListener("click", (e) => {
+            e.stopPropagation();
             coachDismissed = false;
-            const rootCfg = SCENARIO_GUIDES[coachRootScenario] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
-            const list = rootCfg.bubbles || [];
-            if (coachStepIndex >= list.length) {
-                runGuidedBubbleStep(0);
-            } else {
-                syncCoachBubbleNavButtons();
-                positionCoachBubbleOverNode();
-            }
+            runGuidedBubbleStep(0);
         });
     }
     if (prevBtnEl) {
-        prevBtnEl.addEventListener("click", () => {
+        prevBtnEl.addEventListener("click", (e) => {
+            e.stopPropagation();
             if (coachStepIndex > 0) runGuidedBubbleStep(coachStepIndex - 1);
         });
     }
     if (nextBtnEl) {
-        nextBtnEl.addEventListener("click", () => {
+        nextBtnEl.addEventListener("click", (e) => {
+            e.stopPropagation();
             const rootCfg = SCENARIO_GUIDES[coachRootScenario] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
             const list = rootCfg.bubbles || [];
-            if (coachStepIndex >= Math.max(0, list.length - 1)) {
+            if (coachStepIndex >= Math.max(0, list.length - 1) || nextBtnEl.textContent.indexOf("Close") !== -1) {
                 coachDismissed = true;
                 positionCoachBubbleOverNode();
             } else {
@@ -8316,7 +8322,9 @@
 
     setTimeout(() => {
         syncSandboxBannerUI();
-        runGuidedBubbleStep(0);
+        if (!coachDismissed) {
+            runGuidedBubbleStep(0);
+        }
     }, 380);
 </script>
 </body>
