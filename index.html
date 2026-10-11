@@ -63,10 +63,10 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261011-50" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261011-51" />
   <link rel="preload" href="fonts/SFProDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="fonts/SFProText-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="styles.css?v=20261011-50" />
+  <link rel="stylesheet" href="styles.css?v=20261011-51" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -113,21 +113,14 @@
   </header>
 
   <!-- Apple Two-Tier Sticky Product Sub-Navigation Bar (ac-localnav) -->
-  <div class="apple-localnav" id="apple-localnav" role="navigation" aria-label="Stage chapter navigation">
+  <div class="apple-localnav" id="apple-localnav" role="navigation" aria-label="Section sub-navigation">
     <div class="localnav-inner">
-      <a href="#top" class="localnav-title" id="localnav-active-title">Elias Lim</a>
-      <div class="localnav-chapters" role="menubar" aria-label="Quick stage jump">
-        <a href="#about" class="localnav-link active" data-localnav-target="about">Overview</a>
-        <a href="#highlights-section" class="localnav-link" data-localnav-target="highlights-section">Highlights</a>
-        <a href="#showcase-agent-tracer" class="localnav-link" data-localnav-target="showcase-agent-tracer">Agent Tracer</a>
-        <a href="#showcase-meeting-prep" class="localnav-link" data-localnav-target="showcase-meeting-prep">Meeting Dossier</a>
-        <a href="#showcase-uq-xai" class="localnav-link" data-localnav-target="showcase-uq-xai">Battery Research</a>
-        <a href="#projects" class="localnav-link" data-localnav-target="projects">All Systems</a>
-      </div>
-      <div class="localnav-actions">
-        <button type="button" class="localnav-pill-cta" id="localnav-print-cv-btn" aria-label="Save 1-page CV as PDF">
-          Save CV
-        </button>
+      <a href="#top" class="localnav-title" id="localnav-active-title">Profile</a>
+      <div class="localnav-chapters" id="localnav-chapters" role="menubar" aria-label="Section subheadings">
+        <a href="#about-google" class="localnav-link active" data-localnav-item="about-google">Google Cloud</a>
+        <a href="#about-grab" class="localnav-link" data-localnav-item="about-grab">Grab</a>
+        <a href="#about-astar" class="localnav-link" data-localnav-item="about-astar">A*STAR</a>
+        <a href="#about-beyond" class="localnav-link" data-localnav-item="about-beyond">Education</a>
       </div>
     </div>
   </div>
@@ -152,19 +145,6 @@
             <span>Browse projects</span>
             <span aria-hidden="true">&#8595;</span>
           </a>
-          <button
-            type="button"
-            class="apple-pill outline"
-            id="hero-print-cv-btn"
-            aria-label="Print or save 1-page CV as PDF"
-          >
-            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 9V2h12v7"></path>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-              <rect x="6" y="14" width="12" height="8"></rect>
-            </svg>
-            <span>Save CV (PDF)</span>
-          </button>
           <a
             href="https://github.com/elim316"
             target="_blank"
@@ -1495,14 +1475,6 @@
             Engineering roles across cloud infrastructure, high-scale backend systems, and applied machine learning research.
           </p>
         </div>
-        <button type="button" class="apple-pill outline" id="print-cv-btn" aria-label="Print or save 1-page executive CV as PDF">
-          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M6 9V2h12v7"></path>
-            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-            <rect x="6" y="14" width="12" height="8"></rect>
-          </svg>
-          <span>Save 1-Page CV (PDF)</span>
-        </button>
       </div>
 
       <div class="timeline-list">
@@ -1879,19 +1851,6 @@
             <svg class="brand-icon icon-linkedin" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
             <span>Connect on LinkedIn &#8599;</span>
           </a>
-          <button
-            type="button"
-            class="apple-pill outline"
-            id="footer-print-cv-btn"
-            aria-label="Save 1-page CV as PDF"
-          >
-            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 9V2h12v7"></path>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-              <rect x="6" y="14" width="12" height="8"></rect>
-            </svg>
-            <span>Save 1-Page CV (PDF)</span>
-          </button>
           <a
             href="https://github.com/elim316"
             target="_blank"
@@ -2137,6 +2096,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261011-50"></script>
+  <script src="app.js?v=20261011-51"></script>
 </body>
 </html>
