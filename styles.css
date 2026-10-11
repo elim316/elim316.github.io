@@ -4266,6 +4266,22 @@ h3,
   gap: 20px;
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.localnav-chapters.is-entering {
+  animation: localnavReveal 180ms var(--ease-smooth) both;
+}
+
+@keyframes localnavReveal {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .localnav-chapters::-webkit-scrollbar {
@@ -4291,33 +4307,6 @@ h3,
 
 .localnav-link.active {
   border-bottom-color: var(--text-primary);
-}
-
-.localnav-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.localnav-pill-cta {
-  padding: 4px 13px;
-  border-radius: var(--radius-pill);
-  border: none;
-  background: var(--apple-blue);
-  color: #ffffff;
-  font-size: 0.74rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-  transition:
-    background-color 180ms var(--ease-smooth),
-    transform 180ms var(--spring-out);
-}
-
-.localnav-pill-cta:hover {
-  background: var(--apple-blue-hover);
-  transform: scale(1.03);
 }
 
 .highlights-section {
@@ -4383,9 +4372,14 @@ h3,
   box-shadow: var(--glass-specular), var(--shadow-card);
 }
 
-@media (max-width: 820px) {
+@media (max-width: 640px) {
+  .localnav-inner {
+    padding: 0 14px;
+    gap: 12px;
+  }
+
   .localnav-chapters {
-    display: none;
+    gap: 14px;
   }
 }
 
