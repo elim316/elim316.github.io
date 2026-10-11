@@ -1190,8 +1190,8 @@
       const fStepBtns = fTracer.querySelectorAll("[data-fstep-btn]");
       const fSvgNodes = fTracer.querySelectorAll("[data-fstep]");
       const stepOrder = ["user", "planner", "mcp", "subagent"];
-      let stepIdx = 1;
-      let stepTimer = null;
+      let stepIdx = 0;
+      let isTracerBubbleClosed = false;
 
       const tracerTabMeta = {
         timeline: {
@@ -1402,7 +1402,7 @@
         });
         const bMeta = stepBubbleMeta[stepKey];
         if (bMeta && ovBubbleEl) {
-          ovBubbleEl.style.display = "";
+          ovBubbleEl.style.display = isTracerBubbleClosed ? "none" : "";
           let arrowVal = bMeta.arrowX;
           if (activeSvgEl && typeof activeSvgEl.getBoundingClientRect === "function") {
             const nRect = activeSvgEl.getBoundingClientRect();
@@ -1420,16 +1420,27 @@
         }
       }
 
+      const ovBubbleCloseBtn = document.getElementById("tracer-bubble-close-btn");
+      if (ovBubbleCloseBtn) {
+        ovBubbleCloseBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isTracerBubbleClosed = true;
+          if (ovBubbleEl) ovBubbleEl.style.display = "none";
+        });
+      }
+
       if (ovBubbleNextBtn) {
-        ovBubbleNextBtn.addEventListener("click", () => {
-          if (stepTimer) clearInterval(stepTimer);
-          const curKey = stepOrder[stepIdx] || "planner";
+        ovBubbleNextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const curKey = stepOrder[stepIdx] || "user";
           const bMeta = stepBubbleMeta[curKey];
           if (bMeta && bMeta.nextStep === "__close__") {
+            isTracerBubbleClosed = true;
             if (ovBubbleEl) ovBubbleEl.style.display = "none";
           } else if (bMeta && bMeta.nextStep === "__sandbox__") {
             selectTracerTab("sandbox");
           } else if (bMeta && bMeta.nextStep) {
+            isTracerBubbleClosed = false;
             selectFlagshipStep(bMeta.nextStep);
           }
         });
@@ -1437,22 +1448,17 @@
 
       fStepBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
-          if (stepTimer) clearInterval(stepTimer);
+          isTracerBubbleClosed = false;
           selectFlagshipStep(btn.getAttribute("data-fstep-btn"));
         });
       });
       fSvgNodes.forEach((node) => {
         node.addEventListener("click", () => {
-          if (stepTimer) clearInterval(stepTimer);
+          isTracerBubbleClosed = false;
           selectFlagshipStep(node.getAttribute("data-fstep"));
         });
       });
-
-      stepTimer = setInterval(() => {
-        if (document.hidden) return;
-        stepIdx = (stepIdx + 1) % stepOrder.length;
-        selectFlagshipStep(stepOrder[stepIdx]);
-      }, 3400);
+      selectFlagshipStep("user");
     }
 
     const fPrep = document.getElementById("flagship-prep-sandbox");
@@ -1562,8 +1568,8 @@
       const pTabOrder = ["sandbox", "linter", "pipeline"];
       let pTabIdx = 0;
       const prepStepOrder = ["nbd", "linter", "t1h"];
-      let prepIdx = 1;
-      let prepTimer = null;
+      let prepIdx = 0;
+      let isPrepBubbleClosed = false;
 
       function postToPrepSandbox(action, arg) {
         const embFrame = document.getElementById("prep-embedded-iframe");
@@ -1650,7 +1656,7 @@
           if (isMatch) activeSvgEl = n;
         });
         if (pOvBubbleEl) {
-          pOvBubbleEl.style.display = "";
+          pOvBubbleEl.style.display = isPrepBubbleClosed ? "none" : "";
           let arrowVal = bMeta.arrowX;
           if (activeSvgEl && typeof activeSvgEl.getBoundingClientRect === "function") {
             const nRect = activeSvgEl.getBoundingClientRect();
@@ -1668,14 +1674,25 @@
         }
       }
 
+      const pOvBubbleCloseBtn = document.getElementById("prep-bubble-close-btn");
+      if (pOvBubbleCloseBtn) {
+        pOvBubbleCloseBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isPrepBubbleClosed = true;
+          if (pOvBubbleEl) pOvBubbleEl.style.display = "none";
+        });
+      }
+
       if (pOvBubbleNextBtn) {
-        pOvBubbleNextBtn.addEventListener("click", () => {
-          if (prepTimer) clearInterval(prepTimer);
-          const curKey = prepStepOrder[prepIdx] || "linter";
+        pOvBubbleNextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const curKey = prepStepOrder[prepIdx] || "nbd";
           const bMeta = prepBubbleMeta[curKey];
           if (bMeta && bMeta.nextStep === "__close__") {
+            isPrepBubbleClosed = true;
             if (pOvBubbleEl) pOvBubbleEl.style.display = "none";
           } else if (bMeta && bMeta.nextStep) {
+            isPrepBubbleClosed = false;
             selectPrepStage(bMeta.nextStep);
           }
         });
@@ -1683,16 +1700,11 @@
 
       pNodes.forEach((node) => {
         node.addEventListener("click", () => {
-          if (prepTimer) clearInterval(prepTimer);
+          isPrepBubbleClosed = false;
           selectPrepStage(node.getAttribute("data-fprep"));
         });
       });
-
-      prepTimer = setInterval(() => {
-        if (document.hidden) return;
-        prepIdx = (prepIdx + 1) % prepStepOrder.length;
-        selectPrepStage(prepStepOrder[prepIdx]);
-      }, 4500);
+      selectPrepStage("nbd");
     }
 
     const fUq = document.getElementById("flagship-uq-sandbox");
@@ -1772,8 +1784,8 @@
       const uTabOrder = ["sandbox", "aci", "overview"];
       let uTabIdx = 0;
       const ciOrder = ["90", "95", "99"];
-      let ciIdx = 1;
-      let ciTimer = null;
+      let ciIdx = 0;
+      let isUqBubbleClosed = false;
 
       function selectUqTab(tabKey) {
         const cfg = uqTabMeta[tabKey];
@@ -1825,7 +1837,7 @@
         });
         if (fBand) fBand.style.setProperty("--ci-scale", String(bMeta.scale));
         if (uOvBubbleEl) {
-          uOvBubbleEl.style.display = "";
+          uOvBubbleEl.style.display = isUqBubbleClosed ? "none" : "";
           let arrowVal = bMeta.arrowX;
           if (activeSvgEl && typeof activeSvgEl.getBoundingClientRect === "function") {
             const nRect = activeSvgEl.getBoundingClientRect();
@@ -1843,14 +1855,25 @@
         }
       }
 
+      const uOvBubbleCloseBtn = document.getElementById("uq-bubble-close-btn");
+      if (uOvBubbleCloseBtn) {
+        uOvBubbleCloseBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          isUqBubbleClosed = true;
+          if (uOvBubbleEl) uOvBubbleEl.style.display = "none";
+        });
+      }
+
       if (uOvBubbleNextBtn) {
-        uOvBubbleNextBtn.addEventListener("click", () => {
-          if (ciTimer) clearInterval(ciTimer);
-          const curKey = ciOrder[ciIdx] || "95";
+        uOvBubbleNextBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const curKey = ciOrder[ciIdx] || "90";
           const bMeta = uqBubbleMeta[curKey];
           if (bMeta && bMeta.nextStep === "__close__") {
+            isUqBubbleClosed = true;
             if (uOvBubbleEl) uOvBubbleEl.style.display = "none";
           } else if (bMeta && bMeta.nextStep) {
+            isUqBubbleClosed = false;
             selectUqLevel(bMeta.nextStep);
           }
         });
@@ -1858,16 +1881,11 @@
 
       fCiNodes.forEach((node) => {
         node.addEventListener("click", () => {
-          if (ciTimer) clearInterval(ciTimer);
+          isUqBubbleClosed = false;
           selectUqLevel(node.getAttribute("data-fci-node"));
         });
       });
-
-      ciTimer = setInterval(() => {
-        if (document.hidden) return;
-        ciIdx = (ciIdx + 1) % ciOrder.length;
-        selectUqLevel(ciOrder[ciIdx]);
-      }, 4500);
+      selectUqLevel("90");
     }
   }
 
