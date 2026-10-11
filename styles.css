@@ -4028,9 +4028,33 @@ textarea {
   border-radius: var(--radius-pill);
 }
 
+.tracer-bubble-top-right {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .tracer-bubble-hint {
   font-size: 0.72rem;
   color: var(--text-muted);
+}
+
+.tracer-bubble-close-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 6px;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+
+.tracer-bubble-close-btn:hover {
+  background: rgba(15, 23, 42, 0.08);
+  color: var(--text-primary);
 }
 
 .tracer-bubble-main {
