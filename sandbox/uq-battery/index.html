@@ -350,7 +350,7 @@
   }
 
   #uqPopoverBubble.is-hidden {
-    display: none;
+    display: none !important;
   }
 
   #uqPopoverArrow {
@@ -900,7 +900,7 @@
 
   let curDataset = "mcmaster";
   let curCi = "95";
-  let activeCycleIdx = 1; /* Default on Cycle 340 Knee-Point */
+  let activeCycleIdx = 0; /* Default on Cycle 120: Early Healthy Regime */
   let curViewMode = "curve"; /* "curve" | "xai" */
   let isBubbleOpen = true;
 
@@ -914,6 +914,12 @@
   const popPrev = document.getElementById("popPrevBtn");
   const popNext = document.getElementById("popNextBtn");
   const popClose = document.getElementById("popCloseBtn");
+
+  function closeBatteryBubble() {
+    isBubbleOpen = false;
+    pop.classList.add("is-hidden");
+    pop.style.display = "none";
+  }
   const modeBtnCurve = document.getElementById("mode-btn-curve");
   const modeBtnXai = document.getElementById("mode-btn-xai");
   const btnBackToCurve = document.getElementById("btn-back-to-curve");
