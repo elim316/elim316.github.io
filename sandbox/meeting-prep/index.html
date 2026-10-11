@@ -1224,7 +1224,7 @@
               <span class="pop-step" id="popStepLabel">BUBBLE 1 OF 4</span>
               <button type="button" class="pop-close" id="popCloseBtn" title="Close bubble">&#215;</button>
             </div>
-            <div class="pop-title" id="popTitle">Acme &lt;&gt; Platform Sync</div>
+            <div class="pop-title" id="popTitle">Daily Team Standup</div>
             <div class="pop-meta" id="popMeta">Thu 24 Sep, 10:00am - 11:30am | Brief Ready Below Card</div>
             <div class="pop-desc" id="popDesc">
               Every external or cross-team meeting gets an attached "Brief ready" tab directly underneath the calendar slot. Click any "Brief ready" strip on the calendar to open its Google Docs Briefing.
@@ -1683,7 +1683,7 @@
       if (isBubbleOpen) {
         showPopoverForEvent(activeEventId);
       } else {
-        pop.classList.add("is-hidden");
+        closeCalendarBubble();
       }
     }
   }
@@ -1842,8 +1842,18 @@
 
     const tourArr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
     const tIdx = tourArr.indexOf(ev.id);
-    if (tIdx >= 0) curTourStep = tIdx;
+    if (tIdx >= 0 && !stepBadgeText) {
+      curTourStep = tIdx;
+      popPrev.style.display = curTourStep === 0 ? "none" : "inline-flex";
+      const isLast = curTourStep >= tourArr.length - 1;
+      popNext.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
+    } else {
+      curTourStep = tourArr.length - 1;
+      popPrev.style.display = "none";
+      popNext.textContent = "Close Bubble";
+    }
 
+    pop.style.display = "";
     pop.classList.remove("is-hidden");
     popStepLabel.textContent = stepBadgeText || (
       tIdx >= 0 ? `BUBBLE ${tIdx + 1} OF ${tourArr.length}` : "MEETING SLOT DETAILS"
@@ -1852,10 +1862,6 @@
     popMeta.textContent = ev.meta;
     popDesc.textContent = ev.desc;
     popOpenBriefBtn.style.display = ev.hasBrief ? "block" : "none";
-
-    popPrev.style.display = curTourStep === 0 ? "none" : "inline-flex";
-    const isLast = curTourStep >= tourArr.length - 1;
-    popNext.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
 
     const wrapEl = canvas.querySelector(`[data-ev-wrap="${ev.id}"]`);
     const scrollEl = document.getElementById("week-grid-scroll");
@@ -1976,12 +1982,15 @@
   });
   document.getElementById("btn-today").addEventListener("click", () => applyScenario("next_day_mixed"));
 
-  popClose.addEventListener("click", () => {
-    isBubbleOpen = false;
-    pop.classList.add("is-hidden");
+  pop.addEventListener("click", (e) => e.stopPropagation());
+
+  popClose.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeCalendarBubble();
   });
 
-  popPrev.addEventListener("click", () => {
+  popPrev.addEventListener("click", (e) => {
+    e.stopPropagation();
     const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
     if (curTourStep > 0) {
       curTourStep--;
@@ -1989,11 +1998,11 @@
     }
   });
 
-  popNext.addEventListener("click", () => {
+  popNext.addEventListener("click", (e) => {
+    e.stopPropagation();
     const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
-    if (curTourStep >= arr.length - 1) {
-      isBubbleOpen = false;
-      pop.classList.add("is-hidden");
+    if (curTourStep >= arr.length - 1 || popNext.textContent.indexOf("Close") !== -1) {
+      closeCalendarBubble();
     } else {
       curTourStep++;
       showPopoverForEvent(arr[curTourStep]);
