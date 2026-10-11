@@ -286,6 +286,8 @@
     padding: 4px 11px;
     border-radius: 999px;
     cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
     transition: background 0.15s ease, color 0.15s ease;
   }
 
@@ -338,15 +340,17 @@
     font-weight: 700;
     color: var(--fg);
     margin-left: 4px;
+    white-space: nowrap;
   }
 
   .cal-views-right {
     display: flex;
     align-items: center;
     gap: 5px;
+    flex-shrink: 0;
   }
 
-  /* Primary Mode Switcher: Week Calendar <-> 1-Page Exec Briefing */
+  /* Primary Mode Switcher: Week Calendar <-> Google Docs Briefing */
   .view-mode-segmented {
     display: inline-flex;
     align-items: center;
@@ -354,6 +358,7 @@
     border-radius: 8px;
     background: var(--bg-sub);
     border: 1px solid var(--border);
+    flex-shrink: 0;
   }
 
   .view-mode-btn {
@@ -366,6 +371,7 @@
     padding: 3.5px 10px;
     border-radius: 6px;
     cursor: pointer;
+    white-space: nowrap;
     transition: all 0.14s ease;
   }
 
@@ -385,6 +391,7 @@
     padding: 4px 7px;
     border-radius: 6px;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   .cal-view-tab.active {
@@ -403,6 +410,8 @@
     padding: 4px 9px;
     border-radius: 6px;
     cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   /* VIEW 1: MULTI-DAY WEEK CALENDAR VIEW */
@@ -794,35 +803,176 @@
     color: #ffffff;
   }
 
-  /* VIEW 2: FULL 1-PAGE EXECUTIVE BRIEFING DOCUMENT VIEW */
+  /* Hide Calendar Sidebar in Google Docs Dossier View for Full-Width Google Docs Canvas */
+  body.mode-briefing #cal-sidebar {
+    display: none;
+  }
+
+  /* VIEW 2: AUTHENTIC GOOGLE DOCS DOSSIER WORKSPACE */
   #exec-briefing-view {
     display: none;
     flex: 1 1 0%;
+    min-height: 0;
     overflow-y: auto;
-    background: var(--bg-sub);
-    padding: 12px 20px 18px;
+    background: #f9fbfd;
     position: relative;
   }
 
   body.mode-briefing #exec-briefing-view {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
 
-  .brief-switcher-strip {
-    max-width: 820px;
-    margin: 0 auto 10px;
+  /* Authentic Google Docs Top Header + Formatting Toolbar */
+  .gdoc-chrome {
+    background: #f9fbfd;
+    border-bottom: 1px solid #e1e3e1;
+    padding: 8px 16px 8px;
+    flex-shrink: 0;
+  }
+
+  .gdoc-title-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 6px;
+    gap: 12px;
+    margin-bottom: 6px;
   }
 
-  .brief-meeting-pills {
+  .gdoc-title-left {
     display: flex;
     align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .gdoc-icon-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: #2684fc;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .gdoc-file-meta {
+    min-width: 0;
+  }
+
+  .gdoc-filename {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1f1f1f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gdoc-menus {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-family: Arial, sans-serif;
+    font-size: 11.5px;
+    color: #444746;
+    margin-top: 2px;
+  }
+
+  .gdoc-title-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .gdoc-lint-badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #137333;
+    background: #e6f4ea;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  .gdoc-lint-badge.is-alert {
+    color: #c5221f;
+    background: #fce8e6;
+  }
+
+  .gdoc-trap-btn {
+    border: 1px solid #c7c7c7;
+    background: #ffffff;
+    color: #1f1f1f;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .gdoc-trap-btn:hover {
+    background: #f1f3f4;
+  }
+
+  .gdoc-share-pill {
+    display: inline-flex;
+    align-items: center;
     gap: 5px;
-    flex-wrap: nowrap;
+    background: #c2e7ff;
+    color: #001d35;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 999px;
+    user-select: none;
+  }
+
+  .gdoc-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #edf2fa;
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-family: Arial, sans-serif;
+    font-size: 11.5px;
+    color: #444746;
+    user-select: none;
     overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .gdoc-tb-sep {
+    width: 1px;
+    height: 14px;
+    background: #c7c7c7;
+    flex-shrink: 0;
+  }
+
+  .gdoc-tb-size {
+    border: 1px solid #c7c7c7;
+    border-radius: 4px;
+    padding: 0 5px;
+    font-size: 11px;
+    background: #ffffff;
+  }
+
+  /* Meeting Switcher Strip Inside Topbar When Viewing Google Doc */
+  .top-brief-pills {
+    display: none;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+  }
+
+  body.mode-briefing .top-brief-pills {
+    display: inline-flex;
   }
 
   .brief-pill-btn {
@@ -832,7 +982,7 @@
     font-family: inherit;
     font-size: 10.5px;
     font-weight: 600;
-    padding: 3.5px 9px;
+    padding: 3px 8px;
     border-radius: 999px;
     cursor: pointer;
     white-space: nowrap;
@@ -844,152 +994,123 @@
     color: #ffffff;
   }
 
-  .exec-sheet {
-    max-width: 820px;
+  /* Authentic Google Docs White Page Canvas */
+  .gdoc-scroll-area {
+    flex: 1 1 0%;
+    overflow-y: auto;
+    padding: 14px 20px 28px;
+  }
+
+  .gdoc-page {
+    max-width: 816px;
     margin: 0 auto;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 22px;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+    background: #ffffff;
+    border: 1px solid #dadce0;
+    box-shadow: 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    padding: 36px 56px 40px;
+    font-family: Arial, sans-serif;
+    color: #000000;
+    line-height: 1.5;
   }
 
-  .exec-doc-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 12px;
+  .gdoc-doc-title {
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    letter-spacing: -0.005em;
   }
 
-  .exec-kicker {
-    font-size: 9.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    margin-bottom: 3px;
+  @keyframes gdocBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
   }
 
-  .exec-title {
-    font-size: 16.5px;
-    font-weight: 700;
-    color: var(--fg);
-    line-height: 1.25;
-    margin-bottom: 3px;
-  }
-
-  .exec-when {
-    font-size: 11px;
-    color: var(--fg-muted);
-  }
-
-  .exec-verified-box {
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .exec-verified-tag {
+  .gdoc-caret {
     display: inline-block;
-    font-size: 10.5px;
-    font-weight: 700;
-    color: var(--col-green);
-    background: rgba(43, 138, 62, 0.1);
-    padding: 3px 9px;
-    border-radius: 999px;
-    margin-bottom: 4px;
+    font-weight: 300;
+    color: #000000;
+    margin-right: 1px;
+    animation: gdocBlink 1.05s infinite;
   }
 
-  .exec-verified-tag.is-alert {
-    color: var(--col-red);
-    background: rgba(201, 42, 42, 0.12);
+  .gdoc-sec-heading {
+    font-family: Arial, sans-serif;
+    font-size: 17.5px;
+    font-weight: 400;
+    color: #000000;
+    margin: 0 0 10px 0;
   }
 
-  .exec-trap-link {
-    display: block;
-    border: none;
-    background: transparent;
-    color: var(--accent);
-    font-family: inherit;
-    font-size: 10.5px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-left: auto;
-  }
-
-  .exec-grid-2col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 10px;
-  }
-
-  .exec-sec-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--fg-muted);
-    margin-bottom: 5px;
-  }
-
-  .exec-items {
+  .gdoc-dash-list {
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 11.5px;
-    line-height: 1.36;
-    color: var(--fg);
+    margin: 0 0 4px 0;
+    padding: 0 0 0 22px;
   }
 
-  .exec-items li {
-    padding-left: 9px;
-    border-left: 2px solid var(--border);
+  .gdoc-dash-list li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.48;
+    color: #000000;
   }
 
-  .exec-items li.priority-row {
-    border-left-color: var(--accent);
+  .gdoc-dash-list li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #000000;
   }
 
-  .exec-items li.alert-row {
-    border-left-color: var(--col-red);
-    background: rgba(201, 42, 42, 0.06);
-    padding: 4px 8px;
-    border-radius: 4px;
+  .gdoc-dash-list li.gdoc-alert-li {
+    background: #fce8e6;
+    border-left: 3px solid #c5221f;
+    padding: 6px 10px 6px 22px;
+    margin-bottom: 8px;
   }
 
-  .exec-cite {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--accent);
-    margin-left: 3px;
+  .gdoc-link {
+    color: #1155cc;
+    text-decoration: underline;
+    cursor: pointer;
   }
 
-  .exec-cite.alert {
-    color: var(--col-red);
+  .gdoc-link-alert {
+    color: #c5221f;
+    font-weight: 700;
+    text-decoration: underline;
   }
 
-  .exec-bottom-nav {
-    margin-top: 10px;
-    padding-top: 9px;
-    border-top: 1px solid var(--border);
+  .gdoc-hr {
+    border: none;
+    border-top: 1px solid #9aa0a6;
+    margin: 18px 0 16px;
+  }
+
+  .gdoc-page-foot {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid #e8eaed;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    font-size: 10.5px;
-    color: var(--fg-muted);
+    font-family: Arial, sans-serif;
+    font-size: 11.5px;
+    color: #5f6368;
   }
 
   @media (max-width: 720px) {
     #cal-sidebar {
       display: none;
     }
-    .exec-grid-2col {
-      grid-template-columns: 1fr;
+    .gdoc-page {
+      padding: 20px 22px 26px;
     }
   }
 </style>
@@ -1039,13 +1160,15 @@
       </div>
     </aside>
 
-    <!-- Main Workspace (Toggles Seamlessly Between Week Calendar & 1-Page Executive Briefing) -->
+    <!-- Main Workspace (Toggles Seamlessly Between Week Calendar & Google Docs Dossier) -->
     <div id="cal-main">
       <div id="cal-topbar">
         <div class="cal-nav-left">
           <button type="button" class="back-to-cal-btn" id="btn-back-to-cal">
-            &#8592; Back to Week Calendar
+            &#8592; Back to Calendar
           </button>
+
+          <div class="top-brief-pills" id="brief-meeting-pills"></div>
 
           <div id="cal-date-nav-controls" class="cal-date-nav-controls">
             <div class="cal-pill-group">
@@ -1058,9 +1181,9 @@
         </div>
 
         <div class="cal-views-right">
-          <div class="view-mode-segmented" role="tablist" aria-label="Switch between Week Calendar and 1-Page Executive Briefing">
+          <div class="view-mode-segmented" role="tablist" aria-label="Switch between Week Calendar and Google Docs Briefing">
             <button type="button" class="view-mode-btn active" id="mode-btn-calendar">Week Calendar</button>
-            <button type="button" class="view-mode-btn" id="mode-btn-briefing">1-Page Exec Briefing</button>
+            <button type="button" class="view-mode-btn" id="mode-btn-briefing">Google Docs Briefing</button>
           </div>
           <button type="button" class="cal-view-tab" data-sc-view="next_day_cold_lead">New Contact</button>
           <button type="button" class="cal-view-tab active" data-sc-view="next_day_mixed">Full Week</button>
@@ -1104,10 +1227,10 @@
             <div class="pop-title" id="popTitle">Acme &lt;&gt; Platform Sync</div>
             <div class="pop-meta" id="popMeta">Thu 24 Sep, 10:00am - 11:30am | Brief Ready Below Card</div>
             <div class="pop-desc" id="popDesc">
-              Every external or cross-team meeting gets a attached "Brief ready" tab directly underneath the calendar slot. Click any "Brief ready" strip on the calendar to open its 1-Page Executive Briefing.
+              Every external or cross-team meeting gets an attached "Brief ready" tab directly underneath the calendar slot. Click any "Brief ready" strip on the calendar to open its Google Docs Briefing.
             </div>
             <button type="button" class="pop-open-brief-btn" id="popOpenBriefBtn">
-              Open 1-Page Exec Briefing &#8594;
+              Open Google Docs Briefing &#8594;
             </button>
             <div class="pop-footer">
               <div class="pop-nav-btns">
@@ -1119,13 +1242,68 @@
         </div>
       </div>
 
-      <!-- VIEW 2: 1-PAGE EXECUTIVE BRIEFING DOCUMENT SHOWCASE -->
+      <!-- VIEW 2: AUTHENTIC GOOGLE DOCS DOSSIER SHOWCASE -->
       <div id="exec-briefing-view">
-        <div class="brief-switcher-strip">
-          <div class="brief-meeting-pills" id="brief-meeting-pills"></div>
+        <div class="gdoc-chrome">
+          <div class="gdoc-title-row">
+            <div class="gdoc-title-left">
+              <div class="gdoc-icon-box" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="8" y1="13" x2="16" y2="13"></line>
+                  <line x1="8" y1="17" x2="13" y2="17"></line>
+                </svg>
+              </div>
+              <div class="gdoc-file-meta">
+                <div class="gdoc-filename" id="gdoc-header-filename">Meeting Prep Dossier - 2026-09-24 - Enterprise API Rollout Sync</div>
+                <div class="gdoc-menus">
+                  <span>File</span>
+                  <span>Edit</span>
+                  <span>View</span>
+                  <span>Insert</span>
+                  <span>Format</span>
+                  <span>Tools</span>
+                  <span>Extensions</span>
+                  <span>Help</span>
+                </div>
+              </div>
+            </div>
+            <div class="gdoc-title-right">
+              <span class="gdoc-lint-badge" id="gdoc-lint-status">36/36 Fact Checks Passed</span>
+              <button type="button" class="gdoc-trap-btn" id="gdoc-trap-toggle">Test Fake Link Trap</button>
+              <span class="gdoc-share-pill">Share</span>
+            </div>
+          </div>
+
+          <div class="gdoc-toolbar" aria-hidden="true">
+            <span>&#8630;</span>
+            <span>&#8631;</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            <span class="gdoc-tb-sep"></span>
+            <span>100% &#9662;</span>
+            <span class="gdoc-tb-sep"></span>
+            <span>Normal text &#9662;</span>
+            <span class="gdoc-tb-sep"></span>
+            <span>Arial &#9662;</span>
+            <span class="gdoc-tb-sep"></span>
+            <span>&#8722;</span>
+            <span class="gdoc-tb-size">11</span>
+            <span>+</span>
+            <span class="gdoc-tb-sep"></span>
+            <span style="font-weight:700;">B</span>
+            <span style="font-style:italic;">I</span>
+            <span style="text-decoration:underline;">U</span>
+            <span style="border-bottom:2px solid #000000;line-height:1;">A</span>
+            <span class="gdoc-tb-sep"></span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            <span>&#8801;</span>
+          </div>
         </div>
 
-        <article class="exec-sheet" id="exec-sheet-content"></article>
+        <div class="gdoc-scroll-area">
+          <article class="gdoc-page" id="exec-sheet-content"></article>
+        </div>
       </div>
     </div>
   </div>
@@ -1173,31 +1351,37 @@
       id: "mon_stripe",
       col: 0, startH: 14.1, durH: 1.35,
       color: "var(--col-blue)", cat: "external", hasBrief: true,
-      shortTabLabel: "Mon 2:15pm: FinPay",
+      shortTabLabel: "Mon: FinPay",
       timeText: "2:15pm FinPay Sync",
       subText: "Claire Tan / Dev Patel",
       meta: "Mon 21 Sep, 2:15pm - 3:45pm | Brief Ready",
-      desc: "External partner call with FinPay engineering leadership. Click 'Brief ready' below this card to read the generated 1-Page Executive Briefing.",
+      desc: "External partner call with FinPay engineering leadership. Click 'Brief ready' below this card to read the generated Google Docs Briefing.",
       brief: {
-        title: "FinPay <> Core Platform: Webhook & Settlement Sync",
-        when: "Monday, 21 September 2026 | 2:15pm - 3:45pm SGT | Google Meet",
+        docHeading: "Meeting Prep Dossier - 2026-09-21 - FinPay Webhook & Settlement Sync",
+        meetingTitle: "FinPay Webhook & Settlement Sync",
+        dateTimeUtc: "Monday, 21 September 2026, 2:15 PM - 3:45 PM SGT (06:15 - 07:45 UTC)",
+        location: "SG-Tower-B-18-HarbourView (6) [Video Conferencing Ready]",
+        meetUrl: "https://meet.google.com/finpay-webhook-sync",
+        organiserName: "Dana Martin",
+        organiserEmail: "dana.martin@platform-demo.example",
+        inviteQuote: "Hi all, syncing on NAT egress allowlisting and webhook retry thresholds ahead of October launch.",
         attendees: [
-          { t: "Claire Tan, VP of Engineering at FinPay (last met 14 days ago)", c: "People Directory" },
-          { t: "Dev Patel, Principal Payments Architect at FinPay", c: "People Directory" },
-          { t: "Dana Martin, Partner Solutions Lead (APAC)", c: "People Directory" }
+          { lead: "Claire Tan (VP of Engineering, FinPay)", detail: "External decision-maker, last met 14 days ago at scoping sync", cite: "People Directory" },
+          { lead: "Dev Patel (Principal Payments Architect, FinPay)", detail: "Owns webhook signature validation and settlement pipeline", cite: "People Directory" },
+          { lead: "Dana Martin (Partner Solutions Lead, APAC)", detail: "Internal technical lead and meeting organiser", cite: "People Directory" }
         ],
         context: [
-          { t: "Agreed during 7 Sep sync to complete sandbox webhook signature tests ahead of October volume ramp.", c: "Calendar Notes" },
-          { t: "Shared Q4 Settlement Rollout Tracker shows 4 of 5 staging milestones green.", c: "Google Sheets" }
+          { lead: "Last Sync (7 Sep 2026)", detail: "Agreed to complete sandbox webhook signature tests ahead of October volume ramp", cite: "Calendar Notes" },
+          { lead: "Shared Rollout Tracker", detail: "Q4 Settlement Rollout Sheet shows 4 of 5 staging milestones complete", cite: "Google Sheets" }
         ],
         blockers: [
-          { t: "Claire Tan emailed 3 days ago asking for production NAT egress IP ranges for FinPay firewall allowlisting (unanswered).", c: "Gmail Thread" },
-          { t: "Retry backoff threshold on idempotency keys needs final sign-off before Friday.", c: "Google Chat" }
+          { lead: "NAT Egress Allowlisting", detail: "Claire Tan emailed 3 days ago asking for production NAT IP ranges (awaiting reply)", cite: "Gmail Thread" },
+          { lead: "Retry Backoff Cap", detail: "Idempotency key backoff threshold needs final sign-off before Friday", cite: "Google Chat" }
         ],
         agenda: [
-          "Share verified production NAT egress IP block to unblock FinPay security allowlisting.",
-          "Confirm exponential retry cap (5 attempts over 15 minutes) for settlement webhooks.",
-          "Lock production cutover rehearsal window for 29 September."
+          { lead: "Share Production NAT Ranges", detail: "Provide verified egress CIDR block to unblock FinPay security allowlisting." },
+          { lead: "Lock Webhook Retry Policy", detail: "Confirm exponential retry cap (5 attempts over 15 minutes) with Dev Patel." },
+          { lead: "Confirm Cutover Rehearsal", detail: "Book final staging cutover rehearsal window for 29 September." }
         ],
         skippedNote: "Skipped on Mon 21: Infra Pod Standup (same-team recurring sync), Focus Block (solo block)."
       }
@@ -1224,30 +1408,36 @@
       id: "tue_auth",
       col: 1, startH: 14.3, durH: 1.35,
       color: "var(--col-green)", cat: "crossteam", hasBrief: true,
-      shortTabLabel: "Tue 2:20pm: Payments x Auth",
+      shortTabLabel: "Tue: Payments x Auth",
       timeText: "2:20pm Payments x Identity",
       subText: "Rahul Khan / Sofia Barros",
       meta: "Tue 22 Sep, 2:20pm - 3:50pm | Brief Ready",
-      desc: "Cross-org review with Identity Product & Security leads. Click 'Brief ready' underneath the card to view the 1-Page Executive Briefing.",
+      desc: "Cross-org review with Identity Product & Security leads. Click 'Brief ready' underneath the card to view the Google Docs Briefing.",
       brief: {
-        title: "Payments x Identity: OAuth Token Exchange Architecture Review",
-        when: "Tuesday, 22 September 2026 | 2:20pm - 3:50pm SGT | Conference Room 4B",
+        docHeading: "Meeting Prep Dossier - 2026-09-22 - OAuth Token Exchange Review",
+        meetingTitle: "OAuth Token Exchange Architecture Review",
+        dateTimeUtc: "Tuesday, 22 September 2026, 2:20 PM - 3:50 PM SGT (06:20 - 07:50 UTC)",
+        location: "SG-Campus-West-04-Boardroom-B (8) [Video Conferencing Ready]",
+        meetUrl: "https://meet.google.com/oauth-token-review",
+        organiserName: "Rahul Khan",
+        organiserEmail: "rahul.khan@platform-demo.example",
+        inviteQuote: "Hi all, booking time to finalise Section 3 token rotation window and Q4 sprint owners.",
         attendees: [
-          { t: "Rahul Khan, Group Product Manager, Identity Platform", c: "People Directory" },
-          { t: "Sofia Barros, Staff Security Engineer, AppSec", c: "People Directory" }
+          { lead: "Rahul Khan (Group Product Manager, Identity Platform)", detail: "Cross-org product lead owning Q4 authentication roadmap", cite: "People Directory" },
+          { lead: "Sofia Barros (Staff Security Engineer, AppSec)", detail: "Security reviewer for production token exchange gate", cite: "People Directory" }
         ],
         context: [
-          { t: "Phase 1 token exchange migration split agreed 3 weeks ago; engineering owner assignment due this week.", c: "Calendar Notes" },
-          { t: "Token Exchange RFC v2.4 updated yesterday with latency benchmarks (< 4.2ms p99).", c: "Google Docs" }
+          { lead: "Architecture Split (1 Sep 2026)", detail: "Phase 1 token migration split agreed 3 weeks ago; engineering lead due this week", cite: "Calendar Notes" },
+          { lead: "Design Spec Update", detail: "Token Exchange RFC v2.4 updated yesterday with p99 latency benchmarks (< 4.2ms)", cite: "Google Docs" }
         ],
         blockers: [
-          { t: "Rahul Khan is awaiting your approval comment on Section 3 of Token Exchange RFC before booking Q4 sprint capacity.", c: "Drive Comment" },
-          { t: "Security ticket b/412998877 requires named Phase 1 owner before production gate.", c: "Chat Thread" }
+          { lead: "RFC Section 3 Approval", detail: "Rahul Khan is awaiting your approval comment on Section 3 before locking sprint headcount", cite: "Drive Comment" },
+          { lead: "Security Gate Owner", detail: "Security review ticket requires a named Phase 1 engineering lead before release", cite: "Chat Thread" }
         ],
         agenda: [
-          "Sign off on Section 3 token rotation window in Rahul Khan's RFC document.",
-          "Assign Phase 1 engineering lead on ticket b/412998877 with Sofia Barros.",
-          "Confirm Q4 sprint allocation across Payments and Identity teams."
+          { lead: "Approve Token Rotation Window", detail: "Sign off on Section 3 rotation window in Rahul Khan's RFC document." },
+          { lead: "Assign Phase 1 Lead", detail: "Confirm engineering owner on the security gate with Sofia Barros." },
+          { lead: "Lock Q4 Sprint Capacity", detail: "Confirm shared Q4 allocation across Payments and Identity teams." }
         ],
         skippedNote: "Skipped on Tue 22: Core Bug Scrub (same-team triage), Q3 Company All-Hands (312 invitees)."
       }
@@ -1274,32 +1464,38 @@
       id: "thu_acme",
       col: 3, startH: 9.85, durH: 1.35,
       color: "var(--col-blue)", cat: "external", hasBrief: true,
-      shortTabLabel: "Thu 10am: Acme Corp",
+      shortTabLabel: "Thu: Acme Corp",
       timeText: "10am Acme <> Platform",
       subText: "Alex Chen / Jordan Lee",
       meta: "Thu 24 Sep, 10:00am - 11:30am | Brief Ready",
-      desc: "Click the 'Brief ready' tab tucked right underneath this meeting block to switch views and read the full 1-Page Executive Briefing.",
+      desc: "Click the 'Brief ready' tab tucked right underneath this meeting block to switch views and read the Google Docs Dossier.",
       brief: {
-        title: "Acme Corp <> Core Platform: Enterprise API Rollout Sync",
-        when: "Thursday, 24 September 2026 | 10:00am - 11:30am SGT | Google Meet",
+        docHeading: "Meeting Prep Dossier - 2026-09-24 - Enterprise API Rollout Sync",
+        meetingTitle: "Enterprise API Rollout Sync",
+        dateTimeUtc: "Thursday, 24 September 2026, 10:00 AM - 11:30 AM SGT (02:00 - 03:30 UTC)",
+        location: "SG-Tower-B-14-Boardroom (7) [Video Conferencing Ready]",
+        meetUrl: "https://meet.google.com/acme-rollout-sync",
+        organiserName: "Dana Martin",
+        organiserEmail: "dana.martin@platform-demo.example",
+        inviteQuote: "Hi all, booking time to go through staging cutover readiness and OAuth sign-off. Thank you.",
         attendees: [
-          { t: "Alex Chen, Director of Engineering at Acme Corp (external partner, last met 10 days ago)", c: "People Directory" },
-          { t: "Jordan Lee, Technical Programme Manager at Acme Corp", c: "People Directory" },
-          { t: "Dana Martin, Partner Engineering Lead (APAC)", c: "People Directory" }
+          { lead: "Alex Chen (Director of Engineering, Acme Corp)", detail: "External partner stakeholder, last met 10 days ago at kickoff", cite: "People Directory" },
+          { lead: "Jordan Lee (Technical Programme Manager, Acme Corp)", detail: "Owns cutover schedule and partner integration timeline", cite: "People Directory" },
+          { lead: "Dana Martin (Partner Engineering Lead, APAC)", detail: "Internal technical lead and meeting organiser", cite: "People Directory" }
         ],
         context: [
-          { t: "Agreed at 14 Sep kickoff to complete staging cutover first, followed by full production launch two weeks later.", c: "Calendar Notes" },
-          { t: "Shared Q4 Launch Readiness Deck updated by Dana Martin with throughput load-test metrics.", c: "Google Slides" }
+          { lead: "Kickoff Agreement (14 Sep 2026)", detail: "Agreed to complete staging cutover first, followed by full production launch two weeks later", cite: "Calendar Notes" },
+          { lead: "Launch Readiness Deck", detail: "Q4 Launch Readiness Deck updated by Dana Martin with throughput load-test metrics", cite: "Google Slides" }
         ],
         blockers: [
-          { t: "Alex Chen's security team has not yet signed off on the updated OAuth read/write scope permissions.", c: "Gmail: Security Status" },
-          { t: "Jordan Lee asked 6 days ago whether staging cutover can move to code freeze week (still awaiting your reply).", c: "Gmail: Cutover Window" },
-          { t: "Automated regression coverage on v2 batch endpoints stands at 60% and needs one additional sprint.", c: "Chat: Acme x Platform" }
+          { lead: "OAuth Scope Sign-Off", detail: "Alex Chen's security team has not yet signed off on updated read/write scope permissions", cite: "Gmail: Security Status" },
+          { lead: "Cutover Window Question", detail: "Jordan Lee asked 6 days ago whether staging cutover can move into code freeze week", cite: "Gmail: Cutover Window" },
+          { lead: "Regression Coverage", detail: "Automated test coverage on v2 batch endpoints stands at 60% and needs one more sprint", cite: "Chat: Acme x Platform" }
         ],
         agenda: [
-          "Lock target sign-off date with Alex Chen for Acme's security review on OAuth scopes.",
-          "Give Jordan Lee a clear yes/no on moving staging cutover into code freeze week.",
-          "Review load-test numbers in the Q4 Launch Readiness Deck and assign v2 test owners."
+          { lead: "Lock Security Sign-Off Date", detail: "Confirm exact sign-off date with Alex Chen for Acme's security review on OAuth scopes." },
+          { lead: "Decide Cutover Window", detail: "Give Jordan Lee a clear yes or no on moving staging cutover into code freeze week." },
+          { lead: "Assign v2 Test Owners", detail: "Review throughput numbers in the Q4 Launch Readiness Deck and assign regression owners." }
         ],
         skippedNote: "Filtered from Thu 24 schedule: Org Design Broadcast (84 attendees)."
       }
@@ -1317,29 +1513,35 @@
       id: "thu_northwind",
       col: 3, startH: 14.55, durH: 1.35,
       color: "var(--col-orange)", cat: "t1h", hasBrief: true,
-      shortTabLabel: "Thu 2:35pm: Northwind (1h Scan)",
+      shortTabLabel: "Thu: Northwind",
       timeText: "2:35pm Northwind Kickoff",
       subText: "Tom Hale / Dana Martin",
       meta: "Thu 24 Sep, 2:35pm - 4:00pm | Caught 1h Before Call",
       desc: "Booked same morning after last night's 5pm run! Caught by the 1-hour pre-call scanner and given a fresh 'Brief ready' tab underneath.",
       brief: {
-        title: "1-Hour Pre-Call Briefing: Northwind Traders Integration Kickoff",
-        when: "Thursday, 24 September 2026 | 2:35pm - 4:00pm SGT | Caught by Hourly Window",
+        docHeading: "Meeting Prep Dossier - 2026-09-24 - Northwind Integration Kickoff",
+        meetingTitle: "Northwind Traders Integration Kickoff",
+        dateTimeUtc: "Thursday, 24 September 2026, 2:35 PM - 4:00 PM SGT (06:35 - 08:00 UTC)",
+        location: "SG-Tower-B-09-BayView (5) [Caught by 1h Pre-Call Scanner]",
+        meetUrl: "https://meet.google.com/northwind-kickoff-sync",
+        organiserName: "Tom Hale",
+        organiserEmail: "tom.hale@northwind-demo.example",
+        inviteQuote: "Hi team, adding a same-day technical sync to review connector rate limits before next sprint.",
         attendees: [
-          { t: "Tom Hale, Head of Enterprise Integrations at Northwind Traders", c: "People Directory" },
-          { t: "Dana Martin, Partner Engineering Lead (APAC)", c: "People Directory" }
+          { lead: "Tom Hale (Head of Enterprise Integrations, Northwind Traders)", detail: "External architecture lead owning connector throughput requirements", cite: "People Directory" },
+          { lead: "Dana Martin (Partner Engineering Lead, APAC)", detail: "Internal technical lead supporting Northwind rollout", cite: "People Directory" }
         ],
         context: [
-          { t: "Same-day calendar invite added at 10:12am this morning after yesterday's 5pm batch run.", c: "Hourly Calendar Scan" },
-          { t: "Fast pre-call research pass completed in 38 seconds with zero duplicate email alerts.", c: "Stateless Window" }
+          { lead: "Same-Day Calendar Scan", detail: "Invite added at 10:12 AM today after yesterday's 5:00 PM batch run; caught by hourly window", cite: "Hourly Calendar Scan" },
+          { lead: "Zero Duplicate Guarantee", detail: "Stateless pre-call window ensures each meeting receives at most one automated briefing", cite: "Stateless Window" }
         ],
         blockers: [
-          { t: "Tom Hale emailed 2 days ago asking for exact connector rate-limit figures and burst quotas.", c: "Gmail: Scoping Asks" },
-          { t: "Northwind Integration Scope Doc has connector endpoints listed with rate limits marked TBD.", c: "Google Docs" }
+          { lead: "Connector Rate-Limit Specs", detail: "Tom Hale emailed 2 days ago asking for exact RPS and burst quotas (unanswered)", cite: "Gmail: Scoping Asks" },
+          { lead: "TBD Thresholds in Scope Doc", detail: "Northwind Integration Scope Doc still marks burst limits as TBD", cite: "Google Docs" }
         ],
         agenda: [
-          "Provide exact connector RPS and burst quota numbers to unblock Tom Hale's team.",
-          "Walk through the Northwind Integration Scope Doc together live and lock milestone dates."
+          { lead: "Share RPS & Burst Quotas", detail: "Provide exact connector rate-limit figures live on the call." },
+          { lead: "Lock Milestone Dates", detail: "Update TBD cells inside the Northwind Integration Scope Doc together." }
         ],
         skippedNote: "Stateless hourly window ensures each meeting receives at most one pre-call briefing."
       }
@@ -1348,26 +1550,32 @@
       id: "fri_initech",
       col: 4, startH: 10.1, durH: 1.35,
       color: "var(--col-blue)", cat: "external", hasBrief: true,
-      shortTabLabel: "Fri 10:10am: Initech (New)",
+      shortTabLabel: "Fri: Initech",
       timeText: "10:10am Initech Intro Call",
       subText: "Marta Novak (First-Time)",
       meta: "Fri 25 Sep, 10:10am - 11:35am | Honest Empty History",
       desc: "First-time external intro with Marta Novak at Initech. Click 'Brief ready' below the card to see how first-time contacts are briefed with zero invented facts.",
       brief: {
-        title: "First-Time External Briefing: Initech <> Core Platform Intro",
-        when: "Friday, 25 September 2026 | 10:10am - 11:35am SGT | Google Meet",
+        docHeading: "Meeting Prep Dossier - 2026-09-25 - Initech Intro Call",
+        meetingTitle: "Initech <> Core Platform Intro Call",
+        dateTimeUtc: "Friday, 25 September 2026, 10:10 AM - 11:35 AM SGT (02:10 - 03:35 UTC)",
+        location: "Google Meet (First-Time External Introduction)",
+        meetUrl: "https://meet.google.com/initech-intro-call",
+        organiserName: "Marta Novak",
+        organiserEmail: "marta.novak@initech-demo.example",
+        inviteQuote: "Hi there, booking an introductory call to explore Q4 platform integration options. Thank you.",
         attendees: [
-          { t: "Marta Novak, VP of Data Platform at Initech (first-time external introduction)", c: "People Directory" }
+          { lead: "Marta Novak (VP of Data Platform, Initech)", detail: "First-time external contact; zero prior meetings on record", cite: "People Directory" }
         ],
         context: [
-          { t: "No prior context found across Google Calendar, Gmail, Google Chat, or shared Drive documents.", c: "Verified Empty History" }
+          { lead: "Prior Meeting History", detail: "No prior meetings, emails, chats, or shared Drive documents found with Initech", cite: "Verified Empty History" }
         ],
         blockers: [
-          { t: "Zero prior email threads, open tickets, or shared decks exist with Initech — zero invented past meetings.", c: "7/7 Honesty Checks" }
+          { lead: "Zero Prior Threads", detail: "Strict grounding check active: never invent past meetings when workspace search returns zero hits", cite: "7/7 Honesty Checks" }
         ],
         agenda: [
-          "Introduce Core Platform capabilities and learn Initech's Q4 data platform priorities.",
-          "Agree on follow-up technical evaluation owners and next steps."
+          { lead: "Discovery & Platform Walkthrough", detail: "Introduce Core Platform capabilities and learn Initech's Q4 data platform priorities." },
+          { lead: "Agree Next Steps", detail: "Identify technical evaluation owners on both sides." }
         ],
         skippedNote: "Strict honesty rule active: when no prior records exist, never guess or invent past meetings."
       }
@@ -1423,6 +1631,9 @@
   const btnBackToCal = document.getElementById("btn-back-to-cal");
   const briefPillsEl = document.getElementById("brief-meeting-pills");
   const execSheetEl = document.getElementById("exec-sheet-content");
+  const gdocFilenameEl = document.getElementById("gdoc-header-filename");
+  const gdocLintStatusEl = document.getElementById("gdoc-lint-status");
+  const gdocTrapToggleEl = document.getElementById("gdoc-trap-toggle");
 
   function renderMiniCal() {
     const dows = ["S", "M", "T", "W", "T", "F", "S"];
@@ -1550,72 +1761,73 @@
       .join("");
 
     const b = ev.brief;
-    const trapRow = fakeLinkActive
-      ? `<li class="alert-row">BLOCKED BY CHECK #19: Unverified link docs.google.com/d/invented-link stripped before delivery <span class="exec-cite alert">(Caught &amp; Halted)</span></li>`
+    gdocFilenameEl.textContent = b.docHeading;
+    gdocLintStatusEl.textContent = fakeLinkActive ? "HOLD: 1 Fake URL Blocked" : "36/36 Fact Checks Passed";
+    gdocLintStatusEl.classList.toggle("is-alert", fakeLinkActive);
+    gdocTrapToggleEl.textContent = fakeLinkActive ? "Clear Fake Link Simulation" : "Test Fake Link Trap";
+
+    const trapBullet = fakeLinkActive
+      ? `<li class="gdoc-alert-li"><strong>Blocked by Grounding Check #19:</strong> Unverified link <span class="gdoc-link-alert">https://docs.google.com/document/d/invented-doc-link</span> was not present in any retrieved tool trace and was stripped before delivery.</li>`
       : "";
 
     execSheetEl.innerHTML = `
-      <div class="exec-doc-top">
-        <div>
-          <div class="exec-kicker">1-Page Executive Briefing Dossier</div>
-          <h1 class="exec-title">${b.title}</h1>
-          <div class="exec-when">${b.when}</div>
-        </div>
-        <div class="exec-verified-box">
-          <div class="exec-verified-tag ${fakeLinkActive ? "is-alert" : ""}">
-            ${fakeLinkActive ? "HOLD: 1 Fake URL Blocked" : "36 / 36 Fact Checks Passed"}
-          </div>
-          <button type="button" class="exec-trap-link" id="exec-toggle-trap-btn">
-            ${fakeLinkActive ? "Clear fake link simulation" : "Test what happens if AI invents a link"}
-          </button>
-        </div>
-      </div>
+      <h1 class="gdoc-doc-title"><span class="gdoc-caret">|</span>${b.docHeading}</h1>
 
-      <div class="exec-grid-2col">
-        <div>
-          <div class="exec-sec-label">Who is in the Room</div>
-          <ul class="exec-items">
-            ${b.attendees.map(x => `<li class="priority-row">${x.t} <span class="exec-cite">(${x.c})</span></li>`).join("")}
-          </ul>
-        </div>
-        <div>
-          <div class="exec-sec-label">Prior Context &amp; Last Recap</div>
-          <ul class="exec-items">
-            ${trapRow}
-            ${b.context.map(x => `<li>${x.t} <span class="exec-cite">(${x.c})</span></li>`).join("")}
-          </ul>
-        </div>
-      </div>
+      <h2 class="gdoc-sec-heading">1. Meeting Details</h2>
+      <ul class="gdoc-dash-list">
+        <li><strong>Meeting Title:</strong> ${b.meetingTitle}</li>
+        <li><strong>Date &amp; Time:</strong> ${b.dateTimeUtc}</li>
+        <li><strong>Location:</strong> ${b.location} (<span class="gdoc-link">Google Maps</span>)</li>
+        <li><strong>Google Meet:</strong> <span class="gdoc-link">${b.meetUrl}</span></li>
+        <li><strong>Calendar Event:</strong> <span class="gdoc-link">${b.meetingTitle} Calendar Invite</span></li>
+        <li><strong>Meeting Organiser:</strong> ${b.organiserName} (<span class="gdoc-link">${b.organiserEmail}</span>)</li>
+        <li><strong>Description:</strong> "${b.inviteQuote}" (<span class="gdoc-link">Invitation Source</span>)</li>
+      </ul>
 
-      <div class="exec-grid-2col">
-        <div>
-          <div class="exec-sec-label">Open Blockers &amp; Unanswered Asks</div>
-          <ul class="exec-items">
-            ${b.blockers.map(x => `<li class="priority-row">${x.t} <span class="exec-cite">(${x.c})</span></li>`).join("")}
-          </ul>
-        </div>
-        <div>
-          <div class="exec-sec-label">Recommended Talking Points</div>
-          <ul class="exec-items">
-            ${b.agenda.map(x => `<li>${x}</li>`).join("")}
-          </ul>
-        </div>
-      </div>
+      <hr class="gdoc-hr">
 
-      <div class="exec-bottom-nav">
+      <h2 class="gdoc-sec-heading">2. Attendee Context</h2>
+      <ul class="gdoc-dash-list">
+        ${b.attendees.map(x => `<li><strong>${x.lead}:</strong> ${x.detail} (<span class="gdoc-link">${x.cite}</span>)</li>`).join("")}
+      </ul>
+
+      <hr class="gdoc-hr">
+
+      <h2 class="gdoc-sec-heading">3. Prior Context &amp; Last Recap</h2>
+      <ul class="gdoc-dash-list">
+        ${trapBullet}
+        ${b.context.map(x => `<li><strong>${x.lead}:</strong> ${x.detail} (<span class="gdoc-link">${x.cite}</span>)</li>`).join("")}
+      </ul>
+
+      <hr class="gdoc-hr">
+
+      <h2 class="gdoc-sec-heading">4. Open Action Items &amp; Unanswered Asks</h2>
+      <ul class="gdoc-dash-list">
+        ${b.blockers.map(x => `<li><strong>${x.lead}:</strong> ${x.detail} (<span class="gdoc-link">${x.cite}</span>)</li>`).join("")}
+      </ul>
+
+      <hr class="gdoc-hr">
+
+      <h2 class="gdoc-sec-heading">5. Recommended Talking Points</h2>
+      <ul class="gdoc-dash-list">
+        ${b.agenda.map(x => `<li><strong>${x.lead}:</strong> ${x.detail}</li>`).join("")}
+      </ul>
+
+      <div class="gdoc-page-foot">
         <span>${b.skippedNote}</span>
         <button type="button" class="pop-btn primary" id="exec-bottom-back-btn">&#8592; Return to Week Calendar</button>
       </div>
     `;
 
-    document.getElementById("exec-toggle-trap-btn").addEventListener("click", () => {
-      fakeLinkActive = !fakeLinkActive;
-      renderExecBriefingView();
-    });
     document.getElementById("exec-bottom-back-btn").addEventListener("click", () => {
       setViewMode("calendar");
     });
   }
+
+  gdocTrapToggleEl.addEventListener("click", () => {
+    fakeLinkActive = !fakeLinkActive;
+    renderExecBriefingView();
+  });
 
   function showPopoverForEvent(evId, stepBadgeText) {
     const ev = EVENTS.find(e => e.id === evId) || EVENTS[8];
