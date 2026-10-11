@@ -2400,68 +2400,302 @@
   }
 
   function initNavHighlight() {
-    const links = document.querySelectorAll(".nav-link");
-    const sections = document.querySelectorAll("[data-section-target]");
-    if ("IntersectionObserver" in window && sections.length > 0) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const id = entry.target.getAttribute("data-section-target");
-              links.forEach((l) => {
-                l.classList.toggle("active", l.getAttribute("data-section") === id);
-              });
-            }
-          });
-        },
-        { rootMargin: "-25% 0px -55% 0px", threshold: 0.05 }
-      );
-      sections.forEach((s) => observer.observe(s));
+    const links = Array.from(document.querySelectorAll(".nav-link"));
+    const sections = Array.from(document.querySelectorAll("[data-section-target]"));
+    const localnavTitle = document.getElementById("localnav-active-title");
+    const localnavChapters = document.getElementById("localnav-chapters");
+
+    const SECTION_SUBNAV_CONFIG = {
+      top: {
+        title: "Profile",
+        href: "#top",
+        items: [
+          {
+            id: "about-google",
+            label: "Google Cloud",
+            href: "#about-google",
+            onClick: () => {
+              const btn = document.querySelector('#about [data-about-tab="google"]');
+              if (btn) btn.click();
+              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+          {
+            id: "about-grab",
+            label: "Grab",
+            href: "#about-grab",
+            onClick: () => {
+              const btn = document.querySelector('#about [data-about-tab="grab"]');
+              if (btn) btn.click();
+              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+          {
+            id: "about-astar",
+            label: "A*STAR",
+            href: "#about-astar",
+            onClick: () => {
+              const btn = document.querySelector('#about [data-about-tab="astar"]');
+              if (btn) btn.click();
+              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+          {
+            id: "about-beyond",
+            label: "Education",
+            href: "#about-beyond",
+            onClick: () => {
+              const btn = document.querySelector('#about [data-about-tab="beyond"]');
+              if (btn) btn.click();
+              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+        ],
+      },
+      featured: {
+        title: "Featured Repos",
+        href: "#featured",
+        items: [
+          { id: "highlights-section", label: "Highlights", href: "#highlights-section" },
+          { id: "showcase-agent-tracer", label: "Agent Tracer", href: "#showcase-agent-tracer" },
+          { id: "showcase-meeting-prep", label: "Meeting Dossier", href: "#showcase-meeting-prep" },
+          { id: "showcase-uq-xai", label: "Battery Research", href: "#showcase-uq-xai" },
+        ],
+      },
+      projects: {
+        title: "All Projects",
+        href: "#projects",
+        items: [
+          {
+            id: "projects-all",
+            label: "All Systems",
+            href: "#projects-all",
+            onClick: () => {
+              setFilterCategory("all");
+              const el = document.getElementById("projects");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+          {
+            id: "projects-agentic",
+            label: "Agentic & DevTools",
+            href: "#projects-agentic",
+            onClick: () => {
+              setFilterCategory("agentic");
+              const el = document.getElementById("projects");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+          {
+            id: "projects-fullstack",
+            label: "Full-Stack & Cloud",
+            href: "#projects-fullstack",
+            onClick: () => {
+              setFilterCategory("fullstack");
+              const el = document.getElementById("projects");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+          {
+            id: "projects-ml",
+            label: "ML & Research",
+            href: "#projects-ml",
+            onClick: () => {
+              setFilterCategory("ml");
+              const el = document.getElementById("projects");
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            },
+          },
+          {
+            id: "compare-systems-box",
+            label: "Compare Systems",
+            href: "#compare-systems-box",
+          },
+        ],
+      },
+      journey: {
+        title: "Experience",
+        href: "#journey",
+        items: [
+          { id: "milestone-gcloud", label: "Google Singapore", href: "#milestone-gcloud" },
+          { id: "milestone-grab", label: "Grab Singapore", href: "#milestone-grab" },
+          { id: "milestone-astar", label: "A*STAR Singapore", href: "#milestone-astar" },
+          { id: "milestone-education", label: "Glasgow & SIT", href: "#milestone-education" },
+          { id: "leadership-strip", label: "Workshops & Awards", href: "#leadership-strip" },
+        ],
+      },
+      publications: {
+        title: "Research",
+        href: "#publications",
+        items: [
+          { id: "pub-battery-xai", label: "Battery State-of-Health", href: "#pub-battery-xai" },
+          { id: "pub-teamwork-ed", label: "Teamwork Assessment", href: "#pub-teamwork-ed" },
+        ],
+      },
+      stack: {
+        title: "Toolkit",
+        href: "#stack",
+        items: [
+          { id: "bento-specs-grid", label: "By the Numbers", href: "#bento-specs-grid" },
+          { id: "skill-agentic", label: "Agentic AI & ML", href: "#skill-agentic" },
+          { id: "skill-fullstack", label: "Backend & Cloud", href: "#skill-fullstack" },
+          { id: "skill-cloud", label: "Security & Infrastructure", href: "#skill-cloud" },
+          { id: "closing-cta", label: "Connect", href: "#closing-cta" },
+        ],
+      },
+    };
+
+    let currentRenderedSection = null;
+    let manualSectionOverride = null;
+    let manualOverrideTimer = null;
+
+    function resolveActiveSubItem(sectionId) {
+      const cfg = SECTION_SUBNAV_CONFIG[sectionId];
+      if (!cfg || cfg.items.length === 0) return "";
+      const probeY = Math.max(136, window.innerHeight * 0.28);
+
+      if (sectionId === "top") {
+        const activeAboutBtn = document.querySelector("#about [data-about-tab].active");
+        const tabKey = activeAboutBtn ? activeAboutBtn.getAttribute("data-about-tab") : "google";
+        return `about-${tabKey || "google"}`;
+      }
+
+      if (sectionId === "projects") {
+        const compareBox = document.getElementById("compare-systems-box");
+        if (compareBox && compareBox.getBoundingClientRect().top <= probeY) {
+          return "compare-systems-box";
+        }
+        const activeFilterBtn = document.querySelector(".filter-btn.active");
+        const filterKey = activeFilterBtn ? activeFilterBtn.getAttribute("data-filter") : "all";
+        return `projects-${filterKey || "all"}`;
+      }
+
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
+      if (nearBottom && sectionId === "stack") {
+        return cfg.items[cfg.items.length - 1].id;
+      }
+
+      let activeId = cfg.items[0].id;
+      for (const item of cfg.items) {
+        const domEl = document.getElementById(item.id);
+        if (domEl && domEl.getBoundingClientRect().top <= probeY) {
+          activeId = item.id;
+        }
+      }
+      return activeId;
     }
 
-    const localnavTitle = document.getElementById("localnav-active-title");
-    const localnavLinks = document.querySelectorAll("[data-localnav-target]");
-    const chapterTargets = [
-      { id: "about", title: "Elias Lim" },
-      { id: "highlights-section", title: "Highlights" },
-      { id: "showcase-agent-tracer", title: "Antigravity Agent Tracer" },
-      { id: "showcase-meeting-prep", title: "Smart Meeting Dossier" },
-      { id: "showcase-uq-xai", title: "Battery UQ & XAI Research" },
-      { id: "projects", title: "All Systems" },
-      { id: "journey", title: "Experience & Honours" },
-      { id: "publications", title: "Published Research" },
-      { id: "stack", title: "By the Numbers" },
-    ];
-    if ("IntersectionObserver" in window && localnavLinks.length > 0) {
-      const chapterObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const targetId = entry.target.id;
-              const match = chapterTargets.find((c) => c.id === targetId);
-              if (match && localnavTitle) {
-                localnavTitle.textContent = match.title;
-              }
-              const mappedNavId =
-                targetId === "journey" || targetId === "publications" || targetId === "stack"
-                  ? "projects"
-                  : targetId;
-              localnavLinks.forEach((lnk) => {
-                lnk.classList.toggle(
-                  "active",
-                  lnk.getAttribute("data-localnav-target") === mappedNavId
-                );
-              });
+    function renderLocalNavSection(sectionId, activeSubId, animateSwap) {
+      const cfg = SECTION_SUBNAV_CONFIG[sectionId] || SECTION_SUBNAV_CONFIG.top;
+      if (localnavTitle) {
+        localnavTitle.textContent = cfg.title;
+        localnavTitle.setAttribute("href", cfg.href);
+      }
+      if (!localnavChapters) return;
+
+      if (currentRenderedSection !== sectionId) {
+        currentRenderedSection = sectionId;
+        localnavChapters.textContent = "";
+        cfg.items.forEach((item) => {
+          const a = document.createElement("a");
+          a.className = "localnav-link" + (item.id === activeSubId ? " active" : "");
+          a.href = item.href;
+          a.setAttribute("data-localnav-item", item.id);
+          a.textContent = item.label;
+          a.addEventListener("click", (e) => {
+            if (typeof item.onClick === "function") {
+              e.preventDefault();
+              item.onClick();
             }
+            Array.from(localnavChapters.querySelectorAll(".localnav-link")).forEach((lnk) => {
+              lnk.classList.toggle("active", lnk === a);
+            });
           });
-        },
-        { rootMargin: "-22% 0px -58% 0px", threshold: 0.04 }
+          localnavChapters.appendChild(a);
+        });
+        if (animateSwap) {
+          localnavChapters.classList.remove("is-entering");
+          void localnavChapters.offsetWidth;
+          localnavChapters.classList.add("is-entering");
+        }
+      } else {
+        Array.from(localnavChapters.querySelectorAll(".localnav-link")).forEach((lnk) => {
+          const isMatch = lnk.getAttribute("data-localnav-item") === activeSubId;
+          lnk.classList.toggle("active", isMatch);
+        });
+      }
+    }
+
+    function syncTwoTierNav() {
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
+      const probeY = Math.max(136, window.innerHeight * 0.28);
+
+      let activeSectionId = "top";
+      if (manualSectionOverride && SECTION_SUBNAV_CONFIG[manualSectionOverride]) {
+        activeSectionId = manualSectionOverride;
+      } else if (nearBottom && sections.length > 0) {
+        activeSectionId =
+          sections[sections.length - 1].getAttribute("data-section-target") || "stack";
+      } else {
+        for (const sec of sections) {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top <= probeY) {
+            activeSectionId = sec.getAttribute("data-section-target") || activeSectionId;
+          }
+        }
+      }
+
+      links.forEach((l) => {
+        l.classList.toggle("active", l.getAttribute("data-section") === activeSectionId);
+      });
+
+      const activeSubId = resolveActiveSubItem(activeSectionId);
+      renderLocalNavSection(
+        activeSectionId,
+        activeSubId,
+        currentRenderedSection !== null && currentRenderedSection !== activeSectionId
       );
-      chapterTargets.forEach((item) => {
-        const el = document.getElementById(item.id);
-        if (el) chapterObserver.observe(el);
+    }
+
+    let scrollTicking = false;
+    function scheduleNavSync() {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      requestAnimationFrame(() => {
+        scrollTicking = false;
+        syncTwoTierNav();
       });
     }
+
+    links.forEach((l) => {
+      l.addEventListener("click", () => {
+        const targetSec = l.getAttribute("data-section");
+        if (!targetSec) return;
+        manualSectionOverride = targetSec;
+        if (manualOverrideTimer) window.clearTimeout(manualOverrideTimer);
+        manualOverrideTimer = window.setTimeout(() => {
+          manualSectionOverride = null;
+          scheduleNavSync();
+        }, 720);
+        syncTwoTierNav();
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-about-tab], .filter-btn")) {
+        requestAnimationFrame(syncTwoTierNav);
+      }
+    });
+
+    window.addEventListener("scroll", scheduleNavSync, { passive: true });
+    window.addEventListener("resize", scheduleNavSync, { passive: true });
+    syncTwoTierNav();
   }
 
   function initScrollReveal() {
@@ -2673,12 +2907,6 @@
         sub: "IEEE Xplore Document 10892827",
         badge: "BibTeX",
         action: () => copyTextToClipboard(BIBTEX_ENTRIES["10892827"]),
-      },
-      {
-        title: "Save 1-Page Executive CV (Print / PDF)",
-        sub: "Format experience, research, and projects into a clean printable CV",
-        badge: "Action",
-        action: () => window.print(),
       },
       {
         title: "Take a Closer Look: Architecture Inspector",
@@ -3566,14 +3794,8 @@
     resetStageReadTimer(true);
   }
 
-  /* Apple Bento Specs, Before/After Comparison, Skill Chips, Deep-Linking, Print CV & Keyboard Nav */
+  /* Apple Bento Specs, Before/After Comparison, Skill Chips, Deep-Linking & Keyboard Nav */
   function initBentoSpecsAndSkillFilters() {
-    document
-      .querySelectorAll("#print-cv-btn, #hero-print-cv-btn, #footer-print-cv-btn, #localnav-print-cv-btn")
-      .forEach((btn) => {
-        btn.addEventListener("click", () => window.print());
-      });
-
     const compareBtns = document.querySelectorAll("[data-compare-mode]");
     const bentoSpecComparison = {
       /* [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL BENTO SPEC VALUES TO RE-ENABLE JUMPGATE] */
