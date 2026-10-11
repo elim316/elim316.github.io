@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Battery UQ &amp; XAI Digital Twin | Interactive Research Sandbox</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-sub: #f8fafc;
+    --fg: #111827;
+    --fg-sub: #475569;
+    --fg-muted: #64748b;
+    --border: #e2e8f0;
+    --border-soft: #f1f5f9;
+    --accent: #1d63b8;
+    --col-blue: #1d63b8;
+    --col-green: #16a34a;
+    --col-orange: #ea580c;
+    --col-red: #dc2626;
+    --col-purple: #6b46c1;
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--fg);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Standalone Top Bar (Hidden automatically when embedded inside portfolio iframe) */
+  #standalone-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 16px;
+    background: var(--bg-sub);
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+  }
+
+  body.is-embedded #standalone-bar,
+  body.is-embedded #btn-fullscreen-ext {
+    display: none;
+  }
+
+  .standalone-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .standalone-brand {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  .sc-chip {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg-sub);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .sc-chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  .standalone-back {
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    white-space: nowrap;
+  }
+
+  /* Main App Container */
+  #uq-app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: var(--bg);
+  }
+
+  body:not(.is-embedded) #uq-app {
+    height: calc(100% - 41px);
+  }
+
+  /* Single-Line Clean Top Navigation Bar */
+  #uq-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 7px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .uq-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .back-to-curve-btn {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--accent);
+    background: rgba(29, 99, 184, 0.08);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.14s ease, color 0.14s ease;
+  }
+
+  .back-to-curve-btn:hover {
+    background: var(--accent);
+    color: #ffffff;
+  }
+
+  body.mode-xai .back-to-curve-btn {
+    display: inline-flex;
+  }
+
+  .curve-controls-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  body.mode-xai .curve-controls-wrap {
+    display: none;
+  }
+
+  .top-cycle-pills {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    overflow-x: auto;
+  }
+
+  body.mode-xai .top-cycle-pills {
+    display: inline-flex;
+  }
+
+  .cycle-pill-btn {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg-sub);
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3.5px 9px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .cycle-pill-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  .seg-group {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 8px;
+    background: var(--bg-sub);
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .seg-btn {
+    border: none;
+    background: transparent;
+    color: var(--fg-sub);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3.5px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.14s ease;
+  }
+
+  .seg-btn.active {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .uq-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .ext-link-btn {
+    border: 1px solid var(--border);
+    background: var(--bg-sub);
+    color: var(--accent);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* VIEW 1: FULL-WIDTH BATTERY DEGRADATION & UNCERTAINTY PLOT */
+  #uq-curve-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    min-height: 0;
+    background: var(--bg);
+    position: relative;
+  }
+
+  body.mode-xai #uq-curve-view {
+    display: none;
+  }
+
+  /* Clean Telemetry Strip Above Chart */
+  .telemetry-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-sub);
+    flex-shrink: 0;
+  }
+
+  .tel-cell {
+    padding: 8px 14px;
+    border-right: 1px solid var(--border);
+  }
+
+  .tel-cell:last-child {
+    border-right: none;
+  }
+
+  .tel-lbl {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-muted);
+    margin-bottom: 2px;
+    white-space: nowrap;
+  }
+
+  .tel-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--fg);
+    white-space: nowrap;
+  }
+
+  .tel-val.accent {
+    color: var(--accent);
+  }
+
+  .tel-val.green {
+    color: var(--col-green);
+  }
+
+  /* Interactive Plot Stage */
+  #plot-stage-wrap {
+    flex: 1 1 0%;
+    position: relative;
+    padding: 12px 18px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #uq-svg-canvas {
+    width: 100%;
+    height: auto;
+    max-height: 410px;
+    display: block;
+    user-select: none;
+  }
+
+  /* Stacked Cycle Card + Attached "XAI Drivers ->" Strip (Matches Stage 02 Sketch Style) */
+  .cycle-node-group {
+    cursor: pointer;
+  }
+
+  .cycle-card-top {
+    transition: filter 0.14s ease;
+  }
+
+  .cycle-node-group:hover .cycle-card-top {
+    filter: brightness(0.95);
+  }
+
+  /* Floating Directional Pop-Up Bubble Next to Selected Cycle Node */
+  #uqPopoverBubble {
+    position: absolute;
+    width: 308px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(15, 23, 42, 0.04);
+    padding: 12px 14px;
+    z-index: 25;
+    transition: top 0.18s ease, left 0.18s ease;
+  }
+
+  #uqPopoverBubble.is-hidden {
+    display: none;
+  }
+
+  #uqPopoverArrow {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    background: var(--bg);
+    transform: rotate(45deg);
+    top: 22px;
+  }
+
+  #uqPopoverBubble.arrow-left #uqPopoverArrow {
+    left: -6px;
+    border-left: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  #uqPopoverBubble.arrow-right #uqPopoverArrow {
+    right: -6px;
+    border-right: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+
+  .pop-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .pop-step {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: rgba(29, 99, 184, 0.1);
+    color: var(--accent);
+  }
+
+  .pop-close {
+    border: none;
+    background: transparent;
+    color: var(--fg-muted);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 3px;
+  }
+
+  .pop-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 2px;
+    line-height: 1.28;
+  }
+
+  .pop-meta {
+    font-size: 10.5px;
+    color: var(--fg-muted);
+    margin-bottom: 6px;
+  }
+
+  .pop-desc {
+    font-size: 11.5px;
+    line-height: 1.44;
+    color: var(--fg-sub);
+    margin-bottom: 9px;
+  }
+
+  .pop-open-xai-btn {
+    width: 100%;
+    border: 1px solid var(--accent);
+    background: rgba(29, 99, 184, 0.08);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 9px;
+    transition: background 0.14s ease, color 0.14s ease;
+  }
+
+  .pop-open-xai-btn:hover {
+    background: var(--accent);
+    color: #ffffff;
+  }
+
+  .pop-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    padding-top: 7px;
+    border-top: 1px solid var(--border);
+  }
+
+  .pop-btn {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3.5px 9px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .pop-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  /* VIEW 2: SCIENTIFIC RESEARCH SHEET (SHAP ATTRIBUTION & 4-METHOD XAI BENCHMARK) */
+  #uq-xai-view {
+    display: none;
+    flex: 1 1 0%;
+    min-height: 0;
+    overflow-y: auto;
+    background: #f8fafc;
+    padding: 16px 22px 26px;
+  }
+
+  body.mode-xai #uq-xai-view {
+    display: block;
+  }
+
+  .xai-sheet {
+    max-width: 820px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    padding: 26px 38px 30px;
+  }
+
+  .xai-doc-title {
+    font-size: 19px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .xai-doc-sub {
+    font-size: 12px;
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .xai-sec-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .xai-sec-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  /* Horizontal Signed SHAP Attribution Bars */
+  .shap-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .shap-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 78px;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .shap-feat-name {
+    font-weight: 600;
+    color: var(--fg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .shap-track {
+    height: 12px;
+    background: var(--border-soft);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .shap-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.2s ease;
+  }
+
+  .shap-bar.neg {
+    background: #dc2626;
+  }
+
+  .shap-bar.pos {
+    background: #16a34a;
+  }
+
+  .shap-impact-val {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .shap-impact-val.neg {
+    color: #dc2626;
+  }
+
+  .shap-impact-val.pos {
+    color: #16a34a;
+  }
+
+  /* Clean Scientific Benchmark Table (APSIPA ASC 2025 / IEEE Xplore Doc 11249263) */
+  .xai-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+  }
+
+  .xai-table th {
+    text-align: left;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-muted);
+    padding: 7px 10px;
+    border-bottom: 1.5px solid #cbd5e1;
+    background: var(--bg-sub);
+  }
+
+  .xai-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg);
+  }
+
+  .xai-table tr.is-best td {
+    background: rgba(29, 99, 184, 0.05);
+    font-weight: 600;
+  }
+
+  .xai-foot {
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11.5px;
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+  <div id="standalone-bar">
+    <div class="standalone-left">
+      <span class="standalone-brand">Battery UQ &amp; XAI Digital Twin (IEEE Xplore 11249263)</span>
+      <button type="button" class="sc-chip active" data-ds-chip="mcmaster">01: McMaster Battery Dataset (Train)</button>
+      <button type="button" class="sc-chip" data-ds-chip="oxford">02: Oxford Battery Dataset (Cross-Test)</button>
+    </div>
+    <a href="../../index.html#showcase-uq-xai" class="standalone-back">Back to Portfolio &#8599;</a>
+  </div>
+
+  <div id="uq-app">
+    <div id="uq-topbar">
+      <div class="uq-nav-left">
+        <button type="button" class="back-to-curve-btn" id="btn-back-to-curve">
+          &#8592; Back to Curve
+        </button>
+
+        <div class="top-cycle-pills" id="top-cycle-pills"></div>
+
+        <div class="curve-controls-wrap">
+          <div class="seg-group" role="tablist" aria-label="Select Battery Dataset">
+            <button type="button" class="seg-btn active" data-ds-btn="mcmaster">McMaster (Train)</button>
+            <button type="button" class="seg-btn" data-ds-btn="oxford">Oxford (Cross-Test)</button>
+          </div>
+
+          <div class="seg-group" role="tablist" aria-label="Select Confidence Interval">
+            <button type="button" class="seg-btn" data-ci-btn="90">90% Band</button>
+            <button type="button" class="seg-btn active" data-ci-btn="95">95% IEEE Target</button>
+            <button type="button" class="seg-btn" data-ci-btn="99">99% Safety</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="uq-nav-right">
+        <div class="seg-group" role="tablist" aria-label="Switch between Degradation Curve and XAI Attribution">
+          <button type="button" class="seg-btn active" id="mode-btn-curve">Degradation &amp; UQ Curve</button>
+          <button type="button" class="seg-btn" id="mode-btn-xai">4-Method XAI Attribution</button>
+        </div>
+        <a href="index.html" target="_blank" rel="noopener noreferrer" class="ext-link-btn" id="btn-fullscreen-ext">Full Screen &#8599;</a>
+      </div>
+    </div>
+
+    <!-- VIEW 1: FULL-WIDTH DEGRADATION & UNCERTAINTY PLOT -->
+    <div id="uq-curve-view">
+      <div class="telemetry-bar">
+        <div class="tel-cell">
+          <div class="tel-lbl"> Empirical Coverage (PICP)</div>
+          <div class="tel-val green" id="tel-picp">95.2% Verified</div>
+        </div>
+        <div class="tel-cell">
+          <div class="tel-lbl">Calibration Error (ECE)</div>
+          <div class="tel-val accent" id="tel-ece">0.012 ECE</div>
+        </div>
+        <div class="tel-cell">
+          <div class="tel-lbl">Interval Width (Epistemic + Aleatoric)</div>
+          <div class="tel-val" id="tel-mpiw">+/- 1.8% SOH</div>
+        </div>
+        <div class="tel-cell">
+          <div class="tel-lbl">Top XAI Driver (SHAP R^2 = 0.94)</div>
+          <div class="tel-val" id="tel-driver">Terminal Voltage Drop (dV/dt)</div>
+        </div>
+      </div>
+
+      <div id="plot-stage-wrap">
+        <svg id="uq-svg-canvas" viewBox="0 0 920 340" aria-label="Battery State-of-Health Degradation Curve and Conformal Uncertainty Band"></svg>
+
+        <!-- Floating Directional Pop-Up Bubble Next to Selected Cycle Node -->
+        <div id="uqPopoverBubble" class="arrow-left" role="dialog" aria-live="polite">
+          <div id="uqPopoverArrow"></div>
+          <div class="pop-top">
+            <span class="pop-step" id="popStepLabel">BUBBLE 1 OF 4</span>
+            <button type="button" class="pop-close" id="popCloseBtn" title="Close bubble">&#215;</button>
+          </div>
+          <div class="pop-title" id="popTitle">Cycle 340: Capacity Knee-Point Onset</div>
+          <div class="pop-meta" id="popMeta">CNN Prediction: 89.2% SOH | 95% Interval: [87.4%, 91.0%]</div>
+          <div class="pop-desc" id="popDesc">
+            Lithium-plating and solid-electrolyte interphase growth accelerate capacity fade past Cycle 340. Click "XAI Drivers ->" below any node to inspect the 4-method feature attribution breakdown.
+          </div>
+          <button type="button" class="pop-open-xai-btn" id="popOpenXaiBtn">
+            Open 4-Method XAI Attribution &#8594;
+          </button>
+          <div class="pop-footer">
+            <button type="button" class="pop-btn" id="popPrevBtn">&#8592; Back</button>
+            <button type="button" class="pop-btn primary" id="popNextBtn">Next Bubble &#8594;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: FULL-PAGE SCIENTIFIC XAI ATTRIBUTION SHEET -->
+    <div id="uq-xai-view">
+      <article class="xai-sheet" id="xai-sheet-content"></article>
+    </div>
+  </div>
+
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("embed") === "1" || window.self !== window.top) {
+    document.body.classList.add("is-embedded");
+  }
+
+  const CI_CONFIG = {
+    "90": { scale: 0.72, picp: "90.4% Verified", halfWidth: 1.3 },
+    "95": { scale: 1.0, picp: "95.2% Verified", halfWidth: 1.8 },
+    "99": { scale: 1.42, picp: "98.9% Verified", halfWidth: 2.6 }
+  };
+
+  const DATASETS = {
+    mcmaster: {
+      name: "McMaster Battery Dataset (Training & Validation)",
+      ece: "0.012 ECE",
+      offsetY: 0,
+      cycles: [
+        {
+          id: "c120",
+          cycle: 120,
+          soh: 96.4,
+          xPx: 195,
+          yPx: 74,
+          color: "var(--col-green)",
+          shortPill: "Cycle 120: Healthy",
+          title: "Cycle 120: Early Healthy Regime",
+          desc: "Minimal capacity fade (96.4% SOH). Both Monte Carlo Dropout epistemic variance and aleatoric sensor noise remain tight around nominal voltage.",
+          topDriver: "Rest Recovery Voltage (+0.6%)",
+          shap: [
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 22, label: "-0.7% SOH", neg: true },
+            { name: "Peak Cell Temperature (32.4 deg C)", pct: 16, label: "-0.4% SOH", neg: true },
+            { name: "Internal Resistance (R_int)", pct: 14, label: "-0.3% SOH", neg: true },
+            { name: "Rest Recovery Voltage", pct: 28, label: "+0.6% SOH", neg: false }
+          ]
+        },
+        {
+          id: "c340",
+          cycle: 340,
+          soh: 89.2,
+          xPx: 415,
+          yPx: 142,
+          color: "var(--col-blue)",
+          shortPill: "Cycle 340: Knee-Point",
+          title: "Cycle 340: Capacity Knee-Point Onset",
+          desc: "Inflection point where solid-electrolyte interphase growth accelerates capacity fade. SHAP pinpoints terminal voltage slope (dV/dt) as the primary driver.",
+          topDriver: "Terminal Voltage Drop (dV/dt)",
+          shap: [
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 68, label: "-2.9% SOH", neg: true },
+            { name: "Internal Resistance Growth (R_int)", pct: 49, label: "-1.8% SOH", neg: true },
+            { name: "Peak Cell Temperature (37.8 deg C)", pct: 38, label: "-1.3% SOH", neg: true },
+            { name: "CC-CV Charge Time Constant", pct: 24, label: "-0.7% SOH", neg: true }
+          ]
+        },
+        {
+          id: "c520",
+          cycle: 520,
+          soh: 81.4,
+          xPx: 625,
+          yPx: 215,
+          color: "var(--col-orange)",
+          shortPill: "Cycle 520: 80% EOL",
+          title: "Cycle 520: Approaching 80% End-of-Life Gate",
+          desc: "Lower bound of the 95% Adaptive Conformal Inference interval crosses the critical 80% End-of-Life safety threshold before the point prediction alone would alert operators.",
+          topDriver: "Terminal Voltage Drop (-3.8%)",
+          shap: [
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 86, label: "-3.8% SOH", neg: true },
+            { name: "Peak Cell Temperature (41.2 deg C)", pct: 64, label: "-2.4% SOH", neg: true },
+            { name: "Internal Resistance Growth (R_int)", pct: 52, label: "-1.9% SOH", neg: true },
+            { name: "CC-CV Charge Time Constant", pct: 30, label: "-0.8% SOH", neg: true }
+          ]
+        },
+        {
+          id: "c680",
+          cycle: 680,
+          soh: 75.8,
+          xPx: 805,
+          yPx: 268,
+          color: "var(--col-red)",
+          shortPill: "Cycle 680: High Drift",
+          title: "Cycle 680: Post-EOL High Epistemic Uncertainty",
+          desc: "Severe thermal resistance growth past 80% EOL. Epistemic uncertainty widens noticeably to reflect sparse extreme-ageing training samples.",
+          topDriver: "Internal Resistance (-4.6%)",
+          shap: [
+            { name: "Internal Resistance Growth (R_int)", pct: 94, label: "-4.6% SOH", neg: true },
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 82, label: "-3.9% SOH", neg: true },
+            { name: "Peak Cell Temperature (44.6 deg C)", pct: 71, label: "-2.8% SOH", neg: true },
+            { name: "Rest Recovery Voltage", pct: 18, label: "+0.3% SOH", neg: false }
+          ]
+        }
+      ]
+    },
+    oxford: {
+      name: "Oxford Battery Degradation Dataset (Cross-Dataset Generalisation)",
+      ece: "0.016 ECE",
+      offsetY: 8,
+      cycles: [
+        {
+          id: "c120",
+          cycle: 120,
+          soh: 95.8,
+          xPx: 195,
+          yPx: 80,
+          color: "var(--col-green)",
+          shortPill: "Cycle 120: Healthy",
+          title: "Cycle 120 (Oxford Cell): Cross-Domain Baseline",
+          desc: "Zero-shot transfer from McMaster to Oxford pouch cells preserves 95.2% empirical interval coverage via Adaptive Conformal Inference recalibration.",
+          topDriver: "Charge Curve Slope (-0.8%)",
+          shap: [
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 26, label: "-0.8% SOH", neg: true },
+            { name: "Peak Cell Temperature (33.1 deg C)", pct: 19, label: "-0.5% SOH", neg: true },
+            { name: "Internal Resistance (R_int)", pct: 15, label: "-0.4% SOH", neg: true },
+            { name: "Rest Recovery Voltage", pct: 25, label: "+0.5% SOH", neg: false }
+          ]
+        },
+        {
+          id: "c340",
+          cycle: 340,
+          soh: 88.1,
+          xPx: 415,
+          yPx: 151,
+          color: "var(--col-blue)",
+          shortPill: "Cycle 340: Knee-Point",
+          title: "Cycle 340 (Oxford Cell): Cross-Dataset Knee-Point",
+          desc: "Adaptive Conformal Inference adjusts interval width automatically on unseen Oxford drive-cycle profiles without retraining CNN weights.",
+          topDriver: "Terminal Voltage Drop (-3.1%)",
+          shap: [
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 72, label: "-3.1% SOH", neg: true },
+            { name: "Internal Resistance Growth (R_int)", pct: 54, label: "-2.0% SOH", neg: true },
+            { name: "Peak Cell Temperature (38.5 deg C)", pct: 41, label: "-1.4% SOH", neg: true },
+            { name: "CC-CV Charge Time Constant", pct: 28, label: "-0.9% SOH", neg: true }
+          ]
+        },
+        {
+          id: "c520",
+          cycle: 520,
+          soh: 80.5,
+          xPx: 625,
+          yPx: 223,
+          color: "var(--col-orange)",
+          shortPill: "Cycle 520: 80% EOL",
+          title: "Cycle 520 (Oxford Cell): Early EOL Safety Alert",
+          desc: "Lower calibrated bound crosses 80% SOH 38 cycles ahead of uncalibrated point estimates, preventing unexpected cell failure.",
+          topDriver: "Terminal Voltage Drop (-4.1%)",
+          shap: [
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 89, label: "-4.1% SOH", neg: true },
+            { name: "Peak Cell Temperature (42.0 deg C)", pct: 68, label: "-2.6% SOH", neg: true },
+            { name: "Internal Resistance Growth (R_int)", pct: 56, label: "-2.1% SOH", neg: true },
+            { name: "CC-CV Charge Time Constant", pct: 33, label: "-1.0% SOH", neg: true }
+          ]
+        },
+        {
+          id: "c680",
+          cycle: 680,
+          soh: 74.6,
+          xPx: 805,
+          yPx: 278,
+          color: "var(--col-red)",
+          shortPill: "Cycle 680: High Drift",
+          title: "Cycle 680 (Oxford Cell): Deep Ageing Regime",
+          desc: "SHAP retains R^2 = 0.94 feature ranking consistency across cross-dataset cells compared to LIME (0.86) and Integrated Gradients (0.89).",
+          topDriver: "Internal Resistance (-4.9%)",
+          shap: [
+            { name: "Internal Resistance Growth (R_int)", pct: 96, label: "-4.9% SOH", neg: true },
+            { name: "Terminal Voltage Drop (dV/dt)", pct: 84, label: "-4.2% SOH", neg: true },
+            { name: "Peak Cell Temperature (45.1 deg C)", pct: 74, label: "-3.0% SOH", neg: true },
+            { name: "Rest Recovery Voltage", pct: 16, label: "+0.2% SOH", neg: false }
+          ]
+        }
+      ]
+    }
+  };
+
+  let curDataset = "mcmaster";
+  let curCi = "95";
+  let activeCycleIdx = 1; /* Default on Cycle 340 Knee-Point */
+  let curViewMode = "curve"; /* "curve" | "xai" */
+  let isBubbleOpen = true;
+
+  const svgCanvas = document.getElementById("uq-svg-canvas");
+  const pop = document.getElementById("uqPopoverBubble");
+  const popStepLabel = document.getElementById("popStepLabel");
+  const popTitle = document.getElementById("popTitle");
+  const popMeta = document.getElementById("popMeta");
+  const popDesc = document.getElementById("popDesc");
+  const popOpenXaiBtn = document.getElementById("popOpenXaiBtn");
+  const popPrev = document.getElementById("popPrevBtn");
+  const popNext = document.getElementById("popNextBtn");
+  const popClose = document.getElementById("popCloseBtn");
+  const modeBtnCurve = document.getElementById("mode-btn-curve");
+  const modeBtnXai = document.getElementById("mode-btn-xai");
+  const btnBackToCurve = document.getElementById("btn-back-to-curve");
+  const topCyclePills = document.getElementById("top-cycle-pills");
+  const xaiSheetEl = document.getElementById("xai-sheet-content");
+
+  const telPicp = document.getElementById("tel-picp");
+  const telEce = document.getElementById("tel-ece");
+  const telMpiw = document.getElementById("tel-mpiw");
+  const telDriver = document.getElementById("tel-driver");
+
+  function setViewMode(mode, cycleIdx) {
+    if (typeof cycleIdx === "number") {
+      activeCycleIdx = cycleIdx;
+    }
+    curViewMode = mode;
+    document.body.classList.toggle("mode-xai", mode === "xai");
+    modeBtnCurve.classList.toggle("active", mode === "curve");
+    modeBtnXai.classList.toggle("active", mode === "xai");
+
+    if (mode === "xai") {
+      renderXaiSheet();
+    } else {
+      renderCurvePlot();
+      if (isBubbleOpen) {
+        showBubbleForCycle(activeCycleIdx);
+      } else {
+        pop.classList.add("is-hidden");
+      }
+    }
+  }
+
+  function renderCurvePlot() {
+    const ds = DATASETS[curDataset];
+    const ci = CI_CONFIG[curCi];
+    const activeNode = ds.cycles[activeCycleIdx] || ds.cycles[1];
+    const halfPx = Math.round(18 * ci.scale);
+    const dy = ds.offsetY;
+
+    telPicp.textContent = ci.picp;
+    telEce.textContent = ds.ece;
+    telMpiw.textContent = `+/- ${ci.halfWidth.toFixed(1)}% SOH`;
+    telDriver.textContent = activeNode.topDriver;
+
+    /* Grid lines & Y Axis Labels (100% down to 75% SOH) */
+    const yTicks = [
+      { lbl: "100%", y: 40 },
+      { lbl: "95%", y: 88 },
+      { lbl: "90%", y: 136 },
+      { lbl: "85%", y: 184 },
+      { lbl: "80% EOL", y: 232, eol: true },
+      { lbl: "75%", y: 280 }
+    ];
+
+    let gridSvg = yTicks.map(t => `
+      <line x1="68" y1="${t.y}" x2="885" y2="${t.y}"
+        stroke="${t.eol ? "#dc2626" : "#e2e8f0"}"
+        stroke-width="${t.eol ? "1.5" : "1"}"
+        stroke-dasharray="${t.eol ? "5 4" : "none"}" />
+      <text x="58" y="${t.y + 4}" text-anchor="end"
+        font-size="11" font-weight="${t.eol ? "700" : "500"}"
+        fill="${t.eol ? "#dc2626" : "#64748b"}">${t.lbl}</text>
+    `).join("");
+
+    gridSvg += `
+      <text x="145" y="225" text-anchor="start" font-size="10" font-weight="700" fill="#dc2626">
+        80% END-OF-LIFE SAFETY GATE
+      </text>
+      <text x="72" y="316" font-size="11" fill="#64748b">Cycle 0</text>
+      <text x="275" y="316" font-size="11" fill="#64748b">Cycle 200</text>
+      <text x="480" y="316" font-size="11" fill="#64748b">Cycle 400</text>
+      <text x="685" y="316" font-size="11" fill="#64748b">Cycle 600</text>
+      <text x="885" y="316" text-anchor="end" font-size="11" fill="#64748b">Cycle 750</text>
+    `;
+
+    /* Smooth CNN Degradation Trajectory + Adaptive Conformal Inference (ACI) Band */
+    const bandPath = `
+      M 80 ${46 + dy - halfPx}
+      Q 340 ${96 + dy - halfPx}, 560 ${186 + dy - halfPx}
+      T 875 ${282 + dy - Math.round(halfPx * 1.25)}
+      L 875 ${282 + dy + Math.round(halfPx * 1.25)}
+      Q 560 ${186 + dy + halfPx}, 340 ${96 + dy + halfPx}
+      T 80 ${46 + dy + halfPx} Z
+    `;
+
+    const curvePath = `
+      M 80 ${46 + dy}
+      Q 340 ${96 + dy}, 560 ${186 + dy}
+      T 875 ${282 + dy}
+    `;
+
+    let nodesSvg = ds.cycles.map((c, idx) => {
+      const isSel = idx === activeCycleIdx;
+      const cardW = 128;
+      const cardX = c.xPx - Math.round(cardW / 2);
+      const placeAbove = idx === 3;
+      const cardY = placeAbove ? (c.yPx - 64) : (c.yPx + 14);
+      const tabY = cardY + 31;
+
+      return `
+        <g class="cycle-node-group" data-cycle-idx="${idx}">
+          <circle cx="${c.xPx}" cy="${c.yPx}" r="${isSel ? "8" : "6"}"
+            fill="#ffffff" stroke="${c.color}" stroke-width="${isSel ? "3.5" : "2.5"}" />
+          <!-- Upper Rounded Card -->
+          <g class="cycle-card-top" data-select-cycle="${idx}">
+            <rect x="${cardX}" y="${cardY}" width="${cardW}" height="32" rx="6"
+              fill="${c.color}" stroke="${isSel ? "#111827" : "none"}" stroke-width="1.8" />
+            <text x="${c.xPx}" y="${cardY + 13}" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff">
+              Cycle ${c.cycle}: ${c.soh}%
+            </text>
+            <text x="${c.xPx}" y="${cardY + 25}" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.92)">
+              ${c.shortPill.split(": ")[1]}
+            </text>
+          </g>
+          <!-- Lower Attached "XAI Drivers ->" Strip -->
+          <g data-open-xai="${idx}">
+            <rect x="${cardX + 4}" y="${tabY}" width="${cardW - 8}" height="17" rx="4"
+              fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" />
+            <text x="${c.xPx}" y="${tabY + 11.5}" text-anchor="middle" font-size="9.2" font-weight="700" fill="#1e293b">
+              XAI Drivers &#8594;
+            </text>
+          </g>
+        </g>
+      `;
+    }).join("");
+
+    svgCanvas.innerHTML = `
+      ${gridSvg}
+      <path d="${bandPath}" fill="rgba(29, 99, 184, 0.14)" stroke="rgba(29, 99, 184, 0.28)" stroke-width="1" />
+      <path d="${curvePath}" fill="none" stroke="#1d63b8" stroke-width="2.8" />
+      ${nodesSvg}
+    `;
+  }
+
+  function showBubbleForCycle(idx) {
+    const ds = DATASETS[curDataset];
+    const ci = CI_CONFIG[curCi];
+    activeCycleIdx = Math.max(0, Math.min(ds.cycles.length - 1, idx));
+    isBubbleOpen = true;
+    renderCurvePlot();
+
+    const c = ds.cycles[activeCycleIdx];
+    const lo = (c.soh - ci.halfWidth).toFixed(1);
+    const hi = (c.soh + ci.halfWidth).toFixed(1);
+
+    pop.classList.remove("is-hidden");
+    popStepLabel.textContent = `BUBBLE ${activeCycleIdx + 1} OF ${ds.cycles.length}`;
+    popTitle.textContent = c.title;
+    popMeta.textContent = `CNN Prediction: ${c.soh}% SOH | ${curCi}% Interval: [${lo}%, ${hi}%]`;
+    popDesc.textContent = c.desc;
+
+    popPrev.style.display = activeCycleIdx === 0 ? "none" : "inline-flex";
+    const isLast = activeCycleIdx >= ds.cycles.length - 1;
+    popNext.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
+
+    const stageEl = document.getElementById("plot-stage-wrap");
+    const svgRect = svgCanvas.getBoundingClientRect();
+    const stageRect = stageEl.getBoundingClientRect();
+    if (svgRect.width > 0) {
+      const scaleX = svgRect.width / 920;
+      const nodeScreenX = (svgRect.left - stageRect.left) + (c.xPx * scaleX);
+      const bubW = 308;
+
+      let leftPx = Math.max(240, Math.min(stageRect.width - bubW - 24, nodeScreenX - Math.round(bubW / 2)));
+      pop.classList.remove("arrow-left", "arrow-right");
+      const arrowEl = document.getElementById("uqPopoverArrow");
+      arrowEl.style.top = "auto";
+      arrowEl.style.bottom = "-6px";
+      arrowEl.style.left = Math.max(24, Math.min(bubW - 34, Math.round(nodeScreenX - leftPx - 6))) + "px";
+      arrowEl.style.right = "auto";
+      arrowEl.style.border = "none";
+      arrowEl.style.borderRight = "1px solid var(--border)";
+      arrowEl.style.borderBottom = "1px solid var(--border)";
+
+      pop.style.left = Math.round(leftPx) + "px";
+      pop.style.top = "14px";
+    }
+  }
+
+  function renderXaiSheet() {
+    const ds = DATASETS[curDataset];
+    const c = ds.cycles[activeCycleIdx] || ds.cycles[1];
+    const ci = CI_CONFIG[curCi];
+
+    topCyclePills.innerHTML = ds.cycles.map((item, i) => `
+      <button type="button" class="cycle-pill-btn ${i === activeCycleIdx ? "active" : ""}" data-top-cycle="${i}">
+        ${item.shortPill}
+      </button>
+    `).join("");
+
+    xaiSheetEl.innerHTML = `
+      <h1 class="xai-doc-title">XAI Attribution &amp; Calibration Report: Cycle ${c.cycle} (${c.soh}% Predicted SOH)</h1>
+      <div class="xai-doc-sub">
+        Dataset: ${ds.name} | ${curCi}% Adaptive Conformal Band: [${(c.soh - ci.halfWidth).toFixed(1)}%, ${(c.soh + ci.halfWidth).toFixed(1)}% SOH] | IEEE Xplore Doc 11249263
+      </div>
+
+      <div class="xai-sec-head">
+        <span class="xai-sec-title">1. Sensor Feature Attributions at Cycle ${c.cycle} (SHAP Signed Impact on SOH)</span>
+      </div>
+      <div class="shap-rows">
+        ${c.shap.map(row => `
+          <div class="shap-row">
+            <div class="shap-feat-name">${row.name}</div>
+            <div class="shap-track">
+              <div class="shap-bar ${row.neg ? "neg" : "pos"}" style="width:${row.pct}%;"></div>
+            </div>
+            <div class="shap-impact-val ${row.neg ? "neg" : "pos"}">${row.label}</div>
+          </div>
+        `).join("")}
+      </div>
+
+      <div class="xai-sec-head">
+        <span class="xai-sec-title">2. Four-Method XAI Stability &amp; Fidelity Benchmark (APSIPA ASC 2025)</span>
+      </div>
+      <table class="xai-table">
+        <thead>
+          <tr>
+            <th>Attribution Method</th>
+            <th>Fidelity (MAE)</th>
+            <th>Consistency (R^2)</th>
+            <th>Counterfactual Stability</th>
+            <th>Key Finding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="is-best">
+            <td>SHAP (Selected Default)</td>
+            <td>0.011 (Best)</td>
+            <td>0.94 (Highest)</td>
+            <td>96.4% Valid</td>
+            <td>Strongest cross-cycle stability across voltage and thermal ageing regimes</td>
+          </tr>
+          <tr>
+            <td>Integrated Gradients</td>
+            <td>0.015</td>
+            <td>0.89</td>
+            <td>92.8% Valid</td>
+            <td>Smooth gradient path along CNN convolutional layers; slight high-cycle variance</td>
+          </tr>
+          <tr>
+            <td>LIME</td>
+            <td>0.019</td>
+            <td>0.86</td>
+            <td>88.5% Valid</td>
+            <td>Fast local linear surrogate; sensitive to perturbation kernel width near knee-point</td>
+          </tr>
+          <tr>
+            <td>Counterfactuals</td>
+            <td>0.017</td>
+            <td>0.91</td>
+            <td>97.1% Valid</td>
+            <td>Actionable minimum delta thresholds for battery management thermal throttling</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="xai-foot">
+        <span>Cross-dataset transfer validated from McMaster training cells to unseen Oxford pouch cells.</span>
+        <button type="button" class="pop-btn primary" id="xai-bottom-back-btn">&#8592; Return to Degradation Curve</button>
+      </div>
+    `;
+
+    document.getElementById("xai-bottom-back-btn").addEventListener("click", () => {
+      setViewMode("curve");
+    });
+  }
+
+  /* Click Delegation on Curve SVG */
+  svgCanvas.addEventListener("click", (e) => {
+    const openXaiEl = e.target.closest("[data-open-xai]");
+    if (openXaiEl) {
+      e.stopPropagation();
+      setViewMode("xai", parseInt(openXaiEl.getAttribute("data-open-xai"), 10));
+      return;
+    }
+    const selEl = e.target.closest("[data-select-cycle], [data-cycle-idx]");
+    if (selEl) {
+      const raw = selEl.getAttribute("data-select-cycle") || selEl.getAttribute("data-cycle-idx");
+      showBubbleForCycle(parseInt(raw, 10));
+    }
+  });
+
+  topCyclePills.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-top-cycle]");
+    if (btn) {
+      activeCycleIdx = parseInt(btn.getAttribute("data-top-cycle"), 10);
+      renderXaiSheet();
+    }
+  });
+
+  function selectDataset(dsKey) {
+    if (!DATASETS[dsKey]) return;
+    curDataset = dsKey;
+    document.querySelectorAll("[data-ds-btn]").forEach(b => {
+      b.classList.toggle("active", b.getAttribute("data-ds-btn") === dsKey);
+    });
+    document.querySelectorAll("[data-ds-chip]").forEach(b => {
+      b.classList.toggle("active", b.getAttribute("data-ds-chip") === dsKey);
+    });
+    if (curViewMode === "xai") renderXaiSheet();
+    else {
+      renderCurvePlot();
+      if (isBubbleOpen) showBubbleForCycle(activeCycleIdx);
+    }
+  }
+
+  function selectConfidence(ciKey) {
+    if (!CI_CONFIG[ciKey]) return;
+    curCi = ciKey;
+    document.querySelectorAll("[data-ci-btn]").forEach(b => {
+      b.classList.toggle("active", b.getAttribute("data-ci-btn") === ciKey);
+    });
+    if (curViewMode === "xai") renderXaiSheet();
+    else {
+      renderCurvePlot();
+      if (isBubbleOpen) showBubbleForCycle(activeCycleIdx);
+    }
+  }
+
+  document.querySelectorAll("[data-ds-btn]").forEach(b => {
+    b.addEventListener("click", () => selectDataset(b.getAttribute("data-ds-btn")));
+  });
+  document.querySelectorAll("[data-ds-chip]").forEach(b => {
+    b.addEventListener("click", () => selectDataset(b.getAttribute("data-ds-chip")));
+  });
+  document.querySelectorAll("[data-ci-btn]").forEach(b => {
+    b.addEventListener("click", () => selectConfidence(b.getAttribute("data-ci-btn")));
+  });
+
+  modeBtnCurve.addEventListener("click", () => setViewMode("curve"));
+  btnBackToCurve.addEventListener("click", () => setViewMode("curve"));
+  modeBtnXai.addEventListener("click", () => setViewMode("xai", activeCycleIdx));
+  popOpenXaiBtn.addEventListener("click", () => setViewMode("xai", activeCycleIdx));
+
+  popClose.addEventListener("click", () => {
+    isBubbleOpen = false;
+    pop.classList.add("is-hidden");
+  });
+
+  popPrev.addEventListener("click", () => {
+    if (activeCycleIdx > 0) {
+      showBubbleForCycle(activeCycleIdx - 1);
+    }
+  });
+
+  popNext.addEventListener("click", () => {
+    const total = DATASETS[curDataset].cycles.length;
+    if (activeCycleIdx >= total - 1) {
+      isBubbleOpen = false;
+      pop.classList.add("is-hidden");
+    } else {
+      showBubbleForCycle(activeCycleIdx + 1);
+    }
+  });
+
+  window.addEventListener("message", (ev) => {
+    const msg = ev && ev.data;
+    if (!msg || typeof msg !== "object") return;
+    if (msg.source === "portfolio-uq-host") {
+      if (msg.action === "ci" && msg.arg) selectConfidence(msg.arg);
+      else if (msg.action === "dataset" && msg.arg) selectDataset(msg.arg);
+      return;
+    }
+    if (msg.type === "setTheme") {
+      document.documentElement.setAttribute("data-theme", msg.theme === "dark" ? "dark" : "light");
+    }
+  });
+
+  renderCurvePlot();
+  setTimeout(() => showBubbleForCycle(1), 60);
+})();
+</script>
+</body>
+</html>
