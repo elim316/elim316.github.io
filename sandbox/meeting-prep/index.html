@@ -674,7 +674,7 @@
   }
 
   #calPopoverBubble.is-hidden {
-    display: none;
+    display: none !important;
   }
 
   #calPopoverArrow {
@@ -1601,14 +1601,14 @@
   ];
 
   const SCENARIO_TOURS = {
-    next_day_mixed: ["thu_acme", "mon_standup", "tue_auth", "thu_northwind"],
+    next_day_mixed: ["mon_standup", "tue_auth", "thu_acme", "thu_northwind"],
     next_day_cold_lead: ["fri_initech", "thu_acme", "fri_declined"],
     t1h_window: ["thu_northwind", "thu_review", "thu_acme"]
   };
 
   let curScenario = "next_day_mixed";
   let curTourStep = 0;
-  let activeEventId = "thu_acme";
+  let activeEventId = "mon_standup";
   let curViewMode = "calendar"; /* "calendar" | "briefing" */
   let isBubbleOpen = true;
   let mutedCats = new Set();
@@ -1626,6 +1626,12 @@
   const popPrev = document.getElementById("popPrevBtn");
   const popNext = document.getElementById("popNextBtn");
   const popClose = document.getElementById("popCloseBtn");
+
+  function closeCalendarBubble() {
+    isBubbleOpen = false;
+    pop.classList.add("is-hidden");
+    pop.style.display = "none";
+  }
   const filterLabel = document.getElementById("filter-state-label");
   const modeBtnCal = document.getElementById("mode-btn-calendar");
   const modeBtnBrief = document.getElementById("mode-btn-briefing");
