@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://elim316.github.io; media-src 'self'; connect-src 'self' https://api.github.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://elim316.github.io; media-src 'self'; connect-src 'self' https://api.github.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none';"
   />
   <title>Elias Lim | Software, Agentic AI &amp; Machine Learning Engineer</title>
   <meta
@@ -63,14 +63,10 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261011-49" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="styles.css?v=20261011-49" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261011-50" />
+  <link rel="preload" href="fonts/SFProDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/SFProText-Regular.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="styles.css?v=20261011-50" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -115,6 +111,26 @@
       </div>
     </div>
   </header>
+
+  <!-- Apple Two-Tier Sticky Product Sub-Navigation Bar (ac-localnav) -->
+  <div class="apple-localnav" id="apple-localnav" role="navigation" aria-label="Stage chapter navigation">
+    <div class="localnav-inner">
+      <a href="#top" class="localnav-title" id="localnav-active-title">Elias Lim</a>
+      <div class="localnav-chapters" role="menubar" aria-label="Quick stage jump">
+        <a href="#about" class="localnav-link active" data-localnav-target="about">Overview</a>
+        <a href="#highlights-section" class="localnav-link" data-localnav-target="highlights-section">Highlights</a>
+        <a href="#showcase-agent-tracer" class="localnav-link" data-localnav-target="showcase-agent-tracer">Agent Tracer</a>
+        <a href="#showcase-meeting-prep" class="localnav-link" data-localnav-target="showcase-meeting-prep">Meeting Dossier</a>
+        <a href="#showcase-uq-xai" class="localnav-link" data-localnav-target="showcase-uq-xai">Battery Research</a>
+        <a href="#projects" class="localnav-link" data-localnav-target="projects">All Systems</a>
+      </div>
+      <div class="localnav-actions">
+        <button type="button" class="localnav-pill-cta" id="localnav-print-cv-btn" aria-label="Save 1-page CV as PDF">
+          Save CV
+        </button>
+      </div>
+    </div>
+  </div>
 
   <main id="top">
     <!-- ======================================================================
@@ -408,11 +424,11 @@
          ====================================================================== -->
     <div id="featured" data-section-target="featured">
       <!-- Apple-Inspired "Get the highlights." Horizontal Media Scroller -->
-      <section class="highlights-section container reveal-on-scroll" id="highlights-section" aria-label="Key portfolio highlights">
-        <div class="highlights-header">
+      <section class="highlights-section reveal-on-scroll" id="highlights-section" aria-label="Key portfolio highlights">
+        <div class="highlights-header container">
           <div>
             <span class="section-eyebrow">KEY HIGHLIGHTS</span>
-            <h2 class="section-title">Get the highlights.</h2>
+            <h2 class="section-title">Get the highlights. <span class="apple-tone-muted">Every signal at a glance.</span></h2>
           </div>
           <div class="highlights-controls">
             <div class="highlights-dots" id="highlights-dots" role="tablist" aria-label="Select highlight slide">
@@ -496,7 +512,7 @@
                   <span class="highlight-pop-unit">token memory &amp; live step flow</span>
                 </div>
                 <h3 class="highlight-headline">
-                  Watch every step an AI agent takes in real time, without reading raw logs.
+                  Watch every step an AI agent takes in real time. <span class="apple-tone-muted">Zero raw logs required.</span>
                 </h3>
               </div>
               <div class="highlight-visual">
@@ -522,7 +538,10 @@
               </div>
               <div class="highlight-card-footer">
                 <span class="highlight-meta">Built with Python, Go &amp; TypeScript</span>
-                <span class="highlight-jump-pill">Explore Tracer &#8595;</span>
+                <div class="highlight-footer-cta">
+                  <span class="highlight-jump-pill">Explore Tracer</span>
+                  <span class="apple-card-plus" aria-hidden="true">+</span>
+                </div>
               </div>
             </article>
 
@@ -538,7 +557,7 @@
                   <span class="highlight-pop-unit">verified confidence range</span>
                 </div>
                 <h3 class="highlight-headline">
-                  AI models that tell engineers how confident they are and why.
+                  AI models that quantify confidence <span class="apple-tone-muted">and explain every driver.</span>
                 </h3>
               </div>
               <div class="highlight-visual">
@@ -564,7 +583,10 @@
               </div>
               <div class="highlight-card-footer">
                 <span class="highlight-meta">IEEE Xplore (APSIPA 2025)</span>
-                <span class="highlight-jump-pill">Explore Research &#8595;</span>
+                <div class="highlight-footer-cta">
+                  <span class="highlight-jump-pill">Explore Research</span>
+                  <span class="apple-card-plus" aria-hidden="true">+</span>
+                </div>
               </div>
             </article>
 
@@ -580,7 +602,7 @@
                   <span class="highlight-pop-unit">engineers &amp; students trained</span>
                 </div>
                 <h3 class="highlight-headline">
-                  Hands-on cloud and AI workshops across Singapore's top institutions.
+                  Hands-on cloud and AI buildathons <span class="apple-tone-muted">across Singapore's top institutions.</span>
                 </h3>
               </div>
               <div class="highlight-visual">
@@ -599,7 +621,10 @@
               </div>
               <div class="highlight-card-footer">
                 <span class="highlight-meta">Enterprise Workshops &amp; Hackathons</span>
-                <span class="highlight-jump-pill">Explore Honours &#8595;</span>
+                <div class="highlight-footer-cta">
+                  <span class="highlight-jump-pill">Explore Honours</span>
+                  <span class="apple-card-plus" aria-hidden="true">+</span>
+                </div>
               </div>
             </article>
           </div>
@@ -1408,7 +1433,7 @@
       <div class="section-header reveal-on-scroll">
         <div>
           <span class="section-eyebrow">ALL REPOSITORIES</span>
-          <h2 class="section-title">Explore the full project line-up.</h2>
+          <h2 class="section-title">Explore the line-up. <span class="apple-tone-muted">Built end to end.</span></h2>
           <p class="section-subtitle">
             Filter by engineering domain or expand any project tile to inspect its technical architecture.
           </p>
@@ -1439,7 +1464,7 @@
         <div class="compare-systems-header">
           <div>
             <span class="section-eyebrow">SIDE-BY-SIDE ARCHITECTURE COMPARISON</span>
-            <h3 class="compare-systems-title">Compare systems.</h3>
+            <h3 class="compare-systems-title">Compare systems. <span class="apple-tone-muted">Side by side.</span></h3>
             <p class="compare-systems-sub">Select any two repositories to compare their runtime stack, verification gates, and system schematics.</p>
           </div>
           <div class="compare-selectors-bar">
@@ -1465,7 +1490,7 @@
       <div class="section-header reveal-on-scroll">
         <div>
           <span class="section-eyebrow">EXPERIENCE &amp; EDUCATION</span>
-          <h2 class="section-title">Career and academic progression.</h2>
+          <h2 class="section-title">Career progression. <span class="apple-tone-muted">Cloud, systems, and research.</span></h2>
           <p class="section-subtitle">
             Engineering roles across cloud infrastructure, high-scale backend systems, and applied machine learning research.
           </p>
@@ -1618,7 +1643,7 @@
       <div class="section-header reveal-on-scroll">
         <div>
           <span class="section-eyebrow">PUBLICATIONS</span>
-          <h2 class="section-title">Peer-reviewed research.</h2>
+          <h2 class="section-title">Peer-reviewed research. <span class="apple-tone-muted">Published in IEEE Xplore.</span></h2>
           <p class="section-subtitle">Published in IEEE Xplore, with one-click BibTeX citations.</p>
         </div>
       </div>
@@ -1713,7 +1738,7 @@
       <div class="section-header reveal-on-scroll">
         <div>
           <span class="section-eyebrow">BY THE NUMBERS</span>
-          <h2 class="section-title">By the numbers. Built for production.</h2>
+          <h2 class="section-title">By the numbers. <span class="apple-tone-muted">Built for production.</span></h2>
           <p class="section-subtitle">Compare the automated AI systems against traditional manual baselines, or click any tile below to explore the repositories.</p>
         </div>
 
@@ -2112,6 +2137,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261011-49"></script>
+  <script src="app.js?v=20261011-50"></script>
 </body>
 </html>
