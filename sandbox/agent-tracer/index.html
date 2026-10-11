@@ -8046,10 +8046,10 @@
                 selectedNodeId = nid;
                 const info = explainNodeInPlainEnglish(rawDataMap ? rawDataMap[nid] : null);
                 coachDismissed = false;
+                coachStepIndex = 99;
                 setCoachBubbleContent(info.step, info.title, info.body, "Click any other box or Close Bubble when done");
                 const nextBtnEl = document.getElementById("coachBubbleNext");
                 if (nextBtnEl) nextBtnEl.textContent = "Close Bubble";
-                coachStepIndex = 99;
                 centerCameraWithBubbleRoom(nid, 260);
                 setTimeout(() => positionCoachBubbleOverNode(nid), 40);
                 setTimeout(() => positionCoachBubbleOverNode(nid), 290);
