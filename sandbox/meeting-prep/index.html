@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Meeting Prep &amp; Dossier Calendar | Elias Lim</title>
+<title>Meeting Prep &amp; Executive Briefing Calendar | Elias Lim</title>
 <style>
   :root {
     --bg: #ffffff;
@@ -105,7 +105,7 @@
     font-size: 12px;
   }
 
-  /* Main Calendar App Shell (Matches Classic Week Calendar Layout) */
+  /* Main App Container */
   #cal-app {
     display: flex;
     width: 100%;
@@ -121,7 +121,7 @@
 
   /* Left Sidebar: Mini Month Calendar + Solid Colour Category Bars */
   #cal-sidebar {
-    width: 186px;
+    width: 184px;
     flex-shrink: 0;
     border-right: 1px solid var(--border);
     padding: 12px 12px;
@@ -222,7 +222,7 @@
     font-weight: 600;
     text-align: left;
     cursor: pointer;
-    transition: opacity 0.15s ease, transform 0.12s ease;
+    transition: opacity 0.15s ease;
   }
 
   .cal-cat-bar:hover {
@@ -245,7 +245,7 @@
     cursor: pointer;
   }
 
-  /* Main Right Calendar Area */
+  /* Main Right Workspace (Switches Cleanly Between Week Calendar & 1-Page Exec Briefing) */
   #cal-main {
     flex: 1 1 0%;
     min-width: 0;
@@ -255,13 +255,13 @@
     position: relative;
   }
 
-  /* Clean Calendar Top Bar (< Today > | Sep 21 - 26, 2026 ... Day Week Agenda) */
+  /* Clean Shared Top Bar */
   #cal-topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    padding: 8px 14px;
+    gap: 8px;
+    padding: 7px 14px;
     border-bottom: 1px solid var(--border);
     background: var(--bg);
     flex-shrink: 0;
@@ -271,6 +271,42 @@
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .back-to-cal-btn {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--accent);
+    background: rgba(29, 99, 184, 0.08);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 4px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .back-to-cal-btn:hover {
+    background: var(--accent);
+    color: #ffffff;
+  }
+
+  body.mode-briefing .back-to-cal-btn {
+    display: inline-flex;
+  }
+
+  .cal-date-nav-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  body.mode-briefing .cal-date-nav-controls,
+  body.mode-briefing .cal-view-tab {
+    display: none;
   }
 
   .cal-pill-group {
@@ -307,7 +343,36 @@
   .cal-views-right {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
+  }
+
+  /* Primary Mode Switcher: Week Calendar <-> 1-Page Exec Briefing */
+  .view-mode-segmented {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 8px;
+    background: var(--bg-sub);
+    border: 1px solid var(--border);
+  }
+
+  .view-mode-btn {
+    border: none;
+    background: transparent;
+    color: var(--fg-sub);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3.5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.14s ease;
+  }
+
+  .view-mode-btn.active {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   }
 
   .cal-view-tab {
@@ -315,9 +380,9 @@
     background: transparent;
     color: var(--fg-sub);
     font-family: inherit;
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 500;
-    padding: 4px 9px;
+    padding: 4px 7px;
     border-radius: 6px;
     cursor: pointer;
   }
@@ -335,19 +400,23 @@
     font-family: inherit;
     font-size: 11px;
     font-weight: 600;
-    padding: 4px 10px;
+    padding: 4px 9px;
     border-radius: 6px;
     cursor: pointer;
-    margin-left: 4px;
   }
 
-  .cal-check-btn.is-alert {
-    background: #fee2e2;
-    border-color: #fca5a5;
-    color: #b91c1c;
+  /* VIEW 1: MULTI-DAY WEEK CALENDAR VIEW */
+  #calendar-stage-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    min-height: 0;
   }
 
-  /* Week Header + All-Day Banners + Scrollable Hourly Columns */
+  body.mode-briefing #calendar-stage-view {
+    display: none;
+  }
+
   #week-header-wrap {
     border-bottom: 1px solid var(--border);
     background: var(--bg);
@@ -387,7 +456,6 @@
     background: rgba(29, 99, 184, 0.04);
   }
 
-  /* Top All-Day / Automation Banner Rows (Matches Image 2 Top Strips) */
   .allday-banners {
     display: grid;
     grid-template-columns: 46px repeat(6, 1fr);
@@ -414,7 +482,6 @@
     cursor: pointer;
   }
 
-  /* Scrollable Multi-Column Time Grid */
   #week-grid-scroll {
     flex: 1 1 0%;
     overflow-y: auto;
@@ -426,7 +493,7 @@
     position: relative;
     display: grid;
     grid-template-columns: 46px repeat(6, 1fr);
-    height: 450px; /* 9 hours (9am to 6pm) * 50px */
+    height: 450px;
     min-height: 450px;
   }
 
@@ -463,7 +530,6 @@
     background-color: rgba(29, 99, 184, 0.02);
   }
 
-  /* Shaded 1-Hour Reminder Band when Scenario 03 is Active */
   .hour-scan-band {
     position: absolute;
     left: 0;
@@ -496,39 +562,51 @@
     background: #dc2626;
   }
 
-  /* Solid Rounded Calendar Event Blocks (Matches Image 2) */
-  .cal-block {
+  /* Stacked Meeting + Attached "Brief ready" Bottom Tab (Matches User Sketch!) */
+  .cal-block-wrap {
     position: absolute;
     left: 3px;
     right: 3px;
-    border-radius: 5px;
-    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    transition: transform 0.12s ease, opacity 0.15s ease;
+  }
+
+  .cal-block-wrap:hover {
+    z-index: 8;
+  }
+
+  .cal-block-wrap.is-selected {
+    z-index: 9;
+  }
+
+  .cal-block-wrap.is-dimmed {
+    opacity: 0.22;
+  }
+
+  /* Upper Rounded Meeting Card */
+  .cal-block-card {
+    flex: 1 1 auto;
+    border-radius: 7px;
+    padding: 5px 7px;
     color: #ffffff;
     font-size: 10.5px;
-    line-height: 1.25;
+    line-height: 1.24;
     cursor: pointer;
     overflow: hidden;
-    z-index: 3;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.15s ease;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.14);
   }
 
-  .cal-block:hover {
-    z-index: 6;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  .cal-block-wrap.is-selected .cal-block-card {
+    outline: 2px solid #111827;
+    box-shadow: 0 5px 14px rgba(15, 23, 42, 0.22);
   }
 
-  .cal-block.is-selected {
-    z-index: 7;
-    outline: 2.5px solid #111827;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
-  }
-
-  [data-theme="dark"] .cal-block.is-selected {
-    outline: 2.5px solid #ffffff;
-  }
-
-  .cal-block.is-dimmed {
-    opacity: 0.22;
+  [data-theme="dark"] .cal-block-wrap.is-selected .cal-block-card {
+    outline: 2px solid #ffffff;
   }
 
   .cal-block-title {
@@ -541,10 +619,42 @@
     opacity: 0.92;
   }
 
-  /* Floating Pop-Up Bubble Next to Active Event Block */
+  /* Lower Attached "Brief ready" Strip Underneath Qualified Meetings (Exact Match to Sketch) */
+  .cal-brief-ready-tab {
+    position: relative;
+    z-index: 1;
+    margin: -4px 2px 0;
+    padding: 6px 6px 3px;
+    background: #ffffff;
+    border: 1.5px solid #cbd5e1;
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    color: #1e293b;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+    transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease;
+  }
+
+  [data-theme="dark"] .cal-brief-ready-tab {
+    background: #1e293b;
+    border-color: #475569;
+    color: #f8fafc;
+  }
+
+  .cal-brief-ready-tab:hover {
+    background: #eff6ff;
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Floating Pop-Up Bubble Next to Calendar Event Blocks */
   #calPopoverBubble {
     position: absolute;
-    width: 318px;
+    width: 306px;
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -558,7 +668,6 @@
     display: none;
   }
 
-  /* Left/Right Directional Pointer Arrow on Pop-Up Bubble */
   #calPopoverArrow {
     position: absolute;
     width: 11px;
@@ -585,7 +694,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
 
   .pop-step {
@@ -614,49 +723,41 @@
     font-size: 13px;
     font-weight: 700;
     color: var(--fg);
-    margin-bottom: 3px;
+    margin-bottom: 2px;
     line-height: 1.28;
   }
 
   .pop-meta {
     font-size: 10.5px;
     color: var(--fg-muted);
-    margin-bottom: 7px;
+    margin-bottom: 6px;
   }
 
   .pop-desc {
     font-size: 11.5px;
     line-height: 1.44;
     color: var(--fg-sub);
-    margin-bottom: 8px;
-  }
-
-  .pop-bullets {
-    list-style: none;
-    background: var(--bg-sub);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 7px 9px;
     margin-bottom: 9px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 10.5px;
-    color: var(--fg);
   }
 
-  .pop-bullets li {
-    line-height: 1.35;
-  }
-
-  .pop-cite {
+  .pop-open-brief-btn {
+    width: 100%;
+    border: 1px solid var(--accent);
+    background: rgba(29, 99, 184, 0.08);
     color: var(--accent);
-    font-weight: 600;
-    margin-left: 3px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 9px;
+    transition: background 0.14s ease, color 0.14s ease;
   }
 
-  .pop-cite.alert {
-    color: #dc2626;
+  .pop-open-brief-btn:hover {
+    background: var(--accent);
+    color: #ffffff;
   }
 
   .pop-footer {
@@ -666,17 +767,6 @@
     gap: 6px;
     padding-top: 7px;
     border-top: 1px solid var(--border);
-  }
-
-  .pop-link-btn {
-    border: none;
-    background: transparent;
-    color: var(--accent);
-    font-family: inherit;
-    font-size: 10.5px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 0;
   }
 
   .pop-nav-btns {
@@ -704,9 +794,202 @@
     color: #ffffff;
   }
 
+  /* VIEW 2: FULL 1-PAGE EXECUTIVE BRIEFING DOCUMENT VIEW */
+  #exec-briefing-view {
+    display: none;
+    flex: 1 1 0%;
+    overflow-y: auto;
+    background: var(--bg-sub);
+    padding: 12px 20px 18px;
+    position: relative;
+  }
+
+  body.mode-briefing #exec-briefing-view {
+    display: block;
+  }
+
+  .brief-switcher-strip {
+    max-width: 820px;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .brief-meeting-pills {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .brief-pill-btn {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--fg-sub);
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 3.5px 9px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .brief-pill-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+  }
+
+  .exec-sheet {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 22px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+  }
+
+  .exec-doc-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .exec-kicker {
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+
+  .exec-title {
+    font-size: 16.5px;
+    font-weight: 700;
+    color: var(--fg);
+    line-height: 1.25;
+    margin-bottom: 3px;
+  }
+
+  .exec-when {
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+
+  .exec-verified-box {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .exec-verified-tag {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--col-green);
+    background: rgba(43, 138, 62, 0.1);
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+  }
+
+  .exec-verified-tag.is-alert {
+    color: var(--col-red);
+    background: rgba(201, 42, 42, 0.12);
+  }
+
+  .exec-trap-link {
+    display: block;
+    border: none;
+    background: transparent;
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .exec-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+
+  .exec-sec-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--fg-muted);
+    margin-bottom: 5px;
+  }
+
+  .exec-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11.5px;
+    line-height: 1.36;
+    color: var(--fg);
+  }
+
+  .exec-items li {
+    padding-left: 9px;
+    border-left: 2px solid var(--border);
+  }
+
+  .exec-items li.priority-row {
+    border-left-color: var(--accent);
+  }
+
+  .exec-items li.alert-row {
+    border-left-color: var(--col-red);
+    background: rgba(201, 42, 42, 0.06);
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .exec-cite {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-left: 3px;
+  }
+
+  .exec-cite.alert {
+    color: var(--col-red);
+  }
+
+  .exec-bottom-nav {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 10.5px;
+    color: var(--fg-muted);
+  }
+
   @media (max-width: 720px) {
     #cal-sidebar {
       display: none;
+    }
+    .exec-grid-2col {
+      grid-template-columns: 1fr;
     }
   }
 </style>
@@ -756,73 +1039,93 @@
       </div>
     </aside>
 
-    <!-- Main Multi-Day Week Calendar Grid -->
+    <!-- Main Workspace (Toggles Seamlessly Between Week Calendar & 1-Page Executive Briefing) -->
     <div id="cal-main">
       <div id="cal-topbar">
         <div class="cal-nav-left">
-          <div class="cal-pill-group">
-            <button type="button" class="cal-nav-btn" id="btn-prev-sc" title="Previous example">&#8249;</button>
-            <button type="button" class="cal-nav-btn" id="btn-today">Today</button>
-            <button type="button" class="cal-nav-btn" id="btn-next-sc" title="Next example">&#8250;</button>
+          <button type="button" class="back-to-cal-btn" id="btn-back-to-cal">
+            &#8592; Back to Week Calendar
+          </button>
+
+          <div id="cal-date-nav-controls" class="cal-date-nav-controls">
+            <div class="cal-pill-group">
+              <button type="button" class="cal-nav-btn" id="btn-prev-sc" title="Previous example">&#8249;</button>
+              <button type="button" class="cal-nav-btn" id="btn-today">Today</button>
+              <button type="button" class="cal-nav-btn" id="btn-next-sc" title="Next example">&#8250;</button>
+            </div>
+            <span class="cal-range-label" id="cal-range-label">Sep 21 - 26, 2026</span>
           </div>
-          <span class="cal-range-label" id="cal-range-label">Sep 21 - 26, 2026</span>
         </div>
 
         <div class="cal-views-right">
+          <div class="view-mode-segmented" role="tablist" aria-label="Switch between Week Calendar and 1-Page Executive Briefing">
+            <button type="button" class="view-mode-btn active" id="mode-btn-calendar">Week Calendar</button>
+            <button type="button" class="view-mode-btn" id="mode-btn-briefing">1-Page Exec Briefing</button>
+          </div>
           <button type="button" class="cal-view-tab" data-sc-view="next_day_cold_lead">New Contact</button>
-          <button type="button" class="cal-view-tab active" data-sc-view="next_day_mixed">Week</button>
+          <button type="button" class="cal-view-tab active" data-sc-view="next_day_mixed">Full Week</button>
           <button type="button" class="cal-view-tab" data-sc-view="t1h_window">1h Window</button>
-          <button type="button" class="cal-check-btn" id="btn-fake-link">Test Fake Link Check</button>
           <a href="index.html" target="_blank" rel="noopener noreferrer" class="cal-check-btn" id="btn-fullscreen-ext" style="text-decoration:none;color:var(--accent);">Full Screen &#8599;</a>
         </div>
       </div>
 
-      <div id="week-header-wrap">
-        <div class="week-day-names" id="week-day-names"></div>
-        <div class="allday-banners" id="allday-banners">
-          <div class="allday-gutter"></div>
-          <div class="allday-strip" style="grid-column: 2 / 5; background: var(--col-red);" data-banner="noise">
-            Auto-Filtered: Stand-ups, Focus Blocks &amp; Declined Invites
+      <!-- VIEW 1: MULTI-DAY WEEK CALENDAR WITH STACKED "Brief ready" CARDS -->
+      <div id="calendar-stage-view">
+        <div id="week-header-wrap">
+          <div class="week-day-names" id="week-day-names"></div>
+          <div class="allday-banners" id="allday-banners">
+            <div class="allday-gutter"></div>
+            <div class="allday-strip" style="grid-column: 2 / 5; background: var(--col-red);" data-banner="noise">
+              Auto-Filtered: Stand-ups, Focus Blocks &amp; Declined Invites
+            </div>
+            <div class="allday-strip" style="grid-column: 5 / 8; background: var(--col-orange);" data-banner="t1h">
+              Hourly 1h Pre-Call Scanner (Zero Duplicate Reminders)
+            </div>
+            <div class="allday-gutter"></div>
+            <div class="allday-strip" style="grid-column: 2 / 7; background: var(--col-green);" data-banner="linter">
+              5pm Evening Briefing Run: 36/36 Grounding &amp; Link Checks Passed
+            </div>
+            <div class="allday-strip" style="grid-column: 7 / 8; background: var(--col-blue);" data-banner="cold">
+              Honest Empty History
+            </div>
           </div>
-          <div class="allday-strip" style="grid-column: 5 / 8; background: var(--col-orange);" data-banner="t1h">
-            Hourly 1h Pre-Call Scanner (Zero Duplicate Reminders)
-          </div>
-          <div class="allday-gutter"></div>
-          <div class="allday-strip" style="grid-column: 2 / 7; background: var(--col-green);" data-banner="linter">
-            5pm Evening Briefing Run: 36/36 Grounding &amp; Link Checks Passed
-          </div>
-          <div class="allday-strip" style="grid-column: 7 / 8; background: var(--col-blue);" data-banner="cold">
-            Honest Empty History
+        </div>
+
+        <div id="week-grid-scroll">
+          <div id="week-grid-canvas"></div>
+
+          <!-- Floating Pop-Up Bubble Next to Calendar Event Blocks -->
+          <div id="calPopoverBubble" class="arrow-right" role="dialog" aria-live="polite">
+            <div id="calPopoverArrow"></div>
+            <div class="pop-top">
+              <span class="pop-step" id="popStepLabel">BUBBLE 1 OF 4</span>
+              <button type="button" class="pop-close" id="popCloseBtn" title="Close bubble">&#215;</button>
+            </div>
+            <div class="pop-title" id="popTitle">Acme &lt;&gt; Platform Sync</div>
+            <div class="pop-meta" id="popMeta">Thu 24 Sep, 10:00am - 11:30am | Brief Ready Below Card</div>
+            <div class="pop-desc" id="popDesc">
+              Every external or cross-team meeting gets a attached "Brief ready" tab directly underneath the calendar slot. Click any "Brief ready" strip on the calendar to open its 1-Page Executive Briefing.
+            </div>
+            <button type="button" class="pop-open-brief-btn" id="popOpenBriefBtn">
+              Open 1-Page Exec Briefing &#8594;
+            </button>
+            <div class="pop-footer">
+              <div class="pop-nav-btns">
+                <button type="button" class="pop-btn" id="popPrevBtn">&#8592; Back</button>
+                <button type="button" class="pop-btn primary" id="popNextBtn">Next Bubble &#8594;</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div id="week-grid-scroll">
-        <div id="week-grid-canvas">
-          <!-- Rendered by JS: 9am-5pm left ruler + 6 day columns + solid event blocks -->
+      <!-- VIEW 2: 1-PAGE EXECUTIVE BRIEFING DOCUMENT SHOWCASE -->
+      <div id="exec-briefing-view">
+        <div class="brief-switcher-strip">
+          <div class="brief-meeting-pills" id="brief-meeting-pills"></div>
         </div>
 
-        <!-- Floating Pop-Up Bubble Pointing Directly at Calendar Event Blocks -->
-        <div id="calPopoverBubble" class="arrow-left" role="dialog" aria-live="polite">
-          <div id="calPopoverArrow"></div>
-          <div class="pop-top">
-            <span class="pop-step" id="popStepLabel">BUBBLE 1 OF 4</span>
-            <button type="button" class="pop-close" id="popCloseBtn" title="Close bubble">&#215;</button>
-          </div>
-          <div class="pop-title" id="popTitle">Acme &lt;&gt; Platform: API Rollout Sync</div>
-          <div class="pop-meta" id="popMeta">Thu 24 Sep, 10:00am - 11:15am | 1-Page Briefing Created</div>
-          <div class="pop-desc" id="popDesc">
-            Pulled unanswered Gmail threads, Chat notes, and shared Drive docs into a one-page briefing the evening before so you walk in prepared.
-          </div>
-          <ul class="pop-bullets" id="popBullets"></ul>
-          <div class="pop-footer">
-            <button type="button" class="pop-link-btn" id="popFakeToggle">Test fake AI link</button>
-            <div class="pop-nav-btns">
-              <button type="button" class="pop-btn" id="popPrevBtn">&#8592; Back</button>
-              <button type="button" class="pop-btn primary" id="popNextBtn">Next Bubble &#8594;</button>
-            </div>
-          </div>
-        </div>
+        <article class="exec-sheet" id="exec-sheet-content"></article>
       </div>
     </div>
   </div>
@@ -847,182 +1150,245 @@
   const END_H = 17;
   const HOUR_PX = 50;
 
-  /* Full Week Calendar Events Across Mon 21 - Sat 26 (Solid Colour Blocks Like Reference Pic 2) */
   const EVENTS = [
     {
       id: "mon_standup",
       col: 0, startH: 9.25, durH: 1.0,
-      color: "var(--col-grey)", cat: "standup",
+      color: "var(--col-grey)", cat: "standup", hasBrief: false,
       timeText: "9:15am Infra Pod Standup",
       subText: "Alex Morgan, Priya Nair",
       meta: "Mon 21 Sep, 9:15am - 10:15am | Auto-Skipped",
-      desc: "Internal stand-up with your immediate engineering team is skipped automatically so daily briefings only cover external partners and cross-team reviews.",
-      bullets: [
-        { t: "Rule matched: Same-team recurring daily sync", c: "Calendar Filter" },
-        { t: "Listed in single-line transparency footer only", c: "Zero Inbox Noise" }
-      ]
+      desc: "Internal stand-up with your own engineering team has no 'Brief ready' tab because internal routine meetings are automatically skipped."
     },
     {
       id: "mon_prep",
-      col: 0, startH: 12.0, durH: 1.1,
-      color: "var(--col-lime)", cat: "focus",
-      timeText: "12pm Architecture Focus Block",
+      col: 0, startH: 12.0, durH: 1.05,
+      color: "var(--col-lime)", cat: "focus", hasBrief: false,
+      timeText: "12pm Focus Block",
       subText: "Personal Deep Work",
       meta: "Mon 21 Sep, 12:00pm - 1:05pm | Auto-Skipped",
-      desc: "Personal solo focus blocks have zero external attendees and are skipped cleanly without generating unnecessary briefing emails.",
-      bullets: [
-        { t: "Rule matched: Solo focus block (1 attendee)", c: "Calendar Filter" }
-      ]
+      desc: "Personal solo focus blocks have zero external attendees so no briefing is generated."
     },
     {
       id: "mon_stripe",
-      col: 0, startH: 14.25, durH: 1.6,
-      color: "var(--col-blue)", cat: "external",
-      timeText: "2:15pm Partner Sync: FinPay",
+      col: 0, startH: 14.1, durH: 1.35,
+      color: "var(--col-blue)", cat: "external", hasBrief: true,
+      shortTabLabel: "Mon 2:15pm: FinPay",
+      timeText: "2:15pm FinPay Sync",
       subText: "Claire Tan / Dev Patel",
-      meta: "Mon 21 Sep, 2:15pm - 3:50pm | 1-Page Briefing Ready",
-      desc: "External partner call matched during Sunday 5pm scan. Summarised open webhook retry questions from Gmail and linked the shared Q4 rollout sheet.",
-      bullets: [
-        { t: "Claire Tan (VP Eng, FinPay) asked for staging webhook IP allowlist", c: "Gmail Thread" },
-        { t: "36 / 36 fact checks passed with zero invented links", c: "Verified Doc" }
-      ]
+      meta: "Mon 21 Sep, 2:15pm - 3:45pm | Brief Ready",
+      desc: "External partner call with FinPay engineering leadership. Click 'Brief ready' below this card to read the generated 1-Page Executive Briefing.",
+      brief: {
+        title: "FinPay <> Core Platform: Webhook & Settlement Sync",
+        when: "Monday, 21 September 2026 | 2:15pm - 3:45pm SGT | Google Meet",
+        attendees: [
+          { t: "Claire Tan, VP of Engineering at FinPay (last met 14 days ago)", c: "People Directory" },
+          { t: "Dev Patel, Principal Payments Architect at FinPay", c: "People Directory" },
+          { t: "Dana Martin, Partner Solutions Lead (APAC)", c: "People Directory" }
+        ],
+        context: [
+          { t: "Agreed during 7 Sep sync to complete sandbox webhook signature tests ahead of October volume ramp.", c: "Calendar Notes" },
+          { t: "Shared Q4 Settlement Rollout Tracker shows 4 of 5 staging milestones green.", c: "Google Sheets" }
+        ],
+        blockers: [
+          { t: "Claire Tan emailed 3 days ago asking for production NAT egress IP ranges for FinPay firewall allowlisting (unanswered).", c: "Gmail Thread" },
+          { t: "Retry backoff threshold on idempotency keys needs final sign-off before Friday.", c: "Google Chat" }
+        ],
+        agenda: [
+          "Share verified production NAT egress IP block to unblock FinPay security allowlisting.",
+          "Confirm exponential retry cap (5 attempts over 15 minutes) for settlement webhooks.",
+          "Lock production cutover rehearsal window for 29 September."
+        ],
+        skippedNote: "Skipped on Mon 21: Infra Pod Standup (same-team recurring sync), Focus Block (solo block)."
+      }
     },
     {
       id: "tue_sec",
-      col: 1, startH: 9.5, durH: 1.1,
-      color: "var(--col-grey)", cat: "standup",
-      timeText: "9:30am Core Team Triage",
-      subText: "Internal Bug Scrub",
+      col: 1, startH: 9.5, durH: 1.05,
+      color: "var(--col-grey)", cat: "standup", hasBrief: false,
+      timeText: "9:30am Core Bug Scrub",
+      subText: "Internal Squad Triage",
       meta: "Tue 22 Sep, 9:30am - 10:35am | Auto-Skipped",
-      desc: "Routine internal bug triage is filtered out automatically so you never waste morning reading time on meetings with your own squad.",
-      bullets: [
-        { t: "Rule matched: Internal squad triage", c: "Skipped" }
-      ]
+      desc: "Routine internal bug triage is skipped automatically so only external and cross-team meetings show a 'Brief ready' strip."
     },
     {
       id: "tue_allhands",
-      col: 1, startH: 11.5, durH: 2.2,
-      color: "var(--col-pink)", cat: "broadcast",
-      timeText: "11:30am Q3 Company All-Hands",
+      col: 1, startH: 11.4, durH: 1.75,
+      color: "var(--col-pink)", cat: "broadcast", hasBrief: false,
+      timeText: "11:25am Q3 Company All-Hands",
       subText: "312 Invitees Across Org",
-      meta: "Tue 22 Sep, 11:30am - 1:40pm | Skipped (>50 Attendees)",
-      desc: "Large town halls and broadcast invites (>50 guests) are excluded automatically so big company-wide announcements never trigger personal prep docs.",
-      bullets: [
-        { t: "312 invitees detected on Google Calendar event", c: "Broadcast Filter" }
-      ]
+      meta: "Tue 22 Sep, 11:25am - 1:10pm | Skipped (>50 Guests)",
+      desc: "Large town halls (>50 invitees) are excluded automatically so broadcast events never clutter your morning prep."
     },
     {
       id: "tue_auth",
-      col: 1, startH: 14.5, durH: 1.5,
-      color: "var(--col-green)", cat: "crossteam",
-      timeText: "2:30pm Payments x Identity",
+      col: 1, startH: 14.3, durH: 1.35,
+      color: "var(--col-green)", cat: "crossteam", hasBrief: true,
+      shortTabLabel: "Tue 2:20pm: Payments x Auth",
+      timeText: "2:20pm Payments x Identity",
       subText: "Rahul Khan / Sofia Barros",
-      meta: "Tue 22 Sep, 2:30pm - 4:00pm | Cross-Team Briefing Ready",
-      desc: "Cross-team review between Payments and Identity leadership. Highlights Rahul Khan's pending Token Exchange design doc waiting for your sign-off.",
-      bullets: [
-        { t: "Rahul Khan (Identity PM) awaiting sign-off on Token Exchange Doc", c: "Drive Doc" },
-        { t: "Security ticket b/412998877 needs Phase 1 owner", c: "Google Chat" }
-      ]
+      meta: "Tue 22 Sep, 2:20pm - 3:50pm | Brief Ready",
+      desc: "Cross-org review with Identity Product & Security leads. Click 'Brief ready' underneath the card to view the 1-Page Executive Briefing.",
+      brief: {
+        title: "Payments x Identity: OAuth Token Exchange Architecture Review",
+        when: "Tuesday, 22 September 2026 | 2:20pm - 3:50pm SGT | Conference Room 4B",
+        attendees: [
+          { t: "Rahul Khan, Group Product Manager, Identity Platform", c: "People Directory" },
+          { t: "Sofia Barros, Staff Security Engineer, AppSec", c: "People Directory" }
+        ],
+        context: [
+          { t: "Phase 1 token exchange migration split agreed 3 weeks ago; engineering owner assignment due this week.", c: "Calendar Notes" },
+          { t: "Token Exchange RFC v2.4 updated yesterday with latency benchmarks (< 4.2ms p99).", c: "Google Docs" }
+        ],
+        blockers: [
+          { t: "Rahul Khan is awaiting your approval comment on Section 3 of Token Exchange RFC before booking Q4 sprint capacity.", c: "Drive Comment" },
+          { t: "Security ticket b/412998877 requires named Phase 1 owner before production gate.", c: "Chat Thread" }
+        ],
+        agenda: [
+          "Sign off on Section 3 token rotation window in Rahul Khan's RFC document.",
+          "Assign Phase 1 engineering lead on ticket b/412998877 with Sofia Barros.",
+          "Confirm Q4 sprint allocation across Payments and Identity teams."
+        ],
+        skippedNote: "Skipped on Tue 22: Core Bug Scrub (same-team triage), Q3 Company All-Hands (312 invitees)."
+      }
     },
     {
       id: "wed_standup",
-      col: 2, startH: 10.0, durH: 1.1,
-      color: "var(--col-grey)", cat: "standup",
+      col: 2, startH: 10.0, durH: 1.05,
+      color: "var(--col-grey)", cat: "standup", hasBrief: false,
       timeText: "10am Weekly Infra Sync",
       subText: "Same-Team Pod Check-in",
       meta: "Wed 23 Sep, 10:00am - 11:05am | Auto-Skipped",
-      desc: "Skipped automatically because all participants report to the same engineering pod.",
-      bullets: [
-        { t: "Rule matched: Own-team weekly check-in", c: "Skipped" }
-      ]
+      desc: "Skipped automatically because every participant belongs to your immediate pod."
     },
     {
       id: "wed_focus",
-      col: 2, startH: 12.25, durH: 1.5,
-      color: "var(--col-lime)", cat: "focus",
+      col: 2, startH: 12.25, durH: 1.35,
+      color: "var(--col-lime)", cat: "focus", hasBrief: false,
       timeText: "12:15pm Code Review Block",
       subText: "Deep Work Block",
-      meta: "Wed 23 Sep, 12:15pm - 1:45pm | Auto-Skipped",
-      desc: "Protected calendar focus block ignored by the briefing generator.",
-      bullets: [
-        { t: "Rule matched: Focus time calendar event", c: "Skipped" }
-      ]
+      meta: "Wed 23 Sep, 12:15pm - 1:35pm | Auto-Skipped",
+      desc: "Protected solo focus time on Google Calendar."
     },
     {
       id: "thu_acme",
-      col: 3, startH: 10.0, durH: 1.5,
-      color: "var(--col-blue)", cat: "external",
-      timeText: "10am Acme <> Platform Sync",
+      col: 3, startH: 9.85, durH: 1.35,
+      color: "var(--col-blue)", cat: "external", hasBrief: true,
+      shortTabLabel: "Thu 10am: Acme Corp",
+      timeText: "10am Acme <> Platform",
       subText: "Alex Chen / Jordan Lee",
-      meta: "Thu 24 Sep, 10:00am - 11:30am | 1-Page Briefing Created",
-      desc: "External customer call with Acme Corp. The evening before, the assistant pulled unanswered Gmail threads, Chat notes, and shared Drive docs into a one-page dossier.",
-      bullets: [
-        { t: "Alex Chen (Director, Acme) security team reviewing OAuth scopes", c: "Gmail" },
-        { t: "Jordan Lee asked 6d ago if staging cutover moves to freeze week", c: "Needs Reply" },
-        { t: "All 36 link and participant grounding checks passed", c: "36/36 Verified" }
-      ]
+      meta: "Thu 24 Sep, 10:00am - 11:30am | Brief Ready",
+      desc: "Click the 'Brief ready' tab tucked right underneath this meeting block to switch views and read the full 1-Page Executive Briefing.",
+      brief: {
+        title: "Acme Corp <> Core Platform: Enterprise API Rollout Sync",
+        when: "Thursday, 24 September 2026 | 10:00am - 11:30am SGT | Google Meet",
+        attendees: [
+          { t: "Alex Chen, Director of Engineering at Acme Corp (external partner, last met 10 days ago)", c: "People Directory" },
+          { t: "Jordan Lee, Technical Programme Manager at Acme Corp", c: "People Directory" },
+          { t: "Dana Martin, Partner Engineering Lead (APAC)", c: "People Directory" }
+        ],
+        context: [
+          { t: "Agreed at 14 Sep kickoff to complete staging cutover first, followed by full production launch two weeks later.", c: "Calendar Notes" },
+          { t: "Shared Q4 Launch Readiness Deck updated by Dana Martin with throughput load-test metrics.", c: "Google Slides" }
+        ],
+        blockers: [
+          { t: "Alex Chen's security team has not yet signed off on the updated OAuth read/write scope permissions.", c: "Gmail: Security Status" },
+          { t: "Jordan Lee asked 6 days ago whether staging cutover can move to code freeze week (still awaiting your reply).", c: "Gmail: Cutover Window" },
+          { t: "Automated regression coverage on v2 batch endpoints stands at 60% and needs one additional sprint.", c: "Chat: Acme x Platform" }
+        ],
+        agenda: [
+          "Lock target sign-off date with Alex Chen for Acme's security review on OAuth scopes.",
+          "Give Jordan Lee a clear yes/no on moving staging cutover into code freeze week.",
+          "Review load-test numbers in the Q4 Launch Readiness Deck and assign v2 test owners."
+        ],
+        skippedNote: "Filtered from Thu 24 schedule: Org Design Broadcast (84 attendees)."
+      }
     },
     {
       id: "thu_review",
-      col: 3, startH: 13.25, durH: 1.25,
-      color: "var(--col-pink)", cat: "broadcast",
-      timeText: "1:15pm Org Design Review",
-      subText: "84 Invitees (Broadcast)",
-      meta: "Thu 24 Sep, 1:15pm - 2:30pm | Auto-Skipped",
-      desc: "Skipped because 84 invitees exceed the small-meeting briefing threshold.",
-      bullets: [
-        { t: "84 attendees detected; logged cleanly in transparency footer", c: "Skipped" }
-      ]
+      col: 3, startH: 12.85, durH: 1.05,
+      color: "var(--col-pink)", cat: "broadcast", hasBrief: false,
+      timeText: "12:50pm Org Broadcast",
+      subText: "84 Invitees (Town Hall)",
+      meta: "Thu 24 Sep, 12:50pm - 1:55pm | Auto-Skipped",
+      desc: "Broadcast session (>50 attendees) skipped cleanly without generating noise."
     },
     {
       id: "thu_northwind",
-      col: 3, startH: 15.0, durH: 1.5,
-      color: "var(--col-orange)", cat: "t1h",
-      timeText: "3pm Northwind Kickoff (1h Window)",
+      col: 3, startH: 14.55, durH: 1.35,
+      color: "var(--col-orange)", cat: "t1h", hasBrief: true,
+      shortTabLabel: "Thu 2:35pm: Northwind (1h Scan)",
+      timeText: "2:35pm Northwind Kickoff",
       subText: "Tom Hale / Dana Martin",
-      meta: "Thu 24 Sep, 3:00pm - 4:30pm | Caught by 2pm Hourly Scan",
-      desc: "Booked same morning after last night's 5pm run! At 2:00pm (red line), the hourly scan inspects only the 3:00pm - 4:00pm band so same-day calls get briefed once with zero duplicates.",
-      bullets: [
-        { t: "Tom Hale (Head of Integrations) asked 2d ago for connector rate limits", c: "Gmail" },
-        { t: "Stateless hourly band guarantees zero duplicate emails", c: "1h Window" }
-      ]
+      meta: "Thu 24 Sep, 2:35pm - 4:00pm | Caught 1h Before Call",
+      desc: "Booked same morning after last night's 5pm run! Caught by the 1-hour pre-call scanner and given a fresh 'Brief ready' tab underneath.",
+      brief: {
+        title: "1-Hour Pre-Call Briefing: Northwind Traders Integration Kickoff",
+        when: "Thursday, 24 September 2026 | 2:35pm - 4:00pm SGT | Caught by Hourly Window",
+        attendees: [
+          { t: "Tom Hale, Head of Enterprise Integrations at Northwind Traders", c: "People Directory" },
+          { t: "Dana Martin, Partner Engineering Lead (APAC)", c: "People Directory" }
+        ],
+        context: [
+          { t: "Same-day calendar invite added at 10:12am this morning after yesterday's 5pm batch run.", c: "Hourly Calendar Scan" },
+          { t: "Fast pre-call research pass completed in 38 seconds with zero duplicate email alerts.", c: "Stateless Window" }
+        ],
+        blockers: [
+          { t: "Tom Hale emailed 2 days ago asking for exact connector rate-limit figures and burst quotas.", c: "Gmail: Scoping Asks" },
+          { t: "Northwind Integration Scope Doc has connector endpoints listed with rate limits marked TBD.", c: "Google Docs" }
+        ],
+        agenda: [
+          "Provide exact connector RPS and burst quota numbers to unblock Tom Hale's team.",
+          "Walk through the Northwind Integration Scope Doc together live and lock milestone dates."
+        ],
+        skippedNote: "Stateless hourly window ensures each meeting receives at most one pre-call briefing."
+      }
     },
     {
       id: "fri_initech",
-      col: 4, startH: 10.25, durH: 1.5,
-      color: "var(--col-blue)", cat: "external",
-      timeText: "10:15am Initech Intro Call",
+      col: 4, startH: 10.1, durH: 1.35,
+      color: "var(--col-blue)", cat: "external", hasBrief: true,
+      shortTabLabel: "Fri 10:10am: Initech (New)",
+      timeText: "10:10am Initech Intro Call",
       subText: "Marta Novak (First-Time)",
-      meta: "Fri 25 Sep, 10:15am - 11:45am | Brand-New Contact",
-      desc: "First-time external call with Marta Novak (VP Data Platform, Initech). When zero past emails or docs exist, the assistant states 'No prior context found' honestly instead of guessing.",
-      bullets: [
-        { t: "Marta Novak verified via People Directory (first-time introduction)", c: "Directory" },
-        { t: "Explicitly states 'No prior context found' with 0 invented recaps", c: "7/7 Checks" }
-      ]
+      meta: "Fri 25 Sep, 10:10am - 11:35am | Honest Empty History",
+      desc: "First-time external intro with Marta Novak at Initech. Click 'Brief ready' below the card to see how first-time contacts are briefed with zero invented facts.",
+      brief: {
+        title: "First-Time External Briefing: Initech <> Core Platform Intro",
+        when: "Friday, 25 September 2026 | 10:10am - 11:35am SGT | Google Meet",
+        attendees: [
+          { t: "Marta Novak, VP of Data Platform at Initech (first-time external introduction)", c: "People Directory" }
+        ],
+        context: [
+          { t: "No prior context found across Google Calendar, Gmail, Google Chat, or shared Drive documents.", c: "Verified Empty History" }
+        ],
+        blockers: [
+          { t: "Zero prior email threads, open tickets, or shared decks exist with Initech — zero invented past meetings.", c: "7/7 Honesty Checks" }
+        ],
+        agenda: [
+          "Introduce Core Platform capabilities and learn Initech's Q4 data platform priorities.",
+          "Agree on follow-up technical evaluation owners and next steps."
+        ],
+        skippedNote: "Strict honesty rule active: when no prior records exist, never guess or invent past meetings."
+      }
     },
     {
       id: "fri_declined",
-      col: 4, startH: 13.75, durH: 1.35,
-      color: "var(--col-red)", cat: "declined",
-      timeText: "1:45pm Globex Vendor Demo",
+      col: 4, startH: 13.75, durH: 1.25,
+      color: "var(--col-red)", cat: "declined", hasBrief: false,
+      timeText: "1:45pm Globex Demo",
       subText: "Declined Invitation",
-      meta: "Fri 25 Sep, 1:45pm - 3:05pm | Skipped (Declined)",
-      desc: "Because you declined this cold vendor invite on Google Calendar, the assistant skips it automatically instead of wasting prep time.",
-      bullets: [
-        { t: "RSVP status = Declined on primary calendar", c: "Skipped" }
-      ]
+      meta: "Fri 25 Sep, 1:45pm - 3:00pm | Skipped (Declined)",
+      desc: "Cold vendor invite you already declined on Google Calendar — skipped automatically."
     },
     {
       id: "sat_prep",
-      col: 5, startH: 11.0, durH: 1.35,
-      color: "var(--col-purple)", cat: "broadcast",
-      timeText: "11am Buildathon Mentor Slot",
-      subText: "Optional Office Hours",
-      meta: "Sat 26 Sep, 11:00am - 12:20pm | Optional Slot",
-      desc: "Optional weekend mentoring office hours; skipped unless external guests confirm attendance.",
-      bullets: [
-        { t: "No confirmed external partner attendees", c: "Skipped" }
-      ]
+      col: 5, startH: 11.0, durH: 1.25,
+      color: "var(--col-purple)", cat: "broadcast", hasBrief: false,
+      timeText: "11am Mentor Office Hours",
+      subText: "Optional Slot",
+      meta: "Sat 26 Sep, 11:00am - 12:15pm | Skipped",
+      desc: "Optional weekend mentoring slot with no external partner attendees."
     }
   ];
 
@@ -1035,6 +1401,7 @@
   let curScenario = "next_day_mixed";
   let curTourStep = 0;
   let activeEventId = "thu_acme";
+  let curViewMode = "calendar"; /* "calendar" | "briefing" */
   let mutedCats = new Set();
   let fakeLinkActive = false;
 
@@ -1046,15 +1413,17 @@
   const popTitle = document.getElementById("popTitle");
   const popMeta = document.getElementById("popMeta");
   const popDesc = document.getElementById("popDesc");
-  const popBullets = document.getElementById("popBullets");
+  const popOpenBriefBtn = document.getElementById("popOpenBriefBtn");
   const popPrev = document.getElementById("popPrevBtn");
   const popNext = document.getElementById("popNextBtn");
   const popClose = document.getElementById("popCloseBtn");
-  const popFakeToggle = document.getElementById("popFakeToggle");
-  const topFakeBtn = document.getElementById("btn-fake-link");
   const filterLabel = document.getElementById("filter-state-label");
+  const modeBtnCal = document.getElementById("mode-btn-calendar");
+  const modeBtnBrief = document.getElementById("mode-btn-briefing");
+  const btnBackToCal = document.getElementById("btn-back-to-cal");
+  const briefPillsEl = document.getElementById("brief-meeting-pills");
+  const execSheetEl = document.getElementById("exec-sheet-content");
 
-  /* Build Left Mini Month Calendar (September 2026) */
   function renderMiniCal() {
     const dows = ["S", "M", "T", "W", "T", "F", "S"];
     let h = dows.map(d => `<div class="mini-cal-dow">${d}</div>`).join("");
@@ -1082,6 +1451,27 @@
     return h > 12 ? (h - 12) + "pm" : h + "am";
   }
 
+  function setViewMode(mode, targetEventId) {
+    if (targetEventId) {
+      activeEventId = targetEventId;
+    }
+    const ev = EVENTS.find(e => e.id === activeEventId);
+    if (mode === "briefing" && (!ev || !ev.hasBrief)) {
+      activeEventId = "thu_acme";
+    }
+    curViewMode = mode;
+    document.body.classList.toggle("mode-briefing", mode === "briefing");
+    modeBtnCal.classList.toggle("active", mode === "calendar");
+    modeBtnBrief.classList.toggle("active", mode === "briefing");
+
+    if (mode === "briefing") {
+      renderExecBriefingView();
+    } else {
+      renderCalendarGrid();
+      showPopoverForEvent(activeEventId);
+    }
+  }
+
   function renderCalendarGrid() {
     const activeEv = EVENTS.find(e => e.id === activeEventId) || EVENTS[8];
     let headHtml = `<div class="week-gutter-lbl">W39</div>`;
@@ -1103,25 +1493,35 @@
       let inner = "";
 
       if (curScenario === "t1h_window" && c === 3) {
-        const nowY = Math.round((14.0 - START_H) * HOUR_PX);
-        const bandY = Math.round((15.0 - START_H) * HOUR_PX);
+        const nowY = Math.round((13.95 - START_H) * HOUR_PX);
+        const bandY = Math.round((14.4 - START_H) * HOUR_PX);
         inner += `<div class="now-time-line" style="top:${nowY}px;"></div>`;
-        inner += `<div class="hour-scan-band" style="top:${bandY}px;height:${HOUR_PX * 1.5}px;"></div>`;
+        inner += `<div class="hour-scan-band" style="top:${bandY}px;height:${HOUR_PX * 1.9}px;"></div>`;
       }
 
       EVENTS.filter(ev => ev.col === c).forEach(ev => {
         const topPx = Math.round((ev.startH - START_H) * HOUR_PX) + 2;
-        const heightPx = Math.max(36, Math.round(ev.durH * HOUR_PX) - 4);
+        const cardH = Math.max(38, Math.round(ev.durH * HOUR_PX) - 4);
         const isSel = ev.id === activeEventId;
         const isDim = mutedCats.has(ev.cat);
+        const briefTabHtml = ev.hasBrief
+          ? `<button type="button" class="cal-brief-ready-tab" data-open-brief="${ev.id}">Brief ready &#8594;</button>`
+          : "";
         inner += `
           <div
-            class="cal-block ${isSel ? "is-selected" : ""} ${isDim ? "is-dimmed" : ""}"
-            data-ev-id="${ev.id}"
-            style="top:${topPx}px;height:${heightPx}px;background:${ev.color};"
+            class="cal-block-wrap ${isSel ? "is-selected" : ""} ${isDim ? "is-dimmed" : ""}"
+            data-ev-wrap="${ev.id}"
+            style="top:${topPx}px;"
           >
-            <div class="cal-block-title">${ev.timeText}</div>
-            <div class="cal-block-sub">${ev.subText}</div>
+            <div
+              class="cal-block-card"
+              data-ev-id="${ev.id}"
+              style="min-height:${cardH}px;background:${ev.color};"
+            >
+              <div class="cal-block-title">${ev.timeText}</div>
+              <div class="cal-block-sub">${ev.subText}</div>
+            </div>
+            ${briefTabHtml}
           </div>
         `;
       });
@@ -1130,6 +1530,91 @@
     }
 
     canvas.innerHTML = gutterHtml + colsHtml;
+  }
+
+  function renderExecBriefingView() {
+    const qualifiedEvents = EVENTS.filter(e => e.hasBrief);
+    const ev = qualifiedEvents.find(e => e.id === activeEventId) || qualifiedEvents[2];
+    activeEventId = ev.id;
+
+    briefPillsEl.innerHTML = qualifiedEvents
+      .map(q => `
+        <button
+          type="button"
+          class="brief-pill-btn ${q.id === ev.id ? "active" : ""}"
+          data-switch-brief="${q.id}"
+        >
+          ${q.shortTabLabel}
+        </button>
+      `)
+      .join("");
+
+    const b = ev.brief;
+    const trapRow = fakeLinkActive
+      ? `<li class="alert-row">BLOCKED BY CHECK #19: Unverified link docs.google.com/d/invented-link stripped before delivery <span class="exec-cite alert">(Caught &amp; Halted)</span></li>`
+      : "";
+
+    execSheetEl.innerHTML = `
+      <div class="exec-doc-top">
+        <div>
+          <div class="exec-kicker">1-Page Executive Briefing Dossier</div>
+          <h1 class="exec-title">${b.title}</h1>
+          <div class="exec-when">${b.when}</div>
+        </div>
+        <div class="exec-verified-box">
+          <div class="exec-verified-tag ${fakeLinkActive ? "is-alert" : ""}">
+            ${fakeLinkActive ? "HOLD: 1 Fake URL Blocked" : "36 / 36 Fact Checks Passed"}
+          </div>
+          <button type="button" class="exec-trap-link" id="exec-toggle-trap-btn">
+            ${fakeLinkActive ? "Clear fake link simulation" : "Test what happens if AI invents a link"}
+          </button>
+        </div>
+      </div>
+
+      <div class="exec-grid-2col">
+        <div>
+          <div class="exec-sec-label">Who is in the Room</div>
+          <ul class="exec-items">
+            ${b.attendees.map(x => `<li class="priority-row">${x.t} <span class="exec-cite">(${x.c})</span></li>`).join("")}
+          </ul>
+        </div>
+        <div>
+          <div class="exec-sec-label">Prior Context &amp; Last Recap</div>
+          <ul class="exec-items">
+            ${trapRow}
+            ${b.context.map(x => `<li>${x.t} <span class="exec-cite">(${x.c})</span></li>`).join("")}
+          </ul>
+        </div>
+      </div>
+
+      <div class="exec-grid-2col">
+        <div>
+          <div class="exec-sec-label">Open Blockers &amp; Unanswered Asks</div>
+          <ul class="exec-items">
+            ${b.blockers.map(x => `<li class="priority-row">${x.t} <span class="exec-cite">(${x.c})</span></li>`).join("")}
+          </ul>
+        </div>
+        <div>
+          <div class="exec-sec-label">Recommended Talking Points</div>
+          <ul class="exec-items">
+            ${b.agenda.map(x => `<li>${x}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+
+      <div class="exec-bottom-nav">
+        <span>${b.skippedNote}</span>
+        <button type="button" class="pop-btn primary" id="exec-bottom-back-btn">&#8592; Return to Week Calendar</button>
+      </div>
+    `;
+
+    document.getElementById("exec-toggle-trap-btn").addEventListener("click", () => {
+      fakeLinkActive = !fakeLinkActive;
+      renderExecBriefingView();
+    });
+    document.getElementById("exec-bottom-back-btn").addEventListener("click", () => {
+      setViewMode("calendar");
+    });
   }
 
   function showPopoverForEvent(evId, stepBadgeText) {
@@ -1143,55 +1628,38 @@
 
     pop.classList.remove("is-hidden");
     popStepLabel.textContent = stepBadgeText || (
-      tIdx >= 0 ? `BUBBLE ${tIdx + 1} OF ${tourArr.length}` : "CALENDAR EVENT BRIEFING"
+      tIdx >= 0 ? `BUBBLE ${tIdx + 1} OF ${tourArr.length}` : "MEETING SLOT DETAILS"
     );
     popTitle.textContent = ev.timeText.replace(/^[0-9:apm]+\s+/, "");
-    popMeta.textContent = fakeLinkActive
-      ? "HOLD DELIVERY: Unverified Link Caught by Check #19"
-      : ev.meta;
-    popDesc.textContent = fakeLinkActive
-      ? "Simulated hallucinated link docs.google.com/d/invented-link detected! Because that URL does not exist in your real Google Drive search results, delivery is blocked automatically before emailing."
-      : ev.desc;
-
-    const listItems = fakeLinkActive
-      ? [
-          { t: "BLOCKED URL: docs.google.com/d/invented-link", c: "Caught & Stripped", alert: true },
-          ...ev.bullets
-        ]
-      : ev.bullets;
-
-    popBullets.innerHTML = listItems
-      .map(b => `<li style="padding-left:7px;border-left:2px solid var(--accent);">${b.t} <span class="pop-cite ${b.alert ? "alert" : ""}">(${b.c})</span></li>`)
-      .join("");
+    popMeta.textContent = ev.meta;
+    popDesc.textContent = ev.desc;
+    popOpenBriefBtn.style.display = ev.hasBrief ? "block" : "none";
 
     popPrev.style.display = curTourStep === 0 ? "none" : "inline-flex";
     const isLast = curTourStep >= tourArr.length - 1;
     popNext.textContent = isLast ? "Close Bubble" : "Next Bubble \u2192";
 
-    /* Position Pop-Up Bubble Cleanly Next to Clicked Block Without Overflowing Any Edge */
-    const blockEl = canvas.querySelector(`[data-ev-id="${ev.id}"]`);
+    const wrapEl = canvas.querySelector(`[data-ev-wrap="${ev.id}"]`);
     const scrollEl = document.getElementById("week-grid-scroll");
-    if (blockEl && scrollEl) {
-      const bRect = blockEl.getBoundingClientRect();
+    if (wrapEl && scrollEl) {
+      const bRect = wrapEl.getBoundingClientRect();
       const sRect = scrollEl.getBoundingClientRect();
-      const bubW = 318;
-      const bubH = pop.offsetHeight || 226;
+      const bubW = 306;
+      const bubH = pop.offsetHeight || 198;
 
       let leftPx;
       if (ev.col <= 2) {
-        /* Event is in Mon-Wed: open bubble to the RIGHT of the calendar block */
         leftPx = (bRect.right - sRect.left) + 10;
         pop.classList.remove("arrow-right");
         pop.classList.add("arrow-left");
       } else {
-        /* Event is in Thu-Sat: open bubble to the LEFT of the calendar block */
         leftPx = (bRect.left - sRect.left) - bubW - 10;
         pop.classList.remove("arrow-left");
         pop.classList.add("arrow-right");
       }
       leftPx = Math.max(54, Math.min(sRect.width - bubW - 10, leftPx));
 
-      let topPx = (bRect.top - sRect.top) + scrollEl.scrollTop - 10;
+      let topPx = (bRect.top - sRect.top) + scrollEl.scrollTop - 6;
       topPx = Math.max(8, Math.min(scrollEl.scrollHeight - bubH - 12, topPx));
 
       pop.style.left = Math.round(leftPx) + "px";
@@ -1212,26 +1680,35 @@
     });
 
     const firstId = SCENARIO_TOURS[key][0];
-    showPopoverForEvent(firstId);
-    if (window.parent && window.parent !== window) {
-      window.parent.postMessage({ source: "prep-sandbox-child", scenario: key }, "*");
-    }
+    setViewMode("calendar", firstId);
   }
 
-  function toggleFakeLinkTrap() {
-    fakeLinkActive = !fakeLinkActive;
-    topFakeBtn.textContent = fakeLinkActive ? "Clear Fake Link Test" : "Test Fake Link Check";
-    topFakeBtn.classList.toggle("is-alert", fakeLinkActive);
-    popFakeToggle.textContent = fakeLinkActive ? "Clear fake link test" : "Test fake AI link";
-    showPopoverForEvent(activeEventId, fakeLinkActive ? "BLOCKED BY FACT CHECKER" : null);
-  }
-
+  /* Click on Calendar: Clicking "Brief ready" opens 1-Page Executive Briefing; clicking meeting card shows bubble */
   canvas.addEventListener("click", (e) => {
-    const blk = e.target.closest(".cal-block");
-    if (blk) {
-      showPopoverForEvent(blk.getAttribute("data-ev-id"));
+    const briefBtn = e.target.closest("[data-open-brief]");
+    if (briefBtn) {
+      e.stopPropagation();
+      setViewMode("briefing", briefBtn.getAttribute("data-open-brief"));
+      return;
+    }
+    const cardEl = e.target.closest("[data-ev-id]");
+    if (cardEl) {
+      showPopoverForEvent(cardEl.getAttribute("data-ev-id"));
     }
   });
+
+  briefPillsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-switch-brief]");
+    if (btn) {
+      activeEventId = btn.getAttribute("data-switch-brief");
+      renderExecBriefingView();
+    }
+  });
+
+  modeBtnCal.addEventListener("click", () => setViewMode("calendar"));
+  btnBackToCal.addEventListener("click", () => setViewMode("calendar"));
+  modeBtnBrief.addEventListener("click", () => setViewMode("briefing", activeEventId));
+  popOpenBriefBtn.addEventListener("click", () => setViewMode("briefing", activeEventId));
 
   document.getElementById("allday-banners").addEventListener("click", (e) => {
     const strip = e.target.closest(".allday-strip");
@@ -1280,8 +1757,6 @@
   });
   document.getElementById("btn-today").addEventListener("click", () => applyScenario("next_day_mixed"));
 
-  topFakeBtn.addEventListener("click", toggleFakeLinkTrap);
-  popFakeToggle.addEventListener("click", toggleFakeLinkTrap);
   popClose.addEventListener("click", () => pop.classList.add("is-hidden"));
 
   popPrev.addEventListener("click", () => {
@@ -1312,24 +1787,11 @@
         const idx = parseInt(msg.action.replace("tour_", ""), 10) || 0;
         const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
         curTourStep = Math.max(0, Math.min(idx, arr.length - 1));
-        showPopoverForEvent(arr[curTourStep]);
-      } else if (msg.action === "toggle_fake_link") {
-        toggleFakeLinkTrap();
+        setViewMode("calendar", arr[curTourStep]);
       }
       return;
     }
-    if (msg.type === "prepScenario" && msg.scenario) {
-      applyScenario(msg.scenario);
-    } else if (msg.type === "prepAction" && msg.action) {
-      if (msg.action.startsWith("tour_")) {
-        const idx = parseInt(msg.action.replace("tour_", ""), 10) || 0;
-        const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
-        curTourStep = Math.max(0, Math.min(idx, arr.length - 1));
-        showPopoverForEvent(arr[curTourStep]);
-      } else if (msg.action === "toggle_fake_link") {
-        toggleFakeLinkTrap();
-      }
-    } else if (msg.type === "setTheme") {
+    if (msg.type === "setTheme") {
       document.documentElement.setAttribute("data-theme", msg.theme === "dark" ? "dark" : "light");
     }
   });
