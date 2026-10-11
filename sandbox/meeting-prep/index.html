@@ -1610,6 +1610,7 @@
   let curTourStep = 0;
   let activeEventId = "thu_acme";
   let curViewMode = "calendar"; /* "calendar" | "briefing" */
+  let isBubbleOpen = true;
   let mutedCats = new Set();
   let fakeLinkActive = false;
 
@@ -1679,7 +1680,11 @@
       renderExecBriefingView();
     } else {
       renderCalendarGrid();
-      showPopoverForEvent(activeEventId);
+      if (isBubbleOpen) {
+        showPopoverForEvent(activeEventId);
+      } else {
+        pop.classList.add("is-hidden");
+      }
     }
   }
 
@@ -1815,7 +1820,7 @@
 
       <div class="gdoc-page-foot">
         <span>${b.skippedNote}</span>
-        <button type="button" class="pop-btn primary" id="exec-bottom-back-btn">&#8592; Return to Week Calendar</button>
+        <button type="button" class="pop-btn primary" id="exec-bottom-back-btn">&#8592; Return to Calendar</button>
       </div>
     `;
 
@@ -1832,6 +1837,7 @@
   function showPopoverForEvent(evId, stepBadgeText) {
     const ev = EVENTS.find(e => e.id === evId) || EVENTS[8];
     activeEventId = ev.id;
+    isBubbleOpen = true;
     renderCalendarGrid();
 
     const tourArr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
@@ -1883,6 +1889,7 @@
     if (!SCENARIO_TOURS[key]) return;
     curScenario = key;
     curTourStep = 0;
+    isBubbleOpen = true;
 
     document.querySelectorAll("[data-sc]").forEach(b => {
       b.classList.toggle("active", b.getAttribute("data-sc") === key);
@@ -1895,7 +1902,7 @@
     setViewMode("calendar", firstId);
   }
 
-  /* Click on Calendar: Clicking "Brief ready" opens 1-Page Executive Briefing; clicking meeting card shows bubble */
+  /* Click on Calendar: Clicking "Brief ready" opens Google Docs Briefing; clicking meeting card shows bubble */
   canvas.addEventListener("click", (e) => {
     const briefBtn = e.target.closest("[data-open-brief]");
     if (briefBtn) {
@@ -1969,7 +1976,10 @@
   });
   document.getElementById("btn-today").addEventListener("click", () => applyScenario("next_day_mixed"));
 
-  popClose.addEventListener("click", () => pop.classList.add("is-hidden"));
+  popClose.addEventListener("click", () => {
+    isBubbleOpen = false;
+    pop.classList.add("is-hidden");
+  });
 
   popPrev.addEventListener("click", () => {
     const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
@@ -1982,6 +1992,7 @@
   popNext.addEventListener("click", () => {
     const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
     if (curTourStep >= arr.length - 1) {
+      isBubbleOpen = false;
       pop.classList.add("is-hidden");
     } else {
       curTourStep++;
@@ -1999,6 +2010,7 @@
         const idx = parseInt(msg.action.replace("tour_", ""), 10) || 0;
         const arr = SCENARIO_TOURS[curScenario] || SCENARIO_TOURS.next_day_mixed;
         curTourStep = Math.max(0, Math.min(idx, arr.length - 1));
+        isBubbleOpen = true;
         setViewMode("calendar", arr[curTourStep]);
       }
       return;
