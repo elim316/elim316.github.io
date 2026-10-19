@@ -45,7 +45,7 @@
       "category": "agentic",
       "categoryLabel": "Agentic & DevTools",
       "year": "2026",
-      "summary": "Real-time visual step timeline and three-lane architecture explorer for AI agents, turning raw background transcripts into clear Timeline, Architecture, and Simplified views.",
+      "summary": "Awarded 1st Place at Google's AI Agent Lab Hackathon 2026. Real-time visual step timeline and three-lane architecture explorer for AI agents, turning raw background transcripts into clear Timeline, Architecture, and Simplified views.",
       "architecture": "Lightweight zero-dependency Python 3 server streaming live conversation logs every 1.5 seconds into an interactive Vis.js and SVG frontend. Automatically catches failed tool calls, strips internal log noise, and lets engineers inspect child subagent runs inline.",
       "stack": [
         "Python",
