@@ -27,7 +27,7 @@
       categoryLabel: "Agentic & DevTools",
       year: "2026",
       summary:
-        "Real-time visual step timeline and three-lane architecture explorer for AI agents, turning raw background transcripts into clear Timeline, Architecture, and Simplified views.",
+        "Awarded 1st Place at Google's AI Agent Lab Hackathon 2026. Real-time visual step timeline and three-lane architecture explorer for AI agents, turning raw background transcripts into clear Timeline, Architecture, and Simplified views.",
       architecture:
         "Lightweight zero-dependency Python 3 server streaming live conversation logs every 1.5 seconds into an interactive Vis.js and SVG frontend. Automatically catches failed tool calls, strips internal log noise, and lets engineers inspect child subagent runs inline.",
       stack: ["Python", "Vis.js", "SVG", "Live Logs"],
@@ -841,9 +841,9 @@
         readout: "Tab 01 / 04",
         nextTabLabel: "Next tab: Grab \u2192",
         story:
-          "Customer Engineer at Google Singapore architecting secure Cloud Run and Gemini platform systems, creator of Antigravity Agent Tracer, and technical lead for buildathons training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.",
+          "Customer Engineer at Google Singapore architecting secure Cloud Run and Gemini platform systems, creator of Antigravity Agent Tracer (1st Place, Google AI Agent Lab Hackathon), and technical lead for buildathons training 4,000+ engineers across GovTech, DBS, NTU, and A*STAR.",
         tags: [
-          "Antigravity Tracer & 200k Harness",
+          "Antigravity Tracer (1st Place)",
           "36 / 36 Dossier Eval Checks",
           "4,000+ Engineers Trained",
         ],
@@ -886,10 +886,10 @@
         readout: "Tab 04 / 04",
         nextTabLabel: "Next tab: Google Cloud \u2192",
         story:
-          "BSc (Hons) Computer Science (Second Upper Class) graduate from the University of Glasgow and SIT, 3x national hackathon award winner, and avid basketball and pickleball player.",
+          "BSc (Hons) Computer Science (Second Upper Class) graduate from the University of Glasgow and SIT, 4x hackathon award winner, and avid basketball and pickleball player.",
         tags: [
           "BSc (Hons) Computer Science (2:1)",
-          "3x National Hackathon Awards",
+          "4x Hackathon Awards",
           "Basketball, Pickleball & Thrifting",
         ],
       },
@@ -2164,7 +2164,7 @@
     if (!config.autoDiscoverNewGithubRepos || !config.githubUsername) return;
 
     try {
-      const cacheKey = `gh_repos_v4_${config.githubUsername}`;
+      const cacheKey = `gh_repos_v5_${config.githubUsername}`;
       let repos = null;
       const cachedRaw = sessionStorage.getItem(cacheKey);
       if (cachedRaw) {
@@ -2901,7 +2901,7 @@
       },
       {
         title: "Jump to Experience, Hackathons & Education",
-        sub: "Google, Grab, A*STAR, 3x Hackathon Honours & 4,000+ Trained",
+        sub: "Google, Grab, A*STAR, 4x Hackathon Honours & 4,000+ Trained",
         badge: "Section",
         action: () => document.getElementById("journey")?.scrollIntoView({ behavior: "smooth" }),
       },
@@ -4252,7 +4252,7 @@
         {
           label: "HONOURS & DEGREE",
           val: "Glasgow & SIT (2:1)",
-          sub: "2nd Place LifeHack 2025, Overall Best AISG/SMU, DSTA Semifinalist",
+          sub: "1st Place Google Agent Lab, 2nd Place LifeHack, AISG & DSTA",
         },
       ],
       "showcase-jumpgate": [
