@@ -3602,6 +3602,7 @@
     let stageElapsedMs = 0;
     let lastTickTs = performance.now();
     let isAutoScrolling = false;
+    let stageInteractionPaused = false;
     let currentReadEstimate = {
       wordCount: 100,
       readingSeconds: 26,
@@ -3654,7 +3655,9 @@
           fillEl.style.width = `${progressPct.toFixed(1)}%`;
           btn.setAttribute(
             "title",
-            `${stageConfigs[i]?.label || ""}, Est. ${currentReadEstimate.readingSeconds}s read + 10s (${remainingSec}s to next stage)`
+            stageInteractionPaused
+              ? `${stageConfigs[i]?.label || ""} (Auto-advance paused while interacting with stage)`
+              : `${stageConfigs[i]?.label || ""}, Est. ${currentReadEstimate.readingSeconds}s read + 10s (${remainingSec}s to next stage)`
           );
         } else {
           fillEl.style.width = "0%";
@@ -3664,14 +3667,22 @@
 
     function resetStageReadTimer(forceRefresh) {
       stageElapsedMs = 0;
+      stageInteractionPaused = false;
       lastTickTs = performance.now();
       const cfg = stageConfigs[activeStageIdx] || stageConfigs[0];
       currentReadEstimate = estimateStageReadDuration(cfg.id, Boolean(forceRefresh));
       updateDotFillBars(0, currentReadEstimate.totalSeconds);
     }
 
+    function pauseStageTimerForInteraction() {
+      stageInteractionPaused = true;
+      stageElapsedMs = 0;
+      lastTickTs = performance.now();
+      updateDotFillBars(0, currentReadEstimate.totalSeconds);
+    }
+
     function advanceToNextStageOnBarFull() {
-      if (isAutoScrolling) return;
+      if (isAutoScrolling || stageInteractionPaused) return;
       const nextStageCfg = stageConfigs[activeStageIdx + 1];
       const nextTargetEl = nextStageCfg
         ? document.getElementById(nextStageCfg.id)
@@ -3686,6 +3697,22 @@
       }, 950);
     }
 
+    function isUserEngagedInStageOrSandbox() {
+      if (stageInteractionPaused) return true;
+      const activeEl = document.activeElement;
+      if (
+        activeEl &&
+        typeof activeEl.closest === "function" &&
+        activeEl.closest(".hardware-deck, .stage-deck, #apple-stage-dock")
+      ) {
+        return true;
+      }
+      if (document.querySelector(".hardware-deck:hover, .stage-deck:hover, #apple-stage-dock:hover")) {
+        return true;
+      }
+      return false;
+    }
+
     setInterval(() => {
       if (document.hidden) return;
       const now = performance.now();
@@ -3695,7 +3722,14 @@
         ?.classList.contains("is-open");
       const dockHidden = dock.classList.contains("is-hidden");
 
-      if (document.hidden || dockHidden || cmdOpen || closerOpen || isAutoScrolling) {
+      if (
+        document.hidden ||
+        dockHidden ||
+        cmdOpen ||
+        closerOpen ||
+        isAutoScrolling ||
+        isUserEngagedInStageOrSandbox()
+      ) {
         lastTickTs = now;
         return;
       }
@@ -3762,10 +3796,71 @@
         el.addEventListener("click", (e) => {
           lastTabInteractionTs = performance.now();
           if (e.isTrusted && !isNarrating) {
-            requestAnimationFrame(() => resetStageReadTimer(true));
+            pauseStageTimerForInteraction();
           }
         });
       });
+
+    ["pointerdown", "click", "keydown", "touchstart"].forEach((evtName) => {
+      document.addEventListener(
+        evtName,
+        (e) => {
+          if (
+            e.isTrusted &&
+            e.target &&
+            typeof e.target.closest === "function" &&
+            e.target.closest(".hardware-deck, .stage-deck")
+          ) {
+            pauseStageTimerForInteraction();
+          }
+        },
+        { passive: true }
+      );
+    });
+
+    window.addEventListener("blur", () => {
+      requestAnimationFrame(() => {
+        const activeEl = document.activeElement;
+        if (
+          activeEl &&
+          activeEl.tagName === "IFRAME" &&
+          typeof activeEl.closest === "function" &&
+          activeEl.closest(".hardware-deck, .stage-deck")
+        ) {
+          pauseStageTimerForInteraction();
+        }
+      });
+    });
+
+    function bindSandboxIframeActivity(iframeEl) {
+      if (!iframeEl) return;
+      const attachInner = () => {
+        try {
+          const win = iframeEl.contentWindow;
+          const doc = iframeEl.contentDocument || win?.document;
+          const target = doc || win;
+          if (!target || target.__stageTimerBound) return;
+          target.__stageTimerBound = true;
+          ["pointerdown", "click", "keydown", "wheel", "touchstart", "mousemove"].forEach((evtName) => {
+            target.addEventListener(
+              evtName,
+              () => {
+                pauseStageTimerForInteraction();
+              },
+              { passive: true }
+            );
+          });
+        } catch (_err) {
+          /* Ignore cross-origin frame access if any */
+        }
+      };
+      iframeEl.addEventListener("load", attachInner);
+      attachInner();
+    }
+
+    document
+      .querySelectorAll("#tracer-embedded-iframe, #prep-embedded-iframe, #uq-embedded-iframe")
+      .forEach(bindSandboxIframeActivity);
 
     if (playBtn) {
       playBtn.addEventListener("mouseenter", () => {
