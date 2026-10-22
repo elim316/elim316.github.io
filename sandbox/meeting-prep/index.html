@@ -1356,6 +1356,18 @@
   if (params.get("embed") === "1" || window.self !== window.top) {
     document.body.classList.add("is-embedded");
   }
+  try {
+    let initTheme = null;
+    if (window.parent && window.parent !== window && window.parent.document && window.parent.document.documentElement) {
+      initTheme = window.parent.document.documentElement.getAttribute("data-theme");
+    }
+    if (!initTheme) {
+      initTheme = localStorage.getItem("eliaslim_theme_pref");
+    }
+    if (initTheme === "dark" || initTheme === "light") {
+      document.documentElement.setAttribute("data-theme", initTheme);
+    }
+  } catch (_) {}
 
   const DAYS = [
     { label: "Mon 21", dayNum: 21 },
