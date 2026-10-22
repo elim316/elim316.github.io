@@ -944,12 +944,14 @@ textarea {
   align-items: flex-end;
   justify-content: flex-start;
   gap: 12px;
-  margin: 0 -22px 0;
+  margin: 0 -24px 0;
   padding: 10px 18px 0;
   background: color-mix(in srgb, var(--bg-primary) 92%, var(--border-subtle));
   border-bottom: 1px solid var(--border-subtle);
   flex-wrap: nowrap;
   min-height: 44px;
+  max-width: calc(100% + 48px);
+  overflow: hidden;
 }
 
 .browser-top-bar .bezel-dots {
@@ -961,10 +963,14 @@ textarea {
   margin-left: auto;
   align-self: center;
   margin-bottom: 10px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .browser-tab-strip {
-  display: inline-flex;
+  display: flex;
+  flex: 1 1 0%;
+  min-width: 0;
   align-items: flex-end;
   gap: 3px;
   padding: 0;
@@ -973,7 +979,7 @@ textarea {
   border: none;
   overflow-x: auto;
   scrollbar-width: none;
-  max-width: calc(100% - 140px);
+  max-width: 100%;
 }
 
 .browser-tab-strip::-webkit-scrollbar {
@@ -4184,6 +4190,23 @@ textarea {
 }
 
 @media (max-width: 680px) {
+  .hardware-bezel {
+    padding: 16px 14px 18px;
+    border-radius: 22px;
+  }
+
+  .browser-top-bar {
+    margin: 0 -14px 0;
+    padding: 8px 12px 0;
+    gap: 8px;
+    max-width: calc(100% + 28px);
+  }
+
+  .browser-tab {
+    padding: 7px 11px 8px;
+    font-size: 0.72rem;
+  }
+
   .tracer-bubble-main {
     flex-direction: column;
     align-items: flex-start;
