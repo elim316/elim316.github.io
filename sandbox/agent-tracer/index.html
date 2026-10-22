@@ -2123,9 +2123,20 @@
     }
 
     // --- Dark / Light Mode Theme Toggle ------------------------------------
-    let isDarkMode = prefs.darkMode !== undefined
-        ? !!prefs.darkMode
-        : (localStorage.getItem('tracer_theme') === 'dark');
+    let hostThemePref = null;
+    try {
+        if (window.parent && window.parent !== window && window.parent.document && window.parent.document.documentElement) {
+            hostThemePref = window.parent.document.documentElement.getAttribute('data-theme');
+        }
+    } catch (_) {}
+    if (!hostThemePref) {
+        try { hostThemePref = localStorage.getItem('eliaslim_theme_pref'); } catch (_) {}
+    }
+    let isDarkMode = hostThemePref
+        ? (hostThemePref === 'dark')
+        : (prefs.darkMode !== undefined
+            ? !!prefs.darkMode
+            : (localStorage.getItem('tracer_theme') === 'dark'));
     const btnTheme = document.getElementById('btnTheme');
 
     function nodePalette() {
@@ -8348,7 +8359,12 @@
 
     window.addEventListener("message", (ev) => {
         const msg = ev && ev.data;
-        if (!msg || msg.source !== "portfolio-tracer-host") return;
+        if (!msg || typeof msg !== "object") return;
+        if (msg.type === "setTheme") {
+            applyTheme(msg.theme === "dark", true);
+            return;
+        }
+        if (msg.source !== "portfolio-tracer-host") return;
         window.sandboxRunAction(msg.action, msg.arg);
     });
 
