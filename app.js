@@ -1304,13 +1304,36 @@
       const ovBubbleNextBtn = document.getElementById("tracer-bubble-next-btn");
       const ovBubbleNextLabel = document.getElementById("tracer-bubble-next-label");
 
+      let pendingTracerAction = null;
+      const embTracerFrameInit = document.getElementById("tracer-embedded-iframe");
+      if (embTracerFrameInit) {
+        embTracerFrameInit.addEventListener("load", () => {
+          embTracerFrameInit.dataset.loaded = "1";
+          if (pendingTracerAction && embTracerFrameInit.contentWindow) {
+            const { action, arg } = pendingTracerAction;
+            pendingTracerAction = null;
+            setTimeout(() => {
+              if (embTracerFrameInit.contentWindow) {
+                embTracerFrameInit.contentWindow.postMessage(
+                  { source: "portfolio-tracer-host", action, arg },
+                  "*"
+                );
+              }
+            }, 450);
+          }
+        });
+      }
+
       function postToTracerSandbox(action, arg) {
         const embFrame = document.getElementById("tracer-embedded-iframe");
-        if (embFrame && embFrame.contentWindow) {
+        if (!embFrame) return;
+        if (embFrame.dataset.loaded === "1" && embFrame.contentWindow) {
           embFrame.contentWindow.postMessage(
             { source: "portfolio-tracer-host", action, arg },
             "*"
           );
+        } else {
+          pendingTracerAction = { action, arg };
         }
       }
 
@@ -1367,6 +1390,8 @@
           if (embFrame && !embFrame.getAttribute("src") && embFrame.dataset.src) {
             embFrame.setAttribute("src", embFrame.dataset.src);
           }
+        } else if (tabKey === "timeline") {
+          requestAnimationFrame(() => selectFlagshipStep(stepOrder[stepIdx] || "user"));
         }
         if (tPaneLabel) tPaneLabel.textContent = cfg.label;
         if (fReadout) fReadout.textContent = cfg.readout;
@@ -1495,21 +1520,21 @@
           readout: "36 / 36 Quality Checks Passed",
           story:
             "Every citation, participant role, and document link is checked across 36 automated rules before delivery so busy teams never see invented facts.",
-          nextLabel: "Next tab: 36-Check Fact Linter \u2192",
+          nextLabel: "Next tab: Week Calendar \u2192",
         },
         linter: {
           label: "MULTI-SOURCE WORKSPACE FACT VERIFIER",
           readout: "0 Invented URLs or Roles",
           story:
             "Cross-checks Calendar, People Directory, Gmail threads, Chat rooms, and Google Drive files so every line in your briefing links back to a real document.",
-          nextLabel: "Next tab: Interactive Sandbox \u2192",
+          nextLabel: "Next tab: Pipeline Overview \u2192",
         },
         sandbox: {
           label: "INTERACTIVE DOSSIER SANDBOX",
           readout: "Client-Side Sandbox",
           story:
             "Explore three real calendar schedules right inside the browser, inspect generated one-page briefings, and test the live fake-link blocker.",
-          nextLabel: "Next tab: Dossier Pipeline \u2192",
+          nextLabel: "Next tab: 36-Check Fact Linter \u2192",
         },
       };
 
@@ -1627,6 +1652,8 @@
           if (embFrame && !embFrame.getAttribute("src") && embFrame.dataset.src) {
             embFrame.setAttribute("src", embFrame.dataset.src);
           }
+        } else if (tabKey === "pipeline") {
+          requestAnimationFrame(() => selectPrepStage(prepStepOrder[prepIdx] || "nbd"));
         }
         if (pPaneLabel) pPaneLabel.textContent = cfg.label;
         if (pReadout) pReadout.textContent = cfg.readout;
@@ -1711,6 +1738,7 @@
         });
       });
       selectPrepStage("nbd");
+      selectPrepTab("sandbox");
     }
 
     const fUq = document.getElementById("flagship-uq-sandbox");
@@ -1808,6 +1836,9 @@
         if (uDiagHeader) {
           uDiagHeader.style.display = tabKey === "sandbox" ? "none" : "";
         }
+        if (tabKey === "overview") {
+          requestAnimationFrame(() => selectUqLevel(ciOrder[ciIdx] || "90"));
+        }
         if (fTitle) fTitle.textContent = cfg.title;
         if (fReadout) fReadout.textContent = cfg.readout;
         if (uStory) uStory.textContent = cfg.story;
@@ -1892,6 +1923,7 @@
         });
       });
       selectUqLevel("90");
+      selectUqTab("sandbox");
     }
   }
 
@@ -2130,7 +2162,8 @@
         "elim316",
         "elim316.github.io",
         "CSC2106-IoT",
-                "WeatherPredictor",
+        "Brain-Tumour-Classification",
+        "WeatherPredictor",
         "yolov6-object-detector",
         "Opencv-real-time-face-detection",
         "INF2007_Week2_Lab",
@@ -2154,6 +2187,7 @@
             payload.projects.forEach((item) => PROJECTS.push(item));
             updateFilterCounts();
             renderProjects();
+            initCompareSystemsSelector();
           }
         }
       }
@@ -2248,6 +2282,7 @@
       if (addedAny) {
         updateFilterCounts();
         renderProjects();
+        initCompareSystemsSelector();
       }
     } catch (_err) {
       /* Ignore GitHub API offline/rate-limit errors gracefully */
@@ -2380,11 +2415,16 @@
     pillEl.style.transform = `translateX(${offsetLeft}px)`;
   }
 
-  function setFilterCategory(category) {
+  function setFilterCategory(category, keepSkillChips) {
     const bar = document.getElementById("filter-bar");
     const pill = document.getElementById("filter-pill-bg");
     const buttons = document.querySelectorAll(".filter-btn");
     activeFilter = category || "all";
+    if (!keepSkillChips) {
+      document.querySelectorAll(".skill-chip.is-active").forEach((c) => {
+        c.classList.remove("is-active");
+      });
+    }
     buttons.forEach((b) => {
       const isMatch = b.getAttribute("data-filter") === activeFilter;
       b.classList.toggle("active", isMatch);
@@ -2433,7 +2473,7 @@
             onClick: () => {
               const btn = document.querySelector('#about [data-about-tab="google"]');
               if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
               if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
             },
           },
@@ -2444,7 +2484,7 @@
             onClick: () => {
               const btn = document.querySelector('#about [data-about-tab="grab"]');
               if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
               if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
             },
           },
@@ -2455,7 +2495,7 @@
             onClick: () => {
               const btn = document.querySelector('#about [data-about-tab="astar"]');
               if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
               if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
             },
           },
@@ -2466,7 +2506,7 @@
             onClick: () => {
               const btn = document.querySelector('#about [data-about-tab="beyond"]');
               if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window") || document.getElementById("about");
+              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
               if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
             },
           },
@@ -2793,6 +2833,22 @@
     setInterval(updateClock, 30000);
   }
 
+  function syncSandboxIframesTheme(theme) {
+    const clean = theme === "dark" ? "dark" : "light";
+    document
+      .querySelectorAll("#tracer-embedded-iframe, #prep-embedded-iframe, #uq-embedded-iframe")
+      .forEach((frame) => {
+        try {
+          if (frame.contentDocument && frame.contentDocument.documentElement) {
+            frame.contentDocument.documentElement.setAttribute("data-theme", clean);
+          }
+          if (frame.contentWindow) {
+            frame.contentWindow.postMessage({ type: "setTheme", theme: clean }, "*");
+          }
+        } catch (_) {}
+      });
+  }
+
   function applyTheme(theme) {
     const clean = theme === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", clean);
@@ -2803,6 +2859,7 @@
     if (label) {
       label.textContent = clean === "dark" ? "Light" : "Dark";
     }
+    syncSandboxIframesTheme(clean);
   }
 
   function toggleTheme() {
@@ -2816,6 +2873,15 @@
       saved = localStorage.getItem("eliaslim_theme_pref");
     } catch (_) {}
     applyTheme(saved || "light");
+
+    document
+      .querySelectorAll("#tracer-embedded-iframe, #prep-embedded-iframe, #uq-embedded-iframe")
+      .forEach((frame) => {
+        frame.addEventListener("load", () => {
+          const cur = document.documentElement.getAttribute("data-theme") || "light";
+          syncSandboxIframesTheme(cur);
+        });
+      });
 
     const btn = document.getElementById("theme-toggle-btn");
     if (btn) {
@@ -4032,9 +4098,13 @@
       chip.addEventListener("click", () => {
         const cat = chip.getAttribute("data-skill-cat") || "all";
         const query = (chip.getAttribute("data-skill-query") || "").toLowerCase();
+        const terms = query
+          .split("|")
+          .map((t) => t.trim())
+          .filter(Boolean);
 
         skillChips.forEach((c) => c.classList.toggle("is-active", c === chip));
-        setFilterCategory(cat);
+        setFilterCategory(cat, true);
 
         const projectsSection = document.getElementById("projects");
         if (projectsSection) {
@@ -4045,7 +4115,13 @@
           const cards = document.querySelectorAll(".project-card");
           cards.forEach((card) => {
             const text = (card.textContent || "").toLowerCase();
-            card.classList.toggle("is-skill-matched", Boolean(query && text.includes(query)));
+            const isMatched = terms.some((term) => {
+              if (/^[a-z0-9]+$/.test(term) && term.length <= 3) {
+                return new RegExp(`\\b${term}\\b`, "i").test(text);
+              }
+              return text.includes(term);
+            });
+            card.classList.toggle("is-skill-matched", isMatched);
           });
         });
       });
@@ -4565,14 +4641,22 @@
     const grid = document.getElementById("compare-cards-grid");
     if (!selA || !selB || !grid || PROJECTS.length < 2) return;
 
+    const prevValA = selA.value;
+    const prevValB = selB.value;
     const optionsHtml = PROJECTS.map(
       (p) => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.title)}</option>`
     ).join("");
     selA.innerHTML = optionsHtml;
     selB.innerHTML = optionsHtml;
 
-    selA.value = PROJECTS[0]?.id || "jumpgate-agentic-lz";
-    selB.value = PROJECTS[1]?.id || "gemini-agent-tracer";
+    selA.value =
+      PROJECTS.some((p) => p.id === prevValA)
+        ? prevValA
+        : PROJECTS[0]?.id || "jumpgate-agentic-lz";
+    selB.value =
+      PROJECTS.some((p) => p.id === prevValB)
+        ? prevValB
+        : PROJECTS[1]?.id || "gemini-agent-tracer";
 
     function renderComparison() {
       const projA = PROJECTS.find((p) => p.id === selA.value) || PROJECTS[0];
@@ -4632,15 +4716,18 @@
       attachSandboxControls(grid);
     }
 
-    selA.addEventListener("change", renderComparison);
-    selB.addEventListener("change", renderComparison);
-    if (swapBtn) {
-      swapBtn.addEventListener("click", () => {
-        const tmp = selA.value;
-        selA.value = selB.value;
-        selB.value = tmp;
-        renderComparison();
-      });
+    if (!selA.dataset.bound) {
+      selA.dataset.bound = "1";
+      selA.addEventListener("change", renderComparison);
+      selB.addEventListener("change", renderComparison);
+      if (swapBtn) {
+        swapBtn.addEventListener("click", () => {
+          const tmp = selA.value;
+          selA.value = selB.value;
+          selB.value = tmp;
+          renderComparison();
+        });
+      }
     }
 
     renderComparison();
