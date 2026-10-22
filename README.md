@@ -125,22 +125,23 @@ dependencies:
      architecture.
 - Excluded Repositories (`EXCLUDED_REPOS` in `app.js` & `projects.json`):
   Coursework, lab, and duplicate repositories are listed in `excludedRepos`
-  (`CSC2106-IoT`, `real-time-cv-vlm-pipeline`, `WeatherPredictor`,
-  `yolov6-object-detector`, `Opencv-real-time-face-detection`,
+  (`CSC2106-IoT`, `Brain-Tumour-Classification`, `real-time-cv-vlm-pipeline`,
+  `WeatherPredictor`, `yolov6-object-detector`, `Opencv-real-time-face-detection`,
   `INF2007_Week2_Lab`, `mylab2`, `Google-Certificate---Introduction-to-Github`,
   `Wind-City-BrainHack-2023`, `COMPUTERFUNCTION-Easy`) so `initScalableProjects()`
   does not auto-import them from the GitHub API.
 - Cache Busting on Every Update:
   Whenever you edit `styles.css` or `app.js`, increment the version query string
   in `index.html` (`styles.css?v=YYYYMMDD-N` and `app.js?v=YYYYMMDD-N`) and bump
-  `cacheKey` (`gh_repos_v4_elim316`) in `app.js` if the project list changed.
+  `cacheKey` (`gh_repos_v5_elim316`) in `app.js` if the project list changed.
 
 5. CURRENT STATE & CHANGELOG (UPDATE THIS BEFORE ENDING YOUR SESSION)
 --------------------------------------------------------------------------------
-- Last updated: 2026-10-19
-- Asset version in `index.html`: `?v=20261022-56`
+- Last updated: 2026-10-22
+- Asset version in `index.html`: `?v=20261022-57`
 - SessionStorage cache key in `app.js`: `gh_repos_v5_elim316`
 - Recent milestones completed:
+  * Resolved 7 end-to-end functional, state-sync, dark-mode, and mobile layout bugs (`?v=20261022-57`): excluded `Brain-Tumour-Classification` from `initScalableProjects()` so raw uncurated repo cards never append to `#projects-grid`, synchronised Dark Mode across all 3 embedded sandbox iframes (`sandbox/agent-tracer/`, `sandbox/meeting-prep/`, `sandbox/uq-battery/`), fixed mobile (`390px`) horizontal overflow in `.browser-top-bar` / `.browser-tab-strip`, aligned initial SSR copy and `Next tab` labels across Stages 01/03/04, recalculated `--step-arrow-x` speech-bubble pointers on hidden tab switches, fixed `.skill-chip` query matching and filter-bar state reset, and queued Stage 02 host tour `postMessage` actions until the lazy `#tracer-embedded-iframe` finishes loading.
   * Added 1st Place at Google's AI Agent Lab Hackathon 2026 recognition across Stage 01 (`#about`), Highlight Card 1 & Card 3 (`#highlights-track`), Stage 02 (`#showcase-agent-tracer`), the Google Cloud experience timeline (`#milestone-gcloud`), the Hackathon Honours strip (`#leadership-strip`, updated to `4x`), and the `agent-tracer` project summary in `projects.json` and `app.js` (`?v=20261022-56`).
   * Added authentic self-hosted Apple San Francisco webfonts (`fonts/SFProDisplay-*.woff2` and `fonts/SFProText-*.woff2` with optical sizing across `index.html`, `styles.css`, and all 3 sandboxes) alongside 6 signature Apple aesthetic details: two-tier sticky sub-navigation ribbon (`#apple-localnav` beneath slim 44px `#site-header` with `scroll-padding-top: 104px`), two-tone editorial headlines (`.apple-tone-muted`), Liquid Glass inner specular hairlines (`--glass-specular`) and concentric 28px/16px radii, container-aligned horizontal highlight track gutters, circular dark `+` action controls (`.apple-card-plus`), and continuous scroll-linked stage framing (`?v=20261011-53`).
   * Launched the 3rd live zero-backend browser sandbox for Repo Showcase 03 (`#showcase-uq-xai` / `sandbox/uq-battery/index.html`, IEEE Xplore Doc `11249263`), featuring interactive CNN State-of-Health & Adaptive Conformal Inference curves across McMaster and Oxford battery cells, stacked cycle checkpoints with `XAI Drivers ->` triggers, floating speech bubbles (`#uqPopoverBubble`) with `isBubbleOpen` state preservation, and a full 4-method XAI attribution report sheet (`?v=20261011-49`).
