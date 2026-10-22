@@ -3699,6 +3699,13 @@
 
     function isUserEngagedInStageOrSandbox() {
       if (stageInteractionPaused) return true;
+      const activeCfg = stageConfigs[activeStageIdx];
+      if (
+        activeCfg?.id === "showcase-agent-tracer" &&
+        document.querySelector('#showcase-agent-tracer [data-tracer-tab="sandbox"].active')
+      ) {
+        return true;
+      }
       const activeEl = document.activeElement;
       if (
         activeEl &&
@@ -3793,20 +3800,19 @@
         "#about [data-about-tab], #about [data-about-card], [data-tracer-tab], [data-prep-tab], [data-uq-tab], [data-fjg-btn], [data-fstep-btn], [data-fturn-btn], [data-fprep-btn], [data-fci-btn], .about-next-tab-btn"
       )
       .forEach((el) => {
-        el.addEventListener("click", (e) => {
+        el.addEventListener("click", () => {
           lastTabInteractionTs = performance.now();
-          if (e.isTrusted && !isNarrating) {
+          if (!isNarrating) {
             pauseStageTimerForInteraction();
           }
         });
       });
 
-    ["pointerdown", "click", "keydown", "touchstart"].forEach((evtName) => {
+    ["pointerdown", "click", "keydown", "wheel", "touchstart"].forEach((evtName) => {
       document.addEventListener(
         evtName,
         (e) => {
           if (
-            e.isTrusted &&
             e.target &&
             typeof e.target.closest === "function" &&
             e.target.closest(".hardware-deck, .stage-deck")
@@ -3814,7 +3820,7 @@
             pauseStageTimerForInteraction();
           }
         },
-        { passive: true }
+        { capture: true, passive: true }
       );
     });
 
@@ -3838,7 +3844,7 @@
         try {
           const win = iframeEl.contentWindow;
           const doc = iframeEl.contentDocument || win?.document;
-          const target = doc || win;
+          const target = win || doc;
           if (!target || target.__stageTimerBound) return;
           target.__stageTimerBound = true;
           ["pointerdown", "click", "keydown", "wheel", "touchstart", "mousemove"].forEach((evtName) => {
@@ -3847,7 +3853,7 @@
               () => {
                 pauseStageTimerForInteraction();
               },
-              { passive: true }
+              { capture: true, passive: true }
             );
           });
         } catch (_err) {
