@@ -347,7 +347,7 @@
     </style>
     <meta charset="utf-8">
     <title>Agent Tracer (Strict Timeline)</title>
-    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         html[data-theme="dark"], html[data-theme="dark"] body {
             --background: #0f1117 !important;
@@ -921,9 +921,9 @@
         </div>
         <div id="graph-container"></div>
         <div class="swimlanes-labels">
-            <div class="swimlane-row-label"><div class="swimlane-header" onclick="window.showExplanation('actions')" title="Click for info">Actions<span class="lane-sub"> (Trigger)</span></div></div>
-            <div class="swimlane-row-label"><div class="swimlane-header" onclick="window.showExplanation('agent')" title="Click for info">Multi-Agent<span class="lane-sub"> Workflow</span></div></div>
-            <div class="swimlane-row-label"><div class="swimlane-header" onclick="window.showExplanation('tools')" title="Click for info">Tools<span class="lane-sub"> & Functions</span></div></div>
+            <div class="swimlane-row-label"><div class="swimlane-header" data-explain-lane="actions" title="Click for info">Actions<span class="lane-sub"> (Trigger)</span></div></div>
+            <div class="swimlane-row-label"><div class="swimlane-header" data-explain-lane="agent" title="Click for info">Multi-Agent<span class="lane-sub"> Workflow</span></div></div>
+            <div class="swimlane-row-label"><div class="swimlane-header" data-explain-lane="tools" title="Click for info">Tools<span class="lane-sub"> & Functions</span></div></div>
         </div>
 
         <!-- Plain-English Pop-Up Speech Bubble Coachmark for Non-Technical Visitors -->
@@ -1508,7 +1508,7 @@
         bcBar.classList.remove('hidden');
         let leftHtml = '<div class="conv-bc-trail">';
         if (convStack.length > 0) {
-            leftHtml += '<button type="button" class="conv-bc-btn" onclick="window.popConversationBreadcrumb()">← Back to Parent</button>';
+            leftHtml += '<button type="button" class="conv-bc-btn" data-bc-action="pop">← Back to Parent</button>';
             const trailStr = convStack.map(c => escapeHtml(truncate(c.label, 22))).join(' › ');
             leftHtml += '<span style="color:var(--muted-foreground,#64748b);">' + trailStr + ' ›</span>';
             leftHtml += '<span style="color:#8B5CF6;">' + escapeHtml(manualConvLabel || ('Subagent ' + manualConvId.slice(0, 8))) + '</span>';
@@ -1520,8 +1520,8 @@
         leftHtml += '</div>';
 
         let rightHtml = '<div style="display:flex; align-items:center; gap:6px;">' +
-                        '<button type="button" class="conv-bc-btn" onclick="window.openTracedSessionInHost()" title="Switch the main Jetski chat pane to this conversation">Open in Host ↗</button>' +
-                        '<button type="button" class="conv-bc-btn" onclick="window.resetToHostConversation()">Return to Live Host</button>' +
+                        '<button type="button" class="conv-bc-btn" data-bc-action="open-host" title="Switch the main Jetski chat pane to this conversation">Open in Host ↗</button>' +
+                        '<button type="button" class="conv-bc-btn" data-bc-action="reset-host">Return to Live Host</button>' +
                         '</div>';
         bcBar.innerHTML = leftHtml + rightHtml;
     }
@@ -3692,7 +3692,7 @@
         const fields = step.truncated_fields.join(', ');
         return '<div style="margin-top:8px; font-size:12px; color:#996C00; background:#FEF7E0; border:1px solid #F9AB00; border-radius:6px; padding:8px 10px;">' +
                'Abbreviated in this log (' + fields + '). ' +
-               '<a href="#" onclick="window.loadFullStep(' + step.step_index + '); return false;" style="color:#1a73e8; font-weight:600;">Load full version</a></div>';
+               '<a href="#" data-load-full-step="' + Number(step.step_index) + '" style="color:#1a73e8; font-weight:600;">Load full version</a></div>';
     }
 
     // Fetches the untruncated step and drops it into the inspector.
@@ -4016,7 +4016,7 @@
         const isTopo = (typeof viewMode !== 'undefined' && viewMode === 'topology');
         const label = isTopo ? '← Event Log' : '← Overview';
         const title = isTopo ? 'Return to Event Propagation Log (l)' : 'Return to Session Overview (o)';
-        return '<button type="button" class="inspector-back-btn" onclick="window.goBackInspector()" title="' + title + '">' + label + '</button>';
+        return '<button type="button" class="inspector-back-btn" data-inspector-back="1" title="' + title + '">' + label + '</button>';
     }
 
     window.goBackInspector = function() {
@@ -7421,7 +7421,7 @@
                 const pId = data._nodeId || selectedNodeId || '';
                 const stepCollapsed = pId && regularToolCount > 1 ? isStepToolsCollapsed(pId, regularToolCount) : false;
                 const toggleBtnHtml = (pId && regularToolCount > 1)
-                    ? '<button class="subagent-trace-btn" onclick="window.toggleStepToolsCollapse(\'' + escapeHtmlRaw(pId) + '\', true)" style="padding:3px 9px; font-size:10.5px;">' +
+                    ? '<button class="subagent-trace-btn" data-toggle-step-tools="' + escapeHtmlRaw(pId) + '" style="padding:3px 9px; font-size:10.5px;">' +
                       (stepCollapsed ? ('Expand ' + regularToolCount + ' Tools on Graph') : ('Collapse ' + regularToolCount + ' Tools on Graph')) +
                       '</button>'
                     : '';
@@ -7468,7 +7468,7 @@
             text += '<div class="inspector-section">' +
                     '<div style="display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--secondary,#f8f9fa); border:1px solid var(--border,#eee); border-left:4px solid '+titleColor+'; border-radius:6px; padding:12px 14px;">' +
                     '<div style="font-size:13px; color:var(--foreground,#202124);">This step executed <strong>' + items.length + ' tool calls</strong>. Expand on graph to see each individual tool node, or click any tool below to inspect its arguments &amp; output.</div>' +
-                    (pId ? '<button class="subagent-trace-btn" onclick="window.toggleStepToolsCollapse(\'' + escapeHtmlRaw(pId) + '\', true)">Expand ' + items.length + ' Tools on Graph</button>' : '') +
+                    (pId ? '<button class="subagent-trace-btn" data-toggle-step-tools="' + escapeHtmlRaw(pId) + '">Expand ' + items.length + ' Tools on Graph</button>' : '') +
                     '</div></div>';
 
             text += '<div class="inspector-section"><div class="inspector-label">Tool Calls in This Step (' + items.length + ')</div>';
@@ -7535,7 +7535,7 @@
                 ? parentStep.tool_calls.filter(t => t.name !== 'invoke_subagent').length
                 : 0;
             const collapseSiblingsBtn = (!isSubagent && data.parentId && siblingRegularTools > 1)
-                ? '<button class="subagent-trace-btn" onclick="window.toggleStepToolsCollapse(\'' + escapeHtmlRaw(data.parentId) + '\', true)" style="padding:3px 9px; font-size:10.5px; margin-right:6px;">Collapse Step Tools (' + siblingRegularTools + ')</button>'
+                ? '<button class="subagent-trace-btn" data-toggle-step-tools="' + escapeHtmlRaw(data.parentId) + '" style="padding:3px 9px; font-size:10.5px; margin-right:6px;">Collapse Step Tools (' + siblingRegularTools + ')</button>'
                 : '';
 
             text += '<div id="inspector-title" style="color:'+titleColor+'"><span style="white-space:nowrap;">' + prettyName + '</span><span style="display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px;margin-left:auto;">' + collapseSiblingsBtn + backBtn + '</span></div>';
@@ -7746,6 +7746,39 @@
         
         inspectorEl.innerHTML = text;
     };
+
+    document.addEventListener('click', (e) => {
+        if (!e.target || typeof e.target.closest !== 'function') return;
+        const explainEl = e.target.closest('[data-explain-lane]');
+        if (explainEl) {
+            window.showExplanation(explainEl.dataset.explainLane);
+            return;
+        }
+        const bcEl = e.target.closest('[data-bc-action]');
+        if (bcEl) {
+            const act = bcEl.dataset.bcAction;
+            if (act === 'pop') window.popConversationBreadcrumb();
+            else if (act === 'open-host') window.openTracedSessionInHost();
+            else if (act === 'reset-host') window.resetToHostConversation();
+            return;
+        }
+        const fullStepEl = e.target.closest('[data-load-full-step]');
+        if (fullStepEl) {
+            e.preventDefault();
+            window.loadFullStep(Number(fullStepEl.dataset.loadFullStep));
+            return;
+        }
+        const backEl = e.target.closest('[data-inspector-back]');
+        if (backEl) {
+            window.goBackInspector();
+            return;
+        }
+        const toggleToolsEl = e.target.closest('[data-toggle-step-tools]');
+        if (toggleToolsEl) {
+            window.toggleStepToolsCollapse(toggleToolsEl.dataset.toggleStepTools, true);
+            return;
+        }
+    });
 
     if (new URLSearchParams(window.location.search).get("embed") === "1") {
         document.body.classList.add("is-embedded");
@@ -8110,6 +8143,15 @@
         });
     }
 
+    function escSandboxHtml(s) {
+        return String(s || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
     function syncSandboxBannerUI() {
         const curId = getActiveScenarioId();
         const cfg = SCENARIO_GUIDES[curId] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
@@ -8118,7 +8160,7 @@
         const pillsEl = document.getElementById("sandboxTourPills");
         if (pillsEl) {
             pillsEl.innerHTML = cfg.tour.map(t =>
-                '<button type="button" class="sandbox-tour-btn" data-tour-act="' + t.act + '">' + t.label + '</button>'
+                '<button type="button" class="sandbox-tour-btn" data-tour-act="' + escSandboxHtml(t.act) + '">' + escSandboxHtml(t.label) + '</button>'
             ).join("");
             pillsEl.querySelectorAll("[data-tour-act]").forEach(b => {
                 b.addEventListener("click", () => window.sandboxRunAction(b.dataset.tourAct));
@@ -8131,15 +8173,22 @@
         const curId = getActiveScenarioId();
         const cfg = SCENARIO_GUIDES[curId] || SCENARIO_GUIDES["a1000000-0000-4000-8000-000000000001"];
         const btns = cfg.tour.map(t =>
-            '<button type="button" class="sandbox-tour-btn" onclick="window.sandboxRunAction(\'' + t.act + '\')">' + t.label + '</button>'
+            '<button type="button" class="sandbox-tour-btn" data-tour-act="' + escSandboxHtml(t.act) + '">' + escSandboxHtml(t.label) + '</button>'
         ).join("");
         return '<div class="ov-guide-card">' +
             '<div class="ov-guide-kicker">Summary</div>' +
-            '<div>' + cfg.doing + '</div>' +
+            '<div>' + escSandboxHtml(cfg.doing) + '</div>' +
             '<div style="margin-top:6px; font-size:11px; color:var(--muted-foreground,#5f6368);">Click any box on the left canvas for a pop-up explanation bubble, or step through the highlights below:</div>' +
             '<div class="ov-guide-actions">' + btns + '</div>' +
             '</div>';
     };
+
+    document.addEventListener("click", (e) => {
+        const btn = e.target && typeof e.target.closest === "function" ? e.target.closest(".ov-guide-actions [data-tour-act]") : null;
+        if (btn && typeof window.sandboxRunAction === "function") {
+            window.sandboxRunAction(btn.getAttribute("data-tour-act"));
+        }
+    });
 
     function focusAndSelectNode(predicate, bubbleOverride, instantOpt) {
         if (typeof setViewMode === "function" && viewMode !== "timeline") {
@@ -8358,6 +8407,8 @@
     window.addEventListener("resize", () => positionCoachBubbleOverNode());
 
     window.addEventListener("message", (ev) => {
+        if (ev.source !== window.parent) return;
+        if (window.location.origin && window.location.origin !== "null" && ev.origin && ev.origin !== window.location.origin) return;
         const msg = ev && ev.data;
         if (!msg || typeof msg !== "object") return;
         if (msg.type === "setTheme") {
