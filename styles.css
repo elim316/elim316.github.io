@@ -138,20 +138,20 @@
 
 [data-theme="dark"] {
   --signal-green: #22c55e;
-  /* Optional Dark Theme Tokens */
+  /* True OLED Material Hierarchy (Apple macOS Pro Dark Finish) */
   --bg-primary: #000000;
-  --bg-elevated: #121214;
-  --bg-canvas: #18181b;
-  --bg-subtle: #242429;
-  --bg-nav: rgba(22, 22, 23, 0.84);
-  --bg-hero: radial-gradient(ellipse 80% 55% at 50% 58%, #131824 0%, #000000 74%);
+  --bg-elevated: #121215;
+  --bg-canvas: #18181c;
+  --bg-subtle: #232329;
+  --bg-nav: rgba(18, 18, 21, 0.84);
+  --bg-hero: radial-gradient(ellipse 80% 55% at 50% 58%, #111622 0%, #000000 76%);
 
   --text-primary: #f5f5f7;
   --text-secondary: #a1a1a6;
   --text-muted: #86868b;
 
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.2);
 
   --apple-blue: #0071e3;
   --apple-blue-hover: #0077ed;
@@ -165,12 +165,12 @@
   --signal-amber: #ffd60a;
   --signal-teal: #64d2ff;
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.45);
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
-  --shadow-card-hover: 0 18px 46px rgba(0, 0, 0, 0.7);
-  --shadow-deck: 0 28px 70px rgba(0, 0, 0, 0.85);
-  --shadow-modal: 0 32px 76px rgba(0, 0, 0, 0.82);
-  --glass-specular: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 12px 34px rgba(0, 0, 0, 0.65);
+  --shadow-card-hover: 0 20px 48px rgba(0, 0, 0, 0.82);
+  --shadow-deck: 0 30px 76px rgba(0, 0, 0, 0.9);
+  --shadow-modal: 0 34px 80px rgba(0, 0, 0, 0.88);
+  --glass-specular: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 0 0.5px rgba(255, 255, 255, 0.08);
 
   --wordmark-gradient: linear-gradient(
     112deg,
@@ -195,7 +195,7 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-padding-top: 104px;
+  scroll-padding-top: 64px;
 }
 
 body {
@@ -1246,6 +1246,19 @@ textarea {
   margin: 0 auto;
 }
 
+@keyframes sceneSpringIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.986);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
 .about-scene {
   display: none;
   opacity: 0;
@@ -1253,7 +1266,7 @@ textarea {
 
 .about-scene.is-active {
   display: block;
-  animation: heroRise 420ms var(--spring-out) forwards;
+  animation: sceneSpringIn 280ms var(--ease-smooth) forwards;
 }
 
 .tracer-sandbox-scene.is-active {
@@ -4248,8 +4261,9 @@ textarea {
 }
 
 /* ==========================================================================
-   Apple Signature Typography, Two-Tone Editorial Cadence, Two-Tier Sticky
-   Sub-Navigation (ac-localnav), and Circular + Disclosure Controls
+   Apple Signature Typography, Two-Tone Editorial Cadence, Circular + Controls,
+   Scroll-Linked Timeline Spine, Publication Abstract Drawers, Specular Borders,
+   and True OLED Dark Mode Material Hierarchy
    ========================================================================== */
 
 h1,
@@ -4270,94 +4284,6 @@ h3,
 .apple-tone-muted {
   color: var(--text-muted);
   font-weight: 600;
-}
-
-.apple-localnav {
-  position: sticky;
-  top: 44px;
-  z-index: 55;
-  height: 46px;
-  background: rgba(245, 245, 247, 0.78);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 1px solid var(--border-subtle);
-  box-shadow: var(--glass-specular);
-  transition: background-color 240ms var(--ease-smooth);
-}
-
-[data-theme="dark"] .apple-localnav {
-  background: rgba(18, 18, 20, 0.78);
-}
-
-.localnav-inner {
-  max-width: 1080px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 16px;
-}
-
-.localnav-title {
-  justify-self: start;
-  font-family: var(--font-display);
-  font-size: 0.94rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  white-space: nowrap;
-}
-
-.localnav-chapters {
-  justify-self: center;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.localnav-chapters.is-entering {
-  animation: localnavReveal 180ms var(--ease-smooth) both;
-}
-
-@keyframes localnavReveal {
-  from {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.localnav-chapters::-webkit-scrollbar {
-  display: none;
-}
-
-.localnav-link {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  padding: 4px 0;
-  border-bottom: 1.5px solid transparent;
-  transition:
-    color 180ms var(--ease-smooth),
-    border-color 180ms var(--ease-smooth);
-}
-
-.localnav-link:hover,
-.localnav-link.active {
-  color: var(--text-primary);
-}
-
-.localnav-link.active {
-  border-bottom-color: var(--text-primary);
 }
 
 .highlights-section {
@@ -4423,22 +4349,381 @@ h3,
   box-shadow: var(--glass-specular), var(--shadow-card);
 }
 
+/* 1. Auto-Compacting Bottom Stage Pill Below Stage 04 */
+.stage-dock-dots,
+#stage-dock-next-btn,
+#stage-dock-inspect-btn {
+  transition:
+    max-width 280ms var(--spring-out),
+    opacity 220ms var(--ease-smooth),
+    padding 240ms var(--ease-smooth),
+    margin 240ms var(--ease-smooth),
+    transform 240ms var(--spring-out);
+}
+
+.apple-stage-dock.is-compact:not(:hover):not(.is-narrating-active) .stage-dock-dots,
+.apple-stage-dock.is-compact:not(:hover):not(.is-narrating-active) #stage-dock-next-btn,
+.apple-stage-dock.is-compact:not(:hover):not(.is-narrating-active) #stage-dock-inspect-btn {
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  border-width: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: scale(0.92);
+}
+
+.apple-stage-dock.is-compact:not(:hover):not(.is-narrating-active) .stage-dock-pill {
+  gap: 8px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+/* 2. Staggered Fluid Spring Entrance on Category Filter Switches */
+@keyframes cardFilterSpringIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.984);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.project-card.is-filter-entering {
+  animation: cardFilterSpringIn 320ms var(--ease-smooth) both;
+  animation-delay: var(--card-delay, 0ms);
+}
+
+/* 3. Scroll-Linked Experience Timeline Spine & Interactive Proof Pills */
+.timeline-list {
+  position: relative;
+  padding-left: 28px;
+}
+
+.timeline-spine {
+  position: absolute;
+  left: 7px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--border-subtle);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.timeline-spine-fill {
+  width: 100%;
+  height: var(--spine-progress, 28%);
+  background: linear-gradient(180deg, var(--apple-blue) 0%, var(--signal-teal) 100%);
+  border-radius: 999px;
+  transition: height 140ms linear;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-node-dot {
+  position: absolute;
+  left: -26px;
+  top: 30px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 2.5px solid var(--border-strong);
+  box-shadow: 0 0 0 4px var(--bg-primary);
+  transition:
+    border-color 240ms var(--ease-smooth),
+    background-color 240ms var(--ease-smooth),
+    transform 240ms var(--spring-out),
+    box-shadow 240ms var(--ease-smooth);
+  pointer-events: none;
+}
+
+.timeline-item.is-lit .timeline-node-dot,
+.timeline-item:hover .timeline-node-dot {
+  border-color: var(--apple-blue);
+  background: var(--apple-blue);
+  transform: scale(1.12);
+  box-shadow:
+    0 0 0 4px var(--bg-primary),
+    0 0 0 7px var(--accent-subtle);
+}
+
+.timeline-proof-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.timeline-proof-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition:
+    transform 180ms var(--spring-out),
+    border-color 180ms var(--ease-smooth),
+    background-color 180ms var(--ease-smooth),
+    color 180ms var(--ease-smooth);
+}
+
+.timeline-proof-pill:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent-text);
+}
+
+/* 4. Expandable Abstract & Key Metrics Drawer on IEEE Publication Cards */
+.pub-card {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.pub-card-top-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+}
+
+.pub-abstract-btn.is-active {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--accent-text);
+}
+
+.pub-abstract-chevron {
+  display: inline-block;
+  font-weight: 600;
+  transition: transform 220ms var(--spring-out);
+}
+
+.pub-abstract-btn.is-active .pub-abstract-chevron {
+  transform: rotate(45deg);
+}
+
+.pub-abstract-drawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 300ms var(--ease-smooth),
+    opacity 240ms var(--ease-smooth),
+    margin-top 240ms var(--ease-smooth);
+}
+
+.pub-abstract-drawer.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 18px;
+}
+
+.pub-abstract-collapse {
+  overflow: hidden;
+}
+
+.pub-abstract-inner {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pub-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pub-metric-cell {
+  padding: 11px 13px;
+  border-radius: 12px;
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pub-metric-label {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.pub-metric-val {
+  font-family: var(--font-display);
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.pub-metric-sub {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.pub-abstract-text {
+  font-size: 0.85rem;
+  line-height: 1.58;
+  color: var(--text-secondary);
+}
+
+/* 5. Subtle Cursor-Tracked 1px Specular Border Highlights */
+.highlight-card,
+.project-card,
+.bento-spec-tile,
+.leadership-card,
+.pub-card,
+.timeline-item,
+.skill-group {
+  position: relative;
+}
+
+.highlight-card::after,
+.project-card::after,
+.bento-spec-tile::after,
+.leadership-card::after,
+.pub-card::after,
+.timeline-item::after,
+.skill-group::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(
+    300px circle at var(--card-mx, 50%) var(--card-my, 0%),
+    rgba(0, 113, 227, 0.42),
+    transparent 68%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms var(--ease-smooth);
+}
+
+[data-theme="dark"] .highlight-card::after,
+[data-theme="dark"] .project-card::after,
+[data-theme="dark"] .bento-spec-tile::after,
+[data-theme="dark"] .leadership-card::after,
+[data-theme="dark"] .pub-card::after,
+[data-theme="dark"] .timeline-item::after,
+[data-theme="dark"] .skill-group::after {
+  background: radial-gradient(
+    300px circle at var(--card-mx, 50%) var(--card-my, 0%),
+    rgba(82, 168, 255, 0.52),
+    rgba(255, 255, 255, 0.14) 38%,
+    transparent 72%
+  );
+}
+
+.highlight-card:hover::after,
+.project-card:hover::after,
+.bento-spec-tile:hover::after,
+.leadership-card:hover::after,
+.pub-card:hover::after,
+.timeline-item:hover::after,
+.skill-group:hover::after {
+  opacity: 1;
+}
+
+/* 6. True OLED Material Hierarchy in Dark Mode */
+[data-theme="dark"] .hardware-bezel,
+[data-theme="dark"] .browser-window-bezel {
+  background: linear-gradient(180deg, #16161a 0%, #101013 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    var(--shadow-deck);
+}
+
+[data-theme="dark"] .browser-top-bar {
+  background: #141418;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .browser-single-pane {
+  background: #19191e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .highlight-card,
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .bento-spec-tile,
+[data-theme="dark"] .leadership-card,
+[data-theme="dark"] .pub-card,
+[data-theme="dark"] .timeline-item,
+[data-theme="dark"] .skill-group,
+[data-theme="dark"] .closing-cta-card,
+[data-theme="dark"] .compare-systems-box {
+  background: linear-gradient(180deg, #16161a 0%, #121215 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    var(--shadow-card);
+}
+
 @media (max-width: 760px) {
-  .nav-content,
-  .localnav-inner {
+  .nav-content {
     display: flex;
     justify-content: space-between;
     padding: 0 14px;
     gap: 12px;
   }
 
-  .localnav-chapters {
-    gap: 14px;
+  .pub-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .timeline-list {
+    padding-left: 20px;
+  }
+
+  .timeline-spine {
+    left: 4px;
+  }
+
+  .timeline-node-dot {
+    left: -21px;
+    width: 10px;
+    height: 10px;
   }
 }
 
-@media print {
-  .apple-localnav {
-    display: none !important;
+@media (max-width: 520px) {
+  .pub-metrics-grid {
+    grid-template-columns: 1fr;
   }
 }
