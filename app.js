@@ -691,7 +691,7 @@
     return "Full-Stack & Cloud";
   }
 
-  function renderProjects() {
+  function renderProjects(animateFilter) {
     const grid = document.getElementById("projects-grid");
     if (!grid) return;
 
@@ -706,9 +706,9 @@
           const safeSlug = sanitizeDomSlug(p.id);
           return `
       <article
-        class="project-card"
+        class="project-card${animateFilter ? " is-filter-entering" : ""}"
         id="project-${safeSlug}"
-        style="--card-delay: ${Math.min(idx * 55, 360)}ms"
+        style="--card-delay: ${Math.min(idx * 45, 320)}ms"
       >
         <div class="project-body">
           <div class="project-meta-line">
@@ -2429,7 +2429,7 @@
     });
     const activeBtn = document.querySelector(".filter-btn.active");
     syncSlidingPill(bar, pill, activeBtn);
-    renderProjects();
+    renderProjects(true);
   }
 
   function initFilters() {
@@ -2455,242 +2455,17 @@
   function initNavHighlight() {
     const links = Array.from(document.querySelectorAll(".nav-link"));
     const sections = Array.from(document.querySelectorAll("[data-section-target]"));
-    const localnavTitle = document.getElementById("localnav-active-title");
-    const localnavChapters = document.getElementById("localnav-chapters");
 
-    const SECTION_SUBNAV_CONFIG = {
-      top: {
-        title: "Profile",
-        href: "#top",
-        items: [
-          {
-            id: "about-google",
-            label: "Google Cloud",
-            href: "#about-google",
-            onClick: () => {
-              const btn = document.querySelector('#about [data-about-tab="google"]');
-              if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
-              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-          {
-            id: "about-grab",
-            label: "Grab",
-            href: "#about-grab",
-            onClick: () => {
-              const btn = document.querySelector('#about [data-about-tab="grab"]');
-              if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
-              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-          {
-            id: "about-astar",
-            label: "A*STAR",
-            href: "#about-astar",
-            onClick: () => {
-              const btn = document.querySelector('#about [data-about-tab="astar"]');
-              if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
-              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-          {
-            id: "about-beyond",
-            label: "Education",
-            href: "#about-beyond",
-            onClick: () => {
-              const btn = document.querySelector('#about [data-about-tab="beyond"]');
-              if (btn) btn.click();
-              const win = document.querySelector("#about .browser-window-bezel") || document.getElementById("about");
-              if (win) win.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-        ],
-      },
-      featured: {
-        title: "Featured Repos",
-        href: "#featured",
-        items: [
-          { id: "highlights-section", label: "Highlights", href: "#highlights-section" },
-          { id: "showcase-agent-tracer", label: "Agent Tracer", href: "#showcase-agent-tracer" },
-          { id: "showcase-meeting-prep", label: "Meeting Dossier", href: "#showcase-meeting-prep" },
-          { id: "showcase-uq-xai", label: "Battery Research", href: "#showcase-uq-xai" },
-        ],
-      },
-      projects: {
-        title: "All Projects",
-        href: "#projects",
-        items: [
-          {
-            id: "projects-all",
-            label: "All Systems",
-            href: "#projects-all",
-            onClick: () => {
-              setFilterCategory("all");
-              const el = document.getElementById("projects");
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-          {
-            id: "projects-agentic",
-            label: "Agentic & DevTools",
-            href: "#projects-agentic",
-            onClick: () => {
-              setFilterCategory("agentic");
-              const el = document.getElementById("projects");
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-          {
-            id: "projects-fullstack",
-            label: "Full-Stack & Cloud",
-            href: "#projects-fullstack",
-            onClick: () => {
-              setFilterCategory("fullstack");
-              const el = document.getElementById("projects");
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-          {
-            id: "projects-ml",
-            label: "ML & Research",
-            href: "#projects-ml",
-            onClick: () => {
-              setFilterCategory("ml");
-              const el = document.getElementById("projects");
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-            },
-          },
-          {
-            id: "compare-systems-box",
-            label: "Compare Systems",
-            href: "#compare-systems-box",
-          },
-        ],
-      },
-      journey: {
-        title: "Experience",
-        href: "#journey",
-        items: [
-          { id: "milestone-gcloud", label: "Google Singapore", href: "#milestone-gcloud" },
-          { id: "milestone-grab", label: "Grab Singapore", href: "#milestone-grab" },
-          { id: "milestone-astar", label: "A*STAR Singapore", href: "#milestone-astar" },
-          { id: "milestone-education", label: "Glasgow & SIT", href: "#milestone-education" },
-          { id: "leadership-strip", label: "Workshops & Awards", href: "#leadership-strip" },
-        ],
-      },
-      publications: {
-        title: "Research",
-        href: "#publications",
-        items: [
-          { id: "pub-battery-xai", label: "Battery State-of-Health", href: "#pub-battery-xai" },
-          { id: "pub-teamwork-ed", label: "Teamwork Assessment", href: "#pub-teamwork-ed" },
-        ],
-      },
-      stack: {
-        title: "Toolkit",
-        href: "#stack",
-        items: [
-          { id: "bento-specs-grid", label: "By the Numbers", href: "#bento-specs-grid" },
-          { id: "skill-agentic", label: "Agentic AI & ML", href: "#skill-agentic" },
-          { id: "skill-fullstack", label: "Backend & Cloud", href: "#skill-fullstack" },
-          { id: "skill-cloud", label: "Security & Infrastructure", href: "#skill-cloud" },
-          { id: "closing-cta", label: "Connect", href: "#closing-cta" },
-        ],
-      },
-    };
-
-    let currentRenderedSection = null;
     let manualSectionOverride = null;
     let manualOverrideTimer = null;
 
-    function resolveActiveSubItem(sectionId) {
-      const cfg = SECTION_SUBNAV_CONFIG[sectionId];
-      if (!cfg || cfg.items.length === 0) return "";
-      const probeY = Math.max(136, window.innerHeight * 0.28);
-
-      if (sectionId === "top") {
-        const activeAboutBtn = document.querySelector("#about [data-about-tab].active");
-        const tabKey = activeAboutBtn ? activeAboutBtn.getAttribute("data-about-tab") : "google";
-        return `about-${tabKey || "google"}`;
-      }
-
-      if (sectionId === "projects") {
-        const compareBox = document.getElementById("compare-systems-box");
-        if (compareBox && compareBox.getBoundingClientRect().top <= probeY) {
-          return "compare-systems-box";
-        }
-        const activeFilterBtn = document.querySelector(".filter-btn.active");
-        const filterKey = activeFilterBtn ? activeFilterBtn.getAttribute("data-filter") : "all";
-        return `projects-${filterKey || "all"}`;
-      }
-
+    function syncTopNav() {
       const nearBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
-      if (nearBottom && sectionId === "stack") {
-        return cfg.items[cfg.items.length - 1].id;
-      }
-
-      let activeId = cfg.items[0].id;
-      for (const item of cfg.items) {
-        const domEl = document.getElementById(item.id);
-        if (domEl && domEl.getBoundingClientRect().top <= probeY) {
-          activeId = item.id;
-        }
-      }
-      return activeId;
-    }
-
-    function renderLocalNavSection(sectionId, activeSubId, animateSwap) {
-      const cfg = SECTION_SUBNAV_CONFIG[sectionId] || SECTION_SUBNAV_CONFIG.top;
-      if (localnavTitle) {
-        localnavTitle.textContent = cfg.title;
-        localnavTitle.setAttribute("href", cfg.href);
-      }
-      if (!localnavChapters) return;
-
-      if (currentRenderedSection !== sectionId) {
-        currentRenderedSection = sectionId;
-        localnavChapters.textContent = "";
-        cfg.items.forEach((item) => {
-          const a = document.createElement("a");
-          a.className = "localnav-link" + (item.id === activeSubId ? " active" : "");
-          a.href = item.href;
-          a.setAttribute("data-localnav-item", item.id);
-          a.textContent = item.label;
-          a.addEventListener("click", (e) => {
-            if (typeof item.onClick === "function") {
-              e.preventDefault();
-              item.onClick();
-            }
-            Array.from(localnavChapters.querySelectorAll(".localnav-link")).forEach((lnk) => {
-              lnk.classList.toggle("active", lnk === a);
-            });
-          });
-          localnavChapters.appendChild(a);
-        });
-        if (animateSwap) {
-          localnavChapters.classList.remove("is-entering");
-          void localnavChapters.offsetWidth;
-          localnavChapters.classList.add("is-entering");
-        }
-      } else {
-        Array.from(localnavChapters.querySelectorAll(".localnav-link")).forEach((lnk) => {
-          const isMatch = lnk.getAttribute("data-localnav-item") === activeSubId;
-          lnk.classList.toggle("active", isMatch);
-        });
-      }
-    }
-
-    function syncTwoTierNav() {
-      const nearBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
-      const probeY = Math.max(136, window.innerHeight * 0.28);
+      const probeY = Math.max(96, window.innerHeight * 0.28);
 
       let activeSectionId = "top";
-      if (manualSectionOverride && SECTION_SUBNAV_CONFIG[manualSectionOverride]) {
+      if (manualSectionOverride) {
         activeSectionId = manualSectionOverride;
       } else if (nearBottom && sections.length > 0) {
         activeSectionId =
@@ -2707,13 +2482,6 @@
       links.forEach((l) => {
         l.classList.toggle("active", l.getAttribute("data-section") === activeSectionId);
       });
-
-      const activeSubId = resolveActiveSubItem(activeSectionId);
-      renderLocalNavSection(
-        activeSectionId,
-        activeSubId,
-        currentRenderedSection !== null && currentRenderedSection !== activeSectionId
-      );
     }
 
     let scrollTicking = false;
@@ -2722,7 +2490,7 @@
       scrollTicking = true;
       requestAnimationFrame(() => {
         scrollTicking = false;
-        syncTwoTierNav();
+        syncTopNav();
       });
     }
 
@@ -2736,19 +2504,13 @@
           manualSectionOverride = null;
           scheduleNavSync();
         }, 720);
-        syncTwoTierNav();
+        syncTopNav();
       });
-    });
-
-    document.addEventListener("click", (e) => {
-      if (e.target.closest("[data-about-tab], .filter-btn")) {
-        requestAnimationFrame(syncTwoTierNav);
-      }
     });
 
     window.addEventListener("scroll", scheduleNavSync, { passive: true });
     window.addEventListener("resize", scheduleNavSync, { passive: true });
-    syncTwoTierNav();
+    syncTopNav();
   }
 
   function initScrollReveal() {
@@ -3481,6 +3243,7 @@
 
     function setVoiceUiState(speaking) {
       isNarrating = speaking;
+      dock.classList.toggle("is-narrating-active", speaking);
       if (!speaking) {
         setRingProgress(0);
       }
@@ -3623,9 +3386,16 @@
     function updateStageDockOnScroll() {
       const vh = window.innerHeight || 800;
       const projectsSection = document.getElementById("projects");
+      const footerEl = document.querySelector(".site-footer");
+      let isBelowStages = false;
       if (projectsSection) {
         const projRect = projectsSection.getBoundingClientRect();
-        const shouldHide = projRect.top < vh * 0.42;
+        isBelowStages = projRect.top < vh * 0.45;
+        dock.classList.toggle("is-compact", isBelowStages);
+      }
+      if (footerEl) {
+        const footerRect = footerEl.getBoundingClientRect();
+        const shouldHide = footerRect.top < vh - 20 && !isNarrating;
         dock.classList.toggle("is-hidden", shouldHide);
       }
 
@@ -3645,7 +3415,8 @@
       const prevIdx = activeStageIdx;
       activeStageIdx = bestIdx;
       if (captionEl && stageConfigs[bestIdx]) {
-        captionEl.textContent = stageConfigs[bestIdx].label;
+        captionEl.textContent =
+          isBelowStages && !isNarrating ? "TOP OF STAGES" : stageConfigs[bestIdx].label;
       }
       dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === bestIdx));
 
@@ -3839,10 +3610,21 @@
     const dockNextBtn = document.getElementById("stage-dock-next-btn");
     if (dockPrevBtn) {
       dockPrevBtn.addEventListener("click", () => {
+        if (dock.classList.contains("is-compact")) {
+          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
         const prevIdx = (activeStageIdx - 1 + stageConfigs.length) % stageConfigs.length;
         const target = stageConfigs[prevIdx] ? document.getElementById(stageConfigs[prevIdx].id) : null;
         resetStageReadTimer(false);
         if (target) target.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+    if (captionEl) {
+      captionEl.addEventListener("click", () => {
+        if (dock.classList.contains("is-compact")) {
+          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+        }
       });
     }
     if (dockNextBtn) {
@@ -4149,6 +3931,11 @@
       } else if (clean.startsWith("inspect-")) {
         const pid = clean.replace("inspect-", "");
         openCloserLookModal(pid);
+      } else {
+        const targetEl = document.getElementById(clean);
+        if (targetEl && shouldScroll) {
+          targetEl.scrollIntoView({ behavior: "smooth" });
+        }
       }
     }
 
@@ -4730,6 +4517,78 @@
     renderComparison();
   }
 
+  /* 6. Scroll-Linked Timeline Spine, Publication Abstract Drawers & Specular Borders */
+  function initTimelinePubAndSpecularEffects() {
+    const timelineList = document.getElementById("timeline-list");
+    const spineFill = document.getElementById("timeline-spine-fill");
+    const timelineItems = Array.from(document.querySelectorAll("#timeline-list .timeline-item"));
+
+    if (timelineList && spineFill && timelineItems.length > 0) {
+      let spineTicking = false;
+      function updateTimelineSpine() {
+        spineTicking = false;
+        const vh = window.innerHeight || 800;
+        const listRect = timelineList.getBoundingClientRect();
+        const triggerY = vh * 0.62;
+        const rawProgress = (triggerY - listRect.top) / Math.max(1, listRect.height);
+        const pct = Math.max(14, Math.min(100, rawProgress * 100));
+        spineFill.style.setProperty("--spine-progress", `${pct.toFixed(1)}%`);
+
+        timelineItems.forEach((item, idx) => {
+          const itemRect = item.getBoundingClientRect();
+          const isReached = idx === 0 || itemRect.top <= triggerY;
+          item.classList.toggle("is-lit", isReached);
+        });
+      }
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!spineTicking) {
+            requestAnimationFrame(updateTimelineSpine);
+            spineTicking = true;
+          }
+        },
+        { passive: true }
+      );
+      window.addEventListener("resize", updateTimelineSpine, { passive: true });
+      updateTimelineSpine();
+    }
+
+    document.querySelectorAll(".pub-abstract-btn[data-pub-drawer]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const drawerId = btn.getAttribute("data-pub-drawer");
+        const drawer = drawerId ? document.getElementById(drawerId) : null;
+        if (!drawer) return;
+        const isOpen = drawer.classList.toggle("is-open");
+        btn.classList.toggle("is-active", isOpen);
+        btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        const labelEl = btn.querySelector(".pub-abstract-label");
+        if (labelEl) {
+          labelEl.textContent = isOpen ? "Hide Abstract" : "Read Abstract & Results";
+        }
+      });
+    });
+
+    document.addEventListener(
+      "pointermove",
+      (e) => {
+        const target = e.target;
+        if (!target || typeof target.closest !== "function") return;
+        const card = target.closest(
+          ".highlight-card, .project-card, .bento-spec-tile, .leadership-card, .pub-card, .timeline-item, .skill-group"
+        );
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        card.style.setProperty("--card-mx", `${mx.toFixed(1)}px`);
+        card.style.setProperty("--card-my", `${my.toFixed(1)}px`);
+      },
+      { passive: true }
+    );
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     initTheme();
     updateFilterCounts();
@@ -4751,6 +4610,7 @@
     initHardwareXraySpecs();
     initScrollCountUpAndBars();
     initCompareSystemsSelector();
+    initTimelinePubAndSpecularEffects();
     initScalableProjects();
   });
 })();
