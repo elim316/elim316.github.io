@@ -25,7 +25,7 @@
   />
   <meta property="og:url" content="https://elim316.github.io/" />
   <meta property="og:locale" content="en_GB" />
-  <meta property="og:image" content="https://elim316.github.io/og-image.png?v=20261023-61" />
+  <meta property="og:image" content="https://elim316.github.io/og-image.png?v=20261023-62" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
@@ -36,7 +36,7 @@
     name="twitter:description"
     content="Engineering portfolio of Elias Lim. Agentic AI systems, cloud architecture, and machine learning research."
   />
-  <meta name="twitter:image" content="https://elim316.github.io/og-image.png?v=20261023-61" />
+  <meta name="twitter:image" content="https://elim316.github.io/og-image.png?v=20261023-62" />
 
   <!-- JSON-LD Structured Data (no email address) -->
   <script type="application/ld+json">
@@ -63,10 +63,10 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-61" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-62" />
   <link rel="preload" href="fonts/SFProDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="fonts/SFProText-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="styles.css?v=20261023-61" />
+  <link rel="stylesheet" href="styles.css?v=20261023-62" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -952,7 +952,7 @@
                       id="tracer-embedded-iframe"
                       class="tracer-sandbox-frame"
                       sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-                      data-src="sandbox/agent-tracer/index.html?embed=1&amp;v=20261023-61"
+                      data-src="sandbox/agent-tracer/index.html?embed=1&amp;v=20261023-62"
                       title="Interactive Agent Tracer Sandbox"
                     ></iframe>
                   </div>
@@ -1079,8 +1079,8 @@
                       id="prep-embedded-iframe"
                       class="tracer-sandbox-frame"
                       sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-                      src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-61"
-                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-61"
+                      src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-62"
+                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-62"
                       title="Interactive Meeting Prep Week Calendar"
                     ></iframe>
                   </div>
@@ -1272,8 +1272,8 @@
                       id="uq-embedded-iframe"
                       class="tracer-sandbox-frame"
                       sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-                      src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-61"
-                      data-src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-61"
+                      src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-62"
+                      data-src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-62"
                       title="Interactive Battery UQ and XAI Digital Twin"
                     ></iframe>
                   </div>
@@ -2007,17 +2007,44 @@
   <!-- Apple-Style Floating Bottom Stage Controller Pill -->
   <div class="apple-stage-dock" id="apple-stage-dock" role="region" aria-label="Interactive stage controller">
     <div class="stage-dock-teleprompter" id="stage-dock-teleprompter" aria-live="polite">
-      <span class="teleprompter-dot" aria-hidden="true"></span>
-      <span class="teleprompter-text" id="teleprompter-text">Voice-over narration active</span>
-      <button
-        type="button"
-        class="teleprompter-speed-btn"
-        id="stage-dock-speed-btn"
-        aria-label="Toggle voice-over playback speed"
-        title="Cycle playback speed (1x / 1.25x / 1.5x)"
-      >
-        1x
-      </button>
+      <div class="teleprompter-top-row">
+        <span class="teleprompter-dot" aria-hidden="true"></span>
+        <span class="teleprompter-text" id="teleprompter-text">Voice-over narration active</span>
+        <div class="teleprompter-actions">
+          <button
+            type="button"
+            class="teleprompter-speed-btn"
+            id="stage-dock-speed-btn"
+            aria-label="Toggle voice-over playback speed"
+            title="Cycle playback speed (1x / 1.25x / 1.5x)"
+          >
+            1x
+          </button>
+          <button
+            type="button"
+            class="teleprompter-close-btn"
+            id="teleprompter-close-btn"
+            aria-label="Close voice-over player"
+            title="Stop and close voice-over player"
+          >
+            &#215;
+          </button>
+        </div>
+      </div>
+      <div class="teleprompter-scrubber-row" aria-label="Audio playback scrubber">
+        <span class="scrubber-time" id="scrubber-time-current">0:00</span>
+        <input
+          type="range"
+          class="stage-dock-scrubber"
+          id="stage-dock-scrubber"
+          min="0"
+          max="1000"
+          step="1"
+          value="0"
+          aria-label="Seek voice-over audio"
+        />
+        <span class="scrubber-time" id="scrubber-time-total">0:29</span>
+      </div>
     </div>
     <div class="stage-dock-row">
     <div class="stage-dock-pill">
@@ -2233,6 +2260,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261023-61"></script>
+  <script src="app.js?v=20261023-62"></script>
 </body>
 </html>
