@@ -2162,7 +2162,6 @@
         "elim316",
         "elim316.github.io",
         "CSC2106-IoT",
-        "Brain-Tumour-Classification",
         "WeatherPredictor",
         "yolov6-object-detector",
         "Opencv-real-time-face-detection",
@@ -2187,7 +2186,6 @@
             payload.projects.forEach((item) => PROJECTS.push(item));
             updateFilterCounts();
             renderProjects();
-            initCompareSystemsSelector();
           }
         }
       }
@@ -2282,7 +2280,6 @@
       if (addedAny) {
         updateFilterCounts();
         renderProjects();
-        initCompareSystemsSelector();
       }
     } catch (_err) {
       /* Ignore GitHub API offline/rate-limit errors gracefully */
