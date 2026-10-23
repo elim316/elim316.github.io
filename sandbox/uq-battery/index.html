@@ -510,7 +510,7 @@
   .xai-doc-title {
     font-size: 19px;
     font-weight: 600;
-    color: #0f172a;
+    color: var(--fg);
     margin-bottom: 4px;
     letter-spacing: -0.01em;
   }
@@ -534,7 +534,7 @@
   .xai-sec-title {
     font-size: 14px;
     font-weight: 600;
-    color: #0f172a;
+    color: var(--fg);
   }
 
   /* Horizontal Signed SHAP Attribution Bars */
@@ -1346,6 +1346,8 @@
   });
 
   window.addEventListener("message", (ev) => {
+    if (ev.source !== window.parent) return;
+    if (window.location.origin && window.location.origin !== "null" && ev.origin && ev.origin !== window.location.origin) return;
     const msg = ev && ev.data;
     if (!msg || typeof msg !== "object") return;
     if (msg.source === "portfolio-uq-host") {
