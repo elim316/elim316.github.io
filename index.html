@@ -63,10 +63,10 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-63" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-64" />
   <link rel="preload" href="fonts/SFProDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="fonts/SFProText-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="styles.css?v=20261023-63" />
+  <link rel="stylesheet" href="styles.css?v=20261023-64" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -539,6 +539,77 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <!-- Apple "By the Numbers" Spec Bento Subsection -->
+      <div class="section-header by-numbers-header reveal-on-scroll" id="by-the-numbers">
+        <div>
+          <span class="section-eyebrow">BY THE NUMBERS</span>
+          <h2 class="section-title">By the numbers. <span class="apple-tone-muted">Built for production.</span></h2>
+          <p class="section-subtitle">Compare the automated AI systems against traditional manual baselines, or click any tile below to explore the repositories.</p>
+        </div>
+
+        <!-- Apple-Style Before vs. After Architecture Comparison Toggle -->
+        <div class="bento-compare-bar" id="bento-compare-bar" role="tablist" aria-label="Compare automated AI systems vs traditional baseline">
+          <!-- [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL BENTO BUTTON & TILES TO RE-ENABLE JUMPGATE] -->
+          <button
+            type="button"
+            class="bento-compare-btn active"
+            data-compare-mode="after"
+            role="tab"
+            aria-selected="true"
+          >
+            With Automated AI Systems
+          </button>
+          <button
+            type="button"
+            class="bento-compare-btn"
+            data-compare-mode="before"
+            role="tab"
+            aria-selected="false"
+          >
+            Traditional Baseline (Before)
+          </button>
+        </div>
+      </div>
+
+      <!-- Apple M4-Inspired Sculpted Titanium Spec Bento Grid -->
+      <div class="apple-bento-specs reveal-on-scroll" id="bento-specs-grid">
+        <button type="button" class="bento-spec-tile" data-bento-target="#inspect-agent-tracer">
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">AGENT VISIBILITY</span>
+            <span class="bento-delta-pill" id="bento-delta-1">Live Visual Timeline</span>
+          </div>
+          <span class="bento-spec-stat stat-blue" id="bento-stat-1">200k</span>
+          <span class="bento-spec-caption" id="bento-cap-1">Live step-by-step agent visualiser and 200k token memory bar inside Antigravity Harness.</span>
+        </button>
+
+        <button type="button" class="bento-spec-tile" data-bento-target="#about-google">
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">TECHNICAL WORKSHOPS</span>
+            <span class="bento-delta-pill" id="bento-delta-2">4 Partner Institutions</span>
+          </div>
+          <span class="bento-spec-stat stat-teal" id="bento-stat-2">4,000+</span>
+          <span class="bento-spec-caption" id="bento-cap-2">Engineers and students trained in hands-on cloud and AI workshops across GovTech, DBS, NTU, and A*STAR.</span>
+        </button>
+
+        <button type="button" class="bento-spec-tile" data-bento-target="#projects-agentic">
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">FACT VERIFICATION</span>
+            <span class="bento-delta-pill" id="bento-delta-3">36 Quality Checks</span>
+          </div>
+          <span class="bento-spec-stat stat-emerald" id="bento-stat-3">100%</span>
+          <span class="bento-spec-caption" id="bento-cap-3">Automated fact checks verifying every document link and speaker role before sending meeting briefings.</span>
+        </button>
+
+        <button type="button" class="bento-spec-tile" data-bento-target="#projects-ml">
+          <div class="bento-tile-top">
+            <span class="bento-spec-eyebrow">IEEE PUBLISHED AI</span>
+            <span class="bento-delta-pill" id="bento-delta-4">Verified Error Range</span>
+          </div>
+          <span class="bento-spec-stat stat-amber" id="bento-stat-4">95.2%</span>
+          <span class="bento-spec-caption" id="bento-cap-4">Verified confidence range for deep learning battery health predictions published in IEEE Xplore.</span>
+        </button>
       </div>
     </section>
 
@@ -1816,77 +1887,15 @@
     </section>
 
     <!-- ======================================================================
-         6. Technical Stack & Apple "By the Numbers" Spec Bento Section
+         6. Technical Toolkit & Skills Section (#stack)
          ====================================================================== -->
     <section id="stack" class="section container" data-section-target="stack">
       <div class="section-header reveal-on-scroll">
         <div>
-          <span class="section-eyebrow">BY THE NUMBERS</span>
-          <h2 class="section-title">By the numbers. <span class="apple-tone-muted">Built for production.</span></h2>
-          <p class="section-subtitle">Compare the automated AI systems against traditional manual baselines, or click any tile below to explore the repositories.</p>
+          <span class="section-eyebrow">TECHNICAL TOOLKIT</span>
+          <h2 class="section-title">Core technologies. <span class="apple-tone-muted">Click any chip to filter repositories.</span></h2>
+          <p class="section-subtitle">Select any technology below to filter and highlight matching repositories in All Projects.</p>
         </div>
-
-        <!-- Apple-Style Before vs. After Architecture Comparison Toggle -->
-        <div class="bento-compare-bar" id="bento-compare-bar" role="tablist" aria-label="Compare automated AI systems vs traditional baseline">
-          <!-- [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL BENTO BUTTON & TILES TO RE-ENABLE JUMPGATE] -->
-          <button
-            type="button"
-            class="bento-compare-btn active"
-            data-compare-mode="after"
-            role="tab"
-            aria-selected="true"
-          >
-            With Automated AI Systems
-          </button>
-          <button
-            type="button"
-            class="bento-compare-btn"
-            data-compare-mode="before"
-            role="tab"
-            aria-selected="false"
-          >
-            Traditional Baseline (Before)
-          </button>
-        </div>
-      </div>
-
-      <!-- Apple M4-Inspired Sculpted Titanium Spec Bento Grid -->
-      <div class="apple-bento-specs reveal-on-scroll" id="bento-specs-grid">
-        <button type="button" class="bento-spec-tile" data-bento-target="#inspect-agent-tracer">
-          <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">AGENT VISIBILITY</span>
-            <span class="bento-delta-pill" id="bento-delta-1">Live Visual Timeline</span>
-          </div>
-          <span class="bento-spec-stat stat-blue" id="bento-stat-1">200k</span>
-          <span class="bento-spec-caption" id="bento-cap-1">Live step-by-step agent visualiser and 200k token memory bar inside Antigravity Harness.</span>
-        </button>
-
-        <button type="button" class="bento-spec-tile" data-bento-target="#about-google">
-          <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">TECHNICAL WORKSHOPS</span>
-            <span class="bento-delta-pill" id="bento-delta-2">4 Partner Institutions</span>
-          </div>
-          <span class="bento-spec-stat stat-teal" id="bento-stat-2">4,000+</span>
-          <span class="bento-spec-caption" id="bento-cap-2">Engineers and students trained in hands-on cloud and AI workshops across GovTech, DBS, NTU, and A*STAR.</span>
-        </button>
-
-        <button type="button" class="bento-spec-tile" data-bento-target="#projects-agentic">
-          <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">FACT VERIFICATION</span>
-            <span class="bento-delta-pill" id="bento-delta-3">36 Quality Checks</span>
-          </div>
-          <span class="bento-spec-stat stat-emerald" id="bento-stat-3">100%</span>
-          <span class="bento-spec-caption" id="bento-cap-3">Automated fact checks verifying every document link and speaker role before sending meeting briefings.</span>
-        </button>
-
-        <button type="button" class="bento-spec-tile" data-bento-target="#projects-ml">
-          <div class="bento-tile-top">
-            <span class="bento-spec-eyebrow">IEEE PUBLISHED AI</span>
-            <span class="bento-delta-pill" id="bento-delta-4">Verified Error Range</span>
-          </div>
-          <span class="bento-spec-stat stat-amber" id="bento-stat-4">95.2%</span>
-          <span class="bento-spec-caption" id="bento-cap-4">Verified confidence range for deep learning battery health predictions published in IEEE Xplore.</span>
-        </button>
       </div>
 
       <div class="skills-grid">
@@ -2235,6 +2244,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261023-63"></script>
+  <script src="app.js?v=20261023-64"></script>
 </body>
 </html>
