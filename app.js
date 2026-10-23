@@ -3066,6 +3066,7 @@
         label: "01 / 04  PROFILE",
         projectId: "agent-tracer",
         audioSrc: "audio/stage-profile-google.mp3?v=20261011-50",
+        durationSec: 29.08,
         speechText:
           "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure AI systems on Cloud Run and the Gemini platform, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
@@ -3075,6 +3076,7 @@
         label: "02 / 05  BUILDER",
         projectId: "agent-tracer",
         audioSrc: "audio/stage-builder.mp3?v=20261007-24",
+        durationSec: 28.2,
         speechText:
           "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Antigravity Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
       },
@@ -3085,6 +3087,7 @@
         label: "03 / 06  JUMPGATE",
         projectId: "jumpgate-agentic-lz",
         audioSrc: "audio/stage-jumpgate.mp3?v=20261011-50",
+        durationSec: 32.2,
         speechText:
           "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to the Gemini platform in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
       },
@@ -3093,7 +3096,8 @@
         id: "showcase-agent-tracer",
         label: "02 / 04  TRACER",
         projectId: "agent-tracer",
-        audioSrc: "audio/stage-tracer.mp3?v=20261007-24",
+        audioSrc: "audio/stage-tracer.mp3?v=20261023-62",
+        durationSec: 22.8,
         speechText:
           "Stage 2: Antigravity Agent Tracer and Harness. Visualise every step an AI agent takes in real time, from user prompt and LLM planning to Model Context Protocol tool execution and subagent delegation, paired with a two-by-two workspace that monitors 200,000-token context window saturation and automatic compaction.",
       },
@@ -3101,7 +3105,8 @@
         id: "showcase-meeting-prep",
         label: "03 / 04  DOSSIER",
         projectId: "meeting-prep-agent",
-        audioSrc: "audio/stage-dossier.mp3?v=20261007-24",
+        audioSrc: "audio/stage-dossier.mp3?v=20261023-62",
+        durationSec: 23.32,
         speechText:
           "Stage 3: Smart Meeting Prep and Dossier Agent. A two-stage scheduled agent that synthesises Calendar, Gmail, Chat, Drive, and People Directory context into cited one-page briefings at 6 PM the day before and one hour prior to every meeting, verified by a five-scenario, 36-check hallucination linter with zero fabricated links.",
       },
@@ -3109,7 +3114,8 @@
         id: "showcase-uq-xai",
         label: "04 / 04  RESEARCH",
         projectId: "uq-xai-battery",
-        audioSrc: "audio/stage-research.mp3?v=20261007-24",
+        audioSrc: "audio/stage-research.mp3?v=20261023-62",
+        durationSec: 30.52,
         speechText:
           "Stage 4: Uncertainty and Explainable AI for Battery Analytics. Published as a first-author paper in IEEE Xplore, this unified deep learning framework quantifies both model and data uncertainty via Adaptive Conformal Inference, achieving 95.2 percent empirical prediction interval coverage and 0.012 expected calibration error across McMaster and Oxford degradation datasets, paired with SHAP and LIME feature attributions.",
       },
@@ -3118,38 +3124,67 @@
     const aboutChapterAudio = {
       google: {
         audioSrc: "audio/stage-profile-google.mp3?v=20261011-50",
+        durationSec: 29.08,
         speechText: stageConfigs[0].speechText,
       },
       grab: {
         audioSrc: "audio/stage-profile-grab.mp3?v=20261007-24",
+        durationSec: 19.92,
         speechText:
           "About Elias Lim, Chapter 2: Backend Systems at Grab. At Grab in Singapore, I engineered scalable Golang backend microservices for real-time fraud detection across petabyte-scale data infrastructure, implementing dynamic runtime feature flags, rate limiting controls, and high-coverage unit test suites.",
       },
       astar: {
         audioSrc: "audio/stage-profile-astar.mp3?v=20261007-24",
+        durationSec: 24.52,
         speechText:
           "About Elias Lim, Chapter 3: AI Research at A-STAR. As an AI Research Intern at A-STAR in Singapore, I designed a unified deep learning framework that quantifies both data and model uncertainty alongside SHAP and LIME attributions for battery State-of-Health estimation, published as a first-author paper at APSIPA ASC 2025 in IEEE Xplore.",
       },
       beyond: {
         audioSrc: "audio/stage-profile-beyond.mp3?v=20261007-24",
+        durationSec: 29.4,
         speechText:
           "About Elias Lim, Chapter 4: Glasgow, SIT, and Life Outside Code. I graduated with a Bachelor of Science with Honours in Computer Science, Second Upper Class, from the University of Glasgow and Singapore Institute of Technology, winning awards at NUS LifeHack, AI Singapore, and DSTA BrainHack. Away from the terminal, you will find me playing basketball, on the pickleball court, or thrifting for vintage pieces.",
       },
     };
 
     const projectAudioMap = {
-      "jumpgate-agentic-lz": "audio/stage-jumpgate.mp3?v=20261011-50",
-      "agent-tracer": "audio/stage-tracer.mp3?v=20261007-24",
-      "antigravity-harness": "audio/stage-tracer.mp3?v=20261007-24",
-      "meeting-prep-agent": "audio/stage-dossier.mp3?v=20261007-24",
-      "uq-xai-battery": "audio/stage-research.mp3?v=20261007-24",
+      "jumpgate-agentic-lz": {
+        audioSrc: "audio/stage-jumpgate.mp3?v=20261011-50",
+        durationSec: 32.2,
+        speechText:
+          "Stage 3: Jumpgate Zero-Trust AI Landing Zone and 14-Step Vending Machine Agent. Co-architected at Google Cloud Singapore, Jumpgate provisions an IM8-compliant Dual-VPC landing zone with Cloud Armor WAF, Secure Web Proxy L7 inspection, and Private Service Connect to the Gemini platform in under three minutes, passing all 14 Ingress and 18 Egress security checks and driving 1.96 million dollars in realised public sector recurring revenue.",
+      },
+      "agent-tracer": {
+        audioSrc: stageConfigs[1].audioSrc,
+        durationSec: stageConfigs[1].durationSec,
+        speechText: stageConfigs[1].speechText,
+      },
+      "antigravity-harness": {
+        audioSrc: stageConfigs[1].audioSrc,
+        durationSec: stageConfigs[1].durationSec,
+        speechText: stageConfigs[1].speechText,
+      },
+      "meeting-prep-agent": {
+        audioSrc: stageConfigs[2].audioSrc,
+        durationSec: stageConfigs[2].durationSec,
+        speechText: stageConfigs[2].speechText,
+      },
+      "uq-xai-battery": {
+        audioSrc: stageConfigs[3].audioSrc,
+        durationSec: stageConfigs[3].durationSec,
+        speechText: stageConfigs[3].speechText,
+      },
     };
 
     let activeStageIdx = 0;
     let isNarrating = false;
+    let hasActiveTrack = false;
     let currentTrackKey = "";
+    let currentTrackDurationHint = 29.08;
     let lastTabInteractionTs = 0;
     let isAudioAutoAdvancing = false;
+    let autoScrollLockTimer = null;
+    let isScrubbing = false;
     const audioPlayer = new Audio();
     audioPlayer.preload = "none";
     const preloadedSet = new Set();
@@ -3171,6 +3206,20 @@
       progressCircle.style.strokeDashoffset = offset.toFixed(2);
     }
 
+    function formatAudioTime(seconds) {
+      const s = Math.max(0, Math.floor(Number(seconds) || 0));
+      const mins = Math.floor(s / 60);
+      const secs = s % 60;
+      return `${mins}:${String(secs).padStart(2, "0")}`;
+    }
+
+    function getEffectiveDuration() {
+      if (Number.isFinite(audioPlayer.duration) && audioPlayer.duration > 0) {
+        return audioPlayer.duration;
+      }
+      return currentTrackDurationHint > 0 ? currentTrackDurationHint : 25;
+    }
+
     function getActiveAboutChapterKey() {
       const activeTab = document.querySelector("#about [data-about-tab].active");
       return activeTab ? activeTab.getAttribute("data-about-tab") || "google" : "google";
@@ -3184,18 +3233,24 @@
         return {
           key: `profile-${chapKey}`,
           audioSrc: chap.audioSrc,
+          durationSec: chap.durationSec,
           speechText: chap.speechText,
         };
       }
       return {
         key: cfg.id,
         audioSrc: cfg.audioSrc,
+        durationSec: cfg.durationSec,
         speechText: cfg.speechText,
       };
     }
 
     const teleprompterEl = document.getElementById("stage-dock-teleprompter");
     const teleprompterTextEl = document.getElementById("teleprompter-text");
+    const teleprompterCloseBtn = document.getElementById("teleprompter-close-btn");
+    const scrubberEl = document.getElementById("stage-dock-scrubber");
+    const scrubberCurrentEl = document.getElementById("scrubber-time-current");
+    const scrubberTotalEl = document.getElementById("scrubber-time-total");
     const speedBtn = document.getElementById("stage-dock-speed-btn");
     const speedRates = [1.0, 1.25, 1.5];
     let currentSpeedIdx = 0;
@@ -3220,6 +3275,69 @@
       teleprompterTextEl.textContent = currentSentences[idx];
     }
 
+    function updateScrubberUi(currentTimeSec, totalDurationSec, skipSliderValue) {
+      const dur = Math.max(0.1, Number(totalDurationSec) || getEffectiveDuration());
+      const cur = Math.min(Math.max(0, Number(currentTimeSec) || 0), dur);
+      const ratio = Math.min(Math.max(cur / dur, 0), 1);
+      const pct = (ratio * 100).toFixed(1);
+      if (scrubberCurrentEl) scrubberCurrentEl.textContent = formatAudioTime(cur);
+      if (scrubberTotalEl) scrubberTotalEl.textContent = formatAudioTime(dur);
+      if (scrubberEl) {
+        scrubberEl.style.setProperty("--scrubber-pct", `${pct}%`);
+        if (!skipSliderValue && !isScrubbing) {
+          scrubberEl.value = String(Math.round(ratio * 1000));
+        }
+      }
+    }
+
+    function applyScrubPosition(sliderVal, commitToAudio) {
+      const ratio = Math.min(Math.max((Number(sliderVal) || 0) / 1000, 0), 0.998);
+      const dur = getEffectiveDuration();
+      const targetTime = ratio * dur;
+      updateScrubberUi(targetTime, dur, true);
+      setRingProgress(ratio);
+      updateTeleprompterProgress(ratio);
+      const remSec = Math.max(0, Math.ceil(dur - targetTime));
+      updateDotFillBars(ratio * 100, remSec);
+      if (commitToAudio && audioPlayer.src) {
+        try {
+          audioPlayer.currentTime = targetTime;
+        } catch (_) {}
+      }
+    }
+
+    if (scrubberEl) {
+      scrubberEl.addEventListener("pointerdown", (e) => {
+        e.stopPropagation();
+        isScrubbing = true;
+      });
+      scrubberEl.addEventListener("input", (e) => {
+        e.stopPropagation();
+        applyScrubPosition(scrubberEl.value, true);
+      });
+      scrubberEl.addEventListener("change", (e) => {
+        e.stopPropagation();
+        isScrubbing = false;
+        applyScrubPosition(scrubberEl.value, true);
+      });
+      window.addEventListener(
+        "pointerup",
+        () => {
+          if (isScrubbing) {
+            isScrubbing = false;
+          }
+        },
+        { passive: true }
+      );
+    }
+
+    if (teleprompterCloseBtn) {
+      teleprompterCloseBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        stopAllNarration();
+      });
+    }
+
     if (speedBtn) {
       speedBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -3230,14 +3348,18 @@
       });
     }
 
-    function setVoiceUiState(speaking) {
+    function setVoiceUiState(speaking, keepTeleprompterVisible) {
       isNarrating = speaking;
-      dock.classList.toggle("is-narrating-active", speaking);
-      if (!speaking) {
+      const showTeleprompter = Boolean(speaking || keepTeleprompterVisible);
+      hasActiveTrack = showTeleprompter;
+      dock.classList.toggle("is-narrating-active", showTeleprompter);
+      if (!showTeleprompter) {
         setRingProgress(0);
+        updateScrubberUi(0, getEffectiveDuration());
       }
       if (teleprompterEl) {
-        teleprompterEl.classList.toggle("is-visible", speaking);
+        teleprompterEl.classList.toggle("is-visible", showTeleprompter);
+        teleprompterEl.classList.toggle("is-paused", !speaking && showTeleprompter);
       }
       if (playBtn) {
         playBtn.classList.toggle("is-speaking", speaking);
@@ -3262,29 +3384,43 @@
       if (closerListenLabel) closerListenLabel.textContent = speaking ? "Pause" : "Listen";
     }
 
-    function stopAllNarration() {
+    function pauseNarration() {
       try {
         audioPlayer.pause();
       } catch (_) {}
-      setVoiceUiState(false);
+      setVoiceUiState(false, true);
+    }
+
+    function stopAllNarration() {
+      try {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+      } catch (_) {}
+      setVoiceUiState(false, false);
     }
 
     function playPayload(payload, forceRestart) {
       if (!payload || !payload.audioSrc) {
-        setVoiceUiState(false);
+        stopAllNarration();
         return;
       }
 
+      currentTrackDurationHint = Number(payload.durationSec) || 25;
       currentSentences = splitIntoSentences(payload.speechText || "");
-      updateTeleprompterProgress(0);
 
       if (!forceRestart && currentTrackKey === payload.key && audioPlayer.src) {
+        const dur = getEffectiveDuration();
+        if (audioPlayer.ended || audioPlayer.currentTime >= dur - 0.15) {
+          audioPlayer.currentTime = 0;
+        }
+        const resumeRatio = dur > 0 ? audioPlayer.currentTime / dur : 0;
+        setRingProgress(resumeRatio);
+        updateTeleprompterProgress(resumeRatio);
+        updateScrubberUi(audioPlayer.currentTime, dur);
         audioPlayer.playbackRate = speedRates[currentSpeedIdx];
-        setVoiceUiState(true);
-        audioPlayer.play().catch((err) => {
-          if (err && err.name === "NotAllowedError") {
-            setVoiceUiState(false);
-          }
+        setVoiceUiState(true, true);
+        audioPlayer.play().catch(() => {
+          /* Keep teleprompter and scrubber active even if synthetic click autoplay is restricted */
         });
         return;
       }
@@ -3293,11 +3429,12 @@
       audioPlayer.src = payload.audioSrc;
       audioPlayer.currentTime = 0;
       audioPlayer.playbackRate = speedRates[currentSpeedIdx];
-      setVoiceUiState(true);
-      audioPlayer.play().catch((err) => {
-        if (err && err.name === "NotAllowedError") {
-          setVoiceUiState(false);
-        }
+      setRingProgress(0);
+      updateTeleprompterProgress(0);
+      updateScrubberUi(0, currentTrackDurationHint);
+      setVoiceUiState(true, true);
+      audioPlayer.play().catch(() => {
+        /* Keep teleprompter and scrubber active even if synthetic click autoplay is restricted */
       });
     }
 
@@ -3308,64 +3445,100 @@
     stopSharedNarrationFn = stopAllNarration;
     playProjectNarrationFn = (proj) => {
       if (!proj) return;
-      const mappedAudio = projectAudioMap[proj.id] || "";
-      if (!mappedAudio) {
-        setVoiceUiState(false);
+      const mapped = projectAudioMap[proj.id];
+      if (!mapped || !mapped.audioSrc) {
+        stopAllNarration();
         return;
       }
-      const text = `${proj.title}. ${proj.summary} ${proj.architecture || ""}`;
       playPayload(
         {
           key: `modal-${proj.id}`,
-          audioSrc: mappedAudio,
-          speechText: text,
+          audioSrc: mapped.audioSrc,
+          durationSec: mapped.durationSec,
+          speechText: mapped.speechText,
         },
         true
       );
     };
 
+    audioPlayer.addEventListener("loadedmetadata", () => {
+      if (Number.isFinite(audioPlayer.duration) && audioPlayer.duration > 0) {
+        updateScrubberUi(audioPlayer.currentTime, audioPlayer.duration);
+      }
+    });
+
     audioPlayer.addEventListener("timeupdate", () => {
-      if (isNarrating && audioPlayer.duration > 0) {
-        const ratio = audioPlayer.currentTime / audioPlayer.duration;
-        setRingProgress(ratio);
-        updateTeleprompterProgress(ratio);
-        const remSec = Math.max(0, Math.ceil(audioPlayer.duration - audioPlayer.currentTime));
-        updateDotFillBars(ratio * 100, remSec);
-        if (ratio > 0.72 && stageConfigs[activeStageIdx + 1]?.audioSrc) {
-          preloadAudioUrl(stageConfigs[activeStageIdx + 1].audioSrc);
+      if ((isNarrating || hasActiveTrack) && !isScrubbing) {
+        const dur = getEffectiveDuration();
+        if (dur > 0) {
+          const ratio = Math.min(Math.max(audioPlayer.currentTime / dur, 0), 1);
+          setRingProgress(ratio);
+          updateTeleprompterProgress(ratio);
+          updateScrubberUi(audioPlayer.currentTime, dur);
+          const remSec = Math.max(0, Math.ceil(dur - audioPlayer.currentTime));
+          updateDotFillBars(ratio * 100, remSec);
+          if (ratio > 0.72 && stageConfigs[activeStageIdx + 1]?.audioSrc) {
+            preloadAudioUrl(stageConfigs[activeStageIdx + 1].audioSrc);
+          }
         }
       }
     });
 
-    audioPlayer.addEventListener("ended", () => {
-      if (activeStageIdx < stageConfigs.length - 1) {
-        const nextIdx = activeStageIdx + 1;
-        const nextCfg = stageConfigs[nextIdx];
-        const nextEl = nextCfg ? document.getElementById(nextCfg.id) : null;
-        if (nextEl && nextCfg) {
-          isAudioAutoAdvancing = true;
-          isAutoScrolling = true;
-          activeStageIdx = nextIdx;
-          if (captionEl) captionEl.textContent = nextCfg.label;
-          dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === nextIdx));
-          updateDotFillBars(0, Math.ceil(audioPlayer.duration || 30));
-          nextEl.scrollIntoView({ behavior: "smooth" });
-          setTimeout(() => {
-            isAutoScrolling = false;
-            isAudioAutoAdvancing = false;
-            playPayload(
-              {
-                key: nextCfg.id,
-                audioSrc: nextCfg.audioSrc,
-                speechText: nextCfg.speechText,
-              },
-              true
-            );
-          }, 520);
-          return;
-        }
+    function setActiveStageUi(idx, isBelowStages) {
+      activeStageIdx = idx;
+      if (captionEl && stageConfigs[idx]) {
+        captionEl.textContent =
+          isBelowStages && !isNarrating && !hasActiveTrack
+            ? "TOP OF STAGES"
+            : stageConfigs[idx].label;
       }
-      setVoiceUiState(false);
+      dotBtns.forEach((btn, i) => {
+        const isAct = i === idx;
+        btn.classList.toggle("active", isAct);
+        btn.setAttribute("aria-selected", isAct ? "true" : "false");
+      });
+    }
+
+    function scrollToStageIndex(targetIdx, forcePlayAudio) {
+      const clampedIdx = Math.max(0, Math.min(stageConfigs.length - 1, targetIdx));
+      const targetCfg = stageConfigs[clampedIdx];
+      const targetEl = targetCfg ? document.getElementById(targetCfg.id) : null;
+      if (!targetCfg || !targetEl) return;
+
+      const shouldNarrate = Boolean(forcePlayAudio || isNarrating);
+      isAutoScrolling = true;
+      isAudioAutoAdvancing = true;
+      if (autoScrollLockTimer) clearTimeout(autoScrollLockTimer);
+      setActiveStageUi(clampedIdx, false);
+      resetStageReadTimer(false);
+      targetEl.scrollIntoView({ behavior: "smooth" });
+
+      if (shouldNarrate) {
+        playPayload(getTargetVoicePayload(), true);
+      } else if (hasActiveTrack) {
+        stopAllNarration();
+      }
+
+      autoScrollLockTimer = setTimeout(() => {
+        isAutoScrolling = false;
+        isAudioAutoAdvancing = false;
+        lastTickTs = performance.now();
+      }, 950);
+    }
+
+    audioPlayer.addEventListener("ended", () => {
+      const closerOpen = document
+        .getElementById("closer-look-backdrop")
+        ?.classList.contains("is-open");
+      if (closerOpen || currentTrackKey.startsWith("modal-")) {
+        stopAllNarration();
+        return;
+      }
+      if (activeStageIdx < stageConfigs.length - 1) {
+        scrollToStageIndex(activeStageIdx + 1, true);
+        return;
+      }
+      stopAllNarration();
       document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
     });
 
@@ -3384,8 +3557,13 @@
       }
       if (footerEl) {
         const footerRect = footerEl.getBoundingClientRect();
-        const shouldHide = footerRect.top < vh - 20 && !isNarrating;
+        const shouldHide = footerRect.top < vh - 20 && !isNarrating && !hasActiveTrack;
         dock.classList.toggle("is-hidden", shouldHide);
+      }
+
+      if (isAutoScrolling || isAudioAutoAdvancing) {
+        stageScrollTicking = false;
+        return;
       }
 
       let bestIdx = 0;
@@ -3402,18 +3580,15 @@
       });
 
       const prevIdx = activeStageIdx;
-      activeStageIdx = bestIdx;
-      if (captionEl && stageConfigs[bestIdx]) {
-        captionEl.textContent =
-          isBelowStages && !isNarrating ? "TOP OF STAGES" : stageConfigs[bestIdx].label;
-      }
-      dotBtns.forEach((btn, i) => btn.classList.toggle("active", i === bestIdx));
+      setActiveStageUi(bestIdx, isBelowStages);
 
       if (prevIdx !== bestIdx) {
         resetStageReadTimer(false);
         const recentTabClick = performance.now() - lastTabInteractionTs < 650;
         if (isNarrating && !isAudioAutoAdvancing && !recentTabClick) {
           startOrSwitchNarration(true);
+        } else if (!isNarrating && hasActiveTrack) {
+          stopAllNarration();
         }
       }
       stageScrollTicking = false;
@@ -3569,7 +3744,7 @@
       stageElapsedMs += deltaMs;
 
       let effectiveDurationMs = currentReadEstimate.durationMs;
-      if (isNarrating) {
+      if (isNarrating || hasActiveTrack) {
         return;
       }
 
@@ -3589,9 +3764,7 @@
     dotBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const idx = Number(btn.getAttribute("data-dock-idx") || 0);
-        const target = stageConfigs[idx] ? document.getElementById(stageConfigs[idx].id) : null;
-        resetStageReadTimer(false);
-        if (target) target.scrollIntoView({ behavior: "smooth" });
+        scrollToStageIndex(idx, false);
       });
     });
 
@@ -3600,29 +3773,24 @@
     if (dockPrevBtn) {
       dockPrevBtn.addEventListener("click", () => {
         if (dock.classList.contains("is-compact")) {
-          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+          scrollToStageIndex(0, false);
           return;
         }
         const prevIdx = (activeStageIdx - 1 + stageConfigs.length) % stageConfigs.length;
-        const target = stageConfigs[prevIdx] ? document.getElementById(stageConfigs[prevIdx].id) : null;
-        resetStageReadTimer(false);
-        if (target) target.scrollIntoView({ behavior: "smooth" });
+        scrollToStageIndex(prevIdx, false);
       });
     }
     if (captionEl) {
       captionEl.addEventListener("click", () => {
         if (dock.classList.contains("is-compact")) {
-          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+          scrollToStageIndex(0, false);
         }
       });
     }
     if (dockNextBtn) {
       dockNextBtn.addEventListener("click", () => {
         if (activeStageIdx < stageConfigs.length - 1) {
-          const nextIdx = activeStageIdx + 1;
-          const target = stageConfigs[nextIdx] ? document.getElementById(stageConfigs[nextIdx].id) : null;
-          resetStageReadTimer(false);
-          if (target) target.scrollIntoView({ behavior: "smooth" });
+          scrollToStageIndex(activeStageIdx + 1, false);
         } else {
           document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
         }
@@ -3713,7 +3881,7 @@
       });
       playBtn.addEventListener("click", () => {
         if (isNarrating) {
-          stopAllNarration();
+          pauseNarration();
         } else {
           startOrSwitchNarration(false);
         }
@@ -3945,7 +4113,10 @@
       if (cmdOpen) return;
 
       const tag = (e.target && e.target.tagName ? e.target.tagName : "").toLowerCase();
-      const isTyping = tag === "input" || tag === "textarea" || (e.target && e.target.isContentEditable);
+      const isTyping =
+        (tag === "input" && e.target.type !== "range") ||
+        tag === "textarea" ||
+        (e.target && e.target.isContentEditable);
 
       const closerBackdrop = document.getElementById("closer-look-backdrop");
       const closerOpen = closerBackdrop?.classList.contains("is-open");
