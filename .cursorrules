@@ -52,9 +52,10 @@ This site is deployed directly via GitHub Pages (`https://elim316.github.io/`) a
 
 ## 5. Current State & Changelog
 - Last updated: 2026-10-23
-- Asset version in `index.html`: `?v=20261023-58`
+- Asset version in `index.html`: `?v=20261023-59`
 - SessionStorage cache key in `app.js`: `gh_repos_v5_elim316`
 - Recent milestones completed:
+  * Redesigned the Open Graph social preview card (`og-image.png`, rendered at `1200x630` using self-hosted `SF Pro Display` / `SF Pro Text` webfonts) and simplified Open Graph / Twitter metadata (`Elias Lim | Cloud & AI Engineer`) in `index.html` for a minimal, uncluttered Apple-style aesthetic (`?v=20261023-59`).
   * Resolved 6 end-to-end functional, state-sync, dark-mode, and mobile layout bugs (`?v=20261023-58`): synchronised Dark Mode across all 3 embedded sandbox iframes (`sandbox/agent-tracer/`, `sandbox/meeting-prep/`, `sandbox/uq-battery/`), fixed mobile (`390px`) horizontal overflow in `.browser-top-bar` / `.browser-tab-strip` / `.leadership-card` / `.closing-cta-actions`, aligned initial SSR copy and `Next tab` labels across Stages 01/03/04, recalculated `--step-arrow-x` speech-bubble pointers on hidden tab switches, fixed `.skill-chip` query matching and filter-bar state reset, and queued Stage 02 host tour `postMessage` actions until the lazy `#tracer-embedded-iframe` finishes loading.
   * Added 1st Place at Google's AI Agent Lab Hackathon 2026 recognition across Stage 01 (`#about`), Highlight Card 1 & Card 3 (`#highlights-track`), Stage 02 (`#showcase-agent-tracer`), the Google Cloud experience timeline (`#milestone-gcloud`), the Hackathon Honours strip (`#leadership-strip`, updated to `4x`), and the `agent-tracer` project summary in `projects.json` and `app.js` (`?v=20261022-56`).
   * Removed all `Save CV` buttons across `index.html` and `app.js` and upgraded `#apple-localnav` (`initNavHighlight()` in `app.js`) so its left section label and right subheading links dynamically swap and highlight based on whichever top heading pill (`Profile`, `Featured Repos`, `All Projects`, `Experience`, `Research`, `Toolkit`) is currently active on scroll or top-nav click (`?v=20261011-53`).
