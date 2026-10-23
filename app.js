@@ -3698,6 +3698,16 @@
     function isUserEngagedInStageOrSandbox() {
       if (stageInteractionPaused) return true;
       const activeCfg = stageConfigs[activeStageIdx];
+      if (activeCfg) {
+        const activeStageEl = document.getElementById(activeCfg.id);
+        if (activeStageEl) {
+          const rect = activeStageEl.getBoundingClientRect();
+          const vh = window.innerHeight || 800;
+          if (rect.bottom < vh * 0.35 || rect.top > vh * 0.75) {
+            return true;
+          }
+        }
+      }
       if (
         activeCfg?.id === "showcase-agent-tracer" &&
         document.querySelector('#showcase-agent-tracer [data-tracer-tab="sandbox"].active')
@@ -3708,11 +3718,15 @@
       if (
         activeEl &&
         typeof activeEl.closest === "function" &&
-        activeEl.closest(".hardware-deck, .stage-deck, #apple-stage-dock")
+        activeEl.closest(".hardware-deck, .stage-deck, #apple-stage-dock, #journey")
       ) {
         return true;
       }
-      if (document.querySelector(".hardware-deck:hover, .stage-deck:hover, #apple-stage-dock:hover")) {
+      if (
+        document.querySelector(
+          ".hardware-deck:hover, .stage-deck:hover, #apple-stage-dock:hover, #journey:hover, #highlights-section:hover"
+        )
+      ) {
         return true;
       }
       return false;
