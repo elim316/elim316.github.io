@@ -788,17 +788,6 @@
   }
 
   function attachCardInteractions() {
-    const cards = document.querySelectorAll(".project-card");
-    cards.forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
-      });
-    });
-
     const toggleButtons = document.querySelectorAll(".arch-toggle-btn");
     toggleButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -1304,6 +1293,10 @@
       const ovBubbleNextBtn = document.getElementById("tracer-bubble-next-btn");
       const ovBubbleNextLabel = document.getElementById("tracer-bubble-next-label");
 
+      const sameTargetOrigin =
+        window.location.origin && window.location.origin !== "null"
+          ? window.location.origin
+          : "*";
       let pendingTracerAction = null;
       const embTracerFrameInit = document.getElementById("tracer-embedded-iframe");
       if (embTracerFrameInit) {
@@ -1316,7 +1309,7 @@
               if (embTracerFrameInit.contentWindow) {
                 embTracerFrameInit.contentWindow.postMessage(
                   { source: "portfolio-tracer-host", action, arg },
-                  "*"
+                  sameTargetOrigin
                 );
               }
             }, 450);
@@ -1330,7 +1323,7 @@
         if (embFrame.dataset.loaded === "1" && embFrame.contentWindow) {
           embFrame.contentWindow.postMessage(
             { source: "portfolio-tracer-host", action, arg },
-            "*"
+            sameTargetOrigin
           );
         } else {
           pendingTracerAction = { action, arg };
@@ -1353,14 +1346,16 @@
           fTracer.querySelectorAll("[data-host-sc]").forEach((b) => {
             b.classList.toggle("active", b === scBtn);
           });
-          const meta = hostScenarioMeta[scId];
+          const meta = Object.prototype.hasOwnProperty.call(hostScenarioMeta, scId)
+            ? hostScenarioMeta[scId]
+            : null;
           if (meta) {
             if (hostDoingEl) hostDoingEl.textContent = meta.doing;
             if (hostTourEl) {
               hostTourEl.innerHTML = meta.actions
                 .map(
                   (a) =>
-                    `<button type="button" class="tracer-tour-pill" data-host-act="${a.act}">${a.label}</button>`
+                    `<button type="button" class="tracer-tour-pill" data-host-act="${escapeHtml(a.act)}">${escapeHtml(a.label)}</button>`
                 )
                 .join("");
               bindHostTourButtons();
@@ -1505,8 +1500,6 @@
       const pDiagramHeader = document.getElementById("prep-diagram-header");
       const pSandboxConsole = document.getElementById("prep-sandbox-console");
       const switchPrepSandboxBtn = document.getElementById("prep-switch-to-sandbox-btn");
-      const pHostDoingEl = document.getElementById("prep-host-doing-text");
-      const pHostTourEl = document.getElementById("prep-host-tour-actions");
       const pOvBubbleEl = document.getElementById("prep-overview-bubble");
       const pOvBubbleKicker = document.getElementById("prep-bubble-kicker");
       const pOvBubbleTitle = document.getElementById("prep-bubble-title");
@@ -1565,62 +1558,25 @@
         },
       };
 
-      const prepHostScenarioMeta = {
-        next_day_mixed: {
-          doing:
-            "Scans tomorrow's day calendar from 09:00 to 18:00, skips 4 routine blocks, highlights 2 important calls in blue with one-page briefings, and checks every link across 36 rules.",
-          actions: [
-            { label: "Bubble 1: Calendar Clutter", act: "tour_0" },
-            { label: "Bubble 2: 10:15 Acme Sync", act: "tour_1" },
-            { label: "Bubble 3: 13:00 Cross-Team", act: "tour_2" },
-            { label: "Bubble 4: Fact Checker", act: "tour_3" },
-          ],
-        },
-        next_day_cold_lead: {
-          doing:
-            "Shows a first-time 13:30 call on Friday's calendar with a brand-new external contact where zero past emails exist, writing 'No prior context found' rather than guessing.",
-          actions: [
-            { label: "Bubble 1: 13:30 Intro Call", act: "tour_0" },
-            { label: "Bubble 2: Honest Empty State", act: "tour_1" },
-            { label: "Bubble 3: 7 / 7 Checks", act: "tour_2" },
-          ],
-        },
-        t1h_window: {
-          doing:
-            "Highlights the live 14:00 to 15:00 reminder window band on the day calendar so the 14:15 client call gets reminded once without alerting 13:30 or 15:30 calls twice.",
-          actions: [
-            { label: "Bubble 1: Shaded 1h Band", act: "tour_0" },
-            { label: "Bubble 2: Same-Day Booking", act: "tour_1" },
-            { label: "Bubble 3: Zero Duplicates", act: "tour_2" },
-          ],
-        },
-      };
-
       const pTabOrder = ["sandbox", "linter", "pipeline"];
       let pTabIdx = 0;
       const prepStepOrder = ["nbd", "linter", "t1h"];
       let prepIdx = 0;
       let isPrepBubbleClosed = false;
+      const prepTargetOrigin =
+        window.location.origin && window.location.origin !== "null"
+          ? window.location.origin
+          : "*";
 
       function postToPrepSandbox(action, arg) {
         const embFrame = document.getElementById("prep-embedded-iframe");
         if (embFrame && embFrame.contentWindow) {
           embFrame.contentWindow.postMessage(
             { source: "portfolio-prep-host", action, arg },
-            "*"
+            prepTargetOrigin
           );
         }
       }
-
-      function bindPrepHostTourButtons() {
-        if (!pHostTourEl) return;
-        pHostTourEl.querySelectorAll("[data-prep-act]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            postToPrepSandbox(btn.getAttribute("data-prep-act"));
-          });
-        });
-      }
-      bindPrepHostTourButtons();
 
       fPrep.querySelectorAll("[data-prep-sc]").forEach((scBtn) => {
         scBtn.addEventListener("click", () => {
@@ -2186,6 +2142,7 @@
             payload.projects.forEach((item) => PROJECTS.push(item));
             updateFilterCounts();
             renderProjects();
+            initCompareSystemsSelector();
           }
         }
       }
@@ -2280,6 +2237,7 @@
       if (addedAny) {
         updateFilterCounts();
         renderProjects();
+        initCompareSystemsSelector();
       }
     } catch (_err) {
       /* Ignore GitHub API offline/rate-limit errors gracefully */
@@ -2343,7 +2301,16 @@
       { passive: true }
     );
 
-    window.addEventListener("resize", updateScrollPhysics);
+    window.addEventListener(
+      "resize",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateScrollPhysics);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
     updateScrollPhysics();
 
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -2364,25 +2331,39 @@
       const wordmark = stage.querySelector(".metallic-wordmark");
       if (!visualStage || !wordmark) return;
 
-      stage.addEventListener("mousemove", (e) => {
-        visualStage.classList.add("is-hovered");
-
-        const wmRect = wordmark.getBoundingClientRect();
-        if (wmRect.width > 0 && wmRect.height > 0) {
-          const spotX = Math.min(
-            Math.max(((e.clientX - wmRect.left) / wmRect.width) * 100, -10),
-            110
-          );
-          const spotY = Math.min(
-            Math.max(((e.clientY - wmRect.top) / wmRect.height) * 100, -20),
-            120
-          );
-          wordmark.style.setProperty("--wordmark-spot-x", `${spotX.toFixed(1)}%`);
-          wordmark.style.setProperty("--wordmark-spot-y", `${spotY.toFixed(1)}%`);
-        }
-      });
+      let wmRaf = 0;
+      stage.addEventListener(
+        "mousemove",
+        (e) => {
+          const cx = e.clientX;
+          const cy = e.clientY;
+          if (wmRaf) return;
+          wmRaf = requestAnimationFrame(() => {
+            wmRaf = 0;
+            visualStage.classList.add("is-hovered");
+            const wmRect = wordmark.getBoundingClientRect();
+            if (wmRect.width > 0 && wmRect.height > 0) {
+              const spotX = Math.min(
+                Math.max(((cx - wmRect.left) / wmRect.width) * 100, -10),
+                110
+              );
+              const spotY = Math.min(
+                Math.max(((cy - wmRect.top) / wmRect.height) * 100, -20),
+                120
+              );
+              wordmark.style.setProperty("--wordmark-spot-x", `${spotX.toFixed(1)}%`);
+              wordmark.style.setProperty("--wordmark-spot-y", `${spotY.toFixed(1)}%`);
+            }
+          });
+        },
+        { passive: true }
+      );
 
       stage.addEventListener("mouseleave", () => {
+        if (wmRaf) {
+          cancelAnimationFrame(wmRaf);
+          wmRaf = 0;
+        }
         visualStage.classList.remove("is-hovered");
         wordmark.style.setProperty("--wordmark-spot-x", "50%");
         wordmark.style.setProperty("--wordmark-spot-y", "50%");
@@ -2448,7 +2429,7 @@
       });
     });
 
-    window.addEventListener("resize", updateActiveFilterPill);
+    window.addEventListener("resize", updateActiveFilterPill, { passive: true });
     requestAnimationFrame(updateActiveFilterPill);
   }
 
@@ -2594,6 +2575,10 @@
 
   function syncSandboxIframesTheme(theme) {
     const clean = theme === "dark" ? "dark" : "light";
+    const targetOrigin =
+      window.location.origin && window.location.origin !== "null"
+        ? window.location.origin
+        : "*";
     document
       .querySelectorAll("#tracer-embedded-iframe, #prep-embedded-iframe, #uq-embedded-iframe")
       .forEach((frame) => {
@@ -2602,7 +2587,7 @@
             frame.contentDocument.documentElement.setAttribute("data-theme", clean);
           }
           if (frame.contentWindow) {
-            frame.contentWindow.postMessage({ type: "setTheme", theme: clean }, "*");
+            frame.contentWindow.postMessage({ type: "setTheme", theme: clean }, targetOrigin);
           }
         } catch (_) {}
       });
@@ -2755,12 +2740,6 @@
         badge: "Inspector",
         action: () => openCloserLookModal(PROJECTS[0]?.id || "agent-tracer"),
       },
-      ...PROJECTS.map((p) => ({
-        title: p.title,
-        sub: `${p.categoryLabel}, ${p.stack.join(", ")}`,
-        badge: "Project",
-        action: () => openCloserLookModal(p.id),
-      })),
       {
         title: "Open GitHub Profile (@elim316)",
         sub: "https://github.com/elim316",
@@ -2782,9 +2761,19 @@
       },
     ];
 
+    function getAllCommands() {
+      const projectCommands = PROJECTS.map((p) => ({
+        title: p.title,
+        sub: `${p.categoryLabel || getCategoryLabel(p.category)}, ${(p.stack || []).join(", ")}`,
+        badge: "Project",
+        action: () => openCloserLookModal(p.id),
+      }));
+      return [...baseCommands.slice(0, -3), ...projectCommands, ...baseCommands.slice(-3)];
+    }
+
     function renderResults() {
       const q = input.value.trim().toLowerCase();
-      currentItems = baseCommands.filter(
+      currentItems = getAllCommands().filter(
         (item) =>
           !q ||
           item.title.toLowerCase().includes(q) ||
@@ -2949,7 +2938,7 @@
     if (summaryEl) summaryEl.textContent = p.summary;
     if (visualEl) {
       visualEl.innerHTML = getProjectVisual(p);
-      attachSandboxControls(visualEl);
+      attachSandboxControls();
     }
     if (archEl) archEl.textContent = p.architecture || p.summary;
     if (stackEl) {
@@ -3864,14 +3853,6 @@
       });
     });
 
-    const awardBtns = document.querySelectorAll("[data-award-target]");
-    awardBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const target = btn.getAttribute("data-award-target") || "";
-        applyDeepLinkHash(target, true);
-      });
-    });
-
     const skillChips = document.querySelectorAll(".skill-chip[data-skill-cat]");
     skillChips.forEach((chip) => {
       chip.addEventListener("click", () => {
@@ -4436,11 +4417,11 @@
     selA.value =
       PROJECTS.some((p) => p.id === prevValA)
         ? prevValA
-        : PROJECTS[0]?.id || "jumpgate-agentic-lz";
+        : PROJECTS[0]?.id || "agent-tracer";
     selB.value =
       PROJECTS.some((p) => p.id === prevValB)
         ? prevValB
-        : PROJECTS[1]?.id || "gemini-agent-tracer";
+        : PROJECTS[1]?.id || "antigravity-harness";
 
     function renderComparison() {
       const projA = PROJECTS.find((p) => p.id === selA.value) || PROJECTS[0];
@@ -4479,7 +4460,7 @@
 
               <div class="promo-links" style="justify-content: flex-start; margin-top: 4px;">
                 <a href="${escapeHtml(sanitizeHttpUrl(p.repoUrl))}" target="_blank" rel="noopener noreferrer" class="apple-pill solid small">
-                  <span>${escapeHtml(p.linkLabel || "GitHub")} &#8599;</span>
+                  <span>${escapeHtml(p.repoLabel || p.linkLabel || "GitHub")} &#8599;</span>
                 </a>
                 <button type="button" class="apple-pill outline small" data-compare-inspect="${escapeHtml(p.id)}">
                   <span>Closer Look (+)</span>
@@ -4497,7 +4478,7 @@
         });
       });
 
-      attachSandboxControls(grid);
+      attachSandboxControls();
     }
 
     if (!selA.dataset.bound) {
@@ -4541,17 +4522,15 @@
         });
       }
 
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (!spineTicking) {
-            requestAnimationFrame(updateTimelineSpine);
-            spineTicking = true;
-          }
-        },
-        { passive: true }
-      );
-      window.addEventListener("resize", updateTimelineSpine, { passive: true });
+      function scheduleTimelineSpine() {
+        if (!spineTicking) {
+          requestAnimationFrame(updateTimelineSpine);
+          spineTicking = true;
+        }
+      }
+
+      window.addEventListener("scroll", scheduleTimelineSpine, { passive: true });
+      window.addEventListener("resize", scheduleTimelineSpine, { passive: true });
       updateTimelineSpine();
     }
 
@@ -4570,6 +4549,11 @@
       });
     });
 
+    let specularRaf = 0;
+    let pendingCard = null;
+    let pendingClientX = 0;
+    let pendingClientY = 0;
+
     document.addEventListener(
       "pointermove",
       (e) => {
@@ -4579,11 +4563,21 @@
           ".highlight-card, .project-card, .bento-spec-tile, .leadership-card, .pub-card, .timeline-item, .skill-group"
         );
         if (!card) return;
-        const rect = card.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        card.style.setProperty("--card-mx", `${mx.toFixed(1)}px`);
-        card.style.setProperty("--card-my", `${my.toFixed(1)}px`);
+        pendingCard = card;
+        pendingClientX = e.clientX;
+        pendingClientY = e.clientY;
+        if (specularRaf) return;
+        specularRaf = requestAnimationFrame(() => {
+          specularRaf = 0;
+          if (!pendingCard) return;
+          const rect = pendingCard.getBoundingClientRect();
+          const mx = `${(pendingClientX - rect.left).toFixed(1)}px`;
+          const my = `${(pendingClientY - rect.top).toFixed(1)}px`;
+          pendingCard.style.setProperty("--card-mx", mx);
+          pendingCard.style.setProperty("--card-my", my);
+          pendingCard.style.setProperty("--mouse-x", mx);
+          pendingCard.style.setProperty("--mouse-y", my);
+        });
       },
       { passive: true }
     );
