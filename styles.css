@@ -2090,10 +2090,10 @@ textarea {
   line-height: 1.64;
 }
 
-/* Hackathon Honours & 4,000+ Engineer Buildathon Leadership Strip */
+/* Hackathon Honours Full-Width Showcase Card */
 .leadership-bento-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 20px;
   margin-top: 22px;
 }
@@ -2158,9 +2158,9 @@ textarea {
 }
 
 .award-pill-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
   margin-top: 6px;
 }
 
@@ -2172,7 +2172,7 @@ textarea {
   width: 100%;
   text-align: left;
   font-family: var(--font-sans);
-  padding: 11px 14px;
+  padding: 12px 15px;
   border-radius: 12px;
   border: 1px solid var(--border-subtle);
   background: var(--bg-canvas);
@@ -2184,7 +2184,7 @@ textarea {
 }
 
 .award-row-btn:hover {
-  transform: translateX(3px);
+  transform: translateY(-2px);
   border-color: var(--accent);
   background: var(--accent-subtle);
 }
@@ -4806,6 +4806,10 @@ h3,
     justify-content: space-between;
     padding: 0 14px;
     gap: 12px;
+  }
+
+  .award-pill-list {
+    grid-template-columns: 1fr;
   }
 
   .pub-metrics-grid {
