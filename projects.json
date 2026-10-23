@@ -27,7 +27,6 @@
     "excludedRepos": [
       "elim316",
       "elim316.github.io",
-      "Brain-Tumour-Classification",
       "CSC2106-IoT",
       "WeatherPredictor",
       "yolov6-object-detector",
