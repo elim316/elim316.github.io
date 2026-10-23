@@ -2445,13 +2445,6 @@ textarea {
 }
 
 /* Apple M4-Inspired Sculpted Titanium Spec Bento Grid & Before/After Comparison */
-.stack-header-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
 .bento-compare-bar {
   display: inline-flex;
   align-items: center;
@@ -2620,20 +2613,6 @@ textarea {
   border-color: var(--accent);
   color: var(--accent-text);
   transform: scale(1.02);
-}
-
-.closer-look-plus-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--apple-blue);
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1;
 }
 
 /* ==========================================================================
@@ -3955,9 +3934,6 @@ textarea {
 
 @media (max-width: 840px) {
   .bezel-grid,
-  .about-grid,
-  .about-bento,
-  .stage-visual-grid,
   .promo-grid,
   .skills-grid,
   .apple-bento-specs,
@@ -3992,8 +3968,8 @@ textarea {
   margin-top: 38px;
   padding: 34px 36px;
   border-radius: 26px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
   display: flex;
   align-items: center;
@@ -4047,10 +4023,7 @@ textarea {
   .project-visual,
   .promo-links,
   .pub-actions,
-  .closing-cta-card,
-  #hero-print-cv-btn,
-  #footer-print-cv-btn,
-  #print-cv-btn {
+  .closing-cta-card {
     display: none !important;
   }
 
