@@ -2445,6 +2445,10 @@ textarea {
 }
 
 /* Apple M4-Inspired Sculpted Titanium Spec Bento Grid & Before/After Comparison */
+.by-numbers-header {
+  margin-top: 48px;
+}
+
 .bento-compare-bar {
   display: inline-flex;
   align-items: center;
