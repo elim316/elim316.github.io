@@ -63,10 +63,10 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-62" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-63" />
   <link rel="preload" href="fonts/SFProDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="fonts/SFProText-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="styles.css?v=20261023-62" />
+  <link rel="stylesheet" href="styles.css?v=20261023-63" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -79,9 +79,9 @@
 
       <nav class="nav-links" id="nav-dock" aria-label="Primary Navigation">
         <a href="#top" class="nav-link active" data-section="top" id="nav-overview">Profile</a>
+        <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Experience</a>
         <a href="#featured" class="nav-link" data-section="featured" id="nav-featured">Featured Repos</a>
         <a href="#projects" class="nav-link" data-section="projects" id="nav-projects">All Projects</a>
-        <a href="#journey" class="nav-link" data-section="journey" id="nav-journey">Experience</a>
         <a href="#publications" class="nav-link" data-section="publications" id="nav-publications">Research</a>
         <a href="#stack" class="nav-link" data-section="stack" id="nav-stack">Toolkit</a>
       </nav>
@@ -363,10 +363,183 @@
         </div>
       </div>
 
-      <a href="#featured" class="scroll-cue" aria-label="Scroll down to key highlights and featured repositories">
-        <span>Scroll down to explore highlights and repositories</span>
+      <a href="#journey" class="scroll-cue" aria-label="Scroll down to career experience, key highlights, and featured repositories">
+        <span>Scroll down to explore experience and repositories</span>
         <span class="scroll-chevron" aria-hidden="true">&#8595;</span>
       </a>
+    </section>
+
+    <!-- ======================================================================
+         2. Experience, Education & Awards Timeline (#journey)
+         ====================================================================== -->
+    <section id="journey" class="section container" data-section-target="journey">
+      <div class="section-header reveal-on-scroll">
+        <div>
+          <span class="section-eyebrow">EXPERIENCE &amp; EDUCATION</span>
+          <h2 class="section-title">Career progression. <span class="apple-tone-muted">Cloud, systems, and research.</span></h2>
+          <p class="section-subtitle">
+            Engineering roles across cloud infrastructure, high-scale backend systems, and applied machine learning research.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-list" id="timeline-list">
+        <div class="timeline-spine" aria-hidden="true">
+          <div class="timeline-spine-fill" id="timeline-spine-fill"></div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll is-lit" id="milestone-gcloud">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
+          <div class="timeline-meta">
+            <span class="timeline-year">Apr 2026 to Present</span>
+            <span class="timeline-tag">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24Z"/><path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96Z"/></svg>
+              <span>Google Singapore</span>
+            </span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Customer Engineer at Google</h3>
+            <!-- [JUMPGATE HIDDEN — UNCOMMENT THIS PARAGRAPH TO RE-ENABLE JUMPGATE TIMELINE COPY]
+            <p class="timeline-desc">
+              Co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone (Terraform, Cloud Armor WAF, Serverless NEG, Private Service Connect, Secure Web Proxy) and 14-step Vending Machine Agent (with &gt;=0.85 LLM-as-a-Judge quality gate) that cuts deployment from 4 to 6 weeks to under 3 minutes while passing 14/14 Ingress runtime and 18/18 Egress static security checks. Contributed to $1.96M in realised public sector ARR (plus $1.46M pipeline ARR), built the native Antigravity Agent Tracer visualiser, and led AI buildathons for 4,000+ engineers and students.
+            </p>
+            -->
+            <p class="timeline-desc">
+              Architecting secure cloud and agentic AI workflows on Cloud Run, the Gemini platform, and Terraform. Built the native Antigravity Agent Tracer execution visualiser and two-by-two Antigravity Harness workspace with live 200k context telemetry (awarded 1st Place at Google's AI Agent Lab Hackathon 2026), and led AI buildathons training over 4,000 engineers and students across NTU, GovTech, DBS Bank, and A*STAR.
+            </p>
+            <div class="timeline-proof-row" aria-label="Google Singapore related systems">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-agent-tracer">
+                <span>Agent Tracer Sandbox &#8595;</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-meeting-prep">
+                <span>Meeting Dossier Sandbox &#8595;</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#leadership-strip">
+                <span>4x Hackathon Honours &#8595;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll" id="milestone-grab">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
+          <div class="timeline-meta">
+            <span class="timeline-year">Jan 2026 to Mar 2026</span>
+            <span class="timeline-tag">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.5" fill="#00B14F"/><path fill="#FFFFFF" d="M12.2 5.5c-3.7 0-6.5 2.8-6.5 6.5s2.8 6.5 6.5 6.5c2.9 0 5.3-1.8 6.1-4.4H13v-2.4h7.5v1.1c0 4.6-3.5 8.1-8.3 8.1-4.9 0-8.9-4-8.9-8.9s4-8.9 8.9-8.9c2.5 0 4.8 1 6.4 2.6l-1.8 1.8c-1.1-1.2-2.7-2-4.6-2Z"/></svg>
+              <span>Grab Singapore</span>
+            </span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Trust Software Engineer at Grab</h3>
+            <p class="timeline-desc">
+              Built scalable Golang backend services for real-time fraud detection, implementing runtime control mechanisms such as feature flags and rate limiting on petabyte-scale risk infrastructure. Expanded automated unit test coverage, resolved production defects, and contributed to architecture and code reviews across Agile sprints.
+            </p>
+            <div class="timeline-proof-row" aria-label="Grab Singapore related systems">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-multi-cloud-serverless">
+                <span>Inspect Cloud &amp; Go Architecture +</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#projects-fullstack">
+                <span>Backend &amp; Cloud Repos &#8595;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll" id="milestone-astar">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
+          <div class="timeline-meta">
+            <span class="timeline-year">Sep 2024 to May 2025</span>
+            <span class="timeline-tag">
+              <img class="brand-icon brand-icon-img" src="astar-logo.png" alt="" aria-hidden="true" />
+              <span>A*STAR Singapore</span>
+            </span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">AI Research Intern at A*STAR (Agency for Science, Technology and Research)</h3>
+            <p class="timeline-desc">
+              Designed and implemented a unified uncertainty-aware deep learning framework for battery State-of-Health estimation that quantifies both model and data uncertainty alongside model-agnostic explainability (SHAP and LIME). First author of "A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks" (APSIPA ASC 2025 / IEEE Xplore).
+            </p>
+            <div class="timeline-proof-row" aria-label="A*STAR Singapore related research">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-uq-xai">
+                <span>Launch Battery Digital Twin &#8595;</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#pub-battery-xai">
+                <span>IEEE Xplore Paper (95.2% PICP) &#8595;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll" id="milestone-education">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
+          <div class="timeline-meta">
+            <span class="timeline-year">Aug 2022 to May 2025</span>
+            <span class="timeline-tag">
+              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.5" fill="#00539B"/><path fill="#FFFFFF" d="M12 4.5L3.5 9 12 13.5 20.5 9 12 4.5Zm-5.5 7.2v4.2c0 1.8 2.5 3.3 5.5 3.3s5.5-1.5 5.5-3.3v-4.2L12 14.8l-5.5-3.1Z"/></svg>
+              <span>Glasgow &amp; SIT</span>
+            </span>
+          </div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">BSc (Hons) Computer Science (Second Upper Class), University of Glasgow &amp; SIT</h3>
+            <p class="timeline-desc">
+              Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025 (EduVerse), Overall Best (Intermediate) and Most Impactful at the AI Singapore, SMU, and CyberYouthSG Hackathon, and Semifinalist at DSTA BrainHack 2024 TIL-AI (Autonomous Air Defence System).
+            </p>
+            <div class="timeline-proof-row" aria-label="University & Hackathon systems">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-eduverse">
+                <span>EduVerse (2nd Place LifeHack) +</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-mindsync">
+                <span>MINDSync (Overall Best AISG) +</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-operation-guardian">
+                <span>Autonomous Air Defence (DSTA) +</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scannable Full-Width Hackathon Honours Showcase Card -->
+      <div class="leadership-bento-grid reveal-on-scroll" id="leadership-strip">
+        <div class="leadership-card">
+          <div class="leadership-card-header">
+            <span class="leadership-eyebrow">HACKATHON HONOURS</span>
+            <span class="leadership-badge">4x Award Winner / Finalist</span>
+          </div>
+          <h3 class="leadership-title">Competitive AI &amp; Systems Engineering</h3>
+          <div class="award-pill-list">
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-agent-tracer">
+              <div class="award-row-main">
+                <span class="award-rank-pill rank-blue">1st Place Overall</span>
+                <span class="award-event-name">Google AI Agent Lab Hackathon 2026</span>
+              </div>
+              <span class="award-project-link">Antigravity Agent Tracer &#8599;</span>
+            </button>
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-eduverse">
+              <div class="award-row-main">
+                <span class="award-rank-pill rank-blue">2nd Place Overall</span>
+                <span class="award-event-name">NUS, Singtel &amp; Millennium LifeHack 2025</span>
+              </div>
+              <span class="award-project-link">EduVerse AI Platform &#8599;</span>
+            </button>
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-mindsync">
+              <div class="award-row-main">
+                <span class="award-rank-pill rank-emerald">Overall Best &amp; Most Impactful</span>
+                <span class="award-event-name">AI Singapore, SMU &amp; CyberYouthSG</span>
+              </div>
+              <span class="award-project-link">MINDSync Suite &#8599;</span>
+            </button>
+            <button type="button" class="award-row-btn" data-bento-target="#inspect-operation-guardian">
+              <div class="award-row-main">
+                <span class="award-rank-pill rank-amber">Semifinalist</span>
+                <span class="award-event-name">DSTA BrainHack 2024 (TIL-AI)</span>
+              </div>
+              <span class="award-project-link">Autonomous Air Defence &#8599;</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- [BUILDER STAGE HIDDEN — UNCOMMENT THIS SECTION AND RE-ENABLE DOT 2 TO SHOW SEPARATE BUILDER PREVIEW STAGE]
@@ -1454,204 +1627,6 @@
     </section>
 
     <!-- ======================================================================
-         4. Experience, Education & Awards Timeline (#journey)
-         ====================================================================== -->
-    <section id="journey" class="section container" data-section-target="journey">
-      <div class="section-header reveal-on-scroll">
-        <div>
-          <span class="section-eyebrow">EXPERIENCE &amp; EDUCATION</span>
-          <h2 class="section-title">Career progression. <span class="apple-tone-muted">Cloud, systems, and research.</span></h2>
-          <p class="section-subtitle">
-            Engineering roles across cloud infrastructure, high-scale backend systems, and applied machine learning research.
-          </p>
-        </div>
-      </div>
-
-      <div class="timeline-list" id="timeline-list">
-        <div class="timeline-spine" aria-hidden="true">
-          <div class="timeline-spine-fill" id="timeline-spine-fill"></div>
-        </div>
-
-        <div class="timeline-item reveal-on-scroll is-lit" id="milestone-gcloud">
-          <span class="timeline-node-dot" aria-hidden="true"></span>
-          <div class="timeline-meta">
-            <span class="timeline-year">Apr 2026 to Present</span>
-            <span class="timeline-tag">
-              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82Z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24Z"/><path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09Z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96Z"/></svg>
-              <span>Google Singapore</span>
-            </span>
-          </div>
-          <div class="timeline-content">
-            <h3 class="timeline-title">Customer Engineer at Google</h3>
-            <!-- [JUMPGATE HIDDEN — UNCOMMENT THIS PARAGRAPH TO RE-ENABLE JUMPGATE TIMELINE COPY]
-            <p class="timeline-desc">
-              Co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone (Terraform, Cloud Armor WAF, Serverless NEG, Private Service Connect, Secure Web Proxy) and 14-step Vending Machine Agent (with &gt;=0.85 LLM-as-a-Judge quality gate) that cuts deployment from 4 to 6 weeks to under 3 minutes while passing 14/14 Ingress runtime and 18/18 Egress static security checks. Contributed to $1.96M in realised public sector ARR (plus $1.46M pipeline ARR), built the native Antigravity Agent Tracer visualiser, and led AI buildathons for 4,000+ engineers and students.
-            </p>
-            -->
-            <p class="timeline-desc">
-              Architecting secure cloud and agentic AI workflows on Cloud Run, the Gemini platform, and Terraform. Built the native Antigravity Agent Tracer execution visualiser and two-by-two Antigravity Harness workspace with live 200k context telemetry (awarded 1st Place at Google's AI Agent Lab Hackathon 2026), and led AI buildathons training over 4,000 engineers and students across NTU, GovTech, DBS Bank, and A*STAR.
-            </p>
-            <div class="timeline-proof-row" aria-label="Google Singapore related systems">
-              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-agent-tracer">
-                <span>Agent Tracer Sandbox &#8593;</span>
-              </button>
-              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-meeting-prep">
-                <span>Meeting Dossier Sandbox &#8593;</span>
-              </button>
-              <button type="button" class="timeline-proof-pill" data-bento-target="#leadership-strip">
-                <span>4,000+ Engineers Trained &#8595;</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-on-scroll" id="milestone-grab">
-          <span class="timeline-node-dot" aria-hidden="true"></span>
-          <div class="timeline-meta">
-            <span class="timeline-year">Jan 2026 to Mar 2026</span>
-            <span class="timeline-tag">
-              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.5" fill="#00B14F"/><path fill="#FFFFFF" d="M12.2 5.5c-3.7 0-6.5 2.8-6.5 6.5s2.8 6.5 6.5 6.5c2.9 0 5.3-1.8 6.1-4.4H13v-2.4h7.5v1.1c0 4.6-3.5 8.1-8.3 8.1-4.9 0-8.9-4-8.9-8.9s4-8.9 8.9-8.9c2.5 0 4.8 1 6.4 2.6l-1.8 1.8c-1.1-1.2-2.7-2-4.6-2Z"/></svg>
-              <span>Grab Singapore</span>
-            </span>
-          </div>
-          <div class="timeline-content">
-            <h3 class="timeline-title">Trust Software Engineer at Grab</h3>
-            <p class="timeline-desc">
-              Built scalable Golang backend services for real-time fraud detection, implementing runtime control mechanisms such as feature flags and rate limiting on petabyte-scale risk infrastructure. Expanded automated unit test coverage, resolved production defects, and contributed to architecture and code reviews across Agile sprints.
-            </p>
-            <div class="timeline-proof-row" aria-label="Grab Singapore related systems">
-              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-multi-cloud-serverless">
-                <span>Inspect Cloud &amp; Go Architecture +</span>
-              </button>
-              <button type="button" class="timeline-proof-pill" data-bento-target="#projects-fullstack">
-                <span>Backend &amp; Cloud Repos &#8593;</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-on-scroll" id="milestone-astar">
-          <span class="timeline-node-dot" aria-hidden="true"></span>
-          <div class="timeline-meta">
-            <span class="timeline-year">Sep 2024 to May 2025</span>
-            <span class="timeline-tag">
-              <img class="brand-icon brand-icon-img" src="astar-logo.png" alt="" aria-hidden="true" />
-              <span>A*STAR Singapore</span>
-            </span>
-          </div>
-          <div class="timeline-content">
-            <h3 class="timeline-title">AI Research Intern at A*STAR (Agency for Science, Technology and Research)</h3>
-            <p class="timeline-desc">
-              Designed and implemented a unified uncertainty-aware deep learning framework for battery State-of-Health estimation that quantifies both model and data uncertainty alongside model-agnostic explainability (SHAP and LIME). First author of "A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks" (APSIPA ASC 2025 / IEEE Xplore).
-            </p>
-            <div class="timeline-proof-row" aria-label="A*STAR Singapore related research">
-              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-uq-xai">
-                <span>Launch Battery Digital Twin &#8593;</span>
-              </button>
-              <button type="button" class="timeline-proof-pill" data-bento-target="#pub-battery-xai">
-                <span>IEEE Xplore Paper (95.2% PICP) &#8595;</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item reveal-on-scroll" id="milestone-education">
-          <span class="timeline-node-dot" aria-hidden="true"></span>
-          <div class="timeline-meta">
-            <span class="timeline-year">Aug 2022 to May 2025</span>
-            <span class="timeline-tag">
-              <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.5" fill="#00539B"/><path fill="#FFFFFF" d="M12 4.5L3.5 9 12 13.5 20.5 9 12 4.5Zm-5.5 7.2v4.2c0 1.8 2.5 3.3 5.5 3.3s5.5-1.5 5.5-3.3v-4.2L12 14.8l-5.5-3.1Z"/></svg>
-              <span>Glasgow &amp; SIT</span>
-            </span>
-          </div>
-          <div class="timeline-content">
-            <h3 class="timeline-title">BSc (Hons) Computer Science (Second Upper Class), University of Glasgow &amp; SIT</h3>
-            <p class="timeline-desc">
-              Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025 (EduVerse), Overall Best (Intermediate) and Most Impactful at the AI Singapore, SMU, and CyberYouthSG Hackathon, and Semifinalist at DSTA BrainHack 2024 TIL-AI (Autonomous Air Defence System).
-            </p>
-            <div class="timeline-proof-row" aria-label="University & Hackathon systems">
-              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-eduverse">
-                <span>EduVerse (2nd Place LifeHack) +</span>
-              </button>
-              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-mindsync">
-                <span>MINDSync (Overall Best AISG) +</span>
-              </button>
-              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-operation-guardian">
-                <span>Autonomous Air Defence (DSTA) +</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scannable Hackathon Awards & 4,000+ Engineer Buildathon Leadership Showcase Strip -->
-      <div class="leadership-bento-grid reveal-on-scroll" id="leadership-strip">
-        <div class="leadership-card">
-          <div class="leadership-card-header">
-            <span class="leadership-eyebrow">HACKATHON HONOURS</span>
-            <span class="leadership-badge">4x Award Winner / Finalist</span>
-          </div>
-          <h3 class="leadership-title">Competitive AI &amp; Systems Engineering</h3>
-          <div class="award-pill-list">
-            <button type="button" class="award-row-btn" data-bento-target="#inspect-agent-tracer">
-              <div class="award-row-main">
-                <span class="award-rank-pill rank-blue">1st Place Overall</span>
-                <span class="award-event-name">Google AI Agent Lab Hackathon 2026</span>
-              </div>
-              <span class="award-project-link">Antigravity Agent Tracer &#8599;</span>
-            </button>
-            <button type="button" class="award-row-btn" data-bento-target="#inspect-eduverse">
-              <div class="award-row-main">
-                <span class="award-rank-pill rank-blue">2nd Place Overall</span>
-                <span class="award-event-name">NUS, Singtel & Millennium LifeHack 2025</span>
-              </div>
-              <span class="award-project-link">EduVerse AI Platform &#8599;</span>
-            </button>
-            <button type="button" class="award-row-btn" data-bento-target="#inspect-mindsync">
-              <div class="award-row-main">
-                <span class="award-rank-pill rank-emerald">Overall Best &amp; Most Impactful</span>
-                <span class="award-event-name">AI Singapore, SMU & CyberYouthSG</span>
-              </div>
-              <span class="award-project-link">MINDSync Suite &#8599;</span>
-            </button>
-            <button type="button" class="award-row-btn" data-bento-target="#inspect-operation-guardian">
-              <div class="award-row-main">
-                <span class="award-rank-pill rank-amber">Semifinalist</span>
-                <span class="award-event-name">DSTA BrainHack 2024 (TIL-AI)</span>
-              </div>
-              <span class="award-project-link">Autonomous Air Defence &#8599;</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="leadership-card">
-          <div class="leadership-card-header">
-            <span class="leadership-eyebrow">TECHNICAL ENABLEMENT &amp; WORKSHOPS</span>
-            <span class="leadership-badge">4,000+ Engineers &amp; Students</span>
-          </div>
-          <h3 class="leadership-title">AI Buildathons &amp; Cloud Architecture Training</h3>
-          <p class="leadership-desc">
-            Designed and delivered hands-on agentic AI, Gemini platform, and zero-trust Google Cloud architecture buildathons across Singapore's public sector, banking, and research institutions.
-          </p>
-          <div class="institution-badge-row" aria-label="Partner institutions trained">
-            <span class="institution-pill">
-              <span>GovTech Singapore</span>
-            </span>
-            <span class="institution-pill">
-              <span>DBS Bank</span>
-            </span>
-            <span class="institution-pill">
-              <span>NTU Singapore</span>
-            </span>
-            <span class="institution-pill">
-              <span>A*STAR Singapore</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
          5. Publications Section
          ====================================================================== -->
     <section id="publications" class="section container" data-section-target="publications">
@@ -2260,6 +2235,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261023-62"></script>
+  <script src="app.js?v=20261023-63"></script>
 </body>
 </html>
