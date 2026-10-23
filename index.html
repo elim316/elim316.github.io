@@ -25,7 +25,7 @@
   />
   <meta property="og:url" content="https://elim316.github.io/" />
   <meta property="og:locale" content="en_GB" />
-  <meta property="og:image" content="https://elim316.github.io/og-image.png?v=20261023-59" />
+  <meta property="og:image" content="https://elim316.github.io/og-image.png?v=20261023-60" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
@@ -36,7 +36,7 @@
     name="twitter:description"
     content="Engineering portfolio of Elias Lim. Agentic AI systems, cloud architecture, and machine learning research."
   />
-  <meta name="twitter:image" content="https://elim316.github.io/og-image.png?v=20261023-59" />
+  <meta name="twitter:image" content="https://elim316.github.io/og-image.png?v=20261023-60" />
 
   <!-- JSON-LD Structured Data (no email address) -->
   <script type="application/ld+json">
@@ -63,10 +63,10 @@
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-59" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261023-60" />
   <link rel="preload" href="fonts/SFProDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="fonts/SFProText-Regular.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="styles.css?v=20261023-59" />
+  <link rel="stylesheet" href="styles.css?v=20261023-60" />
 </head>
 <body>
   <!-- Frosted Global Navigation Bar -->
@@ -111,19 +111,6 @@
       </div>
     </div>
   </header>
-
-  <!-- Apple Two-Tier Sticky Product Sub-Navigation Bar (ac-localnav) -->
-  <div class="apple-localnav" id="apple-localnav" role="navigation" aria-label="Section sub-navigation">
-    <div class="localnav-inner">
-      <a href="#top" class="localnav-title" id="localnav-active-title">Profile</a>
-      <div class="localnav-chapters" id="localnav-chapters" role="menubar" aria-label="Section subheadings">
-        <a href="#about-google" class="localnav-link active" data-localnav-item="about-google">Google Cloud</a>
-        <a href="#about-grab" class="localnav-link" data-localnav-item="about-grab">Grab</a>
-        <a href="#about-astar" class="localnav-link" data-localnav-item="about-astar">A*STAR</a>
-        <a href="#about-beyond" class="localnav-link" data-localnav-item="about-beyond">Education</a>
-      </div>
-    </div>
-  </div>
 
   <main id="top">
     <!-- ======================================================================
@@ -964,7 +951,7 @@
                     <iframe
                       id="tracer-embedded-iframe"
                       class="tracer-sandbox-frame"
-                      data-src="sandbox/agent-tracer/index.html?embed=1&amp;v=20261023-59"
+                      data-src="sandbox/agent-tracer/index.html?embed=1&amp;v=20261023-60"
                       title="Interactive Agent Tracer Sandbox"
                     ></iframe>
                   </div>
@@ -1090,8 +1077,8 @@
                     <iframe
                       id="prep-embedded-iframe"
                       class="tracer-sandbox-frame"
-                      src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-59"
-                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-59"
+                      src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-60"
+                      data-src="sandbox/meeting-prep/index.html?embed=1&amp;v=20261023-60"
                       title="Interactive Meeting Prep Week Calendar"
                     ></iframe>
                   </div>
@@ -1282,8 +1269,8 @@
                     <iframe
                       id="uq-embedded-iframe"
                       class="tracer-sandbox-frame"
-                      src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-59"
-                      data-src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-59"
+                      src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-60"
+                      data-src="sandbox/uq-battery/index.html?embed=1&amp;v=20261023-60"
                       title="Interactive Battery UQ and XAI Digital Twin"
                     ></iframe>
                   </div>
@@ -1477,8 +1464,13 @@
         </div>
       </div>
 
-      <div class="timeline-list">
-        <div class="timeline-item reveal-on-scroll" id="milestone-gcloud">
+      <div class="timeline-list" id="timeline-list">
+        <div class="timeline-spine" aria-hidden="true">
+          <div class="timeline-spine-fill" id="timeline-spine-fill"></div>
+        </div>
+
+        <div class="timeline-item reveal-on-scroll is-lit" id="milestone-gcloud">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
           <div class="timeline-meta">
             <span class="timeline-year">Apr 2026 to Present</span>
             <span class="timeline-tag">
@@ -1496,10 +1488,22 @@
             <p class="timeline-desc">
               Architecting secure cloud and agentic AI workflows on Cloud Run, the Gemini platform, and Terraform. Built the native Antigravity Agent Tracer execution visualiser and two-by-two Antigravity Harness workspace with live 200k context telemetry (awarded 1st Place at Google's AI Agent Lab Hackathon 2026), and led AI buildathons training over 4,000 engineers and students across NTU, GovTech, DBS Bank, and A*STAR.
             </p>
+            <div class="timeline-proof-row" aria-label="Google Singapore related systems">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-agent-tracer">
+                <span>Agent Tracer Sandbox &#8593;</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-meeting-prep">
+                <span>Meeting Dossier Sandbox &#8593;</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#leadership-strip">
+                <span>4,000+ Engineers Trained &#8595;</span>
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="timeline-item reveal-on-scroll" id="milestone-grab">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
           <div class="timeline-meta">
             <span class="timeline-year">Jan 2026 to Mar 2026</span>
             <span class="timeline-tag">
@@ -1512,10 +1516,19 @@
             <p class="timeline-desc">
               Built scalable Golang backend services for real-time fraud detection, implementing runtime control mechanisms such as feature flags and rate limiting on petabyte-scale risk infrastructure. Expanded automated unit test coverage, resolved production defects, and contributed to architecture and code reviews across Agile sprints.
             </p>
+            <div class="timeline-proof-row" aria-label="Grab Singapore related systems">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-multicloud-serverless">
+                <span>Inspect Cloud &amp; Go Architecture +</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#projects-fullstack">
+                <span>Backend &amp; Cloud Repos &#8593;</span>
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="timeline-item reveal-on-scroll" id="milestone-astar">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
           <div class="timeline-meta">
             <span class="timeline-year">Sep 2024 to May 2025</span>
             <span class="timeline-tag">
@@ -1528,10 +1541,19 @@
             <p class="timeline-desc">
               Designed and implemented a unified uncertainty-aware deep learning framework for battery State-of-Health estimation that quantifies both model and data uncertainty alongside model-agnostic explainability (SHAP and LIME). First author of "A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks" (APSIPA ASC 2025 / IEEE Xplore).
             </p>
+            <div class="timeline-proof-row" aria-label="A*STAR Singapore related research">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#showcase-uq-xai">
+                <span>Launch Battery Digital Twin &#8593;</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#pub-battery-xai">
+                <span>IEEE Xplore Paper (95.2% PICP) &#8595;</span>
+              </button>
+            </div>
           </div>
         </div>
 
         <div class="timeline-item reveal-on-scroll" id="milestone-education">
+          <span class="timeline-node-dot" aria-hidden="true"></span>
           <div class="timeline-meta">
             <span class="timeline-year">Aug 2022 to May 2025</span>
             <span class="timeline-tag">
@@ -1544,6 +1566,17 @@
             <p class="timeline-desc">
               Awarded 2nd Place Overall at NUS, Singtel, and Millennium Management LifeHack 2025 (EduVerse), Overall Best (Intermediate) and Most Impactful at the AI Singapore, SMU, and CyberYouthSG Hackathon, and Semifinalist at DSTA BrainHack 2024 TIL-AI (Autonomous Air Defence System).
             </p>
+            <div class="timeline-proof-row" aria-label="University & Hackathon systems">
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-eduverse">
+                <span>EduVerse (2nd Place LifeHack) +</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-mindsync">
+                <span>MINDSync (Overall Best AISG) +</span>
+              </button>
+              <button type="button" class="timeline-proof-pill" data-bento-target="#inspect-operation-guardian">
+                <span>Autonomous Air Defence (DSTA) +</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1629,82 +1662,176 @@
 
       <div class="pub-list">
         <article class="pub-card reveal-on-scroll" id="pub-battery-xai">
-          <div class="pub-info">
-            <div class="pub-meta-row">
-              <span class="pub-venue">APSIPA ASC 2025, IEEE Xplore (Doc 11249263)</span>
-              <span class="pub-year">First Author, 2025</span>
+          <div class="pub-card-top-row">
+            <div class="pub-info">
+              <div class="pub-meta-row">
+                <span class="pub-venue">APSIPA ASC 2025, IEEE Xplore (Doc 11249263)</span>
+                <span class="pub-year">First Author, 2025</span>
+              </div>
+              <h3 class="pub-title">
+                A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks
+              </h3>
+              <p class="pub-desc">
+                Designed a deep learning framework that wraps every battery lifespan prediction in a verified 95.2% confidence range (with 0.012 calibration accuracy) and explains which physical signals, such as voltage and heat, drove each forecast across the McMaster and Oxford datasets.
+              </p>
             </div>
-            <h3 class="pub-title">
-              A Unified Framework for Interpretable and Uncertainty-Aware Battery State of Health Estimation Using Deep Neural Networks
-            </h3>
-            <p class="pub-desc">
-              Designed a deep learning framework that wraps every battery lifespan prediction in a verified 95.2% confidence range (with 0.012 calibration accuracy) and explains which physical signals, such as voltage and heat, drove each forecast across the McMaster and Oxford datasets.
-            </p>
+            <div class="pub-actions">
+              <button
+                type="button"
+                class="tactile-btn small pub-abstract-btn"
+                data-pub-drawer="pub-drawer-11249263"
+                aria-expanded="false"
+              >
+                <span class="pub-abstract-label">Read Abstract &amp; Results</span>
+                <span class="pub-abstract-chevron" aria-hidden="true">+</span>
+              </button>
+              <button
+                type="button"
+                class="tactile-btn small"
+                data-bento-target="#showcase-uq-xai"
+              >
+                <span>Launch Digital Twin</span>
+                <span class="arrow-glyph" aria-hidden="true">&#8593;</span>
+              </button>
+              <a
+                href="https://ieeexplore.ieee.org/document/11249263"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="tactile-btn small"
+                id="pub-link-11249263"
+              >
+                <span>IEEE Paper</span>
+                <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
+              </a>
+              <a
+                href="https://github.com/elim316/UQ-XAI-battery-analytics"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="tactile-btn small"
+                id="pub-repo-11249263"
+              >
+                <span>Code</span>
+                <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
+              </a>
+              <button
+                type="button"
+                class="tactile-btn small bibtex-btn"
+                id="bibtex-btn-11249263"
+                data-doc-id="11249263"
+              >
+                <span class="bibtex-label">Copy BibTeX</span>
+              </button>
+            </div>
           </div>
-          <div class="pub-actions">
-            <a
-              href="https://ieeexplore.ieee.org/document/11249263"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="tactile-btn small"
-              id="pub-link-11249263"
-            >
-              <span>IEEE Paper</span>
-              <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
-            </a>
-            <a
-              href="https://github.com/elim316/UQ-XAI-battery-analytics"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="tactile-btn small"
-              id="pub-repo-11249263"
-            >
-              <span>Code</span>
-              <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
-            </a>
-            <button
-              type="button"
-              class="tactile-btn small bibtex-btn"
-              id="bibtex-btn-11249263"
-              data-doc-id="11249263"
-            >
-              <span class="bibtex-label">Copy BibTeX</span>
-            </button>
+
+          <div class="pub-abstract-drawer" id="pub-drawer-11249263">
+            <div class="pub-abstract-collapse">
+              <div class="pub-abstract-inner">
+                <div class="pub-metrics-grid">
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">EMPIRICAL COVERAGE</span>
+                    <span class="pub-metric-val">95.2% PICP</span>
+                    <span class="pub-metric-sub">Target &gt;= 95.0% across ageing cycles</span>
+                  </div>
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">CALIBRATION ERROR</span>
+                    <span class="pub-metric-val">0.012 ECE</span>
+                    <span class="pub-metric-sub">Distribution-free Adaptive Conformal</span>
+                  </div>
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">BENCHMARK DATASETS</span>
+                    <span class="pub-metric-val">McMaster &amp; Oxford</span>
+                    <span class="pub-metric-sub">Dynamic drive-cycle &amp; constant-current cells</span>
+                  </div>
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">ATTRIBUTION SUITE</span>
+                    <span class="pub-metric-val">4 XAI Methods</span>
+                    <span class="pub-metric-sub">SHAP, LIME, Integrated Gradients &amp; CF</span>
+                  </div>
+                </div>
+                <p class="pub-abstract-text">
+                  Abstract: Accurate State-of-Health (SOH) estimation is critical for safe lithium-ion battery operation, yet point-estimate deep neural networks provide neither calibrated confidence bounds under distribution shift nor physical interpretability. This paper introduces a unified framework pairing convolutional SOH estimation with Adaptive Conformal Inference (ACI) to guarantee finite-sample coverage across non-exchangeable ageing trajectories, alongside cross-validated SHAP, LIME, Integrated Gradients, and Counterfactual explanations that isolate voltage relaxation, incremental capacity peaks, and thermal rise at knee-point degradation.
+                </p>
+              </div>
+            </div>
           </div>
         </article>
 
         <article class="pub-card reveal-on-scroll" id="pub-teamwork-ed">
-          <div class="pub-info">
-            <div class="pub-meta-row">
-              <span class="pub-venue">IEEE Xplore, Document 10892827</span>
-              <span class="pub-year">2025</span>
+          <div class="pub-card-top-row">
+            <div class="pub-info">
+              <div class="pub-meta-row">
+                <span class="pub-venue">IEEE Xplore, Document 10892827</span>
+                <span class="pub-year">2025</span>
+              </div>
+              <h3 class="pub-title">
+                Teamwork Assessment in Software Engineering Education
+              </h3>
+              <p class="pub-desc">
+                Evaluated practical data-driven methods for measuring collaboration and engineering contribution patterns across software student teams.
+              </p>
             </div>
-            <h3 class="pub-title">
-              Teamwork Assessment in Software Engineering Education
-            </h3>
-            <p class="pub-desc">
-              Evaluated practical data-driven methods for measuring collaboration and engineering contribution patterns across software student teams.
-            </p>
+            <div class="pub-actions">
+              <button
+                type="button"
+                class="tactile-btn small pub-abstract-btn"
+                data-pub-drawer="pub-drawer-10892827"
+                aria-expanded="false"
+              >
+                <span class="pub-abstract-label">Read Abstract &amp; Results</span>
+                <span class="pub-abstract-chevron" aria-hidden="true">+</span>
+              </button>
+              <a
+                href="https://ieeexplore.ieee.org/document/10892827"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="tactile-btn small"
+                id="pub-link-10892827"
+              >
+                <span>IEEE Paper</span>
+                <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
+              </a>
+              <button
+                type="button"
+                class="tactile-btn small bibtex-btn"
+                id="bibtex-btn-10892827"
+                data-doc-id="10892827"
+              >
+                <span class="bibtex-label">Copy BibTeX</span>
+              </button>
+            </div>
           </div>
-          <div class="pub-actions">
-            <a
-              href="https://ieeexplore.ieee.org/document/10892827"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="tactile-btn small"
-              id="pub-link-10892827"
-            >
-              <span>IEEE Paper</span>
-              <span class="arrow-glyph" aria-hidden="true">&#8599;</span>
-            </a>
-            <button
-              type="button"
-              class="tactile-btn small bibtex-btn"
-              id="bibtex-btn-10892827"
-              data-doc-id="10892827"
-            >
-              <span class="bibtex-label">Copy BibTeX</span>
-            </button>
+
+          <div class="pub-abstract-drawer" id="pub-drawer-10892827">
+            <div class="pub-abstract-collapse">
+              <div class="pub-abstract-inner">
+                <div class="pub-metrics-grid">
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">TELEMETRY SIGNALS</span>
+                    <span class="pub-metric-val">Git, PR &amp; Peer Data</span>
+                    <span class="pub-metric-sub">Commit cadence, code review &amp; sprint velocity</span>
+                  </div>
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">EVALUATION SCOPE</span>
+                    <span class="pub-metric-val">Multi-Team Cohorts</span>
+                    <span class="pub-metric-sub">Longitudinal software engineering capstones</span>
+                  </div>
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">ASSESSMENT OUTCOME</span>
+                    <span class="pub-metric-val">Fair Contribution</span>
+                    <span class="pub-metric-sub">Reduces subjective peer-grading bias</span>
+                  </div>
+                  <div class="pub-metric-cell">
+                    <span class="pub-metric-label">PUBLICATION VENUE</span>
+                    <span class="pub-metric-val">IEEE Xplore (2025)</span>
+                    <span class="pub-metric-sub">Document 10892827</span>
+                  </div>
+                </div>
+                <p class="pub-abstract-text">
+                  Abstract: Assessing individual contributions within collaborative software engineering projects remains challenging when relying solely on end-of-term peer surveys. This study investigates combining repository activity, pull-request review interactions, and structured milestone evaluations to provide instructors and students with transparent, actionable feedback throughout the delivery lifecycle.
+                </p>
+              </div>
+            </div>
           </div>
         </article>
       </div>
@@ -2103,6 +2230,6 @@
     </div>
   </footer>
 
-  <script src="app.js?v=20261023-59"></script>
+  <script src="app.js?v=20261023-60"></script>
 </body>
 </html>
