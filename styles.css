@@ -2642,16 +2642,18 @@ textarea {
 
 .stage-dock-teleprompter {
   display: none;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  min-width: min(380px, 88vw);
   max-width: min(680px, 92vw);
-  padding: 7px 14px;
-  border-radius: var(--radius-pill);
+  padding: 8px 14px 7px;
+  border-radius: 18px;
   background: var(--bg-nav);
   backdrop-filter: saturate(180%) blur(22px);
   -webkit-backdrop-filter: saturate(180%) blur(22px);
   border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: var(--glass-specular), var(--shadow-card-hover);
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-primary);
@@ -2660,6 +2662,20 @@ textarea {
 
 .stage-dock-teleprompter.is-visible {
   display: inline-flex;
+}
+
+.teleprompter-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.teleprompter-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
 }
 
 @keyframes teleprompterFadeIn {
@@ -2680,13 +2696,21 @@ textarea {
   background: var(--apple-blue);
   flex-shrink: 0;
   box-shadow: 0 0 0 3px var(--accent-subtle);
+  transition: background-color 180ms var(--ease-smooth), box-shadow 180ms var(--ease-smooth);
+}
+
+.stage-dock-teleprompter.is-paused .teleprompter-dot {
+  background: var(--text-muted);
+  box-shadow: none;
 }
 
 .teleprompter-text {
+  flex: 1;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: min(540px, 72vw);
+  max-width: min(520px, 68vw);
   letter-spacing: -0.01em;
 }
 
@@ -2711,6 +2735,114 @@ textarea {
   border-color: var(--apple-blue);
   background: var(--accent-subtle);
   transform: scale(1.04);
+}
+
+.teleprompter-close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 160ms var(--ease-smooth),
+    color 160ms var(--ease-smooth),
+    border-color 160ms var(--ease-smooth);
+}
+
+.teleprompter-close-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.teleprompter-scrubber-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 1px;
+}
+
+.scrubber-time {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  min-width: 26px;
+  line-height: 1;
+  user-select: none;
+}
+
+#scrubber-time-total {
+  text-align: right;
+}
+
+.stage-dock-scrubber {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 3.5px;
+  margin: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--apple-blue) 0%,
+    var(--apple-blue) var(--scrubber-pct, 0%),
+    var(--border-strong) var(--scrubber-pct, 0%),
+    var(--border-strong) 100%
+  );
+  outline: none;
+  cursor: pointer;
+  transition: height 150ms var(--ease-smooth);
+}
+
+.stage-dock-scrubber:hover,
+.stage-dock-scrubber:focus-visible {
+  height: 5px;
+}
+
+.stage-dock-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--apple-blue);
+  border: 1.5px solid var(--bg-elevated);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  transition: transform 150ms var(--spring-out), background-color 150ms var(--ease-smooth);
+}
+
+.stage-dock-scrubber:hover::-webkit-slider-thumb,
+.stage-dock-scrubber:active::-webkit-slider-thumb {
+  transform: scale(1.22);
+}
+
+.stage-dock-scrubber::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--apple-blue);
+  border: 1.5px solid var(--bg-elevated);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  transition: transform 150ms var(--spring-out), background-color 150ms var(--ease-smooth);
+}
+
+.stage-dock-scrubber:hover::-moz-range-thumb,
+.stage-dock-scrubber:active::-moz-range-thumb {
+  transform: scale(1.22);
 }
 
 .apple-stage-dock.is-hidden {
