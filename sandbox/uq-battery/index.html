@@ -229,7 +229,14 @@
     border-radius: 6px;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.14s ease;
+    transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .seg-btn:active,
+  .cycle-pill-btn:active,
+  .back-to-curve-btn:active,
+  .ext-link-btn:active {
+    transform: scale(0.97);
   }
 
   .seg-btn.active {
