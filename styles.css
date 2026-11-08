@@ -65,8 +65,8 @@
 }
 
 /* ==========================================================================
-   Elias Lim · Light-First Scroll-Animated Repository Showcase (styles.css)
-   Scroll-Driven 3D Stage · Full-Width Repo Showcases · 2-Column Promo Grid
+   Elias Lim: Light-First Scroll-Animated Repository Showcase (styles.css)
+   Scroll-Driven 3D Stage, Full-Width Repo Showcases, 2-Column Promo Grid
    ========================================================================== */
 
 :root {
@@ -134,6 +134,8 @@
   --spring-out: cubic-bezier(0.16, 1, 0.3, 1);
   --spring-bounce: cubic-bezier(0.34, 1.45, 0.64, 1);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 [data-theme="dark"] {
@@ -1112,7 +1114,11 @@ textarea {
   padding: 4px 11px;
   border-radius: 999px;
   cursor: pointer;
-  transition: all 160ms ease;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out),
+    transform 140ms var(--ease-out);
 }
 
 .tracer-sc-pill:hover {
@@ -1140,7 +1146,11 @@ textarea {
   padding: 4px 12px;
   border-radius: 999px;
   white-space: nowrap;
-  transition: all 160ms ease;
+  transition:
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out),
+    transform 140ms var(--ease-out);
 }
 
 .tracer-fullscreen-pill:hover {
@@ -1206,7 +1216,11 @@ textarea {
   padding: 3.5px 10px;
   border-radius: 999px;
   cursor: pointer;
-  transition: all 150ms ease;
+  transition:
+    background-color 150ms var(--ease-out),
+    color 150ms var(--ease-out),
+    border-color 150ms var(--ease-out),
+    transform 140ms var(--ease-out);
 }
 
 .tracer-tour-pill:hover {
@@ -4840,3 +4854,155 @@ h3,
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Pass 2 UI & Animation Unslop Refinements:
+   - Headline Balance & Orphan Prevention (Unslop #16)
+   - Optical Play Icon Centering (Unslop #17)
+   - Concentric Nested Radii (Unslop #14)
+   - Tactile scale(0.97) Press Feedback (Animation Rule 4)
+   - 20% Faster Modal/Drawer Exits & Zero Utility Bounce (Animation Rules 13 & 15)
+   - Origin-Anchored Speech Bubbles from scale(0.95) (Animation Rules 10, 11, 12)
+   - 1:1 Direct Scrubber Tracking While Held (Animation Rule 14)
+   - Single Confirmation Pulse on Copy Actions (Animation Rules 8 & 16)
+   ========================================================================== */
+
+.hero-headline,
+.stage-hero-headline,
+.section-title,
+.highlight-headline,
+.project-title,
+.closing-cta-title,
+.closer-look-title,
+.compare-systems-title,
+.leadership-title {
+  text-wrap: balance;
+}
+
+.hero-subhead,
+.section-subtitle,
+.project-summary,
+.about-live-story,
+.pub-abstract-text {
+  text-wrap: pretty;
+}
+
+/* Optical centering for play triangles inside circular controls */
+#dock-icon-play,
+#closer-icon-play {
+  transform: translateX(1px);
+}
+
+/* Concentric nested radii: outer 28px bezel - 12px optical inset = 16px inner */
+.hardware-bezel {
+  border-radius: 28px;
+}
+
+.hardware-bezel .bezel-pane,
+.closer-look-stage,
+.compare-card {
+  border-radius: 16px;
+}
+
+/* Tactile press feedback (scale(0.97)) on interactive controls */
+.apple-pill:active,
+.tactile-btn:active,
+.nav-icon-btn:active,
+.stage-dock-action-btn:active,
+.closer-look-trigger-btn:active,
+.timeline-proof-pill:active,
+.award-row-btn:active,
+.skill-chip:active,
+.about-next-tab-btn:active,
+.about-scroll-pill:active,
+.tracer-sc-pill:active,
+.tracer-fullscreen-pill:active,
+.tracer-tour-pill:active,
+.tracer-bubble-next-btn:active {
+  transform: scale(0.97);
+}
+
+/* 20% faster exits (200ms out vs 250ms in) and zero bounce on utility modals */
+.closer-look-backdrop,
+.cmd-backdrop {
+  transition:
+    opacity 200ms var(--ease-out),
+    visibility 200ms var(--ease-out);
+}
+
+.closer-look-backdrop.is-open,
+.cmd-backdrop.is-open {
+  transition:
+    opacity 250ms var(--ease-out),
+    visibility 250ms var(--ease-out);
+}
+
+.closer-look-sheet,
+.cmd-dialog {
+  transform: translateY(10px) scale(0.96);
+  transition:
+    transform 200ms var(--ease-out),
+    opacity 180ms var(--ease-out);
+}
+
+.closer-look-backdrop.is-open .closer-look-sheet,
+.cmd-backdrop.is-open .cmd-dialog {
+  transform: translateY(0) scale(1);
+  transition:
+    transform 250ms var(--ease-out),
+    opacity 220ms var(--ease-out);
+}
+
+.pub-abstract-drawer,
+.arch-collapse {
+  transition:
+    grid-template-rows 200ms var(--ease-out),
+    opacity 180ms var(--ease-out),
+    margin-top 200ms var(--ease-out);
+}
+
+.pub-abstract-drawer.is-open,
+.arch-collapse.is-open {
+  transition:
+    grid-template-rows 250ms var(--ease-out),
+    opacity 220ms var(--ease-out),
+    margin-top 250ms var(--ease-out);
+}
+
+/* Origin-anchored speech bubble transitions starting from scale(0.95) */
+.tracer-step-bubble {
+  transform-origin: var(--step-arrow-x, 50%) top;
+  transition:
+    top 240ms var(--ease-out),
+    left 240ms var(--ease-out),
+    opacity 180ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.tracer-step-bubble.arrow-bottom {
+  transform-origin: var(--step-arrow-x, 50%) bottom;
+}
+
+/* 1:1 direct pointer tracking while scrubbing stage timeline */
+#stage-dock-scrubber.is-dragging,
+#stage-dock-scrubber.is-dragging::-webkit-slider-thumb {
+  transition: none !important;
+}
+
+/* Single confirmation pulse on copy actions */
+@keyframes confirmPulse {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.is-copied {
+  animation: confirmPulse 260ms var(--ease-out);
+}
+
