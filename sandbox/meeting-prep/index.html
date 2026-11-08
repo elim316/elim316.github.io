@@ -372,7 +372,15 @@
     border-radius: 6px;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.14s ease;
+    transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .view-mode-btn:active,
+  .cal-nav-btn:active,
+  .cal-view-tab:active,
+  .cal-check-btn:active,
+  .back-to-cal-btn:active {
+    transform: scale(0.97);
   }
 
   .view-mode-btn.active {
@@ -1641,7 +1649,7 @@
       timeText: "1:45pm Globex Demo",
       subText: "Declined Invitation",
       meta: "Fri 25 Sep, 1:45pm - 3:00pm | Skipped (Declined)",
-      desc: "Cold vendor invite you already declined on Google Calendar — skipped automatically."
+      desc: "Cold vendor invite you already declined on Google Calendar, skipped automatically."
     },
     {
       id: "sat_prep",
