@@ -2,7 +2,7 @@
   "use strict";
 
   const PROJECTS = [
-    /* [JUMPGATE HIDDEN — UNCOMMENT THIS OBJECT TO RE-ENABLE JUMPGATE IN PROJECTS]
+    /* [JUMPGATE HIDDEN: UNCOMMENT THIS OBJECT TO RE-ENABLE JUMPGATE IN PROJECTS]
     {
       id: "jumpgate-agentic-lz",
       title: "Jumpgate: Zero-Trust Agentic AI Landing Zone & Vending Machine",
@@ -708,7 +708,7 @@
       <article
         class="project-card${animateFilter ? " is-filter-entering" : ""}"
         id="project-${safeSlug}"
-        style="--card-delay: ${Math.min(idx * 45, 320)}ms"
+        style="--card-delay: ${Math.min(idx * 30, 240)}ms"
       >
         <div class="project-body">
           <div class="project-meta-line">
@@ -814,7 +814,7 @@
 
     const chapters = {
       google: {
-        /* [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL FIELDS TO RE-ENABLE JUMPGATE IN GOOGLE CHAPTER]
+        /* [JUMPGATE HIDDEN: UNCOMMENT ORIGINAL FIELDS TO RE-ENABLE JUMPGATE IN GOOGLE CHAPTER]
         paneLabel: "JUMPGATE DUAL-VPC LANDING ZONE & 14-STEP AGENT VENDING MACHINE",
         paneBadge: "< 3 min, 32/32 IM8, $1.96M ARR",
         story: "At Google in Singapore, I co-architected Jumpgate, an IM8-compliant Dual-VPC AI agent landing zone and 14-step Vending Machine Agent that compresses 4 to 6 weeks of setup into under 3 minutes (passing 14/14 Ingress and 18/18 Egress security checks), driving $1.96M in realised public sector ARR (+$1.46M pipeline) and training over 4,000 engineers and students across NTU, GovTech, DBS, and A*STAR.",
@@ -971,12 +971,6 @@
         if (key) selectChapter(key);
       });
     });
-
-    autoTimer = setInterval(() => {
-      if (document.hidden) return;
-      currentIdx = (currentIdx + 1) % order.length;
-      selectChapter(order[currentIdx]);
-    }, 6500);
   }
 
   function initFlagshipSandboxes() {
@@ -1059,12 +1053,6 @@
           selectHeroTab(hOrder[hIdx]);
         });
       }
-
-      hTimer = setInterval(() => {
-        if (document.hidden) return;
-        hIdx = (hIdx + 1) % hOrder.length;
-        selectHeroTab(hOrder[hIdx]);
-      }, 6000);
     }
 
     const fJumpgate = document.getElementById("flagship-jumpgate-sandbox");
@@ -2539,10 +2527,10 @@
         const label = btn.querySelector(".bibtex-label");
         try {
           await copyTextToClipboard(bibtex);
-          btn.classList.add("copied");
+          btn.classList.add("copied", "is-copied");
           if (label) label.textContent = "Copied BibTeX";
           setTimeout(() => {
-            btn.classList.remove("copied");
+            btn.classList.remove("copied", "is-copied");
             if (label) label.textContent = "Copy BibTeX";
           }, 2000);
         } catch (_) {}
@@ -2655,7 +2643,7 @@
           if (btn) btn.click();
         },
       },
-      /* [JUMPGATE HIDDEN — UNCOMMENT TO RE-ENABLE JUMPGATE COMMAND PALETTE ITEM]
+      /* [JUMPGATE HIDDEN: UNCOMMENT TO RE-ENABLE JUMPGATE COMMAND PALETTE ITEM]
       {
         title: "Jump to Jumpgate Zero-Trust AI Landing Zone Stage",
         sub: "< 3 min Dual-VPC & 14-Step Vending Machine ($1.96M ARR, 32/32 IM8)",
@@ -3070,7 +3058,7 @@
         speechText:
           "About Elias Lim, Chapter 1: Google Cloud and AI. At Google in Singapore, I architect secure AI systems on Cloud Run and the Gemini platform, built the native Antigravity Agent Tracer visualiser and 200k context harness, and led technical enablement buildathons training over 4,000 engineers and students across NTU, GovTech, DBS, and A-STAR.",
       },
-      /* [BUILDER STAGE HIDDEN — UNCOMMENT THIS ENTRY AND RE-INDEX TO RESTORE SEPARATE BUILDER STAGE]
+      /* [BUILDER STAGE HIDDEN: UNCOMMENT THIS ENTRY AND RE-INDEX TO RESTORE SEPARATE BUILDER STAGE]
       {
         id: "hero-stage",
         label: "02 / 05  BUILDER",
@@ -3081,7 +3069,7 @@
           "Elias Lim. Cloud and AI engineer at Google Singapore, experienced in secure cloud architecture, Go and Python backend systems, applied machine learning, and autonomous agent tooling. Featured highlights include real-time multi-agent observability with Antigravity Agent Tracer, 95.2 percent conformal coverage on battery State-of-Health analytics, and a 36-check evaluation harness for enterprise meeting dossiers.",
       },
       */
-      /* [JUMPGATE HIDDEN — UNCOMMENT THIS STAGE AND RE-INDEX TO RE-ENABLE STAGE: JUMPGATE]
+      /* [JUMPGATE HIDDEN: UNCOMMENT THIS STAGE AND RE-INDEX TO RE-ENABLE STAGE: JUMPGATE]
       {
         id: "showcase-jumpgate",
         label: "03 / 06  JUMPGATE",
@@ -3310,6 +3298,7 @@
       scrubberEl.addEventListener("pointerdown", (e) => {
         e.stopPropagation();
         isScrubbing = true;
+        scrubberEl.classList.add("is-dragging");
       });
       scrubberEl.addEventListener("input", (e) => {
         e.stopPropagation();
@@ -3318,6 +3307,7 @@
       scrubberEl.addEventListener("change", (e) => {
         e.stopPropagation();
         isScrubbing = false;
+        scrubberEl.classList.remove("is-dragging");
         applyScrubPosition(scrubberEl.value, true);
       });
       window.addEventListener(
@@ -3325,6 +3315,7 @@
         () => {
           if (isScrubbing) {
             isScrubbing = false;
+            scrubberEl.classList.remove("is-dragging");
           }
         },
         { passive: true }
@@ -3931,7 +3922,7 @@
   function initBentoSpecsAndSkillFilters() {
     const compareBtns = document.querySelectorAll("[data-compare-mode]");
     const bentoSpecComparison = {
-      /* [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL BENTO SPEC VALUES TO RE-ENABLE JUMPGATE] */
+      /* [JUMPGATE HIDDEN: UNCOMMENT ORIGINAL BENTO SPEC VALUES TO RE-ENABLE JUMPGATE] */
       after: [
         {
           statId: "bento-stat-1",
@@ -4338,7 +4329,7 @@
   function initHardwareXraySpecs() {
     const stageSpecs = {
       "hero-stage": [
-        /* [JUMPGATE HIDDEN — UNCOMMENT ORIGINAL HERO SPECS TO RE-ENABLE JUMPGATE] */
+        /* [JUMPGATE HIDDEN: UNCOMMENT ORIGINAL HERO SPECS TO RE-ENABLE JUMPGATE] */
         {
           label: "RUNTIME & TRANSPORT",
           val: "Go, Python & Connect-RPC",
