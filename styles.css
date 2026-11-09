@@ -345,7 +345,7 @@ textarea {
 
 .hero-stage {
   position: relative;
-  min-height: calc(100vh - 48px);
+  min-height: calc(100dvh - 48px);
   background: var(--bg-hero);
   color: var(--text-primary);
   display: flex;
@@ -910,7 +910,7 @@ textarea {
 
 .repo-showcase {
   position: relative;
-  min-height: calc(100vh - 48px);
+  min-height: calc(100dvh - 48px);
   padding: 56px 20px 48px;
   display: flex;
   flex-direction: column;
@@ -5005,4 +5005,36 @@ h3,
 .is-copied {
   animation: confirmPulse 260ms var(--ease-out);
 }
+
+/* Accessible keyboard focus replacement ring (Check #110) */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[role="tab"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--apple-blue);
+  outline-offset: 2px;
+}
+
+/* Reduced-transparency solid surface fallback for frosted glass (Check #108) */
+@media (prefers-reduced-transparency: reduce) {
+  .global-nav,
+  .stage-dock-pill,
+  .stage-dock-action-btn,
+  .stage-dock-teleprompter,
+  .tracer-step-bubble {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--bg-secondary) !important;
+  }
+
+  .closer-look-backdrop,
+  .cmd-backdrop {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.72) !important;
+  }
+}
+
 
