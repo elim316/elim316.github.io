@@ -68,7 +68,7 @@
         padding: 3px 10px;
         border-radius: 999px;
         cursor: pointer;
-        transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        transition: all 0.16s ease;
       }
       html[data-theme="dark"] .sandbox-sc-btn {
         background: #1e2230;
@@ -116,7 +116,7 @@
         padding: 2.5px 9px;
         border-radius: 999px;
         cursor: pointer;
-        transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        transition: all 0.15s ease;
       }
       .sandbox-tour-btn:hover {
         background: #0066cc;
@@ -284,7 +284,7 @@
         border-radius: 999px;
         white-space: nowrap;
         cursor: pointer;
-        transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+        transition: all 0.14s ease;
       }
       .coach-nav-btn:hover {
         border-color: #0066cc;
@@ -437,7 +437,7 @@
         .tb-group label { cursor: pointer; user-select: none; font-weight: 500; white-space: nowrap; }
         .tb-group input[type=checkbox] { cursor: pointer; margin: 0; accent-color: var(--primary, #1a73e8); }
         .tb-sep { width: 1px; height: 16px; background: var(--border, #dadce0); }
-        .tb-btn { background: rgba(26, 115, 232, 0.1); border: 1px solid transparent; border-radius: 6px; padding: 4px 9px; font-size: 11.5px; cursor: pointer; font-weight: 600; color: var(--primary, #1a73e8); white-space: nowrap; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        .tb-btn { background: rgba(26, 115, 232, 0.1); border: 1px solid transparent; border-radius: 6px; padding: 4px 9px; font-size: 11.5px; cursor: pointer; font-weight: 600; color: var(--primary, #1a73e8); white-space: nowrap; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); }
         html[data-theme="dark"] .tb-btn { background: rgba(138, 180, 248, 0.14); color: #8ab4f8; }
         .tb-btn:hover { background: rgba(26, 115, 232, 0.18); }
         .tb-btn.ghost { background: var(--card, #fff); border: 1px solid var(--border, #dadce0); color: var(--foreground, #3c4043); font-weight: 500; }
@@ -470,7 +470,7 @@
         
         .swimlanes-labels { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; z-index: 2; pointer-events: none; }
         .swimlane-row-label { flex: 1; position: relative; }
-        .swimlane-header { font-weight: 600; font-size: 11.5px; color: var(--muted-foreground, #5f6368); padding: 5px 10px; margin: 6px 0 0 8px; background: var(--card, #fff); opacity: 0.94; box-shadow: 0 1px 3px rgba(60,64,67,0.1); display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; border: 1px solid var(--border, #dadce0); pointer-events: auto; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1), opacity 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        .swimlane-header { font-weight: 600; font-size: 11.5px; color: var(--muted-foreground, #5f6368); padding: 5px 10px; margin: 6px 0 0 8px; background: var(--card, #fff); opacity: 0.94; box-shadow: 0 1px 3px rgba(60,64,67,0.1); display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; border: 1px solid var(--border, #dadce0); pointer-events: auto; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1), opacity 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
         .swimlane-header:hover { background: var(--card, #fff); opacity: 1; border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); box-shadow: 0 2px 6px rgba(26,115,232,0.14); }
 
         /* Search + issue navigation */
@@ -480,11 +480,11 @@
         #searchCount { font-size: 11px; color: var(--muted-foreground, #80868b); min-width: 36px; text-align: center; background: transparent; border: none; padding: 2px; font-family: inherit; cursor: pointer; border-radius: 4px; white-space: nowrap; }
         #searchCount:hover:not(:disabled) { background: var(--secondary, #f1f3f4); color: var(--foreground, #202124); }
         #searchCount:disabled { cursor: default; }
-        #btnNextIssue { background: transparent; border: 1px solid var(--border, #dadce0); border-radius: 6px; padding: 4px 8px; font-size: 11.5px; cursor: pointer; color: var(--muted-foreground, #5f6368); font-weight: 600; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        #btnNextIssue { background: transparent; border: 1px solid var(--border, #dadce0); border-radius: 6px; padding: 4px 8px; font-size: 11.5px; cursor: pointer; color: var(--muted-foreground, #5f6368); font-weight: 600; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); }
         #btnNextIssue.has-issues { border-color: #D93025; color: #D93025; background: rgba(217,48,37,0.06); }
         #btnNextIssue.has-issues:hover { background: rgba(217,48,37,0.12); }
         #btnNextIssue:disabled { opacity: 0.45; cursor: default; }
-        #btnUpdate { display: none; background: #1e8e3e; color: #fff; border: 1px solid #1e8e3e; border-radius: 6px; padding: 4px 9px; font-size: 11.5px; font-weight: 600; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        #btnUpdate { display: none; background: #1e8e3e; color: #fff; border: 1px solid #1e8e3e; border-radius: 6px; padding: 4px 9px; font-size: 11.5px; font-weight: 600; cursor: pointer; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); }
         #btnUpdate:hover:not(:disabled) { background: #137333; color: #fff; }
         html[data-theme="dark"] #btnUpdate { background: #81c995; border-color: #81c995; color: #0d652d; }
         html[data-theme="dark"] #btnUpdate:hover:not(:disabled) { background: #a8dab5; color: #0d652d; }
@@ -493,7 +493,7 @@
 
         /* View Mode Switcher (Timeline | Architecture | Simplified) */
         .view-switch { display: inline-flex; align-items: center; background: var(--secondary, #f1f3f4); border: 1px solid var(--border, #dadce0); border-radius: 8px; padding: 2px; gap: 2px; }
-        .view-switch-btn { border: none; background: transparent; color: var(--muted-foreground, #5f6368); font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 6px; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
+        .view-switch-btn { border: none; background: transparent; color: var(--muted-foreground, #5f6368); font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 6px; cursor: pointer; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
         .view-switch-btn:hover { color: var(--foreground, #202124); }
         .view-switch-btn.active { background: var(--card, #fff); color: var(--primary, #1a73e8); box-shadow: 0 1px 2px rgba(60,64,67,0.16); }
         html[data-theme="dark"] .view-switch-btn.active { background: #282a2c; color: #8ab4f8; }
@@ -541,10 +541,10 @@
         .topo-kpi-hit { cursor: pointer; }
         .topo-kpi-hit:hover rect { stroke: var(--primary, #1a73e8); stroke-width: 1.5px; }
         .topo-hub-card { cursor: pointer; }
-        .topo-chip { cursor: pointer; transition: transform 420ms cubic-bezier(0.34, 1.35, 0.5, 1); }
+        .topo-chip { cursor: pointer; transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1); }
         .topo-chip:hover circle { stroke: #f9ab00 !important; stroke-width: 2.5px !important; }
         html[data-theme="dark"] .topo-chip:hover circle { stroke: #fdd663 !important; }
-        .topo-sub-chip { cursor: pointer; transition: transform 420ms cubic-bezier(0.34, 1.35, 0.5, 1); }
+        .topo-sub-chip { cursor: pointer; transition: transform 250ms cubic-bezier(0.23, 1, 0.32, 1); }
         .topo-sub-chip:hover circle { stroke: #1a73e8 !important; stroke-width: 2.5px !important; }
         html[data-theme="dark"] .topo-sub-chip:hover circle { stroke: #8ab4f8 !important; }
 
@@ -561,10 +561,10 @@
         .topo-hud-tool { font-size: 12px; font-weight: 700; font-family: var(--font-mono); color: var(--topo-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .topo-hud-dur { font-size: 11px; font-weight: 600; font-family: var(--font-mono); padding: 1px 6px; border-radius: 10px; background: var(--topo-card-alt); border: 1px solid var(--topo-border); color: var(--topo-muted); white-space: nowrap; flex-shrink: 0; }
         .topo-hud-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-shrink: 0; }
-        .topo-hud-expand { flex-shrink: 0; background: var(--topo-card-alt); border: 1px solid var(--topo-border); color: var(--topo-text); border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        .topo-hud-expand { flex-shrink: 0; background: var(--topo-card-alt); border: 1px solid var(--topo-border); color: var(--topo-text); border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); }
         .topo-hud-expand:hover { border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); background: rgba(26,115,232,0.08); }
         .topo-hud.expanded .topo-hud-expand { background: rgba(26,115,232,0.14); border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); }
-        .topo-hud-inspect { flex-shrink: 0; background: transparent; border: 1px solid var(--topo-border); color: var(--topo-text); border-radius: 6px; padding: 3px 9px; font-size: 11.5px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        .topo-hud-inspect { flex-shrink: 0; background: transparent; border: 1px solid var(--topo-border); color: var(--topo-text); border-radius: 6px; padding: 3px 9px; font-size: 11.5px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); }
         .topo-hud-inspect:hover { border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); background: rgba(26,115,232,0.06); }
         .topo-hud-nutshell { display: flex; align-items: flex-start; gap: 8px; width: 100%; box-sizing: border-box; background: var(--topo-card-alt); border: 1px solid var(--topo-border); border-left: 3px solid var(--primary, #1a73e8); border-radius: 7px; padding: 5px 10px; cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease; }
         .topo-hud-nutshell:hover { border-color: var(--primary, #1a73e8); }
@@ -582,7 +582,7 @@
         .topo-drill-kpi-val { font-size: 14px; font-weight: 800; font-family: var(--font-mono); color: var(--topo-text); }
         .topo-drill-filter-bar { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
         .topo-drill-pills { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
-        .topo-drill-pill { background: var(--topo-card-alt); border: 1px solid var(--topo-border); color: var(--topo-muted); border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        .topo-drill-pill { background: var(--topo-card-alt); border: 1px solid var(--topo-border); color: var(--topo-muted); border-radius: 6px; padding: 3px 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); }
         .topo-drill-pill:hover { color: var(--topo-text); border-color: var(--primary, #1a73e8); }
         .topo-drill-pill.active { background: rgba(26,115,232,0.14); border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); }
         .topo-drill-call-row { position: relative; padding: 9px 11px 9px 13px; border-bottom: 1px solid var(--topo-border); cursor: pointer; transition: background-color 0.18s ease; }
@@ -597,14 +597,14 @@
         .topo-footer { flex-shrink: 0; background: var(--topo-bar-bg); border-top: 1px solid var(--topo-border); padding: 5px 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; font-size: 11.5px; overflow: hidden; }
         .topo-legend { display: flex; align-items: center; flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1 1 auto; }
         .topo-legend::-webkit-scrollbar { display: none; }
-        .topo-legend-btn { display: inline-flex; align-items: center; gap: 4px; background: transparent; border: 1px solid transparent; color: var(--topo-muted); font-size: 11px; font-weight: 600; padding: 2px 6px; cursor: pointer; border-radius: 5px; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), opacity 160ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; flex-shrink: 0; }
+        .topo-legend-btn { display: inline-flex; align-items: center; gap: 4px; background: transparent; border: 1px solid transparent; color: var(--topo-muted); font-size: 11px; font-weight: 600; padding: 2px 6px; cursor: pointer; border-radius: 5px; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), opacity 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; flex-shrink: 0; }
         .topo-legend-btn:hover { color: var(--topo-text); background: var(--topo-card-alt); border-color: var(--topo-border); }
         .topo-legend-btn.active-filter { color: var(--topo-text); background: var(--topo-card-alt); border-color: var(--topo-border); }
         .topo-legend-btn.dimmed { opacity: 0.35; }
         .topo-legend-dot { width: 7px; height: 7px; border-radius: 2px; flex-shrink: 0; }
         .topo-legend-count { font-family: var(--font-mono); color: var(--topo-subtle); font-size: 10.5px; }
         .topo-actions { display: flex; align-items: center; gap: 5px; margin-left: auto; flex-shrink: 0; }
-        .topo-btn { background: var(--topo-card-alt); border: 1px solid var(--topo-border); color: var(--topo-text); border-radius: 6px; padding: 3px 8px; font-size: 11.5px; font-weight: 600; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
+        .topo-btn { background: var(--topo-card-alt); border: 1px solid var(--topo-border); color: var(--topo-text); border-radius: 6px; padding: 3px 8px; font-size: 11.5px; font-weight: 600; cursor: pointer; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
         .topo-btn:hover { border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); }
         .topo-btn.replaying { background: rgba(26,115,232,0.14); border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); }
         /* Topology Event Log rows inside #inspector */
@@ -646,10 +646,10 @@
         .conv-breadcrumb { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 5px 12px; background: rgba(26,115,232,0.08); border-bottom: 1px solid rgba(26,115,232,0.28); font-size: 11.5px; color: var(--foreground, #202124); flex-shrink: 0; flex-wrap: wrap; position: relative; z-index: 15; }
         .conv-breadcrumb.hidden { display: none; }
         .conv-bc-trail { display: flex; align-items: center; gap: 6px; min-width: 0; flex-wrap: wrap; font-weight: 600; }
-        .conv-bc-btn { background: var(--card, #fff); border: 1px solid var(--border, #dadce0); color: var(--foreground, #202124); border-radius: 5px; padding: 2px 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
+        .conv-bc-btn { background: var(--card, #fff); border: 1px solid var(--border, #dadce0); color: var(--foreground, #202124); border-radius: 5px; padding: 2px 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
         .conv-bc-btn:hover { border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); }
 
-        /* Turn Latency Waterfall / Flamechart Strip: Single-Line Ellipsis Safe */
+        /* Turn Latency Waterfall / Flamechart Strip (Single-Line Ellipsis Safe) */
         .topo-waterfall { flex-shrink: 0; background: var(--topo-bar-bg); border-top: 1px solid var(--topo-border); padding: 4px 12px; display: flex; align-items: center; gap: 8px; min-height: 28px; box-sizing: border-box; overflow: hidden; }
         .topo-waterfall.hidden { display: none; }
         .wf-label { font-size: 10.5px; font-weight: 700; font-family: var(--font-mono); color: var(--topo-muted); letter-spacing: 0.3px; white-space: nowrap; flex-shrink: 0; display: flex; align-items: center; gap: 5px; }
@@ -662,7 +662,7 @@
 
         /* Turn vs. All-Session Scope Toggle */
         .topo-scope-switch { display: inline-flex; align-items: center; background: var(--topo-card-alt); border: 1px solid var(--topo-border); border-radius: 6px; padding: 1.5px; gap: 2px; }
-        .topo-scope-btn { border: none; background: transparent; color: var(--topo-muted); font-size: 11px; font-weight: 600; padding: 2.5px 8px; border-radius: 4px; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
+        .topo-scope-btn { border: none; background: transparent; color: var(--topo-muted); font-size: 11px; font-weight: 600; padding: 2.5px 8px; border-radius: 4px; cursor: pointer; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; }
         .topo-scope-btn:hover { color: var(--topo-text); }
         .topo-scope-btn.active { background: var(--topo-card); color: var(--primary, #1a73e8); box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         html[data-theme="dark"] .topo-scope-btn.active { background: #282a2c; color: #8ab4f8; }
@@ -673,13 +673,13 @@
         .subagent-card-role { font-size: 12.5px; font-weight: 700; color: var(--foreground, #202124); display: flex; align-items: center; gap: 6px; }
         .subagent-card-id { font-size: 10.5px; font-family: ui-monospace, monospace; color: var(--muted-foreground, #64748b); }
         .subagent-card-prompt { font-size: 11px; color: var(--muted-foreground, #5f6368); margin-top: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .subagent-trace-btn { flex-shrink: 0; background: rgba(139,92,246,0.12); border: 1px solid #8B5CF6; color: #8B5CF6; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
+        .subagent-trace-btn { flex-shrink: 0; background: rgba(139,92,246,0.12); border: 1px solid #8B5CF6; color: #8B5CF6; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); }
         .subagent-trace-btn:hover { background: #8B5CF6; color: #ffffff; }
         html[data-theme="dark"] .subagent-trace-btn { color: #C4B5FD; border-color: #A78BFA; }
         html[data-theme="dark"] .subagent-trace-btn:hover { background: #8B5CF6; color: #ffffff; }
 
         #inspector-title { font-weight: 600; font-size: 13.5px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border, #eee); display: flex; align-items: center; gap: 8px; color: var(--foreground, #202124); }
-        .inspector-back-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; background: var(--secondary, #f1f3f4); border: 1px solid var(--border, #dadce0); color: var(--foreground, #202124); font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px; cursor: pointer; transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; flex-shrink: 0; font-family: inherit; }
+        .inspector-back-btn { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; background: var(--secondary, #f1f3f4); border: 1px solid var(--border, #dadce0); color: var(--foreground, #202124); font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 6px; cursor: pointer; transition: background-color 150ms cubic-bezier(0.23, 1, 0.32, 1), border-color 150ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms cubic-bezier(0.23, 1, 0.32, 1), transform 150ms cubic-bezier(0.23, 1, 0.32, 1); white-space: nowrap; flex-shrink: 0; font-family: inherit; }
         .inspector-back-btn:hover { border-color: var(--primary, #1a73e8); color: var(--primary, #1a73e8); background: var(--card, #fff); }
         html[data-theme="dark"] .inspector-back-btn { background: #1e293b; border-color: #334155; color: #cbd5e1; }
         html[data-theme="dark"] .inspector-back-btn:hover { border-color: #2DD4BF; color: #2DD4BF; background: #0f172a; }
@@ -833,13 +833,74 @@
         .live-sub-pill-top { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 11.5px; font-weight: 700; color: var(--foreground, #202124); }
         .live-sub-pill-sub { font-size: 11px; font-family: ui-monospace, monospace; color: var(--muted-foreground, #5f6368); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .live-pill-actions { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
-        .live-action-btn { border-radius: 5px; padding: 3px 8px; font-size: 10.5px; font-weight: 700; cursor: pointer; white-space: nowrap; border: 1px solid var(--border, #dadce0); background: var(--secondary, #f1f3f4); color: var(--foreground, #202124); transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1), color 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 160ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
-        .sandbox-sc-btn:active, .sandbox-tour-btn:active, .coach-nav-btn:active, .tb-btn:active, .swimlane-header:active, #btnNextIssue:active, #btnUpdate:active, .view-switch-btn:active, .topo-hud-expand:active, .topo-hud-inspect:active, .topo-drill-pill:active, .topo-btn:active, .conv-bc-btn:active, .topo-scope-btn:active, .subagent-trace-btn:active, .inspector-back-btn:active, .live-action-btn:active { transform: scale(0.97); }
+        .live-action-btn { border-radius: 5px; padding: 3px 8px; font-size: 10.5px; font-weight: 700; cursor: pointer; white-space: nowrap; border: 1px solid var(--border, #dadce0); background: var(--secondary, #f1f3f4); color: var(--foreground, #202124); transition: background-color 140ms cubic-bezier(0.23, 1, 0.32, 1), border-color 140ms cubic-bezier(0.23, 1, 0.32, 1), color 140ms cubic-bezier(0.23, 1, 0.32, 1), transform 140ms cubic-bezier(0.23, 1, 0.32, 1); }
         .live-action-btn:hover { border-color: #8B5CF6; color: #8B5CF6; background: var(--card, #fff); }
         .live-action-btn.approve { background: #EA580C; border-color: #EA580C; color: #FFFFFF; }
         .live-action-btn.approve:hover { background: #C2410C; border-color: #C2410C; color: #FFFFFF; }
         .sub-activity-list { margin-top: 6px; display: flex; flex-direction: column; gap: 3px; padding: 6px 8px; border-radius: 5px; background: var(--card, #ffffff); border: 1px solid var(--border, #e5e7eb); font-size: 11px; font-family: ui-monospace, monospace; }
         html[data-theme="dark"] .sub-activity-list { background: rgba(15,23,42,0.55); border-color: #2e3340; }
+
+        /* UI Unslop v2.0: Motion & Craft Engineering (Operate + Express Hybrid) */
+        :root {
+            --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out-quint: cubic-bezier(0.77, 0, 0.175, 1);
+            --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .tb-btn:active:not(:disabled), .view-switch-btn:active:not(:disabled),
+        .topo-scope-btn:active:not(:disabled), .topo-drill-pill:active:not(:disabled),
+        .topo-btn:active:not(:disabled), .topo-step-btn:active:not(:disabled),
+        .goalbar-step:active:not(:disabled), .conv-bc-btn:active:not(:disabled),
+        .subagent-trace-btn:active:not(:disabled), .inspector-back-btn:active:not(:disabled),
+        .live-action-btn:active:not(:disabled) {
+            transform: scale(0.97);
+        }
+        .session-popover, .export-popover {
+            transform-origin: top left;
+            transition: opacity 200ms var(--ease-out-expo),
+                        transform 200ms var(--ease-out-expo);
+        }
+        .export-popover {
+            transform-origin: top right;
+        }
+        .session-popover.hidden, .export-popover.hidden {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95) translateY(-4px);
+        }
+        @keyframes unslopRowEnter {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .issue-row, .topo-log-row, .session-item {
+            animation: unslopRowEnter 220ms var(--ease-out-expo) both;
+        }
+        .issue-row:nth-child(1), .topo-log-row:nth-child(1), .session-item:nth-child(1) { animation-delay: 0ms; }
+        .issue-row:nth-child(2), .topo-log-row:nth-child(2), .session-item:nth-child(2) { animation-delay: 30ms; }
+        .issue-row:nth-child(3), .topo-log-row:nth-child(3), .session-item:nth-child(3) { animation-delay: 60ms; }
+        .issue-row:nth-child(4), .topo-log-row:nth-child(4), .session-item:nth-child(4) { animation-delay: 90ms; }
+        .issue-row:nth-child(5), .topo-log-row:nth-child(5), .session-item:nth-child(5) { animation-delay: 120ms; }
+        .issue-row:nth-child(6), .topo-log-row:nth-child(6), .session-item:nth-child(6) { animation-delay: 150ms; }
+        #zoomSlider:active, .scrubber-track:active .scrubber-view {
+            transition: none !important;
+        }
+        #inspector-title, .header h1 {
+            text-wrap: balance;
+        }
+        .empty-state, .inspector-label {
+            text-wrap: pretty;
+        }
+        button:focus-visible, input:focus-visible, [tabindex]:focus-visible {
+            outline: 2px solid var(--primary, #1a73e8);
+            outline-offset: 2px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
     <!-- Bridge script to interact directly with Jetski runtime! -->
     <!-- static sandbox: preload.js omitted -->
@@ -1208,7 +1269,7 @@
                             <animateTransform attributeName="transform" type="rotate" from="0 815 236" to="360 815 236" dur="60s" repeatCount="indefinite" />
                         </circle>
                         <text id="topo-simple-tools-title" x="815" y="25" text-anchor="middle" fill="#FCD34D" font-size="18.5" font-weight="800" letter-spacing="2">TOOL SET</text>
-                        <text id="topo-simple-tools-sub" x="815" y="45" text-anchor="middle" fill="#B45309" font-size="14" font-weight="700" letter-spacing="0.6">8 agent tools, 0 calls</text>
+                        <text id="topo-simple-tools-sub" x="815" y="45" text-anchor="middle" fill="#B45309" font-size="14" font-weight="700" letter-spacing="0.6">8 agent tools · 0 calls</text>
                         <g id="topo-simple-tools-chips"></g>
                         <g id="topo-simple-tools-panel"></g>
                     </g>
@@ -1221,7 +1282,7 @@
                         <circle id="topo-simple-sub-body" cx="815" cy="614" r="112" fill="url(#topo-grad-sub-off-dark)" stroke="#334155" stroke-width="2.2" style="transition: stroke 300ms ease;" />
                         <g id="topo-simple-sub-pulse"></g>
                         <text id="topo-simple-sub-title" x="815" y="452" text-anchor="middle" fill="#64748B" font-size="18" font-weight="800" letter-spacing="1.6">SUBAGENTS &amp; TASKS</text>
-                        <text id="topo-simple-sub-subtitle" x="815" y="472" text-anchor="middle" fill="#334155" font-size="13.5" font-weight="700" letter-spacing="0.6">4 orchestration tools, idle</text>
+                        <text id="topo-simple-sub-subtitle" x="815" y="472" text-anchor="middle" fill="#334155" font-size="13.5" font-weight="700" letter-spacing="0.6">4 orchestration tools · idle</text>
                         <g id="topo-simple-sub-glyph" transform="translate(815, 614)" style="transition: opacity 200ms ease;">
                             <rect x="-18" y="-12" width="36" height="25" rx="6" fill="none" stroke="#475569" stroke-width="2.2" />
                             <circle cx="-6.5" cy="0.5" r="3" fill="#475569" />
@@ -1250,7 +1311,7 @@
                         <circle id="topo-simple-core-body" cx="440" cy="380" r="98" fill="url(#topo-grad-core-dark)" stroke="#5EEAD4" stroke-width="2.8" filter="url(#topo-neon-soft)" />
                         <g id="topo-simple-core-pulse"></g>
                         <text id="topo-simple-core-title" x="440" y="373" text-anchor="middle" fill="#CCFBF1" font-size="22" font-weight="800" letter-spacing="1.4">AGENT CORE</text>
-                        <text id="topo-simple-core-sub" x="440" y="398" text-anchor="middle" fill="#5EEAD4" font-size="14" font-weight="700" letter-spacing="1.4">GEMINI / PLANNER</text>
+                        <text id="topo-simple-core-sub" x="440" y="398" text-anchor="middle" fill="#5EEAD4" font-size="14" font-weight="700" letter-spacing="1.4">GEMINI · PLANNER</text>
                         <circle id="topo-simple-core-dot" cx="440" cy="416" r="4.5" fill="#34D399">
                             <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite" />
                         </circle>
@@ -1876,11 +1937,11 @@
     };
 
     // Guard against programmatic horizontal scroll when inputs inside popovers receive focus
-    window.addEventListener('scroll', () => {
+    document.addEventListener('focusin', () => {
         if (window.scrollX !== 0 || window.scrollY !== 0) window.scrollTo(0, 0);
         if (document.documentElement.scrollLeft !== 0) document.documentElement.scrollLeft = 0;
         if (document.body && document.body.scrollLeft !== 0) document.body.scrollLeft = 0;
-    }, { passive: true });
+    });
 
     const btnSessionPicker = document.getElementById('btnSessionPicker');
     const sessionPopover = document.getElementById('sessionPopover');
@@ -2023,7 +2084,7 @@
             dot.addEventListener('mouseenter', () => {
                 const r = dot.getBoundingClientRect();
                 const stamp = formatStamp(cp.time);
-                checkpointTip.textContent = '#' + (i + 1) + (stamp ? ' | ' + stamp : '') + ': ' + cp.label;
+                checkpointTip.textContent = '#' + (i + 1) + (stamp ? ' · ' + stamp : '') + ' · ' + cp.label;
                 checkpointTip.style.left = (r.left + r.width / 2) + 'px';
                 checkpointTip.style.bottom = (window.innerHeight - r.top + 10) + 'px';
                 checkpointTip.classList.add('show');
@@ -2043,7 +2104,7 @@
             });
             mark.addEventListener('mouseenter', () => {
                 const r = mark.getBoundingClientRect();
-                checkpointTip.textContent = (iss.requestNum ? 'Request ' + iss.requestNum + ' | ' : '') +
+                checkpointTip.textContent = (iss.requestNum ? 'Request ' + iss.requestNum + ': ' : '') +
                                             iss.tool + ': ' + iss.detail;
                 checkpointTip.style.left = (r.left + r.width / 2) + 'px';
                 checkpointTip.style.bottom = (window.innerHeight - r.top + 10) + 'px';
@@ -2570,7 +2631,7 @@
         let html = '<div id="inspector-title" style="color:#1967D2"><span>MATCHES</span>' + inspectorBackBtnHtml() + '</div>' +
                    '<div class="inspector-section"><div class="inspector-label">' +
                    searchMatches.length + ' node' + (searchMatches.length === 1 ? '' : 's') +
-                   ' matching “' + escapeHtml(searchTerm.trim()) + '” (click one to jump to it)</div>';
+                   ' matching “' + escapeHtml(searchTerm.trim()) + '” (select one to jump to it)</div>';
         searchMatches.forEach((m, i) => {
             html += '<button class="issue-row match-row' + (i === searchCursor ? ' active' : '') +
                     '" data-match="' + i + '">' +
@@ -2653,9 +2714,9 @@
             ? ('⚠ ' + curCount + ' issue' + (curCount === 1 ? '' : 's'))
             : '⚠ 0 issues';
         btnNextIssue.title = curCount > 0
-            ? (curCount + (curCount === 1 ? ' issue' : ' issues') + ' in current prompt (#' + (curReq || 1) + '), click to inspect')
+            ? (curCount + (curCount === 1 ? ' issue' : ' issues') + ' in current prompt (#' + (curReq || 1) + '): select to inspect')
             : (totalCount > 0
-                ? ('0 issues in current prompt (#' + (curReq || 1) + '), ' + totalCount + ' in earlier prompts (click to view history)')
+                ? ('0 issues in current prompt (#' + (curReq || 1) + '), ' + totalCount + ' in earlier prompts: select to view history')
                 : '0 issues in current prompt');
     }
     if (btnNextIssue) {
@@ -3494,7 +3555,7 @@
     }
 
     // Prompts are stored wrapped in an envelope (`<USER_REQUEST>`) with metadata
-    // and system blocks appended. Showing that raw is noise, so strip it back to
+    // and system blocks appended. Showing that raw is noise: strip it back to
     // what the person actually typed.
     function cleanUserText(str, stepOpt) {
         if (!str) return '';
@@ -4325,7 +4386,7 @@
         if (isNaN(sIdx)) return '';
         return '<div style="margin-top:8px; font-size:12px; color:#996C00; background:#FEF7E0; border:1px solid #F9AB00; border-radius:6px; padding:8px 10px;">' +
                'Abbreviated in this log (' + fields + '). ' +
-               '<a href="#" data-load-full-step="' + sIdx + '" style="color:#1a73e8; font-weight:600;">Load full version</a></div>';
+               '<button type="button" data-load-full-step="' + sIdx + '" onclick="window.loadFullStep(' + sIdx + '); return false;" style="background:none; border:none; padding:0; cursor:pointer; color:var(--primary, #1a73e8); font-weight:600; font:inherit; text-decoration:underline;">Load full version</button></div>';
     }
 
     // Fetches the untruncated step and drops it into the inspector.
@@ -4786,11 +4847,11 @@
 
         const turnTag = s.curReq ? (' (Turn #' + s.curReq + ')') : '';
         const failedHint = s.curFailed > 0
-            ? (s.curFailed + ' failed in current prompt' + (s.failed > s.curFailed ? ', ' + s.failed + ' across all prompts' : ''))
-            : (s.failed > 0 ? ('0 failed in current prompt, ' + s.failed + ' in earlier prompts (click to view)') : '0 failed steps');
+            ? (s.curFailed + ' failed in current prompt' + (s.failed > s.curFailed ? ' · ' + s.failed + ' across all prompts' : ''))
+            : (s.failed > 0 ? ('0 failed in current prompt · ' + s.failed + ' in earlier prompts (click to view)') : '0 failed steps');
         const slowHint = s.curSlow > 0
-            ? (s.curSlow + ' slow in current prompt' + (s.slow > s.curSlow ? ', ' + s.slow + ' across all prompts' : ''))
-            : (s.slow > 0 ? ('0 slow in current prompt, ' + s.slow + ' in earlier prompts (click to view)') : '0 slow tool calls');
+            ? (s.curSlow + ' slow in current prompt' + (s.slow > s.curSlow ? ' · ' + s.slow + ' across all prompts' : ''))
+            : (s.slow > 0 ? ('0 slow in current prompt · ' + s.slow + ' in earlier prompts (click to view)') : '0 slow tool calls');
 
         html += '<div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;">' +
                 tile('Requests', s.requests) +
@@ -4841,7 +4902,7 @@
                         '<div class="subagent-card-info">' +
                         '<div class="subagent-card-role">' + escapeHtml(sa.role || sa.typeName || 'Subagent') + '</div>' +
                         '<div class="subagent-card-meta">ID: ' + escapeHtml(sa.id.slice(0, 8)) + '…' +
-                        (sa.prompt ? ': ' + escapeHtml(truncate(sa.prompt, 52)) : '') + '</div>' +
+                        (sa.prompt ? ' · ' + escapeHtml(truncate(sa.prompt, 52)) : '') + '</div>' +
                         renderSubagentLiveBadgeHtml(sa.id) +
                         '</div>' +
                         '<div style="display:flex; flex-direction:column; gap:5px; flex-shrink:0;">' +
@@ -4912,7 +4973,7 @@
         if (!activeList.length) {
             html += '<div class="empty-state" style="font-size:13px;">' +
                     (slowScopeMode === 'turn'
-                        ? ('No tool calls took 10s or longer in Prompt #' + (curReq || 1) + '.' + (slowNodes.length > 0 ? ' (' + slowNodes.length + ' in earlier prompts, switch to All Prompts above to view)' : ''))
+                        ? ('No tool calls took 10s or longer in Prompt #' + (curReq || 1) + '.' + (slowNodes.length > 0 ? ' (' + slowNodes.length + ' in earlier prompts: switch to All Prompts above to view)' : ''))
                         : 'No tool calls took 10s or longer in this trace.') +
                     '</div>';
             inspectorEl.innerHTML = html;
@@ -4925,15 +4986,15 @@
         const sorted = activeList.slice().sort((a, b) => b.ms - a.ms);
         html += '<div class="inspector-section"><div class="inspector-label">' +
                 sorted.length + ' call' + (sorted.length === 1 ? '' : 's') +
-                ' ≥ 10s (ranked slowest first, click one to jump to it)</div>';
+                ' ≥ 10s (ranked slowest first, select one to jump to it)</div>';
         sorted.forEach((item, i) => {
             html += '<button class="issue-row slow-row" data-slow="' + i + '">' +
                     '<span class="req">' + formatDuration(item.ms) + '</span>' +
                     '<span class="body"><span class="tool">' + escapeHtml(item.tool) +
-                    (item.requestNum ? ' <span class="when" style="font-weight:400;">| Req #' + item.requestNum + '</span>' : '') +
+                    (item.requestNum ? ' <span class="when" style="font-weight:400;">· Req #' + item.requestNum + '</span>' : '') +
                     '</span>' +
                     '<span class="detail">' + escapeHtml(item.detail || '') +
-                    (item.time ? ' <span class="when">| ' + formatStamp(item.time) + '</span>' : '') +
+                    (item.time ? ' <span class="when">· ' + formatStamp(item.time) + '</span>' : '') +
                     '</span></span></button>';
         });
         html += '</div>';
@@ -4982,7 +5043,7 @@
         if (!activeList.length) {
             html += '<div class="empty-state" style="font-size:13px;">' +
                     (issueScopeMode === 'turn'
-                        ? ('0 issues in Prompt #' + (curReq || 1) + '.' + (issueNodes.length > 0 ? ' (' + issueNodes.length + ' in earlier prompts, switch to All Prompts above to view)' : ''))
+                        ? ('0 issues in Prompt #' + (curReq || 1) + '.' + (issueNodes.length > 0 ? ' (' + issueNodes.length + ' in earlier prompts: switch to All Prompts above to view)' : ''))
                         : 'Nothing failed in this trace.') +
                     '</div>';
             inspectorEl.innerHTML = html;
@@ -4994,14 +5055,14 @@
 
         html += '<div class="inspector-section"><div class="inspector-label">' +
                 activeList.length + (activeList.length === 1 ? ' failure' : ' failures') +
-                ' (click one to jump to it)</div>';
+                ' (select one to jump to it)</div>';
         activeList.forEach((iss, i) => {
             html += '<button class="issue-row' + (i === issueCursor ? ' active' : '') +
                     '" data-issue="' + i + '">' +
-                    '<span class="req">' + (iss.requestNum ? '#' + iss.requestNum : 'N/A') + '</span>' +
+                    '<span class="req">' + (iss.requestNum ? '#' + iss.requestNum : '-') + '</span>' +
                     '<span class="body"><span class="tool">' + escapeHtml(iss.tool) + '</span>' +
                     '<span class="detail">' + escapeHtml(iss.detail || '') +
-                    (iss.time ? ' <span class="when">| ' + formatStamp(iss.time) + '</span>' : '') +
+                    (iss.time ? ' <span class="when">· ' + formatStamp(iss.time) + '</span>' : '') +
                     '</span></span></button>';
         });
         html += '</div>';
@@ -5182,7 +5243,7 @@
         inspectorEl.innerHTML =
             '<div id="inspector-title" style="color:#F9AB00"><span>COPY MANUALLY</span>' + inspectorBackBtnHtml() + '</div>' +
             '<div class="inspector-section"><div class="inspector-label">' +
-            'This panel is not allowed to write to the clipboard. The text is selected below, press Ctrl+C.' +
+            'This panel is not allowed to write to the clipboard. The text is selected below; press Ctrl+C.' +
             '</div><textarea id="copyFallbackBox" style="width:100%; height:340px; font-family:monospace; ' +
             'font-size:11px; padding:8px; box-sizing:border-box; border:1px solid var(--border,#dadce0); ' +
             'border-radius:6px; background:var(--secondary,#f8f9fa); color:var(--foreground,#202124);">' +
@@ -6524,7 +6585,7 @@
                             .join(' ');
                         const fullArgPairs = Object.entries(previewArgs)
                             .map(([k, v]) => k + '=' + (typeof v === 'string' ? '"' + v + '"' : v))
-                            .join(', ');
+                            .join(' · ');
 
                         const isSub = cls.clusterId === 'sub';
                         const callType = isSub ? 'SUBAGENT_CALL' : 'TOOL_CALL';
@@ -6559,7 +6620,7 @@
                             targetHint: targetHint,
                             humanAction: humanAction,
                             timestamp: ts,
-                            summary: cls.short + (argPairs ? ': ' + argPairs : ''),
+                            summary: cls.short + (argPairs ? ', ' + argPairs : ''),
                             gist: (humanAction ? humanAction + ': ' : '') + (targetHint || argPairs || cls.short),
                             fullGist: (humanAction ? humanAction + ': ' : '') + (targetHint || fullArgPairs || cls.short),
                         };
@@ -6583,7 +6644,7 @@
                             callMs = ms;
                             callHeadline = (sumObj && sumObj.headline) ? sumObj.headline : '';
 
-                            const durStr = timing ? ', ' + formatDuration(timing.ms) : '';
+                            const durStr = timing ? ' · ' + formatDuration(timing.ms) : '';
                             const headline = callHeadline ? truncate(callHeadline, 85) : '';
                             const resEv = {
                                 id: 'ev_res_' + step.step_index + '_' + tIdx,
@@ -6611,7 +6672,7 @@
                                 humanAction: humanAction,
                                 resultHeadline: callHeadline,
                                 timestamp: resTs,
-                                summary: cls.short + durStr + (headline ? ': ' + headline : ''),
+                                summary: cls.short + durStr + (headline ? ' · ' + headline : ''),
                                 gist: headline || (cls.short + ' completed' + durStr),
                                 fullGist: (callHeadline || (cls.short + ' completed' + durStr)) + (targetHint ? ' (' + targetHint + ')' : ''),
                             };
@@ -6809,7 +6870,7 @@
         const route = TOPO_ROUTES[ev.message_type] || TOPO_ROUTES.TOOL_CALL;
         const badgeColor = ev.accentColor || route.color;
 
-        posEl.textContent = (scopedIdx + 1) + ' / ' + total + (ev.reqNum ? ' | Turn #' + ev.reqNum : '');
+        posEl.textContent = (scopedIdx + 1) + ' / ' + total + (ev.reqNum ? ' · Turn #' + ev.reqNum : '');
         if (btnTopoStepFirst) btnTopoStepFirst.disabled = scopedIdx <= 0;
         if (btnTopoStepPrev)  btnTopoStepPrev.disabled = scopedIdx <= 0;
         if (btnTopoStepNext)  btnTopoStepNext.disabled = scopedIdx >= total - 1;
@@ -6819,7 +6880,7 @@
         if (ev.durationMs && ev.durationMs > 0) {
             const slow = ev.durationMs >= SLOW_MS;
             durHtml = '<span class="topo-hud-dur" style="' + (slow ? 'border-color:#f59e0b;color:#f59e0b;' : '') + '">' +
-                      (slow ? 'SLOW | ' : '') + formatDuration(ev.durationMs) + '</span>';
+                      (slow ? 'SLOW · ' : '') + formatDuration(ev.durationMs) + '</span>';
         }
 
         const toolLabel = ev.tool
@@ -7168,7 +7229,7 @@
             } else {
                 headersLayer.innerHTML =
                     '<text x="130" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">I/O TERMINALS</text>' +
-                    '<text x="420" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">ORCHESTRATION CORE / ' + scopeBadgeText + '</text>' +
+                    '<text x="420" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">ORCHESTRATION CORE · ' + scopeBadgeText + '</text>' +
                     '<text x="845" y="36" text-anchor="middle" fill="' + pal.subtle + '" font-size="14" font-weight="800" letter-spacing="1.6">CAPABILITY CLUSTERS &amp; TOOLS</text>';
             }
         }
@@ -7365,7 +7426,7 @@
             const pKpis = [
                 { x: 26,  y: 246, label: topoScope === 'turn' ? 'TURN' : 'TURNS', val: topoScope === 'turn' ? ('#' + (activeTurnReqNum() || 1)) : String(checkpoints.length || 0), color: pal.text },
                 { x: 150, y: 246, label: 'TOOL CALLS', val: String(totalToolCalls), color: '#1a73e8', drill: 'all', tip: 'Click to view all tool calls in Inspector' },
-                { x: 26,  y: 298, label: 'TOOL TIME',  val: topoTotalDurationMs > 0 ? formatDuration(topoTotalDurationMs) : '0ms', color: pal.text, drill: totalSlow > 0 ? 'slow' : 'all', tip: 'Active foreground tool execution time: click to inspect tool latency breakdown' },
+                { x: 26,  y: 298, label: 'TOOL TIME',  val: topoTotalDurationMs > 0 ? formatDuration(topoTotalDurationMs) : '0ms', color: pal.text, drill: totalSlow > 0 ? 'slow' : 'all', tip: 'Active foreground tool execution time. Select to inspect tool latency breakdown' },
                 { x: 150, y: 298, label: 'HEALTH',     val: totalIssues > 0 ? (totalIssues + ' err') : (totalSlow > 0 ? (totalSlow + ' slow') : 'Clean'), color: totalIssues > 0 ? '#d93025' : (totalSlow > 0 ? '#f9ab00' : '#1e8e3e'), drill: totalIssues > 0 ? 'errors' : (totalSlow > 0 ? 'slow' : 'all'), tip: 'Click to filter tool calls by errors or slow execution' },
             ];
             pKpis.forEach(k => {
@@ -7422,7 +7483,7 @@
             const kpis = [
                 { x: 314, y: 116, label: topoScope === 'turn' ? 'ACTIVE TURN' : 'TURNS', val: topoScope === 'turn' ? ('#' + (activeTurnReqNum() || 1)) : String(checkpoints.length || 0), color: pal.text },
                 { x: 424, y: 116, label: 'TOOL CALLS', val: String(totalToolCalls),          color: '#1a73e8', drill: 'all', tip: 'Click to view all tool calls in Inspector' },
-                { x: 314, y: 188, label: 'TOOL TIME',  val: topoTotalDurationMs > 0 ? formatDuration(topoTotalDurationMs) : '0ms', color: pal.text, drill: totalSlow > 0 ? 'slow' : 'all', tip: 'Active foreground tool execution time: click to inspect tool latency breakdown' },
+                { x: 314, y: 188, label: 'TOOL TIME',  val: topoTotalDurationMs > 0 ? formatDuration(topoTotalDurationMs) : '0ms', color: pal.text, drill: totalSlow > 0 ? 'slow' : 'all', tip: 'Active foreground tool execution time. Select to inspect tool latency breakdown' },
                 { x: 424, y: 188, label: 'HEALTH',     val: totalIssues > 0 ? (totalIssues + ' err') : (totalSlow > 0 ? (totalSlow + ' slow') : 'Clean'), color: totalIssues > 0 ? '#d93025' : (totalSlow > 0 ? '#f9ab00' : '#1e8e3e'), drill: totalIssues > 0 ? 'errors' : (totalSlow > 0 ? 'slow' : 'all'), tip: 'Click to filter tool calls by errors or slow execution' },
             ];
             kpis.forEach(k => {
@@ -7508,7 +7569,7 @@
             const hasExtraBadges = st.slow > 0 || st.errors > 0;
             if (portrait && c.id !== 'sub') {
                 const pText = st.calls > 0
-                    ? ('×' + st.calls + (st.errors > 0 ? ', ' + st.errors + ' err' : ''))
+                    ? ('×' + st.calls + (st.errors > 0 ? ' · ' + st.errors + ' err' : ''))
                     : 'Idle';
                 const pW = Math.max(40, Math.round(pText.length * 6.4 + 12));
                 rightX -= pW;
@@ -7521,8 +7582,8 @@
             } else {
                 const summaryText = st.calls > 0
                     ? ((portrait || hasExtraBadges) && st.totalMs > 0
-                        ? (st.calls + ', ' + formatDuration(st.totalMs))
-                        : (st.calls + (st.calls === 1 ? ' call' : ' calls') + (st.totalMs > 0 ? ', ' + formatDuration(st.totalMs) : '')))
+                        ? (st.calls + ' · ' + formatDuration(st.totalMs))
+                        : (st.calls + (st.calls === 1 ? ' call' : ' calls') + (st.totalMs > 0 ? ' · ' + formatDuration(st.totalMs) : '')))
                     : 'Idle';
                 const sumW = Math.max(44, Math.round(summaryText.length * 6.5 + 12));
                 rightX -= sumW;
@@ -7622,7 +7683,7 @@
                 if (badgeStr) {
                     clustersSvg += '<text x="' + (px + pillW - 6) + '" y="' + txtY + '" text-anchor="end" fill="' + (t.errors > 0 ? '#d93025' : c.accent) + '" font-size="' + (isCompactPills ? '10.5' : '11') + '" font-weight="800" font-family="Google Sans Code, ui-monospace, monospace">' + escapeHtml(badgeStr) + '</text>';
                 }
-                const pillTip = t.rawName + ' (' + t.calls + ' calls' + (t.totalMs > 0 ? ', ' + formatDuration(t.totalMs) : '') + (t.lastTarget ? ', Latest: ' + t.lastTarget : '') + '): click to open full tool calls list';
+                const pillTip = t.rawName + ' (' + t.calls + ' calls' + (t.totalMs > 0 ? ', ' + formatDuration(t.totalMs) : '') + (t.lastTarget ? ', Latest: ' + t.lastTarget : '') + '). Select to open full tool calls list';
                 clustersSvg += '<title>' + escapeHtml(pillTip) + '</title></g>';
             });
 
@@ -7933,7 +7994,7 @@
             const c = g.querySelector('circle');
             const txt = g.querySelector('text');
             const ttl = g.querySelector('title');
-            if (ttl) ttl.textContent = tool.name + (calls ? ' (' + calls + ' call' + (calls === 1 ? '' : 's') + ', click to inspect' + (isSub ? ', double-click to trace subagent' : '') + ')' : ' (0 calls)');
+            if (ttl) ttl.textContent = tool.name + (calls ? ' (' + calls + ' call' + (calls === 1 ? '' : 's') + ': select to inspect' + (isSub ? ', double-click to trace subagent' : '') + ')' : ' (0 calls)');
 
             if (c) {
                 c.setAttribute('r', String(ringStyle.chipR));
@@ -8106,7 +8167,7 @@
             toolsSub.setAttribute('y', String(portrait ? (sNodes.tools.y - sNodes.tools.r - 10) : 45));
             toolsSub.setAttribute('font-size', portrait ? '12.5' : '14');
             toolsSub.setAttribute('fill', isDarkMode ? '#f9ab00' : '#b06000');
-            toolsSub.textContent = topoSimpleTools.length + ' agent tools, ' + totalToolCalls + ' call' + (totalToolCalls === 1 ? '' : 's');
+            toolsSub.textContent = topoSimpleTools.length + ' agent tools · ' + totalToolCalls + ' call' + (totalToolCalls === 1 ? '' : 's');
         }
         const toolPos = topoRingPositions(topoSimpleTools, sNodes.tools);
         const toolRingStyle = topoRingStyleFor(topoSimpleTools.length);
@@ -8179,10 +8240,10 @@
             subSubtitle.setAttribute('font-size', portrait ? '12' : '13.5');
             subSubtitle.setAttribute('fill', subActive ? (isDarkMode ? '#c58af9' : '#9334e6') : (isDarkMode ? '#80868b' : '#5f6368'));
             subSubtitle.textContent = subActive
-                ? 'ACTIVE / DELEGATING'
+                ? 'ACTIVE · DELEGATING'
                 : (spawnedSubCount > 0
-                    ? (spawnedSubCount + ' subagent' + (spawnedSubCount === 1 ? '' : 's') + ', ' + totalSubCalls + ' calls')
-                    : (topoSimpleSubTools.length + ' orchestration tools, ' + totalSubCalls + ' calls'));
+                    ? (spawnedSubCount + ' subagent' + (spawnedSubCount === 1 ? '' : 's') + ' · ' + totalSubCalls + ' calls')
+                    : (topoSimpleSubTools.length + ' orchestration tools · ' + totalSubCalls + ' calls'));
         }
         const subGlyph = document.getElementById('topo-simple-sub-glyph');
         if (subGlyph) {
@@ -8242,7 +8303,7 @@
             coreSub.setAttribute('y', String(sNodes.core.y + 16));
             coreSub.setAttribute('font-size', portrait ? '12' : '14');
             coreSub.setAttribute('fill', isDarkMode ? '#5EEAD4' : '#0F766E');
-            coreSub.textContent = topoCoreThinking ? 'THINKING / IN FLIGHT' : ('GEMINI / ' + (checkpoints.length || 0) + ' REQ');
+            coreSub.textContent = topoCoreThinking ? 'THINKING · IN FLIGHT' : ('GEMINI · ' + (checkpoints.length || 0) + ' REQ');
         }
         const coreDot = document.getElementById('topo-simple-core-dot');
         if (coreDot) {
@@ -8263,7 +8324,7 @@
         if (userLayer) {
             userLayer.innerHTML = buildSimpleEndpointSVG(
                 sNodes.user, 'user', 'USER PROMPT',
-                (topoCounts.USER_PROMPT || 0) + ' requests in',
+                (topoCounts.USER_PROMPT || 0) + ' requests · in',
                 userActive, pulseFor('user'),
                 isDarkMode ? {
                     ring: '#81c995',
@@ -8288,7 +8349,7 @@
         if (replyLayer) {
             replyLayer.innerHTML = buildSimpleEndpointSVG(
                 sNodes.reply, 'reply', 'AGENT OUTPUT',
-                (topoCounts.AGENT_REPLY || 0) + ' replies out',
+                (topoCounts.AGENT_REPLY || 0) + ' replies · out',
                 replyActive, pulseFor('reply'),
                 isDarkMode ? {
                     ring: '#8ab4f8',
@@ -8501,9 +8562,9 @@
                     html += '<div style="background:var(--topo-card-alt); border:1px solid var(--topo-border); border-left:3px solid #9334e6; border-radius:8px; padding:8px 10px; margin-bottom:6px;">' +
                             '<div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:4px;">' +
                             '<span style="font-size:12px; font-weight:800; color:var(--topo-text);">' + escapeHtml(roleTxt) + '</span>' +
-                            (live ? '<span style="font-size:10px; font-weight:700; font-family:var(--font-mono); color:#9334e6;">' + escapeHtml(live.status || 'DONE') + (live.steps ? ', ' + live.steps + ' steps' : '') + '</span>' : '') +
+                            (live ? '<span style="font-size:10px; font-weight:700; font-family:var(--font-mono); color:#9334e6;">' + escapeHtml(live.status || 'DONE') + (live.steps ? ' · ' + live.steps + ' steps' : '') + '</span>' : '') +
                             '</div>' +
-                            (sa.typeName ? '<div style="font-size:11px; color:var(--topo-muted); font-family:var(--font-mono); margin-bottom:6px;">Type: ' + escapeHtml(sa.typeName) + (isRealId ? ', ID: ' + escapeHtml(cid.slice(0, 8)) + '…' : '') + '</div>' : '') +
+                            (sa.typeName ? '<div style="font-size:11px; color:var(--topo-muted); font-family:var(--font-mono); margin-bottom:6px;">Type: ' + escapeHtml(sa.typeName) + (isRealId ? ' · ID: ' + escapeHtml(cid.slice(0, 8)) + '…' : '') + '</div>' : '') +
                             (isRealId ? '<div style="display:flex; gap:6px; flex-wrap:wrap;">' +
                                 '<button type="button" class="subagent-trace-btn" data-sub-trace-id="' + escapeHtml(cid) + '" data-sub-trace-role="' + escapeHtml(roleTxt) + '">View Subagent Trace →</button>' +
                                 '<button type="button" class="topo-btn" data-sub-open-id="' + escapeHtml(cid) + '">Open in Chat ↗</button>' +
@@ -8540,12 +8601,12 @@
                     ? '<span style="font-size:10.5px; font-weight:700; font-family:var(--font-mono); color:' + (isSlow ? '#f9ab00' : 'var(--topo-muted)') + '; margin-left:auto;">' + formatDuration(rec.durationMs) + '</span>'
                     : '<span style="font-size:10px; font-family:var(--font-mono); color:var(--topo-subtle); margin-left:auto;">' + formatTopoClock(rec.timestamp) + '</span>';
 
-                const primaryLine = (rec.humanAction ? rec.humanAction + ': ' : '') + (rec.targetHint || rec.argPairs || rec.rawTool);
+                const primaryLine = (rec.humanAction ? rec.humanAction + ' · ' : '') + (rec.targetHint || rec.argPairs || rec.rawTool);
                 const resultLine = rec.resultHeadline || '';
 
                 html += '<div class="topo-drill-call-row" data-node-id="' + escapeHtml(rec.nodeId) + '" data-ev-id="' + escapeHtml(rec.evId) + '" style="border-left:3px solid ' + rowBorder + ';">' +
                         '<div class="topo-drill-call-head">' +
-                        '<span class="topo-drill-call-seq">#' + rec.seq + ' | Turn #' + rec.reqNum + '</span>' +
+                        '<span class="topo-drill-call-seq">#' + rec.seq + ' · Turn #' + rec.reqNum + '</span>' +
                         '<span class="topo-drill-call-tool">' + escapeHtml(rec.shortTool) + '</span>' +
                         statusBadge +
                         sbBadge +
@@ -8669,9 +8730,9 @@
             html += '<div class="empty-state" style="font-size:13px;">No telemetry events recorded yet.</div>';
             inspectorEl.innerHTML = html;
         } else {
-            html += '<div class="inspector-label" style="margin-bottom:8px;">Click any event to animate &amp; preview in HUD, or double-click to inspect full step</div>';
+            html += '<div class="inspector-label" style="margin-bottom:8px;">Select any event to animate &amp; preview in HUD, or double-click to inspect full step</div>';
             if (sliceStart > 0) {
-                html += '<button type="button" id="btnTopoLogShowAll" class="topo-drill-pill" style="margin-bottom:8px; width:100%; justify-content:center;">Showing latest ' + MAX_LOG_ROWS + ' of ' + visible.length + ' events: Show all</button>';
+                html += '<button type="button" id="btnTopoLogShowAll" class="topo-drill-pill" style="margin-bottom:8px; width:100%; justify-content:center;">Showing latest ' + MAX_LOG_ROWS + ' of ' + visible.length + ' events (Show all)</button>';
             }
             html += '<div id="topoLogList" style="border:1px solid var(--border,#dbe3ee); border-radius:8px; overflow:hidden;">';
             displayEvents.forEach((ev, relIdx) => {
