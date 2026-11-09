@@ -2232,12 +2232,41 @@
     }
   }
 
+  /* Shared Coalesced Viewport Scroll Scheduler (Single RAF Loop) */
+  const scrollFrameCallbacks = [];
+  let sharedScrollTicking = false;
+  function runScrollFrameCallbacks() {
+    sharedScrollTicking = false;
+    for (let i = 0; i < scrollFrameCallbacks.length; i += 1) {
+      scrollFrameCallbacks[i]();
+    }
+  }
+  function queueSharedScrollFrame() {
+    if (!sharedScrollTicking) {
+      sharedScrollTicking = true;
+      requestAnimationFrame(runScrollFrameCallbacks);
+    }
+  }
+  window.addEventListener(
+    "scroll",
+    queueSharedScrollFrame,
+    { passive: true }
+  );
+  window.addEventListener(
+    "resize",
+    queueSharedScrollFrame,
+    { passive: true }
+  );
+  function onViewportScroll(fn) {
+    if (typeof fn === "function") {
+      scrollFrameCallbacks.push(fn);
+    }
+  }
+
   /* Apple-Style Scroll-Driven 3D Stage Physics Across All Stages */
   function initHeroScrollPhysics() {
     const allStages = document.querySelectorAll(".hero-stage, .repo-showcase.scroll-stage");
     if (!allStages.length) return;
-
-    let ticking = false;
 
     function updateScrollPhysics() {
       const scrollY = window.scrollY || window.pageYOffset;
@@ -2274,31 +2303,9 @@
         wordmark.style.setProperty("--wordmark-y", `${wordmarkY.toFixed(1)}px`);
         wordmark.style.setProperty("--wordmark-scale", wordmarkScale.toFixed(3));
       });
-
-      ticking = false;
     }
 
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(updateScrollPhysics);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
-
-    window.addEventListener(
-      "resize",
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(updateScrollPhysics);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
+    onViewportScroll(updateScrollPhysics);
     updateScrollPhysics();
 
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -2477,8 +2484,7 @@
       });
     });
 
-    window.addEventListener("scroll", scheduleNavSync, { passive: true });
-    window.addEventListener("resize", scheduleNavSync, { passive: true });
+    onViewportScroll(syncTopNav);
     syncTopNav();
   }
 
@@ -4705,8 +4711,7 @@
         }
       }
 
-      window.addEventListener("scroll", scheduleTimelineSpine, { passive: true });
-      window.addEventListener("resize", scheduleTimelineSpine, { passive: true });
+      onViewportScroll(updateTimelineSpine);
       updateTimelineSpine();
     }
 
